@@ -6,10 +6,8 @@ type State = {
   lat: number;
   lng: number;
   zoom: number;
-  bounds: LatLngBoundsExpression;
 };
 
-const outer: LatLngBoundsExpression = [[43.7, -125.5], [30, -112.5]];
 const inner = [[49.505, -2.09], [53.505, 2.09]];
 
 export default class SimpleExample extends Component<{}, State> {
@@ -17,15 +15,11 @@ export default class SimpleExample extends Component<{}, State> {
     lat: 38.538762,
     lng: -121.75305,
     zoom: 8,
-    bounds: outer
-  };
-
-  onClickOuter = () => {
-    this.setState({ bounds: outer });
   };
 
   render() {
-
+    const bounds: LatLngBoundsExpression = [[43.7, -125.5], [30, -112.5]];
+    const accessToken = 'pk.eyJ1IjoibGFob2xzdGVnZSIsImEiOiJjandzYjZjYzkwMjRxNDlwY21tNjJqbDN4In0.dyqHfQbzFrVPs2MP1EiaCA';
     const mapboxTiles =
       'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' +
       accessToken;
@@ -33,12 +27,11 @@ export default class SimpleExample extends Component<{}, State> {
       '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
     const position: LatLngExpression = [this.state.lat, this.state.lng];
     return (
-      <Map center={position} zoom={this.state.zoom} maxBounds={this.state.bounds}>
+      <Map center={position} zoom={this.state.zoom} maxBounds={bounds}>
         <TileLayer attribution={attribution} url={mapboxTiles} />
         <Rectangle
-          bounds={outer}
-          color={this.state.bounds === outer ? 'red' : 'white'}
-          onClick={this.onClickOuter}
+          bounds={bounds}
+          color={'red' }
         />
         <Marker position={position}>
           <Popup>
