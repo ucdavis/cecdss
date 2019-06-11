@@ -6,9 +6,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div>
-          <h2>Map</h2>
-        </div>
         <MapContainer />
       </div>
     );
