@@ -1,18 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 
-type State = {
+interface State {
+  hasLocation: boolean;
   lat: number;
   lng: number;
   zoom: number;
 };
 
-export default class SimpleExample extends Component<{}, State> {
-  state = {
-    lat: 38.538762,
-    lng: -121.75305,
-    zoom: 8
+export default class MapContainer extends React.Component<{}, State> {
+  mapRef: any;
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      hasLocation: false,
+      lat: 38.538762,
+      lng: -121.75305,
+      zoom: 8
+    };
+    this.mapRef = createRef<Map>();
+  }
+
+  handleClick = (e: any) => {
+    const map = this.mapRef.current;
+    if (map != null) {
+      this.setState({
+        lat: e.latlng.lat,
+        lng: e.latlng.lng
+      });
+    }
   };
 
   render() {
@@ -24,11 +41,16 @@ export default class SimpleExample extends Component<{}, State> {
       accessToken;
     const attribution =
       '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-      
-    const position: LatLngExpression = [this.state.lat, this.state.lng];
 
+    const position: LatLngExpression = [this.state.lat, this.state.lng];
     return (
-      <Map center={position} zoom={this.state.zoom} maxBounds={bounds}>
+      <Map
+        ref={this.mapRef}
+        onClick={this.handleClick}
+        center={position}
+        maxBounds={bounds}
+        bounds={bounds}
+      >
         <TileLayer attribution={attribution} url={mapboxTiles} />
         <Marker position={position}>
           <Popup>
