@@ -96,17 +96,27 @@ export default class MapContainer extends React.Component<{}, State> {
                   <Input
                     type='text'
                     value={this.state.capacity}
-                    onChange={e => this.setState({capacity: e.target.value})}
+                    onChange={e => this.setState({ capacity: e.target.value })}
                   />
                   <InputGroupAddon addonType='append'>MW</InputGroupAddon>
                 </InputGroup>
                 <Label>Tree management</Label>
-                <Input type='select' value={this.state.treeManagement} onChange={e => this.setState({treeManagement: e.target.value})}>
+                <Input
+                  type='select'
+                  value={this.state.treeManagement}
+                  onChange={e =>
+                    this.setState({ treeManagement: e.target.value })
+                  }
+                >
                   <option>Thin from below</option>
                   <option>Thin from above</option>
                 </Input>
                 <Label>Conversion</Label>
-                <Input type='select' value={this.state.conversion} onChange={e => this.setState({conversion: e.target.value})}>
+                <Input
+                  type='select'
+                  value={this.state.conversion}
+                  onChange={e => this.setState({ conversion: e.target.value })}
+                >
                   <option>Direct-combustion & steam turbine(3-50MW)</option>
                 </Input>
               </div>
@@ -115,18 +125,18 @@ export default class MapContainer extends React.Component<{}, State> {
               <div>
                 <h4>Financing assumptions</h4>
                 <Label>Debt Ratio</Label>
-                  <Input
-                    type='text'
-                    value={this.state.debtRatio}
-                    onChange={e => this.setState({debtRatio: e.target.value})}
-                  />
+                <Input
+                  type='text'
+                  value={this.state.debtRatio}
+                  onChange={e => this.setState({ debtRatio: e.target.value })}
+                />
 
                 <Label>Interest on Return equity</Label>
                 <InputGroup>
                   <Input
                     type='text'
                     value={this.state.interest}
-                    onChange={e => this.setState({interest: e.target.value})}
+                    onChange={e => this.setState({ interest: e.target.value })}
                   />
                   <InputGroupAddon addonType='append'>%</InputGroupAddon>
                 </InputGroup>
@@ -135,7 +145,7 @@ export default class MapContainer extends React.Component<{}, State> {
                   <Input
                     type='text'
                     value={this.state.debtTerm}
-                    onChange={e => this.setState({debtTerm: e.target.value})}
+                    onChange={e => this.setState({ debtTerm: e.target.value })}
                   />
                   <InputGroupAddon addonType='append'>years</InputGroupAddon>
                 </InputGroup>
@@ -144,10 +154,17 @@ export default class MapContainer extends React.Component<{}, State> {
                   <Input
                     type='text'
                     value={this.state.lifeOfProject}
-                    onChange={e => this.setState({lifeOfProject: e.target.value})}
+                    onChange={e =>
+                      this.setState({ lifeOfProject: e.target.value })
+                    }
                   />
                   <InputGroupAddon addonType='append'>years</InputGroupAddon>
                 </InputGroup>
+              </div>
+              <br />
+              <hr />
+              <div>
+                <Button color='primary' onClick={this._modelRefinery}>Model Refinery</Button>
               </div>
             </div>
           </div>
@@ -183,4 +200,8 @@ export default class MapContainer extends React.Component<{}, State> {
     }
     this.setState({ radius: r });
   };
+
+  private _modelRefinery = () => {
+
+  }
 }
