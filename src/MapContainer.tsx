@@ -1,13 +1,16 @@
 import React, { Component, createRef } from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
+import { Button, Toast, ToastBody, ToastHeader } from 'reactstrap';
 
 interface State {
   hasLocation: boolean;
   lat: number;
   lng: number;
   zoom: number;
-};
+  showSidebar: boolean;
+  selected: string;
+}
 
 export default class MapContainer extends React.Component<{}, State> {
   mapRef: any;
@@ -17,6 +20,8 @@ export default class MapContainer extends React.Component<{}, State> {
       hasLocation: false,
       lat: 38.538762,
       lng: -121.75305,
+      selected: 'home',
+      showSidebar: false,
       zoom: 8
     };
     this.mapRef = createRef<Map>();
@@ -27,7 +32,8 @@ export default class MapContainer extends React.Component<{}, State> {
     if (map != null) {
       this.setState({
         lat: e.latlng.lat,
-        lng: e.latlng.lng
+        lng: e.latlng.lng,
+        showSidebar: true
       });
     }
   };
@@ -41,23 +47,29 @@ export default class MapContainer extends React.Component<{}, State> {
       accessToken;
     const attribution =
       '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-
+    const style = {
+      height: window.innerHeight
+    };
     const position: LatLngExpression = [this.state.lat, this.state.lng];
     return (
-      <Map
-        ref={this.mapRef}
-        onClick={this.handleClick}
-        center={position}
-        maxBounds={bounds}
-        bounds={bounds}
-      >
-        <TileLayer attribution={attribution} url={mapboxTiles} />
-        <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      </Map>
+      <div style={style}>
+        {this.state.showSidebar && (
+          <div id='sidebar'>
+            <h2>Select Refinery Parameters</h2>
+          </div>
+        )}
+        <Map
+          ref={this.mapRef}
+          onClick={this.handleClick}
+          
+          // maxBounds={bounds}
+          bounds={bounds}
+        >
+          <TileLayer attribution={attribution} url={mapboxTiles} />
+          <Circle center={position} fillColor='blue' radius={10000} />
+          <Marker position={position} />
+        </Map>
+      </div>
     );
   }
 }
