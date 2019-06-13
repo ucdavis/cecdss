@@ -7,9 +7,10 @@ interface State {
   hasLocation: boolean;
   lat: number;
   lng: number;
-  zoom: number;
+  radius: number;
   showSidebar: boolean;
   selected: string;
+  zoom: number;
 }
 
 export default class MapContainer extends React.Component<{}, State> {
@@ -20,6 +21,7 @@ export default class MapContainer extends React.Component<{}, State> {
       hasLocation: false,
       lat: 38.538762,
       lng: -121.75305,
+      radius: 1000,
       selected: 'home',
       showSidebar: false,
       zoom: 8
@@ -56,17 +58,21 @@ export default class MapContainer extends React.Component<{}, State> {
         {this.state.showSidebar && (
           <div id='sidebar'>
             <h2>Select Refinery Parameters</h2>
+            <div>
+              <label>Radius:</label>
+              <input type="text" value={this.state.radius} onChange={(e) => this.setState({radius: Number(e.target.value)})} /> meters
+              <input type="range" min={500} max={50000} value={this.state.radius} onChange={(e) => this.setState({radius: Number(e.target.value)})}></input>
+              </div>
           </div>
         )}
         <Map
           ref={this.mapRef}
           onClick={this.handleClick}
-          
-          // maxBounds={bounds}
+          maxBounds={bounds}
           bounds={bounds}
         >
           <TileLayer attribution={attribution} url={mapboxTiles} />
-          <Circle center={position} fillColor='blue' radius={10000} />
+          <Circle center={position} fillColor='blue' radius={this.state.radius} />
           <Marker position={position} />
         </Map>
       </div>
