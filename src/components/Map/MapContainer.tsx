@@ -31,10 +31,6 @@ export const MapContainer = () => {
     lifeOfProject: '25'
   });
 
-  const updateParameters = (parameters: Parameters) => {
-    setParameters(parameters);
-  }
-
   let mapRef: any = createRef<Map>();
 
   const bounds: LatLngBoundsExpression = [[43.7, -125.5], [30, -105.5]];
@@ -52,7 +48,7 @@ export const MapContainer = () => {
   return (
     <div style={style}>
       {showSidebar && (
-       <MapSidebar parameters={parameters} setParameters={updateParameters}/>
+       <MapSidebar parameters={parameters} setParameters={setParameters}/>
       )}
       <Map
         ref={mapRef}
