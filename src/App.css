@@ -42,3 +42,11 @@
   top: 0;
   right: 0;
 }
+
+.chart-container {
+  display: flex;
+}
+
+.chart {
+  flex: 1 1 33%
+}

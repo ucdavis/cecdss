@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { Parameters } from './MapContainer';
+import { Link } from 'react-router-dom';
 
 interface Props {
   parameters: Parameters;
@@ -8,7 +9,6 @@ interface Props {
 }
 
 export const MapSidebar = (props: Props) => {
-
   return (
     <div id='sidebar'>
       <h2>Select Refinery Parameters</h2>
@@ -47,7 +47,10 @@ export const MapSidebar = (props: Props) => {
               type='text'
               value={props.parameters.capacity}
               onChange={e =>
-                props.setParameters({ ...props.parameters, capacity: e.target.value })
+                props.setParameters({
+                  ...props.parameters,
+                  capacity: e.target.value
+                })
               }
             />
             <InputGroupAddon addonType='append'>MW</InputGroupAddon>
@@ -71,7 +74,10 @@ export const MapSidebar = (props: Props) => {
             type='select'
             value={props.parameters.conversion}
             onChange={e =>
-              props.setParameters({ ...props.parameters, conversion: e.target.value })
+              props.setParameters({
+                ...props.parameters,
+                conversion: e.target.value
+              })
             }
           >
             <option>Direct-combustion & steam turbine(3-50MW)</option>
@@ -86,7 +92,10 @@ export const MapSidebar = (props: Props) => {
             type='text'
             value={props.parameters.debtRatio}
             onChange={e =>
-              props.setParameters({ ...props.parameters, debtRatio: e.target.value })
+              props.setParameters({
+                ...props.parameters,
+                debtRatio: e.target.value
+              })
             }
           />
 
@@ -96,7 +105,10 @@ export const MapSidebar = (props: Props) => {
               type='text'
               value={props.parameters.interest}
               onChange={e =>
-                props.setParameters({ ...props.parameters, interest: e.target.value })
+                props.setParameters({
+                  ...props.parameters,
+                  interest: e.target.value
+                })
               }
             />
             <InputGroupAddon addonType='append'>%</InputGroupAddon>
@@ -107,7 +119,10 @@ export const MapSidebar = (props: Props) => {
               type='text'
               value={props.parameters.debtTerm}
               onChange={e =>
-                props.setParameters({ ...props.parameters, debtTerm: e.target.value })
+                props.setParameters({
+                  ...props.parameters,
+                  debtTerm: e.target.value
+                })
               }
             />
             <InputGroupAddon addonType='append'>years</InputGroupAddon>
@@ -130,7 +145,9 @@ export const MapSidebar = (props: Props) => {
         <br />
         <hr />
         <div>
-          <Button color='primary'>Model Refinery</Button>
+          <Link to='/results'>
+            <Button color='primary'>Model Refinery</Button>
+          </Link>
         </div>
       </div>
     </div>
