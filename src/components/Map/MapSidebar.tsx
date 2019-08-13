@@ -21,11 +21,11 @@ export const MapSidebar = (props: Props) => {
         setInputs={props.setInputs}
       />
       <div>
-        <Link to='/results'>
-          <Button color='primary' onClick={props.submitInputs}>
-            Model Refinery
-          </Button>
-        </Link>
+        {/* <Link to='/results'> */}
+        <Button color='primary' onClick={props.submitInputs}>
+          Model Refinery
+        </Button>
+        {/* </Link> */}
       </div>
     </div>
   );

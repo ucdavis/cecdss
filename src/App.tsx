@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Route
+      {/* <Route
         exact
         path='/'
         render={() => (
@@ -50,7 +50,15 @@ const App = () => {
         render={() =>
           outputs ? <ResultsContainer results={outputs} /> : <div>ERROR</div>
         }
-      />
+      /> */}
+      {!outputs && (
+        <MapContainer
+          inputs={inputs}
+          setInputs={setInputs}
+          submitInputs={submitInputs}
+        />
+      )}
+      {outputs && <ResultsContainer results={outputs} />}
     </div>
   );
 };
