@@ -9,19 +9,29 @@ import {
   VictoryBar
 } from 'victory';
 
-export const ResultsContainer = () => {
+export const ResultsContainer = (results: any) => {
+  console.log('RESULTS');
+  console.log(results);
   return (
     <div>
       <h1>Results</h1>
       <div>
         <h3>Costs</h3>
-        <p><label>Total installed cost:</label> $25,000</p>
-        <p><label>LCOE</label> $195/MWh</p>
+        <p>
+          <label>Total installed cost:</label> $25,000
+        </p>
+        <p>
+          <label>LCOE</label> $195/MWh
+        </p>
       </div>
       <div>
         <h3>Biomass availability</h3>
-        <p><label>Total biomass availability in area</label> 100,000 BDT/y</p>
-        <p><label>Total biomass required per yer</label> 40,000 BDT/y</p>
+        <p>
+          <label>Total biomass availability in area</label> 100,000 BDT/y
+        </p>
+        <p>
+          <label>Total biomass required per yer</label> 40,000 BDT/y
+        </p>
       </div>
       <div className='chart-container'>
         <div className='chart'>
@@ -46,8 +56,8 @@ export const ResultsContainer = () => {
             ]}
             colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
             animate={{
-                duration: 2000
-              }}
+              duration: 2000
+            }}
           />
         </div>
         <div className='chart'>

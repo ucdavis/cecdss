@@ -1,39 +1,40 @@
 import React, { createRef, useState, useEffect } from 'react';
-import { Map, TileLayer, Marker, Popup, Circle, withLeaflet, GeoJSON} from 'react-leaflet';
+import {
+  Map,
+  TileLayer,
+  Marker,
+  Popup,
+  Circle,
+  withLeaflet,
+  GeoJSON
+} from 'react-leaflet';
 import L, { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { HexbinLayer } from 'react-leaflet-d3';
 import { MapSidebar } from './MapSidebar';
+import HeatmapLayer from 'react-leaflet-heatmap-layer';
+import { Inputs } from '../../Types';
 const WrappedHexbinLayer: any = withLeaflet(HexbinLayer);
 const geoJsonParser = require('geojson');
-const dataFile = require('../../data/lemma_json.json');
+const dataFile: any[] = require('../../data/lemma_json.json');
 
-const data = geoJsonParser.parse(dataFile, {Point: ['attributes.latitude', 'attributes.longitude']});
+const maxValue = dataFile.length;
+const data = geoJsonParser.parse(dataFile, {
+  Point: ['attributes.latitude', 'attributes.longitude']
+});
 console.log(data);
 
-export interface Parameters {
-  capacity: string;
-  radius: number;
-  treeManagement: string;
-  conversion: string;
-  debtRatio: string;
-  interest: string;
-  debtTerm: string;
-  lifeOfProject: string;
+console.log(dataFile);
+
+interface IProps {
+  inputs: Inputs;
+  setInputs: (inputs: Inputs) => void;
+  submitInputs: () => void;
 }
 
-export const MapContainer = () => {
+export const MapContainer = (props: IProps) => {
+  console.log(props);
   const [mapState, setMapState] = useState({ lat: 38.538762, lng: -121.75305 });
-  const [showSidebar, toggleSidebar] = useState(true);
-  const [parameters, setParameters] = useState({
-    capacity: '5',
-    radius: 100,
-    treeManagement: 'Thin from below',
-    conversion: 'Direct-combustion & steam turbine(3-50MW)',
-    debtRatio: '2:1',
-    interest: '12',
-    debtTerm: '10',
-    lifeOfProject: '25'
-  });
+  const [showSidebar, toggleSidebar] = useState(false);
 
   let mapRef: any = createRef<Map>();
 
@@ -50,73 +51,53 @@ export const MapContainer = () => {
   };
   const position: LatLngExpression = mapState;
 
-  // const data: any = {
-  //   type: 'FeatureCollection',
-  //   features: [
-  //     {
-  //       type: 'Feature',
-  //       geometry: {
-  //         type: 'Point',
-  //         coordinates: [-121.75305, 38.538762]
-  //       },
-  //       properties: { prop0: 'value0', prop1: { this: 'that' } }
-  //     },
-  //     {
-  //       type: 'Feature',
-  //       geometry: {
-  //         type: 'Point',
-  //         coordinates: [-110, 43]
-  //       },
-  //       properties: { prop0: 'value0', prop1: { this: 'that' } }
-  //     },
-  //     {
-  //       type: 'Feature',
-  //       geometry: {
-  //         type: 'Point',
-  //         coordinates: [-115, 40]
-  //       },
-  //       properties: { prop0: 'value0', prop1: { this: 'that' } }
-  //     },
-  //     {
-  //       type: 'Feature',
-  //       geometry: {
-  //         type: 'Point',
-  //         coordinates: [-110, 34]
-  //       },
-  //       properties: { prop0: 'value0', prop1: { this: 'that' } }
-  //     },
-  //     {
-  //       type: 'Feature',
-  //       geometry: {
-  //         type: 'Point',
-  //         coordinates: [-120, 42]
-  //       },
-  //       properties: { prop0: 'value0', prop1: { this: 'that' } }
-  //     }
-  //   ]
-  // };
-
   return (
     <div style={style}>
       {showSidebar && (
-        <MapSidebar parameters={parameters} setParameters={setParameters} />
+        <MapSidebar
+          inputs={props.inputs}
+          setInputs={props.setInputs}
+          submitInputs={props.submitInputs}
+        />
       )}
       <Map
         ref={mapRef}
-        onClick={(e: any) => setMapState(e.latlng)}
+        onClick={(e: any) => {
+          if (!showSidebar) {
+            toggleSidebar(true);
+          }
+          setMapState(e.latlng);
+        }}
         maxBounds={bounds}
         bounds={bounds}
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
-        <WrappedHexbinLayer
-          data={data}
+        <HeatmapLayer
+          fitBoundsOnLoad={false}
+          fitBoundsOnUpdate={false}
+          points={dataFile}
+          longitudeExtractor={(m: any) => m.attributes.longitude}
+          latitudeExtractor={(m: any) => m.attributes.latitude}
+          intensityExtractor={(m: any) =>
+            ((m.attributes.BPH_GE_3_C +
+              m.attributes.DBPH_GE_25 +
+              m.attributes.SBPH_GE_25) /
+              maxValue) *
+            50
+          }
+          radius={40}
+          blur={60}
+          max={0.015}
         />
+        {/* <WrappedHexbinLayer
+          data={data}
+        /> */}
         {/* <GeoJSON data={data} /> */}
-        {parameters.radius > 0 && (
+        {props.inputs.ExampleParameters.radius > 0 && (
           <Circle
             center={position}
             fillColor='blue'
-            radius={parameters.radius}
+            radius={props.inputs.ExampleParameters.radius}
           />
         )}
         <Marker position={position} />
