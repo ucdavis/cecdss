@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Inputs } from '../../Types';
+import { Inputs } from '../../models/Types';
 
 interface Props {
   inputs: Inputs;

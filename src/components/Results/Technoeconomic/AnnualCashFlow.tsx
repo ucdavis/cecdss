@@ -1,20 +1,19 @@
 import React from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import { Inputs } from '../../Types';
+import { Inputs } from '../../../models/Types';
 
 interface Props {
   inputs: Inputs;
   setInputs: (inputs: Inputs) => void;
 }
 
-export const TechnoEchonomicInputs = (props: Props) => {
+export const AnnualCashFlow = (props: Props) => {
   return (
     <div>
       <Label>Capital Cost</Label>
-      <Input
+      {/* <Input
         type='text'
-        value={props.inputs.TechnoEconomicAssessmentInputs.CapitalCost}
+        value={props.inputs.TechnoEconomicAssessmentInputs..CapitalCost}
         onChange={e =>
           props.setInputs({
             ...props.inputs,
@@ -24,7 +23,7 @@ export const TechnoEchonomicInputs = (props: Props) => {
             }
           })
         }
-      />
+      /> */}
     </div>
   );
 };

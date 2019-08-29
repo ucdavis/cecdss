@@ -12,7 +12,7 @@ import L, { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { HexbinLayer } from 'react-leaflet-d3';
 import { MapSidebar } from './MapSidebar';
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
-import { Inputs } from '../../Types';
+import { Inputs } from '../../models/Types';
 const WrappedHexbinLayer: any = withLeaflet(HexbinLayer);
 const geoJsonParser = require('geojson');
 const dataFile: any[] = require('../../data/lemma_json.json');

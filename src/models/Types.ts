@@ -1,7 +1,8 @@
 import { GenericPowerOnlyInputMod } from './TechnoeconomicInputs';
+import { OutputModGPO } from './TechnoeconomicOutputs';
 
 export interface Inputs {
-  TechnoEconomicAssessmentInputs: TechnoEconomicAssessmentInputs;
+  TechnoeconomicAssessmentInputs: TechnoeconomicAssessmentInputs;
   ExampleParameters: ExampleParameters;
 }
 
@@ -16,7 +17,18 @@ export interface ExampleParameters {
   lifeOfProject: string;
 }
 
-export interface TechnoEconomicAssessmentInputs {
+export interface TechnoeconomicAssessmentInputs {
   model: string;
   genericPowerOnly?: GenericPowerOnlyInputMod;
 }
+
+export interface TechnoeconomicAssessmentOutputs {
+  genericPowerOnly?: OutputModGPO;
+}
+
+export const TechnoeconomicModels = {
+  genericPowerOnly: 'genericPowerOnly',
+  genericCombinedHeatAndPower: 'genericCombinedHeatAndPower',
+  gasificationPower: 'gasificationPower',
+  hydrogen: 'hydrogen'
+};
