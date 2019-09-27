@@ -28,4 +28,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - run: ls | cd /node_modules/.bin | prettier --check "../../src/**/*.tsx"
+    - run: | 
+      ls
+      cd /node_modules/.bin
+      prettier --check "../../src/**/*.tsx"
