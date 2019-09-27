@@ -26,6 +26,7 @@ jobs:
         CI: true
   prettier:
     needs: build
+    runs-on: ubuntu-latest
     steps:
     - run: cd node_modules/.bin
     - run: prettier --check "../../src/**/*.js"
