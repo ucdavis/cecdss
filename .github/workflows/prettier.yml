@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [11.x]
 
     steps:
     - uses: actions/checkout@v1
@@ -28,5 +28,4 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - run: cd ./node_modules/.bin
-    - run: prettier --check "../../src/**/*.tsx"
+    - run: ls | cd /node_modules/.bin | prettier --check "../../src/**/*.tsx"
