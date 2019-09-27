@@ -27,5 +27,5 @@ jobs:
   prettier:
     needs: build
     steps:
-    - cd node_modules/.bin
-    - prettier --check "../../src/**/*.js"
+    - run: cd node_modules/.bin
+    - run: prettier --check "../../src/**/*.js"
