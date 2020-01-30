@@ -13,34 +13,23 @@ import { HexbinLayer } from 'react-leaflet-d3';
 import { MapSidebar } from './MapSidebar';
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
 import { Inputs } from '../../models/Types';
-const WrappedHexbinLayer: any = withLeaflet(HexbinLayer);
-const geoJsonParser = require('geojson');
-const dataFile: any[] = require('../../data/lemma_json.json');
-
-const maxValue = dataFile.length;
-const data = geoJsonParser.parse(dataFile, {
-  Point: ['attributes.latitude', 'attributes.longitude']
-});
-console.log(data);
-
-console.log(dataFile);
 
 interface IProps {
   inputs: Inputs;
   setInputs: (inputs: Inputs) => void;
-  submitInputs: () => void;
+  submitInputs: (lat: number, lng: number) => void;
 }
 
 export const MapContainer = (props: IProps) => {
   console.log(props);
-  const [mapState, setMapState] = useState({ lat: 38.538762, lng: -121.75305 });
+  const [mapState, setMapState] = useState({ lat: 40.032769, lng: -120.430607 });
   const [showSidebar, toggleSidebar] = useState(false);
 
   let mapRef: any = createRef<Map>();
 
   const bounds: LatLngBoundsExpression = [[43.7, -125.5], [30, -105.5]];
   const accessToken =
-    'pk.eyJ1IjoibGFob2xzdGVnZSIsImEiOiJjandzYjZjYzkwMjRxNDlwY21tNjJqbDN4In0.dyqHfQbzFrVPs2MP1EiaCA';
+    'pk.eyJ1IjoibGF1cmFob2xzdGVnZSIsImEiOiJjazYxM2UwdDEwM2xrM2ZtbGI5cmhtaDdnIn0.BKYruJdLx9bM2ICwhOwdew';
   const mapboxTiles =
     'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' +
     accessToken;
@@ -57,7 +46,7 @@ export const MapContainer = (props: IProps) => {
         <MapSidebar
           inputs={props.inputs}
           setInputs={props.setInputs}
-          submitInputs={props.submitInputs}
+          submitInputs={() => props.submitInputs(mapState.lat, mapState.lng)}
         />
       )}
       <Map
@@ -72,27 +61,7 @@ export const MapContainer = (props: IProps) => {
         bounds={bounds}
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
-        <HeatmapLayer
-          fitBoundsOnLoad={false}
-          fitBoundsOnUpdate={false}
-          points={dataFile}
-          longitudeExtractor={(m: any) => m.attributes.longitude}
-          latitudeExtractor={(m: any) => m.attributes.latitude}
-          intensityExtractor={(m: any) =>
-            ((m.attributes.BPH_GE_3_C +
-              m.attributes.DBPH_GE_25 +
-              m.attributes.SBPH_GE_25) /
-              maxValue) *
-            50
-          }
-          radius={40}
-          blur={60}
-          max={0.015}
-        />
-        {/* <WrappedHexbinLayer
-          data={data}
-        /> */}
-        {/* <GeoJSON data={data} /> */}
+       
         {props.inputs.ExampleParameters.radius > 0 && (
           <Circle
             center={position}

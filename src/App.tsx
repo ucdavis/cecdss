@@ -24,7 +24,7 @@ const App = () => {
     TechnoeconomicAssessmentOutputs
   >();
 
-  const submitInputs = async () => {
+  const submitInputs = async (lat: number, lng: number) => {
     let url = 'https://technoeconomic-assessment.azurewebsites.net/';
     let body = null;
     if (
@@ -47,6 +47,25 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     }).then(res => res.json());
+
+    console.log('frcs output....');
+    console.log('lat: ' + lat +  ' lng: ' + lng + ' radius: ' + inputs.ExampleParameters.radius)
+    const reqBody = JSON.stringify({
+      lat:lat,
+      lng:lng,
+      radius:inputs.ExampleParameters.radius
+    });
+    console.log(reqBody);
+    const frcsOutput: any[] = await fetch('http://localhost:3000/process', {
+      mode: 'cors',
+      method: 'POST',
+      body: reqBody,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json());
+    console.log(frcsOutput);
+
     console.log('OUTPUT');
     console.log(technoOutput);
     setTechnoeconomicOutputs({

@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  VictoryChart,
-  VictoryLine,
-  VictoryAxis,
-  VictoryPie,
-  VictoryStack,
-  VictoryArea,
-  VictoryBar
-} from 'victory';
+
 import {
   TechnoeconomicModels,
   TechnoeconomicAssessmentOutputs,
