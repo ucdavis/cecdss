@@ -3,15 +3,10 @@ import {
   Map,
   TileLayer,
   Marker,
-  Popup,
   Circle,
-  withLeaflet,
-  GeoJSON
 } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
-import { HexbinLayer } from 'react-leaflet-d3';
 import { MapSidebar } from './MapSidebar';
-import HeatmapLayer from 'react-leaflet-heatmap-layer';
 import { Inputs } from '../../models/Types';
 
 interface IProps {
