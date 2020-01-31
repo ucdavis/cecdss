@@ -1,41 +1,35 @@
-import React, {
-  createRef,
-  useState,
-} from 'react';
-import { Map, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
-import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
+import React, { createRef, useState, useEffect } from 'react';
+import {
+  Map,
+  TileLayer,
+  Marker,
+  Popup,
+  Circle,
+  withLeaflet,
+  GeoJSON
+} from 'react-leaflet';
+import L, { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
+import { HexbinLayer } from 'react-leaflet-d3';
 import { MapSidebar } from './MapSidebar';
+import HeatmapLayer from 'react-leaflet-heatmap-layer';
+import { Inputs } from '../../models/Types';
 
-export interface Parameters {
-  capacity: string;
-  radius: number;
-  treeManagement: string;
-  conversion: string;
-  debtRatio: string;
-  interest: string;
-  debtTerm: string;
-  lifeOfProject: string;
+interface IProps {
+  inputs: Inputs;
+  setInputs: (inputs: Inputs) => void;
+  submitInputs: (lat: number, lng: number) => void;
 }
 
-export const MapContainer = () => {
-  const [mapState, setMapState] = useState({ lat: 38.538762, lng: -121.75305 });
-  const [showSidebar, toggleSidebar] = useState(true);
-  const [parameters, setParameters] = useState({
-    capacity: '5',
-    radius: 0,
-    treeManagement: 'Thin from below',
-    conversion: 'Direct-combustion & steam turbine(3-50MW)',
-    debtRatio: '2:1',
-    interest: '12',
-    debtTerm: '10',
-    lifeOfProject: '25'
-  });
+export const MapContainer = (props: IProps) => {
+  console.log(props);
+  const [mapState, setMapState] = useState({ lat: 40.032769, lng: -120.430607 });
+  const [showSidebar, toggleSidebar] = useState(false);
 
   let mapRef: any = createRef<Map>();
 
   const bounds: LatLngBoundsExpression = [[43.7, -125.5], [30, -105.5]];
   const accessToken =
-    'pk.eyJ1IjoibGFob2xzdGVnZSIsImEiOiJjandzYjZjYzkwMjRxNDlwY21tNjJqbDN4In0.dyqHfQbzFrVPs2MP1EiaCA';
+    'pk.eyJ1IjoibGF1cmFob2xzdGVnZSIsImEiOiJjazYxM2UwdDEwM2xrM2ZtbGI5cmhtaDdnIn0.BKYruJdLx9bM2ICwhOwdew';
   const mapboxTiles =
     'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' +
     accessToken;
@@ -45,27 +39,38 @@ export const MapContainer = () => {
     height: window.innerHeight
   };
   const position: LatLngExpression = mapState;
+
   return (
     <div style={style}>
       {showSidebar && (
-       <MapSidebar parameters={parameters} setParameters={setParameters}/>
+        <MapSidebar
+          inputs={props.inputs}
+          setInputs={props.setInputs}
+          submitInputs={() => props.submitInputs(mapState.lat, mapState.lng)}
+        />
       )}
       <Map
         ref={mapRef}
-        onClick={(e: any) => setMapState(e.latlng)}
+        onClick={(e: any) => {
+          if (!showSidebar) {
+            toggleSidebar(true);
+          }
+          setMapState(e.latlng);
+        }}
         maxBounds={bounds}
         bounds={bounds}
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
-        {parameters.radius > 0 && (
+       
+        {props.inputs.ExampleParameters.radius > 0 && (
           <Circle
             center={position}
             fillColor='blue'
-            radius={parameters.radius}
+            radius={props.inputs.ExampleParameters.radius}
           />
         )}
         <Marker position={position} />
       </Map>
     </div>
   );
-}
+};

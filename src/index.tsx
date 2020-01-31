@@ -4,12 +4,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
-import * as RoutesModule from './routes';
-let routes = RoutesModule.routes;
 
 ReactDOM.render(
   <BrowserRouter>
-    <App children={routes}/>
+    <App />
   </BrowserRouter>,
   document.getElementById('root')
 );
