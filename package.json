@@ -47,6 +47,7 @@
     "@types/react-router-dom": "^4.3.4",
     "@types/reactstrap": "^8.0.1",
     "@types/victory": "^31.0.19",
-    "eslint-plugin-react-hooks": "^1.6.0"
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "prettier": "^1.18.2"
   }
 }
