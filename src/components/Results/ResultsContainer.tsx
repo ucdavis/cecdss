@@ -3,14 +3,17 @@ import React from 'react';
 import {
   TechnoeconomicModels,
   TechnoeconomicAssessmentOutputs,
-  Inputs
+  Inputs,
+  FrcsOutputs
 } from '../../models/Types';
 import { GPOResults } from './Technoeconomic/GenericPowerOnly/GPOResults';
+import { FrcsResultsContainer } from './FrcsResultsContainer';
 
 interface Props {
   inputs: Inputs;
   technoeconomicModel: string;
   technoeconomicOutputs: TechnoeconomicAssessmentOutputs;
+  frcsOutputs: FrcsOutputs;
 }
 
 export const ResultsContainer = (props: Props) => {
@@ -29,6 +32,7 @@ export const ResultsContainer = (props: Props) => {
             />
           )}
       </div>
+      <FrcsResultsContainer results={props.frcsOutputs}/>
     </div>
   );
 };

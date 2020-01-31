@@ -8,7 +8,10 @@ import {
   Inputs,
   TechnoeconomicAssessmentInputs,
   TechnoeconomicModels,
-  TechnoeconomicAssessmentOutputs
+  TechnoeconomicAssessmentOutputs,
+  FrcsParameters,
+  FrcsClusterOutput,
+  FrcsOutputs
 } from './models/Types';
 import 'isomorphic-fetch';
 import { OutputModGPO } from './models/TechnoeconomicOutputs';
@@ -17,12 +20,15 @@ import { GenericPowerOnlyInputMod } from './models/TechnoeconomicInputs';
 const App = () => {
   const [inputs, setInputs] = useState<Inputs>({
     TechnoeconomicAssessmentInputs: technoeconomicInputsExample,
+    FrcsParameters: frcsInputsExample,
     ExampleParameters: otherInputsExample
   });
 
   const [technoeconomicOutputs, setTechnoeconomicOutputs] = useState<
     TechnoeconomicAssessmentOutputs
   >();
+
+  const [frcsOutputs, setFrcsOutputs] = useState<FrcsOutputs>();
 
   const submitInputs = async (lat: number, lng: number) => {
     let url = 'https://technoeconomic-assessment.azurewebsites.net/';
@@ -53,10 +59,11 @@ const App = () => {
     const reqBody = JSON.stringify({
       lat:lat,
       lng:lng,
-      radius:inputs.ExampleParameters.radius
+      radius:inputs.ExampleParameters.radius,
+      system: 'Ground-Based Mech WT'
     });
     console.log(reqBody);
-    const frcsOutput: any[] = await fetch('http://localhost:3000/process', {
+    const frcsOutput: FrcsOutputs = await fetch('http://localhost:3000/process', {
       mode: 'cors',
       method: 'POST',
       body: reqBody,
@@ -71,6 +78,7 @@ const App = () => {
     setTechnoeconomicOutputs({
       [inputs.TechnoeconomicAssessmentInputs.model]: technoOutput
     });
+    setFrcsOutputs(frcsOutput)
   };
 
   return (
@@ -99,11 +107,12 @@ const App = () => {
           submitInputs={submitInputs}
         />
       )}
-      {technoeconomicOutputs && (
+      {frcsOutputs && technoeconomicOutputs && (
         <ResultsContainer
           inputs={inputs}
           technoeconomicModel={inputs.TechnoeconomicAssessmentInputs.model}
           technoeconomicOutputs={technoeconomicOutputs}
+          frcsOutputs={frcsOutputs}
         />
       )}
     </div>
@@ -158,3 +167,8 @@ const otherInputsExample = {
   debtTerm: '10',
   lifeOfProject: '25'
 };
+
+const frcsInputsExample: FrcsParameters = {
+  system: 'Ground-Based Mech WT',
+  radius: 50
+}
