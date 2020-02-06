@@ -33,7 +33,7 @@
 }
 
 #sidebar {
-  position: absolute;
+  position: fixed;
   z-index: 2000;
   width: 30%;
   height: 100%;
@@ -41,6 +41,7 @@
   padding: 10px;
   top: 0;
   right: 0;
+  overflow-y: scroll;
 }
 
 .chart-container {
@@ -48,5 +49,5 @@
 }
 
 .chart {
-  flex: 1 1 33%
+  flex: 1 1 33%;
 }

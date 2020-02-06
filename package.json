@@ -11,6 +11,7 @@
     "react-leaflet": "^2.4.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "2.1.8",
+    "react-table": "^7.0.0-rc.15",
     "reactstrap": "^8.0.0",
     "typescript": "3.4.3",
     "victory": "^32.2.3"
@@ -38,6 +39,7 @@
     "@types/react-dom": "^16.8.5",
     "@types/react-leaflet": "^2.2.1",
     "@types/react-router-dom": "^4.3.4",
+    "@types/react-table": "^7.0.4",
     "@types/reactstrap": "^8.0.1",
     "@types/victory": "^31.0.19",
     "eslint-plugin-react-hooks": "^1.6.0",
