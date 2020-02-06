@@ -23,51 +23,11 @@ export const FrcsClusterResultsContainer = (props: Props) => {
     []
   );
 
-  const columns2 = React.useMemo(
-    () => [
-      {
-        Header: 'Name',
-        columns: [
-          {
-            Header: 'First Name',
-            accessor: 'firstName'
-          },
-          {
-            Header: 'Last Name',
-            accessor: 'lastName'
-          }
-        ]
-      },
-      {
-        Header: 'Info',
-        columns: [
-          {
-            Header: 'Age',
-            accessor: 'age'
-          },
-          {
-            Header: 'Visits',
-            accessor: 'visits'
-          },
-          {
-            Header: 'Status',
-            accessor: 'status'
-          },
-          {
-            Header: 'Profile Progress',
-            accessor: 'progress'
-          }
-        ]
-      }
-    ],
-    []
-  );
-
   const results = React.useMemo(() => props.results, []);
   return (
     <div>
       <h3>Clusters</h3>
-      <ReactTable columns={columns} data={props.results} />
+      <ReactTable columns={columns} data={results} />
     </div>
   );
 };
