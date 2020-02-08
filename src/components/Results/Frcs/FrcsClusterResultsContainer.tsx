@@ -16,9 +16,9 @@ export const FrcsClusterResultsContainer = (props: Props) => {
       { Header: 'Cost', accessor: 'cost' },
       { Header: 'Area', accessor: 'area' },
       { Header: 'Distance', accessor: 'distance' },
-      { Header: 'Total Per Acre', accessor: 'TotalPerAcre' },
-      { Header: 'Total Per Bole CCF', accessor: 'TotalPerBoleCCF' },
-      { Header: 'Total Per GT', accessor: 'TotalPerGT' }
+      { Header: 'Total Per Acre', accessor: 'frcsResult.TotalPerAcre' },
+      { Header: 'Total Per Bole CCF', accessor: 'frcsResult.TotalPerBoleCCF' },
+      { Header: 'Total Per GT', accessor: 'frcsResult.TotalPerGT' }
     ],
     []
   );
