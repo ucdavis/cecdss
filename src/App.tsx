@@ -55,22 +55,32 @@ const App = () => {
     }).then(res => res.json());
 
     console.log('frcs output....');
-    console.log('lat: ' + lat +  ' lng: ' + lng + ' radius: ' + inputs.ExampleParameters.radius)
+    console.log(
+      'lat: ' +
+        lat +
+        ' lng: ' +
+        lng +
+        ' radius: ' +
+        inputs.ExampleParameters.radius
+    );
     const reqBody = JSON.stringify({
-      lat:lat,
-      lng:lng,
-      radius:inputs.ExampleParameters.radius,
+      lat: lat,
+      lng: lng,
+      radius: inputs.ExampleParameters.radius,
       system: 'Ground-Based Mech WT'
     });
     console.log(reqBody);
-    const frcsOutput: FrcsOutputs = await fetch('http://localhost:3000/process', {
-      mode: 'cors',
-      method: 'POST',
-      body: reqBody,
-      headers: {
-        'Content-Type': 'application/json'
+    const frcsOutput: FrcsOutputs = await fetch(
+      'https://cecdss-backend.azurewebsites.net/process',
+      {
+        mode: 'cors',
+        method: 'POST',
+        body: reqBody,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    }).then(res => res.json());
+    ).then(res => res.json());
     console.log(frcsOutput);
 
     console.log('OUTPUT');
@@ -78,7 +88,7 @@ const App = () => {
     setTechnoeconomicOutputs({
       [inputs.TechnoeconomicAssessmentInputs.model]: technoOutput
     });
-    setFrcsOutputs(frcsOutput)
+    setFrcsOutputs(frcsOutput);
   };
 
   return (
@@ -171,4 +181,4 @@ const otherInputsExample = {
 const frcsInputsExample: FrcsParameters = {
   system: 'Ground-Based Mech WT',
   radius: 50
-}
+};
