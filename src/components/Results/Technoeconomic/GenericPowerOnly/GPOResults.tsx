@@ -16,7 +16,7 @@ export const GPOResults = (props: Props) => {
       <ElectricalAndFuelBaseYear
         data={props.results.ElectricalAndFuelBaseYear}
       />
-      <GPOCharts inputs={props.inputs} results={props.results} />
+      {/* <GPOCharts inputs={props.inputs} results={props.results} /> */}
     </div>
   );
 };

@@ -311,11 +311,11 @@ export const GenericPowerOnly = (props: Props) => {
         {/* TODO: add tax credit frac */}
       </div>
       <hr />
-      <div>
+      {/* <div>
         <Button color='primary' onClick={() => props.setInputs(inputs)}>
           Next
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };
