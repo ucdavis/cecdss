@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { ElectricalFuelBaseYearMod } from '../../../models/TechnoeconomicOutputs';
+import { formatNumber } from '../../Shared/util';
 
 interface Props {
   data: ElectricalFuelBaseYearMod;
@@ -18,27 +19,27 @@ export const ElectricalAndFuelBaseYear = (props: Props) => {
         <tbody>
           <tr>
             <td>Annual Ash Disposal</td>
-            <td>{props.data.AnnualAshDisposal}</td>
+            <td>{formatNumber(props.data.AnnualAshDisposal)}</td>
           </tr>
           <tr>
             <td>Annual Fuel Consumption</td>
-            <td>{props.data.AnnualFuelConsumption}</td>
+            <td>{formatNumber(props.data.AnnualFuelConsumption)}</td>
           </tr>
           <tr>
             <td>Annual Generation</td>
-            <td>{props.data.AnnualGeneration}</td>
+            <td>{formatNumber(props.data.AnnualGeneration)}</td>
           </tr>
           <tr>
             <td>Annual Hours</td>
-            <td>{props.data.AnnualHours}</td>
+            <td>{formatNumber(props.data.AnnualHours)}</td>
           </tr>
           <tr>
             <td>Capital Cost NEC</td>
-            <td>{props.data.CapitalCostNEC}</td>
+            <td>{formatNumber(props.data.CapitalCostNEC)}</td>
           </tr>
           <tr>
             <td>Fuel Consumption Rate</td>
-            <td>{props.data.FuelConsumptionRate}</td>
+            <td>{formatNumber(props.data.FuelConsumptionRate)}</td>
           </tr>
         </tbody>
       </table>

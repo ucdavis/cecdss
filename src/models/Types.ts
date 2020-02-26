@@ -4,23 +4,12 @@ import { OutputModGPO } from './TechnoeconomicOutputs';
 export interface Inputs {
   TechnoeconomicAssessmentInputs: TechnoeconomicAssessmentInputs;
   FrcsParameters: FrcsParameters;
-  ExampleParameters: ExampleParameters;
-}
-
-export interface ExampleParameters {
-  capacity: string;
-  radius: number;
-  treeManagement: string;
-  conversion: string;
-  debtRatio: string;
-  interest: string;
-  debtTerm: string;
-  lifeOfProject: string;
 }
 
 export interface FrcsParameters {
   radius: number;
   system: string;
+  treatment: string;
 }
 
 export interface TechnoeconomicAssessmentInputs {

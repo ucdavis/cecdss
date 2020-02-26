@@ -3,6 +3,7 @@ import { FrcsOutputs } from '../../../models/Types';
 import { Button } from 'reactstrap';
 import { FrcsClusterCharts } from './FrcsClusterCharts';
 import { FrcsClusterResultsContainer } from './FrcsClusterResultsContainer';
+import { formatNumber } from '../../Shared/util';
 
 interface Props {
   results: FrcsOutputs;
@@ -26,15 +27,15 @@ export const FrcsResultsContainer = (props: Props) => {
         <tbody>
           <tr>
             <td>Total Biomass Available</td>
-            <td>{props.results.totalBiomass}</td>
+            <td>{formatNumber(props.results.totalBiomass)}</td>
           </tr>
           <tr>
             <td>Total Cost</td>
-            <td>{props.results.totalCost}</td>
+            <td>{formatNumber(props.results.totalCost)}</td>
           </tr>
           <tr>
             <td>Total Area</td>
-            <td>{props.results.totalArea}</td>
+            <td>{formatNumber(props.results.totalArea)}</td>
           </tr>
         </tbody>
       </table>
