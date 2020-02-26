@@ -2,10 +2,10 @@ import React from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Inputs } from '../../models/Types';
-import { ExampleInputs } from './ExampleInputs';
 import { GenericPowerOnly } from './Technoeconomic/GenericPowerOnly';
 import { GenericPowerOnlyInputMod } from '../../models/TechnoeconomicInputs';
 import { FrcsInputs } from './Frcs/FrcsInputs';
+import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 
 interface Props {
   inputs: Inputs;
@@ -27,8 +27,7 @@ export const MapSidebar = (props: Props) => {
     <div id='sidebar'>
       <h2>Select Refinery Inputs</h2>
       <FrcsInputs inputs={props.inputs} setInputs={props.setInputs} />
-      <ExampleInputs inputs={props.inputs} setInputs={props.setInputs} />
-      <GenericPowerOnly setInputs={setGenericPowerOnly} />
+      <TechnoeconomicInputs inputs={props.inputs} setInputs={props.setInputs} />
       <div>
         {/* <Link to='/results'> */}
         <Button color='primary' onClick={props.submitInputs}>

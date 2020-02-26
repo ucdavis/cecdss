@@ -20,8 +20,7 @@ import { GenericPowerOnlyInputMod } from './models/TechnoeconomicInputs';
 const App = () => {
   const [inputs, setInputs] = useState<Inputs>({
     TechnoeconomicAssessmentInputs: technoeconomicInputsExample,
-    FrcsParameters: frcsInputsExample,
-    ExampleParameters: otherInputsExample
+    FrcsParameters: frcsInputsExample
   });
 
   const [technoeconomicOutputs, setTechnoeconomicOutputs] = useState<
@@ -165,17 +164,6 @@ const defaultValue: GenericPowerOnlyInputMod = {
 const technoeconomicInputsExample: TechnoeconomicAssessmentInputs = {
   model: 'genericPowerOnly',
   genericPowerOnly: defaultValue
-};
-
-const otherInputsExample = {
-  capacity: '5',
-  radius: 0,
-  treeManagement: 'Thin from below',
-  conversion: 'Direct-combustion & steam turbine(3-50MW)',
-  debtRatio: '2:1',
-  interest: '12',
-  debtTerm: '10',
-  lifeOfProject: '25'
 };
 
 const frcsInputsExample: FrcsParameters = {
