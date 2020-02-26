@@ -61,17 +61,17 @@ const App = () => {
         ' lng: ' +
         lng +
         ' radius: ' +
-        inputs.ExampleParameters.radius
+        inputs.FrcsParameters.radius
     );
     const reqBody = JSON.stringify({
       lat: lat,
       lng: lng,
-      radius: inputs.ExampleParameters.radius,
-      system: 'Ground-Based Mech WT'
+      radius: inputs.FrcsParameters.radius,
+      system: inputs.FrcsParameters.system
     });
     console.log(reqBody);
     const frcsOutput: FrcsOutputs = await fetch(
-      'https://cecdss-backend.azurewebsites.net/process',
+      'http://localhost:3000/process',
       {
         mode: 'cors',
         method: 'POST',
@@ -180,5 +180,6 @@ const otherInputsExample = {
 
 const frcsInputsExample: FrcsParameters = {
   system: 'Ground-Based Mech WT',
-  radius: 50
+  radius: 50,
+  treatment: 'clearcut'
 };

@@ -58,11 +58,11 @@ export const MapContainer = (props: IProps) => {
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
 
-        {props.inputs.ExampleParameters.radius > 0 && (
+        {props.inputs.FrcsParameters.radius > 0 && (
           <Circle
             center={position}
             fillColor='blue'
-            radius={props.inputs.ExampleParameters.radius}
+            radius={props.inputs.FrcsParameters.radius}
           />
         )}
         <Marker position={position} />

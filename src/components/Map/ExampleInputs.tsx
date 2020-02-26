@@ -12,39 +12,6 @@ export const ExampleInputs = (props: Props) => {
   return (
     <div>
       <div>
-        <h4>Forestry and Conversion</h4>
-        <Label>Radius:</Label>
-        <InputGroup>
-          <Input
-            type='text'
-            value={props.inputs.ExampleParameters.radius}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                ExampleParameters: {
-                  ...props.inputs.ExampleParameters,
-                  radius: Number(e.target.value)
-                }
-              })
-            }
-          />
-          <InputGroupAddon addonType='append'>meters</InputGroupAddon>
-        </InputGroup>
-        <Input
-          type='range'
-          min={100}
-          max={50000}
-          value={props.inputs.ExampleParameters.radius}
-          onChange={e =>
-            props.setInputs({
-              ...props.inputs,
-              ExampleParameters: {
-                ...props.inputs.ExampleParameters,
-                radius: Number(e.target.value)
-              }
-            })
-          }
-        />
         <Label>Capacity of processing unit:</Label>
         <InputGroup>
           <Input
@@ -62,23 +29,6 @@ export const ExampleInputs = (props: Props) => {
           />
           <InputGroupAddon addonType='append'>MW</InputGroupAddon>
         </InputGroup>
-        <Label>Tree management</Label>
-        <Input
-          type='select'
-          value={props.inputs.ExampleParameters.treeManagement}
-          onChange={e =>
-            props.setInputs({
-              ...props.inputs,
-              ExampleParameters: {
-                ...props.inputs.ExampleParameters,
-                treeManagement: e.target.value
-              }
-            })
-          }
-        >
-          <option>Thin from below</option>
-          <option>Thin from above</option>
-        </Input>
         <Label>Conversion</Label>
         <Input
           type='select'

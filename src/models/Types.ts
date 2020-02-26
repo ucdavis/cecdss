@@ -9,8 +9,6 @@ export interface Inputs {
 
 export interface ExampleParameters {
   capacity: string;
-  radius: number;
-  treeManagement: string;
   conversion: string;
   debtRatio: string;
   interest: string;
@@ -21,6 +19,7 @@ export interface ExampleParameters {
 export interface FrcsParameters {
   radius: number;
   system: string;
+  treatment: string;
 }
 
 export interface TechnoeconomicAssessmentInputs {
