@@ -5,11 +5,10 @@ import { Route } from 'react-router';
 import { MapContainer } from './components/Map/MapContainer';
 import { ResultsContainer } from './components/Results/ResultsContainer';
 import {
-  Inputs,
   TechnoeconomicAssessmentInputs,
   TechnoeconomicModels,
   TechnoeconomicAssessmentOutputs,
-  FrcsParameters,
+  FrcsInputs,
   FrcsClusterOutput,
   FrcsOutputs
 } from './models/Types';
@@ -18,10 +17,11 @@ import { OutputModGPO } from './models/TechnoeconomicOutputs';
 import { GenericPowerOnlyInputMod } from './models/TechnoeconomicInputs';
 
 const App = () => {
-  const [inputs, setInputs] = useState<Inputs>({
-    TechnoeconomicAssessmentInputs: technoeconomicInputsExample,
-    FrcsParameters: frcsInputsExample
-  });
+  const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
+
+  const [teaInputs, setTeaInputs] = useState<TechnoeconomicAssessmentInputs>(
+    technoeconomicInputsExample
+  );
 
   const [technoeconomicOutputs, setTechnoeconomicOutputs] = useState<
     TechnoeconomicAssessmentOutputs
@@ -32,12 +32,9 @@ const App = () => {
   const submitInputs = async (lat: number, lng: number) => {
     let url = 'https://technoeconomic-assessment.azurewebsites.net/';
     let body = null;
-    if (
-      inputs.TechnoeconomicAssessmentInputs.model ===
-      TechnoeconomicModels.genericPowerOnly
-    ) {
+    if (teaInputs.model === TechnoeconomicModels.genericPowerOnly) {
       url += TechnoeconomicModels.genericPowerOnly;
-      body = inputs.TechnoeconomicAssessmentInputs.genericPowerOnly || null;
+      body = teaInputs.genericPowerOnly || null;
       console.log(url);
       console.log(JSON.stringify(body));
     }
@@ -55,22 +52,17 @@ const App = () => {
 
     console.log('frcs output....');
     console.log(
-      'lat: ' +
-        lat +
-        ' lng: ' +
-        lng +
-        ' radius: ' +
-        inputs.FrcsParameters.radius
+      'lat: ' + lat + ' lng: ' + lng + ' radius: ' + frcsInputs.radius
     );
     const reqBody = JSON.stringify({
       lat: lat,
       lng: lng,
-      radius: inputs.FrcsParameters.radius,
-      system: inputs.FrcsParameters.system
+      radius: frcsInputs.radius,
+      system: frcsInputs.system
     });
     console.log(reqBody);
     const frcsOutput: FrcsOutputs = await fetch(
-      'https://cecdss-backend.azurewebsites.net/process',
+      'http://localhost:3000/process',
       {
         mode: 'cors',
         method: 'POST',
@@ -85,7 +77,7 @@ const App = () => {
     console.log('OUTPUT');
     console.log(technoOutput);
     setTechnoeconomicOutputs({
-      [inputs.TechnoeconomicAssessmentInputs.model]: technoOutput
+      [teaInputs.model]: technoOutput
     });
     setFrcsOutputs(frcsOutput);
   };
@@ -111,16 +103,18 @@ const App = () => {
       /> */}
       {!technoeconomicOutputs && (
         <MapContainer
-          inputs={inputs}
-          setInputs={setInputs}
+          frcsInputs={frcsInputs}
+          setFrcsInputs={setFrcsInputs}
+          teaInputs={teaInputs}
+          setTeaInputs={setTeaInputs}
           submitInputs={submitInputs}
         />
       )}
       {frcsOutputs && technoeconomicOutputs && (
         <ResultsContainer
-          inputs={inputs}
-          technoeconomicModel={inputs.TechnoeconomicAssessmentInputs.model}
-          technoeconomicOutputs={technoeconomicOutputs}
+          frcsInputs={frcsInputs}
+          teaInputs={teaInputs}
+          teaOutputs={technoeconomicOutputs}
           frcsOutputs={frcsOutputs}
         />
       )}
@@ -166,7 +160,7 @@ const technoeconomicInputsExample: TechnoeconomicAssessmentInputs = {
   genericPowerOnly: defaultValue
 };
 
-const frcsInputsExample: FrcsParameters = {
+const frcsInputsExample: FrcsInputs = {
   system: 'Ground-Based Mech WT',
   radius: 50,
   treatment: 'clearcut'

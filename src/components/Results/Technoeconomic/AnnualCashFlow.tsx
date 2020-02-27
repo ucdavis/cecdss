@@ -1,11 +1,7 @@
 import React from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
-import { Inputs } from '../../../models/Types';
 
-interface Props {
-  inputs: Inputs;
-  setInputs: (inputs: Inputs) => void;
-}
+interface Props {}
 
 export const AnnualCashFlow = (props: Props) => {
   return (

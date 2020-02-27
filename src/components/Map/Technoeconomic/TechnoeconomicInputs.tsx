@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Inputs, FrcsParameters } from '../../../models/Types';
 import { GenericPowerOnly } from './GenericPowerOnly';
+import { TechnoeconomicAssessmentInputs } from '../../../models/Types';
+import { GenericPowerOnlyInputMod } from '../../../models/TechnoeconomicInputs';
 
 interface Props {
-  inputs: Inputs;
-  setInputs: (inputs: Inputs) => void;
+  inputs: TechnoeconomicAssessmentInputs;
+  setInputs: (inputs: TechnoeconomicAssessmentInputs) => void;
 }
 
 export const TechnoeconomicInputs = (props: Props) => {
@@ -20,7 +21,14 @@ export const TechnoeconomicInputs = (props: Props) => {
         </Input>
         <br />
       </div>
-      <GenericPowerOnly />
+      {props.inputs.genericPowerOnly && (
+        <GenericPowerOnly
+          inputs={props.inputs.genericPowerOnly}
+          setInputs={(inputs: GenericPowerOnlyInputMod) => {
+            props.setInputs({ ...props.inputs, genericPowerOnly: inputs });
+          }}
+        />
+      )}
       <br />
       <hr />
     </div>

@@ -10,13 +10,14 @@ import {
   FormGroup
 } from 'reactstrap';
 import { GenericPowerOnlyInputMod } from '../../../models/TechnoeconomicInputs';
+import { TechnoeconomicAssessmentInputs } from '../../../models/Types';
 
 interface Props {
+  inputs: GenericPowerOnlyInputMod;
   setInputs: (inputs: GenericPowerOnlyInputMod) => void;
 }
 
-export const GenericPowerOnly = () => {
-  const [inputs, setInputs] = useState<GenericPowerOnlyInputMod>(defaultValue);
+export const GenericPowerOnly = (props: Props) => {
   return (
     <div>
       <Form>
@@ -25,10 +26,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.CapitalCost}
+              value={props.inputs.CapitalCost}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   CapitalCost: Number(e.target.value)
                 })
               }
@@ -42,10 +43,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.NetElectricalCapacity}
+              value={props.inputs.NetElectricalCapacity}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   NetElectricalCapacity: Number(e.target.value)
                 })
               }
@@ -61,10 +62,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.CapacityFactor}
+              value={props.inputs.CapacityFactor}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   CapacityFactor: Number(e.target.value)
                 })
               }
@@ -80,10 +81,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.NetStationEfficiency}
+              value={props.inputs.NetStationEfficiency}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   NetStationEfficiency: Number(e.target.value)
                 })
               }
@@ -99,10 +100,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.FuelHeatingValue}
+              value={props.inputs.FuelHeatingValue}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   FuelHeatingValue: Number(e.target.value)
                 })
               }
@@ -119,10 +120,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.FuelAshConcentration}
+              value={props.inputs.FuelAshConcentration}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   FuelAshConcentration: Number(e.target.value)
                 })
               }
@@ -138,10 +139,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.FuelCost}
+              value={props.inputs.FuelCost}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   FuelCost: Number(e.target.value)
                 })
               }
@@ -157,10 +158,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.LaborCost}
+              value={props.inputs.LaborCost}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   LaborCost: Number(e.target.value)
                 })
               }
@@ -174,10 +175,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.MaintenanceCost}
+              value={props.inputs.MaintenanceCost}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   MaintenanceCost: Number(e.target.value)
                 })
               }
@@ -191,10 +192,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.InsurancePropertyTax}
+              value={props.inputs.InsurancePropertyTax}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   InsurancePropertyTax: Number(e.target.value)
                 })
               }
@@ -211,10 +212,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.Utilities}
+              value={props.inputs.Utilities}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   Utilities: Number(e.target.value)
                 })
               }
@@ -230,10 +231,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.AshDisposal}
+              value={props.inputs.AshDisposal}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   AshDisposal: Number(e.target.value)
                 })
               }
@@ -250,10 +251,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.Management}
+              value={props.inputs.Management}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   Management: Number(e.target.value)
                 })
               }
@@ -269,10 +270,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.OtherOperatingExpenses}
+              value={props.inputs.OtherOperatingExpenses}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   OtherOperatingExpenses: Number(e.target.value)
                 })
               }
@@ -289,10 +290,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.FederalTaxRate}
+              value={props.inputs.FederalTaxRate}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   FederalTaxRate: Number(e.target.value)
                 })
               }
@@ -306,10 +307,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.StateTaxRate}
+              value={props.inputs.StateTaxRate}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   StateTaxRate: Number(e.target.value)
                 })
               }
@@ -323,10 +324,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.ProductionTaxCredit}
+              value={props.inputs.ProductionTaxCredit}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   ProductionTaxCredit: Number(e.target.value)
                 })
               }
@@ -340,10 +341,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.DebtRatio}
+              value={props.inputs.DebtRatio}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   DebtRatio: Number(e.target.value)
                 })
               }
@@ -359,10 +360,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.InterestRateOnDebt}
+              value={props.inputs.InterestRateOnDebt}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   InterestRateOnDebt: Number(e.target.value)
                 })
               }
@@ -378,10 +379,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.EconomicLife}
+              value={props.inputs.EconomicLife}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   EconomicLife: Number(e.target.value)
                 })
               }
@@ -395,10 +396,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.CostOfEquity}
+              value={props.inputs.CostOfEquity}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   CostOfEquity: Number(e.target.value)
                 })
               }
@@ -414,10 +415,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.CapacityPayment}
+              value={props.inputs.CapacityPayment}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   CapacityPayment: Number(e.target.value)
                 })
               }
@@ -434,10 +435,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.InterestRateonDebtReserve}
+              value={props.inputs.InterestRateonDebtReserve}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   InterestRateonDebtReserve: Number(e.target.value)
                 })
               }
@@ -454,10 +455,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.GeneralInflation}
+              value={props.inputs.GeneralInflation}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   GeneralInflation: Number(e.target.value)
                 })
               }
@@ -474,10 +475,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.EscalationFuel}
+              value={props.inputs.EscalationFuel}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   EscalationFuel: Number(e.target.value)
                 })
               }
@@ -493,10 +494,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.EscalationProductionTaxCredit}
+              value={props.inputs.EscalationProductionTaxCredit}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   EscalationProductionTaxCredit: Number(e.target.value)
                 })
               }
@@ -512,10 +513,10 @@ export const GenericPowerOnly = () => {
           <InputGroup>
             <Input
               type='text'
-              value={inputs.EscalationOther}
+              value={props.inputs.EscalationOther}
               onChange={e =>
-                setInputs({
-                  ...inputs,
+                props.setInputs({
+                  ...props.inputs,
                   EscalationOther: Number(e.target.value)
                 })
               }
@@ -530,7 +531,7 @@ export const GenericPowerOnly = () => {
         {/* TODO: add tax credit frac */}
       </Form>
       {/* <div>
-        <Button color='primary' onClick={() => props.setInputs(inputs)}>
+        <Button color='primary' onClick={() => props.props.setInputs(props.inputs)}>
           Next
         </Button>
       </div> */}

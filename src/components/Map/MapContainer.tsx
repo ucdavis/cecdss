@@ -2,11 +2,13 @@ import React, { createRef, useState, useEffect } from 'react';
 import { Map, TileLayer, Marker, Circle } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { MapSidebar } from './MapSidebar';
-import { Inputs } from '../../models/Types';
+import { FrcsInputs, TechnoeconomicAssessmentInputs } from '../../models/Types';
 
 interface IProps {
-  inputs: Inputs;
-  setInputs: (inputs: Inputs) => void;
+  frcsInputs: FrcsInputs;
+  setFrcsInputs: (inputs: FrcsInputs) => void;
+  teaInputs: TechnoeconomicAssessmentInputs;
+  setTeaInputs: (inputs: TechnoeconomicAssessmentInputs) => void;
   submitInputs: (lat: number, lng: number) => void;
 }
 
@@ -40,8 +42,7 @@ export const MapContainer = (props: IProps) => {
     <div style={style}>
       {showSidebar && (
         <MapSidebar
-          inputs={props.inputs}
-          setInputs={props.setInputs}
+          {...props}
           submitInputs={() => props.submitInputs(mapState.lat, mapState.lng)}
         />
       )}
@@ -58,11 +59,11 @@ export const MapContainer = (props: IProps) => {
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
 
-        {props.inputs.FrcsParameters.radius > 0 && (
+        {props.frcsInputs.radius > 0 && (
           <Circle
             center={position}
             fillColor='blue'
-            radius={props.inputs.FrcsParameters.radius}
+            radius={props.frcsInputs.radius}
           />
         )}
         <Marker position={position} />

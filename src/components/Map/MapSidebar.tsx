@@ -1,33 +1,30 @@
 import React from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Inputs } from '../../models/Types';
-import { GenericPowerOnly } from './Technoeconomic/GenericPowerOnly';
-import { GenericPowerOnlyInputMod } from '../../models/TechnoeconomicInputs';
-import { FrcsInputs } from './Frcs/FrcsInputs';
+import { FrcsInputs, TechnoeconomicAssessmentInputs } from '../../models/Types';
+import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 
 interface Props {
-  inputs: Inputs;
-  setInputs: (inputs: Inputs) => void;
+  frcsInputs: FrcsInputs;
+  setFrcsInputs: (inputs: FrcsInputs) => void;
+  teaInputs: TechnoeconomicAssessmentInputs;
+  setTeaInputs: (inputs: TechnoeconomicAssessmentInputs) => void;
   submitInputs: () => void;
 }
 
 export const MapSidebar = (props: Props) => {
-  const setGenericPowerOnly = (genericPowerOnly: GenericPowerOnlyInputMod) => {
-    props.setInputs({
-      ...props.inputs,
-      TechnoeconomicAssessmentInputs: {
-        ...props.inputs.TechnoeconomicAssessmentInputs,
-        genericPowerOnly: genericPowerOnly
-      }
-    });
-  };
   return (
     <div id='sidebar'>
       <h2>Select Refinery Inputs</h2>
-      <FrcsInputs inputs={props.inputs} setInputs={props.setInputs} />
-      <TechnoeconomicInputs inputs={props.inputs} setInputs={props.setInputs} />
+      <FrcsInputsContainer
+        inputs={props.frcsInputs}
+        setInputs={props.setFrcsInputs}
+      />
+      <TechnoeconomicInputs
+        inputs={props.teaInputs}
+        setInputs={props.setTeaInputs}
+      />
       <div>
         {/* <Link to='/results'> */}
         <Button color='primary' onClick={props.submitInputs}>
