@@ -60,7 +60,7 @@ export const FrcsResultsContainer = (props: Props) => {
         View Cluster Charts
       </Button>
       {state.viewClusterTable && (
-        <FrcsClusterResultsContainer results={props.results.clusters} />
+        <FrcsClusterResultsContainer results={props.results} />
       )}
       {state.viewClusterCharts && (
         <FrcsClusterCharts outputs={props.results.clusters} />

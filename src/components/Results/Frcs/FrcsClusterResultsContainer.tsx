@@ -5,9 +5,10 @@ import { FrcsClusterCharts } from './FrcsClusterCharts';
 import { ReactTable } from '../../Shared/ReactTable';
 import { formatNumber } from '../../Shared/util';
 import { Cell } from 'react-table';
+import { FrcsSkippedClusterResultsContainer } from './FrcsSkippedClusterResultsContainer';
 
 interface Props {
-  results: FrcsClusterOutput[];
+  results: FrcsOutputs;
 }
 
 export const FrcsClusterResultsContainer = (props: Props) => {
@@ -60,11 +61,16 @@ export const FrcsClusterResultsContainer = (props: Props) => {
     [props.results]
   );
 
-  const results = React.useMemo(() => props.results, []);
+  const results = React.useMemo(() => props.results.clusters, []);
   return (
     <div>
       <h3>Clusters</h3>
       <ReactTable columns={columns} data={results} />
+      {props.results.skippedClusters && (
+        <FrcsSkippedClusterResultsContainer
+          results={props.results.skippedClusters}
+        />
+      )}
     </div>
   );
 };
