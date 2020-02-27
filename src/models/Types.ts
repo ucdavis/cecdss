@@ -34,6 +34,7 @@ export interface FrcsOutputs {
   totalCost: number;
   numberOfClusters: number;
   clusters: FrcsClusterOutput[];
+  skippedClusters: FrcsClusterOutput[];
 }
 
 export interface FrcsClusterOutput {
