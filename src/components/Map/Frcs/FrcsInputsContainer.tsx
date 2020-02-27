@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Inputs, FrcsParameters } from '../../../models/Types';
+import { FrcsInputs } from '../../../models/Types';
 
 interface Props {
-  inputs: Inputs;
-  setInputs: (inputs: Inputs) => void;
+  inputs: FrcsInputs;
+  setInputs: (inputs: FrcsInputs) => void;
 }
 
-export const FrcsInputs = (props: Props) => {
+export const FrcsInputsContainer = (props: Props) => {
   return (
     <div>
       <div>
@@ -17,14 +17,11 @@ export const FrcsInputs = (props: Props) => {
         <InputGroup>
           <Input
             type='text'
-            value={props.inputs.FrcsParameters.radius}
+            value={props.inputs.radius}
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                FrcsParameters: {
-                  ...props.inputs.FrcsParameters,
-                  radius: Number(e.target.value)
-                }
+                radius: Number(e.target.value)
               })
             }
           />
@@ -34,28 +31,22 @@ export const FrcsInputs = (props: Props) => {
           type='range'
           min={100}
           max={50000}
-          value={props.inputs.FrcsParameters.radius}
+          value={props.inputs.radius}
           onChange={e =>
             props.setInputs({
               ...props.inputs,
-              FrcsParameters: {
-                ...props.inputs.FrcsParameters,
-                radius: Number(e.target.value)
-              }
+              radius: Number(e.target.value)
             })
           }
         />
         <Label>Treatment</Label>
         <Input
           type='select'
-          value={props.inputs.FrcsParameters.treatment}
+          value={props.inputs.treatment}
           onChange={e =>
             props.setInputs({
               ...props.inputs,
-              FrcsParameters: {
-                ...props.inputs.FrcsParameters,
-                treatment: e.target.value
-              }
+              treatment: e.target.value
             })
           }
         >
@@ -66,14 +57,11 @@ export const FrcsInputs = (props: Props) => {
         <Label>FRCS System</Label>
         <Input
           type='select'
-          value={props.inputs.FrcsParameters.system}
+          value={props.inputs.system}
           onChange={e =>
             props.setInputs({
               ...props.inputs,
-              FrcsParameters: {
-                ...props.inputs.FrcsParameters,
-                system: e.target.value
-              }
+              system: e.target.value
             })
           }
         >

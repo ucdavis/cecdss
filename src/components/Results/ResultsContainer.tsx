@@ -2,17 +2,18 @@ import React from 'react';
 import {
   TechnoeconomicModels,
   TechnoeconomicAssessmentOutputs,
-  Inputs,
-  FrcsOutputs
+  FrcsOutputs,
+  FrcsInputs,
+  TechnoeconomicAssessmentInputs
 } from '../../models/Types';
 import { GPOResults } from './Technoeconomic/GenericPowerOnly/GPOResults';
 import { FrcsResultsContainer } from './Frcs/FrcsResultsContainer';
 
 interface Props {
-  inputs: Inputs;
-  technoeconomicModel: string;
-  technoeconomicOutputs: TechnoeconomicAssessmentOutputs;
+  frcsInputs: FrcsInputs;
   frcsOutputs: FrcsOutputs;
+  teaInputs: TechnoeconomicAssessmentInputs;
+  teaOutputs: TechnoeconomicAssessmentOutputs;
 }
 
 export const ResultsContainer = (props: Props) => {
@@ -20,14 +21,12 @@ export const ResultsContainer = (props: Props) => {
     <div>
       <h1>Results</h1>
       <div>
-        {props.technoeconomicModel === TechnoeconomicModels.genericPowerOnly &&
-          !!props.technoeconomicOutputs.genericPowerOnly &&
-          !!props.inputs.TechnoeconomicAssessmentInputs.genericPowerOnly && (
+        {props.teaInputs.model === TechnoeconomicModels.genericPowerOnly &&
+          !!props.teaOutputs.genericPowerOnly &&
+          !!props.teaInputs.genericPowerOnly && (
             <GPOResults
-              inputs={
-                props.inputs.TechnoeconomicAssessmentInputs.genericPowerOnly
-              }
-              results={props.technoeconomicOutputs.genericPowerOnly}
+              inputs={props.teaInputs.genericPowerOnly}
+              results={props.teaOutputs.genericPowerOnly}
             />
           )}
       </div>

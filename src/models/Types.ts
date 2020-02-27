@@ -1,12 +1,7 @@
 import { GenericPowerOnlyInputMod } from './TechnoeconomicInputs';
 import { OutputModGPO } from './TechnoeconomicOutputs';
 
-export interface Inputs {
-  TechnoeconomicAssessmentInputs: TechnoeconomicAssessmentInputs;
-  FrcsParameters: FrcsParameters;
-}
-
-export interface FrcsParameters {
+export interface FrcsInputs {
   radius: number;
   system: string;
   treatment: string;
