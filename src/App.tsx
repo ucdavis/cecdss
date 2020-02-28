@@ -62,7 +62,7 @@ const App = () => {
     });
     console.log(reqBody);
     const frcsOutput: FrcsOutputs = await fetch(
-      'http://localhost:3000/process',
+      'https://cecdss-backend.azurewebsites.net/process',
       {
         mode: 'cors',
         method: 'POST',
@@ -84,13 +84,15 @@ const App = () => {
 
   return (
     <div className='App'>
-      {/* <Route
+      <Route
         exact
         path='/'
         render={() => (
           <MapContainer
-            inputs={inputs}
-            setInputs={setInputs}
+            frcsInputs={frcsInputs}
+            setFrcsInputs={setFrcsInputs}
+            teaInputs={teaInputs}
+            setTeaInputs={setTeaInputs}
             submitInputs={submitInputs}
           />
         )}
@@ -98,26 +100,18 @@ const App = () => {
       <Route
         path='/results'
         render={() =>
-          outputs ? <ResultsContainer results={outputs} /> : <div>ERROR</div>
+          technoeconomicOutputs && frcsOutputs ? (
+            <ResultsContainer
+              frcsInputs={frcsInputs}
+              teaInputs={teaInputs}
+              teaOutputs={technoeconomicOutputs}
+              frcsOutputs={frcsOutputs}
+            />
+          ) : (
+            <div>ERROR</div>
+          )
         }
-      /> */}
-      {!technoeconomicOutputs && (
-        <MapContainer
-          frcsInputs={frcsInputs}
-          setFrcsInputs={setFrcsInputs}
-          teaInputs={teaInputs}
-          setTeaInputs={setTeaInputs}
-          submitInputs={submitInputs}
-        />
-      )}
-      {frcsOutputs && technoeconomicOutputs && (
-        <ResultsContainer
-          frcsInputs={frcsInputs}
-          teaInputs={teaInputs}
-          teaOutputs={technoeconomicOutputs}
-          frcsOutputs={frcsOutputs}
-        />
-      )}
+      />
     </div>
   );
 };
