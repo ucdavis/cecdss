@@ -2,7 +2,7 @@ import React from 'react';
 import {
   TechnoeconomicModels,
   TechnoeconomicAssessmentOutputs,
-  FrcsOutputs,
+  Outputs,
   FrcsInputs,
   TechnoeconomicAssessmentInputs
 } from '../../models/Types';
@@ -11,9 +11,8 @@ import { FrcsResultsContainer } from './Frcs/FrcsResultsContainer';
 
 interface Props {
   frcsInputs: FrcsInputs;
-  frcsOutputs: FrcsOutputs;
+  outputs: Outputs;
   teaInputs: TechnoeconomicAssessmentInputs;
-  teaOutputs: TechnoeconomicAssessmentOutputs;
 }
 
 export const ResultsContainer = (props: Props) => {
@@ -22,15 +21,15 @@ export const ResultsContainer = (props: Props) => {
       <h1>Results</h1>
       <div>
         {props.teaInputs.model === TechnoeconomicModels.genericPowerOnly &&
-          !!props.teaOutputs.genericPowerOnly &&
+          !!props.outputs.teaResults &&
           !!props.teaInputs.genericPowerOnly && (
             <GPOResults
               inputs={props.teaInputs.genericPowerOnly}
-              results={props.teaOutputs.genericPowerOnly}
+              results={props.outputs.teaResults}
             />
           )}
       </div>
-      <FrcsResultsContainer results={props.frcsOutputs} />
+      <FrcsResultsContainer results={props.outputs} />
     </div>
   );
 };

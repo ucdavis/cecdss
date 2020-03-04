@@ -10,7 +10,7 @@ import {
   TechnoeconomicAssessmentOutputs,
   FrcsInputs,
   FrcsClusterOutput,
-  FrcsOutputs
+  Outputs
 } from './models/Types';
 import 'isomorphic-fetch';
 import { OutputModGPO } from './models/TechnoeconomicOutputs';
@@ -23,33 +23,9 @@ const App = () => {
     technoeconomicInputsExample
   );
 
-  const [technoeconomicOutputs, setTechnoeconomicOutputs] = useState<
-    TechnoeconomicAssessmentOutputs
-  >();
-
-  const [frcsOutputs, setFrcsOutputs] = useState<FrcsOutputs>();
+  const [outputs, setOutputs] = useState<Outputs>();
 
   const submitInputs = async (lat: number, lng: number) => {
-    let url = 'https://technoeconomic-assessment.azurewebsites.net/';
-    let body = null;
-    if (teaInputs.model === TechnoeconomicModels.genericPowerOnly) {
-      url += TechnoeconomicModels.genericPowerOnly;
-      body = teaInputs.genericPowerOnly || null;
-      console.log(url);
-      console.log(JSON.stringify(body));
-    }
-    if (!url || !body) {
-      console.log('ERROR');
-      return;
-    }
-    const technoOutput: OutputModGPO = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(res => res.json());
-
     console.log('frcs output....');
     console.log(
       'lat: ' + lat + ' lng: ' + lng + ' radius: ' + frcsInputs.radius
@@ -58,28 +34,21 @@ const App = () => {
       lat: lat,
       lng: lng,
       radius: frcsInputs.radius,
-      system: frcsInputs.system
+      system: frcsInputs.system,
+      teaInputs: teaInputs.genericPowerOnly
     });
     console.log(reqBody);
-    const frcsOutput: FrcsOutputs = await fetch(
-      'https://cecdss-backend.azurewebsites.net/process',
-      {
-        mode: 'cors',
-        method: 'POST',
-        body: reqBody,
-        headers: {
-          'Content-Type': 'application/json'
-        }
+    const outputs: Outputs = await fetch('http://localhost:3000/process', {
+      mode: 'cors',
+      method: 'POST',
+      body: reqBody,
+      headers: {
+        'Content-Type': 'application/json'
       }
-    ).then(res => res.json());
-    console.log(frcsOutput);
+    }).then(res => res.json());
+    console.log(outputs);
 
-    console.log('OUTPUT');
-    console.log(technoOutput);
-    setTechnoeconomicOutputs({
-      [teaInputs.model]: technoOutput
-    });
-    setFrcsOutputs(frcsOutput);
+    setOutputs(outputs);
   };
 
   return (
@@ -100,12 +69,11 @@ const App = () => {
       <Route
         path='/results'
         render={() =>
-          technoeconomicOutputs && frcsOutputs ? (
+          outputs ? (
             <ResultsContainer
               frcsInputs={frcsInputs}
               teaInputs={teaInputs}
-              teaOutputs={technoeconomicOutputs}
-              frcsOutputs={frcsOutputs}
+              outputs={outputs}
             />
           ) : (
             <div>ERROR</div>

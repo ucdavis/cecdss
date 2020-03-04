@@ -23,22 +23,33 @@ export const TechnoeconomicModels = {
   hydrogen: 'hydrogen'
 };
 
-export interface FrcsOutputs {
+export interface Outputs {
+  teaResults: OutputModGPO;
   totalBiomass: number;
   totalArea: number;
   totalCost: number;
   numberOfClusters: number;
   clusters: FrcsClusterOutput[];
   skippedClusters: FrcsClusterOutput[];
+  errorClusters: ClusterErrorResult[];
 }
 
 export interface FrcsClusterOutput {
   cluster_no: number;
   biomass: number;
-  cost: number;
+  totalCost: number;
   area: number;
   distance: number;
+  harvestCost: number;
+  transportationCost: number;
   frcsResult: OutputVarMod;
+}
+
+export interface ClusterErrorResult {
+  cluster_no: number;
+  biomass: number;
+  area: number;
+  error: string;
 }
 
 export interface OutputVarMod {

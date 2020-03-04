@@ -8,7 +8,7 @@ import {
   VictoryScatter,
   VictoryGroup
 } from 'victory';
-import { FrcsOutputs, FrcsClusterOutput } from '../../../models/Types';
+import { Outputs, FrcsClusterOutput } from '../../../models/Types';
 
 interface Props {
   outputs: FrcsClusterOutput[];
@@ -38,7 +38,7 @@ export const FrcsClusterCharts = (props: Props) => {
             height={150}
             data={props.outputs}
             x={(d: FrcsClusterOutput) => d.biomass}
-            y={(d: FrcsClusterOutput) => d.cost}
+            y={(d: FrcsClusterOutput) => d.totalCost}
           />
         </VictoryChart>
       </div>

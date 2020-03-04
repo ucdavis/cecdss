@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { FrcsOutputs, FrcsClusterOutput } from '../../../models/Types';
+import { Outputs, FrcsClusterOutput } from '../../../models/Types';
 import { Button } from 'reactstrap';
 import { FrcsClusterCharts } from './FrcsClusterCharts';
 import { ReactTable } from '../../Shared/ReactTable';
 import { formatNumber } from '../../Shared/util';
 import { Cell } from 'react-table';
-import { FrcsSkippedClusterResultsContainer } from './FrcsSkippedClusterResultsContainer';
+import { FrcsErrorClusterResultsContainer } from './FrcsSkippedClusterResultsContainer';
 
 interface Props {
-  results: FrcsOutputs;
+  results: Outputs;
 }
 
 export const FrcsClusterResultsContainer = (props: Props) => {
@@ -25,7 +25,7 @@ export const FrcsClusterResultsContainer = (props: Props) => {
         Header: 'Cost',
         accessor: 'cost',
         Cell: ({ row }: Cell<FrcsClusterOutput>) =>
-          formatNumber(row.original.cost)
+          formatNumber(row.original.totalCost)
       },
       {
         Header: 'Area',
@@ -62,13 +62,23 @@ export const FrcsClusterResultsContainer = (props: Props) => {
   );
 
   const results = React.useMemo(() => props.results.clusters, []);
+  const skippedClusters = React.useMemo(
+    () => props.results.skippedClusters,
+    []
+  );
   return (
     <div>
       <h3>Clusters</h3>
       <ReactTable columns={columns} data={results} />
       {props.results.skippedClusters && (
-        <FrcsSkippedClusterResultsContainer
-          results={props.results.skippedClusters}
+        <div>
+          <h3>Skipped Clusters</h3>
+          <ReactTable columns={columns} data={skippedClusters} />
+        </div>
+      )}
+      {props.results.errorClusters && (
+        <FrcsErrorClusterResultsContainer
+          results={props.results.errorClusters}
         />
       )}
     </div>

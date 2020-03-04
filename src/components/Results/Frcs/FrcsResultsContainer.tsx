@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { FrcsOutputs } from '../../../models/Types';
+import { Outputs } from '../../../models/Types';
 import { Button } from 'reactstrap';
 import { FrcsClusterCharts } from './FrcsClusterCharts';
 import { FrcsClusterResultsContainer } from './FrcsClusterResultsContainer';
 import { formatNumber } from '../../Shared/util';
 
 interface Props {
-  results: FrcsOutputs;
+  results: Outputs;
 }
 
 interface State {

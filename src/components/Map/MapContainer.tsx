@@ -18,7 +18,7 @@ export const MapContainer = (props: IProps) => {
     lat: 40.032769,
     lng: -120.430607
   });
-  const [showSidebar, toggleSidebar] = useState(false);
+  const [showSidebar, toggleSidebar] = useState();
 
   let mapRef: any = createRef<Map>();
 
