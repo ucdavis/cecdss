@@ -38,14 +38,17 @@ const App = () => {
       teaInputs: teaInputs.genericPowerOnly
     });
     console.log(reqBody);
-    const results: Results = await fetch('http://localhost:3000/process', {
-      mode: 'cors',
-      method: 'POST',
-      body: reqBody,
-      headers: {
-        'Content-Type': 'application/json'
+    const results: Results = await fetch(
+      'https://cecdss-backend.azurewebsites.net/proces',
+      {
+        mode: 'cors',
+        method: 'POST',
+        body: reqBody,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    }).then(res => res.json());
+    ).then(res => res.json());
 
     setTechnoeconomicOutputs({
       [teaInputs.model]: results.teaResults
