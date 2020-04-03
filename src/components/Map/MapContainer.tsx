@@ -18,8 +18,6 @@ export const MapContainer = (props: IProps) => {
     lat: 40.032769,
     lng: -120.430607
   });
-  const [showSidebar, toggleSidebar] = useState(false);
-
   let mapRef: any = createRef<Map>();
 
   const bounds: LatLngBoundsExpression = [
@@ -40,18 +38,13 @@ export const MapContainer = (props: IProps) => {
 
   return (
     <div style={style}>
-      {showSidebar && (
-        <MapSidebar
-          {...props}
-          submitInputs={() => props.submitInputs(mapState.lat, mapState.lng)}
-        />
-      )}
+      <MapSidebar
+        {...props}
+        submitInputs={() => props.submitInputs(mapState.lat, mapState.lng)}
+      />
       <Map
         ref={mapRef}
         onClick={(e: any) => {
-          if (!showSidebar) {
-            toggleSidebar(true);
-          }
           setMapState(e.latlng);
         }}
         maxBounds={bounds}
@@ -63,7 +56,7 @@ export const MapContainer = (props: IProps) => {
           <Circle
             center={position}
             fillColor='blue'
-            radius={props.frcsInputs.radius}
+            radius={props.frcsInputs.radius * 1000}
           />
         )}
         <Marker position={position} />

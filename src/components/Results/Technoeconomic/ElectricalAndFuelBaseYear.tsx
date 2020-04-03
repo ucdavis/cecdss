@@ -18,15 +18,15 @@ export const ElectricalAndFuelBaseYear = (props: Props) => {
         </thead>
         <tbody>
           <tr>
-            <td>Annual Ash Disposal</td>
+            <td>Annual Ash Disposal (dry metric tons/year)</td>
             <td>{formatNumber(props.data.AnnualAshDisposal)}</td>
           </tr>
           <tr>
-            <td>Annual Fuel Consumption</td>
+            <td>Annual Fuel Consumption (dry metric tons/year)</td>
             <td>{formatNumber(props.data.AnnualFuelConsumption)}</td>
           </tr>
           <tr>
-            <td>Annual Generation</td>
+            <td>Annual Generation (kWh)</td>
             <td>{formatNumber(props.data.AnnualGeneration)}</td>
           </tr>
           <tr>
@@ -34,11 +34,11 @@ export const ElectricalAndFuelBaseYear = (props: Props) => {
             <td>{formatNumber(props.data.AnnualHours)}</td>
           </tr>
           <tr>
-            <td>Capital Cost NEC</td>
+            <td>Capital Cost NEC ($/kWe)</td>
             <td>{formatNumber(props.data.CapitalCostNEC)}</td>
           </tr>
           <tr>
-            <td>Fuel Consumption Rate</td>
+            <td>Fuel Consumption Rate (dry metric tons/hour)</td>
             <td>{formatNumber(props.data.FuelConsumptionRate)}</td>
           </tr>
         </tbody>

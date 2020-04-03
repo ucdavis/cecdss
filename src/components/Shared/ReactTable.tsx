@@ -7,6 +7,7 @@ export function ReactTable({ columns, data }: any) {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    footerGroups,
     prepareRow,
     page, // Instead of using 'rows', we'll use page,
     // which has only the rows for the active page
@@ -57,6 +58,15 @@ export function ReactTable({ columns, data }: any) {
             );
           })}
         </tbody>
+        <tfoot>
+          {footerGroups.map(group => (
+            <tr {...group.getFooterGroupProps()}>
+              {group.headers.map(column => (
+                <td {...column.getFooterProps()}>{column.render('Footer')}</td>
+              ))}
+            </tr>
+          ))}
+        </tfoot>
       </table>
       {/* 
         Pagination can be built however you'd like. 

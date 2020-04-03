@@ -3,6 +3,7 @@ export interface GenericPowerOnlyInputMod {
   CapitalCost: number;
   // Electrical and Fuel--base year
   NetElectricalCapacity: number;
+  MoistureContent: number;
   CapacityFactor: number;
   NetStationEfficiency: number;
   FuelHeatingValue: number;

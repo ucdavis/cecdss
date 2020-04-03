@@ -9,8 +9,8 @@ import {
   TechnoeconomicModels,
   TechnoeconomicAssessmentOutputs,
   FrcsInputs,
-  FrcsClusterOutput,
-  FrcsOutputs
+  ClusterResult,
+  Results
 } from './models/Types';
 import 'isomorphic-fetch';
 import { OutputModGPO } from './models/TechnoeconomicOutputs';
@@ -27,59 +27,30 @@ const App = () => {
     TechnoeconomicAssessmentOutputs
   >();
 
-  const [frcsOutputs, setFrcsOutputs] = useState<FrcsOutputs>();
+  const [frcsOutputs, setFrcsOutputs] = useState<Results>();
 
   const submitInputs = async (lat: number, lng: number) => {
-    let url = 'https://technoeconomic-assessment.azurewebsites.net/';
-    let body = null;
-    if (teaInputs.model === TechnoeconomicModels.genericPowerOnly) {
-      url += TechnoeconomicModels.genericPowerOnly;
-      body = teaInputs.genericPowerOnly || null;
-      console.log(url);
-      console.log(JSON.stringify(body));
-    }
-    if (!url || !body) {
-      console.log('ERROR');
-      return;
-    }
-    const technoOutput: OutputModGPO = await fetch(url, {
+    const reqBody = JSON.stringify({
+      lat: lat,
+      lng: lng,
+      radius: frcsInputs.radius,
+      system: frcsInputs.system,
+      teaInputs: teaInputs.genericPowerOnly
+    });
+    console.log(reqBody);
+    const results: Results = await fetch('http://localhost:3000/process', {
+      mode: 'cors',
       method: 'POST',
-      body: JSON.stringify(body),
+      body: reqBody,
       headers: {
         'Content-Type': 'application/json'
       }
     }).then(res => res.json());
 
-    console.log('frcs output....');
-    console.log(
-      'lat: ' + lat + ' lng: ' + lng + ' radius: ' + frcsInputs.radius
-    );
-    const reqBody = JSON.stringify({
-      lat: lat,
-      lng: lng,
-      radius: frcsInputs.radius,
-      system: frcsInputs.system
-    });
-    console.log(reqBody);
-    const frcsOutput: FrcsOutputs = await fetch(
-      'https://cecdss-backend.azurewebsites.net/process',
-      {
-        mode: 'cors',
-        method: 'POST',
-        body: reqBody,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    ).then(res => res.json());
-    console.log(frcsOutput);
-
-    console.log('OUTPUT');
-    console.log(technoOutput);
     setTechnoeconomicOutputs({
-      [teaInputs.model]: technoOutput
+      [teaInputs.model]: results.teaResults
     });
-    setFrcsOutputs(frcsOutput);
+    setFrcsOutputs({ ...results });
   };
 
   return (
@@ -108,7 +79,7 @@ const App = () => {
               frcsOutputs={frcsOutputs}
             />
           ) : (
-            <div>ERROR</div>
+            <div>Loading results....</div>
           )
         }
       />
@@ -123,6 +94,7 @@ const defaultValue: GenericPowerOnlyInputMod = {
   NetElectricalCapacity: 25000,
   CapacityFactor: 85,
   NetStationEfficiency: 20,
+  MoistureContent: 50,
   FuelHeatingValue: 18608,
   FuelAshConcentration: 5,
   FuelCost: 22.05,
@@ -156,6 +128,6 @@ const technoeconomicInputsExample: TechnoeconomicAssessmentInputs = {
 
 const frcsInputsExample: FrcsInputs = {
   system: 'Ground-Based Mech WT',
-  radius: 50,
+  radius: 5,
   treatment: 'clearcut'
 };

@@ -25,12 +25,12 @@ export const FrcsInputsContainer = (props: Props) => {
               })
             }
           />
-          <InputGroupAddon addonType='append'>meters</InputGroupAddon>
+          <InputGroupAddon addonType='append'>km</InputGroupAddon>
         </InputGroup>
         <Input
           type='range'
-          min={100}
-          max={50000}
+          min={1}
+          max={500}
           value={props.inputs.radius}
           onChange={e =>
             props.setInputs({

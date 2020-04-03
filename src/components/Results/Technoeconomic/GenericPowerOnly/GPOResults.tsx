@@ -3,6 +3,7 @@ import { OutputModGPO } from '../../../../models/TechnoeconomicOutputs';
 import { ElectricalAndFuelBaseYear } from '../ElectricalAndFuelBaseYear';
 import { GPOCharts } from './GPOCharts';
 import { GenericPowerOnlyInputMod } from '../../../../models/TechnoeconomicInputs';
+import { AnnualCashFlow } from '../AnnualCashFlow';
 
 interface Props {
   inputs: GenericPowerOnlyInputMod;
@@ -16,6 +17,7 @@ export const GPOResults = (props: Props) => {
       <ElectricalAndFuelBaseYear
         data={props.results.ElectricalAndFuelBaseYear}
       />
+      <AnnualCashFlow annualCashFlows={props.results.AnnualCashFlows} />
       {/* <GPOCharts inputs={props.inputs} results={props.results} /> */}
     </div>
   );

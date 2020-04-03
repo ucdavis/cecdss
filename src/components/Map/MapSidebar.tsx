@@ -16,7 +16,7 @@ interface Props {
 export const MapSidebar = (props: Props) => {
   return (
     <div id='sidebar'>
-      <h2>Select Refinery Inputs</h2>
+      <h2>Select Inputs</h2>
       <FrcsInputsContainer
         inputs={props.frcsInputs}
         setInputs={props.setFrcsInputs}
@@ -28,7 +28,7 @@ export const MapSidebar = (props: Props) => {
       <div>
         <Link to='/results'>
           <Button color='primary' onClick={props.submitInputs}>
-            Model Refinery
+            Run Model
           </Button>
         </Link>
       </div>

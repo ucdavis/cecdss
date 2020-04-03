@@ -8,3 +8,14 @@ export const formatNumber = (num: number) => {
   };
   return num.toLocaleString('en', options);
 };
+
+export const formatCurrency = (num: number) => {
+  if (!num) {
+    return '';
+  }
+  const options = {
+    style: 'currency',
+    currency: 'USD'
+  };
+  return num.toLocaleString('en', options);
+};
