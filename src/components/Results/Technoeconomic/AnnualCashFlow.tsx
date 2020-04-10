@@ -341,7 +341,7 @@ export const AnnualCashFlow = (props: Props) => {
 
   return (
     <div>
-      <h2>Annual Cash Flow</h2>
+      <h3>Annual Cash Flow</h3>
       <ReactTable columns={columns} data={data} />
       {/* <table className='table'>
         <thead>
