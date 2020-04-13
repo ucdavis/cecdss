@@ -30,7 +30,7 @@ export const ConstantLAC = (props: Props) => {
           </tr>
           <tr>
             <td>
-              <b>Constant $ LAC of Energy "($/kWh)</b>
+              <b>Constant $ LAC of Energy ($/kWh)</b>
             </td>
             <td>
               <b>{formatNumber(props.results.ConstantLACofEnergy)}</b>

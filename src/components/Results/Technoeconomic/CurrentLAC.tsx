@@ -39,7 +39,7 @@ export const CurrentLAC = (props: Props) => {
           </tr>
           <tr>
             <td>
-              <b>Current $ LAC of Energy "($/kWh)</b>
+              <b>Current $ LAC of Energy ($/kWh)</b>
             </td>
             <td>
               <b>{formatNumber(props.results.CurrentLACofEnergy)}</b>
