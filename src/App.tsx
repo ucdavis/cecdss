@@ -39,7 +39,7 @@ const App = () => {
     });
     console.log(reqBody);
     const results: Results = await fetch(
-      'https://cecdss-backend.azurewebsites.net/proces',
+      'https://cecdss-backend.azurewebsites.net/process',
       {
         mode: 'cors',
         method: 'POST',
