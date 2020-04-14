@@ -76,7 +76,7 @@ export const FrcsResultsContainer = (props: Props) => {
           </tr>
         </tbody>
       </table>
-      <Button
+      {/* <Button
         onClick={() => {
           setState({
             viewClusterCharts: false,
@@ -95,7 +95,7 @@ export const FrcsResultsContainer = (props: Props) => {
         }}
       >
         View Cluster Charts
-      </Button>
+      </Button> */}
       {/* {state.viewClusterTable && ( */}
       <FrcsClusterResultsContainer results={props.results} />
       {/* )} */}
