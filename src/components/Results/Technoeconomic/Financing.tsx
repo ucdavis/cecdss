@@ -72,7 +72,7 @@ export const Financing = (props: Props) => {
           <tr>
             {/* TODO: is this correct? */}
             <td>Debt Reserve ($)</td>
-            <td>{formatCurrency(props.results.AnnualDebtPayment)}</td>
+            <td>{formatCurrency(props.results.DebtReserve)}</td>
           </tr>
         </tbody>
       </table>
