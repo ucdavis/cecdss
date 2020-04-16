@@ -1,10 +1,9 @@
 import React from 'react';
-import { OutputModGPO } from '../../../models/TechnoeconomicOutputs';
 import { formatNumber } from '../../Shared/util';
-import { GenericPowerOnlyInputMod } from '../../../models/TechnoeconomicInputs';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
 
 interface Props {
-  inputs: GenericPowerOnlyInputMod;
+  inputs: InputModGPO | InputModCHP;
 }
 
 export const EscalationInflation = (props: Props) => {

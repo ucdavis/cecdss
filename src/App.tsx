@@ -7,14 +7,16 @@ import { ResultsContainer } from './components/Results/ResultsContainer';
 import {
   TechnoeconomicAssessmentInputs,
   TechnoeconomicModels,
-  TechnoeconomicAssessmentOutputs,
   FrcsInputs,
   ClusterResult,
   Results
 } from './models/Types';
 import 'isomorphic-fetch';
-import { OutputModGPO } from './models/TechnoeconomicOutputs';
-import { GenericPowerOnlyInputMod } from './models/TechnoeconomicInputs';
+import {
+  OutputModGPO,
+  OutputModCHP
+} from '@ucdavis/tea/out/models/output.model';
+import { InputModGPO } from '@ucdavis/tea/out/models/input.model';
 
 const App = () => {
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
@@ -24,7 +26,7 @@ const App = () => {
   );
 
   const [technoeconomicOutputs, setTechnoeconomicOutputs] = useState<
-    TechnoeconomicAssessmentOutputs
+    OutputModGPO | OutputModCHP
   >();
 
   const [frcsOutputs, setFrcsOutputs] = useState<Results>();
@@ -35,11 +37,13 @@ const App = () => {
       lng: lng,
       radius: frcsInputs.radius,
       system: frcsInputs.system,
-      teaInputs: teaInputs.genericPowerOnly
+      teaModel: teaInputs.model,
+      teaInputs: teaInputs.inputs
     });
     console.log(reqBody);
     const results: Results = await fetch(
-      'https://cecdss-backend.azurewebsites.net/process',
+      'http://localhost:3000/process',
+      //'https://cecdss-backend.azurewebsites.net/process',
       {
         mode: 'cors',
         method: 'POST',
@@ -50,9 +54,7 @@ const App = () => {
       }
     ).then(res => res.json());
 
-    setTechnoeconomicOutputs({
-      [teaInputs.model]: results.teaResults
-    });
+    setTechnoeconomicOutputs(results.teaResults);
     setFrcsOutputs({ ...results });
   };
 
@@ -92,7 +94,7 @@ const App = () => {
 
 export default App;
 
-const defaultValue: GenericPowerOnlyInputMod = {
+const defaultValue: InputModGPO = {
   CapitalCost: 70000000,
   NetElectricalCapacity: 25000,
   CapacityFactor: 85,
@@ -125,8 +127,8 @@ const defaultValue: GenericPowerOnlyInputMod = {
 };
 
 const technoeconomicInputsExample: TechnoeconomicAssessmentInputs = {
-  model: 'genericPowerOnly',
-  genericPowerOnly: defaultValue
+  model: TechnoeconomicModels.genericPowerOnly,
+  inputs: defaultValue
 };
 
 const frcsInputsExample: FrcsInputs = {

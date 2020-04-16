@@ -1,29 +1,27 @@
 import React from 'react';
-import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
-import { CashFlowGPO } from '../../../models/TechnoeconomicOutputs';
 import { ReactTable } from '../../Shared/ReactTable';
 import { Cell } from 'react-table';
 import { formatCurrency } from '../../Shared/util';
+import { CashFlowGPO, CashFlowCHP } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
-  annualCashFlows: CashFlowGPO[];
+  annualCashFlows: CashFlowGPO[] | CashFlowCHP[];
 }
 
 export const AnnualCashFlow = (props: Props) => {
   const columns = React.useMemo(
     () => [
-      { Header: 'Year', accessor: 'Shared.Year' },
+      { Header: 'Year', accessor: 'Year' },
       {
         Header: 'Equity Recovery',
-        accessor: 'Shared.EquityRecovery',
+        accessor: 'EquityRecovery',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.EquityRecovery),
+          formatCurrency(row.original.EquityRecovery),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) =>
-                  row.original.Shared.EquityRecovery + sum,
+                (sum: number, row: any) => row.original.EquityRecovery + sum,
                 0
               ),
             [info.rows]
@@ -33,15 +31,14 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Equity Interest',
-        accessor: 'Shared.EquityInterest',
+        accessor: 'EquityInterest',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.EquityInterest),
+          formatCurrency(row.original.EquityInterest),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) =>
-                  row.original.Shared.EquityInterest + sum,
+                (sum: number, row: any) => row.original.EquityInterest + sum,
                 0
               ),
             [info.rows]
@@ -51,15 +48,15 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Equity Principal Paid',
-        accessor: 'Shared.EquityPrincipalPaid',
+        accessor: 'EquityPrincipalPaid',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.EquityPrincipalPaid),
+          formatCurrency(row.original.EquityPrincipalPaid),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
                 (sum: number, row: any) =>
-                  row.original.Shared.EquityPrincipalPaid + sum,
+                  row.original.EquityPrincipalPaid + sum,
                 0
               ),
             [info.rows]
@@ -69,15 +66,15 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Equity Principal Remaining',
-        accessor: 'Shared.EquityPrincipalRemaining',
+        accessor: 'EquityPrincipalRemaining',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.EquityPrincipalRemaining),
+          formatCurrency(row.original.EquityPrincipalRemaining),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
                 (sum: number, row: any) =>
-                  row.original.Shared.EquityPrincipalRemaining + sum,
+                  row.original.EquityPrincipalRemaining + sum,
                 0
               ),
             [info.rows]
@@ -87,15 +84,14 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Debt Recovery',
-        accessor: 'Shared.DebtRecovery',
+        accessor: 'DebtRecovery',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.DebtRecovery),
+          formatCurrency(row.original.DebtRecovery),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) =>
-                  row.original.Shared.DebtRecovery + sum,
+                (sum: number, row: any) => row.original.DebtRecovery + sum,
                 0
               ),
             [info.rows]
@@ -105,15 +101,14 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Debt Interest',
-        accessor: 'Shared.DebtInterest',
+        accessor: 'DebtInterest',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.DebtInterest),
+          formatCurrency(row.original.DebtInterest),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) =>
-                  row.original.Shared.DebtInterest + sum,
+                (sum: number, row: any) => row.original.DebtInterest + sum,
                 0
               ),
             [info.rows]
@@ -123,15 +118,14 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'DebtPrincipalPaid',
-        accessor: 'Shared.DebtPrincipalPaid',
+        accessor: 'DebtPrincipalPaid',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.DebtPrincipalPaid),
+          formatCurrency(row.original.DebtPrincipalPaid),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) =>
-                  row.original.Shared.DebtPrincipalPaid + sum,
+                (sum: number, row: any) => row.original.DebtPrincipalPaid + sum,
                 0
               ),
             [info.rows]
@@ -141,15 +135,15 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Debt Principal Remaining',
-        accessor: 'Shared.DebtPrincipalRemaining',
+        accessor: 'DebtPrincipalRemaining',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.DebtPrincipalRemaining),
+          formatCurrency(row.original.DebtPrincipalRemaining),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
                 (sum: number, row: any) =>
-                  row.original.Shared.DebtPrincipalRemaining + sum,
+                  row.original.DebtPrincipalRemaining + sum,
                 0
               ),
             [info.rows]
@@ -176,15 +170,14 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'NonFuelExpenses',
-        accessor: 'Shared.NonFuelExpenses',
+        accessor: 'NonFuelExpenses',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.NonFuelExpenses),
+          formatCurrency(row.original.NonFuelExpenses),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) =>
-                  row.original.Shared.NonFuelExpenses + sum,
+                (sum: number, row: any) => row.original.NonFuelExpenses + sum,
                 0
               ),
             [info.rows]
@@ -194,15 +187,14 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Debt Reserve',
-        accessor: 'Shared.DebtReserve',
+        accessor: 'DebtReserve',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.DebtReserve),
+          formatCurrency(row.original.DebtReserve),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) =>
-                  row.original.Shared.DebtReserve + sum,
+                (sum: number, row: any) => row.original.DebtReserve + sum,
                 0
               ),
             [info.rows]
@@ -212,15 +204,14 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Depreciation',
-        accessor: 'Shared.Depreciation',
+        accessor: 'Depreciation',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.Depreciation),
+          formatCurrency(row.original.Depreciation),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) =>
-                  row.original.Shared.Depreciation + sum,
+                (sum: number, row: any) => row.original.Depreciation + sum,
                 0
               ),
             [info.rows]
@@ -230,15 +221,14 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'IncomeCapacity',
-        accessor: 'Shared.IncomeCapacity',
+        accessor: 'IncomeCapacity',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.IncomeCapacity),
+          formatCurrency(row.original.IncomeCapacity),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) =>
-                  row.original.Shared.IncomeCapacity + sum,
+                (sum: number, row: any) => row.original.IncomeCapacity + sum,
                 0
               ),
             [info.rows]
@@ -248,15 +238,15 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Interest On Debt Reserve',
-        accessor: 'Shared.InterestOnDebtReserve',
+        accessor: 'InterestOnDebtReserve',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.InterestOnDebtReserve),
+          formatCurrency(row.original.InterestOnDebtReserve),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
                 (sum: number, row: any) =>
-                  row.original.Shared.InterestOnDebtReserve + sum,
+                  row.original.InterestOnDebtReserve + sum,
                 0
               ),
             [info.rows]
@@ -266,15 +256,14 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Taxes Without Credit',
-        accessor: 'Shared.TaxesWoCredit',
+        accessor: 'TaxesWoCredit',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.TaxesWoCredit),
+          formatCurrency(row.original.TaxesWoCredit),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) =>
-                  row.original.Shared.TaxesWoCredit + sum,
+                (sum: number, row: any) => row.original.TaxesWoCredit + sum,
                 0
               ),
             [info.rows]
@@ -284,14 +273,14 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Tax Credit',
-        accessor: 'Shared.TaxCredit',
+        accessor: 'TaxCredit',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.TaxCredit),
+          formatCurrency(row.original.TaxCredit),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) => row.original.Shared.TaxCredit + sum,
+                (sum: number, row: any) => row.original.TaxCredit + sum,
                 0
               ),
             [info.rows]
@@ -301,14 +290,14 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Taxes',
-        accessor: 'Shared.Taxes',
+        accessor: 'Taxes',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.Taxes),
+          formatCurrency(row.original.Taxes),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
-                (sum: number, row: any) => row.original.Shared.Taxes + sum,
+                (sum: number, row: any) => row.original.Taxes + sum,
                 0
               ),
             [info.rows]
@@ -318,15 +307,15 @@ export const AnnualCashFlow = (props: Props) => {
       },
       {
         Header: 'Energy Revenue Required',
-        accessor: 'Shared.EnergyRevenueRequired',
+        accessor: 'EnergyRevenueRequired',
         Cell: ({ row }: Cell<CashFlowGPO>) =>
-          formatCurrency(row.original.Shared.EnergyRevenueRequired),
+          formatCurrency(row.original.EnergyRevenueRequired),
         Footer: (info: any) => {
           const total = React.useMemo(
             () =>
               info.rows.reduce(
                 (sum: number, row: any) =>
-                  row.original.Shared.EnergyRevenueRequired + sum,
+                  row.original.EnergyRevenueRequired + sum,
                 0
               ),
             [info.rows]
@@ -357,11 +346,11 @@ export const AnnualCashFlow = (props: Props) => {
           <tr>
             <td>Equity Recovery</td>
             {props.annualCashFlows.map(flow => (
-              <td>{flow.Shared.EquityRecovery}</td>
+              <td>{flow.EquityRecovery}</td>
             ))}
             <td>
               {props.annualCashFlows.reduce(
-                (a, b) => a + b.Shared.EquityRecovery,
+                (a, b) => a + b.EquityRecovery,
                 0
               )}
             </td>

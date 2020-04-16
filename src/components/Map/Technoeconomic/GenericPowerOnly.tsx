@@ -9,12 +9,11 @@ import {
   Form,
   FormGroup
 } from 'reactstrap';
-import { GenericPowerOnlyInputMod } from '../../../models/TechnoeconomicInputs';
-import { TechnoeconomicAssessmentInputs } from '../../../models/Types';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
 
 interface Props {
-  inputs: GenericPowerOnlyInputMod;
-  setInputs: (inputs: GenericPowerOnlyInputMod) => void;
+  inputs: InputModGPO | InputModCHP;
+  setInputs: (inputs: InputModGPO | InputModCHP) => void;
 }
 
 export const GenericPowerOnly = (props: Props) => {

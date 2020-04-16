@@ -1,5 +1,14 @@
-import { GenericPowerOnlyInputMod } from './TechnoeconomicInputs';
-import { OutputModGPO } from './TechnoeconomicOutputs';
+import {
+  OutputModCHP,
+  OutputModGP,
+  OutputModGPO
+} from '@ucdavis/tea/out/models/output.model';
+import {
+  InputModCHP,
+  InputModGP,
+  InputModGPO,
+  InputModHydrogen
+} from '@ucdavis/tea/out/models/input.model';
 
 export interface FrcsInputs {
   radius: number;
@@ -9,26 +18,22 @@ export interface FrcsInputs {
 
 export interface TechnoeconomicAssessmentInputs {
   model: string;
-  genericPowerOnly?: GenericPowerOnlyInputMod;
-}
-
-export interface TechnoeconomicAssessmentOutputs {
-  genericPowerOnly?: OutputModGPO;
+  inputs: InputModGPO | InputModCHP; // | InputModGP;
 }
 
 export const TechnoeconomicModels = {
-  genericPowerOnly: 'genericPowerOnly',
-  genericCombinedHeatAndPower: 'genericCombinedHeatAndPower',
-  gasificationPower: 'gasificationPower',
-  hydrogen: 'hydrogen'
+  genericPowerOnly: 'GPO',
+  genericCombinedHeatAndPower: 'CHP',
+  gasificationPower: 'GP',
+  hydrogen: 'Hydrogen'
 };
 
 export interface Results {
-  teaResults: OutputModGPO;
+  teaResults: OutputModGPO | OutputModCHP;
   totalBiomass: number;
   totalArea: number;
-  totalCost: number;
-  totalHarvestCost: number;
+  totalCombinedCost: number;
+  totalResidueCost: number;
   totalTransportationCost: number;
   numberOfClusters: number;
   clusters: ClusterResult[];
@@ -39,10 +44,10 @@ export interface Results {
 export interface ClusterResult {
   cluster_no: number;
   biomass: number;
-  totalCost: number;
+  combinedCost: number;
   area: number;
   distance: number;
-  harvestCost: number;
+  residueCost: number;
   transportationCost: number;
   frcsResult: OutputVarMod;
   lat: number;

@@ -22,7 +22,7 @@ export const MapSidebar = (props: Props) => {
         setInputs={props.setFrcsInputs}
       />
       <TechnoeconomicInputs
-        inputs={props.teaInputs}
+        tea={props.teaInputs}
         setInputs={props.setTeaInputs}
       />
       <div>

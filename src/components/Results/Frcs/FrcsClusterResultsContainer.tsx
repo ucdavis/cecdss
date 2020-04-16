@@ -32,7 +32,7 @@ export const FrcsClusterResultsContainer = (props: Props) => {
         Header: 'Total Cost ($)',
         accessor: 'totalCost',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatCurrency(row.original.totalCost),
+          formatCurrency(row.original.combinedCost),
         Footer: (info: any) => {
           const total = info.rows.reduce(
             (sum: number, row: any) => row.original.totalCost + sum,
@@ -45,7 +45,7 @@ export const FrcsClusterResultsContainer = (props: Props) => {
         Header: 'Harvest Cost ($)',
         accessor: 'harvestCost',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatCurrency(row.original.harvestCost),
+          formatCurrency(row.original.residueCost),
         Footer: (info: any) => {
           const total = info.rows.reduce(
             (sum: number, row: any) => row.original.harvestCost + sum,

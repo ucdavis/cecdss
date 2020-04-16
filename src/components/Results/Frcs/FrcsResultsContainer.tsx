@@ -48,11 +48,11 @@ export const FrcsResultsContainer = (props: Props) => {
           </tr>
           <tr>
             <td>Total Cost</td>
-            <td>{formatCurrency(props.results.totalCost)}</td>
+            <td>{formatCurrency(props.results.totalCombinedCost)}</td>
           </tr>
           <tr>
             <td>Total Harvest Cost</td>
-            <td>{formatCurrency(props.results.totalHarvestCost)}</td>
+            <td>{formatCurrency(props.results.totalResidueCost)}</td>
           </tr>
           <tr>
             <td>Total Transportation Cost</td>

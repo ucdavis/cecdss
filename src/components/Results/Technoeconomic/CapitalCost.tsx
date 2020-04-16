@@ -1,14 +1,9 @@
 import React from 'react';
-import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
-import {
-  ElectricalFuelBaseYearMod,
-  OutputModGPO
-} from '../../../models/TechnoeconomicOutputs';
 import { formatNumber, formatCurrency } from '../../Shared/util';
-import { GenericPowerOnlyInputMod } from '../../../models/TechnoeconomicInputs';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
 
 interface Props {
-  inputs: GenericPowerOnlyInputMod;
+  inputs: InputModGPO | InputModCHP;
 }
 
 export const CapitalCost = (props: Props) => {
