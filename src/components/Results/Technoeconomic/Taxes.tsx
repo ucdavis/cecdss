@@ -1,11 +1,14 @@
 import React from 'react';
-import { OutputModGPO } from '../../../models/TechnoeconomicOutputs';
 import { formatNumber } from '../../Shared/util';
-import { GenericPowerOnlyInputMod } from '../../../models/TechnoeconomicInputs';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import {
+  OutputModGPO,
+  OutputModCHP
+} from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
-  inputs: GenericPowerOnlyInputMod;
-  results: OutputModGPO;
+  inputs: InputModGPO | InputModCHP;
+  results: OutputModGPO | OutputModCHP;
 }
 
 export const Taxes = (props: Props) => {
@@ -28,7 +31,7 @@ export const Taxes = (props: Props) => {
           </tr>
           <tr>
             <td>Combined Tax Rate (%)</td>
-            <td>{formatNumber(props.results.Shared.CombinedTaxRate)}</td>
+            <td>{formatNumber(props.results.CombinedTaxRate)}</td>
           </tr>
         </tbody>
       </table>

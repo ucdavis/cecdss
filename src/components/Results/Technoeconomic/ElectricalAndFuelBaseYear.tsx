@@ -1,15 +1,11 @@
 import React from 'react';
-import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
-import {
-  ElectricalFuelBaseYearMod,
-  OutputModGPO
-} from '../../../models/TechnoeconomicOutputs';
 import { formatNumber } from '../../Shared/util';
-import { GenericPowerOnlyInputMod } from '../../../models/TechnoeconomicInputs';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import { ElectricalFuelBaseYearMod } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
   results: ElectricalFuelBaseYearMod;
-  inputs: GenericPowerOnlyInputMod;
+  inputs: InputModGPO | InputModCHP;
 }
 
 export const ElectricalAndFuelBaseYear = (props: Props) => {
@@ -26,10 +22,12 @@ export const ElectricalAndFuelBaseYear = (props: Props) => {
             <td>Capacity Factor</td>
             <td>{formatNumber(props.inputs.CapacityFactor)}</td>
           </tr>
-          <tr>
-            <td>Annual Hours</td>
-            <td>{formatNumber(props.results.AnnualHours)}</td>
-          </tr>
+          {props.results.AnnualHours && (
+            <tr>
+              <td>Annual Hours</td>
+              <td>{formatNumber(props.results.AnnualHours)}</td>
+            </tr>
+          )}
           <tr>
             <td>Net Station Efficiency (%)</td>
             <td>{formatNumber(props.inputs.NetStationEfficiency)}</td>

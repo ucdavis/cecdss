@@ -1,16 +1,20 @@
 import React from 'react';
-import { OutputModGPO } from '../../../../models/TechnoeconomicOutputs';
 import { ElectricalAndFuelBaseYear } from '../ElectricalAndFuelBaseYear';
 import { GPOCharts } from './GPOCharts';
-import { GenericPowerOnlyInputMod } from '../../../../models/TechnoeconomicInputs';
 import { AnnualCashFlow } from '../AnnualCashFlow';
 import { CapitalCost } from '../CapitalCost';
 import { ExpensesBaseYear } from '../ExpensesBaseYear';
 import { CurrentLAC } from '../CurrentLAC';
 import { ConstantLAC } from '../ConstantLAC';
+import { Taxes } from '../Taxes';
+import { IncomeOtherThanEnergy } from '../IncomeOtherThanEnergy';
+import { EscalationInflation } from '../EscalationInflation';
+import { Financing } from '../Financing';
+import { InputModGPO } from '@ucdavis/tea/out/models/input.model';
+import { OutputModGPO } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
-  inputs: GenericPowerOnlyInputMod;
+  inputs: InputModGPO;
   results: OutputModGPO;
 }
 
@@ -27,10 +31,16 @@ export const GPOResults = (props: Props) => {
         results={props.results.ExpensesBaseYear}
         inputs={props.inputs}
       />
+      <Taxes inputs={props.inputs} results={props.results} />
+      <IncomeOtherThanEnergy
+        inputs={props.inputs}
+        results={props.results.IncomeOtherThanEnergy}
+      />
+      <EscalationInflation inputs={props.inputs} />
+      <Financing inputs={props.inputs} results={props.results.Financing} />
       <AnnualCashFlow annualCashFlows={props.results.AnnualCashFlows} />
-      <CurrentLAC results={props.results.Shared.CurrentLAC} />
-      <ConstantLAC results={props.results.Shared.ConstantLAC} />
-      {/* <GPOCharts inputs={props.inputs} results={props.results} /> */}
+      <CurrentLAC results={props.results.CurrentLAC} />
+      <ConstantLAC results={props.results.ConstantLAC} />
     </div>
   );
 };
