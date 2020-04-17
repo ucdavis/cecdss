@@ -3,14 +3,18 @@ import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { GenericPowerOnly } from './GenericPowerOnly';
 import {
-  TechnoeconomicAssessmentInputs,
-  TechnoeconomicModels
+  TechnoeconomicModels,
+  InputModGPOClass,
+  InputModCHPClass
 } from '../../../models/Types';
-import { InputModGPO } from '@ucdavis/tea/out/models/input.model';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import { CombinedHeatAndPower } from './CombinedHeatAndPower';
 
 interface Props {
-  tea: TechnoeconomicAssessmentInputs;
-  setInputs: (inputs: TechnoeconomicAssessmentInputs) => void;
+  teaInputs: InputModGPO | InputModCHP;
+  setTeaInputs: (inputs: InputModGPO | InputModCHP) => void;
+  teaModel: string;
+  setTeaModel: (model: string) => void;
 }
 
 export const TechnoeconomicInputs = (props: Props) => {
@@ -19,12 +23,7 @@ export const TechnoeconomicInputs = (props: Props) => {
       <div>
         <h4>Techno-Economic Assessment </h4>
         <Label>Treatment</Label>
-        <Input
-          type='select'
-          onChange={x =>
-            props.setInputs({ ...props.tea, model: x.target.value })
-          }
-        >
+        <Input type='select' onChange={x => props.setTeaModel(x.target.value)}>
           <option value={TechnoeconomicModels.genericPowerOnly}>
             Generic Power Only
           </option>
@@ -34,22 +33,20 @@ export const TechnoeconomicInputs = (props: Props) => {
         </Input>
         <br />
       </div>
-      {props.tea.model === TechnoeconomicModels.genericPowerOnly && (
-        <GenericPowerOnly
-          inputs={props.tea.inputs}
-          setInputs={(inputs: InputModGPO) => {
-            props.setInputs({ ...props.tea, inputs: inputs });
-          }}
-        />
-      )}
-      {props.tea.model === TechnoeconomicModels.genericCombinedHeatAndPower && (
-        <GenericPowerOnly
-          inputs={props.tea.inputs}
-          setInputs={(inputs: InputModGPO) => {
-            props.setInputs({ ...props.tea, inputs: inputs });
-          }}
-        />
-      )}
+      {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
+        props.teaInputs instanceof InputModGPOClass && (
+          <GenericPowerOnly
+            inputs={props.teaInputs}
+            setInputs={props.setTeaInputs}
+          />
+        )}
+      {props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower &&
+        props.teaInputs instanceof InputModCHPClass && (
+          <CombinedHeatAndPower
+            inputs={props.teaInputs}
+            setInputs={props.setTeaInputs}
+          />
+        )}
       <br />
       <hr />
     </div>

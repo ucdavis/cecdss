@@ -12,8 +12,8 @@ import {
 import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
 
 interface Props {
-  inputs: InputModGPO | InputModCHP;
-  setInputs: (inputs: InputModGPO | InputModCHP) => void;
+  inputs: InputModGPO;
+  setInputs: (inputs: InputModGPO) => void;
 }
 
 export const GenericPowerOnly = (props: Props) => {

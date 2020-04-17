@@ -1,15 +1,18 @@
 import React from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { FrcsInputs, TechnoeconomicAssessmentInputs } from '../../models/Types';
+import { FrcsInputs } from '../../models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
 
 interface Props {
   frcsInputs: FrcsInputs;
   setFrcsInputs: (inputs: FrcsInputs) => void;
-  teaInputs: TechnoeconomicAssessmentInputs;
-  setTeaInputs: (inputs: TechnoeconomicAssessmentInputs) => void;
+  teaInputs: InputModGPO | InputModCHP;
+  setTeaInputs: (inputs: InputModGPO | InputModCHP) => void;
+  teaModel: string;
+  setTeaModel: (model: string) => void;
   submitInputs: () => void;
 }
 
@@ -22,8 +25,10 @@ export const MapSidebar = (props: Props) => {
         setInputs={props.setFrcsInputs}
       />
       <TechnoeconomicInputs
-        tea={props.teaInputs}
-        setInputs={props.setTeaInputs}
+        teaInputs={props.teaInputs}
+        setTeaInputs={props.setTeaInputs}
+        teaModel={props.teaModel}
+        setTeaModel={props.setTeaModel}
       />
       <div>
         <Link to='/results'>
