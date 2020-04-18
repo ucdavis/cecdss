@@ -23,7 +23,11 @@ export const TechnoeconomicInputs = (props: Props) => {
       <div>
         <h4>Techno-Economic Assessment </h4>
         <Label>Treatment</Label>
-        <Input type='select' onChange={x => props.setTeaModel(x.target.value)}>
+        <Input
+          type='select'
+          onChange={x => props.setTeaModel(x.target.value)}
+          value={props.teaModel}
+        >
           <option value={TechnoeconomicModels.genericPowerOnly}>
             Generic Power Only
           </option>

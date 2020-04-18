@@ -20,7 +20,7 @@ interface Props {
 export const CHPResults = (props: Props) => {
   return (
     <div>
-      <h2>Generic Power Only Results</h2>
+      <h2>Combined Heat And Power Results</h2>
       <CapitalCost inputs={props.inputs} />
       <ElectricalAndFuelBaseYear
         results={props.results.ElectricalAndFuelBaseYear}

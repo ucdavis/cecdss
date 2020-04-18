@@ -1,7 +1,8 @@
 import {
   OutputModCHP,
   OutputModGP,
-  OutputModGPO
+  OutputModGPO,
+  ElectricalFuelBaseYearModCHP
 } from '@ucdavis/tea/out/models/output.model';
 import {
   InputModCHP,
@@ -133,4 +134,17 @@ export class InputModCHPClass implements InputModCHP {
   EscalationHeatSales = 2.1;
   EscalationOther = 2.1;
   TaxCreditFrac = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+}
+
+export class ElectricalFuelBaseYearModCHPClass
+  implements ElectricalFuelBaseYearModCHP {
+  AnnualHours = 0;
+  FuelConsumptionRate = 0;
+  AnnualGeneration = 0;
+  CapitalCostNEC = 0;
+  AnnualFuelConsumption = 0;
+  AnnualAshDisposal = 0;
+  ParasiticLoad = 0;
+  FuelPower = 0;
+  GrossStationElectricalEfficiency = 0;
 }

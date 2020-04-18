@@ -1,10 +1,18 @@
 import React from 'react';
 import { formatNumber } from '../../Shared/util';
 import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
-import { ElectricalFuelBaseYearMod } from '@ucdavis/tea/out/models/output.model';
+import {
+  ElectricalFuelBaseYearMod,
+  ElectricalFuelBaseYearModCHP
+} from '@ucdavis/tea/out/models/output.model';
+import { CHPResults } from './GenericCombinedHeatPower/CHPResults';
+import {
+  InputModCHPClass,
+  ElectricalFuelBaseYearModCHPClass
+} from '../../../models/Types';
 
 interface Props {
-  results: ElectricalFuelBaseYearMod;
+  results: ElectricalFuelBaseYearMod | ElectricalFuelBaseYearModCHP;
   inputs: InputModGPO | InputModCHP;
 }
 
@@ -14,20 +22,30 @@ export const ElectricalAndFuelBaseYear = (props: Props) => {
       <h3>Electrical And Fuel Base Year</h3>
       <table className='table'>
         <tbody>
+          {props.inputs instanceof InputModCHPClass && (
+            <tr>
+              <td>Gross Electrical Capacity (kWe)</td>
+              <td>{formatNumber(props.inputs.GrossElectricalCapacity)}</td>
+            </tr>
+          )}
           <tr>
             <td>Net Plant Capacity (kW)</td>
             <td>{formatNumber(props.inputs.NetElectricalCapacity)}</td>
           </tr>
+          {props.results instanceof ElectricalFuelBaseYearModCHPClass && (
+            <tr>
+              <td>Parasitic Load (kWe)</td>
+              <td>{formatNumber(props.results.ParasiticLoad)}</td>
+            </tr>
+          )}
           <tr>
             <td>Capacity Factor</td>
             <td>{formatNumber(props.inputs.CapacityFactor)}</td>
           </tr>
-          {props.results.AnnualHours && (
-            <tr>
-              <td>Annual Hours</td>
-              <td>{formatNumber(props.results.AnnualHours)}</td>
-            </tr>
-          )}
+          <tr>
+            <td>Annual Hours</td>
+            <td>{formatNumber(props.results.AnnualHours)}</td>
+          </tr>
           <tr>
             <td>Net Station Efficiency (%)</td>
             <td>{formatNumber(props.inputs.NetStationEfficiency)}</td>
@@ -40,6 +58,20 @@ export const ElectricalAndFuelBaseYear = (props: Props) => {
             <td>Fuel Consumption Rate (dry metric tons/hour)</td>
             <td>{formatNumber(props.results.FuelConsumptionRate)}</td>
           </tr>
+          {props.results instanceof ElectricalFuelBaseYearModCHPClass && (
+            <tr>
+              <td>Fuel Power (kW)</td>
+              <td>{formatNumber(props.results.FuelPower)}</td>
+            </tr>
+          )}
+          {props.results instanceof ElectricalFuelBaseYearModCHPClass && (
+            <tr>
+              <td>Gross Station Electrical Efficiency (%)</td>
+              <td>
+                {formatNumber(props.results.GrossStationElectricalEfficiency)}
+              </td>
+            </tr>
+          )}
           <tr>
             <td>Fuel Ash Concetration (%)</td>
             <td>{formatNumber(props.inputs.FuelAshConcentration)}</td>

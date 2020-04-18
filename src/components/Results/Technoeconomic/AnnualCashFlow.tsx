@@ -15,7 +15,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Equity Recovery',
         accessor: 'EquityRecovery',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.EquityRecovery),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -32,7 +32,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Equity Interest',
         accessor: 'EquityInterest',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowGPO>) =>
           formatCurrency(row.original.EquityInterest),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -49,7 +49,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Equity Principal Paid',
         accessor: 'EquityPrincipalPaid',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.EquityPrincipalPaid),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -67,7 +67,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Equity Principal Remaining',
         accessor: 'EquityPrincipalRemaining',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.EquityPrincipalRemaining),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -85,7 +85,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Debt Recovery',
         accessor: 'DebtRecovery',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.DebtRecovery),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -102,7 +102,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Debt Interest',
         accessor: 'DebtInterest',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.DebtInterest),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -119,7 +119,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'DebtPrincipalPaid',
         accessor: 'DebtPrincipalPaid',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.DebtPrincipalPaid),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -136,7 +136,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Debt Principal Remaining',
         accessor: 'DebtPrincipalRemaining',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.DebtPrincipalRemaining),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -154,7 +154,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Fuel Cost',
         accessor: 'FuelCost',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.FuelCost),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -171,7 +171,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'NonFuelExpenses',
         accessor: 'NonFuelExpenses',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.NonFuelExpenses),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -188,7 +188,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Debt Reserve',
         accessor: 'DebtReserve',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.DebtReserve),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -205,7 +205,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Depreciation',
         accessor: 'Depreciation',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.Depreciation),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -222,7 +222,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'IncomeCapacity',
         accessor: 'IncomeCapacity',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.IncomeCapacity),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -239,7 +239,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Interest On Debt Reserve',
         accessor: 'InterestOnDebtReserve',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.InterestOnDebtReserve),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -257,7 +257,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Taxes Without Credit',
         accessor: 'TaxesWoCredit',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.TaxesWoCredit),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -274,7 +274,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Tax Credit',
         accessor: 'TaxCredit',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.TaxCredit),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -291,7 +291,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Taxes',
         accessor: 'Taxes',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.Taxes),
         Footer: (info: any) => {
           const total = React.useMemo(
@@ -308,7 +308,7 @@ export const AnnualCashFlow = (props: Props) => {
       {
         Header: 'Energy Revenue Required',
         accessor: 'EnergyRevenueRequired',
-        Cell: ({ row }: Cell<CashFlowGPO>) =>
+        Cell: ({ row }: Cell<CashFlowGPO | CashFlowCHP>) =>
           formatCurrency(row.original.EnergyRevenueRequired),
         Footer: (info: any) => {
           const total = React.useMemo(

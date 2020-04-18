@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Route } from 'react-router';
@@ -8,7 +8,8 @@ import {
   TechnoeconomicModels,
   FrcsInputs,
   Results,
-  InputModGPOClass
+  InputModGPOClass,
+  InputModCHPClass
 } from './models/Types';
 import 'isomorphic-fetch';
 import {
@@ -23,10 +24,18 @@ const App = () => {
   const [teaInputs, setTeaInputs] = useState<InputModGPO | InputModCHP>(
     new InputModGPOClass()
   );
-
   const [teaModel, setTeaModel] = useState(
     TechnoeconomicModels.genericPowerOnly
   );
+  useEffect(() => {
+    // when teaModel changes, change default values
+    if (teaModel === TechnoeconomicModels.genericPowerOnly) {
+      setTeaInputs(new InputModGPOClass());
+    }
+    if (teaModel === TechnoeconomicModels.genericCombinedHeatAndPower) {
+      setTeaInputs(new InputModCHPClass());
+    }
+  }, [teaModel]);
 
   const [technoeconomicOutputs, setTechnoeconomicOutputs] = useState<
     OutputModGPO | OutputModCHP
