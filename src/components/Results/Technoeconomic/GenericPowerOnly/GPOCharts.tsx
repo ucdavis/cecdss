@@ -1,20 +1,19 @@
 import React from 'react';
 import {
-  OutputModGPO,
-  CashFlowGPO
-} from '../../../../models/TechnoeconomicOutputs';
-import { ElectricalAndFuelBaseYear } from '../ElectricalAndFuelBaseYear';
-import { GenericPowerOnlyInputMod } from '../../../../models/TechnoeconomicInputs';
-import {
   VictoryChart,
   VictoryLine,
   VictoryPie,
   VictoryStack,
   VictoryBar
 } from 'victory';
+import { InputModGPO } from '@ucdavis/tea/out/models/input.model';
+import {
+  OutputModGPO,
+  CashFlowGPO
+} from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
-  inputs: GenericPowerOnlyInputMod;
+  inputs: InputModGPO;
   results: OutputModGPO;
 }
 
@@ -25,8 +24,8 @@ export const GPOCharts = (props: Props) => {
         <VictoryChart height={400} width={400}>
           <VictoryLine
             data={props.results.AnnualCashFlows}
-            x={(d: CashFlowGPO) => d.Shared.IncomeCapacity}
-            y={(d: CashFlowGPO) => d.Shared.Year}
+            x={(d: CashFlowGPO) => d.IncomeCapacity}
+            y={(d: CashFlowGPO) => d.Year}
             animate={{
               duration: 2000,
               onLoad: { duration: 1000 }
@@ -62,13 +61,25 @@ export const GPOCharts = (props: Props) => {
           }}
         >
           <VictoryBar
-            data={[{ x: 'a', y: 2 }, { x: 'b', y: 3 }, { x: 'c', y: 5 }]}
+            data={[
+              { x: 'a', y: 2 },
+              { x: 'b', y: 3 },
+              { x: 'c', y: 5 }
+            ]}
           />
           <VictoryBar
-            data={[{ x: 'a', y: 1 }, { x: 'b', y: 4 }, { x: 'c', y: 5 }]}
+            data={[
+              { x: 'a', y: 1 },
+              { x: 'b', y: 4 },
+              { x: 'c', y: 5 }
+            ]}
           />
           <VictoryBar
-            data={[{ x: 'a', y: 3 }, { x: 'b', y: 2 }, { x: 'c', y: 6 }]}
+            data={[
+              { x: 'a', y: 3 },
+              { x: 'b', y: 2 },
+              { x: 'c', y: 6 }
+            ]}
           />
         </VictoryStack>
       </div>

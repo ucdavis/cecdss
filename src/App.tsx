@@ -1,30 +1,44 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Route } from 'react-router';
 import { MapContainer } from './components/Map/MapContainer';
 import { ResultsContainer } from './components/Results/ResultsContainer';
 import {
-  TechnoeconomicAssessmentInputs,
   TechnoeconomicModels,
-  TechnoeconomicAssessmentOutputs,
   FrcsInputs,
-  ClusterResult,
-  Results
+  Results,
+  InputModGPOClass,
+  InputModCHPClass
 } from './models/Types';
 import 'isomorphic-fetch';
-import { OutputModGPO } from './models/TechnoeconomicOutputs';
-import { GenericPowerOnlyInputMod } from './models/TechnoeconomicInputs';
+import {
+  OutputModGPO,
+  OutputModCHP
+} from '@ucdavis/tea/out/models/output.model';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
 
 const App = () => {
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
 
-  const [teaInputs, setTeaInputs] = useState<TechnoeconomicAssessmentInputs>(
-    technoeconomicInputsExample
+  const [teaInputs, setTeaInputs] = useState<InputModGPO | InputModCHP>(
+    new InputModGPOClass()
   );
+  const [teaModel, setTeaModel] = useState(
+    TechnoeconomicModels.genericPowerOnly
+  );
+  useEffect(() => {
+    // when teaModel changes, change default values
+    if (teaModel === TechnoeconomicModels.genericPowerOnly) {
+      setTeaInputs(new InputModGPOClass());
+    }
+    if (teaModel === TechnoeconomicModels.genericCombinedHeatAndPower) {
+      setTeaInputs(new InputModCHPClass());
+    }
+  }, [teaModel]);
 
   const [technoeconomicOutputs, setTechnoeconomicOutputs] = useState<
-    TechnoeconomicAssessmentOutputs
+    OutputModGPO | OutputModCHP
   >();
 
   const [frcsOutputs, setFrcsOutputs] = useState<Results>();
@@ -35,10 +49,12 @@ const App = () => {
       lng: lng,
       radius: frcsInputs.radius,
       system: frcsInputs.system,
-      teaInputs: teaInputs.genericPowerOnly
+      teaModel: teaModel,
+      teaInputs: teaInputs
     });
     console.log(reqBody);
     const results: Results = await fetch(
+      // 'http://localhost:3000/process',
       'https://cecdss-backend.azurewebsites.net/process',
       {
         mode: 'cors',
@@ -50,9 +66,7 @@ const App = () => {
       }
     ).then(res => res.json());
 
-    setTechnoeconomicOutputs({
-      [teaInputs.model]: results.teaResults
-    });
+    setTechnoeconomicOutputs(results.teaResults);
     setFrcsOutputs({ ...results });
   };
 
@@ -67,6 +81,8 @@ const App = () => {
             setFrcsInputs={setFrcsInputs}
             teaInputs={teaInputs}
             setTeaInputs={setTeaInputs}
+            teaModel={teaModel}
+            setTeaModel={setTeaModel}
             submitInputs={submitInputs}
           />
         )}
@@ -78,6 +94,7 @@ const App = () => {
             <ResultsContainer
               frcsInputs={frcsInputs}
               teaInputs={teaInputs}
+              teaModel={teaModel}
               teaOutputs={technoeconomicOutputs}
               frcsOutputs={frcsOutputs}
             />
@@ -91,43 +108,6 @@ const App = () => {
 };
 
 export default App;
-
-const defaultValue: GenericPowerOnlyInputMod = {
-  CapitalCost: 70000000,
-  NetElectricalCapacity: 25000,
-  CapacityFactor: 85,
-  NetStationEfficiency: 20,
-  MoistureContent: 50,
-  FuelHeatingValue: 18608,
-  FuelAshConcentration: 5,
-  FuelCost: 22.05,
-  LaborCost: 2000000,
-  MaintenanceCost: 1500000,
-  InsurancePropertyTax: 1400000,
-  Utilities: 200000,
-  AshDisposal: 100000,
-  Management: 200000,
-  OtherOperatingExpenses: 400000,
-  FederalTaxRate: 34,
-  StateTaxRate: 9.6,
-  ProductionTaxCredit: 0.009,
-  DebtRatio: 75,
-  InterestRateOnDebt: 5,
-  EconomicLife: 20,
-  CostOfEquity: 15,
-  CapacityPayment: 166,
-  InterestRateonDebtReserve: 5,
-  GeneralInflation: 2.1,
-  EscalationFuel: 2.1,
-  EscalationProductionTaxCredit: 2.1,
-  EscalationOther: 2.1,
-  TaxCreditFrac: [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-};
-
-const technoeconomicInputsExample: TechnoeconomicAssessmentInputs = {
-  model: 'genericPowerOnly',
-  genericPowerOnly: defaultValue
-};
 
 const frcsInputsExample: FrcsInputs = {
   system: 'Ground-Based Mech WT',

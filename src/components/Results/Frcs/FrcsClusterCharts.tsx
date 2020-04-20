@@ -38,7 +38,7 @@ export const FrcsClusterCharts = (props: Props) => {
             height={150}
             data={props.outputs}
             x={(d: ClusterResult) => d.biomass}
-            y={(d: ClusterResult) => d.harvestCost}
+            y={(d: ClusterResult) => d.residueCost}
           />
         </VictoryChart>
       </div>

@@ -2,12 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { GenericPowerOnly } from './GenericPowerOnly';
-import { TechnoeconomicAssessmentInputs } from '../../../models/Types';
-import { GenericPowerOnlyInputMod } from '../../../models/TechnoeconomicInputs';
+import {
+  TechnoeconomicModels,
+  InputModGPOClass,
+  InputModCHPClass
+} from '../../../models/Types';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import { CombinedHeatAndPower } from './CombinedHeatAndPower';
 
 interface Props {
-  inputs: TechnoeconomicAssessmentInputs;
-  setInputs: (inputs: TechnoeconomicAssessmentInputs) => void;
+  teaInputs: InputModGPO | InputModCHP;
+  setTeaInputs: (inputs: InputModGPO | InputModCHP) => void;
+  teaModel: string;
+  setTeaModel: (model: string) => void;
 }
 
 export const TechnoeconomicInputs = (props: Props) => {
@@ -16,19 +23,34 @@ export const TechnoeconomicInputs = (props: Props) => {
       <div>
         <h4>Techno-Economic Assessment </h4>
         <Label>Treatment</Label>
-        <Input type='select'>
-          <option>Generic Power Only</option>
+        <Input
+          type='select'
+          onChange={x => props.setTeaModel(x.target.value)}
+          value={props.teaModel}
+        >
+          <option value={TechnoeconomicModels.genericPowerOnly}>
+            Generic Power Only
+          </option>
+          <option value={TechnoeconomicModels.genericCombinedHeatAndPower}>
+            Generic Combined Heat and Power
+          </option>
         </Input>
         <br />
       </div>
-      {props.inputs.genericPowerOnly && (
-        <GenericPowerOnly
-          inputs={props.inputs.genericPowerOnly}
-          setInputs={(inputs: GenericPowerOnlyInputMod) => {
-            props.setInputs({ ...props.inputs, genericPowerOnly: inputs });
-          }}
-        />
-      )}
+      {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
+        props.teaInputs instanceof InputModGPOClass && (
+          <GenericPowerOnly
+            inputs={props.teaInputs}
+            setInputs={props.setTeaInputs}
+          />
+        )}
+      {props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower &&
+        props.teaInputs instanceof InputModCHPClass && (
+          <CombinedHeatAndPower
+            inputs={props.teaInputs}
+            setInputs={props.setTeaInputs}
+          />
+        )}
       <br />
       <hr />
     </div>

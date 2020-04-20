@@ -9,14 +9,14 @@ import {
   Form,
   FormGroup
 } from 'reactstrap';
-import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import { InputModCHP } from '@ucdavis/tea/out/models/input.model';
 
 interface Props {
-  inputs: InputModGPO;
-  setInputs: (inputs: InputModGPO) => void;
+  inputs: InputModCHP;
+  setInputs: (inputs: InputModCHP) => void;
 }
 
-export const GenericPowerOnly = (props: Props) => {
+export const CombinedHeatAndPower = (props: Props) => {
   return (
     <div>
       <Form>
@@ -36,6 +36,22 @@ export const GenericPowerOnly = (props: Props) => {
             <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
           </InputGroup>
           <FormText color='muted'>Total installed cost of plant</FormText>
+        </FormGroup>
+        <FormGroup>
+          <Label>Gross Electrical Capacity</Label>
+          <InputGroup>
+            <Input
+              type='text'
+              value={props.inputs.GrossElectricalCapacity}
+              onChange={e =>
+                props.setInputs({
+                  ...props.inputs,
+                  GrossElectricalCapacity: Number(e.target.value)
+                })
+              }
+            />
+            <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
+          </InputGroup>
         </FormGroup>
         <FormGroup>
           <Label>Net Electrical Capacity</Label>
@@ -151,6 +167,42 @@ export const GenericPowerOnly = (props: Props) => {
           <FormText color='muted'>
             Fraction of ash in fuel, percent dry basis
           </FormText>
+        </FormGroup>
+        <FormGroup>
+          <Label>Aggregate Fraction Of Heat Recovered</Label>
+          <InputGroup>
+            <Input
+              type='text'
+              value={props.inputs.AggregateFractionOfHeatRecovered}
+              onChange={e =>
+                props.setInputs({
+                  ...props.inputs,
+                  AggregateFractionOfHeatRecovered: Number(e.target.value)
+                })
+              }
+            />
+            <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          </InputGroup>
+          <FormText color='muted'>
+            Fraction of total heat production available for sale
+          </FormText>
+        </FormGroup>
+        <FormGroup>
+          <Label>Aggregrate Sales Price For Heat</Label>
+          <InputGroup>
+            <Input
+              type='text'
+              value={props.inputs.AggregateSalesPriceForHeat}
+              onChange={e =>
+                props.setInputs({
+                  ...props.inputs,
+                  AggregateFractionOfHeatRecovered: Number(e.target.value)
+                })
+              }
+            />
+            <InputGroupAddon addonType='append'>$/kWh</InputGroupAddon>
+          </InputGroup>
+          <FormText color='muted'>Aggregate sales price for heat</FormText>
         </FormGroup>
         <FormGroup>
           <Label>Fuel Cost</Label>
@@ -524,6 +576,25 @@ export const GenericPowerOnly = (props: Props) => {
           </InputGroup>
           <FormText color='muted'>
             Specified index for production tax credit
+          </FormText>
+        </FormGroup>
+        <FormGroup>
+          <Label>Escalation Heat Sales</Label>
+          <InputGroup>
+            <Input
+              type='text'
+              value={props.inputs.EscalationHeatSales}
+              onChange={e =>
+                props.setInputs({
+                  ...props.inputs,
+                  EscalationHeatSales: Number(e.target.value)
+                })
+              }
+            />
+            <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
+          </InputGroup>
+          <FormText color='muted'>
+            Escalation rate applied to heat sales
           </FormText>
         </FormGroup>
         <FormGroup>

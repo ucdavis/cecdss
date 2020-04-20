@@ -47,12 +47,12 @@ export const FrcsResultsContainer = (props: Props) => {
             <td>{formatNumber(props.results.totalBiomass)}</td>
           </tr>
           <tr>
-            <td>Total Cost</td>
-            <td>{formatCurrency(props.results.totalCost)}</td>
+            <td>Total Combined Cost</td>
+            <td>{formatCurrency(props.results.totalCombinedCost)}</td>
           </tr>
           <tr>
-            <td>Total Harvest Cost</td>
-            <td>{formatCurrency(props.results.totalHarvestCost)}</td>
+            <td>Total Residue Cost</td>
+            <td>{formatCurrency(props.results.totalResidueCost)}</td>
           </tr>
           <tr>
             <td>Total Transportation Cost</td>

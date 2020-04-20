@@ -1,11 +1,11 @@
 import React from 'react';
-import { ExpensesBaseYearModGPO } from '../../../models/TechnoeconomicOutputs';
 import { formatNumber, formatCurrency } from '../../Shared/util';
-import { GenericPowerOnlyInputMod } from '../../../models/TechnoeconomicInputs';
+import { ExpensesBaseYearModGPO } from '@ucdavis/tea/out/models/output.model';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
 
 interface Props {
   results: ExpensesBaseYearModGPO;
-  inputs: GenericPowerOnlyInputMod;
+  inputs: InputModGPO | InputModCHP;
 }
 
 export const ExpensesBaseYear = (props: Props) => {
@@ -28,24 +28,22 @@ export const ExpensesBaseYear = (props: Props) => {
           <tr>
             <td>Labor Cost ($/year)</td>
             <td>{formatCurrency(props.inputs.LaborCost)}</td>
-            <td>{formatNumber(props.results.Shared.LaborCostKwh)}</td>
+            <td>{formatNumber(props.results.LaborCostKwh)}</td>
           </tr>
           <tr>
             <td>Maintenance Cost ($/year)</td>
             <td>{formatCurrency(props.inputs.MaintenanceCost)}</td>
-            <td>{formatNumber(props.results.Shared.MaintenanceCostKwh)}</td>
+            <td>{formatNumber(props.results.MaintenanceCostKwh)}</td>
           </tr>
           <tr>
             <td>Insurance/Property Tax ($/year)</td>
             <td>{formatCurrency(props.inputs.InsurancePropertyTax)}</td>
-            <td>
-              {formatNumber(props.results.Shared.InsurancePropertyTaxKwh)}
-            </td>
+            <td>{formatNumber(props.results.InsurancePropertyTaxKwh)}</td>
           </tr>
           <tr>
             <td>Utilities ($/year)</td>
             <td>{formatCurrency(props.inputs.Utilities)}</td>
-            <td>{formatNumber(props.results.Shared.UtilitiesKwh)}</td>
+            <td>{formatNumber(props.results.UtilitiesKwh)}</td>
           </tr>
           <tr>
             <td>Ash Disposal ($/year)</td>
@@ -55,30 +53,22 @@ export const ExpensesBaseYear = (props: Props) => {
           <tr>
             <td>Management/Administration ($/year)</td>
             <td>{formatCurrency(props.inputs.Management)}</td>
-            <td>{formatNumber(props.results.Shared.ManagementKwh)}</td>
+            <td>{formatNumber(props.results.ManagementKwh)}</td>
           </tr>
           <tr>
             <td>Other Operating Expenses ($/year)</td>
             <td>{formatCurrency(props.inputs.OtherOperatingExpenses)}</td>
-            <td>
-              {formatNumber(props.results.Shared.OtherOperatingExpensesKwh)}
-            </td>
+            <td>{formatNumber(props.results.OtherOperatingExpensesKwh)}</td>
           </tr>
           <tr>
             <td>Total Non-Fuel Expenses ($/kWh)</td>
-            <td>{formatCurrency(props.results.Shared.TotalNonFuelExpenses)}</td>
-            <td>
-              {formatNumber(props.results.Shared.TotalNonFuelExpensesKwh)}
-            </td>
+            <td>{formatCurrency(props.results.TotalNonFuelExpenses)}</td>
+            <td>{formatNumber(props.results.TotalNonFuelExpensesKwh)}</td>
           </tr>
           <tr>
             <td>Total Expenses Including Fuel ($/year)</td>
-            <td>
-              {formatCurrency(props.results.Shared.TotalExpensesIncludingFuel)}
-            </td>
-            <td>
-              {formatNumber(props.results.Shared.TotalExpensesIncludingFuelKwh)}
-            </td>
+            <td>{formatCurrency(props.results.TotalExpensesIncludingFuel)}</td>
+            <td>{formatNumber(props.results.TotalExpensesIncludingFuelKwh)}</td>
           </tr>
         </tbody>
       </table>

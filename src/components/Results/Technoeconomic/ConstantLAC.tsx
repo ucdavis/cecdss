@@ -1,6 +1,6 @@
 import React from 'react';
-import { ConstantLevelAnnualCostMod } from '../../../models/TechnoeconomicOutputs';
 import { formatNumber } from '../../Shared/util';
+import { ConstantLevelAnnualCostMod } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
   results: ConstantLevelAnnualCostMod;

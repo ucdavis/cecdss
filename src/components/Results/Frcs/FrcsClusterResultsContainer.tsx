@@ -29,29 +29,29 @@ export const FrcsClusterResultsContainer = (props: Props) => {
         }
       },
       {
-        Header: 'Total Cost ($)',
-        accessor: 'totalCost',
+        Header: 'Combined Cost ($)',
+        accessor: 'combinedCost',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatCurrency(row.original.totalCost),
+          formatCurrency(row.original.combinedCost),
         Footer: (info: any) => {
           const total = info.rows.reduce(
-            (sum: number, row: any) => row.original.totalCost + sum,
+            (sum: number, row: any) => row.original.combinedCost + sum,
             0
           );
-          return <>Total Cost: {formatCurrency(total)}</>;
+          return <>Total Combined Cost: {formatCurrency(total)}</>;
         }
       },
       {
-        Header: 'Harvest Cost ($)',
-        accessor: 'harvestCost',
+        Header: 'Residue Cost ($)',
+        accessor: 'residueCost',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatCurrency(row.original.harvestCost),
+          formatCurrency(row.original.residueCost),
         Footer: (info: any) => {
           const total = info.rows.reduce(
-            (sum: number, row: any) => row.original.harvestCost + sum,
+            (sum: number, row: any) => row.original.residueCost + sum,
             0
           );
-          return <>Total Harvest Cost: {formatCurrency(total)}</>;
+          return <>Total Residue Cost: {formatCurrency(total)}</>;
         }
       },
       {

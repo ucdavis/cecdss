@@ -1,13 +1,10 @@
 import React from 'react';
-import {
-  OutputModGPO,
-  IncomeOtherThanEnergyMod
-} from '../../../models/TechnoeconomicOutputs';
 import { formatNumber } from '../../Shared/util';
-import { GenericPowerOnlyInputMod } from '../../../models/TechnoeconomicInputs';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import { IncomeOtherThanEnergyMod } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
-  inputs: GenericPowerOnlyInputMod;
+  inputs: InputModGPO | InputModCHP;
   results: IncomeOtherThanEnergyMod;
 }
 

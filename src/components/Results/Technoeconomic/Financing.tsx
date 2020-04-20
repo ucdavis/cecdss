@@ -1,13 +1,10 @@
 import React from 'react';
-import {
-  OutputModGPO,
-  FinancingMod
-} from '../../../models/TechnoeconomicOutputs';
 import { formatNumber, formatCurrency } from '../../Shared/util';
-import { GenericPowerOnlyInputMod } from '../../../models/TechnoeconomicInputs';
+import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import { FinancingMod } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
-  inputs: GenericPowerOnlyInputMod;
+  inputs: InputModGPO | InputModCHP;
   results: FinancingMod;
 }
 
@@ -72,7 +69,7 @@ export const Financing = (props: Props) => {
           <tr>
             {/* TODO: is this correct? */}
             <td>Debt Reserve ($)</td>
-            <td>{formatCurrency(props.results.AnnualDebtPayment)}</td>
+            <td>{formatCurrency(props.results.DebtReserve)}</td>
           </tr>
         </tbody>
       </table>
