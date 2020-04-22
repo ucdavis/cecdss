@@ -1,10 +1,14 @@
 import React from 'react';
 import { formatNumber, formatCurrency } from '../../Shared/util';
-import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import {
+  InputModGPO,
+  InputModCHP,
+  InputModGP
+} from '@ucdavis/tea/out/models/input.model';
 import { FinancingMod } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
-  inputs: InputModGPO | InputModCHP;
+  inputs: InputModGPO | InputModCHP | InputModGP;
   results: FinancingMod;
 }
 
@@ -67,7 +71,6 @@ export const Financing = (props: Props) => {
             <td>{formatNumber(props.results.AnnualDebtPayment)}</td>
           </tr>
           <tr>
-            {/* TODO: is this correct? */}
             <td>Debt Reserve ($)</td>
             <td>{formatCurrency(props.results.DebtReserve)}</td>
           </tr>
