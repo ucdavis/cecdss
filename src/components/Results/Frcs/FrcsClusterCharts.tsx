@@ -8,7 +8,7 @@ import {
   VictoryScatter,
   VictoryGroup
 } from 'victory';
-import { Results, ClusterResult } from '../../../models/Types';
+import { ClusterResult } from '../../../models/Types';
 
 interface Props {
   outputs: ClusterResult[];

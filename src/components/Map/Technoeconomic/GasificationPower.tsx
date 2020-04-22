@@ -9,14 +9,14 @@ import {
   Form,
   FormGroup
 } from 'reactstrap';
-import { InputModCHP, InputModGP } from '@ucdavis/tea/out/models/input.model';
+import { InputModGP } from '@ucdavis/tea/out/models/input.model';
 
 interface Props {
   inputs: InputModGP;
   setInputs: (inputs: InputModGP) => void;
 }
 
-export const CombinedHeatAndPower = (props: Props) => {
+export const GasificationPower = (props: Props) => {
   return (
     <div>
       <Form>
