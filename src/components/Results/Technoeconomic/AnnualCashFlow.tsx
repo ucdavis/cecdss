@@ -2,10 +2,14 @@ import React from 'react';
 import { ReactTable } from '../../Shared/ReactTable';
 import { Cell } from 'react-table';
 import { formatCurrency } from '../../Shared/util';
-import { CashFlowGPO, CashFlowCHP } from '@ucdavis/tea/out/models/output.model';
+import {
+  CashFlowGPO,
+  CashFlowCHP,
+  CashFlowGP
+} from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
-  annualCashFlows: CashFlowGPO[] | CashFlowCHP[];
+  annualCashFlows: CashFlowGPO[] | CashFlowCHP[] | CashFlowGP[];
 }
 
 export const AnnualCashFlow = (props: Props) => {
