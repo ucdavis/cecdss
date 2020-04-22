@@ -1,15 +1,7 @@
 import {
   OutputModCHP,
-  OutputModGP,
-  OutputModGPO,
-  ElectricalFuelBaseYearModCHP
+  OutputModGPO
 } from '@ucdavis/tea/out/models/output.model';
-import {
-  InputModCHP,
-  InputModGP,
-  InputModGPO,
-  InputModHydrogen
-} from '@ucdavis/tea/out/models/input.model';
 
 export interface FrcsInputs {
   radius: number;
