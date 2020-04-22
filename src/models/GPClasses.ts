@@ -1,4 +1,5 @@
 import { InputModGP } from '@ucdavis/tea/out/models/input.model';
+import { ExpensesBaseYearModGP } from '@ucdavis/tea/out/models/output.model';
 
 export class InputModGPClass implements InputModGP {
   GasifierSystemCapitalCost = 300000;
@@ -50,4 +51,20 @@ export class InputModGPClass implements InputModGP {
   EconomicLife = 20;
   CostOfEquity = 15;
   TaxCreditFrac = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+}
+
+export class ExpensesBaseYearModGPClass implements ExpensesBaseYearModGP {
+  TotalNonFuelExpenses = 0;
+  TotalExpensesIncludingFuel = 0;
+  LaborCostKwh = 0;
+  MaintenanceCostKwh = 0;
+  InsurancePropertyTaxKwh = 0;
+  UtilitiesKwh = 0;
+  ManagementKwh = 0;
+  OtherOperatingExpensesKwh = 0;
+  TotalNonFuelExpensesKwh = 0;
+  TotalExpensesIncludingFuelKwh = 0;
+  BiomassFuelCostKwh = 0;
+  DualFuelCostKwh = 0;
+  WasteTreatmentKwh = 0;
 }

@@ -1,4 +1,5 @@
 import { InputModGPO } from '@ucdavis/tea/out/models/input.model';
+import { ExpensesBaseYearModGPO } from '@ucdavis/tea/out/models/output.model';
 
 export class InputModGPOClass implements InputModGPO {
   CapitalCost = 70000000;
@@ -30,4 +31,19 @@ export class InputModGPOClass implements InputModGPO {
   EscalationProductionTaxCredit = 2.1;
   EscalationOther = 2.1;
   TaxCreditFrac = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+}
+
+export class ExpensesBaseYearModGPOClass implements ExpensesBaseYearModGPO {
+  TotalNonFuelExpenses = 0;
+  TotalExpensesIncludingFuel = 0;
+  LaborCostKwh = 0;
+  MaintenanceCostKwh = 0;
+  InsurancePropertyTaxKwh = 0;
+  UtilitiesKwh = 0;
+  ManagementKwh = 0;
+  OtherOperatingExpensesKwh = 0;
+  TotalNonFuelExpensesKwh = 0;
+  TotalExpensesIncludingFuelKwh = 0;
+  FuelCostKwh = 0;
+  AshDisposalKwh = 0;
 }
