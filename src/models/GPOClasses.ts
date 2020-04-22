@@ -1,5 +1,8 @@
 import { InputModGPO } from '@ucdavis/tea/out/models/input.model';
-import { ExpensesBaseYearModGPO } from '@ucdavis/tea/out/models/output.model';
+import {
+  ExpensesBaseYearModGPO,
+  IncomeOtherThanEnergyMod
+} from '@ucdavis/tea/out/models/output.model';
 
 export class InputModGPOClass implements InputModGPO {
   CapitalCost = 70000000;
@@ -46,4 +49,9 @@ export class ExpensesBaseYearModGPOClass implements ExpensesBaseYearModGPO {
   TotalExpensesIncludingFuelKwh = 0;
   FuelCostKwh = 0;
   AshDisposalKwh = 0;
+}
+
+export class IncomeOtherThanEnergyModClass implements IncomeOtherThanEnergyMod {
+  AnnualCapacityPayment = 0;
+  AnnualDebtReserveInterest = 0;
 }

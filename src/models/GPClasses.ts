@@ -1,5 +1,8 @@
 import { InputModGP } from '@ucdavis/tea/out/models/input.model';
-import { ExpensesBaseYearModGP } from '@ucdavis/tea/out/models/output.model';
+import {
+  ExpensesBaseYearModGP,
+  IncomeOtherThanEnergyModGP
+} from '@ucdavis/tea/out/models/output.model';
 
 export class InputModGPClass implements InputModGP {
   GasifierSystemCapitalCost = 300000;
@@ -67,4 +70,11 @@ export class ExpensesBaseYearModGPClass implements ExpensesBaseYearModGP {
   BiomassFuelCostKwh = 0;
   DualFuelCostKwh = 0;
   WasteTreatmentKwh = 0;
+}
+
+export class IncomeOtherThanEnergyModGPClass
+  implements IncomeOtherThanEnergyModGP {
+  AnnualCapacityPayment = 0;
+  AnnualDebtReserveInterest = 0;
+  AnnualIncomeFromChar = 0;
 }
