@@ -5,11 +5,10 @@ import {
   ElectricalFuelBaseYearMod,
   ElectricalFuelBaseYearModCHP
 } from '@ucdavis/tea/out/models/output.model';
-import { CHPResults } from './GenericCombinedHeatPower/CHPResults';
 import {
   InputModCHPClass,
   ElectricalFuelBaseYearModCHPClass
-} from '../../../models/Types';
+} from '../../../models/CHPClasses';
 
 interface Props {
   results: ElectricalFuelBaseYearMod | ElectricalFuelBaseYearModCHP;
@@ -59,18 +58,18 @@ export const ElectricalAndFuelBaseYear = (props: Props) => {
             <td>{formatNumber(props.results.FuelConsumptionRate)}</td>
           </tr>
           {props.results instanceof ElectricalFuelBaseYearModCHPClass && (
-            <tr>
-              <td>Fuel Power (kW)</td>
-              <td>{formatNumber(props.results.FuelPower)}</td>
-            </tr>
-          )}
-          {props.results instanceof ElectricalFuelBaseYearModCHPClass && (
-            <tr>
-              <td>Gross Station Electrical Efficiency (%)</td>
-              <td>
-                {formatNumber(props.results.GrossStationElectricalEfficiency)}
-              </td>
-            </tr>
+            <>
+              <tr>
+                <td>Fuel Power (kW)</td>
+                <td>{formatNumber(props.results.FuelPower)}</td>
+              </tr>
+              <tr>
+                <td>Gross Station Electrical Efficiency (%)</td>
+                <td>
+                  {formatNumber(props.results.GrossStationElectricalEfficiency)}
+                </td>
+              </tr>
+            </>
           )}
           <tr>
             <td>Fuel Ash Concetration (%)</td>

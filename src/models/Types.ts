@@ -1,6 +1,7 @@
 import {
   OutputModCHP,
-  OutputModGPO
+  OutputModGPO,
+  OutputModGP
 } from '@ucdavis/tea/out/models/output.model';
 
 export interface FrcsInputs {
@@ -17,7 +18,7 @@ export const TechnoeconomicModels = {
 };
 
 export interface Results {
-  teaResults: OutputModGPO | OutputModCHP;
+  teaResults: OutputModGPO | OutputModCHP | OutputModGP;
   totalBiomass: number;
   totalArea: number;
   totalCombinedCost: number;

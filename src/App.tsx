@@ -4,26 +4,28 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Route } from 'react-router';
 import { MapContainer } from './components/Map/MapContainer';
 import { ResultsContainer } from './components/Results/ResultsContainer';
-import {
-  TechnoeconomicModels,
-  FrcsInputs,
-  Results,
-  InputModGPOClass,
-  InputModCHPClass
-} from './models/Types';
+import { TechnoeconomicModels, FrcsInputs, Results } from './models/Types';
 import 'isomorphic-fetch';
 import {
   OutputModGPO,
-  OutputModCHP
+  OutputModCHP,
+  OutputModGP
 } from '@ucdavis/tea/out/models/output.model';
-import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import {
+  InputModGPO,
+  InputModCHP,
+  InputModGP
+} from '@ucdavis/tea/out/models/input.model';
+import { InputModGPOClass } from './models/GPOClasses';
+import { InputModCHPClass } from './models/CHPClasses';
+import { InputModGPClass } from './models/GPClasses';
 
 const App = () => {
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
 
-  const [teaInputs, setTeaInputs] = useState<InputModGPO | InputModCHP>(
-    new InputModGPOClass()
-  );
+  const [teaInputs, setTeaInputs] = useState<
+    InputModGPO | InputModCHP | InputModGP
+  >(new InputModGPOClass());
   const [teaModel, setTeaModel] = useState(
     TechnoeconomicModels.genericPowerOnly
   );
@@ -35,10 +37,13 @@ const App = () => {
     if (teaModel === TechnoeconomicModels.genericCombinedHeatAndPower) {
       setTeaInputs(new InputModCHPClass());
     }
+    if (teaModel === TechnoeconomicModels.gasificationPower) {
+      setTeaInputs(new InputModGPClass());
+    }
   }, [teaModel]);
 
   const [technoeconomicOutputs, setTechnoeconomicOutputs] = useState<
-    OutputModGPO | OutputModCHP
+    OutputModGPO | OutputModCHP | OutputModGP
   >();
 
   const [frcsOutputs, setFrcsOutputs] = useState<Results>();

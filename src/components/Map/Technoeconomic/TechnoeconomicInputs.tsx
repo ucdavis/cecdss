@@ -33,10 +33,13 @@ export const TechnoeconomicInputs = (props: Props) => {
           value={props.teaModel}
         >
           <option value={TechnoeconomicModels.genericPowerOnly}>
-            Generic Power Only
+            Generic Power Only (GPO)
           </option>
           <option value={TechnoeconomicModels.genericCombinedHeatAndPower}>
-            Generic Combined Heat and Power
+            Generic Combined Heat and Power (CHP)
+          </option>
+          <option value={TechnoeconomicModels.gasificationPower}>
+            Gasification Power (GP)
           </option>
         </Input>
         <br />
