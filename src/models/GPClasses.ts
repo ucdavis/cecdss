@@ -1,7 +1,8 @@
 import { InputModGP } from '@ucdavis/tea/out/models/input.model';
 import {
   ExpensesBaseYearModGP,
-  IncomeOtherThanEnergyModGP
+  IncomeOtherThanEnergyModGP,
+  ElectricalFuelBaseYearModGP
 } from '@ucdavis/tea/out/models/output.model';
 
 export class InputModGPClass implements InputModGP {
@@ -77,4 +78,30 @@ export class IncomeOtherThanEnergyModGPClass
   AnnualCapacityPayment = 0;
   AnnualDebtReserveInterest = 0;
   AnnualIncomeFromChar = 0;
+}
+
+export class ElectricalFuelBaseYearModGPClass
+  implements ElectricalFuelBaseYearModGP {
+  ParasiticLoad = 0;
+  AnnualHours = 0;
+  AnnualNetElectricityGeneration = 0;
+  OverallNetSystemEfficiency = 0;
+  NitrogenGas = 0;
+  CleanGasMolecularMass = 0;
+  CleanGasDensity = 0;
+  CleanGasHigherHeatingValue = 0;
+  CleanGasLowerHeatingValue = 0;
+  TotalFuelPowerInput = 0;
+  CleanGasPowerInput = 0;
+  DualFuelPowerInput = 0;
+  CleanGasFlowRateVolume = 0;
+  CleanGasFlowRateMass = 0;
+  AnnualCleanGasConsumption = 0;
+  DualFuelFlowRate = 0;
+  AnnualDualFuelConsumption = 0;
+  BiomassFeedRate = 0;
+  AnnualBiomassConsumptionDryMass = 0;
+  AnnualBiomassConsumptionWetMass = 0;
+  CharProductionRate = 0;
+  AnnualCharProduction = 0;
 }

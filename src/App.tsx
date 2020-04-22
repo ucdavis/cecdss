@@ -95,7 +95,7 @@ const App = () => {
       <Route
         path='/results'
         render={() =>
-          technoeconomicOutputs && frcsOutputs ? (
+          !!technoeconomicOutputs && !!frcsOutputs ? (
             <ResultsContainer
               frcsInputs={frcsInputs}
               teaInputs={teaInputs}

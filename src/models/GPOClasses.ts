@@ -1,7 +1,8 @@
 import { InputModGPO } from '@ucdavis/tea/out/models/input.model';
 import {
   ExpensesBaseYearModGPO,
-  IncomeOtherThanEnergyMod
+  IncomeOtherThanEnergyMod,
+  ElectricalFuelBaseYearMod
 } from '@ucdavis/tea/out/models/output.model';
 
 export class InputModGPOClass implements InputModGPO {
@@ -54,4 +55,14 @@ export class ExpensesBaseYearModGPOClass implements ExpensesBaseYearModGPO {
 export class IncomeOtherThanEnergyModClass implements IncomeOtherThanEnergyMod {
   AnnualCapacityPayment = 0;
   AnnualDebtReserveInterest = 0;
+}
+
+export class ElectricalFuelBaseYearModGPOClass
+  implements ElectricalFuelBaseYearMod {
+  AnnualHours = 0;
+  FuelConsumptionRate = 0;
+  AnnualGeneration = 0;
+  CapitalCostNEC = 0;
+  AnnualFuelConsumption = 0;
+  AnnualAshDisposal = 0;
 }

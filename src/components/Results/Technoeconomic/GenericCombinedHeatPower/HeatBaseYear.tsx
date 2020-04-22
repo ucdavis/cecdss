@@ -2,7 +2,6 @@ import React from 'react';
 import { formatNumber } from '../../../Shared/util';
 import { InputModCHP, InputModGP } from '@ucdavis/tea/out/models/input.model';
 import { HeatBaseYearMod } from '@ucdavis/tea/out/models/output.model';
-import { ElectricalFuelBaseYearModCHPClass } from '../../../../models/Types';
 
 interface Props {
   results: HeatBaseYearMod;

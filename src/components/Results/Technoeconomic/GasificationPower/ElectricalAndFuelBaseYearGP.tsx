@@ -59,14 +59,6 @@ export const ElectricalAndFuelBaseYearGP = (props: Props) => {
             <td>{formatNumber(props.inputs.FractionOfInputEnergy)}</td>
           </tr>
           <tr>
-            <td>Clean Gas Composition (% by volume, dry)</td>
-            <td>
-              {
-                // TODO: ??
-              }
-            </td>
-          </tr>
-          <tr>
             <td>CO</td>
             <td>{formatNumber(props.inputs.CO)}</td>
           </tr>
