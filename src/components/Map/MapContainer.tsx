@@ -3,13 +3,17 @@ import { Map, TileLayer, Marker, Circle } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { MapSidebar } from './MapSidebar';
 import { FrcsInputs } from '../../models/Types';
-import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import {
+  InputModGPO,
+  InputModCHP,
+  InputModGP
+} from '@ucdavis/tea/out/models/input.model';
 
 interface IProps {
   frcsInputs: FrcsInputs;
   setFrcsInputs: (inputs: FrcsInputs) => void;
-  teaInputs: InputModGPO | InputModCHP;
-  setTeaInputs: (inputs: InputModGPO | InputModCHP) => void;
+  teaInputs: InputModGPO | InputModCHP | InputModGP;
+  setTeaInputs: (inputs: InputModGPO | InputModCHP | InputModGP) => void;
   teaModel: string;
   setTeaModel: (model: string) => void;
   submitInputs: (lat: number, lng: number) => void;

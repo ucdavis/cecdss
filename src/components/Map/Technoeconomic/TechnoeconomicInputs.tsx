@@ -2,17 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { GenericPowerOnly } from './GenericPowerOnly';
+import { TechnoeconomicModels } from '../../../models/Types';
 import {
-  TechnoeconomicModels,
-  InputModGPOClass,
-  InputModCHPClass
-} from '../../../models/Types';
-import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+  InputModGPO,
+  InputModCHP,
+  InputModGP
+} from '@ucdavis/tea/out/models/input.model';
 import { CombinedHeatAndPower } from './CombinedHeatAndPower';
+import { InputModGPOClass } from '../../../models/GPOClasses';
+import { InputModCHPClass } from '../../../models/CHPClasses';
+import { InputModGPClass } from '../../../models/GPClasses';
+import { GasificationPower } from './GasificationPower';
 
 interface Props {
-  teaInputs: InputModGPO | InputModCHP;
-  setTeaInputs: (inputs: InputModGPO | InputModCHP) => void;
+  teaInputs: InputModGPO | InputModCHP | InputModGP;
+  setTeaInputs: (inputs: InputModGPO | InputModCHP | InputModGP) => void;
   teaModel: string;
   setTeaModel: (model: string) => void;
 }
@@ -29,10 +33,13 @@ export const TechnoeconomicInputs = (props: Props) => {
           value={props.teaModel}
         >
           <option value={TechnoeconomicModels.genericPowerOnly}>
-            Generic Power Only
+            Generic Power Only (GPO)
           </option>
           <option value={TechnoeconomicModels.genericCombinedHeatAndPower}>
-            Generic Combined Heat and Power
+            Generic Combined Heat and Power (CHP)
+          </option>
+          <option value={TechnoeconomicModels.gasificationPower}>
+            Gasification Power (GP)
           </option>
         </Input>
         <br />
@@ -47,6 +54,13 @@ export const TechnoeconomicInputs = (props: Props) => {
       {props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower &&
         props.teaInputs instanceof InputModCHPClass && (
           <CombinedHeatAndPower
+            inputs={props.teaInputs}
+            setInputs={props.setTeaInputs}
+          />
+        )}
+      {props.teaModel === TechnoeconomicModels.gasificationPower &&
+        props.teaInputs instanceof InputModGPClass && (
+          <GasificationPower
             inputs={props.teaInputs}
             setInputs={props.setTeaInputs}
           />

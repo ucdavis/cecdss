@@ -4,13 +4,17 @@ import { Link } from 'react-router-dom';
 import { FrcsInputs } from '../../models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
-import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import {
+  InputModGPO,
+  InputModCHP,
+  InputModGP
+} from '@ucdavis/tea/out/models/input.model';
 
 interface Props {
   frcsInputs: FrcsInputs;
   setFrcsInputs: (inputs: FrcsInputs) => void;
-  teaInputs: InputModGPO | InputModCHP;
-  setTeaInputs: (inputs: InputModGPO | InputModCHP) => void;
+  teaInputs: InputModGPO | InputModCHP | InputModGP;
+  setTeaInputs: (inputs: InputModGPO | InputModCHP | InputModGP) => void;
   teaModel: string;
   setTeaModel: (model: string) => void;
   submitInputs: () => void;

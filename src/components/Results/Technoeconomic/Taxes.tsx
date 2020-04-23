@@ -1,14 +1,19 @@
 import React from 'react';
 import { formatNumber } from '../../Shared/util';
-import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import {
+  InputModGPO,
+  InputModCHP,
+  InputModGP
+} from '@ucdavis/tea/out/models/input.model';
 import {
   OutputModGPO,
-  OutputModCHP
+  OutputModCHP,
+  OutputModGP
 } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
-  inputs: InputModGPO | InputModCHP;
-  results: OutputModGPO | OutputModCHP;
+  inputs: InputModGPO | InputModCHP | InputModGP;
+  results: OutputModGPO | OutputModCHP | OutputModGP;
 }
 
 export const Taxes = (props: Props) => {

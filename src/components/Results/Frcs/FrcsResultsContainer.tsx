@@ -4,6 +4,9 @@ import { Button, Alert } from 'reactstrap';
 import { FrcsClusterCharts } from './FrcsClusterCharts';
 import { FrcsClusterResultsContainer } from './FrcsClusterResultsContainer';
 import { formatNumber, formatCurrency } from '../../Shared/util';
+import { ElectricalFuelBaseYearModCHPClass } from '../../../models/CHPClasses';
+import { ElectricalFuelBaseYearModGPClass } from '../../../models/GPClasses';
+import { ElectricalFuelBaseYearModGPOClass } from '../../../models/GPOClasses';
 
 interface Props {
   results: Results;
@@ -15,16 +18,27 @@ interface State {
 }
 
 export const FrcsResultsContainer = (props: Props) => {
-  const [state, setState] = useState<State>({
-    viewClusterTable: false,
-    viewClusterCharts: false
-  });
-
+  let targetBiomass = 0;
+  if (
+    props.results.teaResults.ElectricalAndFuelBaseYear instanceof
+    ElectricalFuelBaseYearModGPClass
+  ) {
+    targetBiomass =
+      props.results.teaResults.ElectricalAndFuelBaseYear
+        .AnnualBiomassConsumptionDryMass;
+  } else if (
+    props.results.teaResults.ElectricalAndFuelBaseYear instanceof
+      ElectricalFuelBaseYearModGPOClass ||
+    props.results.teaResults.ElectricalAndFuelBaseYear instanceof
+      ElectricalFuelBaseYearModCHPClass
+  ) {
+    targetBiomass =
+      props.results.teaResults.ElectricalAndFuelBaseYear.AnnualFuelConsumption;
+  }
   return (
     <div>
       <h2>Fuel Reduction Cost Simulator Results</h2>
-      {props.results.teaResults.ElectricalAndFuelBaseYear
-        .AnnualFuelConsumption > props.results.totalBiomass &&
+      {targetBiomass > props.results.totalBiomass &&
         props.results.skippedClusters.length === 0 && (
           <Alert color='danger'>
             The settings you selected did not return enough biomass to meet the
@@ -35,12 +49,7 @@ export const FrcsResultsContainer = (props: Props) => {
         <tbody>
           <tr>
             <td>Biomass Target (US tons)</td>
-            <td>
-              {formatNumber(
-                props.results.teaResults.ElectricalAndFuelBaseYear
-                  .AnnualFuelConsumption
-              )}
-            </td>
+            <td>{formatNumber(targetBiomass)}</td>
           </tr>
           <tr>
             <td>Total Biomass (US tons)</td>
