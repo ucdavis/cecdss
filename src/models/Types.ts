@@ -3,6 +3,8 @@ import {
   OutputModGPO,
   OutputModGP
 } from '@ucdavis/tea/out/models/output.model';
+import { OutputVarMod } from '@ucdavis/frcs/out/systems/frcs.model';
+import { LCAresults } from './LCAModels';
 
 export interface FrcsInputs {
   radius: number;
@@ -18,6 +20,7 @@ export const TechnoeconomicModels = {
 };
 
 export interface Results {
+  lcaResults: LCAresults;
   teaResults: OutputModGPO | OutputModCHP | OutputModGP;
   totalBiomass: number;
   totalArea: number;
@@ -48,15 +51,4 @@ export interface ClusterErrorResult {
   biomass: number;
   area: number;
   error: string;
-}
-
-export interface OutputVarMod {
-  TotalPerBoleCCF: number;
-  TotalPerGT: number;
-  TotalPerAcre: number;
-  Residue: {
-    ResidueWt: number;
-    ResiduePerAcre: number;
-    ResiduePerGT: number;
-  };
 }
