@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Results } from '../../../models/Types';
 import { Button, Alert } from 'reactstrap';
-import { FrcsClusterCharts } from './FrcsClusterCharts';
 import { FrcsClusterResultsContainer } from './FrcsClusterResultsContainer';
 import { formatNumber, formatCurrency } from '../../Shared/util';
 import { ElectricalFuelBaseYearModCHPClass } from '../../../models/CHPClasses';
@@ -85,32 +84,7 @@ export const FrcsResultsContainer = (props: Props) => {
           </tr>
         </tbody>
       </table>
-      {/* <Button
-        onClick={() => {
-          setState({
-            viewClusterCharts: false,
-            viewClusterTable: !state.viewClusterTable
-          });
-        }}
-      >
-        View Cluster Table
-      </Button>
-      <Button
-        onClick={() => {
-          setState({
-            viewClusterTable: false,
-            viewClusterCharts: !state.viewClusterCharts
-          });
-        }}
-      >
-        View Cluster Charts
-      </Button> */}
-      {/* {state.viewClusterTable && ( */}
       <FrcsClusterResultsContainer results={props.results} />
-      {/* )} */}
-      {/* {state.viewClusterCharts && (
-        <FrcsClusterCharts outputs={props.results.clusters} />
-      )} */}
     </div>
   );
 };

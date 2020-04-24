@@ -5,7 +5,6 @@ import {
   ClusterErrorResult
 } from '../../../models/Types';
 import { Button } from 'reactstrap';
-import { FrcsClusterCharts } from './FrcsClusterCharts';
 import { ReactTable } from '../../Shared/ReactTable';
 import { formatNumber } from '../../Shared/util';
 import { Cell } from 'react-table';
