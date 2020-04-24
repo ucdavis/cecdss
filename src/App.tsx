@@ -42,11 +42,7 @@ const App = () => {
     }
   }, [teaModel]);
 
-  const [technoeconomicOutputs, setTechnoeconomicOutputs] = useState<
-    OutputModGPO | OutputModCHP | OutputModGP
-  >();
-
-  const [frcsOutputs, setFrcsOutputs] = useState<Results>();
+  const [results, setResults] = useState<Results>();
 
   const submitInputs = async (lat: number, lng: number) => {
     const reqBody = JSON.stringify({
@@ -70,9 +66,8 @@ const App = () => {
         }
       }
     ).then(res => res.json());
-
-    setTechnoeconomicOutputs(results.teaResults);
-    setFrcsOutputs({ ...results });
+    debugger;
+    setResults(results);
   };
 
   return (
@@ -95,13 +90,11 @@ const App = () => {
       <Route
         path='/results'
         render={() =>
-          !!technoeconomicOutputs && !!frcsOutputs ? (
+          !!results ? (
             <ResultsContainer
-              frcsInputs={frcsInputs}
               teaInputs={teaInputs}
               teaModel={teaModel}
-              teaOutputs={technoeconomicOutputs}
-              frcsOutputs={frcsOutputs}
+              results={results}
             />
           ) : (
             <div>Loading results....</div>

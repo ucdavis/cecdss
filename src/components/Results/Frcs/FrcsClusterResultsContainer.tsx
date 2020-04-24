@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Results, ClusterResult } from '../../../models/Types';
 import { Button } from 'reactstrap';
-import { FrcsClusterCharts } from './FrcsClusterCharts';
 import { ReactTable } from '../../Shared/ReactTable';
 import { formatNumber, formatCurrency } from '../../Shared/util';
 import { Cell } from 'react-table';
@@ -79,40 +78,40 @@ export const FrcsClusterResultsContainer = (props: Props) => {
           formatNumber(row.original.distance)
       },
       {
-        Header: 'Total Per Acre',
-        accessor: 'frcsResult.TotalPerAcre',
+        Header: 'Total Cost Per Acre',
+        accessor: 'frcsResult.Total.CostPerAcre',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.TotalPerAcre)
+          formatNumber(row.original.frcsResult.Total.CostPerAcre)
       },
       {
-        Header: 'Total Per Bole CCF',
-        accessor: 'frcsResult.TotalPerBoleCCF',
+        Header: 'Total Cost Per Bole CCF',
+        accessor: 'frcsResult.Total.CostPerBoleCCF',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.TotalPerBoleCCF)
+          formatNumber(row.original.frcsResult.Total.CostPerBoleCCF)
       },
       {
-        Header: 'Total Per GT',
-        accessor: 'frcsResult.TotalPerGT',
+        Header: 'Total Cost Per GT',
+        accessor: 'frcsResult.Total.CostPerGT',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.TotalPerGT)
+          formatNumber(row.original.frcsResult.Total.CostPerGT)
       },
       {
-        Header: 'ResiduePerAcre',
-        accessor: 'frcsResult.Residue.ResiduePerAcre',
+        Header: 'Residue Cost Per Acre',
+        accessor: 'frcsResult.Residue.CostPerAcre',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.Residue.ResiduePerAcre)
+          formatNumber(row.original.frcsResult.Residue.CostPerAcre)
       },
       {
-        Header: 'Residue Wt',
-        accessor: 'frcsResult.Residue.ResidueWt',
+        Header: 'Residue Cost Per Bole CCF',
+        accessor: 'frcsResult.Residue.CostPerBoleCCF',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.Residue.ResidueWt)
+          formatNumber(row.original.frcsResult.Residue.CostPerBoleCCF)
       },
       {
-        Header: 'Residue Per GT',
-        accessor: 'frcsResult.Residue.ResiduePerGT',
+        Header: 'Residue Cost Per GT',
+        accessor: 'frcsResult.Residue.CostPerGT',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.Residue.ResiduePerGT)
+          formatNumber(row.original.frcsResult.Residue.CostPerGT)
       }
     ],
     [props.results]
