@@ -66,7 +66,6 @@ const App = () => {
         }
       }
     ).then(res => res.json());
-    debugger;
     setResults(results);
   };
 
