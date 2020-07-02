@@ -40,11 +40,16 @@ export const GPOCharts = (props: Props) => {
           width={150}
           height={150}
           data={[
-            { x: 'Labor', y: props.inputs.LaborCost },
-            { x: 'Maintenance', y: props.inputs.MaintenanceCost },
-            { x: 'Management', y: props.inputs.Management },
-            { x: 'Other', y: props.inputs.OtherOperatingExpenses },
-            { x: 'Fuel', y: props.inputs.FuelCost }
+            { x: 'Labor', y: props.inputs.ExpensesBaseYear.LaborCost },
+            {
+              x: 'Maintenance',
+              y: props.inputs.ExpensesBaseYear.MaintenanceCost
+            },
+            { x: 'Management', y: props.inputs.ExpensesBaseYear.Management },
+            {
+              x: 'Other',
+              y: props.inputs.ExpensesBaseYear.OtherOperatingExpenses
+            }
           ]}
           colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
           animate={{

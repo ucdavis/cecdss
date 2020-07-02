@@ -1,19 +1,51 @@
-import { InputModGP } from '@ucdavis/tea/out/models/input.model';
+import {
+  InputModGP,
+  CapitalCostInputModGP,
+  TaxesInputMod,
+  ExpensesBaseYearInputModGP,
+  FinancingInputMod,
+  IncomeOtherThanEnergyInputModGP,
+  EscalationInflationInputModGP,
+  ElectricalFuelBaseYearInputModGP,
+  HeatBaseYearInputMod
+} from '@ucdavis/tea/out/models/input.model';
 import {
   ExpensesBaseYearModGP,
   IncomeOtherThanEnergyModGP,
   ElectricalFuelBaseYearModGP
 } from '@ucdavis/tea/out/models/output.model';
+import {
+  HeatBaseYearInputModClass,
+  TaxesInputModClass,
+  FinancingInputModClass
+} from './TEASharedClasses';
 
 export class InputModGPClass implements InputModGP {
+  CapitalCost = new CapitalCostInputModGPClass();
+  ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPClass();
+  HeatBaseYear = new HeatBaseYearInputModClass();
+  ExpensesBaseYear = new ExpensesBaseYearInputModGPClass();
+  Taxes = new TaxesInputModClass();
+  Financing = new FinancingInputModClass();
+  IncomeOtherThanEnergy = new IncomeOtherThanEnergyInputModGPClass();
+  EscalationInflation = new EscalationInflationInputModGPClass();
+  TaxCreditFrac = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+}
+
+export class CapitalCostInputModGPClass implements CapitalCostInputModGP {
   GasifierSystemCapitalCost = 300000;
   GasCleaningSystemCapitalCost = 50000;
   PowerGenerationCapitalCost = 450000;
   EmissionControlSystemCapitalCost = 25000;
   HeatRecoverySystemCapitalCost = 50000;
-  GrossElectricalCapacity = 650;
-  NetElectricalCapacity = 500;
+}
+
+export class ElectricalFuelBaseYearInputModGPClass
+  implements ElectricalFuelBaseYearInputModGP {
+  NetElectricalCapacity = 25000;
   CapacityFactor = 85;
+  MoistureContent = 50;
+  GrossElectricalCapacity = 650;
   HHVEfficiency = 65;
   NetHHVEfficiency = 23;
   FractionOfInputEnergy = 20;
@@ -23,38 +55,38 @@ export class InputModGPClass implements InputModGP {
   CO2 = 12;
   O2 = 0;
   HHV = 18608;
-  MoistureContent = 50;
   AshContent = 5;
   CarbonConcentration = 30;
-  AggregateFractionOfHeatRecovered = 50;
-  AggregateSalesPriceForHeat = 0.01;
+}
+
+export class ExpensesBaseYearInputModGPClass
+  implements ExpensesBaseYearInputModGP {
   BiomassFuelCost = 22.05;
+  LaborCost = 2000000;
+  MaintenanceCost = 1500000;
+  InsurancePropertyTax = 1400000;
+  Utilities = 200000;
+  Management = 200000;
+  OtherOperatingExpenses = 400000;
   DualFuelCost = 0.3;
-  LaborCost = 20000;
-  MaintenanceCost = 4000;
   WasteTreatment = 2000;
-  Insurance = 1000;
-  Utilities = 1000;
-  Management = 1000;
-  OtherOperatingExpenses = 1000;
-  FederalTaxRate = 34;
-  StateTaxRate = 9.6;
-  ProductionTaxCredit = 0.009;
-  ElectricityCapacityPayment = 0;
-  InterestRateOnDebtReserve = 2;
+}
+
+export class IncomeOtherThanEnergyInputModGPClass
+  implements IncomeOtherThanEnergyInputModGP {
+  CapacityPayment = 166;
+  InterestRateOnDebtReserve = 5;
   SalesPriceForChar = 0;
+}
+export class EscalationInflationInputModGPClass
+  implements EscalationInflationInputModGP {
   GeneralInflation = 2.1;
   EscalationBiomassFuel = 2.1;
-  EscalationDualFuel = 2.1;
   EscalationProductionTaxCredit = 2.1;
   EscalationHeatSales = 2.1;
-  EscalationCharSales = 2.1;
   EscalationOther = 2.1;
-  DebtRatio = 90;
-  InterestRateOnDebt = 5;
-  EconomicLife = 20;
-  CostOfEquity = 15;
-  TaxCreditFrac = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  EscalationDualFuel = 2.1;
+  EscalationCharSales = 2.1;
 }
 
 export class ExpensesBaseYearModGPClass implements ExpensesBaseYearModGP {
@@ -82,6 +114,7 @@ export class IncomeOtherThanEnergyModGPClass
 
 export class ElectricalFuelBaseYearModGPClass
   implements ElectricalFuelBaseYearModGP {
+  BiomassTarget = 0;
   ParasiticLoad = 0;
   AnnualHours = 0;
   AnnualNetElectricityGeneration = 0;

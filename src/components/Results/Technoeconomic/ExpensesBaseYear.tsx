@@ -5,23 +5,21 @@ import {
   ExpensesBaseYearModGP
 } from '@ucdavis/tea/out/models/output.model';
 import {
-  InputModGPO,
-  InputModCHP,
-  InputModGP
+  ExpensesBaseYearInputModGPO,
+  ExpensesBaseYearInputModGP
 } from '@ucdavis/tea/out/models/input.model';
 import {
   ExpensesBaseYearModGPOClass,
-  InputModGPOClass
+  ExpensesBaseYearInputModGPOClass
 } from '../../../models/GPOClasses';
-import { InputModCHPClass } from '../../../models/CHPClasses';
 import {
-  InputModGPClass,
-  ExpensesBaseYearModGPClass
+  ExpensesBaseYearModGPClass,
+  ExpensesBaseYearInputModGPClass
 } from '../../../models/GPClasses';
 
 interface Props {
   results: ExpensesBaseYearModGPO | ExpensesBaseYearModGP;
-  inputs: InputModGPO | InputModCHP | InputModGP;
+  inputs: ExpensesBaseYearInputModGPO | ExpensesBaseYearInputModGP;
 }
 
 export const ExpensesBaseYear = (props: Props) => {
@@ -36,16 +34,17 @@ export const ExpensesBaseYear = (props: Props) => {
           </tr>
         </thead>
         <tbody>
-          {(props.inputs instanceof InputModGPOClass ||
-            props.inputs instanceof InputModCHPClass) &&
-            props.results instanceof ExpensesBaseYearModGPOClass && (
-              <tr>
-                <td>Fuel Cost ($/dry metric tons</td>
-                <td>{formatNumber(props.inputs.FuelCost)}</td>
-                <td>{formatNumber(props.results.FuelCostKwh)}</td>
-              </tr>
+          <tr>
+            <td>Fuel Cost ($/dry metric tons</td>
+            <td>{formatNumber(props.inputs.BiomassFuelCost)}</td>
+            {props.results instanceof ExpensesBaseYearModGPOClass && (
+              <td>{formatNumber(props.results.FuelCostKwh)}</td>
             )}
-          {props.inputs instanceof InputModGPClass &&
+            {props.results instanceof ExpensesBaseYearModGPClass && (
+              <td>{formatNumber(props.results.BiomassFuelCostKwh)}</td>
+            )}
+          </tr>
+          {props.inputs instanceof ExpensesBaseYearInputModGPClass &&
             props.results instanceof ExpensesBaseYearModGPClass && (
               <>
                 <tr>
@@ -72,7 +71,7 @@ export const ExpensesBaseYear = (props: Props) => {
             <td>{formatNumber(props.inputs.MaintenanceCost)}</td>
             <td>{formatNumber(props.results.MaintenanceCostKwh)}</td>
           </tr>
-          {props.inputs instanceof InputModGPClass &&
+          {props.inputs instanceof ExpensesBaseYearInputModGPClass &&
             props.results instanceof ExpensesBaseYearModGPClass && (
               <>
                 <tr>
@@ -82,30 +81,19 @@ export const ExpensesBaseYear = (props: Props) => {
                   <td>{formatNumber(props.inputs.WasteTreatment)}</td>
                   <td>{formatNumber(props.results.WasteTreatmentKwh)}</td>
                 </tr>
-                <tr>
-                  <td>Insurance/Property Tax ($/y)</td>
-                  <td>{formatNumber(props.inputs.Insurance)}</td>
-                  <td>{formatNumber(props.results.InsurancePropertyTaxKwh)}</td>
-                </tr>
               </>
             )}
-          {(props.inputs instanceof InputModGPOClass ||
-            props.inputs instanceof InputModCHPClass) &&
-            props.results instanceof ExpensesBaseYearModGPOClass && (
-              //TODO: COMBINE THESE WITH ABOVE
-              <tr>
-                <td>Insurance/Property Tax ($/year)</td>
-                <td>{formatNumber(props.inputs.InsurancePropertyTax)}</td>
-                <td>{formatNumber(props.results.InsurancePropertyTaxKwh)}</td>
-              </tr>
-            )}
+          <tr>
+            <td>Insurance/Property Tax ($/year)</td>
+            <td>{formatNumber(props.inputs.InsurancePropertyTax)}</td>
+            <td>{formatNumber(props.results.InsurancePropertyTaxKwh)}</td>
+          </tr>
           <tr>
             <td>Utilities ($/year)</td>
             <td>{formatNumber(props.inputs.Utilities)}</td>
             <td>{formatNumber(props.results.UtilitiesKwh)}</td>
           </tr>
-          {(props.inputs instanceof InputModGPOClass ||
-            props.inputs instanceof InputModCHPClass) &&
+          {props.inputs instanceof ExpensesBaseYearInputModGPOClass &&
             props.results instanceof ExpensesBaseYearModGPOClass && (
               <tr>
                 <td>Ash Disposal ($/year)</td>

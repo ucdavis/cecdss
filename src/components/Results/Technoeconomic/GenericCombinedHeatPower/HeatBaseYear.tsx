@@ -1,11 +1,15 @@
 import React from 'react';
 import { formatNumber } from '../../../Shared/util';
-import { InputModCHP, InputModGP } from '@ucdavis/tea/out/models/input.model';
+import {
+  InputModCHP,
+  InputModGP,
+  HeatBaseYearInputMod
+} from '@ucdavis/tea/out/models/input.model';
 import { HeatBaseYearMod } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
   results: HeatBaseYearMod;
-  inputs: InputModCHP | InputModGP;
+  inputs: HeatBaseYearInputMod;
 }
 
 export const HeatBaseYear = (props: Props) => {

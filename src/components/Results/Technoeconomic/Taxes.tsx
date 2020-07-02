@@ -3,7 +3,8 @@ import { formatNumber } from '../../Shared/util';
 import {
   InputModGPO,
   InputModCHP,
-  InputModGP
+  InputModGP,
+  TaxesInputMod
 } from '@ucdavis/tea/out/models/input.model';
 import {
   OutputModGPO,
@@ -12,7 +13,7 @@ import {
 } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
-  inputs: InputModGPO | InputModCHP | InputModGP;
+  inputs: TaxesInputMod;
   results: OutputModGPO | OutputModCHP | OutputModGP;
 }
 

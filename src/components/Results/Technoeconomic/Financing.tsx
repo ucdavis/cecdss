@@ -1,14 +1,10 @@
 import React from 'react';
 import { formatNumber, formatCurrency } from '../../Shared/util';
-import {
-  InputModGPO,
-  InputModCHP,
-  InputModGP
-} from '@ucdavis/tea/out/models/input.model';
+import { FinancingInputMod } from '@ucdavis/tea/out/models/input.model';
 import { FinancingMod } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
-  inputs: InputModGPO | InputModCHP | InputModGP;
+  inputs: FinancingInputMod;
   results: FinancingMod;
 }
 

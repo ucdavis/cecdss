@@ -1,18 +1,21 @@
 import React from 'react';
 import { formatNumber } from '../../Shared/util';
-import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
 import {
-  ElectricalFuelBaseYearMod,
-  ElectricalFuelBaseYearModCHP
+  ElectricalFuelBaseYearInputModGPO,
+  ElectricalFuelBaseYearInputModCHP
+} from '@ucdavis/tea/out/models/input.model';
+import {
+  ElectricalFuelBaseYearModCHP,
+  ElectricalFuelBaseYearModGPO
 } from '@ucdavis/tea/out/models/output.model';
 import {
-  InputModCHPClass,
-  ElectricalFuelBaseYearModCHPClass
+  ElectricalFuelBaseYearModCHPClass,
+  ElectricalFuelBaseYearInputModCHPClass
 } from '../../../models/CHPClasses';
 
 interface Props {
-  results: ElectricalFuelBaseYearMod | ElectricalFuelBaseYearModCHP;
-  inputs: InputModGPO | InputModCHP;
+  results: ElectricalFuelBaseYearModGPO | ElectricalFuelBaseYearModCHP;
+  inputs: ElectricalFuelBaseYearInputModGPO | ElectricalFuelBaseYearInputModCHP;
 }
 
 export const ElectricalAndFuelBaseYear = (props: Props) => {
@@ -21,7 +24,7 @@ export const ElectricalAndFuelBaseYear = (props: Props) => {
       <h3>Electrical And Fuel Base Year</h3>
       <table className='table'>
         <tbody>
-          {props.inputs instanceof InputModCHPClass && (
+          {props.inputs instanceof ElectricalFuelBaseYearInputModCHPClass && (
             <tr>
               <td>Gross Electrical Capacity (kWe)</td>
               <td>{formatNumber(props.inputs.GrossElectricalCapacity)}</td>

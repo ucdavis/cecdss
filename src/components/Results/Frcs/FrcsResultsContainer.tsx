@@ -32,7 +32,7 @@ export const FrcsResultsContainer = (props: Props) => {
       ElectricalFuelBaseYearModCHPClass
   ) {
     targetBiomass =
-      props.results.teaResults.ElectricalAndFuelBaseYear.AnnualFuelConsumption;
+      props.results.teaResults.ElectricalAndFuelBaseYear.BiomassTarget;
   }
   return (
     <div>

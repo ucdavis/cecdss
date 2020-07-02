@@ -1,40 +1,53 @@
-import { InputModGPO } from '@ucdavis/tea/out/models/input.model';
+import {
+  InputModGPO,
+  ElectricalFuelBaseYearInputModGPO,
+  ExpensesBaseYearInputModGPO,
+  EscalationInflationInputMod,
+  IncomeOtherThanEnergyInputMod
+} from '@ucdavis/tea/out/models/input.model';
 import {
   ExpensesBaseYearModGPO,
   IncomeOtherThanEnergyMod,
   ElectricalFuelBaseYearMod
 } from '@ucdavis/tea/out/models/output.model';
+import {
+  TaxesInputModClass,
+  FinancingInputModClass,
+  IncomeOtherThanEnergyInputModClass,
+  EscalationInflationInputModClass
+} from './TEASharedClasses';
 
 export class InputModGPOClass implements InputModGPO {
   CapitalCost = 70000000;
+  ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPOClass();
+  ExpensesBaseYear = new ExpensesBaseYearInputModGPOClass();
+  Taxes = new TaxesInputModClass();
+  Financing = new FinancingInputModClass();
+  IncomeOtherThanEnergy = new IncomeOtherThanEnergyInputModClass();
+  EscalationInflation = new EscalationInflationInputModClass();
+  TaxCreditFrac = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+}
+
+export class ElectricalFuelBaseYearInputModGPOClass
+  implements ElectricalFuelBaseYearInputModGPO {
   NetElectricalCapacity = 25000;
   CapacityFactor = 85;
-  NetStationEfficiency = 20;
   MoistureContent = 50;
+  NetStationEfficiency = 20;
   FuelHeatingValue = 18608;
   FuelAshConcentration = 5;
-  FuelCost = 22.05;
+}
+
+export class ExpensesBaseYearInputModGPOClass
+  implements ExpensesBaseYearInputModGPO {
+  BiomassFuelCost = 22.05;
   LaborCost = 2000000;
   MaintenanceCost = 1500000;
   InsurancePropertyTax = 1400000;
   Utilities = 200000;
-  AshDisposal = 100000;
   Management = 200000;
   OtherOperatingExpenses = 400000;
-  FederalTaxRate = 34;
-  StateTaxRate = 9.6;
-  ProductionTaxCredit = 0.009;
-  DebtRatio = 75;
-  InterestRateOnDebt = 5;
-  EconomicLife = 20;
-  CostOfEquity = 15;
-  CapacityPayment = 166;
-  InterestRateonDebtReserve = 5;
-  GeneralInflation = 2.1;
-  EscalationFuel = 2.1;
-  EscalationProductionTaxCredit = 2.1;
-  EscalationOther = 2.1;
-  TaxCreditFrac = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  AshDisposal = 100000;
 }
 
 export class ExpensesBaseYearModGPOClass implements ExpensesBaseYearModGPO {
@@ -60,9 +73,5 @@ export class IncomeOtherThanEnergyModClass implements IncomeOtherThanEnergyMod {
 export class ElectricalFuelBaseYearModGPOClass
   implements ElectricalFuelBaseYearMod {
   AnnualHours = 0;
-  FuelConsumptionRate = 0;
-  AnnualGeneration = 0;
-  CapitalCostNEC = 0;
-  AnnualFuelConsumption = 0;
-  AnnualAshDisposal = 0;
+  BiomassTarget = 0;
 }
