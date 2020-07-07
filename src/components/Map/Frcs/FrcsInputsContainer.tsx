@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { FrcsInputs } from '../../../models/Types';
+import { FrcsInputs, Treatments } from '../../../models/Types';
 
 interface Props {
   inputs: FrcsInputs;
@@ -9,6 +9,11 @@ interface Props {
 }
 
 export const FrcsInputsContainer = (props: Props) => {
+  const treatments = Treatments.map(treatment => (
+    <option key={treatment.id} value={treatment.id}>
+      {treatment.name}
+    </option>
+  ));
   return (
     <div>
       <div>
@@ -42,17 +47,15 @@ export const FrcsInputsContainer = (props: Props) => {
         <Label>Treatment</Label>
         <Input
           type='select'
-          value={props.inputs.treatment}
+          value={props.inputs.treatmentid}
           onChange={e =>
             props.setInputs({
               ...props.inputs,
-              treatment: e.target.value
+              treatmentid: Number(e.target.value)
             })
           }
         >
-          <option>Clearcut</option>
-          <option>Thin from below</option>
-          <option>Thin from above</option>
+          {treatments}
         </Input>
         <Label>FRCS System</Label>
         <Input

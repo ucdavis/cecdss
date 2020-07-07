@@ -1,16 +1,13 @@
 import React from 'react';
 import { formatNumber } from '../../Shared/util';
 import {
-  InputModGPO,
-  InputModCHP,
-  InputModGP
+  EscalationInflationInputMod,
+  EscalationInflationInputModGP
 } from '@ucdavis/tea/out/models/input.model';
-import { InputModGPClass } from '../../../models/GPClasses';
-import { InputModGPOClass } from '../../../models/GPOClasses';
-import { InputModCHPClass } from '../../../models/CHPClasses';
+import { EscalationInflationInputModGPClass } from '../../../models/GPClasses';
 
 interface Props {
-  inputs: InputModGPO | InputModCHP | InputModGP;
+  inputs: EscalationInflationInputMod | EscalationInflationInputModGP;
 }
 
 export const EscalationInflation = (props: Props) => {
@@ -23,26 +20,23 @@ export const EscalationInflation = (props: Props) => {
             <td>General Inflation (%/y)</td>
             <td>{formatNumber(props.inputs.GeneralInflation)}</td>
           </tr>
-          {(props.inputs instanceof InputModGPOClass ||
-            props.inputs instanceof InputModCHPClass) && (
-            <tr>
-              <td>Esclation--Fuel (%/y)</td>
-              <td>{formatNumber(props.inputs.EscalationFuel)}</td>
-            </tr>
-          )}
-          {props.inputs instanceof InputModGPClass && (
+          <tr>
+            <td>Esclation--Fuel (%/y)</td>
+            <td>{formatNumber(props.inputs.EscalationBiomassFuel)}</td>
+          </tr>
+          <tr>
+            <td>Escalation--Biomass Fuel (%/y)</td>
+            <td>{formatNumber(props.inputs.EscalationBiomassFuel)}</td>
+          </tr>
+          <tr>
+            <td>Escalation--Heat sales (%/y)</td>
+            <td>{formatNumber(props.inputs.EscalationHeatSales)}</td>
+          </tr>
+          {props.inputs instanceof EscalationInflationInputModGPClass && (
             <>
-              <tr>
-                <td>Escalation--Biomass Fuel (%/y)</td>
-                <td>{formatNumber(props.inputs.EscalationBiomassFuel)}</td>
-              </tr>
               <tr>
                 <td>Escalation--Dual Fuel (%/y)</td>
                 <td>{formatNumber(props.inputs.EscalationDualFuel)}</td>
-              </tr>
-              <tr>
-                <td>Escalation--Heat sales (%/y)</td>
-                <td>{formatNumber(props.inputs.EscalationHeatSales)}</td>
               </tr>
               <tr>
                 <td>Escalation--Char/Ash sales (%/y)</td>

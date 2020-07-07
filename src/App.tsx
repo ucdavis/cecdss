@@ -50,6 +50,7 @@ const App = () => {
       lng: lng,
       radius: frcsInputs.radius,
       system: frcsInputs.system,
+      treatmentid: frcsInputs.treatmentid,
       teaModel: teaModel,
       teaInputs: teaInputs
     });
@@ -109,5 +110,5 @@ export default App;
 const frcsInputsExample: FrcsInputs = {
   system: 'Ground-Based Mech WT',
   radius: 5,
-  treatment: 'clearcut'
+  treatmentid: 1
 };

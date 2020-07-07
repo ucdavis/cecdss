@@ -17,27 +17,10 @@ interface State {
 }
 
 export const FrcsResultsContainer = (props: Props) => {
-  let targetBiomass = 0;
-  if (
-    props.results.teaResults.ElectricalAndFuelBaseYear instanceof
-    ElectricalFuelBaseYearModGPClass
-  ) {
-    targetBiomass =
-      props.results.teaResults.ElectricalAndFuelBaseYear
-        .AnnualBiomassConsumptionDryMass;
-  } else if (
-    props.results.teaResults.ElectricalAndFuelBaseYear instanceof
-      ElectricalFuelBaseYearModGPOClass ||
-    props.results.teaResults.ElectricalAndFuelBaseYear instanceof
-      ElectricalFuelBaseYearModCHPClass
-  ) {
-    targetBiomass =
-      props.results.teaResults.ElectricalAndFuelBaseYear.AnnualFuelConsumption;
-  }
   return (
     <div>
       <h2>Fuel Reduction Cost Simulator Results</h2>
-      {targetBiomass > props.results.totalBiomass &&
+      {props.results.biomassTarget > props.results.totalBiomass &&
         props.results.skippedClusters.length === 0 && (
           <Alert color='danger'>
             The settings you selected did not return enough biomass to meet the
@@ -48,7 +31,7 @@ export const FrcsResultsContainer = (props: Props) => {
         <tbody>
           <tr>
             <td>Biomass Target (US tons)</td>
-            <td>{formatNumber(targetBiomass)}</td>
+            <td>{formatNumber(props.results.biomassTarget)}</td>
           </tr>
           <tr>
             <td>Total Biomass (US tons)</td>

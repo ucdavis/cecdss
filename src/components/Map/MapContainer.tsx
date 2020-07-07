@@ -22,8 +22,8 @@ interface IProps {
 export const MapContainer = (props: IProps) => {
   console.log(props);
   const [mapState, setMapState] = useState({
-    lat: 40.032769,
-    lng: -120.430607
+    lat: 39.644308,
+    lng: -121.553971
   });
   let mapRef: any = createRef<Map>();
 

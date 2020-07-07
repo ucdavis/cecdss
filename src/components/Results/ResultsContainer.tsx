@@ -23,6 +23,7 @@ interface Props {
 export const ResultsContainer = (props: Props) => {
   // TODO: make classes & typecheck below
   const teaResults: any = props.results.teaResults;
+  console.log(teaResults);
   return (
     <div>
       <h1>Results</h1>

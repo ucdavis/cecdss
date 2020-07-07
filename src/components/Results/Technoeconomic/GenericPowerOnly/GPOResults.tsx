@@ -25,19 +25,22 @@ export const GPOResults = (props: Props) => {
       <CapitalCost inputs={props.inputs} />
       <ElectricalAndFuelBaseYear
         results={props.results.ElectricalAndFuelBaseYear}
-        inputs={props.inputs}
+        inputs={props.inputs.ElectricalFuelBaseYear}
       />
       <ExpensesBaseYear
         results={props.results.ExpensesBaseYear}
-        inputs={props.inputs}
+        inputs={props.inputs.ExpensesBaseYear}
       />
-      <Taxes inputs={props.inputs} results={props.results} />
+      <Taxes inputs={props.inputs.Taxes} results={props.results} />
       <IncomeOtherThanEnergy
-        inputs={props.inputs}
+        inputs={props.inputs.IncomeOtherThanEnergy}
         results={props.results.IncomeOtherThanEnergy}
       />
-      <EscalationInflation inputs={props.inputs} />
-      <Financing inputs={props.inputs} results={props.results.Financing} />
+      <EscalationInflation inputs={props.inputs.EscalationInflation} />
+      <Financing
+        inputs={props.inputs.Financing}
+        results={props.results.Financing}
+      />
       <AnnualCashFlow annualCashFlows={props.results.AnnualCashFlows} />
       <CurrentLAC results={props.results.CurrentLAC} />
       <ConstantLAC results={props.results.ConstantLAC} />

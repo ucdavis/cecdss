@@ -21,30 +21,33 @@ interface Props {
 export const GPResults = (props: Props) => {
   return (
     <div>
-      <h2>Combined Heat And Power Results</h2>
+      <h2>Gasification Results</h2>
       <CapitalCostGP
-        inputs={props.inputs}
+        inputs={props.inputs.CapitalCost}
         results={props.results.CapitalCost}
       />
       <ElectricalAndFuelBaseYearGP
         results={props.results.ElectricalAndFuelBaseYear}
-        inputs={props.inputs}
+        inputs={props.inputs.ElectricalFuelBaseYear}
       />
       <HeatBaseYear
-        inputs={props.inputs}
+        inputs={props.inputs.HeatBaseYear}
         results={props.results.HeatBaseYear}
       />
       <ExpensesBaseYear
         results={props.results.ExpensesBaseYear}
-        inputs={props.inputs}
+        inputs={props.inputs.ExpensesBaseYear}
       />
-      <Taxes inputs={props.inputs} results={props.results} />
+      <Taxes inputs={props.inputs.Taxes} results={props.results} />
       <IncomeOtherThanEnergy
-        inputs={props.inputs}
+        inputs={props.inputs.IncomeOtherThanEnergy}
         results={props.results.IncomeOtherThanEnergy}
       />
-      <EscalationInflation inputs={props.inputs} />
-      <Financing inputs={props.inputs} results={props.results.Financing} />
+      <EscalationInflation inputs={props.inputs.EscalationInflation} />
+      <Financing
+        inputs={props.inputs.Financing}
+        results={props.results.Financing}
+      />
       <AnnualCashFlow annualCashFlows={props.results.AnnualCashFlows} />
       <CurrentLAC results={props.results.CurrentLAC} />
       <ConstantLAC results={props.results.ConstantLAC} />
