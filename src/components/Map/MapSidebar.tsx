@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
+import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FrcsInputs } from '../../models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';

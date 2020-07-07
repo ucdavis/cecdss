@@ -50,6 +50,7 @@ const App = () => {
       lng: lng,
       radius: frcsInputs.radius,
       system: frcsInputs.system,
+      treatmentid: frcsInputs.treatmentid,
       teaModel: teaModel,
       teaInputs: teaInputs
     });

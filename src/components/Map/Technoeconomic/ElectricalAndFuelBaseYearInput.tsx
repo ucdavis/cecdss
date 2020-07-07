@@ -1,7 +1,5 @@
 import React from 'react';
-import { formatNumber } from '../../Shared/util';
 import {
-  InputModGP,
   ElectricalFuelBaseYearInputModGP,
   ElectricalFuelBaseYearInputModGPO,
   ElectricalFuelBaseYearInputModCHP
@@ -14,18 +12,9 @@ import {
   Input,
   InputGroupAddon
 } from 'reactstrap';
-import {
-  ElectricalFuelBaseYearInputModGPClass,
-  ElectricalFuelBaseYearModGPClass
-} from '../../../models/GPClasses';
-import {
-  ElectricalFuelBaseYearModGPOClass,
-  ElectricalFuelBaseYearInputModGPOClass
-} from '../../../models/GPOClasses';
-import {
-  ElectricalFuelBaseYearModCHPClass,
-  ElectricalFuelBaseYearInputModCHPClass
-} from '../../../models/CHPClasses';
+import { ElectricalFuelBaseYearInputModGPClass } from '../../../models/GPClasses';
+import { ElectricalFuelBaseYearInputModGPOClass } from '../../../models/GPOClasses';
+import { ElectricalFuelBaseYearInputModCHPClass } from '../../../models/CHPClasses';
 
 interface Props {
   inputs:

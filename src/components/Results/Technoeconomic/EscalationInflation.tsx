@@ -32,7 +32,6 @@ export const EscalationInflation = (props: Props) => {
             <td>Escalation--Heat sales (%/y)</td>
             <td>{formatNumber(props.inputs.EscalationHeatSales)}</td>
           </tr>
-          )}
           {props.inputs instanceof EscalationInflationInputModGPClass && (
             <>
               <tr>

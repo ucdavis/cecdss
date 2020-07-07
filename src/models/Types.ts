@@ -40,6 +40,7 @@ export const Treatments: Treatment[] = [
 export interface Results {
   lcaResults: LCAresults;
   teaResults: OutputModGPO | OutputModCHP | OutputModGP;
+  biomassTarget: number;
   totalBiomass: number;
   totalArea: number;
   totalCombinedCost: number;
