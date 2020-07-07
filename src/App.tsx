@@ -56,8 +56,8 @@ const App = () => {
     });
     console.log(reqBody);
     const results: Results = await fetch(
-      'http://localhost:3000/process',
-      // 'https://cecdss-backend.azurewebsites.net/process',
+      // 'http://localhost:3000/process',
+      'https://cecdss-backend.azurewebsites.net/process',
       {
         mode: 'cors',
         method: 'POST',
