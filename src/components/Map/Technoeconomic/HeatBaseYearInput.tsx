@@ -15,6 +15,9 @@ interface Props {
 }
 
 export const HeatBaseYearInput = (props: Props) => {
+  if (!props.inputs) {
+    return null;
+  }
   return (
     <>
       <FormGroup>

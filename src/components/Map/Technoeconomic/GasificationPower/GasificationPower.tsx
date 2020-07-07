@@ -19,14 +19,22 @@ import { TaxesInput } from '../TaxesInput';
 import { FinancingInput } from '../FinancingInput';
 import { IncomeOtherThanEnergyInput } from '../IncomeOtherThanEnergyInput';
 import { EscalationInflationInput } from '../EscalationInflationInput';
-import { ElectricalFuelBaseYearInputModGPClass } from '../../../../models/GPClasses';
+import {
+  ElectricalFuelBaseYearInputModGPClass,
+  InputModGPClass
+} from '../../../../models/GPClasses';
 
 interface Props {
-  inputs: InputModGP;
-  setInputs: (inputs: InputModGP) => void;
+  // inputs: InputModGP;
+  // setInputs: (inputs: InputModGP) => void;
+  inputs: any;
+  setInputs: (inputs: any) => void;
 }
 
 export const GasificationPower = (props: Props) => {
+  if (!props.inputs) {
+    return null;
+  }
   return (
     <div>
       <Form>

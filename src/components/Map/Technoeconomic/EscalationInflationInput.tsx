@@ -19,6 +19,9 @@ interface Props {
 }
 
 export const EscalationInflationInput = (props: Props) => {
+  if (!props.inputs) {
+    return null;
+  }
   return (
     <>
       <FormGroup>

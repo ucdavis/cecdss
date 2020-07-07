@@ -28,11 +28,16 @@ import { EscalationInflationInput } from '../EscalationInflationInput';
 import { FinancingInput } from '../FinancingInput';
 
 interface Props {
-  inputs: InputModCHP;
-  setInputs: (inputs: InputModCHP) => void;
+  // inputs: InputModCHP;
+  // setInputs: (inputs: InputModCHP) => void;
+  inputs: any;
+  setInputs: (inputs: any) => void;
 }
 
 export const CombinedHeatAndPower = (props: Props) => {
+  if (!props.inputs) {
+    return null;
+  }
   return (
     <div>
       <Form>

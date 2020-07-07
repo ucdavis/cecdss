@@ -18,6 +18,9 @@ interface Props {
 }
 
 export const TaxesInput = (props: Props) => {
+  if (!props.inputs) {
+    return null;
+  }
   return (
     <>
       <FormGroup>

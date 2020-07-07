@@ -19,6 +19,9 @@ interface Props {
 }
 
 export const IncomeOtherThanEnergyInput = (props: Props) => {
+  if (!props.inputs) {
+    return null;
+  }
   return (
     <>
       <FormGroup>

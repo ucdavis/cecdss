@@ -25,6 +25,9 @@ interface Props {
 }
 
 export const ElectricalAndFuelBaseYearInput = (props: Props) => {
+  if (!props.inputs) {
+    return null;
+  }
   return (
     <>
       {props.inputs instanceof ElectricalFuelBaseYearInputModGPClass && (

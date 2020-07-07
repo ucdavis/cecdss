@@ -44,27 +44,27 @@ export const TechnoeconomicInputs = (props: Props) => {
         </Input>
         <br />
       </div>
-      {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
-        props.teaInputs instanceof InputModGPOClass && (
-          <GenericPowerOnly
-            inputs={props.teaInputs}
-            setInputs={props.setTeaInputs}
-          />
-        )}
-      {props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower &&
-        props.teaInputs instanceof InputModCHPClass && (
-          <CombinedHeatAndPower
-            inputs={props.teaInputs}
-            setInputs={props.setTeaInputs}
-          />
-        )}
-      {props.teaModel === TechnoeconomicModels.gasificationPower &&
-        props.teaInputs instanceof InputModGPClass && (
-          <GasificationPower
-            inputs={props.teaInputs}
-            setInputs={props.setTeaInputs}
-          />
-        )}
+      {props.teaModel === TechnoeconomicModels.genericPowerOnly && (
+        // props.teaInputs instanceof InputModGPOClass && (
+        <GenericPowerOnly
+          inputs={props.teaInputs}
+          setInputs={props.setTeaInputs}
+        />
+      )}
+      {props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower && (
+        // props.teaInputs instanceof InputModCHPClass && (
+        <CombinedHeatAndPower
+          inputs={props.teaInputs}
+          setInputs={props.setTeaInputs}
+        />
+      )}
+      {props.teaModel === TechnoeconomicModels.gasificationPower && (
+        // props.teaInputs instanceof InputModGPClass && (
+        <GasificationPower
+          inputs={props.teaInputs}
+          setInputs={props.setTeaInputs}
+        />
+      )}
       <br />
       <hr />
     </div>

@@ -18,6 +18,9 @@ interface Props {
 }
 
 export const FinancingInput = (props: Props) => {
+  if (!props.inputs) {
+    return null;
+  }
   return (
     <>
       <FormGroup>

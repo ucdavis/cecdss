@@ -20,6 +20,9 @@ interface Props {
 }
 
 export const ExpensesBaseYearInput = (props: Props) => {
+  if (!props.inputs) {
+    return null;
+  }
   return (
     <>
       <FormGroup>

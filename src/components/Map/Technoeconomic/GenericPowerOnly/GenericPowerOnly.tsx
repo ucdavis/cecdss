@@ -26,11 +26,16 @@ import { EscalationInflationInput } from '../EscalationInflationInput';
 import { FinancingInput } from '../FinancingInput';
 
 interface Props {
-  inputs: InputModGPO;
-  setInputs: (inputs: InputModGPO) => void;
+  // inputs: InputModGPO;
+  // setInputs: (inputs: InputModGPO) => void;
+  inputs: any;
+  setInputs: (inputs: any) => void;
 }
 
 export const GenericPowerOnly = (props: Props) => {
+  if (!props.inputs) {
+    return null;
+  }
   return (
     <div>
       <Form>
