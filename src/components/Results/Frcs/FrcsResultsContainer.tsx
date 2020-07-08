@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { Results } from '../../../models/Types';
-import { Button, Alert } from 'reactstrap';
+import { YearlyResult } from '../../../models/Types';
+import { Alert } from 'reactstrap';
 import { FrcsClusterResultsContainer } from './FrcsClusterResultsContainer';
 import { formatNumber, formatCurrency } from '../../Shared/util';
-import { ElectricalFuelBaseYearModCHPClass } from '../../../models/CHPClasses';
-import { ElectricalFuelBaseYearModGPClass } from '../../../models/GPClasses';
-import { ElectricalFuelBaseYearModGPOClass } from '../../../models/GPOClasses';
 
 interface Props {
-  results: Results;
+  results: YearlyResult;
 }
 
 interface State {
@@ -20,13 +17,12 @@ export const FrcsResultsContainer = (props: Props) => {
   return (
     <div>
       <h2>Fuel Reduction Cost Simulator Results</h2>
-      {props.results.biomassTarget > props.results.totalBiomass &&
-        props.results.skippedClusters.length === 0 && (
-          <Alert color='danger'>
-            The settings you selected did not return enough biomass to meet the
-            yearly requirement.
-          </Alert>
-        )}
+      {props.results.biomassTarget > props.results.totalBiomass && (
+        <Alert color='danger'>
+          The settings you selected did not return enough biomass to meet the
+          yearly requirement.
+        </Alert>
+      )}
       <table className='table'>
         <tbody>
           <tr>
@@ -57,17 +53,17 @@ export const FrcsResultsContainer = (props: Props) => {
             <td>Number of Clusters Used</td>
             <td>{props.results.numberOfClusters}</td>
           </tr>
-          <tr>
+          {/* <tr>
             <td>Number of Skipped Clusters</td>
             <td>{props.results.skippedClusters.length}</td>
           </tr>
           <tr>
             <td>Number of Error Clusters</td>
             <td>{props.results.errorClusters.length}</td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
-      <FrcsClusterResultsContainer results={props.results} />
+      {/* <FrcsClusterResultsContainer results={props.results} /> */}
     </div>
   );
 };

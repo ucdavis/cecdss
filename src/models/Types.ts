@@ -37,7 +37,8 @@ export const Treatments: Treatment[] = [
   { id: 10, name: 'Biomass Salvage' }
 ];
 
-export interface Results {
+export interface YearlyResult {
+  year: number;
   lcaResults: LCAresults;
   teaResults: OutputModGPO | OutputModCHP | OutputModGP;
   biomassTarget: number;
@@ -47,9 +48,8 @@ export interface Results {
   totalResidueCost: number;
   totalTransportationCost: number;
   numberOfClusters: number;
-  clusters: ClusterResult[];
-  skippedClusters: ClusterResult[];
-  errorClusters: ClusterErrorResult[];
+  clusterNumbers: number[];
+  // clusters: ClusterResult[];
 }
 
 export interface ClusterResult {

@@ -1,47 +1,52 @@
-import React from 'react';
-import { TechnoeconomicModels, Results, FrcsInputs } from '../../models/Types';
+import React, { useState } from 'react';
+import { TechnoeconomicModels, YearlyResult } from '../../models/Types';
 import { GPOResults } from './Technoeconomic/GenericPowerOnly/GPOResults';
-import { FrcsResultsContainer } from './Frcs/FrcsResultsContainer';
 import {
   InputModGPO,
   InputModCHP,
   InputModGP
 } from '@ucdavis/tea/out/models/input.model';
-import { CHPResults } from './Technoeconomic/GenericCombinedHeatPower/CHPResults';
-import { InputModCHPClass } from '../../models/CHPClasses';
-import { InputModGPClass } from '../../models/GPClasses';
-import { GPResults } from './Technoeconomic/GasificationPower/GPResults';
-import { InputModGPOClass } from '../../models/GPOClasses';
-import { LCAResults } from './LCA/LCAResults';
+import { PaginationLink, Pagination, PaginationItem } from 'reactstrap';
+import { YearlyResultsContainer } from './YearlyResultsContainer';
 
 interface Props {
-  results: Results;
+  results: YearlyResult[];
   teaInputs: InputModGPO | InputModCHP | InputModGP;
   teaModel: string;
 }
 
 export const ResultsContainer = (props: Props) => {
-  // TODO: make classes & typecheck below
-  const teaResults: any = props.results.teaResults;
-  console.log(teaResults);
+  const [selectedYearIndex, setSelectedYearIndex] = useState<number>(0);
+
+  const pages = props.results.map((result, i) => (
+    <PaginationItem>
+      <PaginationLink id={i.toString()} onClick={() => setSelectedYearIndex(i)}>
+        {result.year}
+      </PaginationLink>
+    </PaginationItem>
+  ));
   return (
     <div>
-      <h1>Results</h1>
-      <FrcsResultsContainer results={props.results} />
-
-      {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
-        props.teaInputs instanceof InputModGPOClass && (
-          <GPOResults inputs={props.teaInputs} results={teaResults} />
-        )}
-      {props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower &&
-        props.teaInputs instanceof InputModCHPClass && (
-          <CHPResults inputs={props.teaInputs} results={teaResults} />
-        )}
-      {props.teaModel === TechnoeconomicModels.gasificationPower &&
-        props.teaInputs instanceof InputModGPClass && (
-          <GPResults inputs={props.teaInputs} results={teaResults} />
-        )}
-      <LCAResults results={props.results.lcaResults} />
+      <Pagination aria-label='Page navigation example' size='lg'>
+        <PaginationItem>
+          <PaginationLink first href='#' />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink previous href='#' />
+        </PaginationItem>
+        {pages}
+        <PaginationItem>
+          <PaginationLink next href='#' />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink last href='#' />
+        </PaginationItem>
+      </Pagination>
+      <YearlyResultsContainer
+        results={props.results[selectedYearIndex]}
+        teaInputs={props.teaInputs}
+        teaModel={props.teaModel}
+      />
     </div>
   );
 };

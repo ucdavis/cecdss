@@ -5,12 +5,8 @@ import { Route } from 'react-router';
 import { MapContainer } from './components/Map/MapContainer';
 import { ResultsContainer } from './components/Results/ResultsContainer';
 import { TechnoeconomicModels, FrcsInputs, Results } from './models/Types';
+import { TechnoeconomicModels, FrcsInputs, YearlyResult } from './models/Types';
 import 'isomorphic-fetch';
-import {
-  OutputModGPO,
-  OutputModCHP,
-  OutputModGP
-} from '@ucdavis/tea/out/models/output.model';
 import {
   InputModGPO,
   InputModCHP,
@@ -19,6 +15,7 @@ import {
 import { InputModGPOClass } from './models/GPOClasses';
 import { InputModCHPClass } from './models/CHPClasses';
 import { InputModGPClass } from './models/GPClasses';
+import { ResultsContainer } from './components/Results/ResultsContainer';
 
 const App = () => {
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
@@ -42,7 +39,7 @@ const App = () => {
     }
   }, [teaModel]);
 
-  const [results, setResults] = useState<Results>();
+  const [results, setResults] = useState<YearlyResult[]>();
 
   const submitInputs = async (lat: number, lng: number) => {
     const reqBody = JSON.stringify({
@@ -55,9 +52,9 @@ const App = () => {
       teaInputs: teaInputs
     });
     console.log(reqBody);
-    const results: Results = await fetch(
-      // 'http://localhost:3000/process',
-      'https://cecdss-backend.azurewebsites.net/process',
+    const results: YearlyResult[] = await fetch(
+      'http://localhost:3000/process',
+      // 'https://cecdss-backend.azurewebsites.net/process',
       {
         mode: 'cors',
         method: 'POST',

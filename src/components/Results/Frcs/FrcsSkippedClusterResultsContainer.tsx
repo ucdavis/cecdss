@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Results,
+  YearlyResult,
   ClusterResult,
   ClusterErrorResult
 } from '../../../models/Types';
