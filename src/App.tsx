@@ -3,8 +3,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Route } from 'react-router';
 import { MapContainer } from './components/Map/MapContainer';
-import { ResultsContainer } from './components/Results/ResultsContainer';
-import { TechnoeconomicModels, FrcsInputs, Results } from './models/Types';
 import { TechnoeconomicModels, FrcsInputs, YearlyResult } from './models/Types';
 import 'isomorphic-fetch';
 import {
@@ -53,8 +51,8 @@ const App = () => {
     });
     console.log(reqBody);
     const results: YearlyResult[] = await fetch(
-      'http://localhost:3000/process',
-      // 'https://cecdss-backend.azurewebsites.net/process',
+      // 'http://localhost:3000/process',
+      'https://cecdss-backend.azurewebsites.net/process',
       {
         mode: 'cors',
         method: 'POST',
