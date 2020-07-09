@@ -25,6 +25,20 @@ export const MapSidebar = (props: Props) => {
   return (
     <div id='sidebar'>
       <h2>Select Inputs</h2>
+      <Button
+        color='primary'
+        onClick={props.submitInputs}
+        disabled={props.loading}
+      >
+        {props.loading ? (
+          <>
+            Running Model...
+            <Spinner color='light' />
+          </>
+        ) : (
+          <>Run Model</>
+        )}
+      </Button>
       <FrcsInputsContainer
         inputs={props.frcsInputs}
         setInputs={props.setFrcsInputs}
@@ -35,24 +49,20 @@ export const MapSidebar = (props: Props) => {
         teaModel={props.teaModel}
         setTeaModel={props.setTeaModel}
       />
-      <div>
-        <Link to='/results'>
-          <Button
-            color='primary'
-            onClick={props.submitInputs}
-            disabled={props.loading}
-          >
-            {props.loading ? (
-              <>
-                Running Model...
-                <Spinner color='light' />
-              </>
-            ) : (
-              <>Run Model</>
-            )}
-          </Button>
-        </Link>
-      </div>
+      <Button
+        color='primary'
+        onClick={props.submitInputs}
+        disabled={props.loading}
+      >
+        {props.loading ? (
+          <>
+            Running Model...
+            <Spinner color='light' />
+          </>
+        ) : (
+          <>Run Model</>
+        )}
+      </Button>
     </div>
   );
 };

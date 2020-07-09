@@ -20,6 +20,12 @@ import { ResultsContainer } from '../Results/ResultsContainer';
 
 export const MapContainer = () => {
   const [loading, toggleLoading] = useState<boolean>(false);
+  const frcsInputsExample: FrcsInputs = {
+    system: 'Ground-Based Mech WT',
+    radius: 15,
+    treatmentid: 1,
+    dieselFuelPrice: 3.882
+  };
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
 
   const [teaInputs, setTeaInputs] = useState<
@@ -40,6 +46,17 @@ export const MapContainer = () => {
       setTeaInputs(new InputModGPClass());
     }
   }, [teaModel]);
+
+  const [mapState, setMapState] = useState({
+    lat: 39.727116,
+    lng: -121.429053
+  });
+  let mapRef: any = createRef<Map>();
+
+  const bounds: LatLngBoundsExpression = [
+    [40.1, -122.5],
+    [39.2, -120]
+  ];
 
   const [results, setResults] = useState<YearlyResult[]>();
 
@@ -72,16 +89,6 @@ export const MapContainer = () => {
     toggleLoading(false);
   };
 
-  const [mapState, setMapState] = useState({
-    lat: 39.644308,
-    lng: -121.553971
-  });
-  let mapRef: any = createRef<Map>();
-
-  const bounds: LatLngBoundsExpression = [
-    [43.7, -125.5],
-    [30, -105.5]
-  ];
   const accessToken =
     'pk.eyJ1IjoibGF1cmFob2xzdGVnZSIsImEiOiJjazZnc3U3c3gybWw5M25xamc2M2RnNTl2In0.Zcg_-cmP110dT_JzIN3QdA';
   const mapboxTiles =
@@ -136,11 +143,4 @@ export const MapContainer = () => {
       </Map>
     </div>
   );
-};
-
-const frcsInputsExample: FrcsInputs = {
-  system: 'Ground-Based Mech WT',
-  radius: 5,
-  treatmentid: 1,
-  dieselFuelPrice: 3.882
 };
