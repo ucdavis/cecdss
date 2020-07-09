@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { YearlyResult } from '../../../models/Types';
 import { Alert } from 'reactstrap';
 import { FrcsClusterResultsContainer } from './FrcsClusterResultsContainer';
@@ -6,11 +6,6 @@ import { formatNumber, formatCurrency } from '../../Shared/util';
 
 interface Props {
   results: YearlyResult;
-}
-
-interface State {
-  viewClusterTable: boolean;
-  viewClusterCharts: boolean;
 }
 
 export const FrcsResultsContainer = (props: Props) => {

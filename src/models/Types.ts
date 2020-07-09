@@ -5,11 +5,28 @@ import {
 } from '@ucdavis/tea/out/models/output.model';
 import { OutputVarMod } from '@ucdavis/frcs/out/systems/frcs.model';
 import { LCAresults } from './LCAModels';
+import {
+  InputModGPO,
+  InputModCHP,
+  InputModGP
+} from '@ucdavis/tea/out/models/input.model';
+
+export interface RequestParams {
+  lat: number;
+  lng: number;
+  radius: number;
+  system: string;
+  treatmentid: number;
+  dieselFuelPrice: number; // $/gal
+  teaModel: string;
+  teaInputs: InputModGPO | InputModCHP | InputModGP; // | InputModHydrogen;
+}
 
 export interface FrcsInputs {
   radius: number;
   system: string;
   treatmentid: number;
+  dieselFuelPrice: number;
 }
 
 export const TechnoeconomicModels = {

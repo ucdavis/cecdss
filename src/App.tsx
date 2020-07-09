@@ -3,7 +3,12 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Route } from 'react-router';
 import { MapContainer } from './components/Map/MapContainer';
-import { TechnoeconomicModels, FrcsInputs, YearlyResult } from './models/Types';
+import {
+  TechnoeconomicModels,
+  FrcsInputs,
+  YearlyResult,
+  RequestParams
+} from './models/Types';
 import 'isomorphic-fetch';
 import {
   InputModGPO,
@@ -40,23 +45,24 @@ const App = () => {
   const [results, setResults] = useState<YearlyResult[]>();
 
   const submitInputs = async (lat: number, lng: number) => {
-    const reqBody = JSON.stringify({
+    const reqBody: RequestParams = {
       lat: lat,
       lng: lng,
       radius: frcsInputs.radius,
       system: frcsInputs.system,
       treatmentid: frcsInputs.treatmentid,
+      dieselFuelPrice: frcsInputs.dieselFuelPrice,
       teaModel: teaModel,
       teaInputs: teaInputs
-    });
-    console.log(reqBody);
+    };
+    console.log(JSON.stringify(reqBody));
     const results: YearlyResult[] = await fetch(
       // 'http://localhost:3000/process',
       'https://cecdss-backend.azurewebsites.net/process',
       {
         mode: 'cors',
         method: 'POST',
-        body: reqBody,
+        body: JSON.stringify(reqBody),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -105,5 +111,6 @@ export default App;
 const frcsInputsExample: FrcsInputs = {
   system: 'Ground-Based Mech WT',
   radius: 5,
-  treatmentid: 1
+  treatmentid: 1,
+  dieselFuelPrice: 3.882
 };
