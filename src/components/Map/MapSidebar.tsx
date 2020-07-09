@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'reactstrap';
+import { Button, Spinner } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FrcsInputs } from '../../models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
@@ -18,6 +18,7 @@ interface Props {
   teaModel: string;
   setTeaModel: (model: string) => void;
   submitInputs: () => void;
+  loading: boolean;
 }
 
 export const MapSidebar = (props: Props) => {
@@ -36,8 +37,19 @@ export const MapSidebar = (props: Props) => {
       />
       <div>
         <Link to='/results'>
-          <Button color='primary' onClick={props.submitInputs}>
-            Run Model
+          <Button
+            color='primary'
+            onClick={props.submitInputs}
+            disabled={props.loading}
+          >
+            {props.loading ? (
+              <>
+                Running Model...
+                <Spinner color='light' />
+              </>
+            ) : (
+              <>Run Model</>
+            )}
           </Button>
         </Link>
       </div>

@@ -2,25 +2,76 @@ import React, { createRef, useState, useEffect } from 'react';
 import { Map, TileLayer, Marker, Circle } from 'react-leaflet';
 import L, { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { MapSidebar } from './MapSidebar';
-import { FrcsInputs } from '../../models/Types';
+import {
+  FrcsInputs,
+  TechnoeconomicModels,
+  YearlyResult,
+  RequestParams
+} from '../../models/Types';
 import {
   InputModGPO,
   InputModCHP,
   InputModGP
 } from '@ucdavis/tea/out/models/input.model';
+import { InputModGPOClass } from '../../models/GPOClasses';
+import { InputModCHPClass } from '../../models/CHPClasses';
+import { InputModGPClass } from '../../models/GPClasses';
+import { ResultsContainer } from '../Results/ResultsContainer';
 
-interface IProps {
-  frcsInputs: FrcsInputs;
-  setFrcsInputs: (inputs: FrcsInputs) => void;
-  teaInputs: InputModGPO | InputModCHP | InputModGP;
-  setTeaInputs: (inputs: InputModGPO | InputModCHP | InputModGP) => void;
-  teaModel: string;
-  setTeaModel: (model: string) => void;
-  submitInputs: (lat: number, lng: number) => void;
-}
+export const MapContainer = () => {
+  const [loading, toggleLoading] = useState<boolean>(false);
+  const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
 
-export const MapContainer = (props: IProps) => {
-  console.log(props);
+  const [teaInputs, setTeaInputs] = useState<
+    InputModGPO | InputModCHP | InputModGP
+  >(new InputModGPOClass());
+  const [teaModel, setTeaModel] = useState(
+    TechnoeconomicModels.genericPowerOnly
+  );
+  useEffect(() => {
+    // when teaModel changes, change default values
+    if (teaModel === TechnoeconomicModels.genericPowerOnly) {
+      setTeaInputs(new InputModGPOClass());
+    }
+    if (teaModel === TechnoeconomicModels.genericCombinedHeatAndPower) {
+      setTeaInputs(new InputModCHPClass());
+    }
+    if (teaModel === TechnoeconomicModels.gasificationPower) {
+      setTeaInputs(new InputModGPClass());
+    }
+  }, [teaModel]);
+
+  const [results, setResults] = useState<YearlyResult[]>();
+
+  const submitInputs = async (lat: number, lng: number) => {
+    toggleLoading(true);
+    const reqBody: RequestParams = {
+      lat: lat,
+      lng: lng,
+      radius: frcsInputs.radius,
+      system: frcsInputs.system,
+      treatmentid: frcsInputs.treatmentid,
+      dieselFuelPrice: frcsInputs.dieselFuelPrice,
+      teaModel: teaModel,
+      teaInputs: teaInputs
+    };
+    console.log(JSON.stringify(reqBody));
+    const results: YearlyResult[] = await fetch(
+      'http://localhost:3000/process',
+      // 'https://cecdss-backend.azurewebsites.net/process',
+      {
+        mode: 'cors',
+        method: 'POST',
+        body: JSON.stringify(reqBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then(res => res.json());
+    setResults(results);
+    toggleLoading(false);
+  };
+
   const [mapState, setMapState] = useState({
     lat: 39.644308,
     lng: -121.553971
@@ -45,10 +96,25 @@ export const MapContainer = (props: IProps) => {
 
   return (
     <div style={style}>
-      <MapSidebar
-        {...props}
-        submitInputs={() => props.submitInputs(mapState.lat, mapState.lng)}
-      />
+      {!results && (
+        <MapSidebar
+          frcsInputs={frcsInputs}
+          setFrcsInputs={setFrcsInputs}
+          teaInputs={teaInputs}
+          setTeaInputs={setTeaInputs}
+          teaModel={teaModel}
+          setTeaModel={setTeaModel}
+          submitInputs={() => submitInputs(mapState.lat, mapState.lng)}
+          loading={loading}
+        />
+      )}
+      {!!results && (
+        <ResultsContainer
+          teaInputs={teaInputs}
+          teaModel={teaModel}
+          results={results}
+        />
+      )}
       <Map
         ref={mapRef}
         onClick={(e: any) => {
@@ -59,15 +125,22 @@ export const MapContainer = (props: IProps) => {
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
 
-        {props.frcsInputs.radius > 0 && (
+        {frcsInputs.radius > 0 && (
           <Circle
             center={position}
             fillColor='blue'
-            radius={props.frcsInputs.radius * 1000}
+            radius={frcsInputs.radius * 1000}
           />
         )}
         <Marker position={position} />
       </Map>
     </div>
   );
+};
+
+const frcsInputsExample: FrcsInputs = {
+  system: 'Ground-Based Mech WT',
+  radius: 5,
+  treatmentid: 1,
+  dieselFuelPrice: 3.882
 };

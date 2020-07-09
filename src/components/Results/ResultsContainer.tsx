@@ -20,13 +20,13 @@ export const ResultsContainer = (props: Props) => {
 
   const pages = props.results.map((result, i) => (
     <PaginationItem>
-      <PaginationLink id={i.toString()} onClick={() => setSelectedYearIndex(i)}>
+      <PaginationLink key={result.year} onClick={() => setSelectedYearIndex(i)}>
         {result.year}
       </PaginationLink>
     </PaginationItem>
   ));
   return (
-    <div>
+    <div id='results-sidebar'>
       <Pagination aria-label='Page navigation example' size='lg'>
         <PaginationItem>
           <PaginationLink first href='#' />

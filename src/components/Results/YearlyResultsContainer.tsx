@@ -21,7 +21,6 @@ interface Props {
 }
 
 export const YearlyResultsContainer = (props: Props) => {
-  // TODO: make classes & typecheck below
   const teaResults: any = props.results.teaResults;
   return (
     <div>
