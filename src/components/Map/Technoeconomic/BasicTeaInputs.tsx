@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ElectricalFuelBaseYearInputModGP,
   ElectricalFuelBaseYearInputModGPO,
   ElectricalFuelBaseYearInputModCHP
 } from '@ucdavis/tea/out/models/input.model';
@@ -11,13 +12,20 @@ import {
   Input,
   InputGroupAddon
 } from 'reactstrap';
+import { ElectricalFuelBaseYearInputModGPClass } from '../../../models/GPClasses';
+import { ElectricalFuelBaseYearInputModGPOClass } from '../../../models/GPOClasses';
+import { ElectricalFuelBaseYearInputModCHPClass } from '../../../models/CHPClasses';
 
 interface Props {
-  inputs: ElectricalFuelBaseYearInputModGPO | ElectricalFuelBaseYearInputModCHP;
+  inputs: any;
+  // | ElectricalFuelBaseYearInputModGPO
+  // | ElectricalFuelBaseYearInputModCHP
+  // | ElectricalFuelBaseYearInputModGP;
   setInputs: (inputs: any) => void;
+  teaModel: string;
 }
 
-export const ElectricalAndFuelBaseYearInput = (props: Props) => {
+export const BasicTeaInputs = (props: Props) => {
   if (!props.inputs) {
     return null;
   }
@@ -80,64 +88,28 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
           Moisture Content of Biomass Feedstock to Gasifier
         </FormText>
       </FormGroup>
-      <FormGroup>
-        <Label>Net Station Efficiency</Label>
-        <InputGroup>
-          <Input
-            type='text'
-            value={props.inputs.NetStationEfficiency}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                NetStationEfficiency: Number(e.target.value)
-              })
-            }
-          />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
-        </InputGroup>
-        <FormText color='muted'>
-          Ratio of net energy output from plant to fuel energy input to plant
-        </FormText>
-      </FormGroup>
-      <FormGroup>
-        <Label>Fuel Heating Value</Label>
-        <InputGroup>
-          <Input
-            type='text'
-            value={props.inputs.FuelHeatingValue}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                FuelHeatingValue: Number(e.target.value)
-              })
-            }
-          />
-          <InputGroupAddon addonType='append'>kJ/kg</InputGroupAddon>
-        </InputGroup>
-        <FormText color='muted'>
-          Higher heating value (heat of combustion) of fuel expressed on a dry
-          basis input in SI units
-        </FormText>
-      </FormGroup>
-      <FormGroup>
-        <Label>Fuel AshConcentration</Label>
-        <InputGroup>
-          <Input
-            type='text'
-            value={props.inputs.FuelAshConcentration}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                FuelAshConcentration: Number(e.target.value)
-              })
-            }
-          />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
-        </InputGroup>
-        <FormText color='muted'>
-          Fraction of ash in fuel, percent dry basis
-        </FormText>
-      </FormGroup>
+      {props.teaModel !== 'GP' && (
+        <FormGroup>
+          <Label>Fuel Heating Value</Label>
+          <InputGroup>
+            <Input
+              type='text'
+              value={props.inputs.FuelHeatingValue}
+              onChange={e =>
+                props.setInputs({
+                  ...props.inputs,
+                  FuelHeatingValue: Number(e.target.value)
+                })
+              }
+            />
+            <InputGroupAddon addonType='append'>kJ/kg</InputGroupAddon>
+          </InputGroup>
+          <FormText color='muted'>
+            Higher heating value (heat of combustion) of fuel expressed on a dry
+            basis input in SI units
+          </FormText>
+        </FormGroup>
+      )}
     </>
   );
 };

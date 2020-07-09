@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExpensesBaseYearInputModGPO } from '@ucdavis/tea/out/models/input.model';
+import { ExpensesBaseYearInputModGP } from '@ucdavis/tea/out/models/input.model';
 import {
   FormText,
   FormGroup,
@@ -8,13 +8,14 @@ import {
   Input,
   InputGroupAddon
 } from 'reactstrap';
+import { ExpensesBaseYearInputModGPClass } from '../../../../models/GPClasses';
 
 interface Props {
-  inputs: ExpensesBaseYearInputModGPO;
+  inputs: ExpensesBaseYearInputModGP;
   setInputs: (inputs: any) => void;
 }
 
-export const ExpensesBaseYearInput = (props: Props) => {
+export const ExpensesBaseYearInputGP = (props: Props) => {
   if (!props.inputs) {
     return null;
   }
@@ -37,6 +38,25 @@ export const ExpensesBaseYearInput = (props: Props) => {
         </InputGroup>
         <FormText color='muted'>
           Biomass Fuel Cost, use negative value for tipping fee
+        </FormText>
+      </FormGroup>
+      <FormGroup>
+        <Label>Dual Fuel Cost</Label>
+        <InputGroup>
+          <Input
+            type='text'
+            value={props.inputs.DualFuelCost}
+            onChange={e =>
+              props.setInputs({
+                ...props.inputs,
+                DualFuelCost: Number(e.target.value)
+              })
+            }
+          />
+          <InputGroupAddon addonType='append'>$/L</InputGroupAddon>
+        </InputGroup>
+        <FormText color='muted'>
+          Dual Fuel Cost, Default assumes heavy diesel fuel
         </FormText>
       </FormGroup>
       <FormGroup>
@@ -72,6 +92,23 @@ export const ExpensesBaseYearInput = (props: Props) => {
           <InputGroupAddon addonType='append'>$/year</InputGroupAddon>
         </InputGroup>
         <FormText color='muted'>Cost of maintaining the plant</FormText>
+      </FormGroup>
+      <FormGroup>
+        <Label>WasteTreatment</Label>
+        <InputGroup>
+          <Input
+            type='text'
+            value={props.inputs.WasteTreatment}
+            onChange={e =>
+              props.setInputs({
+                ...props.inputs,
+                WasteTreatment: Number(e.target.value)
+              })
+            }
+          />
+          <InputGroupAddon addonType='prepend'>$/year</InputGroupAddon>
+        </InputGroup>
+        <FormText color='muted'>Waste Treatment/Disposal</FormText>
       </FormGroup>
       <FormGroup>
         <Label>Insurance</Label>

@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  EscalationInflationInputModGP,
-  EscalationInflationInputMod
-} from '@ucdavis/tea/out/models/input.model';
+import { EscalationInflationInputModGP } from '@ucdavis/tea/out/models/input.model';
 import {
   FormText,
   FormGroup,
@@ -13,11 +10,11 @@ import {
 } from 'reactstrap';
 
 interface Props {
-  inputs: EscalationInflationInputMod;
+  inputs: EscalationInflationInputModGP;
   setInputs: (inputs: any) => void;
 }
 
-export const EscalationInflationInput = (props: Props) => {
+export const EscalationInflationInputGP = (props: Props) => {
   if (!props.inputs) {
     return null;
   }
@@ -63,6 +60,25 @@ export const EscalationInflationInput = (props: Props) => {
         </FormText>
       </FormGroup>
       <FormGroup>
+        <Label>Escalation Dual Fuel</Label>
+        <InputGroup>
+          <Input
+            type='text'
+            value={props.inputs.EscalationDualFuel}
+            onChange={e =>
+              props.setInputs({
+                ...props.inputs,
+                EscalationDualFuel: Number(e.target.value)
+              })
+            }
+          />
+          <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
+        </InputGroup>
+        <FormText color='muted'>
+          Rate at which dual fuel cost escalates over time
+        </FormText>
+      </FormGroup>
+      <FormGroup>
         <Label>Escalation Production Tax Credit</Label>
         <InputGroup>
           <Input
@@ -97,6 +113,25 @@ export const EscalationInflationInput = (props: Props) => {
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>
         <FormText color='muted'>Escalation rate applied to heat sales</FormText>
+      </FormGroup>
+      <FormGroup>
+        <Label>Escalation Char Sales</Label>
+        <InputGroup>
+          <Input
+            type='text'
+            value={props.inputs.EscalationCharSales}
+            onChange={e =>
+              props.setInputs({
+                ...props.inputs,
+                EscalationCharSales: Number(e.target.value)
+              })
+            }
+          />
+          <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
+        </InputGroup>
+        <FormText color='muted'>
+          Escalation rate applied to char or ash
+        </FormText>
       </FormGroup>
       <FormGroup>
         <Label>Escalation Other</Label>

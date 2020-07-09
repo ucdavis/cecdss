@@ -39,79 +39,70 @@ export const CombinedHeatAndPower = (props: Props) => {
     return null;
   }
   return (
-    <div>
-      <Form>
-        <FormGroup>
-          <Label>Capital Cost</Label>
-          <InputGroup>
-            <Input
-              type='text'
-              value={props.inputs.CapitalCost}
-              onChange={e =>
-                props.setInputs({
-                  ...props.inputs,
-                  CapitalCost: Number(e.target.value)
-                })
-              }
-            />
-            <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
-          </InputGroup>
-          <FormText color='muted'>Total installed cost of plant</FormText>
-        </FormGroup>
+    <>
+      <FormGroup>
+        <Label>Capital Cost</Label>
+        <InputGroup>
+          <Input
+            type='text'
+            value={props.inputs.CapitalCost}
+            onChange={e =>
+              props.setInputs({
+                ...props.inputs,
+                CapitalCost: Number(e.target.value)
+              })
+            }
+          />
+          <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
+        </InputGroup>
+        <FormText color='muted'>Total installed cost of plant</FormText>
+      </FormGroup>
 
-        <ElectricalAndFuelBaseYearInput
-          inputs={props.inputs.ElectricalFuelBaseYear}
-          setInputs={(inputs: ElectricalFuelBaseYearInputModCHP) =>
-            props.setInputs({
-              ...props.inputs,
-              ElectricalFuelBaseYear: inputs
-            })
-          }
-        />
-        <HeatBaseYearInput
-          inputs={props.inputs.HeatBaseYear}
-          setInputs={(inputs: HeatBaseYearInputMod) =>
-            props.setInputs({ ...props.inputs, HeatBaseYear: inputs })
-          }
-        />
-        <ExpensesBaseYearInput
-          inputs={props.inputs.ExpensesBaseYear}
-          setInputs={(inputs: ExpensesBaseYearInputModGPO) =>
-            props.setInputs({ ...props.inputs, ExpensesBaseYear: inputs })
-          }
-        />
-        <TaxesInput
-          inputs={props.inputs.Taxes}
-          setInputs={(inputs: TaxesInputMod) =>
-            props.setInputs({ ...props.inputs, Taxes: inputs })
-          }
-        />
-        <IncomeOtherThanEnergyInput
-          inputs={props.inputs.IncomeOtherThanEnergy}
-          setInputs={(inputs: IncomeOtherThanEnergyInputMod) =>
-            props.setInputs({ ...props.inputs, IncomeOtherThanEnergy: inputs })
-          }
-        />
-        <EscalationInflationInput
-          inputs={props.inputs.EscalationInflation}
-          setInputs={(inputs: EscalationInflationInputMod) =>
-            props.setInputs({ ...props.inputs, EscalationInflation: inputs })
-          }
-        />
-        <FinancingInput
-          inputs={props.inputs.Financing}
-          setInputs={(inputs: FinancingInputMod) =>
-            props.setInputs({ ...props.inputs, Financing: inputs })
-          }
-        />
-
-        {/* TODO: add tax credit frac */}
-      </Form>
-      {/* <div>
-        <Button color='primary' onClick={() => props.props.setInputs(props.inputs)}>
-          Next
-        </Button>
-      </div> */}
-    </div>
+      <ElectricalAndFuelBaseYearInput
+        inputs={props.inputs.ElectricalFuelBaseYear}
+        setInputs={(inputs: ElectricalFuelBaseYearInputModCHP) =>
+          props.setInputs({
+            ...props.inputs,
+            ElectricalFuelBaseYear: inputs
+          })
+        }
+      />
+      <HeatBaseYearInput
+        inputs={props.inputs.HeatBaseYear}
+        setInputs={(inputs: HeatBaseYearInputMod) =>
+          props.setInputs({ ...props.inputs, HeatBaseYear: inputs })
+        }
+      />
+      <ExpensesBaseYearInput
+        inputs={props.inputs.ExpensesBaseYear}
+        setInputs={(inputs: ExpensesBaseYearInputModGPO) =>
+          props.setInputs({ ...props.inputs, ExpensesBaseYear: inputs })
+        }
+      />
+      <TaxesInput
+        inputs={props.inputs.Taxes}
+        setInputs={(inputs: TaxesInputMod) =>
+          props.setInputs({ ...props.inputs, Taxes: inputs })
+        }
+      />
+      <IncomeOtherThanEnergyInput
+        inputs={props.inputs.IncomeOtherThanEnergy}
+        setInputs={(inputs: IncomeOtherThanEnergyInputMod) =>
+          props.setInputs({ ...props.inputs, IncomeOtherThanEnergy: inputs })
+        }
+      />
+      <EscalationInflationInput
+        inputs={props.inputs.EscalationInflation}
+        setInputs={(inputs: EscalationInflationInputMod) =>
+          props.setInputs({ ...props.inputs, EscalationInflation: inputs })
+        }
+      />
+      <FinancingInput
+        inputs={props.inputs.Financing}
+        setInputs={(inputs: FinancingInputMod) =>
+          props.setInputs({ ...props.inputs, Financing: inputs })
+        }
+      />
+    </>
   );
 };

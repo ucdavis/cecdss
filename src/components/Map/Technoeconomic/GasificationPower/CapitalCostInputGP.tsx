@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  InputModGP,
-  CapitalCostInputModGP
-} from '@ucdavis/tea/out/models/input.model';
-import { CapitalCostMod } from '@ucdavis/tea/out/models/output.model';
+import { CapitalCostInputModGP } from '@ucdavis/tea/out/models/input.model';
 import {
   FormGroup,
   Label,

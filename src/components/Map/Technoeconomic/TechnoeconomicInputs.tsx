@@ -1,5 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Input, InputGroup, InputGroupAddon, Label } from 'reactstrap';
+import React, { useState } from 'react';
+import {
+  Button,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  Label,
+  FormGroup,
+  Form
+} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { GenericPowerOnly } from './GenericPowerOnly/GenericPowerOnly';
 import { TechnoeconomicModels } from '../../../models/Types';
@@ -13,6 +21,7 @@ import { InputModGPOClass } from '../../../models/GPOClasses';
 import { InputModCHPClass } from '../../../models/CHPClasses';
 import { InputModGPClass } from '../../../models/GPClasses';
 import { GasificationPower } from './GasificationPower/GasificationPower';
+import { BasicTeaInputs } from './BasicTeaInputs';
 
 interface Props {
   teaInputs: InputModGPO | InputModCHP | InputModGP;
@@ -22,28 +31,12 @@ interface Props {
 }
 
 export const TechnoeconomicInputs = (props: Props) => {
-  return (
-    <div>
-      <div>
-        <h4>Techno-Economic Assessment </h4>
-        <Label>Treatment</Label>
-        <Input
-          type='select'
-          onChange={x => props.setTeaModel(x.target.value)}
-          value={props.teaModel}
-        >
-          <option value={TechnoeconomicModels.genericPowerOnly}>
-            Generic Power Only (GPO)
-          </option>
-          <option value={TechnoeconomicModels.genericCombinedHeatAndPower}>
-            Generic Combined Heat and Power (CHP)
-          </option>
-          <option value={TechnoeconomicModels.gasificationPower}>
-            Gasification Power (GP)
-          </option>
-        </Input>
-        <br />
-      </div>
+  const [showDetailedInputs, toggleShowDetailedInputs] = useState<boolean>(
+    false
+  );
+
+  const renderInputs = showDetailedInputs ? (
+    <>
       {props.teaModel === TechnoeconomicModels.genericPowerOnly && (
         // props.teaInputs instanceof InputModGPOClass && (
         <GenericPowerOnly
@@ -64,6 +57,55 @@ export const TechnoeconomicInputs = (props: Props) => {
           inputs={props.teaInputs}
           setInputs={props.setTeaInputs}
         />
+      )}
+    </>
+  ) : (
+    <>
+      <BasicTeaInputs
+        inputs={props.teaInputs.ElectricalFuelBaseYear}
+        setInputs={(inputs: any) =>
+          props.setTeaInputs({
+            ...props.teaInputs,
+            ElectricalFuelBaseYear: inputs
+          })
+        }
+        teaModel={props.teaModel}
+      />
+    </>
+  );
+  return (
+    <div>
+      <h4>Techno-Economic Assessment </h4>
+      <Button onClick={() => toggleShowDetailedInputs(!showDetailedInputs)}>
+        {showDetailedInputs
+          ? 'Hide More Detailed Inputs'
+          : 'View More Detailed Inputs'}
+      </Button>
+      <Form>
+        <FormGroup>
+          <Label>Treatment</Label>
+          <Input
+            type='select'
+            onChange={x => props.setTeaModel(x.target.value)}
+            value={props.teaModel}
+          >
+            <option value={TechnoeconomicModels.genericPowerOnly}>
+              Generic Power Only (GPO)
+            </option>
+            <option value={TechnoeconomicModels.genericCombinedHeatAndPower}>
+              Generic Combined Heat and Power (CHP)
+            </option>
+            <option value={TechnoeconomicModels.gasificationPower}>
+              Gasification Power (GP)
+            </option>
+          </Input>
+        </FormGroup>
+        {renderInputs}
+      </Form>
+      {showDetailedInputs && (
+        <Button onClick={() => toggleShowDetailedInputs(!showDetailedInputs)}>
+          Hide More Detailed Inputs
+        </Button>
       )}
       <br />
       <hr />

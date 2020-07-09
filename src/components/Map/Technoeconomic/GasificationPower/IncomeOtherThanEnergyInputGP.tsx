@@ -1,5 +1,5 @@
 import React from 'react';
-import { IncomeOtherThanEnergyInputMod } from '@ucdavis/tea/out/models/input.model';
+import { IncomeOtherThanEnergyInputModGP } from '@ucdavis/tea/out/models/input.model';
 import {
   FormText,
   FormGroup,
@@ -8,13 +8,14 @@ import {
   Input,
   InputGroupAddon
 } from 'reactstrap';
+import { IncomeOtherThanEnergyInputModGPClass } from '../../../../models/GPClasses';
 
 interface Props {
-  inputs: IncomeOtherThanEnergyInputMod;
+  inputs: IncomeOtherThanEnergyInputModGP;
   setInputs: (inputs: any) => void;
 }
 
-export const IncomeOtherThanEnergyInput = (props: Props) => {
+export const IncomeOtherThanEnergyInputGP = (props: Props) => {
   if (!props.inputs) {
     return null;
   }
@@ -58,6 +59,25 @@ export const IncomeOtherThanEnergyInput = (props: Props) => {
         <FormText color='muted'>
           Interest income earned on reserve account if financing institution
           requires security deposit
+        </FormText>
+      </FormGroup>
+      <FormGroup>
+        <Label>Sales Price For Char</Label>
+        <InputGroup>
+          <Input
+            type='text'
+            value={props.inputs.SalesPriceForChar}
+            onChange={e =>
+              props.setInputs({
+                ...props.inputs,
+                SalesPriceForChar: Number(e.target.value)
+              })
+            }
+          />
+          <InputGroupAddon addonType='append'>$/t</InputGroupAddon>
+        </InputGroup>
+        <FormText color='muted'>
+          Sales Price for Char/Ash --for disposal
         </FormText>
       </FormGroup>
     </>
