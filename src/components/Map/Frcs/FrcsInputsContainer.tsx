@@ -28,34 +28,6 @@ export const FrcsInputsContainer = (props: Props) => {
         <h4>Forestry and Conversion</h4>
         <Form>
           <FormGroup>
-            <Label>Radius:</Label>
-            <InputGroup>
-              <Input
-                type='text'
-                value={props.inputs.radius}
-                onChange={e =>
-                  props.setInputs({
-                    ...props.inputs,
-                    radius: Number(e.target.value)
-                  })
-                }
-              />
-              <InputGroupAddon addonType='append'>km</InputGroupAddon>
-            </InputGroup>
-            <Input
-              type='range'
-              min={1}
-              max={500}
-              value={props.inputs.radius}
-              onChange={e =>
-                props.setInputs({
-                  ...props.inputs,
-                  radius: Number(e.target.value)
-                })
-              }
-            />
-          </FormGroup>
-          <FormGroup>
             <Label>Treatment</Label>
             <Input
               type='select'
@@ -82,20 +54,28 @@ export const FrcsInputsContainer = (props: Props) => {
                 })
               }
             >
-              <option value='Ground-Based Mech WT'>Ground-Based Mech WT</option>
+              <option value='Ground-Based Mech WT'>
+                Ground-Based Mechanized Whole Tree
+              </option>
               <option value='Ground-Based Manual WT'>
-                Ground-Based Manual WT
+                Ground-Based Manual Whole Tree
               </option>
               <option value='Ground-Based Manual Log'>
                 Ground-Based Manual Log
               </option>
-              <option value='Ground-Based CTL'>Ground-Based CTL</option>
-              <option value='Cable Manual WT/Log'>Cable Manual WT/Log</option>
-              <option value='Cable Manual WT'>Cable Manual WT</option>
+              <option value='Ground-Based CTL'>
+                Ground-Based Cut To Length
+              </option>
+              <option value='Cable Manual WT/Log'>
+                Cable Manual Whole Tree/Log
+              </option>
+              <option value='Cable Manual WT'>Cable Manual Whole Tree</option>
               <option value='Cable Manual Log'>Cable Manual Log</option>
-              <option value='Cable CTL'>Cable CTL</option>
-              <option value='Helicopter Manual WT'>Helicopter Manual WT</option>
-              <option value='Helicopter CTL'>Helicopter CTL</option>
+              <option value='Cable CTL'>Cable Cut To Length</option>
+              <option value='Helicopter Manual WT'>
+                Helicopter Manual Whole Tree
+              </option>
+              <option value='Helicopter CTL'>Helicopter Cut To Length</option>
             </Input>
           </FormGroup>
         </Form>
@@ -112,7 +92,7 @@ export const FrcsInputsContainer = (props: Props) => {
                 })
               }
             />
-            <InputGroupAddon addonType='append'>($/gal)</InputGroupAddon>
+            <InputGroupAddon addonType='append'>$/gal</InputGroupAddon>
           </InputGroup>
         </FormGroup>
       </div>

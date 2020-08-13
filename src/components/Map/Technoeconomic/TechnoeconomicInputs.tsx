@@ -83,7 +83,7 @@ export const TechnoeconomicInputs = (props: Props) => {
       </Button>
       <Form>
         <FormGroup>
-          <Label>Treatment</Label>
+          <Label>Model</Label>
           <Input
             type='select'
             onChange={x => props.setTeaModel(x.target.value)}
