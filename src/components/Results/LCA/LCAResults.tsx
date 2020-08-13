@@ -57,16 +57,6 @@ export const LCAResults = (props: Props) => {
             <td>{props.results.lciResults.NOx}</td>
             <td>g</td>
           </tr>
-          <tr>
-            <td>NMVOC</td>
-            <td>{props.results.lciResults.NMVOC}</td>
-            <td>g</td>
-          </tr>
-          <tr>
-            <td>PM 2.5</td>
-            <td>{props.results.lciResults.Particulates}</td>
-            <td>g</td>
-          </tr>
         </tbody>
       </table>
       <table className='table'>
@@ -97,119 +87,8 @@ export const LCAResults = (props: Props) => {
             <td>{props.results.lciaResults.eutrophication_water}</td>
           </tr>
           <tr>
-            <td>Ozone Depletion Air (kg CFC-11 eq / kg substance)</td>
-            <td>{props.results.lciaResults.ozone_depletion_air}</td>
-          </tr>
-          <tr>
             <td>Smog Air (kg O3 eq / kg substance)</td>
             <td>{props.results.lciaResults.smog_air}</td>
-          </tr>
-          <tr>
-            <td>Ecotox. CF [CTUeco/kg], Em.airU, freshwater</td>
-            <td>{props.results.lciaResults.ecotox_airu_fresh_water}</td>
-          </tr>
-          <tr>
-            <td>Ecotox. CF [CTUeco/kg], Em.airC, freshwater</td>
-            <td>{props.results.lciaResults.ecotox_airc_fresh_water}</td>
-          </tr>
-          <tr>
-            <td>Ecotox. CF [CTUeco/kg], Em.fr.waterC, freshwater</td>
-            <td>{props.results.lciaResults.ecotox_waterc_fresh_water}</td>
-          </tr>
-          <tr>
-            <td>Ecotox. CF [CTUeco/kg], Em.sea waterC, freshwater</td>
-            <td>{props.results.lciaResults.ecotox_seawaterc_fresh_water}</td>
-          </tr>
-          <tr>
-            <td>Ecotox. CF [CTUeco/kg], Em.nat.soilC, freshwater</td>
-            <td>{props.results.lciaResults.ecotox_natsoilc_fresh_water}</td>
-          </tr>
-          <tr>
-            <td>Ecotox. CF [CTUeco/kg], Em.agr.soilC, freshwater</td>
-            <td>{props.results.lciaResults.ecotox_agrsoilc_fresh_water}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUcancer/kg], Emission to urban air, cancer
-            </td>
-            <td>{props.results.lciaResults.hh_urban_air_cancer}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUnoncancer/kg], Emission to urban air,
-              non-canc.
-            </td>
-            <td>{props.results.lciaResults.hh_urban_air_noncanc}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUcancer/kg], Emission to cont. rural air,
-              cancer
-            </td>
-            <td>{props.results.lciaResults.hh_rural_air_cancer}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUnoncancer/kg], Emission to cont. rural air,
-              non-canc.
-            </td>
-            <td>{props.results.lciaResults.hh_rural_air_noncanc}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUcancer/kg], Emission to cont. freshwater,
-              cancer
-            </td>
-            <td>{props.results.lciaResults.hh_fresh_water_cancer}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUnoncancer/kg], Emission to cont. freshwater,
-              non-canc.
-            </td>
-            <td>{props.results.lciaResults.hh_fresh_water_noncanc}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUcancer/kg], Emission to cont. sea water,
-              cancer
-            </td>
-            <td>{props.results.lciaResults.hh_sea_water_cancer}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUnoncancer/kg], Emission to cont. sea water,
-              non-canc.
-            </td>
-            <td>{props.results.lciaResults.hh_sea_water_noncanc}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUcancer/kg], Emission to cont. natural soil,
-              cancer
-            </td>
-            <td>{props.results.lciaResults.hh_natural_soil_cancer}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUnoncancer/kg], Emission to cont. natural soil,
-              non-canc.
-            </td>
-            <td>{props.results.lciaResults.hh_natural_soil_noncanc}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUcancer/kg], Emission to cont. agric. Soil,
-              cancer
-            </td>
-            <td>{props.results.lciaResults.hh_agric_soil_cancer}</td>
-          </tr>
-          <tr>
-            <td>
-              Human health CF [CTUnoncancer/kg], Emission to cont. agric. Soil,
-              non-canc.
-            </td>
-            <td>{props.results.lciaResults.hh_agric_soil_noncanc}</td>
           </tr>
         </tbody>
       </table>
