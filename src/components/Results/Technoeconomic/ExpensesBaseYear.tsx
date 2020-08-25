@@ -36,12 +36,12 @@ export const ExpensesBaseYear = (props: Props) => {
         <tbody>
           <tr>
             <td>Fuel Cost ($/dry metric tons</td>
-            <td>{formatNumber(props.inputs.BiomassFuelCost)}</td>
+            <td>{formatNumber(props.inputs.BiomassFuelCost, 4)}</td>
             {props.results instanceof ExpensesBaseYearModGPOClass && (
               <td>{formatNumber(props.results.FuelCostKwh)}</td>
             )}
             {props.results instanceof ExpensesBaseYearModGPClass && (
-              <td>{formatNumber(props.results.BiomassFuelCostKwh)}</td>
+              <td>{formatNumber(props.results.BiomassFuelCostKwh, 4)}</td>
             )}
           </tr>
           {props.inputs instanceof ExpensesBaseYearInputModGPClass &&
@@ -51,20 +51,20 @@ export const ExpensesBaseYear = (props: Props) => {
                   <td>
                     Biomass Fuel Cost ($/t)--use negative value for tipping fee
                   </td>
-                  <td>{formatNumber(props.inputs.BiomassFuelCost)}</td>
-                  <td>{formatNumber(props.results.BiomassFuelCostKwh)}</td>
+                  <td>{formatNumber(props.inputs.BiomassFuelCost, 4)}</td>
+                  <td>{formatNumber(props.results.BiomassFuelCostKwh, 4)}</td>
                 </tr>
                 <tr>
                   <td>Dual Fuel Cost ($/L)</td>
-                  <td>{formatNumber(props.inputs.DualFuelCost)}</td>
-                  <td>{formatNumber(props.results.DualFuelCostKwh)}</td>
+                  <td>{formatNumber(props.inputs.DualFuelCost, 4)}</td>
+                  <td>{formatNumber(props.results.DualFuelCostKwh, 4)}</td>
                 </tr>
               </>
             )}
           <tr>
             <td>Labor Cost ($/year)</td>
-            <td>{formatNumber(props.inputs.LaborCost)}</td>
-            <td>{formatNumber(props.results.LaborCostKwh)}</td>
+            <td>{formatNumber(props.inputs.LaborCost, 4)}</td>
+            <td>{formatNumber(props.results.LaborCostKwh, 4)}</td>
           </tr>
           <tr>
             <td>Maintenance Cost ($/year)</td>

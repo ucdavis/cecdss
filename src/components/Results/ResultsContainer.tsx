@@ -6,25 +6,57 @@ import {
   InputModCHP,
   InputModGP
 } from '@ucdavis/tea/out/models/input.model';
-import { PaginationLink, Pagination, PaginationItem } from 'reactstrap';
+import {
+  PaginationLink,
+  Pagination,
+  PaginationItem,
+  Spinner,
+  Button
+} from 'reactstrap';
 import { YearlyResultsContainer } from './YearlyResultsContainer';
 
 interface Props {
+  selectedYearIndex: number;
+  setSelectedYearIndex: (year: number) => void;
+  years: number[];
   results: YearlyResult[];
   teaInputs: InputModGPO | InputModCHP | InputModGP;
   teaModel: string;
+  mapOverlayType: string;
+  setMapOverlayType: (type: string) => void;
 }
 
 export const ResultsContainer = (props: Props) => {
-  const [selectedYearIndex, setSelectedYearIndex] = useState<number>(0);
-
-  const pages = props.results.map((result, i) => (
+  const pages = props.years.map((year, i) => (
     <PaginationItem>
-      <PaginationLink key={result.year} onClick={() => setSelectedYearIndex(i)}>
-        {result.year}
+      <PaginationLink
+        key={year}
+        disabled={!props.results[i]}
+        onClick={() => props.setSelectedYearIndex(i)}
+      >
+        {year}
+        {!props.results[i] && <Spinner color='primary' size='sm' />}
       </PaginationLink>
     </PaginationItem>
   ));
+
+  const toggleMapOverlayType = (
+    <div>
+      <h5>Toggle Results Map View</h5>
+      <Button
+        disabled={props.mapOverlayType === 'heatmap'}
+        onClick={() => props.setMapOverlayType('heatmap')}
+      >
+        Heatmap
+      </Button>
+      <Button
+        disabled={props.mapOverlayType === 'hexbin'}
+        onClick={() => props.setMapOverlayType('hexbin')}
+      >
+        Hexbin
+      </Button>
+    </div>
+  );
   return (
     <div id='results-sidebar'>
       <Pagination aria-label='Page navigation example' size='lg'>
@@ -42,8 +74,9 @@ export const ResultsContainer = (props: Props) => {
           <PaginationLink last href='#' />
         </PaginationItem>
       </Pagination>
+      {toggleMapOverlayType}
       <YearlyResultsContainer
-        results={props.results[selectedYearIndex]}
+        results={props.results[props.selectedYearIndex]}
         teaInputs={props.teaInputs}
         teaModel={props.teaModel}
       />

@@ -1,12 +1,14 @@
 import React, { createRef, useState, useEffect } from 'react';
-import { Map, TileLayer, Marker, Circle } from 'react-leaflet';
-import L, { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
+import { Map, TileLayer, Marker, Circle, withLeaflet } from 'react-leaflet';
+import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
+import { FeatureCollection, Feature } from 'geojson';
 import { MapSidebar } from './MapSidebar';
 import {
   FrcsInputs,
   TechnoeconomicModels,
   YearlyResult,
-  RequestParams
+  RequestParams,
+  RequestParamsYear
 } from '../../models/Types';
 import {
   InputModGPO,
@@ -17,16 +19,25 @@ import { InputModGPOClass } from '../../models/GPOClasses';
 import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
 import { ResultsContainer } from '../Results/ResultsContainer';
+import { convertGeoJSON } from '../Shared/util';
+import { HexLayers } from './HexLayers';
+import { HeatmapLayers } from './HeatmapLayers';
+import ReactLeafletKml from 'react-leaflet-kml';
 
 export const MapContainer = () => {
   const [loading, toggleLoading] = useState<boolean>(false);
+  const [results, setResults] = useState<YearlyResult[]>([]);
+  const [selectedYearIndex, setSelectedYearIndex] = useState<number>(0);
+  const [geoJsonResults, setGeoJsonResults] = useState<FeatureCollection[]>([]);
+  const [mapOverlayType, setMapOverlayType] = useState<string>('heatmap');
+
   const frcsInputsExample: FrcsInputs = {
     system: 'Ground-Based Mech WT',
-    radius: 15,
     treatmentid: 1,
     dieselFuelPrice: 3.882
   };
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
+  const years = [2016, 2017, 2018, 2019, 2020, 2021];
 
   const [teaInputs, setTeaInputs] = useState<
     InputModGPO | InputModCHP | InputModGP
@@ -58,35 +69,57 @@ export const MapContainer = () => {
     [39.2, -120]
   ];
 
-  const [results, setResults] = useState<YearlyResult[]>();
-
   const submitInputs = async (lat: number, lng: number) => {
     toggleLoading(true);
-    const reqBody: RequestParams = {
-      lat: lat,
-      lng: lng,
-      radius: frcsInputs.radius,
-      system: frcsInputs.system,
-      treatmentid: frcsInputs.treatmentid,
-      dieselFuelPrice: frcsInputs.dieselFuelPrice,
-      teaModel: teaModel,
-      teaInputs: teaInputs
-    };
-    console.log(JSON.stringify(reqBody));
-    const results: YearlyResult[] = await fetch(
-      // 'http://localhost:3000/process',
-      'https://cecdss-backend.azurewebsites.net/process',
-      {
-        mode: 'cors',
-        method: 'POST',
-        body: JSON.stringify(reqBody),
-        headers: {
-          'Content-Type': 'application/json'
+    let radius = 0;
+    let clusterIds: number[] = [];
+    let errorIds: number[] = [];
+    for (let index = 0; index < years.length; index++) {
+      console.log(
+        `year: ${years[index]}, # of clusters: ${clusterIds.length}, # of error clusters: ${errorIds.length}`
+      );
+      const reqBody: RequestParamsYear = {
+        lat,
+        lng,
+        radius,
+        clusterIds,
+        errorIds,
+        year: years[index],
+        system: frcsInputs.system,
+        treatmentid: frcsInputs.treatmentid,
+        dieselFuelPrice: frcsInputs.dieselFuelPrice,
+        teaModel: teaModel,
+        teaInputs: teaInputs
+      };
+      console.log(JSON.stringify(reqBody));
+      const yearResult: YearlyResult = await fetch(
+        'http://localhost:3000/process',
+        // 'https://cecdss-backend.azurewebsites.net/process',
+        {
+          mode: 'cors',
+          method: 'POST',
+          body: JSON.stringify(reqBody),
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      }
-    ).then(res => res.json());
-    setResults(results);
-    toggleLoading(false);
+      ).then(res => res.json());
+      radius = yearResult.radius;
+      clusterIds.push(...yearResult.clusterNumbers);
+      errorIds.push(...yearResult.errorClusterNumbers);
+      console.log(`setting results of year: ${years[index]}`);
+      const geoJsonClusters: Feature[] = convertGeoJSON(yearResult.clusters);
+      setGeoJsonResults(results => [
+        ...results,
+        {
+          type: 'FeatureCollection',
+          features: geoJsonClusters
+        }
+      ]);
+
+      setResults(results => [...results, yearResult]);
+      toggleLoading(false);
+    }
   };
 
   const accessToken =
@@ -101,9 +134,21 @@ export const MapContainer = () => {
   };
   const position: LatLngExpression = mapState;
 
+  const [kml, setKml] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    fetch('data/butte_kml.kml')
+      .then(res => res.text())
+      .then(kmlText => {
+        const parser = new DOMParser();
+        const kml = parser.parseFromString(kmlText, 'text/xml');
+        setKml(kml);
+      });
+  }, []);
+
   return (
     <div style={style}>
-      {!results && (
+      {results.length === 0 && (
         <MapSidebar
           frcsInputs={frcsInputs}
           setFrcsInputs={setFrcsInputs}
@@ -115,28 +160,37 @@ export const MapContainer = () => {
           loading={loading}
         />
       )}
-      {!!results && (
+      {results.length > 0 && (
         <ResultsContainer
+          selectedYearIndex={selectedYearIndex}
+          setSelectedYearIndex={setSelectedYearIndex}
+          years={years}
           teaInputs={teaInputs}
           teaModel={teaModel}
           results={results}
+          mapOverlayType={mapOverlayType}
+          setMapOverlayType={setMapOverlayType}
         />
       )}
       <Map
         ref={mapRef}
         onClick={(e: any) => {
-          setMapState(e.latlng);
+          results.length === 0 && setMapState(e.latlng);
         }}
-        maxBounds={bounds}
         bounds={bounds}
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
-
-        {frcsInputs.radius > 0 && (
-          <Circle
-            center={position}
-            fillColor='blue'
-            radius={frcsInputs.radius * 1000}
+        {/* {kml && <ReactLeafletKml kml={kml} />} */}
+        {geoJsonResults.length > 0 && mapOverlayType === 'hexbin' && (
+          <HexLayers
+            yearlyGeoJson={geoJsonResults}
+            selectedYearIndex={selectedYearIndex}
+          />
+        )}
+        {geoJsonResults.length > 0 && mapOverlayType === 'heatmap' && (
+          <HeatmapLayers
+            yearlyGeoJson={geoJsonResults}
+            selectedYearIndex={selectedYearIndex}
           />
         )}
         <Marker position={position} />

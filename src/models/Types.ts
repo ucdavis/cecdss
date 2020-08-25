@@ -10,11 +10,11 @@ import {
   InputModCHP,
   InputModGP
 } from '@ucdavis/tea/out/models/input.model';
+import { Feature, Point } from 'geojson';
 
 export interface RequestParams {
   lat: number;
   lng: number;
-  radius: number;
   system: string;
   treatmentid: number;
   dieselFuelPrice: number; // $/gal
@@ -22,8 +22,18 @@ export interface RequestParams {
   teaInputs: InputModGPO | InputModCHP | InputModGP; // | InputModHydrogen;
 }
 
-export interface FrcsInputs {
+export interface RequestParamsYears extends RequestParams {
+  years: number[];
+}
+
+export interface RequestParamsYear extends RequestParams {
+  year: number;
+  clusterIds: number[];
+  errorIds: number[];
   radius: number;
+}
+
+export interface FrcsInputs {
   system: string;
   treatmentid: number;
   dieselFuelPrice: number;
@@ -58,15 +68,19 @@ export interface YearlyResult {
   year: number;
   lcaResults: LCAresults;
   teaResults: OutputModGPO | OutputModCHP | OutputModGP;
-  biomassTarget: number;
-  totalBiomass: number;
+  biomassTarget: number; // from tea output
+  totalBiomass: number; // total biomass from frcs residue output
   totalArea: number;
-  totalCombinedCost: number;
-  totalResidueCost: number;
-  totalTransportationCost: number;
+  totalResidueCost: number; // cost of harvesting residue biomass from frcs
+  totalMoveInCost: number; // move in cost from separate frcs function
+  totalMoveInDistance: number;
+  totalTransportationCost: number; // transportation cost per gt * cluster biomass (distance from osrm)
   numberOfClusters: number;
   clusterNumbers: number[];
-  // clusters: ClusterResult[];
+  clusters: ClusterResult[];
+  errorClusters: ClusterErrorResult[];
+  errorClusterNumbers: number[];
+  radius: number;
 }
 
 export interface ClusterResult {
@@ -87,4 +101,11 @@ export interface ClusterErrorResult {
   biomass: number;
   area: number;
   error: string;
+}
+
+export interface ClusterFeature extends Feature {
+  properties: {
+    cluster_no: number;
+    biomass: number;
+  };
 }

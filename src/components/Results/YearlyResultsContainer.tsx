@@ -21,6 +21,9 @@ interface Props {
 }
 
 export const YearlyResultsContainer = (props: Props) => {
+  if (!props.results) {
+    return null;
+  }
   const teaResults: any = props.results.teaResults;
   return (
     <div>
