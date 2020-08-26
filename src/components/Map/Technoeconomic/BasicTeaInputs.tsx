@@ -23,6 +23,7 @@ interface Props {
   // | ElectricalFuelBaseYearInputModGP;
   setInputs: (inputs: any) => void;
   teaModel: string;
+  disabled: boolean;
 }
 
 export const BasicTeaInputs = (props: Props) => {
@@ -43,6 +44,7 @@ export const BasicTeaInputs = (props: Props) => {
                 NetElectricalCapacity: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
         </InputGroup>
@@ -62,6 +64,7 @@ export const BasicTeaInputs = (props: Props) => {
                 CapacityFactor: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
         </InputGroup>
@@ -81,6 +84,7 @@ export const BasicTeaInputs = (props: Props) => {
                 MoistureContent: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>% wet basis</InputGroupAddon>
         </InputGroup>
@@ -101,6 +105,7 @@ export const BasicTeaInputs = (props: Props) => {
                   FuelHeatingValue: Number(e.target.value)
                 })
               }
+              disabled={props.disabled}
             />
             <InputGroupAddon addonType='append'>kJ/kg</InputGroupAddon>
           </InputGroup>

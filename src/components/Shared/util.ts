@@ -6,8 +6,8 @@ export const formatNumber = (num: number, digits?: number) => {
     return '0';
   }
   const options = {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0
+    minimumFractionDigits: !!digits ? digits : 0,
+    maximumFractionDigits: !!digits ? digits : 0
   };
   return num.toLocaleString('en', options);
 };

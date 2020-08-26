@@ -15,6 +15,7 @@ import {
 interface Props {
   inputs: ElectricalFuelBaseYearInputModGPO | ElectricalFuelBaseYearInputModCHP;
   setInputs: (inputs: any) => void;
+  disabled: boolean;
 }
 
 export const ElectricalAndFuelBaseYearInput = (props: Props) => {
@@ -35,6 +36,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
                 NetElectricalCapacity: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
         </InputGroup>
@@ -54,6 +56,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
                 CapacityFactor: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
         </InputGroup>
@@ -73,6 +76,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
                 MoistureContent: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>% wet basis</InputGroupAddon>
         </InputGroup>
@@ -92,6 +96,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
                 NetStationEfficiency: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -111,6 +116,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
                 FuelHeatingValue: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>kJ/kg</InputGroupAddon>
         </InputGroup>
@@ -131,6 +137,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
                 FuelAshConcentration: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>

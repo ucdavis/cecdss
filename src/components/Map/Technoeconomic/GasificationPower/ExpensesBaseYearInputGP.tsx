@@ -13,6 +13,7 @@ import { ExpensesBaseYearInputModGPClass } from '../../../../models/GPClasses';
 interface Props {
   inputs: ExpensesBaseYearInputModGP;
   setInputs: (inputs: any) => void;
+  disabled: boolean;
 }
 
 export const ExpensesBaseYearInputGP = (props: Props) => {
@@ -33,6 +34,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
                 BiomassFuelCost: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/t</InputGroupAddon>
         </InputGroup>
@@ -52,6 +54,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
                 DualFuelCost: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/L</InputGroupAddon>
         </InputGroup>
@@ -71,6 +74,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
                 LaborCost: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/year</InputGroupAddon>
         </InputGroup>
@@ -88,6 +92,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
                 MaintenanceCost: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/year</InputGroupAddon>
         </InputGroup>
@@ -105,6 +110,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
                 WasteTreatment: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='prepend'>$/year</InputGroupAddon>
         </InputGroup>
@@ -122,6 +128,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
                 InsurancePropertyTax: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='prepend'>$/year</InputGroupAddon>
         </InputGroup>
@@ -141,6 +148,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
                 Utilities: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/year</InputGroupAddon>
         </InputGroup>
@@ -160,6 +168,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
                 Management: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/year</InputGroupAddon>
         </InputGroup>
@@ -179,6 +188,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
                 OtherOperatingExpenses: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/year</InputGroupAddon>
         </InputGroup>

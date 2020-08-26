@@ -12,6 +12,7 @@ import {
 interface Props {
   inputs: CapitalCostInputModGP;
   setInputs: (inputs: CapitalCostInputModGP) => void;
+  disabled: boolean;
 }
 
 export const CapitalCostInputGP = (props: Props) => {
@@ -32,6 +33,7 @@ export const CapitalCostInputGP = (props: Props) => {
                 GasifierSystemCapitalCost: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
         </InputGroup>
@@ -51,6 +53,7 @@ export const CapitalCostInputGP = (props: Props) => {
                 GasCleaningSystemCapitalCost: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
         </InputGroup>
@@ -68,6 +71,7 @@ export const CapitalCostInputGP = (props: Props) => {
                 PowerGenerationCapitalCost: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
         </InputGroup>
@@ -87,6 +91,7 @@ export const CapitalCostInputGP = (props: Props) => {
                 EmissionControlSystemCapitalCost: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
         </InputGroup>
@@ -104,6 +109,7 @@ export const CapitalCostInputGP = (props: Props) => {
                 HeatRecoverySystemCapitalCost: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
         </InputGroup>

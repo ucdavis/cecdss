@@ -28,6 +28,7 @@ interface Props {
   setTeaInputs: (inputs: InputModGPO | InputModCHP | InputModGP) => void;
   teaModel: string;
   setTeaModel: (model: string) => void;
+  disabled: boolean;
 }
 
 export const TechnoeconomicInputs = (props: Props) => {
@@ -42,6 +43,7 @@ export const TechnoeconomicInputs = (props: Props) => {
         <GenericPowerOnly
           inputs={props.teaInputs}
           setInputs={props.setTeaInputs}
+          disabled={props.disabled}
         />
       )}
       {props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower && (
@@ -49,6 +51,7 @@ export const TechnoeconomicInputs = (props: Props) => {
         <CombinedHeatAndPower
           inputs={props.teaInputs}
           setInputs={props.setTeaInputs}
+          disabled={props.disabled}
         />
       )}
       {props.teaModel === TechnoeconomicModels.gasificationPower && (
@@ -56,6 +59,7 @@ export const TechnoeconomicInputs = (props: Props) => {
         <GasificationPower
           inputs={props.teaInputs}
           setInputs={props.setTeaInputs}
+          disabled={props.disabled}
         />
       )}
     </>
@@ -70,6 +74,7 @@ export const TechnoeconomicInputs = (props: Props) => {
           })
         }
         teaModel={props.teaModel}
+        disabled={props.disabled}
       />
     </>
   );
@@ -88,6 +93,7 @@ export const TechnoeconomicInputs = (props: Props) => {
             type='select'
             onChange={x => props.setTeaModel(x.target.value)}
             value={props.teaModel}
+            disabled={props.disabled}
           >
             <option value={TechnoeconomicModels.genericPowerOnly}>
               Generic Power Only (GPO)

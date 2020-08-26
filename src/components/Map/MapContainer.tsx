@@ -2,13 +2,14 @@ import React, { createRef, useState, useEffect } from 'react';
 import { Map, TileLayer, Marker, Circle, withLeaflet } from 'react-leaflet';
 import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { FeatureCollection, Feature } from 'geojson';
-import { MapSidebar } from './MapSidebar';
+import { InputContainer } from './InputContainer';
 import {
   FrcsInputs,
   TechnoeconomicModels,
   YearlyResult,
   RequestParams,
-  RequestParamsYear
+  RequestParamsYear,
+  Coordinates
 } from '../../models/Types';
 import {
   InputModGPO,
@@ -18,23 +19,31 @@ import {
 import { InputModGPOClass } from '../../models/GPOClasses';
 import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
-import { ResultsContainer } from '../Results/ResultsContainer';
 import { convertGeoJSON } from '../Shared/util';
 import { HexLayers } from './HexLayers';
 import { HeatmapLayers } from './HeatmapLayers';
 import ReactLeafletKml from 'react-leaflet-kml';
+import {
+  PaginationItem,
+  PaginationLink,
+  Spinner,
+  Button,
+  Pagination
+} from 'reactstrap';
+import { YearlyResultsContainer } from '../Results/YearlyResultsContainer';
+import { ResultsContainer } from '../Results/ResultsContainer';
 
 export const MapContainer = () => {
   const [loading, toggleLoading] = useState<boolean>(false);
   const [results, setResults] = useState<YearlyResult[]>([]);
-  const [selectedYearIndex, setSelectedYearIndex] = useState<number>(0);
+  const [selectedYearIndex, setSelectedYearIndex] = useState<number>(-1);
   const [geoJsonResults, setGeoJsonResults] = useState<FeatureCollection[]>([]);
   const [mapOverlayType, setMapOverlayType] = useState<string>('heatmap');
 
   const frcsInputsExample: FrcsInputs = {
     system: 'Ground-Based Mech WT',
     treatmentid: 1,
-    dieselFuelPrice: 3.882
+    dieselFuelPrice: 3.251
   };
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
   const years = [2016, 2017, 2018, 2019, 2020, 2021];
@@ -58,7 +67,7 @@ export const MapContainer = () => {
     }
   }, [teaModel]);
 
-  const [mapState, setMapState] = useState({
+  const [mapState, setMapState] = useState<Coordinates>({
     lat: 39.644308,
     lng: -121.553971
   });
@@ -134,48 +143,101 @@ export const MapContainer = () => {
   };
   const position: LatLngExpression = mapState;
 
-  const [kml, setKml] = React.useState<any>(null);
+  // const [kml, setKml] = React.useState<any>(null);
 
-  React.useEffect(() => {
-    fetch('data/butte_kml.kml')
-      .then(res => res.text())
-      .then(kmlText => {
-        const parser = new DOMParser();
-        const kml = parser.parseFromString(kmlText, 'text/xml');
-        setKml(kml);
-      });
-  }, []);
+  // React.useEffect(() => {
+  //   fetch('data/butte_kml.kml')
+  //     .then(res => res.text())
+  //     .then(kmlText => {
+  //       const parser = new DOMParser();
+  //       const kml = parser.parseFromString(kmlText, 'text/xml');
+  //       setKml(kml);
+  //     });
+  // }, []);
+
+  const pages = years.map((year, i) => (
+    <PaginationItem>
+      <PaginationLink
+        key={year}
+        disabled={!results[i]}
+        onClick={() => setSelectedYearIndex(i)}
+      >
+        {year}
+        {!results[i] && <Spinner color='primary' size='sm' />}
+      </PaginationLink>
+    </PaginationItem>
+  ));
 
   return (
     <div style={style}>
-      {results.length === 0 && (
-        <MapSidebar
-          frcsInputs={frcsInputs}
-          setFrcsInputs={setFrcsInputs}
-          teaInputs={teaInputs}
-          setTeaInputs={setTeaInputs}
-          teaModel={teaModel}
-          setTeaModel={setTeaModel}
-          submitInputs={() => submitInputs(mapState.lat, mapState.lng)}
-          loading={loading}
-        />
-      )}
-      {results.length > 0 && (
-        <ResultsContainer
-          selectedYearIndex={selectedYearIndex}
-          setSelectedYearIndex={setSelectedYearIndex}
-          years={years}
-          teaInputs={teaInputs}
-          teaModel={teaModel}
-          results={results}
-          mapOverlayType={mapOverlayType}
-          setMapOverlayType={setMapOverlayType}
-        />
-      )}
+      <div id={results.length > 0 && !loading ? 'results-sidebar' : 'sidebar'}>
+        {(results.length > 0 || loading) && (
+          <>
+            <Pagination aria-label='Page navigation example' size='lg'>
+              <PaginationItem>
+                <PaginationLink
+                  key='inputs'
+                  onClick={() => setSelectedYearIndex(-1)}
+                >
+                  Inputs
+                </PaginationLink>
+              </PaginationItem>
+              {pages}
+              <PaginationItem>
+                <PaginationLink
+                  key='finalResults'
+                  onClick={() => setSelectedYearIndex(-2)}
+                >
+                  Final Resulst
+                </PaginationLink>
+              </PaginationItem>
+            </Pagination>
+            <div>
+              <h5>Toggle Results Map View</h5>
+              <Button
+                disabled={mapOverlayType === 'heatmap'}
+                onClick={() => setMapOverlayType('heatmap')}
+              >
+                Heatmap
+              </Button>
+              <Button
+                disabled={mapOverlayType === 'hexbin'}
+                onClick={() => setMapOverlayType('hexbin')}
+              >
+                Hexbin
+              </Button>
+            </div>
+            {selectedYearIndex > -1 && (
+              <YearlyResultsContainer
+                results={results[selectedYearIndex]}
+                teaInputs={teaInputs}
+                teaModel={teaModel}
+              />
+            )}
+          </>
+        )}
+        {selectedYearIndex === -1 && (
+          <InputContainer
+            mapInputs={mapState}
+            setMapInputs={setMapState}
+            frcsInputs={frcsInputs}
+            setFrcsInputs={setFrcsInputs}
+            teaInputs={teaInputs}
+            setTeaInputs={setTeaInputs}
+            teaModel={teaModel}
+            setTeaModel={setTeaModel}
+            submitInputs={() => submitInputs(mapState.lat, mapState.lng)}
+            loading={loading}
+            disabled={results.length > 0 || loading}
+          />
+        )}
+        {selectedYearIndex === -2 && <ResultsContainer results={results} />}
+      </div>
+
       <Map
         ref={mapRef}
         onClick={(e: any) => {
-          results.length === 0 && setMapState(e.latlng);
+          !loading && results.length === 0 && setMapState(e.latlng);
         }}
         bounds={bounds}
       >

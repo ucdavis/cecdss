@@ -14,6 +14,7 @@ import { FrcsInputs, Treatments } from '../../../models/Types';
 interface Props {
   inputs: FrcsInputs;
   setInputs: (inputs: FrcsInputs) => void;
+  disabled: boolean;
 }
 
 export const FrcsInputsContainer = (props: Props) => {
@@ -38,6 +39,7 @@ export const FrcsInputsContainer = (props: Props) => {
                   treatmentid: Number(e.target.value)
                 })
               }
+              disabled={props.disabled}
             >
               {treatments}
             </Input>
@@ -53,6 +55,7 @@ export const FrcsInputsContainer = (props: Props) => {
                   system: e.target.value
                 })
               }
+              disabled={props.disabled}
             >
               <option value='Ground-Based Mech WT'>
                 Ground-Based Mechanized Whole Tree
@@ -91,6 +94,7 @@ export const FrcsInputsContainer = (props: Props) => {
                   dieselFuelPrice: Number(e.target.value)
                 })
               }
+              disabled={props.disabled}
             />
             <InputGroupAddon addonType='append'>$/gal</InputGroupAddon>
           </InputGroup>

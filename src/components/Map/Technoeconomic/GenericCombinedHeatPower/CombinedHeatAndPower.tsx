@@ -32,6 +32,7 @@ interface Props {
   // setInputs: (inputs: InputModCHP) => void;
   inputs: any;
   setInputs: (inputs: any) => void;
+  disabled: boolean;
 }
 
 export const CombinedHeatAndPower = (props: Props) => {
@@ -52,6 +53,7 @@ export const CombinedHeatAndPower = (props: Props) => {
                 CapitalCost: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
         </InputGroup>
@@ -66,42 +68,49 @@ export const CombinedHeatAndPower = (props: Props) => {
             ElectricalFuelBaseYear: inputs
           })
         }
+        disabled={props.disabled}
       />
       <HeatBaseYearInput
         inputs={props.inputs.HeatBaseYear}
         setInputs={(inputs: HeatBaseYearInputMod) =>
           props.setInputs({ ...props.inputs, HeatBaseYear: inputs })
         }
+        disabled={props.disabled}
       />
       <ExpensesBaseYearInput
         inputs={props.inputs.ExpensesBaseYear}
         setInputs={(inputs: ExpensesBaseYearInputModGPO) =>
           props.setInputs({ ...props.inputs, ExpensesBaseYear: inputs })
         }
+        disabled={props.disabled}
       />
       <TaxesInput
         inputs={props.inputs.Taxes}
         setInputs={(inputs: TaxesInputMod) =>
           props.setInputs({ ...props.inputs, Taxes: inputs })
         }
+        disabled={props.disabled}
       />
       <IncomeOtherThanEnergyInput
         inputs={props.inputs.IncomeOtherThanEnergy}
         setInputs={(inputs: IncomeOtherThanEnergyInputMod) =>
           props.setInputs({ ...props.inputs, IncomeOtherThanEnergy: inputs })
         }
+        disabled={props.disabled}
       />
       <EscalationInflationInput
         inputs={props.inputs.EscalationInflation}
         setInputs={(inputs: EscalationInflationInputMod) =>
           props.setInputs({ ...props.inputs, EscalationInflation: inputs })
         }
+        disabled={props.disabled}
       />
       <FinancingInput
         inputs={props.inputs.Financing}
         setInputs={(inputs: FinancingInputMod) =>
           props.setInputs({ ...props.inputs, Financing: inputs })
         }
+        disabled={props.disabled}
       />
     </>
   );

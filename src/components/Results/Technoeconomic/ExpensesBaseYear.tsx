@@ -36,9 +36,9 @@ export const ExpensesBaseYear = (props: Props) => {
         <tbody>
           <tr>
             <td>Fuel Cost ($/dry metric tons</td>
-            <td>{formatNumber(props.inputs.BiomassFuelCost, 4)}</td>
+            <td>{formatNumber(props.inputs.BiomassFuelCost)}</td>
             {props.results instanceof ExpensesBaseYearModGPOClass && (
-              <td>{formatNumber(props.results.FuelCostKwh)}</td>
+              <td>{formatNumber(props.results.FuelCostKwh, 4)}</td>
             )}
             {props.results instanceof ExpensesBaseYearModGPClass && (
               <td>{formatNumber(props.results.BiomassFuelCostKwh, 4)}</td>

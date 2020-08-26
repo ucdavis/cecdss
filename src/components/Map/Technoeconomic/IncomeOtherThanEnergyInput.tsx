@@ -12,6 +12,7 @@ import {
 interface Props {
   inputs: IncomeOtherThanEnergyInputMod;
   setInputs: (inputs: any) => void;
+  disabled: boolean;
 }
 
 export const IncomeOtherThanEnergyInput = (props: Props) => {
@@ -32,6 +33,7 @@ export const IncomeOtherThanEnergyInput = (props: Props) => {
                 CapacityPayment: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/kW-year</InputGroupAddon>
         </InputGroup>
@@ -52,6 +54,7 @@ export const IncomeOtherThanEnergyInput = (props: Props) => {
                 InterestRateOnDebtReserve: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>

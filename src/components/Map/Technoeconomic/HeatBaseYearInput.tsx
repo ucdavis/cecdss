@@ -12,6 +12,7 @@ import {
 interface Props {
   inputs: HeatBaseYearInputMod;
   setInputs: (inputs: HeatBaseYearInputMod) => void;
+  disabled: boolean;
 }
 
 export const HeatBaseYearInput = (props: Props) => {
@@ -32,6 +33,7 @@ export const HeatBaseYearInput = (props: Props) => {
                 AggregateFractionOfHeatRecovered: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -49,6 +51,7 @@ export const HeatBaseYearInput = (props: Props) => {
                 AggregateSalesPriceForHeat: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/kWh</InputGroupAddon>
         </InputGroup>

@@ -15,6 +15,7 @@ import {
 interface Props {
   inputs: EscalationInflationInputMod;
   setInputs: (inputs: any) => void;
+  disabled: boolean;
 }
 
 export const EscalationInflationInput = (props: Props) => {
@@ -35,6 +36,7 @@ export const EscalationInflationInput = (props: Props) => {
                 GeneralInflation: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -55,6 +57,7 @@ export const EscalationInflationInput = (props: Props) => {
                 EscalationBiomassFuel: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>
@@ -74,6 +77,7 @@ export const EscalationInflationInput = (props: Props) => {
                 EscalationProductionTaxCredit: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -93,6 +97,7 @@ export const EscalationInflationInput = (props: Props) => {
                 EscalationHeatSales: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>
@@ -110,6 +115,7 @@ export const EscalationInflationInput = (props: Props) => {
                 EscalationOther: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>

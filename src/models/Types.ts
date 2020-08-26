@@ -81,6 +81,7 @@ export interface YearlyResult {
   errorClusters: ClusterErrorResult[];
   errorClusterNumbers: number[];
   radius: number;
+  fuelCost: number;
 }
 
 export interface ClusterResult {
@@ -108,4 +109,9 @@ export interface ClusterFeature extends Feature {
     cluster_no: number;
     biomass: number;
   };
+}
+
+export interface Coordinates {
+  lat: number;
+  lng: number;
 }

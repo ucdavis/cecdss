@@ -12,6 +12,7 @@ import {
 interface Props {
   inputs: ElectricalFuelBaseYearInputModGP;
   setInputs: (inputs: any) => void;
+  disabled: boolean;
 }
 
 export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
@@ -32,6 +33,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 GrossElectricalCapacity: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
         </InputGroup>
@@ -49,6 +51,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 NetElectricalCapacity: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
         </InputGroup>
@@ -68,6 +71,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 CapacityFactor: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
         </InputGroup>
@@ -87,6 +91,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 MoistureContent: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>% wet basis</InputGroupAddon>
         </InputGroup>
@@ -106,6 +111,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 HHVEfficiency: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -125,6 +131,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 NetHHVEfficiency: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -144,10 +151,13 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 FractionOfInputEnergy: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
-        <FormText color='muted'>Dual Fuel -> Fraction of Input Energy</FormText>
+        <FormText color='muted'>
+          Dual Fuel -{'>'} Fraction of Input Energy
+        </FormText>
       </FormGroup>
       <FormGroup>
         <Label>CO</Label>
@@ -161,10 +171,11 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 CO: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>% by volume, dry</InputGroupAddon>
         </InputGroup>
-        <FormText color='muted'>Clean Gas Composition -> CO</FormText>
+        <FormText color='muted'>Clean Gas Composition -{'>'} CO</FormText>
       </FormGroup>
       <FormGroup>
         <Label>H2</Label>
@@ -178,10 +189,11 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 H2: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>% by volume, dry</InputGroupAddon>
         </InputGroup>
-        <FormText color='muted'>Clean Gas Composition -> H2</FormText>
+        <FormText color='muted'>Clean Gas Composition -{'>'} H2</FormText>
       </FormGroup>
       <FormGroup>
         <Label>Hydrocarbons</Label>
@@ -195,11 +207,12 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 Hydrocarbons: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>% by volume, dry</InputGroupAddon>
         </InputGroup>
         <FormText color='muted'>
-          Clean Gas Composition -> Hydrocarbons (as CH4)
+          Clean Gas Composition -{'>'} Hydrocarbons (as CH4)
         </FormText>
       </FormGroup>
       <FormGroup>
@@ -214,10 +227,11 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 CO2: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>% by volume, dry</InputGroupAddon>
         </InputGroup>
-        <FormText color='muted'>Clean Gas Composition -> CO2</FormText>
+        <FormText color='muted'>Clean Gas Composition -{'>'} CO2</FormText>
       </FormGroup>
       <FormGroup>
         <Label>O2</Label>
@@ -231,10 +245,11 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 O2: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>% by volume, dry</InputGroupAddon>
         </InputGroup>
-        <FormText color='muted'>Clean Gas Composition -> O2</FormText>
+        <FormText color='muted'>Clean Gas Composition -{'>'} O2</FormText>
       </FormGroup>
       <FormGroup>
         <Label>HHV</Label>
@@ -248,6 +263,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 HHV: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>kJ/kg</InputGroupAddon>
         </InputGroup>
@@ -267,6 +283,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 AshContent: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>% dry matter</InputGroupAddon>
         </InputGroup>
@@ -284,6 +301,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
                 CarbonConcentration: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>% dry basis</InputGroupAddon>
         </InputGroup>
