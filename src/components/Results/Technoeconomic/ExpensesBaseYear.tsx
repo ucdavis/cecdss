@@ -51,12 +51,12 @@ export const ExpensesBaseYear = (props: Props) => {
                   <td>
                     Biomass Fuel Cost ($/t)--use negative value for tipping fee
                   </td>
-                  <td>{formatNumber(props.inputs.BiomassFuelCost, 4)}</td>
+                  <td>{formatNumber(props.inputs.BiomassFuelCost)}</td>
                   <td>{formatNumber(props.results.BiomassFuelCostKwh, 4)}</td>
                 </tr>
                 <tr>
                   <td>Dual Fuel Cost ($/L)</td>
-                  <td>{formatNumber(props.inputs.DualFuelCost, 4)}</td>
+                  <td>{formatNumber(props.inputs.DualFuelCost)}</td>
                   <td>{formatNumber(props.results.DualFuelCostKwh, 4)}</td>
                 </tr>
               </>
@@ -69,7 +69,7 @@ export const ExpensesBaseYear = (props: Props) => {
           <tr>
             <td>Maintenance Cost ($/year)</td>
             <td>{formatNumber(props.inputs.MaintenanceCost)}</td>
-            <td>{formatNumber(props.results.MaintenanceCostKwh)}</td>
+            <td>{formatNumber(props.results.MaintenanceCostKwh, 4)}</td>
           </tr>
           {props.inputs instanceof ExpensesBaseYearInputModGPClass &&
             props.results instanceof ExpensesBaseYearModGPClass && (
@@ -79,47 +79,49 @@ export const ExpensesBaseYear = (props: Props) => {
                     Waste Treatment/Disposal ($/y)--for char/ash, see below
                   </td>
                   <td>{formatNumber(props.inputs.WasteTreatment)}</td>
-                  <td>{formatNumber(props.results.WasteTreatmentKwh)}</td>
+                  <td>{formatNumber(props.results.WasteTreatmentKwh, 4)}</td>
                 </tr>
               </>
             )}
           <tr>
             <td>Insurance/Property Tax ($/year)</td>
             <td>{formatNumber(props.inputs.InsurancePropertyTax)}</td>
-            <td>{formatNumber(props.results.InsurancePropertyTaxKwh)}</td>
+            <td>{formatNumber(props.results.InsurancePropertyTaxKwh, 4)}</td>
           </tr>
           <tr>
             <td>Utilities ($/year)</td>
             <td>{formatNumber(props.inputs.Utilities)}</td>
-            <td>{formatNumber(props.results.UtilitiesKwh)}</td>
+            <td>{formatNumber(props.results.UtilitiesKwh, 4)}</td>
           </tr>
           {props.inputs instanceof ExpensesBaseYearInputModGPOClass &&
             props.results instanceof ExpensesBaseYearModGPOClass && (
               <tr>
                 <td>Ash Disposal ($/year)</td>
                 <td>{formatNumber(props.inputs.AshDisposal)}</td>
-                <td>{formatNumber(props.results.AshDisposalKwh)}</td>
+                <td>{formatNumber(props.results.AshDisposalKwh, 4)}</td>
               </tr>
             )}
           <tr>
             <td>Management/Administration ($/year)</td>
             <td>{formatNumber(props.inputs.Management)}</td>
-            <td>{formatNumber(props.results.ManagementKwh)}</td>
+            <td>{formatNumber(props.results.ManagementKwh, 4)}</td>
           </tr>
           <tr>
             <td>Other Operating Expenses ($/year)</td>
             <td>{formatNumber(props.inputs.OtherOperatingExpenses)}</td>
-            <td>{formatNumber(props.results.OtherOperatingExpensesKwh)}</td>
+            <td>{formatNumber(props.results.OtherOperatingExpensesKwh, 4)}</td>
           </tr>
           <tr>
-            <td>Total Non-Fuel Expenses ($/kWh)</td>
+            <td>Total Non-Fuel Expenses ($/Kwh, 4)</td>
             <td>{formatNumber(props.results.TotalNonFuelExpenses)}</td>
-            <td>{formatNumber(props.results.TotalNonFuelExpensesKwh)}</td>
+            <td>{formatNumber(props.results.TotalNonFuelExpensesKwh, 4)}</td>
           </tr>
           <tr>
             <td>Total Expenses Including Fuel ($/year)</td>
             <td>{formatNumber(props.results.TotalExpensesIncludingFuel)}</td>
-            <td>{formatNumber(props.results.TotalExpensesIncludingFuelKwh)}</td>
+            <td>
+              {formatNumber(props.results.TotalExpensesIncludingFuelKwh, 4)}
+            </td>
           </tr>
         </tbody>
       </table>

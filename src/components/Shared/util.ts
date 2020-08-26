@@ -5,6 +5,10 @@ export const formatNumber = (num: number, digits?: number) => {
   if (!num) {
     return '0';
   }
+  // default to 4 digits on small numbers
+  if (num < 1 && !digits) {
+    digits = 4;
+  }
   const options = {
     minimumFractionDigits: !!digits ? digits : 0,
     maximumFractionDigits: !!digits ? digits : 0
