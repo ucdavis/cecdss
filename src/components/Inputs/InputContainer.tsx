@@ -10,8 +10,7 @@ import {
   InputGroupAddon,
   InputGroupText
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import { FrcsInputs, Coordinates } from '../../models/Types';
+import { FrcsInputs, MapCoordinates } from '../../models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 import {
@@ -21,8 +20,8 @@ import {
 } from '@ucdavis/tea/out/models/input.model';
 
 interface Props {
-  mapInputs: Coordinates;
-  setMapInputs: (coordinates: Coordinates) => void;
+  mapInputs: MapCoordinates;
+  setMapInputs: (coordinates: MapCoordinates) => void;
   frcsInputs: FrcsInputs;
   setFrcsInputs: (inputs: FrcsInputs) => void;
   teaInputs: InputModGPO | InputModCHP | InputModGP;

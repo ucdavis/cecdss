@@ -2,14 +2,14 @@ import React, { createRef, useState, useEffect } from 'react';
 import { Map, TileLayer, Marker, Circle, withLeaflet } from 'react-leaflet';
 import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { FeatureCollection, Feature } from 'geojson';
-import { InputContainer } from './InputContainer';
+import { InputContainer } from '../Inputs/InputContainer';
 import {
   FrcsInputs,
   TechnoeconomicModels,
   YearlyResult,
   RequestParams,
   RequestParamsYear,
-  Coordinates
+  MapCoordinates
 } from '../../models/Types';
 import {
   InputModGPO,
@@ -23,20 +23,14 @@ import { convertGeoJSON } from '../Shared/util';
 import { HexLayers } from './HexLayers';
 import { HeatmapLayers } from './HeatmapLayers';
 import ReactLeafletKml from 'react-leaflet-kml';
-import {
-  PaginationItem,
-  PaginationLink,
-  Spinner,
-  Button,
-  Pagination
-} from 'reactstrap';
-import { YearlyResultsContainer } from '../Results/YearlyResultsContainer';
+import { PaginationItem, PaginationLink, Pagination } from 'reactstrap';
 import { ResultsContainer } from '../Results/ResultsContainer';
 
 export const MapContainer = () => {
   const [loading, toggleLoading] = useState<boolean>(false);
   const [results, setResults] = useState<YearlyResult[]>([]);
   const [selectedYearIndex, setSelectedYearIndex] = useState<number>(-1);
+  const [showResults, toggleShowResults] = useState<boolean>(false);
   const [geoJsonResults, setGeoJsonResults] = useState<FeatureCollection[]>([]);
   const [mapOverlayType, setMapOverlayType] = useState<string>('heatmap');
 
@@ -67,7 +61,7 @@ export const MapContainer = () => {
     }
   }, [teaModel]);
 
-  const [mapState, setMapState] = useState<Coordinates>({
+  const [mapState, setMapState] = useState<MapCoordinates>({
     lat: 39.644308,
     lng: -121.553971
   });
@@ -78,8 +72,10 @@ export const MapContainer = () => {
     [39.2, -120]
   ];
 
-  const submitInputs = async (lat: number, lng: number) => {
+  const submitInputs = async () => {
     toggleLoading(true);
+    const lat = mapState.lat;
+    const lng = mapState.lng;
     let radius = 0;
     let clusterIds: number[] = [];
     let errorIds: number[] = [];
@@ -128,6 +124,7 @@ export const MapContainer = () => {
 
       setResults(results => [...results, yearResult]);
       toggleLoading(false);
+      toggleShowResults(true);
     }
   };
 
@@ -155,68 +152,32 @@ export const MapContainer = () => {
   //     });
   // }, []);
 
-  const pages = years.map((year, i) => (
-    <PaginationItem>
-      <PaginationLink
-        key={year}
-        disabled={!results[i]}
-        onClick={() => setSelectedYearIndex(i)}
-      >
-        {year}
-        {!results[i] && <Spinner color='primary' size='sm' />}
-      </PaginationLink>
-    </PaginationItem>
-  ));
-
   return (
     <div style={style}>
-      <div id={results.length > 0 && !loading ? 'results-sidebar' : 'sidebar'}>
+      <div id={results.length > 0 || loading ? 'results-sidebar' : 'sidebar'}>
         {(results.length > 0 || loading) && (
           <>
             <Pagination aria-label='Page navigation example' size='lg'>
               <PaginationItem>
                 <PaginationLink
                   key='inputs'
-                  onClick={() => setSelectedYearIndex(-1)}
+                  onClick={() => toggleShowResults(false)}
                 >
                   Inputs
                 </PaginationLink>
               </PaginationItem>
-              {pages}
               <PaginationItem>
                 <PaginationLink
                   key='finalResults'
-                  onClick={() => setSelectedYearIndex(-2)}
+                  onClick={() => toggleShowResults(true)}
                 >
-                  Final Resulst
+                  Results
                 </PaginationLink>
               </PaginationItem>
             </Pagination>
-            <div>
-              <h5>Toggle Results Map View</h5>
-              <Button
-                disabled={mapOverlayType === 'heatmap'}
-                onClick={() => setMapOverlayType('heatmap')}
-              >
-                Heatmap
-              </Button>
-              <Button
-                disabled={mapOverlayType === 'hexbin'}
-                onClick={() => setMapOverlayType('hexbin')}
-              >
-                Hexbin
-              </Button>
-            </div>
-            {selectedYearIndex > -1 && (
-              <YearlyResultsContainer
-                results={results[selectedYearIndex]}
-                teaInputs={teaInputs}
-                teaModel={teaModel}
-              />
-            )}
           </>
         )}
-        {selectedYearIndex === -1 && (
+        {!showResults && (
           <InputContainer
             mapInputs={mapState}
             setMapInputs={setMapState}
@@ -226,12 +187,23 @@ export const MapContainer = () => {
             setTeaInputs={setTeaInputs}
             teaModel={teaModel}
             setTeaModel={setTeaModel}
-            submitInputs={() => submitInputs(mapState.lat, mapState.lng)}
+            submitInputs={() => submitInputs()}
             loading={loading}
             disabled={results.length > 0 || loading}
           />
         )}
-        {selectedYearIndex === -2 && <ResultsContainer results={results} />}
+        {showResults && (
+          <ResultsContainer
+            results={results}
+            years={years}
+            selectedYearIndex={selectedYearIndex}
+            setSelectedYearIndex={setSelectedYearIndex}
+            mapOverlayType={mapOverlayType}
+            setMapOverlayType={setMapOverlayType}
+            teaInputs={teaInputs}
+            teaModel={teaModel}
+          />
+        )}
       </div>
 
       <Map

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TechnoeconomicModels, YearlyResult } from '../../models/Types';
 import { GPOResults } from './Technoeconomic/GenericPowerOnly/GPOResults';
-import { FrcsResultsContainer } from './Frcs/FrcsResultsContainer';
+import { YearlyResultsTable } from './YearlyResultsTables';
 import {
   InputModGPO,
   InputModCHP,
@@ -28,7 +28,7 @@ export const YearlyResultsContainer = (props: Props) => {
   return (
     <div>
       <h1>Results For {props.results.year}</h1>
-      <FrcsResultsContainer results={props.results} />
+      <YearlyResultsTable results={props.results} />
 
       {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
         props.teaInputs instanceof InputModGPOClass && (

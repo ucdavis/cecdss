@@ -111,7 +111,7 @@ export interface ClusterFeature extends Feature {
   };
 }
 
-export interface Coordinates {
+export interface MapCoordinates {
   lat: number;
   lng: number;
 }

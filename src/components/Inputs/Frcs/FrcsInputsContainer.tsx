@@ -8,7 +8,6 @@ import {
   FormGroup,
   Form
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import { FrcsInputs, Treatments } from '../../../models/Types';
 
 interface Props {
