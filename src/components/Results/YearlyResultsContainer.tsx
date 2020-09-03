@@ -29,6 +29,7 @@ export const YearlyResultsContainer = (props: Props) => {
     <div>
       <h1>Results For {props.results.year}</h1>
       <YearlyResultsTable results={props.results} />
+      <LCAResults results={props.results.lcaResults} />
 
       {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
         props.teaInputs instanceof InputModGPOClass && (
@@ -42,7 +43,6 @@ export const YearlyResultsContainer = (props: Props) => {
         props.teaInputs instanceof InputModGPClass && (
           <GPResults inputs={props.teaInputs} results={teaResults} />
         )}
-      <LCAResults results={props.results.lcaResults} />
     </div>
   );
 };

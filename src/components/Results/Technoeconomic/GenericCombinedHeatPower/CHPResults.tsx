@@ -1,6 +1,6 @@
 import React from 'react';
 import { ElectricalAndFuelBaseYear } from '../ElectricalAndFuelBaseYear';
-import { AnnualCashFlow } from '../AnnualCashFlow';
+import { AnnualCashFlowTable } from '../AnnualCashFlowTable';
 import { CapitalCost } from '../CapitalCost';
 import { ExpensesBaseYear } from '../ExpensesBaseYear';
 import { CurrentLAC } from '../CurrentLAC';
@@ -11,6 +11,7 @@ import { EscalationInflation } from '../EscalationInflation';
 import { Financing } from '../Financing';
 import { InputModCHP } from '@ucdavis/tea/out/models/input.model';
 import { OutputModCHP } from '@ucdavis/tea/out/models/output.model';
+import { AnnualCashFlow } from '../AnnualCashFlow';
 
 interface Props {
   inputs: InputModCHP;
@@ -40,10 +41,12 @@ export const CHPResults = (props: Props) => {
         inputs={props.inputs.Financing}
         results={props.results.Financing}
       />
-      <AnnualCashFlow annualCashFlows={props.results.AnnualCashFlows} />
+      <AnnualCashFlow
+        teaModel='CHP'
+        annualCashFlow={props.results.AnnualCashFlows[0]}
+      />
       <CurrentLAC results={props.results.CurrentLAC} />
       <ConstantLAC results={props.results.ConstantLAC} />
-      {/* <GPOCharts inputs={props.inputs} results={props.results} /> */}
     </div>
   );
 };
