@@ -39,7 +39,24 @@ export const convertGeoJSON = (clusters: ClusterResult[]) => {
       },
       geometry: {
         type: 'Point',
-        coordinates: [cluster.lng, cluster.lat]
+        coordinates: [cluster.center_lng, cluster.center_lat]
+      }
+    };
+    return feature;
+  });
+  return features;
+};
+
+export const convertLandingSiteGeoJSON = (clusters: ClusterResult[]) => {
+  const features: Feature[] = clusters.map(cluster => {
+    const feature: Feature = {
+      type: 'Feature',
+      properties: {
+        cluster_no: cluster.cluster_no
+      },
+      geometry: {
+        type: 'Point',
+        coordinates: [cluster.landing_lng, cluster.landing_lat]
       }
     };
     return feature;

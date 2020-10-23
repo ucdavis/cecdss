@@ -7,10 +7,7 @@ import {
   VictoryBar
 } from 'victory';
 import { InputModGPO } from '@ucdavis/tea/out/models/input.model';
-import {
-  OutputModGPO,
-  CashFlowGPO
-} from '@ucdavis/tea/out/models/output.model';
+import { OutputModGPO, CashFlow } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
   inputs: InputModGPO;
@@ -24,8 +21,8 @@ export const GPOCharts = (props: Props) => {
         <VictoryChart height={400} width={400}>
           <VictoryLine
             data={props.results.AnnualCashFlows}
-            x={(d: CashFlowGPO) => d.IncomeCapacity}
-            y={(d: CashFlowGPO) => d.Year}
+            x={(d: CashFlow) => d.IncomeCapacity}
+            y={(d: CashFlow) => d.Year}
             animate={{
               duration: 2000,
               onLoad: { duration: 1000 }

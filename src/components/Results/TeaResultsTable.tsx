@@ -1,7 +1,7 @@
 import React from 'react';
-import { ReactTable } from '../../Shared/ReactTable';
+import { ReactTable } from '../Shared/ReactTable';
 import { Cell } from 'react-table';
-import { formatCurrency } from '../../Shared/util';
+import { formatCurrency } from '../Shared/util';
 import {
   CashFlow,
   CashFlowCHP,
@@ -12,10 +12,10 @@ interface Props {
   annualCashFlows: CashFlow[] | CashFlowCHP[] | CashFlowGP[];
 }
 
-export const AnnualCashFlowTable = (props: Props) => {
+export const TeaResultsTable = (props: Props) => {
   const columns = React.useMemo(
     () => [
-      { Header: 'Year', accessor: 'Year' },
+      { Header: 'Technoeconomic Analysis ($)', accessor: 'Year' },
       {
         Header: 'Equity Recovery',
         accessor: 'EquityRecovery',
@@ -336,31 +336,6 @@ export const AnnualCashFlowTable = (props: Props) => {
     <div>
       <h3>Annual Cash Flow</h3>
       <ReactTable columns={columns} data={data} />
-      {/* <table className='table'>
-        <thead>
-          <tr>
-            <td>Year</td>
-            {props.annualCashFlows.map((flow, index) => (
-              <td>{index + 1}</td>
-            ))}
-            <td>Total</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Equity Recovery</td>
-            {props.annualCashFlows.map(flow => (
-              <td>{flow.EquityRecovery}</td>
-            ))}
-            <td>
-              {props.annualCashFlows.reduce(
-                (a, b) => a + b.EquityRecovery,
-                0
-              )}
-            </td>
-          </tr>
-        </tbody>
-      </table> */}
     </div>
   );
 };

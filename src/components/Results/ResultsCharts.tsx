@@ -2,10 +2,11 @@ import React from 'react';
 import { YearlyResult } from '../../models/Types';
 import {
   VictoryChart,
-  VictoryGroup,
+  VictoryPortal,
   VictoryLine,
   VictoryStack,
-  VictoryArea
+  VictoryArea,
+  VictoryLabel
 } from 'victory';
 
 interface Props {
@@ -26,6 +27,9 @@ export const ResultsCharts = (props: Props) => {
     };
   });
   const moveInCosts = props.results.map(result => {
+    if (result.totalMoveInCost === 0) {
+      return null;
+    }
     return {
       x: result.year.toString(),
       y: result.totalMoveInCost / result.totalBiomass
@@ -34,27 +38,31 @@ export const ResultsCharts = (props: Props) => {
   const fuelCosts = props.results.map(result => {
     return { x: result.year.toString(), y: result.fuelCost };
   });
-  const currentLAC = props.results.map(result => {
-    return {
-      x: result.year.toString(),
-      y: result.teaResults.CurrentLAC.CurrentLACofEnergy
-    };
-  });
   return (
     <>
       <VictoryChart>
-        <VictoryLine
-          style={{
-            parent: { border: '1px solid #ccc' }
-          }}
-          data={currentLAC}
-        />
-      </VictoryChart>
-      <VictoryChart>
-        <VictoryStack colorScale={['tomato', 'orange', 'gold']}>
-          <VictoryArea data={harvestCosts} />
+        <VictoryStack
+          colorScale={['tomato', 'orange', 'gold']}
+          // labels={['harvest costs', 'fuel costs']}
+          // labelComponent={
+          //   <VictoryPortal>
+          //     <CustomLabelComponent />
+          //   </VictoryPortal>
+          // }
+        >
+          <VictoryArea
+            data={harvestCosts}
+            label='harvest cost'
+            labelComponent={
+              <VictoryPortal>
+                <VictoryLabel />
+              </VictoryPortal>
+            }
+          />
           <VictoryArea data={transportationCosts} />
-          <VictoryArea data={moveInCosts} />
+          {moveInCosts && (
+            <VictoryArea data={moveInCosts} label='moveInCosts' />
+          )}
         </VictoryStack>
         <VictoryLine
           style={{
@@ -66,3 +74,25 @@ export const ResultsCharts = (props: Props) => {
     </>
   );
 };
+
+function CustomLabelComponent(props: any) {
+  const text = `${Math.round(props.datum.y)}%`;
+  return (
+    <g>
+      <VictoryLabel
+        {...props}
+        textAnchor='middle'
+        verticalAnchor='middle'
+        text={text}
+        angle={0}
+        dy={0}
+        dx={-10}
+        style={{
+          fontSize: 5,
+          fill: 'white'
+        }}
+        renderInPortal={true}
+      />
+    </g>
+  );
+}

@@ -1,5 +1,10 @@
 import React from 'react';
-import { YearlyResult } from '../../models/Types';
+import {
+  AllYearsResults,
+  FrcsInputs,
+  TechnoeconomicModels,
+  YearlyResult
+} from '../../models/Types';
 import {
   PaginationItem,
   PaginationLink,
@@ -14,6 +19,13 @@ import {
   InputModGP
 } from '@ucdavis/tea/out/models/input.model';
 import { ResultsCharts } from './ResultsCharts';
+import { InputModCHPClass } from '../../models/CHPClasses';
+import { InputModGPClass } from '../../models/GPClasses';
+import { InputModGPOClass } from '../../models/GPOClasses';
+import { GPResults } from './Technoeconomic/GasificationPower/GPResults';
+import { CHPResults } from './Technoeconomic/GenericCombinedHeatPower/CHPResults';
+import { GPOResults } from './Technoeconomic/GenericPowerOnly/GPOResults';
+import { ResultsTable } from './ResultsTables';
 
 interface Props {
   years: number[];
@@ -21,9 +33,11 @@ interface Props {
   setSelectedYearIndex: (index: number) => void;
   mapOverlayType: string;
   setMapOverlayType: (type: string) => void;
-  results: YearlyResult[];
+  allYearResults: AllYearsResults;
+  yearlyResults: YearlyResult[];
   teaInputs: InputModGPO | InputModCHP | InputModGP;
   teaModel: string;
+  frcsInputs: FrcsInputs;
 }
 
 export const ResultsContainer = (props: Props) => {
@@ -31,14 +45,16 @@ export const ResultsContainer = (props: Props) => {
     <PaginationItem>
       <PaginationLink
         key={year}
-        disabled={!props.results[i]}
+        disabled={!props.yearlyResults[i]}
         onClick={() => props.setSelectedYearIndex(i)}
       >
         {year}
-        {!props.results[i] && <Spinner color='primary' size='sm' />}
+        {!props.yearlyResults[i] && <Spinner color='primary' size='sm' />}
       </PaginationLink>
     </PaginationItem>
   ));
+  const teaResults: any = props.allYearResults.teaResults;
+
   return (
     <>
       <h2>Results</h2>
@@ -58,12 +74,34 @@ export const ResultsContainer = (props: Props) => {
       <Pagination aria-label='Page navigation example' size='lg'>
         {pages}
       </Pagination>
-      <ResultsCharts results={props.results} />
-      {props.selectedYearIndex > -1 && (
-        <YearlyResultsContainer
-          results={props.results[props.selectedYearIndex]}
+      {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
+        props.teaInputs instanceof InputModGPOClass && (
+          <GPOResults inputs={props.teaInputs} results={teaResults} />
+        )}
+      {props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower &&
+        props.teaInputs instanceof InputModCHPClass && (
+          <CHPResults inputs={props.teaInputs} results={teaResults} />
+        )}
+      {props.teaModel === TechnoeconomicModels.gasificationPower &&
+        props.teaInputs instanceof InputModGPClass && (
+          <GPResults inputs={props.teaInputs} results={teaResults} />
+        )}
+      {props.yearlyResults.length === props.years.length && (
+        <ResultsTable
+          yearlyResults={props.yearlyResults}
+          allYearResults={props.allYearResults}
+          frcsInputs={props.frcsInputs}
           teaInputs={props.teaInputs}
           teaModel={props.teaModel}
+        />
+      )}
+      <ResultsCharts results={props.yearlyResults} />
+      {props.selectedYearIndex > -1 && (
+        <YearlyResultsContainer
+          results={props.yearlyResults[props.selectedYearIndex]}
+          teaInputs={props.teaInputs}
+          teaModel={props.teaModel}
+          biomassTarget={props.allYearResults.biomassTarget}
         />
       )}
     </>

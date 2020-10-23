@@ -20,16 +20,6 @@ export const HexLayers = (props: Props) => {
     radiusRange: [5, 12]
   };
 
-  const testData: FeatureCollection = {
-    type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: [-121.653971, 39.744308] },
-        properties: { prop0: 'value0' }
-      }
-    ]
-  };
   const dataLayers = props.yearlyGeoJson.map((data, i) =>
     i === props.selectedYearIndex ? (
       <WrappedHexbinLayer data={data} {...options} />

@@ -6,13 +6,14 @@ import { formatNumber, formatCurrency } from '../Shared/util';
 import { VictoryPie } from 'victory';
 
 interface Props {
+  biomassTarget: number;
   results: YearlyResult;
 }
 
 export const YearlyResultsTable = (props: Props) => {
   return (
     <div>
-      {props.results.biomassTarget > props.results.totalBiomass && (
+      {props.biomassTarget > props.results.totalBiomass && (
         <Alert color='danger'>
           The settings you selected did not return enough biomass to meet the
           yearly requirement.
@@ -23,7 +24,7 @@ export const YearlyResultsTable = (props: Props) => {
         <tbody>
           <tr>
             <td>Annual Fuel Consumption (tons)</td>
-            <td>{formatNumber(props.results.biomassTarget)}</td>
+            <td>{formatNumber(props.biomassTarget)}</td>
           </tr>
           <tr>
             <td>Harvest Cost ($/ton)</td>
@@ -55,15 +56,6 @@ export const YearlyResultsTable = (props: Props) => {
           <tr>
             <td>Fuel Cost ($/ton)</td>
             <td>{formatCurrency(props.results.fuelCost)}</td>
-          </tr>
-          <tr>
-            <td>Current $ LAC of Energy ($/kWh)</td>
-            <td>
-              {formatNumber(
-                props.results.teaResults.CurrentLAC.CurrentLACofEnergy,
-                4
-              )}
-            </td>
           </tr>
           {/* <tr>
             <td>Number of Clusters Used</td>

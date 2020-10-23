@@ -1,14 +1,14 @@
 import React from 'react';
 import { formatNumber, formatCurrency } from '../../Shared/util';
 import {
-  CashFlowGPO,
+  CashFlow,
   CashFlowCHP,
   CashFlowGP
 } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {
   teaModel: string;
-  annualCashFlow: CashFlowGPO | CashFlowCHP | CashFlowGP;
+  annualCashFlow: CashFlow | CashFlowCHP | CashFlowGP;
 }
 
 export const AnnualCashFlow = (props: Props) => {

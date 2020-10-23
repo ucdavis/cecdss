@@ -1,48 +1,32 @@
 import React from 'react';
-import { TechnoeconomicModels, YearlyResult } from '../../models/Types';
-import { GPOResults } from './Technoeconomic/GenericPowerOnly/GPOResults';
+import { YearlyResult } from '../../models/Types';
 import { YearlyResultsTable } from './YearlyResultsTables';
 import {
   InputModGPO,
   InputModCHP,
   InputModGP
 } from '@ucdavis/tea/out/models/input.model';
-import { CHPResults } from './Technoeconomic/GenericCombinedHeatPower/CHPResults';
-import { InputModCHPClass } from '../../models/CHPClasses';
-import { InputModGPClass } from '../../models/GPClasses';
-import { GPResults } from './Technoeconomic/GasificationPower/GPResults';
-import { InputModGPOClass } from '../../models/GPOClasses';
 import { LCAResults } from './LCA/LCAResults';
 
 interface Props {
   results: YearlyResult;
   teaInputs: InputModGPO | InputModCHP | InputModGP;
   teaModel: string;
+  biomassTarget: number;
 }
 
 export const YearlyResultsContainer = (props: Props) => {
   if (!props.results) {
     return null;
   }
-  const teaResults: any = props.results.teaResults;
   return (
     <div>
       <h1>Results For {props.results.year}</h1>
-      <YearlyResultsTable results={props.results} />
+      <YearlyResultsTable
+        results={props.results}
+        biomassTarget={props.biomassTarget}
+      />
       <LCAResults results={props.results.lcaResults} />
-
-      {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
-        props.teaInputs instanceof InputModGPOClass && (
-          <GPOResults inputs={props.teaInputs} results={teaResults} />
-        )}
-      {props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower &&
-        props.teaInputs instanceof InputModCHPClass && (
-          <CHPResults inputs={props.teaInputs} results={teaResults} />
-        )}
-      {props.teaModel === TechnoeconomicModels.gasificationPower &&
-        props.teaInputs instanceof InputModGPClass && (
-          <GPResults inputs={props.teaInputs} results={teaResults} />
-        )}
     </div>
   );
 };

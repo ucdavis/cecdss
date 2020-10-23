@@ -1,7 +1,10 @@
 import {
   OutputModCHP,
   OutputModGPO,
-  OutputModGP
+  OutputModGP,
+  CashFlowCHP,
+  CashFlowGP,
+  CashFlow
 } from '@ucdavis/tea/out/models/output.model';
 import { OutputVarMod } from '@ucdavis/frcs/out/systems/frcs.model';
 import { LCAresults } from './LCAModels';
@@ -10,7 +13,7 @@ import {
   InputModCHP,
   InputModGP
 } from '@ucdavis/tea/out/models/input.model';
-import { Feature, Point } from 'geojson';
+import { Feature, FeatureCollection, GeoJsonObject, Point } from 'geojson';
 
 export interface RequestParams {
   lat: number;
@@ -18,19 +21,15 @@ export interface RequestParams {
   system: string;
   treatmentid: number;
   dieselFuelPrice: number; // $/gal
-  teaModel: string;
-  teaInputs: InputModGPO | InputModCHP | InputModGP; // | InputModHydrogen;
-}
-
-export interface RequestParamsYears extends RequestParams {
-  years: number[];
-}
-
-export interface RequestParamsYear extends RequestParams {
+  biomassTarget: number;
   year: number;
-  clusterIds: number[];
-  errorIds: number[];
+  clusterIds: string[];
+  errorIds: string[];
   radius: number;
+  teaModel: string;
+  annualGeneration: number; // used for LCA, kWh
+  moistureContent: number; // for frcs
+  cashFlow: CashFlow | CashFlowCHP | CashFlowGP;
 }
 
 export interface FrcsInputs {
@@ -64,11 +63,16 @@ export const Treatments: Treatment[] = [
   { id: 10, name: 'Biomass Salvage' }
 ];
 
+export interface Results {
+  clusterIds: string[];
+  errorIds: string[];
+  years: YearlyResult[];
+  radius: number;
+}
+
 export interface YearlyResult {
   year: number;
   lcaResults: LCAresults;
-  teaResults: OutputModGPO | OutputModCHP | OutputModGP;
-  biomassTarget: number; // from tea output
   totalBiomass: number; // total biomass from frcs residue output
   totalArea: number;
   totalResidueCost: number; // cost of harvesting residue biomass from frcs
@@ -76,16 +80,18 @@ export interface YearlyResult {
   totalMoveInDistance: number;
   totalTransportationCost: number; // transportation cost per gt * cluster biomass (distance from osrm)
   numberOfClusters: number;
-  clusterNumbers: number[];
+  clusterNumbers: string[];
   clusters: ClusterResult[];
   errorClusters: ClusterErrorResult[];
-  errorClusterNumbers: number[];
+  errorClusterNumbers: string[];
   radius: number;
   fuelCost: number;
+  energyRevenueRequired: number;
+  geoJson: FeatureCollection;
 }
 
 export interface ClusterResult {
-  cluster_no: number;
+  cluster_no: string;
   biomass: number;
   combinedCost: number;
   area: number;
@@ -93,12 +99,27 @@ export interface ClusterResult {
   residueCost: number;
   transportationCost: number;
   frcsResult: OutputVarMod;
-  lat: number;
-  lng: number;
+  center_lat: number;
+  center_lng: number;
+  landing_lat: number;
+  landing_lng: number;
+  county: string;
+  land_use: string;
+  site_class: number;
+  forest_type: string;
+  haz_class: number;
+  // total live biomass (including saw log)
+  // total dead biomass
+  // tons of biomass
+  // 2, 7, 15, 25, 35, 40
+  // vol of merch timber
+  // land_use
+  // slope, elevation, site_class, forest_type
+  // county
 }
 
 export interface ClusterErrorResult {
-  cluster_no: number;
+  cluster_no: string;
   biomass: number;
   area: number;
   error: string;
@@ -114,4 +135,23 @@ export interface ClusterFeature extends Feature {
 export interface MapCoordinates {
   lat: number;
   lng: number;
+}
+
+export interface RequestParamsAllYears {
+  facilityLat: number;
+  facilityLng: number;
+  transmission: any; // InputModTransimission;
+  teaModel: string;
+  teaInputs: InputModGPO | InputModCHP | InputModGP; // | InputModHydrogen;
+  includeUnloadingCost: boolean;
+  unloadingCost: number; // default to 10,000
+}
+
+export interface AllYearsResults {
+  biomassTarget: number; // from tea output
+  annualGeneration: number;
+  teaResults: OutputModGPO | OutputModCHP | OutputModGP;
+  transmissionResults?: any;
+  nearestSubstation: string;
+  distanceToNearestSubstation: number; // km
 }
