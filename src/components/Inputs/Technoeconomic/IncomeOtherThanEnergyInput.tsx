@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  IncomeOtherThanEnergyInputModGP,
-  IncomeOtherThanEnergyInputMod
-} from '@ucdavis/tea/out/models/input.model';
+import { IncomeOtherThanEnergyInputMod } from '@ucdavis/tea/out/models/input.model';
 import {
   FormText,
   FormGroup,
@@ -11,11 +8,11 @@ import {
   Input,
   InputGroupAddon
 } from 'reactstrap';
-import { IncomeOtherThanEnergyInputModGPClass } from '../../../models/GPClasses';
 
 interface Props {
-  inputs: IncomeOtherThanEnergyInputMod | IncomeOtherThanEnergyInputModGP;
+  inputs: IncomeOtherThanEnergyInputMod;
   setInputs: (inputs: any) => void;
+  disabled: boolean;
 }
 
 export const IncomeOtherThanEnergyInput = (props: Props) => {
@@ -36,6 +33,7 @@ export const IncomeOtherThanEnergyInput = (props: Props) => {
                 CapacityPayment: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/kW-year</InputGroupAddon>
         </InputGroup>
@@ -56,6 +54,7 @@ export const IncomeOtherThanEnergyInput = (props: Props) => {
                 InterestRateOnDebtReserve: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>
@@ -64,27 +63,6 @@ export const IncomeOtherThanEnergyInput = (props: Props) => {
           requires security deposit
         </FormText>
       </FormGroup>
-      {props.inputs instanceof IncomeOtherThanEnergyInputModGPClass && (
-        <FormGroup>
-          <Label>Sales Price For Char</Label>
-          <InputGroup>
-            <Input
-              type='text'
-              value={props.inputs.SalesPriceForChar}
-              onChange={e =>
-                props.setInputs({
-                  ...props.inputs,
-                  SalesPriceForChar: Number(e.target.value)
-                })
-              }
-            />
-            <InputGroupAddon addonType='append'>$/t</InputGroupAddon>
-          </InputGroup>
-          <FormText color='muted'>
-            Sales Price for Char/Ash --for disposal
-          </FormText>
-        </FormGroup>
-      )}
     </>
   );
 };

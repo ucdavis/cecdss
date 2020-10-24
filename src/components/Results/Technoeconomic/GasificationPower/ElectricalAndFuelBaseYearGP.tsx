@@ -36,9 +36,7 @@ export const ElectricalAndFuelBaseYearGP = (props: Props) => {
           </tr>
           <tr>
             <td>Annual Net Electricity Generation (kWh)</td>
-            <td>
-              {formatNumber(props.results.AnnualNetElectricityGeneration)}
-            </td>
+            <td>{formatNumber(props.results.AnnualGeneration)}</td>
           </tr>
           <tr>
             <td>

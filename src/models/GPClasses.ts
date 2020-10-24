@@ -117,7 +117,7 @@ export class ElectricalFuelBaseYearModGPClass
   BiomassTarget = 0;
   ParasiticLoad = 0;
   AnnualHours = 0;
-  AnnualNetElectricityGeneration = 0;
+  AnnualGeneration = 0;
   OverallNetSystemEfficiency = 0;
   NitrogenGas = 0;
   CleanGasMolecularMass = 0;

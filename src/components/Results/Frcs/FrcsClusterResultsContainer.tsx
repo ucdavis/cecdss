@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Results, ClusterResult } from '../../../models/Types';
+import { YearlyResult, ClusterResult } from '../../../models/Types';
 import { Button } from 'reactstrap';
 import { ReactTable } from '../../Shared/ReactTable';
 import { formatNumber, formatCurrency } from '../../Shared/util';
@@ -7,7 +7,7 @@ import { Cell } from 'react-table';
 import { FrcsSkippedClusterResultsContainer } from './FrcsSkippedClusterResultsContainer';
 
 interface Props {
-  results: Results;
+  results: YearlyResult;
 }
 
 export const FrcsClusterResultsContainer = (props: Props) => {
@@ -117,11 +117,11 @@ export const FrcsClusterResultsContainer = (props: Props) => {
     [props.results]
   );
 
-  const results = React.useMemo(() => props.results.clusters, []);
+  // const results = React.useMemo(() => props.results.clusters, []);
   return (
     <div>
       <h3>Clusters</h3>
-      <ReactTable columns={columns} data={results} />
+      {/* <ReactTable columns={columns} data={results} /> */}
       {/* {props.results.skippedClusters && (
         <FrcsSkippedClusterResultsContainer
           results={props.results.skippedClusters}

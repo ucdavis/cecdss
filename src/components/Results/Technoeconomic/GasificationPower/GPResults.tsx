@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnnualCashFlow } from '../AnnualCashFlow';
+import { AnnualCashFlowTable } from '../AnnualCashFlowTable';
 import { ExpensesBaseYear } from '../ExpensesBaseYear';
 import { CurrentLAC } from '../CurrentLAC';
 import { ConstantLAC } from '../ConstantLAC';
@@ -12,6 +12,7 @@ import { OutputModGP } from '@ucdavis/tea/out/models/output.model';
 import { CapitalCostGP } from './CapitalCostGP';
 import { ElectricalAndFuelBaseYearGP } from './ElectricalAndFuelBaseYearGP';
 import { HeatBaseYear } from '../GenericCombinedHeatPower/HeatBaseYear';
+import { AnnualCashFlow } from '../AnnualCashFlow';
 
 interface Props {
   inputs: InputModGP;
@@ -48,10 +49,12 @@ export const GPResults = (props: Props) => {
         inputs={props.inputs.Financing}
         results={props.results.Financing}
       />
-      <AnnualCashFlow annualCashFlows={props.results.AnnualCashFlows} />
+      <AnnualCashFlow
+        teaModel='GP'
+        annualCashFlow={props.results.AnnualCashFlows[0]}
+      />
       <CurrentLAC results={props.results.CurrentLAC} />
       <ConstantLAC results={props.results.ConstantLAC} />
-      {/* <GPOCharts inputs={props.inputs} results={props.results} /> */}
     </div>
   );
 };

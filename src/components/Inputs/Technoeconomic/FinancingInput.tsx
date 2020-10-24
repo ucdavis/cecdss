@@ -15,6 +15,7 @@ import {
 interface Props {
   inputs: FinancingInputMod;
   setInputs: (inputs: FinancingInputMod) => void;
+  disabled: boolean;
 }
 
 export const FinancingInput = (props: Props) => {
@@ -35,6 +36,7 @@ export const FinancingInput = (props: Props) => {
                 DebtRatio: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -54,6 +56,7 @@ export const FinancingInput = (props: Props) => {
                 InterestRateOnDebt: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -73,6 +76,7 @@ export const FinancingInput = (props: Props) => {
                 EconomicLife: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>years</InputGroupAddon>
         </InputGroup>
@@ -90,6 +94,7 @@ export const FinancingInput = (props: Props) => {
                 CostOfEquity: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>

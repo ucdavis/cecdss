@@ -11,11 +11,11 @@ import {
   Input,
   InputGroupAddon
 } from 'reactstrap';
-import { EscalationInflationInputModGPClass } from '../../../models/GPClasses';
 
 interface Props {
-  inputs: EscalationInflationInputMod | EscalationInflationInputModGP;
+  inputs: EscalationInflationInputMod;
   setInputs: (inputs: any) => void;
+  disabled: boolean;
 }
 
 export const EscalationInflationInput = (props: Props) => {
@@ -36,6 +36,7 @@ export const EscalationInflationInput = (props: Props) => {
                 GeneralInflation: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -56,6 +57,7 @@ export const EscalationInflationInput = (props: Props) => {
                 EscalationBiomassFuel: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>
@@ -63,27 +65,6 @@ export const EscalationInflationInput = (props: Props) => {
           Rate at which biomass fuel cost escalates over time
         </FormText>
       </FormGroup>
-      {props.inputs instanceof EscalationInflationInputModGPClass && (
-        <FormGroup>
-          <Label>Escalation Dual Fuel</Label>
-          <InputGroup>
-            <Input
-              type='text'
-              value={props.inputs.EscalationDualFuel}
-              onChange={e =>
-                props.setInputs({
-                  ...props.inputs,
-                  EscalationDualFuel: Number(e.target.value)
-                })
-              }
-            />
-            <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
-          </InputGroup>
-          <FormText color='muted'>
-            Rate at which dual fuel cost escalates over time
-          </FormText>
-        </FormGroup>
-      )}
       <FormGroup>
         <Label>Escalation Production Tax Credit</Label>
         <InputGroup>
@@ -96,6 +77,7 @@ export const EscalationInflationInput = (props: Props) => {
                 EscalationProductionTaxCredit: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -115,32 +97,12 @@ export const EscalationInflationInput = (props: Props) => {
                 EscalationHeatSales: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>
         <FormText color='muted'>Escalation rate applied to heat sales</FormText>
       </FormGroup>
-      {props.inputs instanceof EscalationInflationInputModGPClass && (
-        <FormGroup>
-          <Label>Escalation Char Sales</Label>
-          <InputGroup>
-            <Input
-              type='text'
-              value={props.inputs.EscalationCharSales}
-              onChange={e =>
-                props.setInputs({
-                  ...props.inputs,
-                  EscalationCharSales: Number(e.target.value)
-                })
-              }
-            />
-            <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
-          </InputGroup>
-          <FormText color='muted'>
-            Escalation rate applied to char or ash
-          </FormText>
-        </FormGroup>
-      )}
       <FormGroup>
         <Label>Escalation Other</Label>
         <InputGroup>
@@ -153,6 +115,7 @@ export const EscalationInflationInput = (props: Props) => {
                 EscalationOther: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>

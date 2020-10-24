@@ -1,7 +1,7 @@
 import React from 'react';
 import { ElectricalAndFuelBaseYear } from '../ElectricalAndFuelBaseYear';
 import { GPOCharts } from './GPOCharts';
-import { AnnualCashFlow } from '../AnnualCashFlow';
+import { AnnualCashFlowTable } from '../AnnualCashFlowTable';
 import { CapitalCost } from '../CapitalCost';
 import { ExpensesBaseYear } from '../ExpensesBaseYear';
 import { CurrentLAC } from '../CurrentLAC';
@@ -12,6 +12,7 @@ import { EscalationInflation } from '../EscalationInflation';
 import { Financing } from '../Financing';
 import { InputModGPO } from '@ucdavis/tea/out/models/input.model';
 import { OutputModGPO } from '@ucdavis/tea/out/models/output.model';
+import { AnnualCashFlow } from '../AnnualCashFlow';
 
 interface Props {
   inputs: InputModGPO;
@@ -41,7 +42,10 @@ export const GPOResults = (props: Props) => {
         inputs={props.inputs.Financing}
         results={props.results.Financing}
       />
-      <AnnualCashFlow annualCashFlows={props.results.AnnualCashFlows} />
+      <AnnualCashFlow
+        teaModel='GPO'
+        annualCashFlow={props.results.AnnualCashFlows[0]}
+      />
       <CurrentLAC results={props.results.CurrentLAC} />
       <ConstantLAC results={props.results.ConstantLAC} />
     </div>

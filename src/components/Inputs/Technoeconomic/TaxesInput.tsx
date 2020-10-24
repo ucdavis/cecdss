@@ -15,6 +15,7 @@ import {
 interface Props {
   inputs: TaxesInputMod;
   setInputs: (inputs: TaxesInputMod) => void;
+  disabled: boolean;
 }
 
 export const TaxesInput = (props: Props) => {
@@ -35,6 +36,7 @@ export const TaxesInput = (props: Props) => {
                 FederalTaxRate: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -52,6 +54,7 @@ export const TaxesInput = (props: Props) => {
                 StateTaxRate: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -69,6 +72,7 @@ export const TaxesInput = (props: Props) => {
                 ProductionTaxCredit: Number(e.target.value)
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/kWh</InputGroupAddon>
         </InputGroup>
