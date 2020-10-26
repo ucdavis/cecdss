@@ -135,7 +135,7 @@ export const MapContainer = () => {
     };
     const allYearResults: AllYearsResults = await fetch(
       // 'http://localhost:3000/initialProcessing',
-      'https://cecdss-backend.azurewebsites.net/process',
+      'https://cecdss-backend.azurewebsites.net/initialProcessing',
       {
         mode: 'cors',
         method: 'POST',
