@@ -134,8 +134,8 @@ export const MapContainer = () => {
       unloadingCost: 10000 // default to 10,000
     };
     const allYearResults: AllYearsResults = await fetch(
-      'http://localhost:3000/initialProcessing',
-      // 'https://cecdss-backend.azurewebsites.net/process',
+      // 'http://localhost:3000/initialProcessing',
+      'https://cecdss-backend.azurewebsites.net/process',
       {
         mode: 'cors',
         method: 'POST',
