@@ -17,13 +17,13 @@ export const ResultsCharts = (props: Props) => {
   const harvestCosts = props.results.map(result => {
     return {
       x: result.year.toString(),
-      y: result.totalResidueCost / result.totalBiomass
+      y: result.totalFeedstockCost / result.totalFeedstock
     };
   });
   const transportationCosts = props.results.map(result => {
     return {
       x: result.year.toString(),
-      y: result.totalTransportationCost / result.totalBiomass
+      y: result.totalTransportationCost / result.totalFeedstock
     };
   });
   const moveInCosts = props.results.map(result => {
@@ -32,7 +32,7 @@ export const ResultsCharts = (props: Props) => {
     }
     return {
       x: result.year.toString(),
-      y: result.totalMoveInCost / result.totalBiomass
+      y: result.totalMoveInCost / result.totalFeedstock
     };
   });
   const fuelCosts = props.results.map(result => {

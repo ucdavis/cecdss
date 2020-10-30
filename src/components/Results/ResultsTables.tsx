@@ -6,6 +6,8 @@ import {
   Treatments,
   YearlyResult
 } from '../../models/Types';
+import { LCATables } from './LCA/LCATables';
+import { TechnoeconomicTables } from './Technoeconomic/TechnoeconomicTables';
 
 interface Props {
   frcsInputs: FrcsInputs;
@@ -62,10 +64,10 @@ export const ResultsTable = (props: Props) => {
             <td>Economic Life (y)</td>
             <td>{props.teaInputs.Financing.EconomicLife}</td>
           </tr>
-          <tr>
+          {/* <tr>
             <td>Nearest Substation</td>
             <td>{props.allYearResults.nearestSubstation}</td>
-          </tr>{' '}
+          </tr> */}
           <tr>
             <td>Proximity to Substation (km)</td>
             <td>{props.allYearResults.distanceToNearestSubstation}</td>
@@ -80,7 +82,7 @@ export const ResultsTable = (props: Props) => {
       <table className='table'>
         <thead>
           <tr>
-            <th rowSpan={2}>Resource Supply</th>
+            <th rowSpan={2}>Resource Supply (ton)</th>
             <td rowSpan={2}>Total</td>
             <td colSpan={props.yearlyResults.length}>Year</td>
             <td rowSpan={2}>Unit</td>
@@ -95,77 +97,32 @@ export const ResultsTable = (props: Props) => {
           <tr>
             <td>Feedstock</td>
             <td>
-              {props.yearlyResults.reduce((sum, x) => sum + x.totalBiomass, 0)}
+              {formatNumber(
+                props.yearlyResults.reduce(
+                  (sum, x) => sum + x.totalFeedstock,
+                  0
+                )
+              )}
             </td>
             {props.yearlyResults.map(result => (
-              <td>{result.totalBiomass}</td>
+              <td>{formatNumber(result.totalFeedstock)}</td>
             ))}
             <td>t</td>
           </tr>
-        </tbody>
-      </table>
-    );
-  };
-  const renderEnvironmentalAnalysisTable = () => {
-    return (
-      <table className='table'>
-        <thead>
           <tr>
-            <th rowSpan={2}>
-              Environmental Analysis (1 kWh electricity generation)
-            </th>
-            <td rowSpan={2}>Total</td>
-            <td colSpan={props.yearlyResults.length}>Year</td>
-            <td rowSpan={2}>Unit</td>
-          </tr>
-          <tr>
-            {props.yearlyResults.map((x, i) => (
-              <td>{i + 1}</td>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th colSpan={3 + props.yearlyResults.length}>LCI Results</th>
-          </tr>
-          <tr>
-            <td>CO2</td>
+            <td>Coproduct</td>
             <td>
-              {props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.CO2,
-                0
+              {formatNumber(
+                props.yearlyResults.reduce(
+                  (sum, x) => sum + x.totalCoproduct,
+                  0
+                )
               )}
             </td>
             {props.yearlyResults.map(result => (
-              <td>{result.lcaResults.lciResults.CO2}</td>
+              <td>{formatNumber(result.totalCoproduct)}</td>
             ))}
-            <td>kg</td>
-          </tr>
-          <tr>
-            <td>CH4</td>
-            <td>
-              {props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.CH4,
-                0
-              )}
-            </td>
-            {props.yearlyResults.map(result => (
-              <td>{result.lcaResults.lciResults.CH4}</td>
-            ))}
-            <td>g</td>
-          </tr>
-          <tr>
-            <td>N2O</td>
-            <td>
-              {props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.N2O,
-                0
-              )}
-            </td>
-            {props.yearlyResults.map(result => (
-              <td>{result.lcaResults.lciResults.N2O}</td>
-            ))}
-            <td>g</td>
+            <td>t</td>
           </tr>
         </tbody>
       </table>
@@ -175,7 +132,8 @@ export const ResultsTable = (props: Props) => {
     <>
       {renderTechnicalPerformanceTable()}
       {renderResourceSupplyTable()}
-      {renderEnvironmentalAnalysisTable()}
+      <LCATables yearlyResults={props.yearlyResults} />
+      <TechnoeconomicTables yearlyResults={props.yearlyResults} />
     </>
   );
 };

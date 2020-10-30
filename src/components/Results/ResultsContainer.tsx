@@ -10,7 +10,8 @@ import {
   PaginationLink,
   Spinner,
   Button,
-  Pagination
+  Pagination,
+  Alert
 } from 'reactstrap';
 import { YearlyResultsContainer } from './YearlyResultsContainer';
 import {
@@ -18,14 +19,7 @@ import {
   InputModCHP,
   InputModGP
 } from '@ucdavis/tea/out/models/input.model';
-import { ResultsCharts } from './ResultsCharts';
-import { InputModCHPClass } from '../../models/CHPClasses';
-import { InputModGPClass } from '../../models/GPClasses';
-import { InputModGPOClass } from '../../models/GPOClasses';
-import { GPResults } from './Technoeconomic/GasificationPower/GPResults';
-import { CHPResults } from './Technoeconomic/GenericCombinedHeatPower/CHPResults';
-import { GPOResults } from './Technoeconomic/GenericPowerOnly/GPOResults';
-import { ResultsTable } from './ResultsTables';
+import { AllResultsContainer } from './AllResultsContainer';
 
 interface Props {
   years: number[];
@@ -47,13 +41,13 @@ export const ResultsContainer = (props: Props) => {
         key={year}
         disabled={!props.yearlyResults[i]}
         onClick={() => props.setSelectedYearIndex(i)}
+        selected={props.selectedYearIndex === i}
       >
         {year}
         {!props.yearlyResults[i] && <Spinner color='primary' size='sm' />}
       </PaginationLink>
     </PaginationItem>
   ));
-  const teaResults: any = props.allYearResults.teaResults;
 
   return (
     <>
@@ -72,38 +66,32 @@ export const ResultsContainer = (props: Props) => {
         Hexbin
       </Button>
       <Pagination aria-label='Page navigation example' size='lg'>
+        <PaginationItem>
+          <PaginationLink
+            key={'all'}
+            onClick={() => props.setSelectedYearIndex(props.years.length)}
+            selected={props.years.length === props.selectedYearIndex}
+          >
+            All Results
+          </PaginationLink>
+        </PaginationItem>
         {pages}
       </Pagination>
-      {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
-        props.teaInputs instanceof InputModGPOClass && (
-          <GPOResults inputs={props.teaInputs} results={teaResults} />
-        )}
-      {props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower &&
-        props.teaInputs instanceof InputModCHPClass && (
-          <CHPResults inputs={props.teaInputs} results={teaResults} />
-        )}
-      {props.teaModel === TechnoeconomicModels.gasificationPower &&
-        props.teaInputs instanceof InputModGPClass && (
-          <GPResults inputs={props.teaInputs} results={teaResults} />
-        )}
-      {props.yearlyResults.length === props.years.length && (
-        <ResultsTable
-          yearlyResults={props.yearlyResults}
-          allYearResults={props.allYearResults}
-          frcsInputs={props.frcsInputs}
-          teaInputs={props.teaInputs}
-          teaModel={props.teaModel}
-        />
+      <Alert color='secondary'>
+        Note: all results in tons refer to green short tons
+      </Alert>
+      {props.selectedYearIndex === props.years.length && (
+        <AllResultsContainer {...props} />
       )}
-      <ResultsCharts results={props.yearlyResults} />
-      {props.selectedYearIndex > -1 && (
-        <YearlyResultsContainer
-          results={props.yearlyResults[props.selectedYearIndex]}
-          teaInputs={props.teaInputs}
-          teaModel={props.teaModel}
-          biomassTarget={props.allYearResults.biomassTarget}
-        />
-      )}
+      {props.selectedYearIndex > -1 &&
+        props.selectedYearIndex < props.years.length && (
+          <YearlyResultsContainer
+            results={props.yearlyResults[props.selectedYearIndex]}
+            teaInputs={props.teaInputs}
+            teaModel={props.teaModel}
+            biomassTarget={props.allYearResults.biomassTarget}
+          />
+        )}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatNumber } from '../../Shared/util';
+import { formatNumber } from '../../../Shared/util';
 import {
   ElectricalFuelBaseYearInputModGPO,
   ElectricalFuelBaseYearInputModCHP
@@ -11,7 +11,7 @@ import {
 import {
   ElectricalFuelBaseYearModCHPClass,
   ElectricalFuelBaseYearInputModCHPClass
-} from '../../../models/CHPClasses';
+} from '../../../../models/CHPClasses';
 
 interface Props {
   results: ElectricalFuelBaseYearModGPO | ElectricalFuelBaseYearModCHP;

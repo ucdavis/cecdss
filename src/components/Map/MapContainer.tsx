@@ -33,18 +33,18 @@ import {
   calculateEnergyRevenueRequiredPW,
   calculateSensitivity
 } from '@ucdavis/tea';
-import { LandingSitesLayer } from './LandingSitesLayer';
+import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
 
 export const MapContainer = () => {
   const [loading, toggleLoading] = useState<boolean>(false);
   const [allYearResults, setAllYearResults] = useState<AllYearsResults>();
   const [yearlyResults, setYearlyResults] = useState<YearlyResult[]>([]);
+  const [sensitvityResults, setSensitivityResults] = useState<
+    OutputModSensitivity
+  >();
   const [selectedYearIndex, setSelectedYearIndex] = useState<number>(-1);
   const [showResults, toggleShowResults] = useState<boolean>(false);
   const [geoJsonResults, setGeoJsonResults] = useState<FeatureCollection[]>([]);
-  const [landingSiteGeoJson, setLandingSiteGeoJson] = useState<
-    FeatureCollection[]
-  >([]);
   const [geoJsonShapeResults, setGeoJsonShapeResults] = useState<
     FeatureCollection[]
   >([]);
@@ -83,11 +83,6 @@ export const MapContainer = () => {
     lng: -121.553971
   });
   let mapRef: any = createRef<Map>();
-
-  const bounds: LatLngBoundsExpression = [
-    [40.1, -122.5],
-    [39.2, -120]
-  ];
 
   const submitInputs = async () => {
     toggleLoading(true);
@@ -146,6 +141,7 @@ export const MapContainer = () => {
       }
     ).then(res => res.json());
     setAllYearResults(allYearResults);
+    setSelectedYearIndex(years.length);
 
     let radius = 0;
     let clusterIds: string[] = [];
@@ -207,16 +203,6 @@ export const MapContainer = () => {
         {
           type: 'FeatureCollection',
           features: geoJsonClusters
-        }
-      ]);
-      const landingGeoJsonClusters: Feature[] = convertLandingSiteGeoJSON(
-        yearResult.clusters
-      );
-      setLandingSiteGeoJson(results => [
-        ...results,
-        {
-          type: 'FeatureCollection',
-          features: landingGeoJsonClusters
         }
       ]);
       setGeoJsonShapeResults(results => [...results, yearResult.geoJson]);
@@ -289,6 +275,7 @@ export const MapContainer = () => {
       }
     };
     const sensitivity = calculateSensitivity(sensitivityInputs);
+    setSensitivityResults(sensitivity.output);
   };
 
   const accessToken =
@@ -302,7 +289,10 @@ export const MapContainer = () => {
     height: window.innerHeight
   };
   const position: LatLngExpression = mapState;
-
+  const bounds: LatLngBoundsExpression = [
+    [40.1, -122.5],
+    [39.2, -120]
+  ];
   return (
     <div style={style}>
       <div
@@ -368,7 +358,6 @@ export const MapContainer = () => {
         bounds={bounds}
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
-        {/* {<ReactLeafletKml kml={butte_kml} />} */}
         {geoJsonResults.length > 0 && mapOverlayType === 'hexbin' && (
           <HexLayers
             yearlyGeoJson={geoJsonResults}
@@ -377,17 +366,15 @@ export const MapContainer = () => {
         )}
         {geoJsonResults.length > 0 && mapOverlayType === 'heatmap' && (
           <HeatmapLayers
+            years={years}
             yearlyGeoJson={geoJsonResults}
             selectedYearIndex={selectedYearIndex}
           />
         )}
         {yearlyResults.length > 0 && (
           <>
-            {/* <LandingSitesLayer
-              yearlyGeoJson={landingSiteGeoJson}
-              selectedYearIndex={selectedYearIndex}
-            /> */}
             <GeoJsonLayers
+              years={years}
               yearlyGeoJson={geoJsonShapeResults}
               selectedYearIndex={selectedYearIndex}
             />

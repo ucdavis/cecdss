@@ -1,9 +1,7 @@
 import React from 'react';
 import { YearlyResult } from '../../models/Types';
 import { Alert } from 'reactstrap';
-import { FrcsClusterResultsContainer } from './Frcs/FrcsClusterResultsContainer';
 import { formatNumber, formatCurrency } from '../Shared/util';
-import { VictoryPie } from 'victory';
 
 interface Props {
   biomassTarget: number;
@@ -13,13 +11,12 @@ interface Props {
 export const YearlyResultsTable = (props: Props) => {
   return (
     <div>
-      {props.biomassTarget > props.results.totalBiomass && (
+      {props.biomassTarget > props.results.totalFeedstock && (
         <Alert color='danger'>
           The settings you selected did not return enough biomass to meet the
           yearly requirement.
         </Alert>
       )}
-      <Alert color='secondary'>Note: all results are in green short tons</Alert>{' '}
       <table className='table'>
         <tbody>
           <tr>
@@ -30,7 +27,7 @@ export const YearlyResultsTable = (props: Props) => {
             <td>Harvest Cost ($/ton)</td>
             <td>
               {formatCurrency(
-                props.results.totalResidueCost / props.results.totalBiomass
+                props.results.totalFeedstockCost / props.results.totalFeedstock
               )}
             </td>
           </tr>
@@ -39,7 +36,7 @@ export const YearlyResultsTable = (props: Props) => {
             <td>
               {formatCurrency(
                 props.results.totalTransportationCost /
-                  props.results.totalBiomass
+                  props.results.totalFeedstock
               )}
             </td>
           </tr>
@@ -48,7 +45,7 @@ export const YearlyResultsTable = (props: Props) => {
               <td>Move In Cost ($/ton)</td>
               <td>
                 {formatCurrency(
-                  props.results.totalMoveInCost / props.results.totalBiomass
+                  props.results.totalMoveInCost / props.results.totalFeedstock
                 )}
               </td>
             </tr>

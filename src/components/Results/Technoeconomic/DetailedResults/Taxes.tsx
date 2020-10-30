@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatNumber } from '../../Shared/util';
+import { formatNumber } from '../../../Shared/util';
 import {
   InputModGPO,
   InputModCHP,

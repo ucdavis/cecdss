@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatNumber } from '../../Shared/util';
+import { formatNumber } from '../../../Shared/util';
 import { ConstantLevelAnnualCostMod } from '@ucdavis/tea/out/models/output.model';
 
 interface Props {

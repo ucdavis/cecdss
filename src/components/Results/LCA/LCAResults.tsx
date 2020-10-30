@@ -29,32 +29,32 @@ export const LCAResults = (props: Props) => {
         <tbody>
           <tr>
             <td>CO2</td>
-            <td>{props.results.lciResults.CO2}</td>
+            <td>{formatNumber(props.results.lciResults.CO2)}</td>
             <td>g</td>
           </tr>
           <tr>
             <td>CH4</td>
-            <td>{props.results.lciResults.CH4}</td>
+            <td>{formatNumber(props.results.lciResults.CH4)}</td>
             <td>g</td>
           </tr>
           <tr>
             <td>N20</td>
-            <td>{props.results.lciResults.N2O}</td>
+            <td>{formatNumber(props.results.lciResults.N2O)}</td>
             <td>g</td>
           </tr>
           <tr>
             <td>CO2e</td>
-            <td>{props.results.lciResults.CO2e}</td>
+            <td>{formatNumber(props.results.lciResults.CO2e)}</td>
             <td>g</td>
           </tr>
           <tr>
             <td>CO</td>
-            <td>{props.results.lciResults.CO}</td>
+            <td>{formatNumber(props.results.lciResults.CO)}</td>
             <td>g</td>
           </tr>
           <tr>
             <td>NOx</td>
-            <td>{props.results.lciResults.NOx}</td>
+            <td>{formatNumber(props.results.lciResults.NOx)}</td>
             <td>g</td>
           </tr>
         </tbody>
@@ -68,27 +68,35 @@ export const LCAResults = (props: Props) => {
         <tbody>
           <tr>
             <td>Global Warming Air (kg CO2 eq / kg substance)</td>
-            <td>{props.results.lciaResults.global_warming_air}</td>
+            <td>
+              {formatNumber(props.results.lciaResults.global_warming_air)}
+            </td>
           </tr>
           <tr>
             <td>Acidification Air (kg SO2 eq / kg substance)</td>
-            <td>{props.results.lciaResults.acidification_air}</td>
+            <td>{formatNumber(props.results.lciaResults.acidification_air)}</td>
           </tr>
           <tr>
             <td>HH Particulate Air (PM2.5 eq / kg substance)</td>
-            <td>{props.results.lciaResults.hh_particulate_air}</td>
+            <td>
+              {formatNumber(props.results.lciaResults.hh_particulate_air)}
+            </td>
           </tr>
           <tr>
             <td>Eutrophication Air (kg N eq / kg substance)</td>
-            <td>{props.results.lciaResults.eutrophication_air}</td>
+            <td>
+              {formatNumber(props.results.lciaResults.eutrophication_air)}
+            </td>
           </tr>
           <tr>
             <td>Eutrophication Water (kg N eq / kg substance)</td>
-            <td>{props.results.lciaResults.eutrophication_water}</td>
+            <td>
+              {formatNumber(props.results.lciaResults.eutrophication_water)}
+            </td>
           </tr>
           <tr>
             <td>Smog Air (kg O3 eq / kg substance)</td>
-            <td>{props.results.lciaResults.smog_air}</td>
+            <td>{formatNumber(props.results.lciaResults.smog_air)}</td>
           </tr>
         </tbody>
       </table>
