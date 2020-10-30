@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatNumber } from '../../Shared/util';
+import { formatNumber } from '../../../Shared/util';
 import {
   IncomeOtherThanEnergyInputMod,
   IncomeOtherThanEnergyInputModGP
@@ -11,7 +11,7 @@ import {
 import {
   IncomeOtherThanEnergyModGPClass,
   IncomeOtherThanEnergyInputModGPClass
-} from '../../../models/GPClasses';
+} from '../../../../models/GPClasses';
 
 interface Props {
   inputs: IncomeOtherThanEnergyInputMod | IncomeOtherThanEnergyInputModGP;

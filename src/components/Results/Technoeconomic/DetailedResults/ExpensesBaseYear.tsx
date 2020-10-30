@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatNumber } from '../../Shared/util';
+import { formatNumber } from '../../../Shared/util';
 import {
   ExpensesBaseYearModGPO,
   ExpensesBaseYearModGP
@@ -11,11 +11,11 @@ import {
 import {
   ExpensesBaseYearModGPOClass,
   ExpensesBaseYearInputModGPOClass
-} from '../../../models/GPOClasses';
+} from '../../../../models/GPOClasses';
 import {
   ExpensesBaseYearModGPClass,
   ExpensesBaseYearInputModGPClass
-} from '../../../models/GPClasses';
+} from '../../../../models/GPClasses';
 
 interface Props {
   results: ExpensesBaseYearModGPO | ExpensesBaseYearModGP;

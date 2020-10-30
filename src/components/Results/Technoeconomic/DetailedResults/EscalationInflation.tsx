@@ -1,10 +1,10 @@
 import React from 'react';
-import { formatNumber } from '../../Shared/util';
+import { formatNumber } from '../../../Shared/util';
 import {
   EscalationInflationInputMod,
   EscalationInflationInputModGP
 } from '@ucdavis/tea/out/models/input.model';
-import { EscalationInflationInputModGPClass } from '../../../models/GPClasses';
+import { EscalationInflationInputModGPClass } from '../../../../models/GPClasses';
 
 interface Props {
   inputs: EscalationInflationInputMod | EscalationInflationInputModGP;

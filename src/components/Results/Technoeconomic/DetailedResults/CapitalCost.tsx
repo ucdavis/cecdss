@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatNumber, formatCurrency } from '../../Shared/util';
+import { formatNumber, formatCurrency } from '../../../Shared/util';
 import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
 
 interface Props {

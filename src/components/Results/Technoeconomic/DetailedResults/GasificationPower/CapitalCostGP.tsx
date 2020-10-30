@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatNumber, formatCurrency } from '../../../Shared/util';
+import { formatNumber, formatCurrency } from '../../../../Shared/util';
 import { CapitalCostInputModGP } from '@ucdavis/tea/out/models/input.model';
 import { CapitalCostMod } from '@ucdavis/tea/out/models/output.model';
 

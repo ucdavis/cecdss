@@ -6,6 +6,7 @@ import { ClusterFeature } from '../../models/Types';
 interface Props {
   yearlyGeoJson: FeatureCollection[];
   selectedYearIndex: number;
+  years: number[];
 }
 
 export const HeatmapLayers = (props: Props) => {
@@ -14,7 +15,8 @@ export const HeatmapLayers = (props: Props) => {
   }
 
   const dataLayers = props.yearlyGeoJson.map((result, i) =>
-    i === props.selectedYearIndex ? (
+    i === props.selectedYearIndex ||
+    props.selectedYearIndex === props.years.length ? (
       <HeatmapLayer
         points={result.features}
         longitudeExtractor={(feature: Feature<Point>) =>
