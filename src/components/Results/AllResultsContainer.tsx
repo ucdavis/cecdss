@@ -45,7 +45,7 @@ export const AllResultsContainer = (props: Props) => {
         teaModel={props.teaModel}
       />
       <ResultsCharts results={props.yearlyResults} />
-      {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
+      {/* {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
         props.teaInputs instanceof InputModGPOClass && (
           <GPOResults inputs={props.teaInputs} results={teaResults} />
         )}
@@ -56,7 +56,7 @@ export const AllResultsContainer = (props: Props) => {
       {props.teaModel === TechnoeconomicModels.gasificationPower &&
         props.teaInputs instanceof InputModGPClass && (
           <GPResults inputs={props.teaInputs} results={teaResults} />
-        )}
+        )} */}
     </>
   );
 };

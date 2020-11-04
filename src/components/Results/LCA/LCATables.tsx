@@ -1,6 +1,7 @@
 import React from 'react';
 import { formatNumber, formatCurrency } from '../../Shared/util';
 import { YearlyResult } from '../../../models/Types';
+import { Table } from 'reactstrap';
 
 interface Props {
   yearlyResults: YearlyResult[];
@@ -8,7 +9,7 @@ interface Props {
 
 export const LCATables = (props: Props) => {
   return (
-    <table className='table'>
+    <Table responsive bordered hover>
       <thead>
         <tr>
           <th rowSpan={2}>
@@ -422,6 +423,6 @@ export const LCATables = (props: Props) => {
           ))}
         </tr>
       </tbody>
-    </table>
+    </Table>
   );
 };
