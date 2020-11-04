@@ -6,7 +6,8 @@ import {
   VictoryLine,
   VictoryStack,
   VictoryArea,
-  VictoryLabel
+  VictoryLabel,
+  VictoryLegend
 } from 'victory';
 
 interface Props {
@@ -38,27 +39,24 @@ export const ResultsCharts = (props: Props) => {
   const fuelCosts = props.results.map(result => {
     return { x: result.year.toString(), y: result.fuelCost };
   });
+  const maxDomain = Math.max(...fuelCosts.map(cost => cost.y)) + 20;
   return (
     <>
-      <VictoryChart>
-        <VictoryStack
-          colorScale={['tomato', 'orange', 'gold']}
-          // labels={['harvest costs', 'fuel costs']}
-          // labelComponent={
-          //   <VictoryPortal>
-          //     <CustomLabelComponent />
-          //   </VictoryPortal>
-          // }
-        >
-          <VictoryArea
-            data={harvestCosts}
-            label='harvest cost'
-            labelComponent={
-              <VictoryPortal>
-                <VictoryLabel />
-              </VictoryPortal>
-            }
-          />
+      <VictoryChart domain={{ y: [0, maxDomain] }}>
+        <VictoryLegend
+          centerTitle
+          orientation='horizontal'
+          x={50}
+          y={50}
+          data={[
+            { name: 'Harvest', symbol: { fill: 'tomato' } },
+            { name: 'Transportation', symbol: { fill: 'orange' } },
+            { name: 'Move In', symbol: { fill: 'gold' } },
+            { name: 'Fuel', symbol: { fill: 'black' } }
+          ]}
+        />
+        <VictoryStack colorScale={['tomato', 'orange', 'gold']}>
+          <VictoryArea data={harvestCosts} label='harvest cost' />
           <VictoryArea data={transportationCosts} />
           {moveInCosts && (
             <VictoryArea data={moveInCosts} label='moveInCosts' />
