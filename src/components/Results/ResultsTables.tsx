@@ -8,6 +8,8 @@ import {
 } from '../../models/Types';
 import { LCATables } from './LCA/LCATables';
 import { TechnoeconomicTables } from './Technoeconomic/TechnoeconomicTables';
+import { FrcsTables } from './Frcs/FrcsTables';
+import { Table } from 'reactstrap';
 
 interface Props {
   frcsInputs: FrcsInputs;
@@ -19,18 +21,27 @@ interface Props {
 }
 
 export const ResultsTable = (props: Props) => {
+  const treatmentIndex = Treatments.findIndex(
+    x => x.id === props.frcsInputs.treatmentid
+  );
+  const treatmentName = Treatments[treatmentIndex].name;
+  console.log(
+    `index: ${treatmentIndex}, Treatment: ${JSON.stringify(
+      Treatments[treatmentIndex]
+    )}`
+  );
   const renderTechnicalPerformanceTable = () => {
     return (
-      <table className='table'>
+      <Table responsive bordered hover>
         <thead>
           <tr>
-            <th>Technical Performance</th>
+            <th colSpan={2}>Technical Performance</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Project Prescription</td>
-            <td>{Treatments[props.frcsInputs.treatmentid].name}</td>
+            <td>{treatmentName}</td>
           </tr>
           <tr>
             <td>Facility Type</td>
@@ -64,76 +75,65 @@ export const ResultsTable = (props: Props) => {
             <td>Economic Life (y)</td>
             <td>{props.teaInputs.Financing.EconomicLife}</td>
           </tr>
-          {/* <tr>
-            <td>Nearest Substation</td>
-            <td>{props.allYearResults.nearestSubstation}</td>
-          </tr> */}
           <tr>
             <td>Proximity to Substation (km)</td>
             <td>{props.allYearResults.distanceToNearestSubstation}</td>
           </tr>
         </tbody>
-      </table>
+      </Table>
     );
   };
 
-  const renderResourceSupplyTable = () => {
+  const renderLCOETable = () => {
     return (
-      <table className='table'>
-        <thead>
-          <tr>
-            <th rowSpan={2}>Resource Supply (ton)</th>
-            <td rowSpan={2}>Total</td>
-            <td colSpan={props.yearlyResults.length}>Year</td>
-            <td rowSpan={2}>Unit</td>
-          </tr>
-          <tr>
-            {props.yearlyResults.map((x, i) => (
-              <td>{i + 1}</td>
-            ))}
-          </tr>
-        </thead>
+      <Table responsive bordered hover>
         <tbody>
           <tr>
-            <td>Feedstock</td>
+            <td>Current $ LCOE ($/kWh)</td>
             <td>
               {formatNumber(
-                props.yearlyResults.reduce(
-                  (sum, x) => sum + x.totalFeedstock,
-                  0
-                )
+                props.allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy,
+                4
               )}
             </td>
-            {props.yearlyResults.map(result => (
-              <td>{formatNumber(result.totalFeedstock)}</td>
-            ))}
-            <td>t</td>
           </tr>
           <tr>
-            <td>Coproduct</td>
+            <td>Constant $ LCOE ($/kWh)</td>
             <td>
               {formatNumber(
-                props.yearlyResults.reduce(
-                  (sum, x) => sum + x.totalCoproduct,
-                  0
-                )
+                props.allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy,
+                4
               )}
             </td>
-            {props.yearlyResults.map(result => (
-              <td>{formatNumber(result.totalCoproduct)}</td>
-            ))}
-            <td>t</td>
           </tr>
         </tbody>
-      </table>
+      </Table>
     );
   };
+
   return (
     <>
-      {renderTechnicalPerformanceTable()}
-      {renderResourceSupplyTable()}
-      <LCATables yearlyResults={props.yearlyResults} />
-      <TechnoeconomicTables yearlyResults={props.yearlyResults} />
+      <div className='results-table'>{renderTechnicalPerformanceTable()}</div>
+      <div className='results-table'>
+        <FrcsTables yearlyResults={props.yearlyResults} />
+      </div>
+      <div className='results-table'>
+        <LCATables yearlyResults={props.yearlyResults} />
+      </div>
+      <div className='results-table'>
+        <TechnoeconomicTables
+          yearlyResults={props.yearlyResults}
+          cashFlows={props.allYearResults.teaResults.AnnualCashFlows.slice(
+            0,
+            props.yearlyResults.length
+          )}
+          presentWorth={props.allYearResults.teaResults.CurrentLAC.PresentWorth.slice(
+            0,
+            props.yearlyResults.length
+          )}
+        />
+      </div>
+      <div className='results-table'>{renderLCOETable()}</div>
     </>
   );
 };

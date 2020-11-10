@@ -1,35 +1,25 @@
 import React from 'react';
-import {
-  AllYearsResults,
-  FrcsInputs,
-  TechnoeconomicModels,
-  YearlyResult
-} from '../../models/Types';
+import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
 import { ResultsCharts } from './ResultsCharts';
-import { InputModCHPClass } from '../../models/CHPClasses';
-import { InputModGPClass } from '../../models/GPClasses';
-import { InputModGPOClass } from '../../models/GPOClasses';
-import { GPResults } from './Technoeconomic/DetailedResults/GasificationPower/GPResults';
-import { CHPResults } from './Technoeconomic/DetailedResults/GenericCombinedHeatPower/CHPResults';
-import { GPOResults } from './Technoeconomic/DetailedResults/GenericPowerOnly/GPOResults';
 import { ResultsTable } from './ResultsTables';
 import {
   InputModGPO,
   InputModCHP,
   InputModGP
 } from '@ucdavis/tea/out/models/input.model';
+import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
+import { AssumptionsAndReferences } from './AssumptionsAndReferences';
 
 interface Props {
   years: number[];
   selectedYearIndex: number;
   setSelectedYearIndex: (index: number) => void;
-  mapOverlayType: string;
-  setMapOverlayType: (type: string) => void;
   allYearResults: AllYearsResults;
   yearlyResults: YearlyResult[];
   teaInputs: InputModGPO | InputModCHP | InputModGP;
   teaModel: string;
   frcsInputs: FrcsInputs;
+  sensitivityResults?: OutputModSensitivity;
 }
 
 export const AllResultsContainer = (props: Props) => {
@@ -44,8 +34,12 @@ export const AllResultsContainer = (props: Props) => {
         teaInputs={props.teaInputs}
         teaModel={props.teaModel}
       />
-      <ResultsCharts results={props.yearlyResults} />
-      {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
+      <ResultsCharts
+        results={props.yearlyResults}
+        sensitivityResults={props.sensitivityResults}
+      />
+      <AssumptionsAndReferences />
+      {/* {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
         props.teaInputs instanceof InputModGPOClass && (
           <GPOResults inputs={props.teaInputs} results={teaResults} />
         )}
@@ -56,7 +50,7 @@ export const AllResultsContainer = (props: Props) => {
       {props.teaModel === TechnoeconomicModels.gasificationPower &&
         props.teaInputs instanceof InputModGPClass && (
           <GPResults inputs={props.teaInputs} results={teaResults} />
-        )}
+        )} */}
     </>
   );
 };

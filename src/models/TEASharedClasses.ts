@@ -31,7 +31,7 @@ export class TaxesInputModClass implements TaxesInputMod {
 export class FinancingInputModClass implements FinancingInputMod {
   DebtRatio = 75;
   InterestRateOnDebt = 5;
-  EconomicLife = 20;
+  EconomicLife = 20; // TODO: set back to 20
   CostOfEquity = 15;
 }
 

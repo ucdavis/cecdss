@@ -22,7 +22,6 @@ import { InputModGPOClass } from '../../models/GPOClasses';
 import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
 import { convertGeoJSON, convertLandingSiteGeoJSON } from '../Shared/util';
-import { HexLayers } from './HexLayers';
 import { HeatmapLayers } from './HeatmapLayers';
 import { PaginationItem, PaginationLink, Pagination } from 'reactstrap';
 import { ResultsContainer } from '../Results/ResultsContainer';
@@ -30,10 +29,10 @@ import { GeoJsonLayers } from './GeoJsonLayers';
 import {
   calculateConstantLAC,
   calculateCurrentLAC,
-  calculateEnergyRevenueRequiredPW,
   calculateSensitivity
 } from '@ucdavis/tea';
 import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
+import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
 
 export const MapContainer = () => {
   const [loading, toggleLoading] = useState<boolean>(false);
@@ -48,8 +47,12 @@ export const MapContainer = () => {
   const [geoJsonShapeResults, setGeoJsonShapeResults] = useState<
     FeatureCollection[]
   >([]);
+  const [errorGeoJsonShapeResults, setErrorGeoJsonShapeResults] = useState<
+    FeatureCollection[]
+  >([]);
 
-  const [mapOverlayType, setMapOverlayType] = useState<string>('heatmap');
+  const [showGeoJson, toggleGeoJson] = useState<boolean>(true);
+  const [showErrorGeoJson, toggleErrorGeoJson] = useState<boolean>(false);
 
   const frcsInputsExample: FrcsInputs = {
     system: 'Ground-Based Mech WT',
@@ -57,7 +60,11 @@ export const MapContainer = () => {
     dieselFuelPrice: 3.251
   };
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
-  const years = [2020, 2021, 2022, 2023, 2024, 2025];
+  const years: number[] = [];
+  for (let index = 0; index < 20; index++) {
+    years.push(2020 + index);
+  }
+  console.log();
 
   const [teaInputs, setTeaInputs] = useState<
     InputModGPO | InputModCHP | InputModGP
@@ -79,8 +86,8 @@ export const MapContainer = () => {
   }, [teaModel]);
 
   const [mapState, setMapState] = useState<MapCoordinates>({
-    lat: 39.644308,
-    lng: -121.553971
+    lat: 38.77228705439114,
+    lng: -120.36827087402345
   });
   let mapRef: any = createRef<Map>();
 
@@ -129,8 +136,8 @@ export const MapContainer = () => {
       unloadingCost: 10000 // default to 10,000
     };
     const allYearResults: AllYearsResults = await fetch(
-      // 'http://localhost:3000/initialProcessing',
-      'https://cecdss-backend.azurewebsites.net/initialProcessing',
+      'http://localhost:3000/initialProcessing',
+      // 'https://cecdss-backend.azurewebsites.net/initialProcessing',
       {
         mode: 'cors',
         method: 'POST',
@@ -141,12 +148,14 @@ export const MapContainer = () => {
       }
     ).then(res => res.json());
     setAllYearResults(allYearResults);
+    setTeaInputs(allYearResults.teaInputs);
     setSelectedYearIndex(years.length);
 
     let radius = 0;
     let clusterIds: string[] = [];
     let errorIds: string[] = [];
     let energyRevenueRequiredPresentYears: number[] = [];
+    let cashFlows: any[] = [];
     for (let index = 0; index < years.length; index++) {
       console.log(
         `year: ${years[index]}, # of clusters: ${clusterIds.length}, # of error clusters: ${errorIds.length}`
@@ -164,13 +173,15 @@ export const MapContainer = () => {
         radius,
         teaModel: teaModel,
         annualGeneration: allYearResults.annualGeneration,
-        moistureContent: 0, // TODO: link with state
-        cashFlow: allYearResults.teaResults.AnnualCashFlows[index]
+        moistureContent:
+          allYearResults.teaInputs.ElectricalFuelBaseYear.MoistureContent,
+        cashFlow: allYearResults.teaResults.AnnualCashFlows[index],
+        costOfEquity: allYearResults.teaInputs.Financing.CostOfEquity
       };
       console.log(JSON.stringify(reqBody));
       const yearResult: YearlyResult = await fetch(
-        // 'http://localhost:3000/process',
-        'https://cecdss-backend.azurewebsites.net/process',
+        'http://localhost:3000/process',
+        // 'https://cecdss-backend.azurewebsites.net/process',
         {
           mode: 'cors',
           method: 'POST',
@@ -183,20 +194,10 @@ export const MapContainer = () => {
       radius = yearResult.radius;
       clusterIds.push(...yearResult.clusterNumbers);
       errorIds.push(...yearResult.errorClusterNumbers);
-      // TODO: clean up TEA output models
-      const cashFlow: any = allYearResults.teaResults.AnnualCashFlows[index];
-      if (teaModel === 'GP') {
-        cashFlow.BiomassFuelCost = yearResult.fuelCost;
-      } else {
-        cashFlow.FuelCost = yearResult.fuelCost;
-      }
-      cashFlow.EnergyRevenueRequired = yearResult.energyRevenueRequired;
-      const energyRevenueRequiredPresent = calculateEnergyRevenueRequiredPW(
-        index + 1,
-        allYearInputs.teaInputs.Financing.CostOfEquity,
-        yearResult.energyRevenueRequired
+      cashFlows.push(yearResult.cashFlow);
+      energyRevenueRequiredPresentYears.push(
+        yearResult.energyRevenueRequiredPW
       );
-      energyRevenueRequiredPresentYears.push(energyRevenueRequiredPresent);
       const geoJsonClusters: Feature[] = convertGeoJSON(yearResult.clusters);
       setGeoJsonResults(results => [
         ...results,
@@ -206,10 +207,15 @@ export const MapContainer = () => {
         }
       ]);
       setGeoJsonShapeResults(results => [...results, yearResult.geoJson]);
+      setErrorGeoJsonShapeResults(results => [
+        ...results,
+        yearResult.errorGeoJson
+      ]);
 
       setYearlyResults(results => [...results, yearResult]);
       toggleLoading(false);
       toggleShowResults(true);
+      // TODO: update each year cashflow as it is done
     }
     // get current LAC
     const totalPresentWorth = energyRevenueRequiredPresentYears.reduce(
@@ -222,18 +228,21 @@ export const MapContainer = () => {
       totalPresentWorth,
       allYearResults.annualGeneration
     );
-    allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy = currentLAC;
-    allYearResults.teaResults.CurrentLAC.TotalPresentWorth = totalPresentWorth;
-    allYearResults.teaResults.CurrentLAC.PresentWorth = energyRevenueRequiredPresentYears;
+    const allYearResultsCopy = { ...allYearResults };
+    allYearResultsCopy.teaResults.AnnualCashFlows = cashFlows;
+    allYearResultsCopy.teaResults.CurrentLAC.CurrentLACofEnergy = currentLAC;
+    allYearResultsCopy.teaResults.CurrentLAC.TotalPresentWorth = totalPresentWorth;
+    allYearResultsCopy.teaResults.CurrentLAC.PresentWorth = energyRevenueRequiredPresentYears;
 
     const constantLAC = calculateConstantLAC(
       allYearInputs.teaInputs.Financing.CostOfEquity,
       allYearInputs.teaInputs.EscalationInflation.GeneralInflation,
       allYearInputs.teaInputs.Financing.EconomicLife,
       totalPresentWorth,
-      allYearResults.annualGeneration
+      allYearResultsCopy.annualGeneration
     );
-    allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy = constantLAC;
+    allYearResultsCopy.teaResults.ConstantLAC.ConstantLACofEnergy = constantLAC;
+    setAllYearResults(allYearResultsCopy);
 
     const sensitivityInputs: InputModSensitivity = {
       model: teaModel,
@@ -296,12 +305,15 @@ export const MapContainer = () => {
   return (
     <div style={style}>
       <div
-        id={yearlyResults.length > 0 || loading ? 'results-sidebar' : 'sidebar'}
+        className={
+          yearlyResults.length > 0 || loading ? 'results-sidebar' : 'sidebar'
+        }
+        id='sidebar'
       >
         {(yearlyResults.length > 0 || loading) && (
           <>
             <Pagination aria-label='Page navigation example' size='lg'>
-              <PaginationItem>
+              <PaginationItem active={!showResults}>
                 <PaginationLink
                   key='inputs'
                   onClick={() => toggleShowResults(false)}
@@ -309,7 +321,7 @@ export const MapContainer = () => {
                   Inputs
                 </PaginationLink>
               </PaginationItem>
-              <PaginationItem>
+              <PaginationItem active={showResults}>
                 <PaginationLink
                   key='finalResults'
                   onClick={() => toggleShowResults(true)}
@@ -342,11 +354,14 @@ export const MapContainer = () => {
             years={years}
             selectedYearIndex={selectedYearIndex}
             setSelectedYearIndex={setSelectedYearIndex}
-            mapOverlayType={mapOverlayType}
-            setMapOverlayType={setMapOverlayType}
+            showGeoJson={showGeoJson}
+            toggleGeoJson={toggleGeoJson}
+            showErrorGeoJson={showErrorGeoJson}
+            toggleErrorGeoJson={toggleErrorGeoJson}
             teaInputs={teaInputs}
             teaModel={teaModel}
             frcsInputs={frcsInputs}
+            sensitivityResults={sensitvityResults}
           />
         )}
       </div>
@@ -358,26 +373,27 @@ export const MapContainer = () => {
         bounds={bounds}
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
-        {geoJsonResults.length > 0 && mapOverlayType === 'hexbin' && (
-          <HexLayers
-            yearlyGeoJson={geoJsonResults}
-            selectedYearIndex={selectedYearIndex}
-          />
-        )}
-        {geoJsonResults.length > 0 && mapOverlayType === 'heatmap' && (
-          <HeatmapLayers
-            years={years}
-            yearlyGeoJson={geoJsonResults}
-            selectedYearIndex={selectedYearIndex}
-          />
-        )}
+        <HeatmapLayers
+          years={years}
+          yearlyGeoJson={geoJsonResults}
+          selectedYearIndex={selectedYearIndex}
+        />
         {yearlyResults.length > 0 && (
           <>
-            <GeoJsonLayers
-              years={years}
-              yearlyGeoJson={geoJsonShapeResults}
-              selectedYearIndex={selectedYearIndex}
-            />
+            {showGeoJson && (
+              <GeoJsonLayers
+                years={years}
+                yearlyGeoJson={geoJsonShapeResults}
+                selectedYearIndex={selectedYearIndex}
+              />
+            )}
+            {showErrorGeoJson && (
+              <ErrorGeoJsonLayers
+                years={years}
+                yearlyGeoJson={errorGeoJsonShapeResults}
+                selectedYearIndex={selectedYearIndex}
+              />
+            )}
           </>
         )}
         <Marker position={position} />
