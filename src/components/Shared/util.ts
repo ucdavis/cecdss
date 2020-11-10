@@ -38,10 +38,7 @@ export const convertGeoJSON = (clusters: ClusterResult[]) => {
   const features: Feature[] = clusters.map(cluster => {
     const feature: Feature = {
       type: 'Feature',
-      properties: {
-        cluster_no: cluster.cluster_no,
-        biomass: cluster.biomass
-      },
+      properties: { ...cluster },
       geometry: {
         type: 'Point',
         coordinates: [cluster.center_lng, cluster.center_lat]

@@ -13,9 +13,9 @@ export const FrcsTables = (props: Props) => {
       <thead>
         <tr>
           <th rowSpan={2}>Resource Supply (ton)</th>
-          <td rowSpan={2}>Unit</td>
-          <td rowSpan={2}>Total</td>
-          <td colSpan={props.yearlyResults.length}>Year</td>
+          <th rowSpan={2}>Unit</th>
+          <th rowSpan={2}>Total</th>
+          <th colSpan={props.yearlyResults.length}>Year</th>
         </tr>
         <tr>
           {props.yearlyResults.map((x, i) => (

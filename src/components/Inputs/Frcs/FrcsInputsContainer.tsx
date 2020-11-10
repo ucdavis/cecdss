@@ -6,7 +6,10 @@ import {
   InputGroupAddon,
   Label,
   FormGroup,
-  Form
+  Form,
+  FormText,
+  Tooltip,
+  UncontrolledTooltip
 } from 'reactstrap';
 import { FrcsInputs, Treatments } from '../../../models/Types';
 
@@ -42,6 +45,22 @@ export const FrcsInputsContainer = (props: Props) => {
             >
               {treatments}
             </Input>
+            <FormText>
+              <span id='treatmentTooltip'>
+                Description:
+                {Treatments[props.inputs.treatmentid - 1].description}
+              </span>
+              <UncontrolledTooltip
+                placement='bottom'
+                target='treatmentTooltip'
+                className='tooltip-sidebar'
+                container='sidebar'
+              >
+                Private: {Treatments[props.inputs.treatmentid - 1].private}
+                <br />
+                Forest: {Treatments[props.inputs.treatmentid - 1].forest}
+              </UncontrolledTooltip>
+            </FormText>
           </FormGroup>
           <FormGroup>
             <Label>FRCS System</Label>

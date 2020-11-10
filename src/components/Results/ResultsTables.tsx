@@ -21,18 +21,27 @@ interface Props {
 }
 
 export const ResultsTable = (props: Props) => {
+  const treatmentIndex = Treatments.findIndex(
+    x => x.id === props.frcsInputs.treatmentid
+  );
+  const treatmentName = Treatments[treatmentIndex].name;
+  console.log(
+    `index: ${treatmentIndex}, Treatment: ${JSON.stringify(
+      Treatments[treatmentIndex]
+    )}`
+  );
   const renderTechnicalPerformanceTable = () => {
     return (
       <Table responsive bordered hover>
         <thead>
           <tr>
-            <th>Technical Performance</th>
+            <th colSpan={2}>Technical Performance</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Project Prescription</td>
-            <td>{Treatments[props.frcsInputs.treatmentid].name}</td>
+            <td>{treatmentName}</td>
           </tr>
           <tr>
             <td>Facility Type</td>
@@ -82,13 +91,19 @@ export const ResultsTable = (props: Props) => {
           <tr>
             <td>Current $ LCOE ($/kWh)</td>
             <td>
-              {props.allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy}
+              {formatNumber(
+                props.allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy,
+                4
+              )}
             </td>
           </tr>
           <tr>
             <td>Constant $ LCOE ($/kWh)</td>
             <td>
-              {props.allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy}
+              {formatNumber(
+                props.allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy,
+                4
+              )}
             </td>
           </tr>
         </tbody>
@@ -98,20 +113,27 @@ export const ResultsTable = (props: Props) => {
 
   return (
     <>
-      {renderTechnicalPerformanceTable()}
-      <FrcsTables yearlyResults={props.yearlyResults} />
-      <LCATables yearlyResults={props.yearlyResults} />
-      <TechnoeconomicTables
-        yearlyResults={props.yearlyResults}
-        cashFlows={props.allYearResults.teaResults.AnnualCashFlows.slice(
-          0,
-          props.yearlyResults.length
-        )}
-        presentWorth={props.allYearResults.teaResults.CurrentLAC.PresentWorth.slice(
-          0,
-          props.yearlyResults.length
-        )}
-      />
+      <div className='results-table'>{renderTechnicalPerformanceTable()}</div>
+      <div className='results-table'>
+        <FrcsTables yearlyResults={props.yearlyResults} />
+      </div>
+      <div className='results-table'>
+        <LCATables yearlyResults={props.yearlyResults} />
+      </div>
+      <div className='results-table'>
+        <TechnoeconomicTables
+          yearlyResults={props.yearlyResults}
+          cashFlows={props.allYearResults.teaResults.AnnualCashFlows.slice(
+            0,
+            props.yearlyResults.length
+          )}
+          presentWorth={props.allYearResults.teaResults.CurrentLAC.PresentWorth.slice(
+            0,
+            props.yearlyResults.length
+          )}
+        />
+      </div>
+      <div className='results-table'>{renderLCOETable()}</div>
     </>
   );
 };

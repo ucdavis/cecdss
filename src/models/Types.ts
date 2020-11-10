@@ -30,6 +30,7 @@ export interface RequestParams {
   annualGeneration: number; // used for LCA, kWh
   moistureContent: number; // for frcs
   cashFlow: CashFlow | CashFlowCHP | CashFlowGP;
+  costOfEquity: number;
 }
 
 export interface FrcsInputs {
@@ -48,19 +49,97 @@ export const TechnoeconomicModels = {
 export interface Treatment {
   id: number;
   name: string;
+  description: string;
+  private: string;
+  forest: string;
 }
 
 export const Treatments: Treatment[] = [
-  { id: 1, name: 'Clearcut' },
-  { id: 2, name: 'Commercial Thin' },
-  { id: 3, name: 'Commercial Thin Chip Tree Removal' },
-  { id: 4, name: 'Timber Salvage' },
-  { id: 5, name: 'Timber Salvage Chip Tree Removal' },
-  { id: 6, name: 'Selection' },
-  { id: 7, name: 'Selection Chip Tree Removal' },
-  { id: 8, name: 'Ten Percent Group Selection' },
-  { id: 9, name: 'Twenty Percent Group Selection' },
-  { id: 10, name: 'Biomass Salvage' }
+  {
+    id: 1,
+    name: 'Clearcut',
+    description: 'All live and dead trees over 10 inches cut.',
+    private:
+      'For smaller size classes, cut at the following proportions for both live and dead: 0-1" DBH - 30%, 1-5" DBH - 60%, 5-10" DBH - 90%',
+    forest: 'This treatment is not performed on FS land.'
+  },
+  {
+    id: 2,
+    name: 'Commercial Thin',
+    description:
+      'Remove trees > 10 inches DBH, starting with small ones closest to 10” until a certain residual basal area is reached, which is based on site class',
+    private: 'N/A',
+    forest: 'This treatment is not performed on FS land.'
+  },
+  {
+    id: 3,
+    name: 'Commercial Thin Chip Tree Removal',
+    description:
+      'Same as Commercial thin but with the additional removal of small trees.',
+    private:
+      'Remove small trees in the following proportions: 0-1" DBH, - 20% 1-5" DBH - 50%, 5-10" DBH - 80%',
+    forest:
+      'Remove small trees in the following proportions: 0-1" DBH - 20%, 1-5" DBH - 85%, 5-10" DBH - 90%'
+  },
+  {
+    id: 4,
+    name: 'Timber Salvage',
+    description: 'Remove all dead trees for timber (fire salvage)',
+    private: 'N/A',
+    forest: 'N/A'
+  },
+  {
+    id: 5,
+    name: 'Timber Salvage Chip Tree Removal',
+    description:
+      'Same as Timber Salvage but with the additional removal of small trees.',
+    private:
+      'Remove small trees in the following proportions: 0-1" DBH - 30%, 1-5" DBH - 60%, 5-10" DBH - 90%',
+    forest:
+      'Remove small trees in the following proportions: 0-1" DBH - 20%, 1-5" DBH - 85%, 5-10" DBH - 90%'
+  },
+  {
+    id: 6,
+    name: 'Selection',
+    description:
+      'Remove some trees but leave behind at least 15 sq ft/ac of basal area of trees > 18" DBH',
+    private: 'N/A',
+    forest: 'This treatment is not performed on FS land.'
+  },
+  {
+    id: 7,
+    name: 'Selection Chip Tree Removal',
+    description:
+      'Same as Selection thin but with the additional removal of small trees.',
+    private:
+      'Remove small trees in the following proportions: 0-1" DBH - 20%, 1-5" DBH - 50%, 5-10" DBH - 80%',
+    forest: 'This treatment is not performed on FS land.'
+  },
+  {
+    id: 8,
+    name: 'Ten Percent Group Selection',
+    description:
+      '10% of the area of the harvest unit is Clearcut and the rest of the area meets requirements for Selection with small tree removal',
+    private: '',
+    forest: ''
+  },
+  {
+    id: 9,
+    name: 'Twenty Percent Group Selection',
+    description:
+      '20% of the area of the harvest unit is Clearcut and the rest of the area meets requirements for Selection with small tree removal',
+    private: '',
+    forest: 'This treatment is not performed on FS land.'
+  },
+  {
+    id: 10,
+    name: 'Biomass Salvage',
+    description: 'Remove all dead trees for biomass (die-off salvage)',
+    private:
+      'Remove small trees in the following proportions: 0-1" DBH - 30%, 1-5" DBH - 60%, 5-10" DBH - 90%',
+    forest:
+      'Remove small trees in the following proportions: 0-1" DBH - 20%, 1-5" DBH - 85%, 5-10" DBH - 90%'
+  }
 ];
 
 export interface Results {
@@ -89,7 +168,10 @@ export interface YearlyResult {
   radius: number;
   fuelCost: number;
   energyRevenueRequired: number;
-  geoJson: FeatureCollection;
+  energyRevenueRequiredPW: number;
+  cashFlow: any;
+  geoJson: any;
+  errorGeoJson: any;
 }
 
 export interface ClusterResult {
@@ -125,20 +207,15 @@ export interface ClusterErrorResult {
   biomass: number;
   area: number;
   error: string;
+  slope: number;
+}
+
+export interface ErrorClusterFeature extends Feature {
+  properties: ClusterErrorResult;
 }
 
 export interface ClusterFeature extends Feature {
-  properties: {
-    cluster_no: string;
-    lat: number;
-    lng: number;
-    area: number;
-    distance: number;
-    biomass: number;
-    combinedCost: number;
-    residueCost: number;
-    transportationCost: number;
-  };
+  properties: ClusterResult;
 }
 
 export interface MapCoordinates {
@@ -160,7 +237,8 @@ export interface AllYearsResults {
   biomassTarget: number; // from tea output
   annualGeneration: number;
   teaResults: OutputModGPO | OutputModCHP | OutputModGP;
-  transmissionResults?: any;
+  teaInputs: InputModGPO | InputModCHP | InputModGP;
+  transmissionResults: any;
   nearestSubstation: string;
   distanceToNearestSubstation: number; // km
 }

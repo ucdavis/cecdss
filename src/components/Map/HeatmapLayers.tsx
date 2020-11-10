@@ -2,6 +2,7 @@ import React from 'react';
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
 import { FeatureCollection, Feature, Point } from 'geojson';
 import { ClusterFeature } from '../../models/Types';
+import { ESRCH } from 'constants';
 
 interface Props {
   yearlyGeoJson: FeatureCollection[];
@@ -11,12 +12,40 @@ interface Props {
 
 export const HeatmapLayers = (props: Props) => {
   if (!props.yearlyGeoJson || props.yearlyGeoJson.length <= 0) {
-    return null;
+    return <></>;
   }
+  if (
+    props.selectedYearIndex >= 0 &&
+    props.selectedYearIndex < props.years.length
+  ) {
+    const dataLayers: any = props.yearlyGeoJson.map((result, i) => {
+      if (i === props.selectedYearIndex) {
+        return (
+          <HeatmapLayer
+            points={result.features}
+            longitudeExtractor={(feature: Feature<Point>) =>
+              feature.geometry.coordinates[0]
+            }
+            latitudeExtractor={(feature: Feature<Point>) =>
+              feature.geometry.coordinates[1]
+            }
+            intensityExtractor={(feature: ClusterFeature) =>
+              feature.properties.biomass
+            }
+            radius={100}
+          />
+        );
+      } else {
+        return <></>;
+      }
+    });
+    return <>{dataLayers}</>;
+  } else if (props.selectedYearIndex === props.years.length) {
+    const result = props.yearlyGeoJson.reduce((res, cur) => {
+      return { ...res, features: [...res.features, ...cur.features] };
+    });
 
-  const dataLayers = props.yearlyGeoJson.map((result, i) =>
-    i === props.selectedYearIndex ||
-    props.selectedYearIndex === props.years.length ? (
+    return (
       <HeatmapLayer
         points={result.features}
         longitudeExtractor={(feature: Feature<Point>) =>
@@ -28,11 +57,10 @@ export const HeatmapLayers = (props: Props) => {
         intensityExtractor={(feature: ClusterFeature) =>
           feature.properties.biomass
         }
+        blur={10}
       />
-    ) : (
-      <></>
-    )
-  );
-
-  return <>{dataLayers}</>;
+    );
+  } else {
+    return <></>;
+  }
 };

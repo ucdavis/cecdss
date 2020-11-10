@@ -32,7 +32,7 @@
   }
 }
 
-#sidebar {
+.sidebar {
   position: fixed;
   z-index: 2000;
   width: 30%;
@@ -44,7 +44,7 @@
   overflow-y: scroll;
 }
 
-#results-sidebar {
+.results-sidebar {
   position: fixed;
   z-index: 2000;
   width: 60%;
@@ -62,4 +62,16 @@
 
 .chart {
   flex: 1 1 33%;
+}
+
+.tooltip-sidebar {
+  z-index: 3001;
+}
+
+.years-pagination {
+  overflow-x: scroll;
+}
+
+.years-page {
+  height: 100%;
 }

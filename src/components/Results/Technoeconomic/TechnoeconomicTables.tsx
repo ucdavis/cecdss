@@ -108,27 +108,6 @@ export const TechnoeconomicTables = (props: Props) => {
           ))}
         </tr>
         <tr>
-          <td>Move-in cost</td>
-          <td>$/ton</td>
-          <td>
-            {formatCurrency(
-              props.yearlyResults.reduce(
-                (sum, x) => sum + x.totalMoveInCost,
-                0
-              ) /
-                props.yearlyResults.reduce(
-                  (sum, x) => sum + x.totalFeedstock,
-                  0
-                )
-            )}
-          </td>
-          {props.yearlyResults.map(result => (
-            <td>
-              {formatCurrency(result.totalMoveInCost / result.totalFeedstock)}
-            </td>
-          ))}
-        </tr>
-        <tr>
           <td>Equity Recovery</td>
           <td>$</td>
           <td>
@@ -246,6 +225,21 @@ export const TechnoeconomicTables = (props: Props) => {
           </td>
           {props.cashFlows.map(result => (
             <td>{formatCurrency(result.DebtPrincipalRemaining)}</td>
+          ))}
+        </tr>
+        <tr>
+          <td>Feedstock Cost</td>
+          <td>$</td>
+          <td>
+            {formatCurrency(
+              props.cashFlows.reduce(
+                (sum: number, x: CashFlow) => sum + x.BiomassFuelCost,
+                0
+              )
+            )}
+          </td>
+          {props.cashFlows.map(result => (
+            <td>{formatCurrency(result.BiomassFuelCost)}</td>
           ))}
         </tr>
         <tr>
@@ -414,7 +408,7 @@ export const TechnoeconomicTables = (props: Props) => {
           ))}
         </tr>
         <tr>
-          <td>EnergyRevenueRequired</td>
+          <td>Present Worth</td>
           <td>$</td>
           <td>
             {formatCurrency(props.presentWorth.reduce((sum, x) => sum + x, 0))}
