@@ -43,9 +43,10 @@ export const ResultsCharts = (props: Props) => {
     });
     return (
       <>
+        <h3>Delivered Cost of Feedstock</h3>
         <ComposedChart
-          width={700}
-          height={600}
+          width={1000}
+          height={500}
           data={data}
           margin={{
             top: 20,
@@ -81,7 +82,12 @@ export const ResultsCharts = (props: Props) => {
             fill='#ffc658'
             unit='$/green ton'
           />
-          <Line type='monotone' dataKey='total' stroke='#ff7300' />
+          <Line
+            type='monotone'
+            dataKey='total'
+            stroke='#ff7300'
+            unit='$/green ton'
+          />
         </ComposedChart>
         {props.sensitivityResults && <></>}
       </>
@@ -163,6 +169,7 @@ export const ResultsCharts = (props: Props) => {
     }
     return (
       <>
+        <h3>Sensitivity Analysis</h3>
         <LineChart
           width={700}
           height={600}
