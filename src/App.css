@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -36,11 +36,12 @@
   position: fixed;
   z-index: 2000;
   width: 30%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  top: 0;
-  right: 0;
+  height: 96%;
+  background-color: #fff;
+  padding: 36px;
+  border-radius: 8px;
+  top: 2%;
+  right: 2%;
   overflow-y: scroll;
 }
 
