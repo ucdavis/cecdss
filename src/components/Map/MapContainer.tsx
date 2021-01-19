@@ -1,5 +1,6 @@
 import React, { createRef, useState, useEffect } from 'react';
 import { Map, TileLayer, Marker, GeoJSON } from 'react-leaflet';
+import { DynamicMapLayer } from 'react-esri-leaflet/v2';
 import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { FeatureCollection, Feature } from 'geojson';
 import { InputContainer } from '../Inputs/InputContainer';
@@ -33,6 +34,7 @@ import {
 } from '@ucdavis/tea';
 import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
 import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
+import { ExternalLayerSelection } from './ExternalLayerSelection';
 
 export const MapContainer = () => {
   const [loading, toggleLoading] = useState<boolean>(false);
@@ -53,6 +55,9 @@ export const MapContainer = () => {
 
   const [showGeoJson, toggleGeoJson] = useState<boolean>(true);
   const [showErrorGeoJson, toggleErrorGeoJson] = useState<boolean>(false);
+
+  // external layers
+  const [externalLayers, setExternalLayers] = useState<string[]>([]);
 
   const frcsInputsExample: FrcsInputs = {
     system: 'Ground-Based Mech WT',
@@ -332,6 +337,7 @@ export const MapContainer = () => {
             </Pagination>
           </>
         )}
+        <ExternalLayerSelection onChange={setExternalLayers} />
         {!showResults && (
           <InputContainer
             mapInputs={mapState}
@@ -373,6 +379,14 @@ export const MapContainer = () => {
         bounds={bounds}
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
+        {externalLayers.includes('fire') && (
+          <DynamicMapLayer
+            url={
+              'https://egis.fire.ca.gov/arcgis/rest/services/FRAP/FHSZ/MapServer'
+            }
+            opacity={0.7}
+          />
+        )}
         <HeatmapLayers
           years={years}
           yearlyGeoJson={geoJsonResults}
