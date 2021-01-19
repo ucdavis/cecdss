@@ -30,7 +30,7 @@ export const ExternalLayerSelection = (props: Props) => {
     [props.onChange, layers]
   );
   return (
-    <div>
+    <div className="layers">
       <h3>Additional Layers</h3>
       {Object.keys(AllLayers).map(layer => (
         <div className='form-check' key={layer}>
