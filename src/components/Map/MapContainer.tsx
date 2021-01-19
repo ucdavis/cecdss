@@ -380,7 +380,13 @@ export const MapContainer = () => {
         bounds={bounds}
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
-        <EsriLeafletGeoSearch useMapBounds={false} position='topleft' />
+        <EsriLeafletGeoSearch
+          useMapBounds={false}
+          position='topleft'
+          eventHandlers={{
+            results: (r: any) => { r.results.length > 0 && setMapState(r.results[0].latlng) }
+          }}
+        />
         {externalLayers.includes('fire') && (
           <DynamicMapLayer
             url={
