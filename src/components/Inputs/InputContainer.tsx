@@ -52,9 +52,11 @@ export const InputContainer = (props: Props) => {
   );
   return (
     <>
-      <h2>Inputs</h2>
-      {button}
-      <div>
+      <div className='cardheader'>
+        <h4>CEC DSS</h4>
+        <h2>Select Inputs</h2>
+      </div>
+      <div className='cardcontents'>
         <h4>Forestry and Conversion</h4>
         <Form>
           <FormGroup>
@@ -94,6 +96,7 @@ export const InputContainer = (props: Props) => {
           </FormGroup>
         </Form>
       </div>
+
       <FrcsInputsContainer
         inputs={props.frcsInputs}
         setInputs={props.setFrcsInputs}

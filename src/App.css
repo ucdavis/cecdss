@@ -8,9 +8,29 @@
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
 }
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  border-color: var(--primary-color) !important;
+}
 .btn-primary:focus,
 .btn-primary.focus {
   box-shadow: 0 0 0 0.2rem rgba(56, 85, 66, 0.5) !important;
+}
+.cardheader {
+  background-color: var(--primary-color);
+  padding: 16px 24px;
+}
+.cardheader h4 {
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 0px;
+  font-size: 14px;
+}
+.cardheader h2 {
+  color: #fff;
+}
+.cardcontents {
+  padding: 24px;
 }
 .App {
   text-align: left;
@@ -52,7 +72,7 @@
   width: 30%;
   height: 96%;
   background-color: #fff;
-  padding: 36px;
+  padding: 0px;
   border-radius: 8px;
   top: 2%;
   right: 2%;
