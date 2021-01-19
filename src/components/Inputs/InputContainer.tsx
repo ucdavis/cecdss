@@ -35,20 +35,22 @@ interface Props {
 
 export const InputContainer = (props: Props) => {
   const button = (!props.disabled || props.loading) && (
-    <Button
-      color='primary'
-      onClick={props.submitInputs}
-      disabled={props.loading}
-    >
-      {props.loading ? (
-        <>
-          Running Model...
-          <Spinner color='light' />
-        </>
-      ) : (
-        <>Run Model</>
-      )}
-    </Button>
+    <div className='cardcontents'>
+      <Button
+        color='primary'
+        onClick={props.submitInputs}
+        disabled={props.loading}
+      >
+        {props.loading ? (
+          <>
+            Running Model...
+            <Spinner color='light' />
+          </>
+        ) : (
+          <>Run Model</>
+        )}
+      </Button>
+    </div>
   );
   return (
     <>

@@ -79,7 +79,7 @@ export const TechnoeconomicInputs = (props: Props) => {
     </>
   );
   return (
-    <div>
+    <div className='cardcontents'>
       <h4>Techno-Economic Assessment </h4>
       <Button onClick={() => toggleShowDetailedInputs(!showDetailedInputs)}>
         {showDetailedInputs
@@ -113,7 +113,6 @@ export const TechnoeconomicInputs = (props: Props) => {
           Hide More Detailed Inputs
         </Button>
       )}
-      <br />
       <hr />
     </div>
   );
