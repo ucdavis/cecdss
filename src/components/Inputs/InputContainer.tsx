@@ -35,26 +35,30 @@ interface Props {
 
 export const InputContainer = (props: Props) => {
   const button = (!props.disabled || props.loading) && (
-    <Button
-      color='primary'
-      onClick={props.submitInputs}
-      disabled={props.loading}
-    >
-      {props.loading ? (
-        <>
-          Running Model...
-          <Spinner color='light' />
-        </>
-      ) : (
-        <>Run Model</>
-      )}
-    </Button>
+    <div className='cardcontents'>
+      <Button
+        color='primary'
+        onClick={props.submitInputs}
+        disabled={props.loading}
+      >
+        {props.loading ? (
+          <>
+            Running Model...
+            <Spinner color='light' />
+          </>
+        ) : (
+          <>Run Model</>
+        )}
+      </Button>
+    </div>
   );
   return (
     <>
-      <h2>Inputs</h2>
-      {button}
-      <div>
+      <div className='cardheader'>
+        <h4>CEC DSS</h4>
+        <h2>Select Inputs</h2>
+      </div>
+      <div className='cardcontents'>
         <h4>Forestry and Conversion</h4>
         <Form>
           <FormGroup>
@@ -94,6 +98,7 @@ export const InputContainer = (props: Props) => {
           </FormGroup>
         </Form>
       </div>
+
       <FrcsInputsContainer
         inputs={props.frcsInputs}
         setInputs={props.setFrcsInputs}
