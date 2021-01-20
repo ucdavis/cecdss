@@ -1,6 +1,6 @@
 import React, { createRef, useState, useEffect } from 'react';
 import { Map, TileLayer, Marker, GeoJSON } from 'react-leaflet';
-import { DynamicMapLayer } from 'react-esri-leaflet/v2';
+import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet/v2';
 import EsriLeafletGeoSearch from 'react-esri-leaflet/v2/plugins/EsriLeafletGeoSearch';
 import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { FeatureCollection, Feature } from 'geojson';
@@ -384,9 +384,32 @@ export const MapContainer = () => {
           useMapBounds={false}
           position='topleft'
           eventHandlers={{
-            results: (r: any) => { r.results.length > 0 && setMapState(r.results[0].latlng) }
+            results: (r: any) => {
+              r.results.length > 0 && setMapState(r.results[0].latlng);
+            }
           }}
         />
+        {externalLayers.includes('transmission') && (
+          <FeatureLayer
+            url={
+              'https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Transmission_Line/FeatureServer/0'
+            }
+          />
+        )}
+        {externalLayers.includes('substation') && (
+          <FeatureLayer
+            url={
+              'https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Substation/FeatureServer/0'
+            }
+          />
+        )}
+        {externalLayers.includes('plant') && (
+          <FeatureLayer
+            url={
+              'https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Power_Plant/FeatureServer/0'
+            }
+          />
+        )}
         {externalLayers.includes('fire') && (
           <DynamicMapLayer
             url={

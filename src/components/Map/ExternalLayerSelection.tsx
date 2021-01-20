@@ -5,10 +5,11 @@ interface Props {
 }
 
 const AllLayers: { [key: string]: string } = {
-    'fire': 'Fire Danger',
-    'ice': 'Ice Danger',
-    'water': 'Flood Danger'
-}
+  fire: 'Fire Hazard Zones',
+  transmission: 'Transmission Lines',
+  substation: 'Substations',
+  plant: 'Power plants'
+};
 
 export const ExternalLayerSelection = (props: Props) => {
   const [layers, setLayers] = useState<string[]>([]);
