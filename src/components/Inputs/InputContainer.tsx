@@ -37,6 +37,7 @@ export const InputContainer = (props: Props) => {
   const button = (!props.disabled || props.loading) && (
     <div className='cardcontents'>
       <Button
+        className='btn-block'
         color='primary'
         onClick={props.submitInputs}
         disabled={props.loading}
@@ -50,6 +51,7 @@ export const InputContainer = (props: Props) => {
           <>Run Model</>
         )}
       </Button>
+      <br />
     </div>
   );
   return (

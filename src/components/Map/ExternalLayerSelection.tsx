@@ -31,21 +31,28 @@ export const ExternalLayerSelection = (props: Props) => {
     [props.onChange, layers]
   );
   return (
-    <div className="layers">
-      <h3>Additional Layers</h3>
-      {Object.keys(AllLayers).map(layer => (
-        <div className='form-check' key={layer}>
-          <input
-            className='form-check-input'
-            type='checkbox'
-            value={layer}
-            checked={layers.includes(layer)}
-            onChange={handleClick}
-            id={layer}
-          />
-          <label className='form-check-label' htmlFor={layer}>{AllLayers[layer]}</label>
-        </div>
-      ))}
+    <div className='layers'>
+      <div className='cardheader'>
+        <h3>Map Layers</h3>
+        <i className='fas fa-align-left'></i>
+      </div>
+      <div className='cardcontents'>
+        {Object.keys(AllLayers).map(layer => (
+          <div className='form-check' key={layer}>
+            <input
+              className='form-check-input'
+              type='checkbox'
+              value={layer}
+              checked={layers.includes(layer)}
+              onChange={handleClick}
+              id={layer}
+            />
+            <label className='form-check-label' htmlFor={layer}>
+              {AllLayers[layer]}
+            </label>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
