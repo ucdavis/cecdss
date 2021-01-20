@@ -1,6 +1,7 @@
 import React, { createRef, useState, useEffect } from 'react';
 import { Map, TileLayer, Marker, GeoJSON } from 'react-leaflet';
 import { DynamicMapLayer } from 'react-esri-leaflet/v2';
+import EsriLeafletGeoSearch from 'react-esri-leaflet/v2/plugins/EsriLeafletGeoSearch';
 import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { FeatureCollection, Feature } from 'geojson';
 import { InputContainer } from '../Inputs/InputContainer';
@@ -379,6 +380,13 @@ export const MapContainer = () => {
         bounds={bounds}
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
+        <EsriLeafletGeoSearch
+          useMapBounds={false}
+          position='topleft'
+          eventHandlers={{
+            results: (r: any) => { r.results.length > 0 && setMapState(r.results[0].latlng) }
+          }}
+        />
         {externalLayers.includes('fire') && (
           <DynamicMapLayer
             url={
