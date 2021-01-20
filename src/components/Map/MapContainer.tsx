@@ -1,5 +1,6 @@
 import React, { createRef, useState, useEffect } from 'react';
 import { Map, TileLayer, Marker, GeoJSON } from 'react-leaflet';
+import 'esri-leaflet-renderers'; // allows rendering feature layers using their defined renderers
 import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet/v2';
 import EsriLeafletGeoSearch from 'react-esri-leaflet/v2/plugins/EsriLeafletGeoSearch';
 import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
