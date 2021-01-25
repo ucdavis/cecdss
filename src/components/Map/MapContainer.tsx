@@ -37,6 +37,7 @@ import {
 import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
 import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
 import { ExternalLayerSelection } from './ExternalLayerSelection';
+import { serviceUrl } from '../Shared/config';
 
 export const MapContainer = () => {
   const [loading, toggleLoading] = useState<boolean>(false);
@@ -143,8 +144,7 @@ export const MapContainer = () => {
       unloadingCost: 10000 // default to 10,000
     };
     const allYearResults: AllYearsResults = await fetch(
-      'http://localhost:3000/initialProcessing',
-      // 'https://cecdss-backend.azurewebsites.net/initialProcessing',
+      serviceUrl + 'initialProcessing',
       {
         mode: 'cors',
         method: 'POST',
@@ -187,8 +187,7 @@ export const MapContainer = () => {
       };
       console.log(JSON.stringify(reqBody));
       const yearResult: YearlyResult = await fetch(
-        'http://localhost:3000/process',
-        // 'https://cecdss-backend.azurewebsites.net/process',
+        serviceUrl + 'process',
         {
           mode: 'cors',
           method: 'POST',
