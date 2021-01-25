@@ -3,6 +3,7 @@
 }
 .btn-primary {
   background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
 }
 .btn-primary:hover {
   background-color: var(--primary-color) !important;
@@ -17,6 +18,25 @@
 .btn-primary.focus {
   box-shadow: 0 0 0 0.2rem rgba(56, 85, 66, 0.5) !important;
 }
+.btn-outline-primary {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+.btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+  border-color: var(--primary-color) !important;
+}
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-primary.dropdown-toggle {
+  border-color: var(--primary-color) !important;
+}
+.btn-outline-primary:focus,
+.btn-outline-primary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(56, 85, 66, 0.5) !important;
+}
 .cardheader {
   background-color: var(--primary-color);
   padding: 16px 24px;
@@ -28,9 +48,16 @@
 }
 .cardheader h2 {
   color: #fff;
+  margin-bottom: 0px;
+}
+.cardheader h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 0px;
 }
 .cardcontents {
-  padding: 24px;
+  padding: 24px 24px 0px 24px;
 }
 .App {
   text-align: left;
@@ -82,23 +109,23 @@
 .results-sidebar {
   position: fixed;
   z-index: 2000;
-  width: 60%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  top: 0;
-  right: 0;
+  width: 30%;
+  height: 96%;
+  background-color: #fff;
+  padding: 0px;
+  border-radius: 8px;
+  top: 2%;
+  right: 2%;
   overflow-y: scroll;
 }
 
 .layers {
   position: fixed;
-  width: 20%;
-  height: 20%;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  bottom: 0;
-  left: 0;
+  background-color: #fff;
+  padding-bottom: 24px;
+  border-radius: 8px;
+  bottom: 2%;
+  left: 2%;
   overflow-y: scroll;
 }
 
