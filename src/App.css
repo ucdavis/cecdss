@@ -105,7 +105,12 @@
   right: 2%;
   overflow-y: scroll;
 }
-
+.input-group-text {
+  min-width: 48px;
+}
+.input-group {
+  margin-top: 6px;
+}
 .results-sidebar {
   position: fixed;
   z-index: 2000;
