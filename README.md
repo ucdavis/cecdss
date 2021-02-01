@@ -1,22 +1,21 @@
 # CEC Decision Support Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Local setup
 
-## Available Scripts
+1. Make sure you are using node v10
+1. `npm install` the dependencies
 
-In the project directory, you can run:
+## Choose your backend
 
-### `npm install`
+This web front-end relies on the backend project [https://github.com/ucdavis/cecdss-backend](https://github.com/ucdavis/cecdss-backend) to be running and accessible.  By default the backend is expected to be running at localhost:3000 but this can be changed in [https://github.com/ucdavis/cecdss/blob/master/src/components/Shared/config.ts](https://github.com/ucdavis/cecdss/blob/master/src/components/Shared/config.ts)
 
-Install dependencies before running.
+## Running the app
 
-### `npm start`
+To run locally on port 3001 (the [backend app](https://github.com/ucdavis/cecdss-backend) will be running on 3000)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`npm run dev`
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Other options for advance users
 
 ### `npm test`
 
