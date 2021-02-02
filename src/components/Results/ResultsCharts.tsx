@@ -5,6 +5,7 @@ import {
   Bar,
   CartesianGrid,
   ComposedChart,
+  Label,
   Legend,
   Line,
   LineChart,
@@ -167,130 +168,84 @@ export const ResultsCharts = (props: Props) => {
         )
       });
     }
+
+    // TODO: figure out data min and max from underlying results or use defaults
+    const dataMin = -50;
+    const dataMax = 200; 
+
     return (
       <>
         <h3>Sensitivity Analysis</h3>
-        <LineChart
+        <ScatterChart
           width={700}
           height={600}
           margin={{
             top: 20,
-            bottom: 20
+            bottom: 20,
+            left: 20
           }}
         >
-          <CartesianGrid stroke='#f5f5f5' />
-          <XAxis dataKey='relativeChange' />
-          <YAxis dataKey='coe' />
-          <Tooltip />
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis type="number" dataKey='relativeChange' domain={[dataMin, dataMax]}>
+            <Label value="% Relative Change" position="insideBottom" className="sensitivity-x-label" />
+          </XAxis>
+          <YAxis type="number" dataKey='coe'>
+            <Label value="$/kwH, constant" angle={-90} position="insideLeft" className="sensitivity-y-label" />
+          </YAxis>
+          <Tooltip cursor={{ strokeDasharray: '3 3' }}/>
           <Legend />
-          <Line
+          <Scatter
             name='Capital Cost'
             data={capitalCost}
             fill='#4B0082'
-            type='monotone'
             dataKey='coe'
+            line
           />
-          <Line
+          <Scatter
             name='Fuel Cost'
             data={fuelCost}
             fill='#8B008B'
-            type='monotone'
             dataKey='coe'
+            line
           />
-          <Line
+          <Scatter
             name='Debt Ratio'
             data={debtRatio}
             fill='#FFD700'
-            type='monotone'
             dataKey='coe'
+            line
           />
-          <Line
+          <Scatter
             name='Debt Interest Rate'
             data={debtInterestRate}
             fill='#CD5C5C'
-            type='monotone'
             dataKey='coe'
+            line
           />
-          <Line
+          <Scatter
             name='Cost Of Equity'
             data={costOfEquity}
             fill='#800000'
-            type='monotone'
             dataKey='coe'
+            line
           />
-          <Line
+          <Scatter
             name='Net Efficiency'
             data={netEfficiency}
             fill='#008B8B'
-            type='monotone'
             dataKey='coe'
+            line
           />
-          <Line
+          <Scatter
             name='Capacity Factor'
             data={capacityFactor}
             fill='#00008B'
-            type='monotone'
             dataKey='coe'
+            line
           />
-        </LineChart>
+        </ScatterChart>
       </>
     );
-    // return (
-    //   <>
-    //     <ScatterChart
-    //       width={700}
-    //       height={600}
-    //       margin={{
-    //         top: 20,
-    //         right: 20,
-    //         bottom: 20,
-    //         left: 20
-    //       }}
-    //     >
-    //       <XAxis
-    //         type='number'
-    //         dataKey='relativeChange'
-    //         name='Relative Change'
-    //         unit='%'
-    //       />
-    //       <YAxis
-    //         type='number'
-    //         dataKey='coe'
-    //         name='COE'
-    //         unit='$/kWh, Constant'
-    //       />
-    //       <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-    //       <Legend />
-    //       <Scatter name='Capital Cost' data={capitalCost} line fill='#4B0082' />
-    //       <Scatter name='Fuel Cost' data={fuelCost} line fill='#8B008B' />
-    //       <Scatter name='Debt Ratio' data={debtRatio} line fill='#FFD700' />
-    //       <Scatter
-    //         name='Debt Interest Rate'
-    //         data={debtInterestRate}
-    //         line
-    //         fill='#CD5C5C'
-    //       />
-    //       <Scatter
-    //         name='Cost Of Equity'
-    //         data={costOfEquity}
-    //         line
-    //         fill='#800000'
-    //       />
-    //       <Scatter
-    //         name='Net Efficiency'
-    //         data={netEfficiency}
-    //         line
-    //         fill='#008B8B'
-    //       />
-    //       <Scatter
-    //         name='Capacity Factor'
-    //         data={capacityFactor}
-    //         line
-    //         fill='#00008B'
-    //       />
-    //     </ScatterChart>
-    //   </>
-    // );
   };
 
   return (
