@@ -56,23 +56,26 @@ export const ResultsContainer = (props: Props) => {
 
   return (
     <>
-      <h2>Results</h2>
-      <Button
-        onClick={() => props.toggleGeoJson(!props.showGeoJson)}
-        outline={!props.showGeoJson}
-        active={props.showGeoJson}
-        color='primary'
-      >
-        Show Cluster Shapes
-      </Button>
-      <Button
-        onClick={() => props.toggleErrorGeoJson(!props.showErrorGeoJson)}
-        outline={!props.showErrorGeoJson}
-        active={props.showErrorGeoJson}
-        color='danger'
-      >
-        Show Cluster Shapes
-      </Button>
+      <div className='cardheader'>
+        <h4>Results</h4>
+        <Button
+          onClick={() => props.toggleGeoJson(!props.showGeoJson)}
+          outline={!props.showGeoJson}
+          active={props.showGeoJson}
+          color='primary'
+        >
+          Show Cluster Shapes
+        </Button>
+        <Button
+          onClick={() => props.toggleErrorGeoJson(!props.showErrorGeoJson)}
+          outline={!props.showErrorGeoJson}
+          active={props.showErrorGeoJson}
+          color='danger'
+        >
+          Show Error Clusters
+        </Button>
+      </div>
+
       <div className='years-pagination'>
         <Pagination aria-label='Year navigation' size='lg'>
           <PaginationItem

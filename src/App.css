@@ -96,13 +96,13 @@
 .sidebar {
   position: fixed;
   z-index: 2000;
-  width: 30%;
+  width: 36%;
   height: 96%;
   background-color: #fff;
   padding: 0px;
   border-radius: 8px;
-  top: 2%;
-  right: 2%;
+  top: 1%;
+  right: 1%;
   overflow-y: scroll;
 }
 .input-group-text {
@@ -114,13 +114,14 @@
 .results-sidebar {
   position: fixed;
   z-index: 2000;
-  width: 30%;
-  height: 96%;
+  width: 98%;
+  height: 44%;
   background-color: #fff;
   padding: 0px;
   border-radius: 8px;
-  top: 2%;
-  right: 2%;
+  bottom: 1%;
+  right: 1%;
+  left: 1%;
   overflow-y: scroll;
 }
 
@@ -129,9 +130,14 @@
   background-color: #fff;
   padding-bottom: 24px;
   border-radius: 8px;
-  bottom: 2%;
-  left: 2%;
+  min-width: 215px;
+  top: 1%;
+  left: 4%;
   overflow-y: scroll;
+}
+.layers p {
+  color: #fff;
+  margin: 0;
 }
 
 .chart-container {
