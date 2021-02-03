@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { Collapse } from 'reactstrap';
 
+import { faCoffee, faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 interface Props {
   onChange: (layers: string[]) => void;
 }
@@ -33,11 +36,20 @@ export const ExternalLayerSelection = (props: Props) => {
     [props.onChange, layers]
   );
 
+  const layerIcon = () => {
+    if (isOpen) {
+      return <FontAwesomeIcon icon={faCoffee} />;
+    } else {
+      return <FontAwesomeIcon icon={faAddressCard} />;
+    }
+  }
+
   return (
     <div className='layers'>
       <div className='cardheader' onClick={() => setIsOpen(!isOpen)}>
-        <h3>Map Layers are {isOpen ? 'showing' : 'hiding'}</h3>
-        <i className='fas fa-align-left'></i>
+        <h3>
+          Map Layers {layerIcon()}
+        </h3>
       </div>
       <Collapse isOpen={isOpen}>
         <div className='cardcontents'>
