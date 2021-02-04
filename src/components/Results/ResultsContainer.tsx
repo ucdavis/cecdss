@@ -56,58 +56,61 @@ export const ResultsContainer = (props: Props) => {
 
   return (
     <>
-      <div className='cardheader'>
-        <h4>Results</h4>
-        <Button
-          onClick={() => props.toggleGeoJson(!props.showGeoJson)}
-          outline={!props.showGeoJson}
-          active={props.showGeoJson}
-          color='primary'
-        >
-          Show Cluster Shapes
-        </Button>
-        <Button
-          onClick={() => props.toggleErrorGeoJson(!props.showErrorGeoJson)}
-          outline={!props.showErrorGeoJson}
-          active={props.showErrorGeoJson}
-          color='danger'
-        >
-          Show Error Clusters
-        </Button>
-      </div>
-
-      <div className='years-pagination'>
-        <Pagination aria-label='Year navigation' size='lg'>
-          <PaginationItem
-            className='years-page'
-            active={props.years.length === props.selectedYearIndex}
+      <div className='cardheader d-flex justify-content-between align-items-center'>
+        <h2>Results</h2>
+        <div className='result-buttons'>
+          <Button
+            onClick={() => props.toggleGeoJson(!props.showGeoJson)}
+            outline={!props.showGeoJson}
+            active={props.showGeoJson}
+            color='primary'
           >
-            <PaginationLink
-              key={'all'}
-              onClick={() => props.setSelectedYearIndex(props.years.length)}
-            >
-              All Results
-            </PaginationLink>
-          </PaginationItem>
-          {pages}
-        </Pagination>
+            Show Cluster Shapes
+          </Button>
+          <Button
+            onClick={() => props.toggleErrorGeoJson(!props.showErrorGeoJson)}
+            outline={!props.showErrorGeoJson}
+            active={props.showErrorGeoJson}
+            color='danger'
+          >
+            Show Error Clusters
+          </Button>
+        </div>
       </div>
-      <Progress
-        value={(props.yearlyResults.length / props.years.length) * 100}
-      />
-      <Alert>Note: all results in tons refer to green short tons</Alert>
-      {props.selectedYearIndex === props.years.length && (
-        <AllResultsContainer {...props} />
-      )}
-      {props.selectedYearIndex > -1 &&
-        props.selectedYearIndex < props.years.length && (
-          <YearlyResultsContainer
-            results={props.yearlyResults[props.selectedYearIndex]}
-            teaInputs={props.teaInputs}
-            teaModel={props.teaModel}
-            biomassTarget={props.allYearResults.biomassTarget}
-          />
+      <div className='cardcontents'>
+        <div className='years-pagination'>
+          <Pagination aria-label='Year navigation' size='lg'>
+            <PaginationItem
+              className='years-page'
+              active={props.years.length === props.selectedYearIndex}
+            >
+              <PaginationLink
+                key={'all'}
+                onClick={() => props.setSelectedYearIndex(props.years.length)}
+              >
+                All Results
+              </PaginationLink>
+            </PaginationItem>
+            {pages}
+          </Pagination>
+        </div>
+        <Progress
+          value={(props.yearlyResults.length / props.years.length) * 100}
+        />
+        <Alert>Note: all results in tons refer to green short tons</Alert>
+        {props.selectedYearIndex === props.years.length && (
+          <AllResultsContainer {...props} />
         )}
+        {props.selectedYearIndex > -1 &&
+          props.selectedYearIndex < props.years.length && (
+            <YearlyResultsContainer
+              results={props.yearlyResults[props.selectedYearIndex]}
+              teaInputs={props.teaInputs}
+              teaModel={props.teaModel}
+              biomassTarget={props.allYearResults.biomassTarget}
+            />
+          )}
+      </div>
     </>
   );
 };
