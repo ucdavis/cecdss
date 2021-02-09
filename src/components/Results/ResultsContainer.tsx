@@ -63,7 +63,7 @@ export const ResultsContainer = (props: Props) => {
             onClick={() => props.toggleGeoJson(!props.showGeoJson)}
             outline={!props.showGeoJson}
             active={props.showGeoJson}
-            color='primary'
+            color='success'
           >
             Show Cluster Shapes
           </Button>
@@ -71,7 +71,7 @@ export const ResultsContainer = (props: Props) => {
             onClick={() => props.toggleErrorGeoJson(!props.showErrorGeoJson)}
             outline={!props.showErrorGeoJson}
             active={props.showErrorGeoJson}
-            color='danger'
+            color='info'
           >
             Show Error Clusters
           </Button>

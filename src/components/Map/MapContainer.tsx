@@ -186,17 +186,14 @@ export const MapContainer = () => {
         costOfEquity: allYearResults.teaInputs.Financing.CostOfEquity
       };
       console.log(JSON.stringify(reqBody));
-      const yearResult: YearlyResult = await fetch(
-        serviceUrl + 'process',
-        {
-          mode: 'cors',
-          method: 'POST',
-          body: JSON.stringify(reqBody),
-          headers: {
-            'Content-Type': 'application/json'
-          }
+      const yearResult: YearlyResult = await fetch(serviceUrl + 'process', {
+        mode: 'cors',
+        method: 'POST',
+        body: JSON.stringify(reqBody),
+        headers: {
+          'Content-Type': 'application/json'
         }
-      ).then(res => res.json());
+      }).then(res => res.json());
       radius = yearResult.radius;
       clusterIds.push(...yearResult.clusterNumbers);
       errorIds.push(...yearResult.errorClusterNumbers);
@@ -310,14 +307,9 @@ export const MapContainer = () => {
   ];
   return (
     <div style={style}>
-      <div
-        className={
-          yearlyResults.length > 0 || loading ? 'results-sidebar' : 'sidebar'
-        }
-        id='sidebar'
-      >
-        {(yearlyResults.length > 0 || loading) && (
-          <>
+      {(yearlyResults.length > 0 || loading) && (
+        <>
+          <div className='input-result-toggle'>
             <Pagination aria-label='Page navigation example' size='lg'>
               <PaginationItem active={!showResults}>
                 <PaginationLink
@@ -336,8 +328,15 @@ export const MapContainer = () => {
                 </PaginationLink>
               </PaginationItem>
             </Pagination>
-          </>
-        )}
+          </div>
+        </>
+      )}
+      <div
+        className={
+          yearlyResults.length > 0 || loading ? 'results-sidebar' : 'sidebar'
+        }
+        id='sidebar'
+      >
         <ExternalLayerSelection onChange={setExternalLayers} />
         {!showResults && (
           <InputContainer
