@@ -158,6 +158,48 @@ export const MapContainer = () => {
     setTeaInputs(allYearResults.teaInputs);
     setSelectedYearIndex(years.length);
 
+    const sensitivityInputs: InputModSensitivity = {
+      model: teaModel,
+      input: teaInputs,
+      CapitalCost: {
+        base: 70000000,
+        high: 200000000,
+        low: 0
+      },
+      BiomassFuelCost: {
+        base: 22.05,
+        high: 100,
+        low: 0
+      },
+      DebtRatio: {
+        base: 75,
+        high: 100,
+        low: 0
+      },
+      DebtInterestRate: {
+        base: 5,
+        high: 15,
+        low: 1
+      },
+      CostOfEquity: {
+        base: 15,
+        high: 50,
+        low: 1
+      },
+      NetStationEfficiency: {
+        base: 20,
+        high: 50,
+        low: 5
+      },
+      CapacityFactor: {
+        base: 85,
+        high: 100,
+        low: 40
+      }
+    };
+    const sensitivity = calculateSensitivity(sensitivityInputs);
+    setSensitivityResults(sensitivity.output);
+
     let radius = 0;
     let clusterIds: string[] = [];
     let errorIds: string[] = [];
@@ -249,48 +291,6 @@ export const MapContainer = () => {
     );
     allYearResultsCopy.teaResults.ConstantLAC.ConstantLACofEnergy = constantLAC;
     setAllYearResults(allYearResultsCopy);
-
-    const sensitivityInputs: InputModSensitivity = {
-      model: teaModel,
-      input: teaInputs,
-      CapitalCost: {
-        base: 70000000,
-        high: 200000000,
-        low: 0
-      },
-      BiomassFuelCost: {
-        base: 22.05,
-        high: 100,
-        low: 0
-      },
-      DebtRatio: {
-        base: 75,
-        high: 100,
-        low: 0
-      },
-      DebtInterestRate: {
-        base: 5,
-        high: 15,
-        low: 1
-      },
-      CostOfEquity: {
-        base: 15,
-        high: 50,
-        low: 1
-      },
-      NetStationEfficiency: {
-        base: 20,
-        high: 50,
-        low: 5
-      },
-      CapacityFactor: {
-        base: 85,
-        high: 100,
-        low: 40
-      }
-    };
-    const sensitivity = calculateSensitivity(sensitivityInputs);
-    setSensitivityResults(sensitivity.output);
   };
 
   const accessToken =

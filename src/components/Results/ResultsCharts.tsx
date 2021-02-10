@@ -108,12 +108,12 @@ export const ResultsCharts = (props: Props) => {
     const capacityFactor = [];
     for (
       let index = 0;
-      index < props.sensitivityResults.CapitalCost.constantLAC.length;
+      index < props.sensitivityResults.CapitalCost.relativeChangeCOE.length;
       index++
     ) {
       capitalCost.push({
         coe: formatNumber(
-          props.sensitivityResults.CapitalCost.constantLAC[index]
+          props.sensitivityResults.CapitalCost.relativeChangeCOE[index]
         ),
         relativeChange: formatNumber(
           props.sensitivityResults.CapitalCost.relativeChange[index]
@@ -121,7 +121,7 @@ export const ResultsCharts = (props: Props) => {
       });
       fuelCost.push({
         coe: formatNumber(
-          props.sensitivityResults.BiomassFuelCost.constantLAC[index]
+          props.sensitivityResults.BiomassFuelCost.relativeChangeCOE[index]
         ),
         relativeChange: formatNumber(
           props.sensitivityResults.BiomassFuelCost.relativeChange[index]
@@ -129,7 +129,7 @@ export const ResultsCharts = (props: Props) => {
       });
       debtRatio.push({
         coe: formatNumber(
-          props.sensitivityResults.DebtRatio.constantLAC[index]
+          props.sensitivityResults.DebtRatio.relativeChangeCOE[index]
         ),
         relativeChange: formatNumber(
           props.sensitivityResults.DebtRatio.relativeChange[index]
@@ -137,7 +137,7 @@ export const ResultsCharts = (props: Props) => {
       });
       debtInterestRate.push({
         coe: formatNumber(
-          props.sensitivityResults.DebtInterestRate.constantLAC[index]
+          props.sensitivityResults.DebtInterestRate.relativeChangeCOE[index]
         ),
         relativeChange: formatNumber(
           props.sensitivityResults.DebtInterestRate.relativeChange[index]
@@ -145,7 +145,7 @@ export const ResultsCharts = (props: Props) => {
       });
       costOfEquity.push({
         coe: formatNumber(
-          props.sensitivityResults.CostOfEquity.constantLAC[index]
+          props.sensitivityResults.CostOfEquity.relativeChangeCOE[index]
         ),
         relativeChange: formatNumber(
           props.sensitivityResults.CostOfEquity.relativeChange[index]
@@ -153,7 +153,7 @@ export const ResultsCharts = (props: Props) => {
       });
       netEfficiency.push({
         coe: formatNumber(
-          props.sensitivityResults.NetStationEfficiency.constantLAC[index]
+          props.sensitivityResults.NetStationEfficiency.relativeChangeCOE[index]
         ),
         relativeChange: formatNumber(
           props.sensitivityResults.NetStationEfficiency.relativeChange[index]
@@ -161,7 +161,7 @@ export const ResultsCharts = (props: Props) => {
       });
       capacityFactor.push({
         coe: formatNumber(
-          props.sensitivityResults.CapacityFactor.constantLAC[index]
+          props.sensitivityResults.CapacityFactor.relativeChangeCOE[index]
         ),
         relativeChange: formatNumber(
           props.sensitivityResults.CapacityFactor.relativeChange[index]
@@ -169,10 +169,8 @@ export const ResultsCharts = (props: Props) => {
       });
     }
 
-    // TODO: figure out data min and max from underlying results or use defaults
-    const dataMin = -50;
-    const dataMax = 200; 
-
+    const xRange = [-200,400];
+    const yRange = [-100,200];
     return (
       <>
         <h3>Sensitivity Analysis</h3>
@@ -186,11 +184,11 @@ export const ResultsCharts = (props: Props) => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis type="number" dataKey='relativeChange' domain={[dataMin, dataMax]}>
+          <XAxis type="number" dataKey='relativeChange' domain={[xRange[0], xRange[1]]}>
             <Label value="% Relative Change" position="insideBottom" className="sensitivity-x-label" />
           </XAxis>
-          <YAxis type="number" dataKey='coe'>
-            <Label value="$/kwH, constant" angle={-90} position="insideLeft" className="sensitivity-y-label" />
+          <YAxis type="number" dataKey='coe' domain={[yRange[0], yRange[1]]}>
+            <Label value="Relative Change in COE (%)" angle={-90} position="insideLeft" className="sensitivity-y-label" />
           </YAxis>
           <Tooltip cursor={{ strokeDasharray: '3 3' }}/>
           <Legend />
