@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Collapse } from 'reactstrap';
 
-import { faCoffee, faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface Props {
@@ -38,18 +38,20 @@ export const ExternalLayerSelection = (props: Props) => {
 
   const layerIcon = () => {
     if (isOpen) {
-      return <FontAwesomeIcon icon={faCoffee} />;
+      return <FontAwesomeIcon icon={faAngleDown} />;
     } else {
-      return <FontAwesomeIcon icon={faAddressCard} />;
+      return <FontAwesomeIcon icon={faAngleUp} />;
     }
-  }
+  };
 
   return (
     <div className='layers'>
-      <div className='cardheader' onClick={() => setIsOpen(!isOpen)}>
-        <h3>
-          Map Layers {layerIcon()}
-        </h3>
+      <div
+        className='cardheader d-flex align-items-center justify-content-between'
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <h3>Map Layers</h3>
+        <p>{layerIcon()}</p>
       </div>
       <Collapse isOpen={isOpen}>
         <div className='cardcontents'>

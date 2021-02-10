@@ -96,26 +96,32 @@
 .sidebar {
   position: fixed;
   z-index: 2000;
-  width: 30%;
+  width: 36%;
   height: 96%;
   background-color: #fff;
   padding: 0px;
   border-radius: 8px;
-  top: 2%;
-  right: 2%;
+  top: 1%;
+  right: 1%;
   overflow-y: scroll;
 }
-
+.input-group-text {
+  min-width: 48px;
+}
+.input-group {
+  margin-top: 6px;
+}
 .results-sidebar {
   position: fixed;
   z-index: 2000;
-  width: 30%;
-  height: 96%;
+  width: 98%;
+  height: 55%;
   background-color: #fff;
   padding: 0px;
   border-radius: 8px;
-  top: 2%;
-  right: 2%;
+  bottom: 1%;
+  right: 1%;
+  left: 1%;
   overflow-y: scroll;
 }
 
@@ -124,9 +130,27 @@
   background-color: #fff;
   padding-bottom: 24px;
   border-radius: 8px;
-  bottom: 2%;
-  left: 2%;
+  min-width: 215px;
+  top: 1%;
+  left: 4%;
   overflow-y: scroll;
+}
+.input-result-toggle {
+  position: fixed;
+  background-color: #fff;
+  border-radius: 8px;
+  min-width: 215px;
+  top: 1%;
+  right: 4%;
+  z-index: 2000;
+  overflow-y: scroll;
+}
+.input-result-toggle .pagination-lg {
+  margin-bottom: 0px;
+}
+.layers p {
+  color: #fff;
+  margin: 0;
 }
 
 .chart-container {
@@ -147,4 +171,39 @@
 
 .years-page {
   height: 100%;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+.page-link:focus {
+  z-index: 2;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgb(56, 85, 66, 0.5) !important;
+}
+.progress-bar {
+  background-color: var(--primary-color) !important;
+}
+.results-sidebar .text-primary {
+  color: var(--primary-color) !important;
+}
+.page-link {
+  color: var(--primary-color) !important;
+}
+.active .page-link {
+  color: #fff !important;
 }
