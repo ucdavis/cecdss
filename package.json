@@ -27,7 +27,7 @@
     "react-leaflet-heatmap-layer": "^2.0.0",
     "react-leaflet-kml": "^1.0.4",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.4.4",
+    "react-scripts": "4.0.2",
     "react-table": "^7.0.0-rc.15",
     "reactstrap": "^8.0.0",
     "recharts": "^1.8.5",
