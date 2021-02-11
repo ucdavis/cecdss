@@ -167,24 +167,46 @@ export const MapContainer = () => {
         low: 0
       },
       BiomassFuelCost: {
-        base: 22.05,
-        high: 100,
-        low: 0
+        base: teaInputs.ExpensesBaseYear.BiomassFuelCost,
+        high:
+          teaInputs.ExpensesBaseYear.BiomassFuelCost > 100
+            ? teaInputs.ExpensesBaseYear.BiomassFuelCost
+            : 100,
+        low:
+          teaInputs.ExpensesBaseYear.BiomassFuelCost < 0
+            ? teaInputs.ExpensesBaseYear.BiomassFuelCost
+            : 0
       },
       DebtRatio: {
-        base: 75,
-        high: 100,
-        low: 0
+        base: teaInputs.Financing.DebtRatio,
+        high:
+          teaInputs.Financing.DebtRatio > 100
+            ? teaInputs.Financing.DebtRatio
+            : 100,
+        low:
+          teaInputs.Financing.DebtRatio < 0 ? teaInputs.Financing.DebtRatio : 0
       },
       DebtInterestRate: {
-        base: 5,
-        high: 15,
-        low: 1
+        base: teaInputs.Financing.InterestRateOnDebt,
+        high:
+          teaInputs.Financing.InterestRateOnDebt > 15
+            ? teaInputs.Financing.InterestRateOnDebt
+            : 15,
+        low:
+          teaInputs.Financing.InterestRateOnDebt < 1
+            ? teaInputs.Financing.InterestRateOnDebt
+            : 1
       },
       CostOfEquity: {
-        base: 15,
-        high: 50,
-        low: 1
+        base: teaInputs.Financing.CostOfEquity,
+        high:
+          teaInputs.Financing.CostOfEquity > 50
+            ? teaInputs.Financing.CostOfEquity
+            : 50,
+        low:
+          teaInputs.Financing.CostOfEquity < 1
+            ? teaInputs.Financing.CostOfEquity
+            : 1
       },
       NetStationEfficiency: {
         base: 20,
@@ -192,9 +214,9 @@ export const MapContainer = () => {
         low: 5
       },
       CapacityFactor: {
-        base: 85,
-        high: 100,
-        low: 40
+        base: teaInputs.ElectricalFuelBaseYear.CapacityFactor,
+        high: teaInputs.ElectricalFuelBaseYear.CapacityFactor > 100 ? teaInputs.ElectricalFuelBaseYear.CapacityFactor : 100,
+        low: teaInputs.ElectricalFuelBaseYear.CapacityFactor < 40 ? teaInputs.ElectricalFuelBaseYear.CapacityFactor : 40
       }
     };
     const sensitivity = calculateSensitivity(sensitivityInputs);
