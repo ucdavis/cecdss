@@ -158,13 +158,36 @@ export const MapContainer = () => {
     setTeaInputs(allYearResults.teaInputs);
     setSelectedYearIndex(years.length);
 
+    let capitalCost = 0;
+    let stationEfficiency = 0;
+
+    if (teaModel === 'GP') {
+      const inputs = teaInputs as InputModGP;
+      capitalCost =
+        inputs.CapitalCost.EmissionControlSystemCapitalCost +
+        inputs.CapitalCost.GasCleaningSystemCapitalCost +
+        inputs.CapitalCost.GasifierSystemCapitalCost +
+        inputs.CapitalCost.HeatRecoverySystemCapitalCost +
+        inputs.CapitalCost.PowerGenerationCapitalCost;
+
+        stationEfficiency = inputs.ElectricalFuelBaseYear.NetHHVEfficiency;
+    } else if (teaModel === 'GPO') {
+      const inputs = teaInputs as InputModGPO;
+      capitalCost = inputs.CapitalCost;
+      stationEfficiency = inputs.ElectricalFuelBaseYear.NetStationEfficiency;
+    } else if (teaModel === 'CHP') {
+      const inputs = teaInputs as InputModCHP;
+      capitalCost = inputs.CapitalCost;
+      stationEfficiency = inputs.ElectricalFuelBaseYear.NetStationEfficiency;
+    }
+
     const sensitivityInputs: InputModSensitivity = {
       model: teaModel,
       input: teaInputs,
       CapitalCost: {
-        base: 70000000,
-        high: 200000000,
-        low: 0
+        base: capitalCost,
+        high: capitalCost > 200000000 ? capitalCost : 200000000,
+        low: capitalCost < 0 ? capitalCost : 0
       },
       BiomassFuelCost: {
         base: teaInputs.ExpensesBaseYear.BiomassFuelCost,
@@ -209,18 +232,27 @@ export const MapContainer = () => {
             : 1
       },
       NetStationEfficiency: {
-        base: 20,
-        high: 50,
-        low: 5
+        base: stationEfficiency,
+        high: stationEfficiency > 50 ? stationEfficiency : 50,
+        low: stationEfficiency < 5 ? stationEfficiency : 5
       },
       CapacityFactor: {
         base: teaInputs.ElectricalFuelBaseYear.CapacityFactor,
-        high: teaInputs.ElectricalFuelBaseYear.CapacityFactor > 100 ? teaInputs.ElectricalFuelBaseYear.CapacityFactor : 100,
-        low: teaInputs.ElectricalFuelBaseYear.CapacityFactor < 40 ? teaInputs.ElectricalFuelBaseYear.CapacityFactor : 40
+        high:
+          teaInputs.ElectricalFuelBaseYear.CapacityFactor > 100
+            ? teaInputs.ElectricalFuelBaseYear.CapacityFactor
+            : 100,
+        low:
+          teaInputs.ElectricalFuelBaseYear.CapacityFactor < 40
+            ? teaInputs.ElectricalFuelBaseYear.CapacityFactor
+            : 40
       }
     };
     const sensitivity = calculateSensitivity(sensitivityInputs);
     setSensitivityResults(sensitivity.output);
+
+    console.log(sensitivityInputs);
+    console.log(sensitivity);
 
     let radius = 0;
     let clusterIds: string[] = [];
