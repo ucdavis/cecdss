@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
 import { ResultsCharts } from './ResultsCharts';
 import { ResultsTable } from './ResultsTables';
@@ -9,6 +9,7 @@ import {
 } from '@ucdavis/tea/out/models/input.model';
 import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
 import { AssumptionsAndReferences } from './AssumptionsAndReferences';
+import ResultsExport from './ResultsExport';
 
 interface Props {
   years: number[];
@@ -23,6 +24,7 @@ interface Props {
 }
 
 export const AllResultsContainer = (props: Props) => {
+  const sensitivityChartRef = useRef<any>(null);
   const teaResults: any = props.allYearResults.teaResults;
 
   return (
@@ -37,8 +39,14 @@ export const AllResultsContainer = (props: Props) => {
       <ResultsCharts
         results={props.yearlyResults}
         sensitivityResults={props.sensitivityResults}
+        sensitivityChartRef={sensitivityChartRef}
       />
       <AssumptionsAndReferences />
+      <ResultsExport
+        allYearResults={props.allYearResults}
+        yearlyResults={props.yearlyResults}
+        sensitivityChart={sensitivityChartRef}
+      />
       {/* {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
         props.teaInputs instanceof InputModGPOClass && (
           <GPOResults inputs={props.teaInputs} results={teaResults} />
