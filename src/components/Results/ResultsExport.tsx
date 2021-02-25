@@ -4,6 +4,7 @@ import { saveAs } from 'file-saver';
 
 import { AllYearsResults, YearlyResult } from '../../models/Types';
 import { Button } from 'reactstrap';
+import { formatNumber } from '../Shared/util';
 
 interface Props {
   allYearResults: AllYearsResults;
@@ -17,6 +18,7 @@ export const ResultsExport = (props: Props) => {
     return <></>; // only show after we get all results back
   }
   const makeExcel = async () => {
+    console.log(props.yearlyResults);
     // https://github.com/exceljs/exceljs#interface
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('ExcelJS sheet');
@@ -86,32 +88,60 @@ export const ResultsExport = (props: Props) => {
         { name: 'Environmental Analysis' },
         { name: 'Unit' },
         { name: 'Total' },
-        ...yearlyHeaders
+        ...props.yearlyResults.map(r => ({ name: 'Y' + r.year }))
       ],
       rows: [
         [
           'Diesel',
-          data.Environemntal.Diesel.Unit,
-          data.Environemntal.Diesel.Total,
-          ...data.Environemntal.Diesel.Yearly
+          'mGal',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.inputs.diesel,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(year =>
+            formatNumber(year.lcaResults.inputs.diesel * 1000)
+          )
         ],
         [
           'Gasoline',
-          data.Environemntal.Gasoline.Unit,
-          data.Environemntal.Gasoline.Total,
-          ...data.Environemntal.Gasoline.Yearly
+          'mGal',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.inputs.gasoline,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(year =>
+            formatNumber(year.lcaResults.inputs.gasoline * 1000)
+          )
         ],
         [
           'Jet Fuel',
-          data.Environemntal.JetFuel.Unit,
-          data.Environemntal.JetFuel.Total,
-          ...data.Environemntal.JetFuel.Yearly
+          'mGal',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.inputs.jetfuel,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(year =>
+            formatNumber(year.lcaResults.inputs.jetfuel * 1000)
+          )
         ],
         [
           'Transport Distance',
-          data.Environemntal.TransportDistance.Unit,
-          data.Environemntal.TransportDistance.Total,
-          ...data.Environemntal.TransportDistance.Yearly
+          'm',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.inputs.distance,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(year =>
+            formatNumber(year.lcaResults.inputs.distance * 1000)
+          )
         ]
       ]
     });
@@ -125,41 +155,177 @@ export const ResultsExport = (props: Props) => {
         { name: 'LCI Results' },
         { name: 'Unit' },
         { name: 'Total' },
-        ...yearlyHeaders
+        ...props.yearlyResults.map(r => ({ name: 'Y' + r.year }))
       ],
       rows: [
-        ['CO2', data.LCI.CO2.Unit, data.LCI.CO2.Total, ...data.LCI.CO2.Yearly],
-        ['CH4', data.LCI.CH4.Unit, data.LCI.CH4.Total, ...data.LCI.CH4.Yearly],
-        ['N2O', data.LCI.N2O.Unit, data.LCI.N2O.Total, ...data.LCI.N2O.Yearly],
+        [
+          'CO2',
+          'kg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.CO2,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.CO2)
+          )
+        ],
+        [
+          'CH4',
+          'g',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.CH4,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.CH4)
+          )
+        ],
+        [
+          'N2O',
+          'g',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.N2O,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.N2O)
+          )
+        ],
         [
           'CO2e',
-          data.LCI.CO2e.Unit,
-          data.LCI.CO2e.Total,
-          ...data.LCI.CO2e.Yearly
+          'kg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.CO2e,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.CO2e)
+          )
         ],
-        ['CO', data.LCI.CO.Unit, data.LCI.CO.Total, ...data.LCI.CO.Yearly],
-        ['NOx', data.LCI.NOx.Unit, data.LCI.NOx.Total, ...data.LCI.NOx.Yearly],
-        ['NH3', data.LCI.NH3.Unit, data.LCI.NH3.Total, ...data.LCI.NH3.Yearly],
-        ['PM10', data.LCI.CO2.Unit, data.LCI.CO2.Total, ...data.LCI.CO2.Yearly],
+        [
+          'CO',
+          'g',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.CO,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.CO * 1000)
+          )
+        ],
+        [
+          'NOx',
+          'g',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.NOx,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.NOx)
+          )
+        ],
+        [
+          'NH3',
+          'mg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.NH3,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.NH3 * 1000)
+          )
+        ],
+        [
+          'PM10',
+          'mg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.PM10,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.PM10 * 1000)
+          )
+        ],
         [
           'PM2.5',
-          data.LCI.PM25.Unit,
-          data.LCI.PM25.Total,
-          ...data.LCI.PM25.Yearly
+          'mg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.PM25,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.PM25 * 1000)
+          )
         ],
-        ['SO2', data.LCI.SO2.Unit, data.LCI.SO2.Total, ...data.LCI.SO2.Yearly],
-        ['SOx', data.LCI.SOx.Unit, data.LCI.SOx.Total, ...data.LCI.SOx.Yearly],
+        [
+          'SO2',
+          'g',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.SO2,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.SO2)
+          )
+        ],
+        [
+          'SOx',
+          'mg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.SOx,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.SOx * 1000)
+          )
+        ],
         [
           'VOCs',
-          data.LCI.VOCs.Unit,
-          data.LCI.VOCs.Total,
-          ...data.LCI.VOCs.Yearly
+          'mg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.VOCs,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.VOCs * 1000)
+          )
         ],
         [
           'Carbon Intensity',
-          data.LCI.CarbonIntensity.Unit,
-          data.LCI.CarbonIntensity.Total,
-          ...data.LCI.CarbonIntensity.Yearly
+          'kg CO2e',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.CO2e,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.CO2e)
+          )
         ]
       ]
     });
