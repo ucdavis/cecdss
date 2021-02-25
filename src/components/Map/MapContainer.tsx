@@ -101,8 +101,6 @@ export const MapContainer = () => {
   let mapRef: any = createRef<Map>();
 
   const submitInputs = async () => {
-    console.log('tea inputs', teaModel, teaInputs);
-    return;
     toggleLoading(true);
     // first do initial processing to get TEA and substation results
     const lat = mapState.lat;
@@ -161,6 +159,7 @@ export const MapContainer = () => {
     setTeaInputs(allYearResults.teaInputs);
     setSelectedYearIndex(years.length);
 
+    // combine input values with default bounds for a the sensitivity analysis
     const sensitivityInputs: InputModSensitivity = {
       model: teaModel,
       input: teaInputs,
