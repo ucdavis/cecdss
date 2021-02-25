@@ -21,7 +21,9 @@ import {
 } from './TEASharedClasses';
 
 export class InputModGPClass implements InputModGP {
-  CapitalCost = new CapitalCostInputModGPClass();
+  doSensitivityAnalysis = true;
+  CapitalCostElements = new CapitalCostInputModGPClass();
+  CapitalCost = 875000;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPClass();
   HeatBaseYear = new HeatBaseYearInputModClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModGPClass();
@@ -47,7 +49,7 @@ export class ElectricalFuelBaseYearInputModGPClass
   MoistureContent = 50;
   GrossElectricalCapacity = 650;
   HHVEfficiency = 65;
-  NetHHVEfficiency = 23;
+  NetStationEfficiency = 23;
   FractionOfInputEnergy = 20;
   CO = 20;
   H2 = 12;
