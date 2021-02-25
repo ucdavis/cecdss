@@ -43,9 +43,10 @@ export const MapContainer = () => {
   const [loading, toggleLoading] = useState<boolean>(false);
   const [allYearResults, setAllYearResults] = useState<AllYearsResults>();
   const [yearlyResults, setYearlyResults] = useState<YearlyResult[]>([]);
-  const [sensitvityResults, setSensitivityResults] = useState<
-    OutputModSensitivity
-  >();
+  const [
+    sensitvityResults,
+    setSensitivityResults
+  ] = useState<OutputModSensitivity>();
   const [selectedYearIndex, setSelectedYearIndex] = useState<number>(-1);
   const [showResults, toggleShowResults] = useState<boolean>(false);
   const [geoJsonResults, setGeoJsonResults] = useState<FeatureCollection[]>([]);
@@ -158,69 +159,47 @@ export const MapContainer = () => {
     setTeaInputs(allYearResults.teaInputs);
     setSelectedYearIndex(years.length);
 
+    // combine input values with default bounds for a the sensitivity analysis
     const sensitivityInputs: InputModSensitivity = {
       model: teaModel,
       input: teaInputs,
       CapitalCost: {
-        base: 70000000,
         high: 200000000,
         low: 0
       },
       BiomassFuelCost: {
-        base: teaInputs.ExpensesBaseYear.BiomassFuelCost,
-        high:
-          teaInputs.ExpensesBaseYear.BiomassFuelCost > 100
-            ? teaInputs.ExpensesBaseYear.BiomassFuelCost
-            : 100,
-        low:
-          teaInputs.ExpensesBaseYear.BiomassFuelCost < 0
-            ? teaInputs.ExpensesBaseYear.BiomassFuelCost
-            : 0
+        high: 100,
+        low: 0
       },
       DebtRatio: {
-        base: teaInputs.Financing.DebtRatio,
-        high:
-          teaInputs.Financing.DebtRatio > 100
-            ? teaInputs.Financing.DebtRatio
-            : 100,
-        low:
-          teaInputs.Financing.DebtRatio < 0 ? teaInputs.Financing.DebtRatio : 0
+        high: 100,
+        low: 0
       },
       DebtInterestRate: {
-        base: teaInputs.Financing.InterestRateOnDebt,
-        high:
-          teaInputs.Financing.InterestRateOnDebt > 15
-            ? teaInputs.Financing.InterestRateOnDebt
-            : 15,
-        low:
-          teaInputs.Financing.InterestRateOnDebt < 1
-            ? teaInputs.Financing.InterestRateOnDebt
-            : 1
+        high: 15,
+        low: 1
       },
       CostOfEquity: {
-        base: teaInputs.Financing.CostOfEquity,
-        high:
-          teaInputs.Financing.CostOfEquity > 50
-            ? teaInputs.Financing.CostOfEquity
-            : 50,
-        low:
-          teaInputs.Financing.CostOfEquity < 1
-            ? teaInputs.Financing.CostOfEquity
-            : 1
+        high: 50,
+        low: 1
       },
       NetStationEfficiency: {
-        base: 20,
         high: 50,
         low: 5
       },
       CapacityFactor: {
-        base: teaInputs.ElectricalFuelBaseYear.CapacityFactor,
-        high: teaInputs.ElectricalFuelBaseYear.CapacityFactor > 100 ? teaInputs.ElectricalFuelBaseYear.CapacityFactor : 100,
-        low: teaInputs.ElectricalFuelBaseYear.CapacityFactor < 40 ? teaInputs.ElectricalFuelBaseYear.CapacityFactor : 40
+        high: 100,
+        low: 40
       }
     };
-    const sensitivity = calculateSensitivity(sensitivityInputs);
+
+    // the sensitivity calculation modifies the passed params, which isn't good so we deep copy them first
+    const deepSensitivityInputs = JSON.parse(JSON.stringify(sensitivityInputs));
+    const sensitivity = calculateSensitivity(deepSensitivityInputs);
     setSensitivityResults(sensitivity.output);
+
+    console.log(sensitivityInputs);
+    console.log(sensitivity);
 
     let radius = 0;
     let clusterIds: string[] = [];

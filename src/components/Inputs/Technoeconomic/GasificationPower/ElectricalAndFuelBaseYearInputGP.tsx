@@ -120,15 +120,15 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
         </FormText>
       </FormGroup>
       <FormGroup>
-        <Label>Net HHV Efficiency</Label>
+        <Label>Net Station Efficiency</Label>
         <InputGroup>
           <Input
             type='text'
-            value={props.inputs.NetHHVEfficiency}
+            value={props.inputs.NetStationEfficiency}
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                NetHHVEfficiency: Number(e.target.value)
+                NetStationEfficiency: Number(e.target.value)
               })
             }
             disabled={props.disabled}

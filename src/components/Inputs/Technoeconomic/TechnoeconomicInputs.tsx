@@ -57,7 +57,7 @@ export const TechnoeconomicInputs = (props: Props) => {
       {props.teaModel === TechnoeconomicModels.gasificationPower && (
         // props.teaInputs instanceof InputModGPClass && (
         <GasificationPower
-          inputs={props.teaInputs}
+          inputs={props.teaInputs as InputModGP}
           setInputs={props.setTeaInputs}
           disabled={props.disabled}
         />

@@ -17,7 +17,7 @@ export class InputModCHPClass implements InputModCHP {
   CapitalCost = 70000000;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModCHPClass();
   HeatBaseYear = new HeatBaseYearInputModClass();
-  ExpensesBaseYear = new ExpensesBaseYearInputModGPOClass();
+  ExpensesBaseYear = new ExpensesBaseYearInputModCHPClass();
   Taxes = new TaxesInputModClass();
   Financing = new FinancingInputModClass();
   IncomeOtherThanEnergy = new IncomeOtherThanEnergyInputModClass();
@@ -34,6 +34,18 @@ export class ElectricalFuelBaseYearInputModCHPClass
   FuelHeatingValue = 18608;
   FuelAshConcentration = 5;
   GrossElectricalCapacity = 28000;
+}
+
+export class ExpensesBaseYearInputModCHPClass
+  implements ExpensesBaseYearInputMod {
+  BiomassFuelCost = 22.05;
+  LaborCost = 2000000;
+  MaintenanceCost = 1500000;
+  InsurancePropertyTax = 1400000;
+  Utilities = 200000;
+  Management = 200000;
+  OtherOperatingExpenses = 400000;
+  AshDisposal = 100000;
 }
 
 export class ElectricalFuelBaseYearModCHPClass

@@ -22,10 +22,8 @@ import { ElectricalAndFuelBaseYearInputGP } from './ElectricalAndFuelBaseYearInp
 import { ExpensesBaseYearInputGP } from './ExpensesBaseYearInputGP';
 
 interface Props {
-  // inputs: InputModGP;
-  // setInputs: (inputs: InputModGP) => void;
-  inputs: any;
-  setInputs: (inputs: any) => void;
+  inputs: InputModGP;
+  setInputs: (inputs: InputModGP) => void;
   disabled: boolean;
 }
 
@@ -36,9 +34,9 @@ export const GasificationPower = (props: Props) => {
   return (
     <>
       <CapitalCostInputGP
-        inputs={props.inputs.CapitalCost}
+        inputs={props.inputs.CapitalCostElements}
         setInputs={(inputs: CapitalCostInputModGP) =>
-          props.setInputs({ ...props.inputs, CapitalCost: inputs })
+          props.setInputs({ ...props.inputs, CapitalCostElements: inputs })
         }
         disabled={props.disabled}
       />
