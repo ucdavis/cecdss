@@ -170,7 +170,7 @@ export const ResultsCharts = (props: Props) => {
     }
 
     const xRange = [-200,400];
-    const yRange = [-100,200];
+    const yRange = [-100,250];
     return (
       <>
         <h3>Sensitivity Analysis</h3>
