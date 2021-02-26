@@ -728,7 +728,7 @@ export const ResultsExport = (props: Props) => {
           ),
           ...props.allYearResults.teaResults.CurrentLAC.PresentWorth.map(r =>
             formatCurrency(r)
-          ),
+          )
         ]
       ]
     });
@@ -764,39 +764,24 @@ export const ResultsExport = (props: Props) => {
       totalsRow: false,
       columns: [{ name: 'Assumptions' }, { name: 'Total' }],
       rows: [
-        ['LogLength, ft', data.Assumptions.LogLength.Total],
-        [
-          'LoadWeight, green tons (logs)',
-          data.Assumptions.LoadWeightLogs.Total
-        ],
-        [
-          'LoadWeight, green tons (chips)',
-          data.Assumptions.LoadWeightChips.Total
-        ],
-        ['CTLTrailSpacing, ft', data.Assumptions.CTLTrailSpacing.Total],
-        [
-          'HardwoodCostPremium, fraction',
-          data.Assumptions.HardwoodCostPremium.Total
-        ],
-        [
-          'ResidueRecoveryFraction for WT systems',
-          data.Assumptions.ResidueRecoveryFractionWT.Total
-        ],
-        [
-          'ResidueRecoveryFraction for CTL',
-          data.Assumptions.ResidueRecoveryFractionCTL.Total
-        ],
-        ['HardwoodFractionCT', data.Assumptions.HardwoodFractionCT.Total],
-        ['HardwoodFractionSLT', data.Assumptions.HardwoodFractionSLT.Total],
-        ['HardwoodFractionLLT', data.Assumptions.HardwoodFractionLLT.Total],
-        ['Feller/Bucker wage (2019)', data.Assumptions.Feller.Total],
-        ['All Others wage (2019)', data.Assumptions.OtherWages.Total],
-        ['Benefits and other payroll costs', data.Assumptions.Benefits.Total],
-        ['OIL_ETC_COST ($/mile)', data.Assumptions.OIL_ETC_COST.Total],
-        ['DRIVERS_PER_TRUCK', data.Assumptions.DRIVERS_PER_TRUCK.Total],
-        ['MILES_PER_GALLON', data.Assumptions.MILES_PER_GALLON.Total],
-        ['FUEL_COST ($/gallon)', data.Assumptions.FUEL_COST.Total],
-        ['TRUCK_LABOR ($/hr)', data.Assumptions.TRUCK_LABOR.Total]
+        ['LogLength, ft', 32],
+        ['LoadWeight, green tons (logs)', 25],
+        ['LoadWeight, green tons (chips)', 25],
+        ['CTLTrailSpacing, ft', 50],
+        ['HardwoodCostPremium, fraction', 0.2],
+        ['ResidueRecoveryFraction for WT systems', 0.8],
+        ['ResidueRecoveryFraction for CTL', 0.5],
+        ['HardwoodFractionCT', 0.2],
+        ['HardwoodFractionSLT', 0],
+        ['HardwoodFractionLLT', 0],
+        ['Feller/Bucker wage (2019)', 30.96],
+        ['All Others wage (2019)', 22.26],
+        ['Benefits and other payroll costs', '35%'],
+        ['OIL_ETC_COST ($/mile)', 0.35],
+        ['DRIVERS_PER_TRUCK', 1.67],
+        ['MILES_PER_GALLON', 6],
+        ['FUEL_COST ($/gallon)', 3.251],
+        ['TRUCK_LABOR ($/hr)', 23.29]
       ]
     });
 
@@ -805,25 +790,26 @@ export const ResultsExport = (props: Props) => {
       ref: 'B123',
       headerRow: true,
       totalsRow: false,
-      columns: [{ name: 'Key References' }, { name: 'Total' }],
+      columns: [{ name: 'Key References' }],
+      rows: [
+        ['Fuel Reduction Cost Simulator'],
+        ['Advanced Hardwood Biofuels Northwest'],
+        ['California Biomass Collaborative'],
+        ['EPA eGrid'],
+        ['GREET model'],
+        ['Literature for emission factors']
+      ]
+    });
+
+    worksheet.addTable({
+      name: 'disclaimer',
+      ref: 'B131',
+      headerRow: true,
+      totalsRow: false,
+      columns: [{ name: 'Disclaimer' }],
       rows: [
         [
-          'Fuel Reduction Cost Simulator',
-          data.KeyRefrences.FuelReduction.Total
-        ],
-        [
-          'Advanced Hardwood Biofuels Northwest',
-          data.KeyRefrences.AdvancedHardwood.Total
-        ],
-        [
-          'California Biomass Collaborative',
-          data.KeyRefrences.CaliforniaBiomass.Total
-        ],
-        ['EPA eGrid', data.KeyRefrences.EPA.Total],
-        ['GREET model', data.KeyRefrences.GREET.Total],
-        [
-          'Literature for emission factors',
-          data.KeyRefrences.LiteratureEmission.Total
+          'Results are estimates only and no guarantees are made that actual project performance will match, and they do not necessarily reflect the views and policies of the California Energy Commission.'
         ]
       ]
     });
