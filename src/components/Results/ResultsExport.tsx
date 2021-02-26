@@ -4,7 +4,7 @@ import { saveAs } from 'file-saver';
 
 import { AllYearsResults, YearlyResult } from '../../models/Types';
 import { Button } from 'reactstrap';
-import { formatNumber } from '../Shared/util';
+import { formatCurrency, formatNumber } from '../Shared/util';
 
 interface Props {
   allYearResults: AllYearsResults;
@@ -344,39 +344,86 @@ export const ResultsExport = (props: Props) => {
       rows: [
         [
           'Global Warming Air',
-          data.LCIA.GlobalWarmingAir.Unit,
-          data.LCIA.GlobalWarmingAir.Total,
-          ...data.LCIA.GlobalWarmingAir.Yearly
+          'kg CO2 eq',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) =>
+                sum + year.lcaResults.lciaResults.global_warming_air,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciaResults.global_warming_air)
+          )
         ],
         [
           'Acidification Air',
-          data.LCIA.AcidificationAir.Unit,
-          data.LCIA.AcidificationAir.Total,
-          ...data.LCIA.AcidificationAir.Yearly
+          'g SO2 eq',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) =>
+                sum + year.lcaResults.lciaResults.acidification_air,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciaResults.acidification_air * 1000)
+          )
         ],
         [
           'HH Particulate Air',
-          data.LCIA.HHParticulateAir.Unit,
-          data.LCIA.HHParticulateAir.Total,
-          ...data.LCIA.HHParticulateAir.Yearly
+          'g PM2.5 eq',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) =>
+                sum + year.lcaResults.lciaResults.hh_particulate_air,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciaResults.hh_particulate_air * 1000)
+          )
         ],
         [
           'Euthrophication Air',
-          data.LCIA.EuthrophicationAir.Unit,
-          data.LCIA.EuthrophicationAir.Total,
-          ...data.LCIA.EuthrophicationAir.Yearly
+          'g N eq',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) =>
+                sum + year.lcaResults.lciaResults.eutrophication_air,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciaResults.eutrophication_air * 1000)
+          )
         ],
         [
           'Euthrophication Water',
-          data.LCIA.EuthrophicationWater.Unit,
-          data.LCIA.EuthrophicationWater.Total,
-          ...data.LCIA.EuthrophicationWater.Yearly
+          'g N eq',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) =>
+                sum + year.lcaResults.lciaResults.eutrophication_water,
+              0
+            ) * 1000
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciaResults.eutrophication_water * 1000)
+          )
         ],
         [
           'Smog Air',
-          data.LCIA.SmogAir.Unit,
-          data.LCIA.SmogAir.Total,
-          ...data.LCIA.SmogAir.Yearly
+          'kg O3 eq',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciaResults.smog_air,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciaResults.smog_air)
+          )
         ]
       ]
     });
@@ -395,147 +442,317 @@ export const ResultsExport = (props: Props) => {
       rows: [
         [
           'Harvest Cost',
-          data.TechnoeconomicAnalysis.HarvestCost.Unit,
-          data.TechnoeconomicAnalysis.HarvestCost.Total,
-          ...data.TechnoeconomicAnalysis.HarvestCost.Yearly
+          '$/ton',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.totalFeedstockCost,
+              0
+            ) /
+              props.yearlyResults.reduce(
+                (sum, year) => sum + year.totalFeedstock,
+                0
+              )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.totalFeedstockCost / r.totalFeedstock)
+          )
         ],
         [
           'Transport Cost',
-          data.TechnoeconomicAnalysis.TransportCost.Unit,
-          data.TechnoeconomicAnalysis.TransportCost.Total,
-          ...data.TechnoeconomicAnalysis.TransportCost.Yearly
+          '$/ton',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.totalTransportationCost,
+              0
+            ) /
+              props.yearlyResults.reduce(
+                (sum, year) => sum + year.totalFeedstock,
+                0
+              )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.totalTransportationCost / r.totalFeedstock)
+          )
         ],
         [
           'Move-in Cost',
-          data.TechnoeconomicAnalysis.MoveInCost.Unit,
-          data.TechnoeconomicAnalysis.MoveInCost.Total,
-          ...data.TechnoeconomicAnalysis.MoveInCost.Yearly
+          '$/ton',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.totalMoveInCost,
+              0
+            ) /
+              props.yearlyResults.reduce(
+                (sum, year) => sum + year.totalFeedstock,
+                0
+              )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.totalMoveInCost / r.totalFeedstock)
+          )
         ],
         [
           'Feedstock Cost',
-          data.TechnoeconomicAnalysis.FeedstockCost.Unit,
-          data.TechnoeconomicAnalysis.FeedstockCost.Total,
-          ...data.TechnoeconomicAnalysis.FeedstockCost.Yearly
+          '$/ton',
+          formatCurrency(
+            props.yearlyResults.reduce((sum, year) => sum + year.fuelCost, 0) /
+              props.yearlyResults.length
+          ),
+          ...props.yearlyResults.map(r => formatCurrency(r.fuelCost))
         ],
         [
           'Equity Recovery',
-          data.TechnoeconomicAnalysis.EquityRecovery.Unit,
-          data.TechnoeconomicAnalysis.EquityRecovery.Total,
-          ...data.TechnoeconomicAnalysis.EquityRecovery.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.EquityRecovery,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.EquityRecovery)
+          )
         ],
         [
           'Equity Interest',
-          data.TechnoeconomicAnalysis.EquityInterest.Unit,
-          data.TechnoeconomicAnalysis.EquityInterest.Total,
-          ...data.TechnoeconomicAnalysis.EquityInterest.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.EquityInterest,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.EquityInterest)
+          )
         ],
         [
           'Equity Principal Paid',
-          data.TechnoeconomicAnalysis.EquityPrincipalPaid.Unit,
-          data.TechnoeconomicAnalysis.EquityPrincipalPaid.Total,
-          ...data.TechnoeconomicAnalysis.EquityPrincipalPaid.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.EquityPrincipalPaid,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.EquityPrincipalPaid)
+          )
         ],
         [
           'Equity Principal Remaining',
-          data.TechnoeconomicAnalysis.EquityPrincipalRemaining.Unit,
-          data.TechnoeconomicAnalysis.EquityPrincipalRemaining.Total,
-          ...data.TechnoeconomicAnalysis.EquityPrincipalRemaining.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.EquityPrincipalRemaining,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.EquityPrincipalRemaining)
+          )
         ],
         [
           'Debt Recovery',
-          data.TechnoeconomicAnalysis.DebtRecovery.Unit,
-          data.TechnoeconomicAnalysis.DebtRecovery.Total,
-          ...data.TechnoeconomicAnalysis.DebtRecovery.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.DebtRecovery,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.DebtRecovery)
+          )
         ],
         [
           'Debt Interest',
-          data.TechnoeconomicAnalysis.DebtInterest.Unit,
-          data.TechnoeconomicAnalysis.DebtInterest.Total,
-          ...data.TechnoeconomicAnalysis.DebtInterest.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.DebtInterest,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.DebtInterest)
+          )
         ],
         [
           'Debt Principal Paid',
-          data.TechnoeconomicAnalysis.DebtPrincipalPaid.Unit,
-          data.TechnoeconomicAnalysis.DebtPrincipalPaid.Total,
-          ...data.TechnoeconomicAnalysis.DebtPrincipalPaid.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.DebtPrincipalPaid,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.DebtPrincipalPaid)
+          )
         ],
         [
           'Debt Principal Remaining',
-          data.TechnoeconomicAnalysis.DebtPrincipalRemaining.Unit,
-          data.TechnoeconomicAnalysis.DebtPrincipalRemaining.Total,
-          ...data.TechnoeconomicAnalysis.DebtPrincipalRemaining.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.DebtPrincipalRemaining,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.DebtPrincipalRemaining)
+          )
         ],
         [
           'Non-fuel Expenses',
-          data.TechnoeconomicAnalysis.NonFuelExpenses.Unit,
-          data.TechnoeconomicAnalysis.NonFuelExpenses.Total,
-          ...data.TechnoeconomicAnalysis.NonFuelExpenses.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.NonFuelExpenses,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.NonFuelExpenses)
+          )
         ],
         [
           'Debt Reserve',
-          data.TechnoeconomicAnalysis.DebtReserve.Unit,
-          data.TechnoeconomicAnalysis.DebtReserve.Total,
-          ...data.TechnoeconomicAnalysis.DebtReserve.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.DebtReserve,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.DebtReserve)
+          )
         ],
         [
           'Deprecation',
-          data.TechnoeconomicAnalysis.Deprecation.Unit,
-          data.TechnoeconomicAnalysis.Deprecation.Total,
-          ...data.TechnoeconomicAnalysis.Deprecation.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.Depreciation,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.Depreciation)
+          )
         ],
         [
           'Income--Capacity',
-          data.TechnoeconomicAnalysis.IncomeCapacity.Unit,
-          data.TechnoeconomicAnalysis.IncomeCapacity.Total,
-          ...data.TechnoeconomicAnalysis.IncomeCapacity.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.IncomeCapacity,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.IncomeCapacity)
+          )
         ],
         [
           'Interest on Debt Reserve',
-          data.TechnoeconomicAnalysis.InterestDebtReserve.Unit,
-          data.TechnoeconomicAnalysis.InterestDebtReserve.Total,
-          ...data.TechnoeconomicAnalysis.InterestDebtReserve.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.InterestOnDebtReserve,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.InterestOnDebtReserve)
+          )
         ],
         [
           'Taxes w/o credit',
-          data.TechnoeconomicAnalysis.TaxesWithoutCredit.Unit,
-          data.TechnoeconomicAnalysis.TaxesWithoutCredit.Total,
-          ...data.TechnoeconomicAnalysis.TaxesWithoutCredit.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.TaxesWoCredit,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.TaxesWoCredit)
+          )
         ],
         [
           'Tax Credit',
-          data.TechnoeconomicAnalysis.TaxCredit.Unit,
-          data.TechnoeconomicAnalysis.TaxCredit.Total,
-          ...data.TechnoeconomicAnalysis.TaxCredit.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.TaxCredit,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r => formatCurrency(r.cashFlow.TaxCredit))
         ],
         [
           'Taxes',
-          data.TechnoeconomicAnalysis.Taxes.Unit,
-          data.TechnoeconomicAnalysis.Taxes.Total,
-          ...data.TechnoeconomicAnalysis.Taxes.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.Taxes,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r => formatCurrency(r.cashFlow.Taxes))
         ],
         [
           'Energy Revenue Required',
-          data.TechnoeconomicAnalysis.EnergyRevenueRequired.Unit,
-          data.TechnoeconomicAnalysis.EnergyRevenueRequired.Total,
-          ...data.TechnoeconomicAnalysis.EnergyRevenueRequired.Yearly
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.EnergyRevenueRequired,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.EnergyRevenueRequired)
+          )
         ],
         [
           'Energy Revenue Required (PW)',
-          data.TechnoeconomicAnalysis.EnergyRevenueRequiredPW.Unit,
-          data.TechnoeconomicAnalysis.EnergyRevenueRequiredPW.Total,
-          ...data.TechnoeconomicAnalysis.EnergyRevenueRequiredPW.Yearly
-        ],
+          '$',
+          formatCurrency(
+            props.allYearResults.teaResults.CurrentLAC.PresentWorth.reduce(
+              (sum, x) => sum + x,
+              0
+            )
+          ),
+          ...props.allYearResults.teaResults.CurrentLAC.PresentWorth.map(r =>
+            formatCurrency(r)
+          ),
+        ]
+      ]
+    });
+
+    worksheet.addTable({
+      name: 'lcoe',
+      ref: 'B70',
+      headerRow: true,
+      totalsRow: false,
+      columns: [{ name: 'LCOE' }, { name: 'Result' }],
+      rows: [
         [
           'Current $ LCOE',
-          data.TechnoeconomicAnalysis.Current$LCOE.Unit,
-          data.TechnoeconomicAnalysis.Current$LCOE.Total,
-          ...data.TechnoeconomicAnalysis.Current$LCOE.Yearly
+          formatNumber(
+            props.allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy,
+            4
+          )
         ],
         [
           'Constant $ LCOE',
-          data.TechnoeconomicAnalysis.Constant$LCOE.Unit,
-          data.TechnoeconomicAnalysis.Constant$LCOE.Total,
-          ...data.TechnoeconomicAnalysis.Constant$LCOE.Yearly
+          formatNumber(
+            props.allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy,
+            4
+          )
         ]
       ]
     });
@@ -626,7 +843,7 @@ export const ResultsExport = (props: Props) => {
       });
 
       // insert an image over B2:D6
-      worksheet.addImage(chartImageId2, 'B72:J100');
+      worksheet.addImage(chartImageId2, 'B75:J100');
     }
 
     const workbookBuffer = await workbook.xlsx.writeBuffer();
