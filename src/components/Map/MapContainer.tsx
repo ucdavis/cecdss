@@ -26,7 +26,7 @@ import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
 import { convertGeoJSON, convertLandingSiteGeoJSON } from '../Shared/util';
 import { HeatmapLayers } from './HeatmapLayers';
-import { PaginationItem, PaginationLink, Pagination } from 'reactstrap';
+import { PaginationItem, PaginationLink, Button, Pagination } from 'reactstrap';
 import { ResultsContainer } from '../Results/ResultsContainer';
 import { GeoJsonLayers } from './GeoJsonLayers';
 import {
@@ -49,6 +49,7 @@ export const MapContainer = () => {
   ] = useState<OutputModSensitivity>();
   const [selectedYearIndex, setSelectedYearIndex] = useState<number>(-1);
   const [showResults, toggleShowResults] = useState<boolean>(false);
+  const [expandedResults, toggleExpandedResults] = useState<boolean>(false);
   const [geoJsonResults, setGeoJsonResults] = useState<FeatureCollection[]>([]);
   const [geoJsonShapeResults, setGeoJsonShapeResults] = useState<
     FeatureCollection[]
@@ -309,8 +310,24 @@ export const MapContainer = () => {
   return (
     <div style={style}>
       {(yearlyResults.length > 0 || loading) && (
-        <>
-          <div className='input-result-toggle'>
+        <div className='result-buttons'>
+          <Button
+            onClick={() => toggleGeoJson(!showGeoJson)}
+            outline={!showGeoJson}
+            active={showGeoJson}
+            color='success'
+          >
+            Show Cluster Shapes
+          </Button>
+          <Button
+            onClick={() => toggleErrorGeoJson(!showErrorGeoJson)}
+            outline={!showErrorGeoJson}
+            active={showErrorGeoJson}
+            color='info'
+          >
+            Show Error Clusters
+          </Button>
+          <div className=''>
             <Pagination aria-label='Page navigation example' size='lg'>
               <PaginationItem active={!showResults}>
                 <PaginationLink
@@ -330,12 +347,13 @@ export const MapContainer = () => {
               </PaginationItem>
             </Pagination>
           </div>
-        </>
+          <button onClick={() => toggleExpandedResults(!expandedResults)}>
+            button to expand
+          </button>
+        </div>
       )}
       <div
-        className={
-          yearlyResults.length > 0 || loading ? 'results-sidebar' : 'sidebar'
-        }
+        className={expandedResults ? 'expanded-results' : 'sidebar'}
         id='sidebar'
       >
         <ExternalLayerSelection onChange={setExternalLayers} />
@@ -356,6 +374,9 @@ export const MapContainer = () => {
         )}
         {showResults && !!allYearResults && (
           <ResultsContainer
+            toggleShowResults={toggleShowResults}
+            showResults={showResults}
+            loading={loading}
             allYearResults={allYearResults}
             yearlyResults={yearlyResults}
             years={years}
