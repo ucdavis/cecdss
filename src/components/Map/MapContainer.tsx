@@ -339,7 +339,7 @@ export const MapContainer = () => {
               onClick={() => toggleErrorGeoJson(!showErrorGeoJson)}
               outline={!showErrorGeoJson}
               active={showErrorGeoJson}
-              color='info'
+              color='link'
             >
               Show Error Clusters
             </Button>
@@ -369,6 +369,7 @@ export const MapContainer = () => {
             color='primary'
             // onClick={() => toggleExpandedResults(!expandedResults)}
             onClick={() => setIsExpanded(!isExpanded)}
+            // OnClick=()=>{ setIsExpanded(!isExpanded); toggleExpandedResults(!expandedResults) }
           >
             Expand Results {expandIcon()}
           </Button>
