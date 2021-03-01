@@ -38,6 +38,7 @@ import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
 import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
 import { ExternalLayerSelection } from './ExternalLayerSelection';
 import { serviceUrl } from '../Shared/config';
+import { ExternalLayerLegend } from './ExternalLayerLegend';
 
 export const MapContainer = () => {
   const [loading, toggleLoading] = useState<boolean>(false);
@@ -339,6 +340,7 @@ export const MapContainer = () => {
         id='sidebar'
       >
         <ExternalLayerSelection onChange={setExternalLayers} />
+        <ExternalLayerLegend layers={externalLayers} />
         {!showResults && (
           <InputContainer
             mapInputs={mapState}

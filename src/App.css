@@ -135,6 +135,16 @@
   left: 4%;
   overflow-y: scroll;
 }
+.layers-legend {
+  position: fixed;
+  background-color: #fff;
+  padding-bottom: 24px;
+  border-radius: 8px;
+  min-width: 215px;
+  top: 30%;
+  left: 4%;
+  overflow-y: scroll;
+}
 .input-result-toggle {
   position: fixed;
   background-color: #fff;
