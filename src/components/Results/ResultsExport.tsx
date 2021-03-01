@@ -35,19 +35,13 @@ export const ResultsExport = (props: Props) => {
     props.teaModel === 'GP'
       ? props.teaInputs.CapitalCost.GasifierSystemCapitalCost
       : props.teaInputs.CapitalCost
-  )
+  );
 
   const makeExcel = async () => {
     console.log(props.yearlyResults);
     // https://github.com/exceljs/exceljs#interface
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('ExcelJS sheet');
-
-    const yearlyHeaders = [];
-
-    for (let i = 0; i < 30; i++) {
-      yearlyHeaders.push({ name: 'Y' + (new Date().getFullYear() + i) });
-    }
 
     // This part increases the width of a chosen column
     const nameCol = worksheet.getColumn('B');
@@ -367,7 +361,7 @@ export const ResultsExport = (props: Props) => {
         { name: 'LCIA Results' },
         { name: 'Unit' },
         { name: 'Total' },
-        ...yearlyHeaders
+        ...props.yearlyResults.map(r => ({ name: 'Y' + r.year }))
       ],
       rows: [
         [
@@ -465,7 +459,7 @@ export const ResultsExport = (props: Props) => {
         { name: 'Technoeconomic Analysis' },
         { name: 'Unit' },
         { name: 'Total' },
-        ...yearlyHeaders
+        ...props.yearlyResults.map(r => ({ name: 'Y' + r.year }))
       ],
       rows: [
         [
