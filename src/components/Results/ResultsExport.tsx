@@ -2,7 +2,12 @@ import React from 'react';
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 
-import { AllYearsResults, YearlyResult } from '../../models/Types';
+import {
+  AllYearsResults,
+  FrcsInputs,
+  Treatments,
+  YearlyResult
+} from '../../models/Types';
 import { Button } from 'reactstrap';
 import { formatCurrency, formatNumber } from '../Shared/util';
 
@@ -10,6 +15,9 @@ interface Props {
   allYearResults: AllYearsResults;
   yearlyResults: YearlyResult[];
   sensitivityChart: React.MutableRefObject<any>;
+  frcsInputs: FrcsInputs;
+  teaInputs: any;
+  teaModel: string;
 }
 
 export const ResultsExport = (props: Props) => {
@@ -17,6 +25,18 @@ export const ResultsExport = (props: Props) => {
   if (!props.yearlyResults || props.yearlyResults.length < 5) {
     return <></>; // only show after we get all results back
   }
+
+  const treatmentIndex = Treatments.findIndex(
+    x => x.id === props.frcsInputs.treatmentid
+  );
+  const treatmentName = Treatments[treatmentIndex].name;
+
+  const capitalCost = formatCurrency(
+    props.teaModel === 'GP'
+      ? props.teaInputs.CapitalCost.GasifierSystemCapitalCost
+      : props.teaInputs.CapitalCost
+  )
+
   const makeExcel = async () => {
     console.log(props.yearlyResults);
     // https://github.com/exceljs/exceljs#interface
@@ -44,14 +64,26 @@ export const ResultsExport = (props: Props) => {
       totalsRow: false,
       columns: [{ name: 'Technical Performance' }, { name: ' ' }],
       rows: [
-        ['Project Prescription', data.Technical.ProjectPrescription.About],
-        ['Facility Type', data.Technical.FacilityType.About],
-        ['Capital Cost ($)', data.Technical.CapitalCost.About],
-        ['Net Electrical Capacity (kWe)', data.Technical.NetElectrical.About],
-        ['Net Station Efficiency (%)', data.Technical.NetStattion.About],
-        ['Economic Life (y)', data.Technical.EconomicLife.About],
-        ['Location', data.Technical.Location.About],
-        ['Proximity to substation (km)', data.Technical.Proximity.About]
+        ['Project Prescription', treatmentName],
+        ['Facility Type', props.teaModel],
+        ['Capital Cost ($)', capitalCost],
+        [
+          'Net Electrical Capacity (kWe)',
+          props.allYearResults.teaInputs.ElectricalFuelBaseYear
+            .NetElectricalCapacity
+        ],
+        [
+          'Net Station Efficiency (%)',
+          props.teaInputs.ElectricalFuelBaseYear.NetStationEfficiency
+        ],
+        [
+          'Economic Life (y)',
+          props.allYearResults.teaInputs.Financing.EconomicLife
+        ],
+        [
+          'Proximity to substation (km)',
+          props.allYearResults.distanceToNearestSubstation
+        ]
       ]
     });
 

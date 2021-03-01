@@ -46,6 +46,9 @@ export const AllResultsContainer = (props: Props) => {
         allYearResults={props.allYearResults}
         yearlyResults={props.yearlyResults}
         sensitivityChart={sensitivityChartRef}
+        frcsInputs={props.frcsInputs}
+        teaModel={props.teaModel}
+        teaInputs={props.teaInputs}
       />
       {/* {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
         props.teaInputs instanceof InputModGPOClass && (
