@@ -310,24 +310,26 @@ export const MapContainer = () => {
   return (
     <div style={style}>
       {(yearlyResults.length > 0 || loading) && (
-        <div className='result-buttons'>
-          <Button
-            onClick={() => toggleGeoJson(!showGeoJson)}
-            outline={!showGeoJson}
-            active={showGeoJson}
-            color='success'
-          >
-            Show Cluster Shapes
-          </Button>
-          <Button
-            onClick={() => toggleErrorGeoJson(!showErrorGeoJson)}
-            outline={!showErrorGeoJson}
-            active={showErrorGeoJson}
-            color='info'
-          >
-            Show Error Clusters
-          </Button>
-          <div className=''>
+        <div className='toggles'>
+          <div className='toggle-cluster'>
+            <Button
+              onClick={() => toggleGeoJson(!showGeoJson)}
+              outline={!showGeoJson}
+              active={showGeoJson}
+              color='success'
+            >
+              Show Cluster Shapes
+            </Button>
+            <Button
+              onClick={() => toggleErrorGeoJson(!showErrorGeoJson)}
+              outline={!showErrorGeoJson}
+              active={showErrorGeoJson}
+              color='info'
+            >
+              Show Error Clusters
+            </Button>
+          </div>
+          <div className='toggle-input-result'>
             <Pagination aria-label='Page navigation example' size='lg'>
               <PaginationItem active={!showResults}>
                 <PaginationLink
@@ -347,7 +349,10 @@ export const MapContainer = () => {
               </PaginationItem>
             </Pagination>
           </div>
-          <button onClick={() => toggleExpandedResults(!expandedResults)}>
+          <button
+            className='toggle-expand'
+            onClick={() => toggleExpandedResults(!expandedResults)}
+          >
             button to expand
           </button>
         </div>
