@@ -135,15 +135,30 @@
   left: 4%;
   overflow-y: scroll;
 }
-.input-result-toggle {
+.toggle-cluster {
   position: fixed;
-  background-color: #fff;
+  padding-bottom: 24px;
   border-radius: 8px;
-  min-width: 215px;
   top: 1%;
-  left: 4%;
+  left: 25%;
   z-index: 2000;
-  overflow-y: scroll;
+}
+.toggle-input-result {
+  position: fixed;
+  padding-bottom: 24px;
+  border-radius: 8px;
+  top: 7%;
+  left: 25%;
+  z-index: 2000;
+}
+.toggle-expand {
+  position: fixed;
+  padding-bottom: 24px;
+  border-radius: 8px;
+  width: 215px;
+  top: 15%;
+  left: 25%;
+  z-index: 2000;
 }
 .input-result-toggle .pagination-lg {
   margin-bottom: 0px;

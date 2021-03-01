@@ -39,7 +39,14 @@ import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
 import { ExternalLayerSelection } from './ExternalLayerSelection';
 import { serviceUrl } from '../Shared/config';
 
+import {
+  faExpandArrowsAlt,
+  faMinusSquare
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 export const MapContainer = () => {
+  const [isExpanded, setIsExpanded] = useState(true);
   const [loading, toggleLoading] = useState<boolean>(false);
   const [allYearResults, setAllYearResults] = useState<AllYearsResults>();
   const [yearlyResults, setYearlyResults] = useState<YearlyResult[]>([]);
@@ -100,6 +107,14 @@ export const MapContainer = () => {
     lng: -120.36827087402345
   });
   let mapRef: any = createRef<Map>();
+
+  const expandIcon = () => {
+    if (isExpanded) {
+      return <FontAwesomeIcon icon={faExpandArrowsAlt} />;
+    } else {
+      return <FontAwesomeIcon icon={faMinusSquare} />;
+    }
+  };
 
   const submitInputs = async () => {
     toggleLoading(true);
@@ -316,7 +331,7 @@ export const MapContainer = () => {
               onClick={() => toggleGeoJson(!showGeoJson)}
               outline={!showGeoJson}
               active={showGeoJson}
-              color='success'
+              color='primary'
             >
               Show Cluster Shapes
             </Button>
@@ -349,12 +364,14 @@ export const MapContainer = () => {
               </PaginationItem>
             </Pagination>
           </div>
-          <button
+          <Button
             className='toggle-expand'
-            onClick={() => toggleExpandedResults(!expandedResults)}
+            color='primary'
+            // onClick={() => toggleExpandedResults(!expandedResults)}
+            onClick={() => setIsExpanded(!isExpanded)}
           >
-            button to expand
-          </button>
+            Expand Results {expandIcon()}
+          </Button>
         </div>
       )}
       <div
