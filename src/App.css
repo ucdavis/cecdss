@@ -57,7 +57,7 @@
   margin-bottom: 0px;
 }
 .cardcontents {
-  padding: 24px 24px 0px 24px;
+  padding: 16px 16px 0px 16px;
 }
 .App {
   text-align: left;
@@ -128,22 +128,18 @@
 .layers {
   position: fixed;
   background-color: #fff;
-  padding-bottom: 24px;
+  padding-bottom: 16px;
   border-radius: 8px;
-  min-width: 215px;
+  width: 250px;
   top: 1%;
   left: 4%;
   overflow-y: scroll;
 }
 .layers-legend {
-  position: fixed;
-  background-color: #fff;
-  padding-bottom: 24px;
-  border-radius: 8px;
-  min-width: 215px;
-  top: 30%;
-  left: 4%;
-  overflow-y: scroll;
+  top: 20%;
+}
+.esriLegendServiceLabel {
+  font-weight: bold;
 }
 .input-result-toggle {
   position: fixed;
