@@ -23,6 +23,7 @@ import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
 interface Props {
   results: YearlyResult[];
   sensitivityResults?: OutputModSensitivity;
+  sensitivityChartRef: React.MutableRefObject<any>;
 }
 
 export const ResultsCharts = (props: Props) => {
@@ -175,6 +176,7 @@ export const ResultsCharts = (props: Props) => {
       <>
         <h3>Sensitivity Analysis</h3>
         <ScatterChart
+          ref={props.sensitivityChartRef}
           width={700}
           height={600}
           margin={{
