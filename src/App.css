@@ -104,6 +104,7 @@
   top: 1%;
   right: 1%;
   overflow-y: scroll;
+  transition: all 0.5s ease;
 }
 .input-group-text {
   min-width: 48px;
@@ -111,18 +112,18 @@
 .input-group {
   margin-top: 6px;
 }
-.results-sidebar {
+.expanded-results {
   position: fixed;
   z-index: 2000;
-  width: 98%;
-  height: 55%;
+  width: 66%;
+  height: 96%;
   background-color: #fff;
   padding: 0px;
   border-radius: 8px;
-  bottom: 1%;
+  top: 1%;
   right: 1%;
-  left: 1%;
   overflow-y: scroll;
+  transition: all 0.5s ease;
 }
 
 .layers {
@@ -130,12 +131,17 @@
   background-color: #fff;
   padding-bottom: 24px;
   border-radius: 8px;
-  min-width: 215px;
+  width: 12%;
   top: 1%;
   left: 4%;
   overflow-y: scroll;
 }
-.toggle-cluster {
+.layers-toggle {
+  top: 1%;
+  left: 18%;
+  z-index: 2000;
+}
+/* .toggle-cluster {
   position: fixed;
   padding-bottom: 24px;
   border-radius: 8px;
@@ -151,13 +157,14 @@
   left: 25%;
   z-index: 2000;
 }
+ */
 .toggle-expand {
   position: fixed;
   padding-bottom: 24px;
   border-radius: 8px;
-  width: 215px;
-  top: 15%;
-  left: 25%;
+  width: 10%;
+  top: 25%;
+  left: 20%;
   z-index: 2000;
 }
 .input-result-toggle .pagination-lg {
