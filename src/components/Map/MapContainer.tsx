@@ -126,9 +126,19 @@ export const MapContainer = () => {
   };
   const expandIcon = () => {
     if (isExpanded) {
-      return <FontAwesomeIcon icon={faExpandArrowsAlt} />;
+      return (
+        <div>
+          <span>Expand Results</span>
+          <FontAwesomeIcon icon={faExpandArrowsAlt} />
+        </div>
+      );
     } else {
-      return <FontAwesomeIcon icon={faMinusSquare} />;
+      return (
+        <div>
+          <span>Minimize Results</span>
+          <FontAwesomeIcon icon={faMinusSquare} />
+        </div>
+      );
     }
   };
 
@@ -399,7 +409,7 @@ export const MapContainer = () => {
               toggleExpandedResults(!expandedResults);
             }}
           >
-            Expand Results {expandIcon()}
+            {expandIcon()}
           </Button>
         </div>
       )}

@@ -167,6 +167,9 @@
   left: 20%;
   z-index: 2000;
 }
+.toggle-expand svg {
+  margin-left: 8px;
+}
 .input-result-toggle .pagination-lg {
   margin-bottom: 0px;
 }
