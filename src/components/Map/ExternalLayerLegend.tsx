@@ -33,7 +33,7 @@ export const ExternalLayerLegend = (props: Props) => {
         className='cardheader d-flex align-items-center justify-content-between'
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h3>Layer Legend</h3>
+        <h3>Layer Legends</h3>
         <p>{layerIcon()}</p>
       </div>
       <Collapse isOpen={isOpen}>

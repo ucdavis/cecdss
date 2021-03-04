@@ -57,7 +57,7 @@
   margin-bottom: 0px;
 }
 .cardcontents {
-  padding: 24px 24px 0px 24px;
+  padding: 16px 16px 0px 16px;
 }
 .App {
   text-align: left;
@@ -132,7 +132,7 @@
 .layers {
   position: fixed;
   background-color: #fff;
-  padding-bottom: 24px;
+  padding-bottom: 16px;
   border-radius: 8px;
   width: 12%;
   top: 1%;
@@ -145,6 +145,12 @@
   top: 1%;
   left: 18%;
   z-index: 2000;
+}
+.layers-legend {
+  top: 20%;
+}
+.esriLegendServiceLabel {
+  font-weight: bold;
 }
 .toggle-buttons {
   position: fixed;
