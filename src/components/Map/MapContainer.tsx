@@ -49,13 +49,17 @@ import {
   faExpandArrowsAlt,
   faMinusSquare,
   faAngleDown,
-  faAngleUp
+  faAngleUp,
+  faEye,
+  faEyeSlash
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const MapContainer = () => {
   const [isExpanded, setIsExpanded] = useState(true);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isClusterZone, setIsClusterZone] = useState(true);
+  const [isErrorZone, setIsErrorZone] = useState(true);
+  // used for collapse const [isOpen, setIsOpen] = useState(true);
   const [loading, toggleLoading] = useState<boolean>(false);
   const [allYearResults, setAllYearResults] = useState<AllYearsResults>();
   const [yearlyResults, setYearlyResults] = useState<YearlyResult[]>([]);
@@ -137,6 +141,40 @@ export const MapContainer = () => {
         <div>
           <span>Minimize Results</span>
           <FontAwesomeIcon icon={faMinusSquare} />
+        </div>
+      );
+    }
+  };
+  const clusterIcon = () => {
+    if (isClusterZone) {
+      return (
+        <div>
+          <span>Hide Cluster Zones</span>
+          <FontAwesomeIcon icon={faEyeSlash} />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <span>Show Cluster Zones</span>
+          <FontAwesomeIcon icon={faEye} />
+        </div>
+      );
+    }
+  };
+  const ErrorIcon = () => {
+    if (isErrorZone) {
+      return (
+        <div>
+          <span>Show Error Zones</span>
+          <FontAwesomeIcon icon={faEye} />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <span>Hide Error Zones</span>
+          <FontAwesomeIcon icon={faEyeSlash} />
         </div>
       );
     }
@@ -351,58 +389,31 @@ export const MapContainer = () => {
   return (
     <div style={style}>
       {(yearlyResults.length > 0 || loading) && (
-        <div>
-          <div className='layers layers-toggle'>
-            <div
-              className='cardheader d-flex align-items-center justify-content-between'
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <h3>View Options</h3>
-              <p>{layerIcon()}</p>
-            </div>
-            <Collapse isOpen={isOpen}>
-              <div className='toggle-cluster'>
-                <Button
-                  onClick={() => toggleGeoJson(!showGeoJson)}
-                  outline={!showGeoJson}
-                  active={showGeoJson}
-                  color='primary'
-                >
-                  Show Cluster Shapes
-                </Button>
-                <Button
-                  onClick={() => toggleErrorGeoJson(!showErrorGeoJson)}
-                  outline={!showErrorGeoJson}
-                  active={showErrorGeoJson}
-                  color='link'
-                >
-                  Show Error Clusters
-                </Button>
-              </div>
-              <div className='toggle-input-result'>
-                <Pagination aria-label='Page navigation example' size='lg'>
-                  <PaginationItem active={!showResults}>
-                    <PaginationLink
-                      key='inputs'
-                      onClick={() => toggleShowResults(false)}
-                    >
-                      Inputs
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active={showResults}>
-                    <PaginationLink
-                      key='finalResults'
-                      onClick={() => toggleShowResults(true)}
-                    >
-                      Results
-                    </PaginationLink>
-                  </PaginationItem>
-                </Pagination>
-              </div>
-            </Collapse>
-          </div>
+        <div className='toggles'>
           <Button
-            className='toggle-expand'
+            onClick={() => {
+              setIsErrorZone(!isErrorZone);
+              toggleErrorGeoJson(!showErrorGeoJson);
+            }}
+            active={showErrorGeoJson}
+            color='primary'
+            className='toggle-buttons error-toggle'
+          >
+            {ErrorIcon()}
+          </Button>
+          <Button
+            onClick={() => {
+              setIsClusterZone(!isClusterZone);
+              toggleGeoJson(!showGeoJson);
+            }}
+            active={showGeoJson}
+            color='primary'
+            className='toggle-buttons cluster-toggle'
+          >
+            {clusterIcon()}
+          </Button>
+          <Button
+            className='toggle-buttons expand-toggle'
             color='primary'
             onClick={() => {
               setIsExpanded(!isExpanded);
@@ -411,6 +422,36 @@ export const MapContainer = () => {
           >
             {expandIcon()}
           </Button>
+          <div className='toggle-input-result'>
+            <Pagination aria-label='Page navigation example' size='lg'>
+              <PaginationItem active={!showResults}>
+                <PaginationLink
+                  key='inputs'
+                  onClick={() => toggleShowResults(false)}
+                >
+                  Inputs
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem active={showResults}>
+                <PaginationLink
+                  key='finalResults'
+                  onClick={() => toggleShowResults(true)}
+                >
+                  Results
+                </PaginationLink>
+              </PaginationItem>
+            </Pagination>
+          </div>
+          {/* COLLAPSE OPTION <div className='layers layers-toggle'>
+            <div
+              className='cardheader d-flex align-items-center justify-content-between'
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <h3>View Options</h3>
+              <p>{layerIcon()}</p>
+            </div>
+            <Collapse isOpen={isOpen}></Collapse>
+          </div> */}
         </div>
       )}
       <div
