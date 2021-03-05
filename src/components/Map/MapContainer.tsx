@@ -122,65 +122,6 @@ export const MapContainer = () => {
   });
   let mapRef: any = createRef<Map>();
 
-  const layerIcon = () => {
-    if (isOpen) {
-      return <FontAwesomeIcon icon={faAngleDown} />;
-    } else {
-      return <FontAwesomeIcon icon={faAngleUp} />;
-    }
-  };
-  const expandIcon = () => {
-    if (isExpanded) {
-      return (
-        <div>
-          <span>Expand Results</span>
-          <FontAwesomeIcon icon={faExpandArrowsAlt} />
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <span>Minimize Results</span>
-          <FontAwesomeIcon icon={faMinusSquare} />
-        </div>
-      );
-    }
-  };
-  const clusterIcon = () => {
-    if (isClusterZone) {
-      return (
-        <div>
-          <span>Hide Cluster Zones</span>
-          <FontAwesomeIcon icon={faEyeSlash} />
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <span>Show Cluster Zones</span>
-          <FontAwesomeIcon icon={faEye} />
-        </div>
-      );
-    }
-  };
-  const ErrorIcon = () => {
-    if (isErrorZone) {
-      return (
-        <div>
-          <span>Show Error Zones</span>
-          <FontAwesomeIcon icon={faEye} />
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <span>Hide Error Zones</span>
-          <FontAwesomeIcon icon={faEyeSlash} />
-        </div>
-      );
-    }
-  };
-
   const submitInputs = async () => {
     toggleLoading(true);
     // first do initial processing to get TEA and substation results
@@ -400,7 +341,8 @@ export const MapContainer = () => {
             color='primary'
             className='toggle-buttons error-toggle'
           >
-            {ErrorIcon()}
+            <span>{isErrorZone ? 'Show Error Zones' : 'Hide Error Zones'}</span>
+            <FontAwesomeIcon icon={isErrorZone ? faEye : faEyeSlash} />
           </Button>
           <Button
             onClick={() => {
@@ -411,7 +353,10 @@ export const MapContainer = () => {
             color='primary'
             className='toggle-buttons cluster-toggle'
           >
-            {clusterIcon()}
+            <span>
+              {isClusterZone ? 'Hide Cluster Zones' : 'Show Cluster Zones'}
+            </span>
+            <FontAwesomeIcon icon={isClusterZone ? faEyeSlash : faEye} />
           </Button>
           <Button
             className='toggle-buttons expand-toggle'
@@ -421,7 +366,10 @@ export const MapContainer = () => {
               toggleExpandedResults(!expandedResults);
             }}
           >
-            {expandIcon()}
+            <span>{isExpanded ? 'Expand Results' : 'Minimize Results'} </span>
+            <FontAwesomeIcon
+              icon={isExpanded ? faExpandArrowsAlt : faMinusSquare}
+            />
           </Button>
           <div className='toggle-input-result'>
             <Pagination aria-label='Page navigation example' size='lg'>
