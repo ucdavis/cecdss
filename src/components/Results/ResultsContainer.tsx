@@ -33,8 +33,11 @@ interface Props {
   toggleErrorGeoJson: (toggle: boolean) => void;
   allYearResults: AllYearsResults;
   yearlyResults: YearlyResult[];
+  loading: boolean;
   teaInputs: InputModGPO | InputModCHP | InputModGP;
   teaModel: string;
+  toggleShowResults: (toggle: boolean) => void;
+  showResults: boolean;
   frcsInputs: FrcsInputs;
   sensitivityResults?: OutputModSensitivity;
 }
@@ -57,25 +60,10 @@ export const ResultsContainer = (props: Props) => {
   return (
     <>
       <div className='cardheader d-flex justify-content-between align-items-center'>
-        <h2>Results</h2>
-        <div className='result-buttons'>
-          <Button
-            onClick={() => props.toggleGeoJson(!props.showGeoJson)}
-            outline={!props.showGeoJson}
-            active={props.showGeoJson}
-            color='success'
-          >
-            Show Cluster Shapes
-          </Button>
-          <Button
-            onClick={() => props.toggleErrorGeoJson(!props.showErrorGeoJson)}
-            outline={!props.showErrorGeoJson}
-            active={props.showErrorGeoJson}
-            color='info'
-          >
-            Show Error Clusters
-          </Button>
-        </div>
+        <span>
+          <h4>CEC DSS</h4>
+          <h2>Results</h2>
+        </span>
       </div>
       <div className='cardcontents'>
         <div className='years-pagination'>

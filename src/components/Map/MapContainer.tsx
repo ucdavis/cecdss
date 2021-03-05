@@ -26,7 +26,13 @@ import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
 import { convertGeoJSON, convertLandingSiteGeoJSON } from '../Shared/util';
 import { HeatmapLayers } from './HeatmapLayers';
-import { PaginationItem, PaginationLink, Pagination } from 'reactstrap';
+import {
+  PaginationItem,
+  PaginationLink,
+  Button,
+  Pagination,
+  Collapse
+} from 'reactstrap';
 import { ResultsContainer } from '../Results/ResultsContainer';
 import { GeoJsonLayers } from './GeoJsonLayers';
 import {
@@ -40,7 +46,21 @@ import { ExternalLayerSelection } from './ExternalLayerSelection';
 import { serviceUrl } from '../Shared/config';
 import { ExternalLayerLegend } from './ExternalLayerLegend';
 
+import {
+  faExpandArrowsAlt,
+  faMinusSquare,
+  faAngleDown,
+  faAngleUp,
+  faEye,
+  faEyeSlash
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 export const MapContainer = () => {
+  const [isExpanded, setIsExpanded] = useState(true);
+  const [isClusterZone, setIsClusterZone] = useState(true);
+  const [isErrorZone, setIsErrorZone] = useState(true);
+  // used for collapse const [isOpen, setIsOpen] = useState(true);
   const [loading, toggleLoading] = useState<boolean>(false);
   const [allYearResults, setAllYearResults] = useState<AllYearsResults>();
   const [yearlyResults, setYearlyResults] = useState<YearlyResult[]>([]);
@@ -50,6 +70,7 @@ export const MapContainer = () => {
   ] = useState<OutputModSensitivity>();
   const [selectedYearIndex, setSelectedYearIndex] = useState<number>(-1);
   const [showResults, toggleShowResults] = useState<boolean>(false);
+  const [expandedResults, toggleExpandedResults] = useState<boolean>(false);
   const [geoJsonResults, setGeoJsonResults] = useState<FeatureCollection[]>([]);
   const [geoJsonShapeResults, setGeoJsonShapeResults] = useState<
     FeatureCollection[]
@@ -310,8 +331,47 @@ export const MapContainer = () => {
   return (
     <div style={style}>
       {(yearlyResults.length > 0 || loading) && (
-        <>
-          <div className='input-result-toggle'>
+        <div className='toggles'>
+          <Button
+            onClick={() => {
+              setIsErrorZone(!isErrorZone);
+              toggleErrorGeoJson(!showErrorGeoJson);
+            }}
+            active={showErrorGeoJson}
+            color='primary'
+            className='toggle-buttons error-toggle'
+          >
+            <span>{isErrorZone ? 'Show Error Zones' : 'Hide Error Zones'}</span>
+            <FontAwesomeIcon icon={isErrorZone ? faEye : faEyeSlash} />
+          </Button>
+          <Button
+            onClick={() => {
+              setIsClusterZone(!isClusterZone);
+              toggleGeoJson(!showGeoJson);
+            }}
+            active={showGeoJson}
+            color='primary'
+            className='toggle-buttons cluster-toggle'
+          >
+            <span>
+              {isClusterZone ? 'Hide Cluster Zones' : 'Show Cluster Zones'}
+            </span>
+            <FontAwesomeIcon icon={isClusterZone ? faEyeSlash : faEye} />
+          </Button>
+          <Button
+            className='toggle-buttons expand-toggle'
+            color='primary'
+            onClick={() => {
+              setIsExpanded(!isExpanded);
+              toggleExpandedResults(!expandedResults);
+            }}
+          >
+            <span>{isExpanded ? 'Expand Results' : 'Minimize Results'} </span>
+            <FontAwesomeIcon
+              icon={isExpanded ? faExpandArrowsAlt : faMinusSquare}
+            />
+          </Button>
+          <div className='toggle-input-result'>
             <Pagination aria-label='Page navigation example' size='lg'>
               <PaginationItem active={!showResults}>
                 <PaginationLink
@@ -331,12 +391,20 @@ export const MapContainer = () => {
               </PaginationItem>
             </Pagination>
           </div>
-        </>
+          {/* COLLAPSE OPTION <div className='layers layers-toggle'>
+            <div
+              className='cardheader d-flex align-items-center justify-content-between'
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <h3>View Options</h3>
+              <p>{layerIcon()}</p>
+            </div>
+            <Collapse isOpen={isOpen}></Collapse>
+          </div> */}
+        </div>
       )}
       <div
-        className={
-          yearlyResults.length > 0 || loading ? 'results-sidebar' : 'sidebar'
-        }
+        className={expandedResults ? 'expanded-results' : 'sidebar'}
         id='sidebar'
       >
         <ExternalLayerSelection onChange={setExternalLayers} />
@@ -358,6 +426,9 @@ export const MapContainer = () => {
         )}
         {showResults && !!allYearResults && (
           <ResultsContainer
+            toggleShowResults={toggleShowResults}
+            showResults={showResults}
+            loading={loading}
             allYearResults={allYearResults}
             yearlyResults={yearlyResults}
             years={years}

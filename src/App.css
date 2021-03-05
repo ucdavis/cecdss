@@ -92,7 +92,10 @@
     transform: rotate(360deg);
   }
 }
-
+#sidebar {
+  box-shadow: 0 0 0 1px rgba(49, 49, 93, 0.03),
+    0 2px 5px 0 rgba(49, 49, 93, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+}
 .sidebar {
   position: fixed;
   z-index: 2000;
@@ -104,6 +107,7 @@
   top: 1%;
   right: 1%;
   overflow-y: scroll;
+  transition: all 0.5s ease;
 }
 .input-group-text {
   min-width: 48px;
@@ -111,18 +115,18 @@
 .input-group {
   margin-top: 6px;
 }
-.results-sidebar {
+.expanded-results {
   position: fixed;
   z-index: 2000;
-  width: 98%;
-  height: 55%;
+  width: 66%;
+  height: 96%;
   background-color: #fff;
   padding: 0px;
   border-radius: 8px;
-  bottom: 1%;
+  top: 1%;
   right: 1%;
-  left: 1%;
   overflow-y: scroll;
+  transition: all 0.5s ease;
 }
 
 .layers {
@@ -130,10 +134,17 @@
   background-color: #fff;
   padding-bottom: 16px;
   border-radius: 8px;
-  width: 250px;
+  width: 12%;
   top: 1%;
   left: 4%;
   overflow-y: scroll;
+  box-shadow: 0 0 0 1px rgba(49, 49, 93, 0.03),
+    0 2px 5px 0 rgba(49, 49, 93, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+}
+.layers-toggle {
+  top: 1%;
+  left: 18%;
+  z-index: 2000;
 }
 .layers-legend {
   top: 20%;
@@ -141,15 +152,37 @@
 .esriLegendServiceLabel {
   font-weight: bold;
 }
-.input-result-toggle {
+.toggle-buttons {
   position: fixed;
-  background-color: #fff;
+  padding-bottom: 24px;
   border-radius: 8px;
-  min-width: 215px;
-  top: 1%;
-  right: 4%;
+  left: 17%;
   z-index: 2000;
-  overflow-y: scroll;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 0 0 1px rgba(49, 49, 93, 0.03),
+    0 2px 5px 0 rgba(49, 49, 93, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+}
+.toggle-buttons svg {
+  margin-left: 8px;
+}
+.cluster-toggle {
+  top: 6%;
+}
+.error-toggle {
+  top: 1%;
+}
+.expand-toggle {
+  top: 11%;
+}
+.toggle-input-result {
+  position: fixed;
+  padding-bottom: 24px;
+  border-radius: 8px;
+  bottom: 1%;
+  left: 4%;
+  z-index: 2000;
 }
 .input-result-toggle .pagination-lg {
   margin-bottom: 0px;
