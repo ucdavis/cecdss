@@ -187,13 +187,13 @@ export const ResultsCharts = (props: Props) => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis type="number" dataKey='relativeChange' domain={[xRange[0], xRange[1]]}>
-            <Label value="% Relative Change" position="insideBottom" className="sensitivity-x-label" />
+            <Label value="% Relative Change" position="insideBottom" offset={-10} className="sensitivity-x-label" />
           </XAxis>
           <YAxis type="number" dataKey='coe' domain={[yRange[0], yRange[1]]}>
             <Label value="Relative Change in COE (%)" angle={-90} position="insideLeft" className="sensitivity-y-label" />
           </YAxis>
           <Tooltip cursor={{ strokeDasharray: '3 3' }}/>
-          <Legend />
+          <Legend wrapperStyle={{ paddingTop: "20px" }}/>
           <Scatter
             name='Capital Cost'
             data={capitalCost}
