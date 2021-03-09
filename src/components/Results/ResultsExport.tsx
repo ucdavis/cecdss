@@ -10,6 +10,7 @@ import {
 } from '../../models/Types';
 import { Button } from 'reactstrap';
 import { formatCurrency, formatNumber } from '../Shared/util';
+import { NUM_YEARS_TO_RUN } from '../Shared/config';
 
 interface Props {
   allYearResults: AllYearsResults;
@@ -21,9 +22,9 @@ interface Props {
 }
 
 export const ResultsExport = (props: Props) => {
-  // TODO: for now we allow showing results once you have projected at least 5 years
-  if (!props.yearlyResults || props.yearlyResults.length < 5) {
-    return <></>; // only show after we get all results back
+  // don't show export until all years are done running
+  if (!props.yearlyResults || props.yearlyResults.length < NUM_YEARS_TO_RUN) {
+    return <></>;
   }
 
   const treatmentIndex = Treatments.findIndex(
@@ -863,7 +864,13 @@ export const ResultsExport = (props: Props) => {
     );
   };
 
-  return <Button onClick={makeExcel}>Export fake result to Excel</Button>;
+  return (
+    <p>
+      <Button color='primary' onClick={makeExcel}>
+        Export results to Excel
+      </Button>
+    </p>
+  );
 };
 
 const svgToPng = (svg: any, width: number, height: number) => {

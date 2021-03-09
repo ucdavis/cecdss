@@ -29,6 +29,14 @@ export const AllResultsContainer = (props: Props) => {
 
   return (
     <>
+      <ResultsExport
+        allYearResults={props.allYearResults}
+        yearlyResults={props.yearlyResults}
+        sensitivityChart={sensitivityChartRef}
+        frcsInputs={props.frcsInputs}
+        teaModel={props.teaModel}
+        teaInputs={props.teaInputs}
+      />
       <ResultsTable
         yearlyResults={props.yearlyResults}
         allYearResults={props.allYearResults}
@@ -42,14 +50,6 @@ export const AllResultsContainer = (props: Props) => {
         sensitivityChartRef={sensitivityChartRef}
       />
       <AssumptionsAndReferences />
-      <ResultsExport
-        allYearResults={props.allYearResults}
-        yearlyResults={props.yearlyResults}
-        sensitivityChart={sensitivityChartRef}
-        frcsInputs={props.frcsInputs}
-        teaModel={props.teaModel}
-        teaInputs={props.teaInputs}
-      />
       {/* {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
         props.teaInputs instanceof InputModGPOClass && (
           <GPOResults inputs={props.teaInputs} results={teaResults} />

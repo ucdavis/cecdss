@@ -43,7 +43,7 @@ import {
 import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
 import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
 import { ExternalLayerSelection } from './ExternalLayerSelection';
-import { serviceUrl } from '../Shared/config';
+import { NUM_YEARS_TO_RUN, serviceUrl } from '../Shared/config';
 import { ExternalLayerLegend } from './ExternalLayerLegend';
 
 import {
@@ -92,8 +92,8 @@ export const MapContainer = () => {
   };
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
   const years: number[] = [];
-  for (let index = 0; index < 20; index++) {
-    years.push(2020 + index);
+  for (let index = 0; index < NUM_YEARS_TO_RUN; index++) {
+    years.push(2016 + index);
   }
   console.log();
 
