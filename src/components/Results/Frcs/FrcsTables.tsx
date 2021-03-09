@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatNumber, formatCurrency } from '../../Shared/util';
+import { formatNumber } from '../../Shared/util';
 import { YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
 
@@ -19,7 +19,7 @@ export const FrcsTables = (props: Props) => {
         </tr>
         <tr>
           {props.yearlyResults.map((x, i) => (
-            <td>{i + 1}</td>
+            <td key={`year-${i}`}>{i + 1}</td>
           ))}
         </tr>
       </thead>
@@ -32,8 +32,10 @@ export const FrcsTables = (props: Props) => {
               props.yearlyResults.reduce((sum, x) => sum + x.totalFeedstock, 0)
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.totalFeedstock)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`totalFeedstock-${i}`}>
+              {formatNumber(result.totalFeedstock)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -44,8 +46,10 @@ export const FrcsTables = (props: Props) => {
               props.yearlyResults.reduce((sum, x) => sum + x.totalCoproduct, 0)
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.totalCoproduct)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`totalCoproduct-${i}`}>
+              {formatNumber(result.totalCoproduct)}
+            </td>
           ))}
         </tr>
       </tbody>
