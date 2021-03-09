@@ -863,7 +863,13 @@ export const ResultsExport = (props: Props) => {
     );
   };
 
-  return <Button onClick={makeExcel}>Export fake result to Excel</Button>;
+  return (
+    <p>
+      <Button color='primary' onClick={makeExcel}>
+        Export results to Excel
+      </Button>
+    </p>
+  );
 };
 
 const svgToPng = (svg: any, width: number, height: number) => {
