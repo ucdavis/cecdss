@@ -2,14 +2,12 @@ import React from 'react';
 import {
   AllYearsResults,
   FrcsInputs,
-  TechnoeconomicModels,
   YearlyResult
 } from '../../models/Types';
 import {
   PaginationItem,
   PaginationLink,
   Spinner,
-  Button,
   Pagination,
   Alert,
   Progress
@@ -44,10 +42,9 @@ interface Props {
 
 export const ResultsContainer = (props: Props) => {
   const pages = props.years.map((year, i) => (
-    <PaginationItem active={props.selectedYearIndex === i}>
+    <PaginationItem key={`year-${i}`} active={props.selectedYearIndex === i}>
       <PaginationLink
         className='years-page'
-        key={year}
         disabled={!props.yearlyResults[i]}
         onClick={() => props.setSelectedYearIndex(i)}
       >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatNumber, formatCurrency } from '../../Shared/util';
+import { formatNumber } from '../../Shared/util';
 import { YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
 
@@ -21,7 +21,7 @@ export const LCATables = (props: Props) => {
         </tr>
         <tr>
           {props.yearlyResults.map((x, i) => (
-            <td>{i + 1}</td>
+            <td key={`year-${i}`}>{i + 1}</td>
           ))}
         </tr>
       </thead>
@@ -42,8 +42,10 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.inputs.diesel * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`diesel-${i}`}>
+              {formatNumber(result.lcaResults.inputs.diesel * 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -57,8 +59,10 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.inputs.gasoline * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`gasoline-${i}`}>
+              {formatNumber(result.lcaResults.inputs.gasoline * 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -72,8 +76,10 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.inputs.jetfuel * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`jetfuel-${i}`}>
+              {formatNumber(result.lcaResults.inputs.jetfuel * 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -87,8 +93,10 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.inputs.distance * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`distance-${i}`}>
+              {formatNumber(result.lcaResults.inputs.distance * 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -107,8 +115,10 @@ export const LCATables = (props: Props) => {
               )
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.CO2)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`CO2-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.CO2)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -124,8 +134,10 @@ export const LCATables = (props: Props) => {
               )
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.CH4)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`CH4-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.CH4)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -141,8 +153,10 @@ export const LCATables = (props: Props) => {
               )
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.N2O)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`N2O-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.N2O)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -158,8 +172,10 @@ export const LCATables = (props: Props) => {
               )
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.CO2e)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`CO2e-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.CO2e)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -173,8 +189,10 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.CO * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`CO-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.CO * 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -190,8 +208,10 @@ export const LCATables = (props: Props) => {
               )
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.NOx)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`NOx-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.NOx)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -207,8 +227,10 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.NH3 * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`NH3-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.NH3 * 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -224,8 +246,10 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.PM10 * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`PM10-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.PM10 * 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -241,8 +265,10 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.PM25 * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`PM25-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.PM25 * 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -258,8 +284,10 @@ export const LCATables = (props: Props) => {
               )
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.SO2)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`SO2-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.SO2)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -275,8 +303,10 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.SOx * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`SOx-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.SOx * 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -290,8 +320,10 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.VOCs * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`VOCs-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.VOCs * 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -307,8 +339,10 @@ export const LCATables = (props: Props) => {
               ) / 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciResults.CI / 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`CI-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.CI / 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -327,8 +361,8 @@ export const LCATables = (props: Props) => {
               )
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`globalWarmingAir-${i}`}>
               {formatNumber(result.lcaResults.lciaResults.global_warming_air)}
             </td>
           ))}
@@ -346,8 +380,8 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`acidificationAir-${i}`}>
               {formatNumber(
                 result.lcaResults.lciaResults.acidification_air * 1000
               )}
@@ -367,8 +401,8 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`hhParticulateAir-${i}`}>
               {formatNumber(
                 result.lcaResults.lciaResults.hh_particulate_air * 1000
               )}
@@ -386,8 +420,8 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`eutrophicationAir-${i}`}>
               {formatNumber(
                 result.lcaResults.lciaResults.eutrophication_air * 1000
               )}
@@ -405,8 +439,8 @@ export const LCATables = (props: Props) => {
               ) * 1000
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`eutrophicationWater-${i}`}>
               {formatNumber(
                 result.lcaResults.lciaResults.eutrophication_water * 1000
               )}
@@ -426,8 +460,10 @@ export const LCATables = (props: Props) => {
               )
             )}
           </td>
-          {props.yearlyResults.map(result => (
-            <td>{formatNumber(result.lcaResults.lciaResults.smog_air)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`smogAir-${i}`}>
+              {formatNumber(result.lcaResults.lciaResults.smog_air)}
+            </td>
           ))}
         </tr>
       </tbody>
