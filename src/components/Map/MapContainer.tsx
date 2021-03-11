@@ -483,6 +483,13 @@ export const MapContainer = () => {
             }
           />
         )}
+        {externalLayers.includes('ownership') && (
+          <DynamicMapLayer
+            url={
+              'https://egis.fire.ca.gov/arcgis/rest/services/FRAP/ownership/MapServer'
+            }
+          />
+        )}
         {externalLayers.includes('fire') && (
           <DynamicMapLayer
             url={
