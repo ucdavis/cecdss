@@ -24,14 +24,13 @@ import {
 import { InputModGPOClass } from '../../models/GPOClasses';
 import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
-import { convertGeoJSON, convertLandingSiteGeoJSON } from '../Shared/util';
+import { convertGeoJSON } from '../Shared/util';
 import { HeatmapLayers } from './HeatmapLayers';
 import {
   PaginationItem,
   PaginationLink,
   Button,
   Pagination,
-  Collapse
 } from 'reactstrap';
 import { ResultsContainer } from '../Results/ResultsContainer';
 import { GeoJsonLayers } from './GeoJsonLayers';
@@ -49,8 +48,6 @@ import { ExternalLayerLegend } from './ExternalLayerLegend';
 import {
   faExpandArrowsAlt,
   faMinusSquare,
-  faAngleDown,
-  faAngleUp,
   faEye,
   faEyeSlash
 } from '@fortawesome/free-solid-svg-icons';
