@@ -7,6 +7,7 @@ import { TransmissionLegend } from './Layers/TransmissionLegend';
 import { StationLegend } from './Layers/StationLegend';
 import { FireLegend } from './Layers/FireLegend';
 import { PlantLegend } from './Layers/PlantLegend';
+import { OwnershipLegend } from './Layers/OwnershipLegend';
 
 interface Props {
   layers: string[];
@@ -38,14 +39,11 @@ export const ExternalLayerLegend = (props: Props) => {
       </div>
       <Collapse isOpen={isOpen}>
         <div className='cardcontents'>
-          {props.layers.includes('fire') && <FireLegend></FireLegend>}
-          {props.layers.includes('transmission') && (
-            <TransmissionLegend></TransmissionLegend>
-          )}
-          {props.layers.includes('substation') && (
-            <StationLegend></StationLegend>
-          )}
-          {props.layers.includes('plant') && <PlantLegend></PlantLegend>}
+          {props.layers.includes('fire') && <FireLegend />}
+          {props.layers.includes('transmission') && <TransmissionLegend />}
+          {props.layers.includes('substation') && <StationLegend />}
+          {props.layers.includes('plant') && <PlantLegend />}
+          {props.layers.includes('ownership') && <OwnershipLegend />}
         </div>
       </Collapse>
     </div>
