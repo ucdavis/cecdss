@@ -7,12 +7,14 @@ export const PrintControl = () => {
   const { map } = useLeaflet();
 
   useEffect(() => {
-    L.easyPrint({
-      exportOnly: true,
-      title: 'Export map',
-      position: 'bottomleft',
-      sizeModes: ['Current', 'A4Portrait', 'A4Landscape']
-    }).addTo(map);
+    (L as any) // since L types do not have our easyPrint extension, we'll just cast as any type
+      .easyPrint({
+        exportOnly: true,
+        title: 'Export map',
+        position: 'bottomleft',
+        sizeModes: ['Current', 'A4Portrait', 'A4Landscape']
+      })
+      .addTo(map);
   }, [map]);
 
   return null;
