@@ -22,6 +22,7 @@ export const HeatmapLayers = (props: Props) => {
       if (i === props.selectedYearIndex) {
         return (
           <HeatmapLayer
+            key={`heatMap-${i}`}
             points={result.features}
             longitudeExtractor={(feature: Feature<Point>) =>
               feature.geometry.coordinates[0]
@@ -36,7 +37,7 @@ export const HeatmapLayers = (props: Props) => {
           />
         );
       } else {
-        return <></>;
+        return <div key={`heatMap-${i}`}></div>
       }
     });
     return <>{dataLayers}</>;

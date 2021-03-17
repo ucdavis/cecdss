@@ -22,7 +22,7 @@ export const GeoJsonLayers = (props: Props) => {
     ) {
       return (
         <GeoJSON
-          key={i}
+          key={`geoData-${i}`}
           data={geojsonData}
           onEachFeature={(feature: ClusterFeature, layer: any) => {
             if (feature && feature.properties) {
@@ -48,7 +48,7 @@ export const GeoJsonLayers = (props: Props) => {
         />
       );
     } else {
-      return <></>;
+      return <div key={`geoData-${i}`}></div>;
     }
   });
   return <>{dataLayers}</>;
