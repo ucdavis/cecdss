@@ -78,6 +78,11 @@ export const MapContainer = () => {
 
   const [showGeoJson, toggleGeoJson] = useState<boolean>(true);
   const [showErrorGeoJson, toggleErrorGeoJson] = useState<boolean>(false);
+  const [zoom, setZoom] = useState<number>(0);
+  const [center, setCenter] = useState<MapCoordinates>({
+    lat: 38.77228705439114,
+    lng: -120.36827087402345
+  });
 
   // external layers
   const [externalLayers, setExternalLayers] = useState<string[]>([]);
@@ -92,7 +97,6 @@ export const MapContainer = () => {
   for (let index = 0; index < NUM_YEARS_TO_RUN; index++) {
     years.push(2016 + index);
   }
-  console.log();
 
   const [teaInputs, setTeaInputs] = useState<
     InputModGPO | InputModCHP | InputModGP
@@ -121,6 +125,8 @@ export const MapContainer = () => {
 
   const submitInputs = async () => {
     toggleLoading(true);
+    setZoom(8);
+    setCenter(mapState);
     // first do initial processing to get TEA and substation results
     const lat = mapState.lat;
     const lng = mapState.lng;
@@ -448,6 +454,8 @@ export const MapContainer = () => {
           !loading && yearlyResults.length === 0 && setMapState(e.latlng);
         }}
         bounds={bounds}
+        zoom={zoom}
+        center={center}
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
         <EsriLeafletGeoSearch
