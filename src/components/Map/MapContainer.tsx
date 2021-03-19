@@ -26,12 +26,7 @@ import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
 import { convertGeoJSON } from '../Shared/util';
 import { HeatmapLayers } from './HeatmapLayers';
-import {
-  PaginationItem,
-  PaginationLink,
-  Button,
-  Pagination,
-} from 'reactstrap';
+import { PaginationItem, PaginationLink, Button, Pagination } from 'reactstrap';
 import { ResultsContainer } from '../Results/ResultsContainer';
 import { GeoJsonLayers } from './GeoJsonLayers';
 import {
@@ -121,6 +116,8 @@ export const MapContainer = () => {
 
   const submitInputs = async () => {
     toggleLoading(true);
+    setIsExpanded(!isExpanded);
+    toggleExpandedResults(!expandedResults);
     // first do initial processing to get TEA and substation results
     const lat = mapState.lat;
     const lng = mapState.lng;
