@@ -80,8 +80,8 @@ export const MapContainer = () => {
   const [showErrorGeoJson, toggleErrorGeoJson] = useState<boolean>(false);
   const [zoom, setZoom] = useState<number>(0);
   const [center, setCenter] = useState<MapCoordinates>({
-    lat: 38.77228705439114,
-    lng: -120.36827087402345
+    lat: 0,
+    lng: 0
   });
 
   // external layers
