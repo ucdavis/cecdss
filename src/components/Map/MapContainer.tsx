@@ -52,6 +52,7 @@ import {
   faEyeSlash
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PrintControl } from './PrintControl';
 
 export const MapContainer = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -459,6 +460,7 @@ export const MapContainer = () => {
             }
           }}
         />
+        <PrintControl />
         {externalLayers.includes('transmission') && (
           <FeatureLayer
             url={
