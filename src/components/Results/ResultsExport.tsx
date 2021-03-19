@@ -11,6 +11,7 @@ import {
 import { Button } from 'reactstrap';
 import { formatCurrency, formatNumber } from '../Shared/util';
 import { NUM_YEARS_TO_RUN } from '../Shared/config';
+import { myBase64Image } from '../Shared/myBase64Image';
 
 interface Props {
   allYearResults: AllYearsResults;
@@ -782,7 +783,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'assumptions',
-      ref: 'B103',
+      ref: 'B108',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Assumptions' }, { name: 'Total' }],
@@ -810,7 +811,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'keyReferences',
-      ref: 'B123',
+      ref: 'B128',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Key References' }],
@@ -826,7 +827,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'disclaimer',
-      ref: 'B131',
+      ref: 'B136',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Disclaimer' }],
@@ -843,16 +844,22 @@ export const ResultsExport = (props: Props) => {
       const chartSvg = props.sensitivityChart.current.container.children[0];
 
       // TODO: legend isn't in SVG so it currently isn't included
-      const pngData = await svgToPng(chartSvg, 700, 600);
+      const pngData = await svgToPng(chartSvg, 800, 600);
 
       // add image to workbook by base64
       const chartImageId2 = workbook.addImage({
         base64: pngData,
         extension: 'png'
       });
+      
+      const legendImageId = workbook.addImage({
+        base64: myBase64Image,
+        extension: 'png'
+      });
 
       // insert an image over B2:D6
       worksheet.addImage(chartImageId2, 'B75:J100');
+      worksheet.addImage(legendImageId, 'B103:J106');
     }
 
     const workbookBuffer = await workbook.xlsx.writeBuffer();
