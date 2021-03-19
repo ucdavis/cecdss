@@ -50,6 +50,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TripLayers } from './TripLayers';
 import { PrintControl } from './PrintControl';
+import { checkFrcsValidity } from '../Inputs/validation';
 
 export const MapContainer = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -122,6 +123,21 @@ export const MapContainer = () => {
 
   const submitInputs = async () => {
     toggleLoading(true);
+
+    // validate frcs inputs
+    const frcsErrors = await checkFrcsValidity(frcsInputs);
+
+    if (frcsErrors.length > 0) {
+      // TODO: make this a nice error message which shows in the FRCS section
+      alert(frcsErrors.join(';'));
+      toggleLoading(false);
+      return;
+    }
+
+    // TODO: FRCS is valid but we should also validate TEA
+    // TEA is more complicated because we have three different models, so our validation must check for the correct type
+    // If any validation fails, we want to not run the model
+
     // first do initial processing to get TEA and substation results
     const lat = mapState.lat;
     const lng = mapState.lng;
