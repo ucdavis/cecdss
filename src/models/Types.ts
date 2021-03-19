@@ -142,6 +142,11 @@ export const Treatments: Treatment[] = [
   }
 ];
 
+export interface Geometry {
+  coordinates: number[][];
+  type: string;
+}
+
 export interface Results {
   clusterIds: string[];
   errorIds: string[];
@@ -172,6 +177,7 @@ export interface YearlyResult {
   cashFlow: any;
   geoJson: any;
   errorGeoJson: any;
+  tripGeometries: Geometry[];
 }
 
 export interface ClusterResult {

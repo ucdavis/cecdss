@@ -13,7 +13,8 @@ import {
   RequestParams,
   MapCoordinates,
   RequestParamsAllYears,
-  AllYearsResults
+  AllYearsResults,
+  Geometry
 } from '../../models/Types';
 import {
   InputModGPO,
@@ -26,12 +27,7 @@ import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
 import { convertGeoJSON } from '../Shared/util';
 import { HeatmapLayers } from './HeatmapLayers';
-import {
-  PaginationItem,
-  PaginationLink,
-  Button,
-  Pagination,
-} from 'reactstrap';
+import { PaginationItem, PaginationLink, Button, Pagination } from 'reactstrap';
 import { ResultsContainer } from '../Results/ResultsContainer';
 import { GeoJsonLayers } from './GeoJsonLayers';
 import {
@@ -52,6 +48,7 @@ import {
   faEyeSlash
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { TripLayers } from './TripLayers';
 import { PrintControl } from './PrintControl';
 
 export const MapContainer = () => {
@@ -76,6 +73,9 @@ export const MapContainer = () => {
   const [errorGeoJsonShapeResults, setErrorGeoJsonShapeResults] = useState<
     FeatureCollection[]
   >([]);
+  const [tripGeometries, setTripGeometries] = useState<Geometry[]>(
+    []
+  );
 
   const [showGeoJson, toggleGeoJson] = useState<boolean>(true);
   const [showErrorGeoJson, toggleErrorGeoJson] = useState<boolean>(false);
@@ -276,6 +276,10 @@ export const MapContainer = () => {
       setErrorGeoJsonShapeResults(results => [
         ...results,
         yearResult.errorGeoJson
+      ]);
+      setTripGeometries(results => [
+        ...results,
+        yearResult.tripGeometries[0] // for now we are assuming only one trip route per year
       ]);
 
       setYearlyResults(results => [...results, yearResult]);
@@ -504,6 +508,11 @@ export const MapContainer = () => {
         />
         {yearlyResults.length > 0 && (
           <>
+            <TripLayers
+              years={years}
+              yearlyGeoJson={tripGeometries}
+              selectedYearIndex={selectedYearIndex}
+            />
             {showGeoJson && (
               <GeoJsonLayers
                 years={years}
