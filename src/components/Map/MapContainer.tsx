@@ -119,8 +119,8 @@ export const MapContainer = () => {
   }, [teaModel]);
 
   const [mapState, setMapState] = useState<MapCoordinates>({
-    lat: 38.77228705439114,
-    lng: -120.36827087402345
+    lat: 39.74667,
+    lng: -121.612244
   });
   let mapRef: any = createRef<Map>();
 
@@ -516,11 +516,11 @@ export const MapContainer = () => {
         />
         {yearlyResults.length > 0 && (
           <>
-            <TripLayers
+            {/* <TripLayers
               years={years}
               yearlyGeoJson={tripGeometries}
               selectedYearIndex={selectedYearIndex}
-            />
+            /> */}
             {showGeoJson && (
               <GeoJsonLayers
                 years={years}
