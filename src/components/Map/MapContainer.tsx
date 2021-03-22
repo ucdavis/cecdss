@@ -119,8 +119,8 @@ export const MapContainer = () => {
   }, [teaModel]);
 
   const [mapState, setMapState] = useState<MapCoordinates>({
-    lat: 39.74667,
-    lng: -121.612244
+    lat: 39.21204328248304,
+    lng: -121.07163446489723
   });
   let mapRef: any = createRef<Map>();
 
