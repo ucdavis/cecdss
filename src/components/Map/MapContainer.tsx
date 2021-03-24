@@ -50,7 +50,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TripLayers } from './TripLayers';
 import { PrintControl } from './PrintControl';
-import { checkFrcsValidity } from '../Inputs/validation';
+import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 
 export const MapContainer = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -94,7 +94,6 @@ export const MapContainer = () => {
   for (let index = 0; index < NUM_YEARS_TO_RUN; index++) {
     years.push(2016 + index);
   }
-  console.log();
 
   const [teaInputs, setTeaInputs] = useState<
     InputModGPO | InputModCHP | InputModGP
@@ -132,6 +131,14 @@ export const MapContainer = () => {
       alert(frcsErrors.join(';'));
       toggleLoading(false);
       return;
+    }
+
+    const teaErrors = await checkTeaValidity(teaModel, teaInputs);
+
+    if (teaErrors.length > 0) {
+      alert(teaErrors.join(';'));
+      toggleLoading(false);
+      return
     }
 
     // TODO: FRCS is valid but we should also validate TEA
