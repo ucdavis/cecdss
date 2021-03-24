@@ -1,9 +1,7 @@
 import {
   InputModGPO,
   ElectricalFuelBaseYearInputModGPO,
-  ExpensesBaseYearInputModGPO,
-  EscalationInflationInputMod,
-  IncomeOtherThanEnergyInputMod
+  ExpensesBaseYearInputModGPO
 } from '@ucdavis/tea/out/models/input.model';
 import {
   ExpensesBaseYearModGPO,
