@@ -80,6 +80,11 @@ export const MapContainer = () => {
 
   const [showGeoJson, toggleGeoJson] = useState<boolean>(true);
   const [showErrorGeoJson, toggleErrorGeoJson] = useState<boolean>(false);
+  const [zoom, setZoom] = useState<number>(0);
+  const [center, setCenter] = useState<MapCoordinates>({
+    lat: 0,
+    lng: 0
+  });
 
   // external layers
   const [externalLayers, setExternalLayers] = useState<string[]>([]);
@@ -115,13 +120,15 @@ export const MapContainer = () => {
   }, [teaModel]);
 
   const [mapState, setMapState] = useState<MapCoordinates>({
-    lat: 38.77228705439114,
-    lng: -120.36827087402345
+    lat: 39.21204328248304,
+    lng: -121.07163446489723
   });
   let mapRef: any = createRef<Map>();
 
   const submitInputs = async () => {
     toggleLoading(true);
+    setZoom(8);
+    setCenter(mapState);
 
     // validate frcs inputs
     const frcsErrors = await checkFrcsValidity(frcsInputs);
@@ -140,10 +147,6 @@ export const MapContainer = () => {
       toggleLoading(false);
       return
     }
-
-    // TODO: FRCS is valid but we should also validate TEA
-    // TEA is more complicated because we have three different models, so our validation must check for the correct type
-    // If any validation fails, we want to not run the model
 
     // first do initial processing to get TEA and substation results
     const lat = mapState.lat;
@@ -476,6 +479,8 @@ export const MapContainer = () => {
           !loading && yearlyResults.length === 0 && setMapState(e.latlng);
         }}
         bounds={bounds}
+        zoom={zoom}
+        center={center}
       >
         <TileLayer attribution={attribution} url={mapboxTiles} />
         <EsriLeafletGeoSearch
@@ -531,11 +536,11 @@ export const MapContainer = () => {
         />
         {yearlyResults.length > 0 && (
           <>
-            <TripLayers
+            {/* <TripLayers
               years={years}
               yearlyGeoJson={tripGeometries}
               selectedYearIndex={selectedYearIndex}
-            />
+            /> */}
             {showGeoJson && (
               <GeoJsonLayers
                 years={years}
