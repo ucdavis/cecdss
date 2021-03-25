@@ -126,6 +126,8 @@ export const MapContainer = () => {
 
   const submitInputs = async () => {
     toggleLoading(true);
+    setIsExpanded(!isExpanded);
+    toggleExpandedResults(!expandedResults);
     setZoom(8);
     setCenter(mapState);
     // first do initial processing to get TEA and substation results
