@@ -11,7 +11,6 @@ import {
   IncomeOtherThanEnergyInputModClass,
   EscalationInflationInputModClass
 } from './TEASharedClasses';
-import { ExpensesBaseYearInputModGPOClass } from './GPOClasses';
 
 export class InputModCHPClass implements InputModCHP {
   CapitalCost = 70000000;

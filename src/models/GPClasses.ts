@@ -1,13 +1,11 @@
 import {
   InputModGP,
   CapitalCostInputModGP,
-  TaxesInputMod,
   ExpensesBaseYearInputModGP,
   FinancingInputMod,
   IncomeOtherThanEnergyInputModGP,
   EscalationInflationInputModGP,
   ElectricalFuelBaseYearInputModGP,
-  HeatBaseYearInputMod
 } from '@ucdavis/tea/out/models/input.model';
 import {
   ExpensesBaseYearModGP,
@@ -17,7 +15,6 @@ import {
 import {
   HeatBaseYearInputModClass,
   TaxesInputModClass,
-  FinancingInputModClass
 } from './TEASharedClasses';
 
 export class InputModGPClass implements InputModGP {

@@ -1,5 +1,5 @@
 import React, { createRef, useState, useEffect } from 'react';
-import { Map, TileLayer, Marker, GeoJSON } from 'react-leaflet';
+import { Map, TileLayer, Marker } from 'react-leaflet';
 import 'esri-leaflet-renderers'; // allows rendering feature layers using their defined renderers
 import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet/v2';
 import EsriLeafletGeoSearch from 'react-esri-leaflet/v2/plugins/EsriLeafletGeoSearch';
@@ -48,8 +48,8 @@ import {
   faEyeSlash
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { TripLayers } from './TripLayers';
 import { PrintControl } from './PrintControl';
+import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 
 export const MapContainer = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -73,9 +73,7 @@ export const MapContainer = () => {
   const [errorGeoJsonShapeResults, setErrorGeoJsonShapeResults] = useState<
     FeatureCollection[]
   >([]);
-  const [tripGeometries, setTripGeometries] = useState<Geometry[]>(
-    []
-  );
+  const [tripGeometries, setTripGeometries] = useState<Geometry[]>([]);
 
   const [showGeoJson, toggleGeoJson] = useState<boolean>(true);
   const [showErrorGeoJson, toggleErrorGeoJson] = useState<boolean>(false);
@@ -84,6 +82,7 @@ export const MapContainer = () => {
     lat: 0,
     lng: 0
   });
+  const [inputErrors, setInputError] = useState<string[]>([]);
 
   // external layers
   const [externalLayers, setExternalLayers] = useState<string[]>([]);
@@ -116,7 +115,7 @@ export const MapContainer = () => {
     if (teaModel === TechnoeconomicModels.gasificationPower) {
       setTeaInputs(new InputModGPClass());
     }
-  }, [teaModel]);
+  }, [teaModel, inputErrors]);
 
   const [mapState, setMapState] = useState<MapCoordinates>({
     lat: 39.21204328248304,
@@ -126,10 +125,30 @@ export const MapContainer = () => {
 
   const submitInputs = async () => {
     toggleLoading(true);
+
+    // validate frcs inputs
+    const frcsErrors = await checkFrcsValidity(frcsInputs);
+
+    if (frcsErrors.length > 0) {
+      setInputError(frcsErrors);
+      toggleLoading(false);
+      return;
+    }
+
+    const teaErrors = await checkTeaValidity(teaModel, teaInputs);
+
+    if (teaErrors.length > 0) {
+      setInputError(teaErrors);
+      toggleLoading(false);
+      return;
+    }
+
     setIsExpanded(!isExpanded);
     toggleExpandedResults(!expandedResults);
     setZoom(8);
     setCenter(mapState);
+    setInputError([]);
+
     // first do initial processing to get TEA and substation results
     const lat = mapState.lat;
     const lng = mapState.lng;
@@ -432,6 +451,7 @@ export const MapContainer = () => {
             submitInputs={() => submitInputs()}
             loading={loading}
             disabled={yearlyResults.length > 0 || loading}
+            errors={inputErrors}
           />
         )}
         {showResults && !!allYearResults && (
