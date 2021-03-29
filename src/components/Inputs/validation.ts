@@ -17,7 +17,7 @@ let frcsSchema: SchemaOf<FrcsInputs> = yup.object().shape({
 
 export const checkFrcsValidity = async (inputs: FrcsInputs) => {
   try {
-    await frcsSchema.validate(inputs);
+    await frcsSchema.validate(inputs, { abortEarly: false });
   } catch (err) {
     if (err instanceof ValidationError) {
       return err.errors;
@@ -33,13 +33,13 @@ export const checkTeaValidity = async (
 ) => {
   try {
     if (model === 'GPO') {
-      await teaGPOSchema.validate(inputs);
+      await teaGPOSchema.validate(inputs, { abortEarly: false });
     }
     if (model === 'CHP') {
-      await teaCHPSchema.validate(inputs);
+      await teaCHPSchema.validate(inputs, { abortEarly: false });
     }
     if (model === 'GP') {
-      await teaGPSchema.validate(inputs);
+      await teaGPSchema.validate(inputs, { abortEarly: false });
     }
   } catch (err) {
     if (err instanceof ValidationError) {

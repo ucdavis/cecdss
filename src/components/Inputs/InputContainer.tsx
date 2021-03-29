@@ -31,11 +31,21 @@ interface Props {
   submitInputs: () => void;
   loading: boolean;
   disabled: boolean;
+  errors: string[];
 }
 
 export const InputContainer = (props: Props) => {
   const button = (!props.disabled || props.loading) && (
     <div className='cardcontents'>
+      <ul>
+        {props.errors.map((error, i) => {
+          return (
+            <li style={{ color: 'red' }} key={`error-${i}`}>
+              {error}
+            </li>
+          );
+        })}
+      </ul>
       <Button
         className='btn-block'
         color='primary'
