@@ -30,7 +30,7 @@ export const IncomeOtherThanEnergyInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                CapacityPayment: Number(e.target.value)
+                CapacityPayment: e.target.value
               })
             }
           />
@@ -50,7 +50,7 @@ export const IncomeOtherThanEnergyInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                InterestRateOnDebtReserve: Number(e.target.value)
+                InterestRateOnDebtReserve: e.target.value
               })
             }
           />
@@ -70,7 +70,7 @@ export const IncomeOtherThanEnergyInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                SalesPriceForChar: Number(e.target.value)
+                SalesPriceForChar: e.target.value
               })
             }
           />

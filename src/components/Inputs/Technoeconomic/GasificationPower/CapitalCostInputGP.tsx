@@ -30,7 +30,7 @@ export const CapitalCostInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                GasifierSystemCapitalCost: Number(e.target.value)
+                GasifierSystemCapitalCost: e.target.value
               })
             }
             disabled={props.disabled}
@@ -50,7 +50,7 @@ export const CapitalCostInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                GasCleaningSystemCapitalCost: Number(e.target.value)
+                GasCleaningSystemCapitalCost: e.target.value
               })
             }
             disabled={props.disabled}
@@ -68,7 +68,7 @@ export const CapitalCostInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                PowerGenerationCapitalCost: Number(e.target.value)
+                PowerGenerationCapitalCost: e.target.value
               })
             }
             disabled={props.disabled}
@@ -88,7 +88,7 @@ export const CapitalCostInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EmissionControlSystemCapitalCost: Number(e.target.value)
+                EmissionControlSystemCapitalCost: e.target.value
               })
             }
             disabled={props.disabled}
@@ -106,7 +106,7 @@ export const CapitalCostInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                HeatRecoverySystemCapitalCost: Number(e.target.value)
+                HeatRecoverySystemCapitalCost: e.target.value
               })
             }
             disabled={props.disabled}

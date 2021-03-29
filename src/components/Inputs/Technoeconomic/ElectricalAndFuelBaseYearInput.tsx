@@ -33,7 +33,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                NetElectricalCapacity: Number(e.target.value)
+                NetElectricalCapacity: e.target.value
               })
             }
             disabled={props.disabled}
@@ -53,7 +53,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                CapacityFactor: Number(e.target.value)
+                CapacityFactor: e.target.value
               })
             }
             disabled={props.disabled}
@@ -73,7 +73,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                MoistureContent: Number(e.target.value)
+                MoistureContent: e.target.value
               })
             }
             disabled={props.disabled}
@@ -93,7 +93,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                NetStationEfficiency: Number(e.target.value)
+                NetStationEfficiency: e.target.value
               })
             }
             disabled={props.disabled}
@@ -113,7 +113,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                FuelHeatingValue: Number(e.target.value)
+                FuelHeatingValue: e.target.value
               })
             }
             disabled={props.disabled}
@@ -134,7 +134,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                FuelAshConcentration: Number(e.target.value)
+                FuelAshConcentration: e.target.value
               })
             }
             disabled={props.disabled}

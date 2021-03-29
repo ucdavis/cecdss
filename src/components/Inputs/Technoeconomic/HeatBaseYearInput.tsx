@@ -30,7 +30,7 @@ export const HeatBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                AggregateFractionOfHeatRecovered: Number(e.target.value)
+                AggregateFractionOfHeatRecovered: e.target.value
               })
             }
             disabled={props.disabled}
@@ -48,7 +48,7 @@ export const HeatBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                AggregateSalesPriceForHeat: Number(e.target.value)
+                AggregateSalesPriceForHeat: e.target.value
               })
             }
             disabled={props.disabled}

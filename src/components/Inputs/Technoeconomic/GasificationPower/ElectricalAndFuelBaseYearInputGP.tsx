@@ -30,7 +30,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                GrossElectricalCapacity: Number(e.target.value)
+                GrossElectricalCapacity: e.target.value
               })
             }
             disabled={props.disabled}
@@ -48,7 +48,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                NetElectricalCapacity: Number(e.target.value)
+                NetElectricalCapacity: e.target.value
               })
             }
             disabled={props.disabled}
@@ -68,7 +68,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                CapacityFactor: Number(e.target.value)
+                CapacityFactor: e.target.value
               })
             }
             disabled={props.disabled}
@@ -88,7 +88,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                MoistureContent: Number(e.target.value)
+                MoistureContent: e.target.value
               })
             }
             disabled={props.disabled}
@@ -108,7 +108,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                HHVEfficiency: Number(e.target.value)
+                HHVEfficiency: e.target.value
               })
             }
             disabled={props.disabled}
@@ -128,7 +128,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                NetStationEfficiency: Number(e.target.value)
+                NetStationEfficiency: e.target.value
               })
             }
             disabled={props.disabled}
@@ -148,7 +148,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                FractionOfInputEnergy: Number(e.target.value)
+                FractionOfInputEnergy: e.target.value
               })
             }
             disabled={props.disabled}
@@ -168,7 +168,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                CO: Number(e.target.value)
+                CO: e.target.value
               })
             }
             disabled={props.disabled}
@@ -186,7 +186,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                H2: Number(e.target.value)
+                H2: e.target.value
               })
             }
             disabled={props.disabled}
@@ -204,7 +204,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                Hydrocarbons: Number(e.target.value)
+                Hydrocarbons: e.target.value
               })
             }
             disabled={props.disabled}
@@ -224,7 +224,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                CO2: Number(e.target.value)
+                CO2: e.target.value
               })
             }
             disabled={props.disabled}
@@ -242,7 +242,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                O2: Number(e.target.value)
+                O2: e.target.value
               })
             }
             disabled={props.disabled}
@@ -260,7 +260,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                HHV: Number(e.target.value)
+                HHV: e.target.value
               })
             }
             disabled={props.disabled}
@@ -280,7 +280,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                AshContent: Number(e.target.value)
+                AshContent: e.target.value
               })
             }
             disabled={props.disabled}
@@ -298,7 +298,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                CarbonConcentration: Number(e.target.value)
+                CarbonConcentration: e.target.value
               })
             }
             disabled={props.disabled}

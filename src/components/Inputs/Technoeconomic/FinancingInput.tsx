@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  HeatBaseYearInputMod,
   FinancingInputMod
 } from '@ucdavis/tea/out/models/input.model';
 import {
@@ -33,7 +32,7 @@ export const FinancingInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                DebtRatio: Number(e.target.value)
+                DebtRatio: e.target.value
               })
             }
             disabled={props.disabled}
@@ -53,7 +52,7 @@ export const FinancingInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                InterestRateOnDebt: Number(e.target.value)
+                InterestRateOnDebt: e.target.value
               })
             }
             disabled={props.disabled}
@@ -73,7 +72,7 @@ export const FinancingInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EconomicLife: Number(e.target.value)
+                EconomicLife: e.target.value
               })
             }
             disabled={props.disabled}
@@ -91,7 +90,7 @@ export const FinancingInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                CostOfEquity: Number(e.target.value)
+                CostOfEquity: e.target.value
               })
             }
             disabled={props.disabled}

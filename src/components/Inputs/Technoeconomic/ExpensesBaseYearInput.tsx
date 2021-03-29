@@ -30,7 +30,7 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                BiomassFuelCost: Number(e.target.value)
+                BiomassFuelCost: e.target.value
               })
             }
             disabled={props.disabled}
@@ -50,7 +50,7 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                LaborCost: Number(e.target.value)
+                LaborCost: e.target.value
               })
             }
             disabled={props.disabled}
@@ -68,7 +68,7 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                MaintenanceCost: Number(e.target.value)
+                MaintenanceCost: e.target.value
               })
             }
             disabled={props.disabled}
@@ -86,7 +86,7 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                InsurancePropertyTax: Number(e.target.value)
+                InsurancePropertyTax: e.target.value
               })
             }
             disabled={props.disabled}
@@ -106,7 +106,7 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                Utilities: Number(e.target.value)
+                Utilities: e.target.value
               })
             }
             disabled={props.disabled}
@@ -126,7 +126,7 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                Management: Number(e.target.value)
+                Management: e.target.value
               })
             }
             disabled={props.disabled}
@@ -146,7 +146,7 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                OtherOperatingExpenses: Number(e.target.value)
+                OtherOperatingExpenses: e.target.value
               })
             }
             disabled={props.disabled}

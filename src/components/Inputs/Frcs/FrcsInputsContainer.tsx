@@ -106,7 +106,7 @@ export const FrcsInputsContainer = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                dieselFuelPrice: Number(e.target.value)
+                dieselFuelPrice: e.target.value
               })
             }
             disabled={props.disabled}
