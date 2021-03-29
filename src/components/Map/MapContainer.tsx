@@ -143,6 +143,8 @@ export const MapContainer = () => {
       return;
     }
 
+    setIsExpanded(!isExpanded);
+    toggleExpandedResults(!expandedResults);
     setZoom(8);
     setCenter(mapState);
     setInputError([]);
