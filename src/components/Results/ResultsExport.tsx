@@ -85,7 +85,7 @@ export const ResultsExport = (props: Props) => {
       headerRow: true,
       totalsRow: false,
       columns: [
-        { name: 'Resource Supply (dry ton)' },
+        { name: 'Resource Supply' },
         { name: 'Unit' },
         { name: 'Total' },
         ...props.yearlyResults.map(r => ({ name: 'Y' + r.year }))
@@ -93,13 +93,13 @@ export const ResultsExport = (props: Props) => {
       rows: [
         [
           'Feedstock ',
-          'ton',
+          'dry ton',
           props.yearlyResults.reduce((sum, x) => sum + x.totalDryFeedstock, 0),
           ...props.yearlyResults.map(r => r.totalDryFeedstock)
         ],
         [
           'Coproduct',
-          'ton',
+          'dry ton',
           props.yearlyResults.reduce((sum, x) => sum + x.totalDryCoproduct, 0),
           ...props.yearlyResults.map(r => r.totalDryCoproduct)
         ]
