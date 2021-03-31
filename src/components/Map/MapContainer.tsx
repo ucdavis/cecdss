@@ -50,7 +50,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PrintControl } from './PrintControl';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
-import { parse } from '@fortawesome/fontawesome-svg-core';
+import { TripLayers } from './TripLayers';
 
 export const MapContainer = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -561,11 +561,11 @@ export const MapContainer = () => {
         />
         {yearlyResults.length > 0 && (
           <>
-            {/* <TripLayers
+            <TripLayers
               years={years}
               yearlyGeoJson={tripGeometries}
               selectedYearIndex={selectedYearIndex}
-            /> */}
+            />
             {showGeoJson && (
               <GeoJsonLayers
                 years={years}
