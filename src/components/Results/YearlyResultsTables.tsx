@@ -26,33 +26,26 @@ export const YearlyResultsTable = (props: Props) => {
           <tr>
             <td>Harvest Cost ($/ton)</td>
             <td>
-              {formatCurrency(
-                props.results.totalFeedstockCost / props.results.totalFeedstock
-              )}
+              {formatCurrency(props.results.harvestCostPerDryTon)}
             </td>
           </tr>
           <tr>
             <td>Transportation Cost ($/ton)</td>
             <td>
-              {formatCurrency(
-                props.results.totalTransportationCost /
-                  props.results.totalFeedstock
-              )}
+              {formatCurrency(props.results.transportationCostPerDryTon)}
             </td>
           </tr>
           {props.results.totalMoveInCost > 0 && (
             <tr>
               <td>Move In Cost ($/ton)</td>
               <td>
-                {formatCurrency(
-                  props.results.totalMoveInCost / props.results.totalFeedstock
-                )}
+                {formatCurrency(props.results.moveInCostPerDryTon)}
               </td>
             </tr>
           )}
           <tr>
             <td>Fuel Cost ($/ton)</td>
-            <td>{formatCurrency(props.results.fuelCost)}</td>
+            <td>{formatCurrency(props.results.totalCostPerDryTon)}</td>
           </tr>
           {/* <tr>
             <td>Number of Clusters Used</td>

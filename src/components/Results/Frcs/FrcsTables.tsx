@@ -12,7 +12,7 @@ export const FrcsTables = (props: Props) => {
     <Table responsive bordered hover>
       <thead>
         <tr>
-          <th rowSpan={2}>Resource Supply (ton)</th>
+          <th rowSpan={2}>Resource Supply (dry ton)</th>
           <th rowSpan={2}>Unit</th>
           <th rowSpan={2}>Total</th>
           <th colSpan={props.yearlyResults.length}>Year</th>
@@ -29,12 +29,12 @@ export const FrcsTables = (props: Props) => {
           <td>t</td>
           <td>
             {formatNumber(
-              props.yearlyResults.reduce((sum, x) => sum + x.totalFeedstock, 0)
+              props.yearlyResults.reduce((sum, x) => sum + x.totalDryFeedstock, 0)
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`totalFeedstock-${i}`}>
-              {formatNumber(result.totalFeedstock)}
+              {formatNumber(result.totalDryFeedstock)}
             </td>
           ))}
         </tr>
@@ -43,12 +43,12 @@ export const FrcsTables = (props: Props) => {
           <td>t</td>
           <td>
             {formatNumber(
-              props.yearlyResults.reduce((sum, x) => sum + x.totalCoproduct, 0)
+              props.yearlyResults.reduce((sum, x) => sum + x.totalDryCoproduct, 0)
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`totalCoproduct-${i}`}>
-              {formatNumber(result.totalCoproduct)}
+              {formatNumber(result.totalDryCoproduct)}
             </td>
           ))}
         </tr>

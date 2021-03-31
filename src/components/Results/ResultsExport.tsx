@@ -85,20 +85,20 @@ export const ResultsExport = (props: Props) => {
       headerRow: true,
       totalsRow: false,
       columns: [
-        { name: 'Resource Supply (ton)' },
+        { name: 'Resource Supply (dry ton)' },
         { name: 'Total' },
         ...props.yearlyResults.map(r => ({ name: 'Y' + r.year }))
       ],
       rows: [
         [
           'Feedstock ',
-          props.yearlyResults.reduce((sum, x) => sum + x.totalFeedstock, 0),
-          ...props.yearlyResults.map(r => r.totalFeedstock)
+          props.yearlyResults.reduce((sum, x) => sum + x.totalDryFeedstock, 0),
+          ...props.yearlyResults.map(r => r.totalDryFeedstock)
         ],
         [
           'Coproduct',
-          props.yearlyResults.reduce((sum, x) => sum + x.totalCoproduct, 0),
-          ...props.yearlyResults.map(r => r.totalCoproduct)
+          props.yearlyResults.reduce((sum, x) => sum + x.totalDryCoproduct, 0),
+          ...props.yearlyResults.map(r => r.totalDryCoproduct)
         ]
       ]
     });
@@ -469,16 +469,12 @@ export const ResultsExport = (props: Props) => {
           '$/ton',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.totalFeedstockCost,
+              (sum, year) => sum + year.harvestCostPerDryTon,
               0
-            ) /
-              props.yearlyResults.reduce(
-                (sum, year) => sum + year.totalFeedstock,
-                0
-              )
+            )
           ),
           ...props.yearlyResults.map(r =>
-            formatCurrency(r.totalFeedstockCost / r.totalFeedstock)
+            formatCurrency(r.harvestCostPerDryTon)
           )
         ],
         [
@@ -486,16 +482,12 @@ export const ResultsExport = (props: Props) => {
           '$/ton',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.totalTransportationCost,
+              (sum, year) => sum + year.transportationCostPerDryTon,
               0
-            ) /
-              props.yearlyResults.reduce(
-                (sum, year) => sum + year.totalFeedstock,
-                0
-              )
+            )
           ),
           ...props.yearlyResults.map(r =>
-            formatCurrency(r.totalTransportationCost / r.totalFeedstock)
+            formatCurrency(r.transportationCostPerDryTon)
           )
         ],
         [
@@ -503,26 +495,22 @@ export const ResultsExport = (props: Props) => {
           '$/ton',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.totalMoveInCost,
+              (sum, year) => sum + year.moveInCostPerDryTon,
               0
-            ) /
-              props.yearlyResults.reduce(
-                (sum, year) => sum + year.totalFeedstock,
-                0
-              )
+            )
           ),
           ...props.yearlyResults.map(r =>
-            formatCurrency(r.totalMoveInCost / r.totalFeedstock)
+            formatCurrency(r.totalMoveInCost / r.moveInCostPerDryTon)
           )
         ],
         [
           'Feedstock Cost',
           '$/ton',
           formatCurrency(
-            props.yearlyResults.reduce((sum, year) => sum + year.fuelCost, 0) /
+            props.yearlyResults.reduce((sum, year) => sum + year.totalCostPerDryTon, 0) /
               props.yearlyResults.length
           ),
-          ...props.yearlyResults.map(r => formatCurrency(r.fuelCost))
+          ...props.yearlyResults.map(r => formatCurrency(r.totalCostPerDryTon))
         ],
         [
           'Equity Recovery',
@@ -851,7 +839,7 @@ export const ResultsExport = (props: Props) => {
         base64: pngData,
         extension: 'png'
       });
-      
+
       const legendImageId = workbook.addImage({
         base64: myBase64Image,
         extension: 'png'

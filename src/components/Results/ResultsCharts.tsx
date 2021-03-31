@@ -31,16 +31,10 @@ export const ResultsCharts = (props: Props) => {
     const data = props.results.map(result => {
       return {
         name: result.year,
-        harvestCosts: formatNumber(
-          result.totalFeedstockCost / result.totalFeedstock
-        ),
-        transportationCosts: formatNumber(
-          result.totalTransportationCost / result.totalFeedstock
-        ),
-        moveInCosts: formatNumber(
-          result.totalMoveInCost / result.totalFeedstock
-        ),
-        total: formatNumber(result.fuelCost)
+        harvestCosts: formatNumber(result.harvestCostPerDryTon),
+        transportationCosts: formatNumber(result.transportationCostPerDryTon),
+        moveInCosts: formatNumber(result.moveInCostPerDryTon),
+        total: formatNumber(result.totalCostPerDryTon)
       };
     });
     return (
