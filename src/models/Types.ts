@@ -155,16 +155,23 @@ export interface Results {
 }
 
 export interface YearlyResult {
+  tripGeometries: Geometry[];
   year: number;
-  lcaResults: LCAresults;
+  lcaResults?: LCAresults;
   totalArea: number;
   totalFeedstock: number; // total biomass from frcs residue output
+  totalDryFeedstock: number; // feedstock multipled by (1-moistureContent)
   totalFeedstockCost: number; // cost of harvesting residue biomass from frcs
   totalCoproduct: number; // Frcs.Total - Frcs.Residue weight
+  totalDryCoproduct: number;
   totalCoproductCost: number;
   totalMoveInCost: number; // move in cost from separate frcs function
   totalMoveInDistance: number;
   totalTransportationCost: number; // transportation cost per gt * cluster biomass (distance from osrm)
+  harvestCostPerDryTon: number;
+  transportationCostPerDryTon: number;
+  moveInCostPerDryTon: number;
+  totalCostPerDryTon: number;
   numberOfClusters: number;
   clusterNumbers: string[];
   clusters: ClusterResult[];
@@ -177,9 +184,7 @@ export interface YearlyResult {
   cashFlow: any;
   geoJson: any;
   errorGeoJson: any;
-  tripGeometries: Geometry[];
 }
-
 export interface ClusterResult {
   cluster_no: string;
   biomass: number;
