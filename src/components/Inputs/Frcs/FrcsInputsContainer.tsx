@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
-  Button,
   Input,
   InputGroup,
   InputGroupAddon,
@@ -8,7 +7,6 @@ import {
   FormGroup,
   Form,
   FormText,
-  Tooltip,
   UncontrolledTooltip
 } from 'reactstrap';
 import { FrcsInputs, Treatments } from '../../../models/Types';
