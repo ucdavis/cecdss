@@ -86,17 +86,20 @@ export const ResultsExport = (props: Props) => {
       totalsRow: false,
       columns: [
         { name: 'Resource Supply (dry ton)' },
+        { name: 'Unit' },
         { name: 'Total' },
         ...props.yearlyResults.map(r => ({ name: 'Y' + r.year }))
       ],
       rows: [
         [
           'Feedstock ',
+          'ton',
           props.yearlyResults.reduce((sum, x) => sum + x.totalDryFeedstock, 0),
           ...props.yearlyResults.map(r => r.totalDryFeedstock)
         ],
         [
           'Coproduct',
+          'ton',
           props.yearlyResults.reduce((sum, x) => sum + x.totalDryCoproduct, 0),
           ...props.yearlyResults.map(r => r.totalDryCoproduct)
         ]
@@ -109,7 +112,7 @@ export const ResultsExport = (props: Props) => {
       headerRow: true,
       totalsRow: false,
       columns: [
-        { name: 'Environmental Analysis' },
+        { name: 'Fuel Consumption & Feedstock Transport (1 MWh electricity generated)' },
         { name: 'Unit' },
         { name: 'Total' },
         ...props.yearlyResults.map(r => ({ name: 'Y' + r.year }))
@@ -176,7 +179,7 @@ export const ResultsExport = (props: Props) => {
       headerRow: true,
       totalsRow: false,
       columns: [
-        { name: 'LCI Results' },
+        { name: 'LCI Results (1 MWh electricity generated)' },
         { name: 'Unit' },
         { name: 'Total' },
         ...props.yearlyResults.map(r => ({ name: 'Y' + r.year }))
@@ -360,7 +363,7 @@ export const ResultsExport = (props: Props) => {
       headerRow: true,
       totalsRow: false,
       columns: [
-        { name: 'LCIA Results' },
+        { name: 'LCIA Results (1 MWh electricity generated)' },
         { name: 'Unit' },
         { name: 'Total' },
         ...props.yearlyResults.map(r => ({ name: 'Y' + r.year }))
