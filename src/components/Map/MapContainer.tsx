@@ -203,6 +203,8 @@ export const MapContainer = () => {
         }
       }
     ).then(res => res.json());
+
+    allYearResults.location = { lat: allYearInputs.facilityLat, lng: allYearInputs.facilityLng };
     setAllYearResults(allYearResults);
     setTeaInputs(allYearResults.teaInputs);
     setSelectedYearIndex(years.length);
