@@ -286,8 +286,14 @@ export const MapContainer = () => {
         }
       }).then(res => res.json());
       radius = yearResult.radius;
-      clusterIds.push(...yearResult.clusterNumbers);
-      errorIds.push(...yearResult.errorClusterNumbers);
+      const uniqueClusters = yearResult.clusterNumbers.filter(
+        (item, index) => yearResult.clusterNumbers.indexOf(item) === index
+      );
+      const uniqueErrors = yearResult.errorClusterNumbers.filter(
+        (item, index) => yearResult.errorClusterNumbers.indexOf(item) === index
+      );
+      clusterIds.push(...uniqueClusters);
+      errorIds.push(...uniqueErrors);
       cashFlows.push(yearResult.cashFlow);
       energyRevenueRequiredPresentYears.push(
         yearResult.energyRevenueRequiredPW
