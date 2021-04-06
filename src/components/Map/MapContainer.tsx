@@ -83,6 +83,10 @@ export const MapContainer = () => {
     lat: 0,
     lng: 0
   });
+  const [bounds, setBounds] = useState<LatLngBoundsExpression>([
+    [40.1, -122.5],
+    [39.2, -120]
+  ]);
   const [inputErrors, setInputError] = useState<string[]>([]);
 
   // external layers
@@ -146,8 +150,12 @@ export const MapContainer = () => {
 
     setIsExpanded(!isExpanded);
     toggleExpandedResults(!expandedResults);
-    setZoom(8);
     setCenter(mapState);
+    setZoom(8);
+    setBounds([
+      [mapState.lat + 1, mapState.lng + 4],
+      [mapState.lat - 1, mapState.lng + 1]
+    ]);
     setInputError([]);
 
     // first do initial processing to get TEA and substation results
@@ -354,10 +362,6 @@ export const MapContainer = () => {
     height: window.innerHeight
   };
   const position: LatLngExpression = mapState;
-  const bounds: LatLngBoundsExpression = [
-    [40.1, -122.5],
-    [39.2, -120]
-  ];
   return (
     <div style={style}>
       {(yearlyResults.length > 0 || loading) && (
