@@ -73,6 +73,10 @@ export const ResultsExport = (props: Props) => {
           props.allYearResults.teaInputs.Financing.EconomicLife
         ],
         [
+          'Location',
+          `${props.allYearResults.location.lat}, ${props.allYearResults.location.lng}`
+        ],
+        [
           'Proximity to substation (km)',
           props.allYearResults.distanceToNearestSubstation
         ]
