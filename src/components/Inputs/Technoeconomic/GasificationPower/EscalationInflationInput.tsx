@@ -29,7 +29,7 @@ export const EscalationInflationInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                GeneralInflation: Number(e.target.value)
+                GeneralInflation: e.target.value
               })
             }
           />
@@ -49,7 +49,7 @@ export const EscalationInflationInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EscalationBiomassFuel: Number(e.target.value)
+                EscalationBiomassFuel: e.target.value
               })
             }
           />
@@ -68,7 +68,7 @@ export const EscalationInflationInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EscalationDualFuel: Number(e.target.value)
+                EscalationDualFuel: e.target.value
               })
             }
           />
@@ -87,7 +87,7 @@ export const EscalationInflationInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EscalationProductionTaxCredit: Number(e.target.value)
+                EscalationProductionTaxCredit: e.target.value
               })
             }
           />
@@ -106,7 +106,7 @@ export const EscalationInflationInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EscalationHeatSales: Number(e.target.value)
+                EscalationHeatSales: e.target.value
               })
             }
           />
@@ -123,7 +123,7 @@ export const EscalationInflationInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EscalationCharSales: Number(e.target.value)
+                EscalationCharSales: e.target.value
               })
             }
           />
@@ -142,7 +142,7 @@ export const EscalationInflationInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EscalationOther: Number(e.target.value)
+                EscalationOther: e.target.value
               })
             }
           />

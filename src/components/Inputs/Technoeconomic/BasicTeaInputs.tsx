@@ -1,10 +1,5 @@
 import React from 'react';
 import {
-  ElectricalFuelBaseYearInputModGP,
-  ElectricalFuelBaseYearInputModGPO,
-  ElectricalFuelBaseYearInputModCHP
-} from '@ucdavis/tea/out/models/input.model';
-import {
   FormText,
   FormGroup,
   Label,
@@ -12,9 +7,6 @@ import {
   Input,
   InputGroupAddon
 } from 'reactstrap';
-import { ElectricalFuelBaseYearInputModGPClass } from '../../../models/GPClasses';
-import { ElectricalFuelBaseYearInputModGPOClass } from '../../../models/GPOClasses';
-import { ElectricalFuelBaseYearInputModCHPClass } from '../../../models/CHPClasses';
 
 interface Props {
   inputs: any;
@@ -41,7 +33,7 @@ export const BasicTeaInputs = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                NetElectricalCapacity: Number(e.target.value)
+                NetElectricalCapacity: e.target.value
               })
             }
             disabled={props.disabled}
@@ -61,7 +53,7 @@ export const BasicTeaInputs = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                CapacityFactor: Number(e.target.value)
+                CapacityFactor: e.target.value
               })
             }
             disabled={props.disabled}
@@ -81,7 +73,7 @@ export const BasicTeaInputs = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                MoistureContent: Number(e.target.value)
+                MoistureContent: e.target.value
               })
             }
             disabled={props.disabled}
@@ -102,7 +94,7 @@ export const BasicTeaInputs = (props: Props) => {
               onChange={e =>
                 props.setInputs({
                   ...props.inputs,
-                  FuelHeatingValue: Number(e.target.value)
+                  FuelHeatingValue: e.target.value
                 })
               }
               disabled={props.disabled}

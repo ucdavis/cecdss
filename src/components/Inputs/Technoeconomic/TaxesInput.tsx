@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  HeatBaseYearInputMod,
   TaxesInputMod
 } from '@ucdavis/tea/out/models/input.model';
 import {
@@ -33,7 +32,7 @@ export const TaxesInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                FederalTaxRate: Number(e.target.value)
+                FederalTaxRate: e.target.value
               })
             }
             disabled={props.disabled}
@@ -51,7 +50,7 @@ export const TaxesInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                StateTaxRate: Number(e.target.value)
+                StateTaxRate: e.target.value
               })
             }
             disabled={props.disabled}
@@ -69,7 +68,7 @@ export const TaxesInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                ProductionTaxCredit: Number(e.target.value)
+                ProductionTaxCredit: e.target.value
               })
             }
             disabled={props.disabled}

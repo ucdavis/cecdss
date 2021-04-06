@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import {
   Button,
   Input,
-  InputGroup,
-  InputGroupAddon,
   Label,
   FormGroup,
   Form
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import { GenericPowerOnly } from './GenericPowerOnly/GenericPowerOnly';
 import { TechnoeconomicModels } from '../../../models/Types';
 import {
@@ -17,9 +14,6 @@ import {
   InputModGP
 } from '@ucdavis/tea/out/models/input.model';
 import { CombinedHeatAndPower } from './GenericCombinedHeatPower/CombinedHeatAndPower';
-import { InputModGPOClass } from '../../../models/GPOClasses';
-import { InputModCHPClass } from '../../../models/CHPClasses';
-import { InputModGPClass } from '../../../models/GPClasses';
 import { GasificationPower } from './GasificationPower/GasificationPower';
 import { BasicTeaInputs } from './BasicTeaInputs';
 

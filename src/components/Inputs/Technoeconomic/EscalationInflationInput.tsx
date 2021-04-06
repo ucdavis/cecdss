@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  EscalationInflationInputModGP,
   EscalationInflationInputMod
 } from '@ucdavis/tea/out/models/input.model';
 import {
@@ -33,7 +32,7 @@ export const EscalationInflationInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                GeneralInflation: Number(e.target.value)
+                GeneralInflation: e.target.value
               })
             }
             disabled={props.disabled}
@@ -54,7 +53,7 @@ export const EscalationInflationInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EscalationBiomassFuel: Number(e.target.value)
+                EscalationBiomassFuel: e.target.value
               })
             }
             disabled={props.disabled}
@@ -74,7 +73,7 @@ export const EscalationInflationInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EscalationProductionTaxCredit: Number(e.target.value)
+                EscalationProductionTaxCredit: e.target.value
               })
             }
             disabled={props.disabled}
@@ -94,7 +93,7 @@ export const EscalationInflationInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EscalationHeatSales: Number(e.target.value)
+                EscalationHeatSales: e.target.value
               })
             }
             disabled={props.disabled}
@@ -112,7 +111,7 @@ export const EscalationInflationInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                EscalationOther: Number(e.target.value)
+                EscalationOther: e.target.value
               })
             }
             disabled={props.disabled}

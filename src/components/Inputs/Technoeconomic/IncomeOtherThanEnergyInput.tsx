@@ -30,7 +30,7 @@ export const IncomeOtherThanEnergyInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                CapacityPayment: Number(e.target.value)
+                CapacityPayment: e.target.value
               })
             }
             disabled={props.disabled}
@@ -51,7 +51,7 @@ export const IncomeOtherThanEnergyInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                InterestRateOnDebtReserve: Number(e.target.value)
+                InterestRateOnDebtReserve: e.target.value
               })
             }
             disabled={props.disabled}

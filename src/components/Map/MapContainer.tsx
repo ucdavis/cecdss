@@ -51,6 +51,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PrintControl } from './PrintControl';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { TripLayers } from './TripLayers';
+import { parse } from '@fortawesome/fontawesome-svg-core';
 
 export const MapContainer = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -128,8 +129,38 @@ export const MapContainer = () => {
   });
   let mapRef: any = createRef<Map>();
 
+  const cleanTeaInput = (inputs: any) => {
+    for (var key in inputs) {
+      if (typeof inputs[key] === 'string') {
+        inputs[key] = parseFloat(inputs[key].toString().replace(/\,/g, ''));
+
+        if (isNaN(inputs[key])) {
+          inputs[key] = inputs[key].toString()
+        }
+      } else if (typeof inputs[key] === 'object') {
+        inputs[key] = cleanTeaInput(inputs[key]);
+      }
+    }
+
+    return inputs;
+  };
+
   const submitInputs = async () => {
     toggleLoading(true);
+
+    if (typeof frcsInputs.dieselFuelPrice === 'string') {
+      frcsInputs.dieselFuelPrice = parseFloat(
+        frcsInputs.dieselFuelPrice.replace(/\,/g, '')
+      );
+
+      if (isNaN(frcsInputs.dieselFuelPrice)) {
+        frcsInputs.dieselFuelPrice = frcsInputs.dieselFuelPrice.toString();
+      }
+    }
+
+    let teaInputsClone = { ...teaInputs };
+    const cleanedInput = cleanTeaInput(teaInputsClone);
+    setTeaInputs(cleanedInput);
 
     // validate frcs inputs
     const frcsErrors = await checkFrcsValidity(frcsInputs);
