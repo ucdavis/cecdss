@@ -1,5 +1,5 @@
 import React, { createRef, useState, useEffect } from 'react';
-import { Map, TileLayer, Marker } from 'react-leaflet';
+import { Map, TileLayer, Marker, LayersControl } from 'react-leaflet';
 import 'esri-leaflet-renderers'; // allows rendering feature layers using their defined renderers
 import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet/v2';
 import EsriLeafletGeoSearch from 'react-esri-leaflet/v2/plugins/EsriLeafletGeoSearch';
@@ -52,6 +52,8 @@ import { PrintControl } from './PrintControl';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { TripLayers } from './TripLayers';
 import { parse } from '@fortawesome/fontawesome-svg-core';
+
+const { BaseLayer } = LayersControl;
 
 export const MapContainer = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -135,7 +137,7 @@ export const MapContainer = () => {
         inputs[key] = parseFloat(inputs[key].toString().replace(/\,/g, ''));
 
         if (isNaN(inputs[key])) {
-          inputs[key] = inputs[key].toString()
+          inputs[key] = inputs[key].toString();
         }
       } else if (typeof inputs[key] === 'object') {
         inputs[key] = cleanTeaInput(inputs[key]);
@@ -243,7 +245,10 @@ export const MapContainer = () => {
       }
     ).then(res => res.json());
 
-    allYearResults.location = { lat: allYearInputs.facilityLat, lng: allYearInputs.facilityLng };
+    allYearResults.location = {
+      lat: allYearInputs.facilityLat,
+      lng: allYearInputs.facilityLng
+    };
     setAllYearResults(allYearResults);
     setTeaInputs(allYearResults.teaInputs);
     setSelectedYearIndex(years.length);
@@ -395,6 +400,9 @@ export const MapContainer = () => {
   const mapboxTiles =
     'https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/{z}/{x}/{y}?access_token=' +
     accessToken;
+  const mapboxTilesSatellite =
+    'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token=' +
+    accessToken;
   const attribution =
     '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
   const style = {
@@ -528,6 +536,14 @@ export const MapContainer = () => {
         zoom={zoom}
         center={center}
       >
+        <LayersControl position='bottomleft'>
+          <BaseLayer checked name='Outdoors'>
+            <TileLayer attribution={attribution} url={mapboxTiles} />
+          </BaseLayer>
+          <BaseLayer name='Satellite'>
+            <TileLayer attribution={attribution} url={mapboxTilesSatellite} />
+          </BaseLayer>
+        </LayersControl>
         <TileLayer attribution={attribution} url={mapboxTiles} />
         <EsriLeafletGeoSearch
           useMapBounds={false}
