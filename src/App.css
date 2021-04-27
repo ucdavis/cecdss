@@ -246,3 +246,8 @@
 .active .page-link {
   color: #fff !important;
 }
+
+.leaflet-div-icon {
+  background: transparent;
+  border: none;
+}

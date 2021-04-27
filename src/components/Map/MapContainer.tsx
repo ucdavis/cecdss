@@ -52,6 +52,7 @@ import { PrintControl } from './PrintControl';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { TripLayers } from './TripLayers';
 import { parse } from '@fortawesome/fontawesome-svg-core';
+import { CustomMarker } from './CustomMarker';
 
 const { BaseLayer } = LayersControl;
 
@@ -125,7 +126,10 @@ export const MapContainer = () => {
     }
   }, [teaModel, inputErrors]);
 
-  const [facilityCoordinates, setFacilityCoordinates] = useState<MapCoordinates>({
+  const [
+    facilityCoordinates,
+    setFacilityCoordinates
+  ] = useState<MapCoordinates>({
     lat: 39.21204328248304,
     lng: -121.07163446489723
   });
@@ -134,7 +138,10 @@ export const MapContainer = () => {
     lng: -121.07163446489723
   });
 
-  const [selectBiomassCoordinates, setSelectBiomassCoordinates] = useState<boolean>(false);
+  const [
+    selectBiomassCoordinates,
+    setSelectBiomassCoordinates
+  ] = useState<boolean>(false);
 
   let mapRef: any = createRef<Map>();
 
@@ -415,7 +422,6 @@ export const MapContainer = () => {
   const style = {
     height: window.innerHeight
   };
-  const position: LatLngExpression = facilityCoordinates;
   return (
     <div style={style}>
       {(yearlyResults.length > 0 || loading) && (
@@ -569,7 +575,8 @@ export const MapContainer = () => {
           position='topleft'
           eventHandlers={{
             results: (r: any) => {
-              r.results.length > 0 && setFacilityCoordinates(r.results[0].latlng);
+              r.results.length > 0 &&
+                setFacilityCoordinates(r.results[0].latlng);
             }
           }}
         />
@@ -638,8 +645,13 @@ export const MapContainer = () => {
             )}
           </>
         )}
-        <Marker position={position} />
-        <Marker position={biomassCoordinates} />
+
+        <CustomMarker icon='facility' position={facilityCoordinates} />
+        {selectBiomassCoordinates &&
+          biomassCoordinates.lat !== facilityCoordinates.lat &&
+          biomassCoordinates.lng !== facilityCoordinates.lng && (
+            <CustomMarker icon='biomass' position={biomassCoordinates} />
+          )}
       </Map>
     </div>
   );
