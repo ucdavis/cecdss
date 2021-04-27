@@ -16,6 +16,8 @@ import {
 import { Feature, FeatureCollection, GeoJsonObject, Point } from 'geojson';
 
 export interface RequestParams {
+  facilityLat: number;
+  facilityLng: number;
   lat: number;
   lng: number;
   system: string;

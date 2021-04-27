@@ -206,12 +206,9 @@ export const MapContainer = () => {
     setInputError([]);
 
     // first do initial processing to get TEA and substation results
-    const lat = facilityCoordinates.lat;
-    const lng = facilityCoordinates.lng;
-    // TODO: fill out obj
     const allYearInputs: RequestParamsAllYears = {
-      facilityLat: lat,
-      facilityLng: lng,
+      facilityLat: facilityCoordinates.lat,
+      facilityLng: facilityCoordinates.lng,
       transmission: {
         VoltageClass: '230 kV Single Circuit',
         ConductorType: 'ACSS',
@@ -319,8 +316,10 @@ export const MapContainer = () => {
         `year: ${years[index]}, # of clusters: ${clusterIds.length}, # of error clusters: ${errorIds.length}`
       );
       const reqBody: RequestParams = {
-        lat,
-        lng,
+        facilityLat: facilityCoordinates.lat,
+        facilityLng: facilityCoordinates.lng,
+        lat: biomassCoordinates.lat,
+        lng: biomassCoordinates.lng,
         system: frcsInputs.system,
         treatmentid: frcsInputs.treatmentid,
         dieselFuelPrice: frcsInputs.dieselFuelPrice,
