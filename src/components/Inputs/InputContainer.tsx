@@ -22,6 +22,10 @@ import {
 interface Props {
   facilityCoordinates: MapCoordinates;
   setFacilityCoordinates: (coordinates: MapCoordinates) => void;
+  biomassCoordinates: MapCoordinates;
+  setBiomassCoordinates: (coordinates: MapCoordinates) => void;
+  selectBiomassCoordinates: boolean;
+  setSelectBiomassCoordinates: (val: boolean) => void;
   frcsInputs: FrcsInputs;
   setFrcsInputs: (inputs: FrcsInputs) => void;
   teaInputs: InputModGPO | InputModCHP | InputModGP;
@@ -109,40 +113,54 @@ export const InputContainer = (props: Props) => {
             </InputGroup>
           </FormGroup>
           <FormGroup>
-            <Label>Biomass Coordinates</Label>
-            <InputGroup>
-              <InputGroupAddon addonType='prepend'>
-                <InputGroupText>lat</InputGroupText>
-              </InputGroupAddon>
+            <Label check>
               <Input
-                type='text'
-                value={props.facilityCoordinates.lat}
+                type='checkbox'
+                checked={props.selectBiomassCoordinates}
                 onChange={e =>
-                  props.setFacilityCoordinates({
-                    ...props.facilityCoordinates,
-                    lat: Number(e.target.value)
-                  })
+                  props.setSelectBiomassCoordinates(e.target.checked)
                 }
-                disabled={props.disabled}
-              />
-            </InputGroup>
-            <InputGroup>
-              <InputGroupAddon addonType='prepend'>
-                <InputGroupText>lng</InputGroupText>
-              </InputGroupAddon>
-              <Input
-                type='text'
-                value={props.facilityCoordinates.lng}
-                onChange={e =>
-                  props.setFacilityCoordinates({
-                    ...props.facilityCoordinates,
-                    lng: Number(e.target.value)
-                  })
-                }
-                disabled={props.disabled}
-              />
-            </InputGroup>
+              />{' '}
+              Select Separate Biomass Coordinates
+            </Label>
           </FormGroup>
+          {props.selectBiomassCoordinates && (
+            <FormGroup>
+              <Label>Biomass Coordinates</Label>
+              <InputGroup>
+                <InputGroupAddon addonType='prepend'>
+                  <InputGroupText>lat</InputGroupText>
+                </InputGroupAddon>
+                <Input
+                  type='text'
+                  value={props.biomassCoordinates.lat}
+                  onChange={e =>
+                    props.setBiomassCoordinates({
+                      ...props.biomassCoordinates,
+                      lat: Number(e.target.value)
+                    })
+                  }
+                  disabled={props.disabled}
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputGroupAddon addonType='prepend'>
+                  <InputGroupText>lng</InputGroupText>
+                </InputGroupAddon>
+                <Input
+                  type='text'
+                  value={props.biomassCoordinates.lng}
+                  onChange={e =>
+                    props.setBiomassCoordinates({
+                      ...props.biomassCoordinates,
+                      lng: Number(e.target.value)
+                    })
+                  }
+                  disabled={props.disabled}
+                />
+              </InputGroup>
+            </FormGroup>
+          )}
         </Form>
       </div>
 

@@ -133,6 +133,9 @@ export const MapContainer = () => {
     lat: 39.21204328248304,
     lng: -121.07163446489723
   });
+
+  const [selectBiomassCoordinates, setSelectBiomassCoordinates] = useState<boolean>(false);
+
   let mapRef: any = createRef<Map>();
 
   const cleanTeaInput = (inputs: any) => {
@@ -498,6 +501,10 @@ export const MapContainer = () => {
           <InputContainer
             facilityCoordinates={facilityCoordinates}
             setFacilityCoordinates={setFacilityCoordinates}
+            biomassCoordinates={biomassCoordinates}
+            setBiomassCoordinates={setBiomassCoordinates}
+            selectBiomassCoordinates={selectBiomassCoordinates}
+            setSelectBiomassCoordinates={setSelectBiomassCoordinates}
             frcsInputs={frcsInputs}
             setFrcsInputs={setFrcsInputs}
             teaInputs={teaInputs}
@@ -534,7 +541,15 @@ export const MapContainer = () => {
       <Map
         ref={mapRef}
         onClick={(e: any) => {
-          !loading && yearlyResults.length === 0 && setFacilityCoordinates(e.latlng);
+          if (!loading && yearlyResults.length === 0) {
+            // always set the biomass coordinates
+            setBiomassCoordinates(e.latlng);
+
+            // only change facility coords if we are not focusing on biomass coords
+            if (selectBiomassCoordinates === false) {
+              setFacilityCoordinates(e.latlng);
+            }
+          }
         }}
         bounds={bounds}
         zoom={zoom}
@@ -624,6 +639,7 @@ export const MapContainer = () => {
           </>
         )}
         <Marker position={position} />
+        <Marker position={biomassCoordinates} />
       </Map>
     </div>
   );
