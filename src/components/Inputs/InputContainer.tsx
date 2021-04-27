@@ -20,8 +20,8 @@ import {
 } from '@ucdavis/tea/out/models/input.model';
 
 interface Props {
-  mapInputs: MapCoordinates;
-  setMapInputs: (coordinates: MapCoordinates) => void;
+  facilityCoordinates: MapCoordinates;
+  setFacilityCoordinates: (coordinates: MapCoordinates) => void;
   frcsInputs: FrcsInputs;
   setFrcsInputs: (inputs: FrcsInputs) => void;
   teaInputs: InputModGPO | InputModCHP | InputModGP;
@@ -81,10 +81,10 @@ export const InputContainer = (props: Props) => {
               </InputGroupAddon>
               <Input
                 type='text'
-                value={props.mapInputs.lat}
+                value={props.facilityCoordinates.lat}
                 onChange={e =>
-                  props.setMapInputs({
-                    ...props.mapInputs,
+                  props.setFacilityCoordinates({
+                    ...props.facilityCoordinates,
                     lat: Number(e.target.value)
                   })
                 }
@@ -97,10 +97,45 @@ export const InputContainer = (props: Props) => {
               </InputGroupAddon>
               <Input
                 type='text'
-                value={props.mapInputs.lng}
+                value={props.facilityCoordinates.lng}
                 onChange={e =>
-                  props.setMapInputs({
-                    ...props.mapInputs,
+                  props.setFacilityCoordinates({
+                    ...props.facilityCoordinates,
+                    lng: Number(e.target.value)
+                  })
+                }
+                disabled={props.disabled}
+              />
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <Label>Biomass Coordinates</Label>
+            <InputGroup>
+              <InputGroupAddon addonType='prepend'>
+                <InputGroupText>lat</InputGroupText>
+              </InputGroupAddon>
+              <Input
+                type='text'
+                value={props.facilityCoordinates.lat}
+                onChange={e =>
+                  props.setFacilityCoordinates({
+                    ...props.facilityCoordinates,
+                    lat: Number(e.target.value)
+                  })
+                }
+                disabled={props.disabled}
+              />
+            </InputGroup>
+            <InputGroup>
+              <InputGroupAddon addonType='prepend'>
+                <InputGroupText>lng</InputGroupText>
+              </InputGroupAddon>
+              <Input
+                type='text'
+                value={props.facilityCoordinates.lng}
+                onChange={e =>
+                  props.setFacilityCoordinates({
+                    ...props.facilityCoordinates,
                     lng: Number(e.target.value)
                   })
                 }
