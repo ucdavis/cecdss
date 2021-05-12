@@ -576,6 +576,13 @@ export const MapContainer = () => {
             }
           />
         )}
+        {externalLayers.includes('county') && (
+          <FeatureLayer
+            url={
+              'https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/California_County_Boundaries/FeatureServer/0'
+            }
+          />
+        )}
         {externalLayers.includes('ownership') && (
           <DynamicMapLayer
             url={
