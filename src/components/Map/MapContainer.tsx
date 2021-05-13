@@ -576,6 +576,13 @@ export const MapContainer = () => {
             }
           />
         )}
+        {externalLayers.includes('urbanCities') && (
+          <FeatureLayer
+            url={
+              'https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Urban_Areas/FeatureServer/3'
+            }
+          />
+        )}
         {externalLayers.includes('ownership') && (
           <DynamicMapLayer
             url={
