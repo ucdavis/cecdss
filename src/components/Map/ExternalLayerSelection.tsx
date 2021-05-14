@@ -14,6 +14,7 @@ const AllLayers: { [key: string]: string } = {
   substation: 'Substations',
   plant: 'Power plants',
   ownership: 'Ownership',
+  county: "County Lines",
   urbanCities: 'Urban City Limits'
 };
 
