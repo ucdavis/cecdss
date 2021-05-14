@@ -1,5 +1,5 @@
 import React, { createRef, useState, useEffect } from 'react';
-import { Map, TileLayer, Marker, LayersControl } from 'react-leaflet';
+import { Map, TileLayer, Marker, LayersControl, ScaleControl } from 'react-leaflet';
 import 'esri-leaflet-renderers'; // allows rendering feature layers using their defined renderers
 import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet/v2';
 import EsriLeafletGeoSearch from 'react-esri-leaflet/v2/plugins/EsriLeafletGeoSearch';
@@ -51,7 +51,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PrintControl } from './PrintControl';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { TripLayers } from './TripLayers';
-import { parse } from '@fortawesome/fontawesome-svg-core';
 
 const { BaseLayer } = LayersControl;
 
@@ -536,6 +535,7 @@ export const MapContainer = () => {
         zoom={zoom}
         center={center}
       >
+        <ScaleControl />
         <LayersControl position='bottomleft'>
           <BaseLayer checked name='Outdoors'>
             <TileLayer attribution={attribution} url={mapboxTiles} />
