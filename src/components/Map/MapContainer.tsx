@@ -1,5 +1,5 @@
 import React, { createRef, useState, useEffect } from 'react';
-import { Map, TileLayer, Marker, LayersControl } from 'react-leaflet';
+import { Map, TileLayer, Marker, LayersControl, ScaleControl } from 'react-leaflet';
 import 'esri-leaflet-renderers'; // allows rendering feature layers using their defined renderers
 import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet/v2';
 import EsriLeafletGeoSearch from 'react-esri-leaflet/v2/plugins/EsriLeafletGeoSearch';
@@ -51,7 +51,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PrintControl } from './PrintControl';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { TripLayers } from './TripLayers';
-import { parse } from '@fortawesome/fontawesome-svg-core';
 import { CustomMarker } from './CustomMarker';
 
 const { BaseLayer } = LayersControl;
@@ -560,6 +559,7 @@ export const MapContainer = () => {
         zoom={zoom}
         center={center}
       >
+        <ScaleControl />
         <LayersControl position='bottomleft'>
           <BaseLayer checked name='Outdoors'>
             <TileLayer attribution={attribution} url={mapboxTiles} />
@@ -598,6 +598,20 @@ export const MapContainer = () => {
           <FeatureLayer
             url={
               'https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Power_Plant/FeatureServer/0'
+            }
+          />
+        )}
+        {externalLayers.includes('county') && (
+          <FeatureLayer
+            url={
+              'https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/California_County_Boundaries/FeatureServer/0'
+            }
+          />
+        )}
+        {externalLayers.includes('urbanCities') && (
+          <FeatureLayer
+            url={
+              'https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Urban_Areas/FeatureServer/3'
             }
           />
         )}

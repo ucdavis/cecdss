@@ -8,6 +8,8 @@ import { StationLegend } from './Layers/StationLegend';
 import { FireLegend } from './Layers/FireLegend';
 import { PlantLegend } from './Layers/PlantLegend';
 import { OwnershipLegend } from './Layers/OwnershipLegend';
+import { CountyLegend } from './Layers/CountyLegend';
+import { UrbanCitiesLegend } from './Layers/UrbanCitiesLegend';
 
 interface Props {
   layers: string[];
@@ -44,6 +46,8 @@ export const ExternalLayerLegend = (props: Props) => {
           {props.layers.includes('substation') && <StationLegend />}
           {props.layers.includes('plant') && <PlantLegend />}
           {props.layers.includes('ownership') && <OwnershipLegend />}
+          {props.layers.includes('county') && <CountyLegend />}
+          {props.layers.includes('urbanCities') && <UrbanCitiesLegend />}
         </div>
       </Collapse>
     </div>
