@@ -116,7 +116,10 @@ export const ResultsExport = (props: Props) => {
       headerRow: true,
       totalsRow: false,
       columns: [
-        { name: 'Fuel Consumption & Feedstock Transport (1 MWh electricity generated)' },
+        {
+          name:
+            'Fuel Consumption & Feedstock Transport (1 MWh electricity generated)'
+        },
         { name: 'Unit' },
         { name: 'Total' },
         ...props.yearlyResults.map(r => ({ name: 'Y' + r.year }))
@@ -229,19 +232,6 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'CO2e',
-          'kg',
-          formatNumber(
-            props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.CO2e,
-              0
-            )
-          ),
-          ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.CO2e)
-          )
-        ],
-        [
           'CO',
           'g',
           formatNumber(
@@ -268,21 +258,8 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'NH3',
-          'mg',
-          formatNumber(
-            props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.NH3,
-              0
-            ) * 1000
-          ),
-          ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.NH3 * 1000)
-          )
-        ],
-        [
           'PM10',
-          'mg',
+          'g',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.PM10,
@@ -295,7 +272,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'PM2.5',
-          'mg',
+          'g',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.PM25,
@@ -304,19 +281,6 @@ export const ResultsExport = (props: Props) => {
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciResults.PM25 * 1000)
-          )
-        ],
-        [
-          'SO2',
-          'g',
-          formatNumber(
-            props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.SO2,
-              0
-            )
-          ),
-          ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.SO2)
           )
         ],
         [
@@ -330,19 +294,6 @@ export const ResultsExport = (props: Props) => {
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciResults.SOx * 1000)
-          )
-        ],
-        [
-          'VOCs',
-          'mg',
-          formatNumber(
-            props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.VOCs,
-              0
-            ) * 1000
-          ),
-          ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.VOCs * 1000)
           )
         ],
         [
@@ -363,7 +314,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'lcia',
-      ref: 'B38',
+      ref: 'B34',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -461,7 +412,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'technoeconomic',
-      ref: 'B46',
+      ref: 'B42',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -514,8 +465,10 @@ export const ResultsExport = (props: Props) => {
           'Feedstock Cost',
           '$/ton',
           formatCurrency(
-            props.yearlyResults.reduce((sum, year) => sum + year.totalCostPerDryTon, 0) /
-              props.yearlyResults.length
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.totalCostPerDryTon,
+              0
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r => formatCurrency(r.totalCostPerDryTon))
         ],
@@ -754,7 +707,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'lcoe',
-      ref: 'B70',
+      ref: 'B66',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'LCOE' }, { name: 'Result' }],
@@ -778,7 +731,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'assumptions',
-      ref: 'B108',
+      ref: 'B104',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Assumptions' }, { name: 'Total' }],
@@ -806,7 +759,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'keyReferences',
-      ref: 'B128',
+      ref: 'B124',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Key References' }],
@@ -822,7 +775,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'disclaimer',
-      ref: 'B136',
+      ref: 'B132',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Disclaimer' }],
@@ -853,8 +806,8 @@ export const ResultsExport = (props: Props) => {
       });
 
       // insert an image over B2:D6
-      worksheet.addImage(chartImageId2, 'B75:J100');
-      worksheet.addImage(legendImageId, 'B103:J106');
+      worksheet.addImage(chartImageId2, 'B71:J96');
+      worksheet.addImage(legendImageId, 'B99:J102');
     }
 
     const workbookBuffer = await workbook.xlsx.writeBuffer();
