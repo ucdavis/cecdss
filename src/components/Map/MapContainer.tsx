@@ -51,6 +51,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PrintControl } from './PrintControl';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { TripLayers } from './TripLayers';
+import { CustomMarker } from './CustomMarker';
 
 const { BaseLayer } = LayersControl;
 
@@ -124,10 +125,23 @@ export const MapContainer = () => {
     }
   }, [teaModel, inputErrors]);
 
-  const [mapState, setMapState] = useState<MapCoordinates>({
+  const [
+    facilityCoordinates,
+    setFacilityCoordinates
+  ] = useState<MapCoordinates>({
     lat: 39.21204328248304,
     lng: -121.07163446489723
   });
+  const [biomassCoordinates, setBiomassCoordinates] = useState<MapCoordinates>({
+    lat: 39.21204328248304,
+    lng: -121.07163446489723
+  });
+
+  const [
+    selectBiomassCoordinates,
+    setSelectBiomassCoordinates
+  ] = useState<boolean>(false);
+
   let mapRef: any = createRef<Map>();
 
   const cleanTeaInput = (inputs: any) => {
@@ -182,21 +196,18 @@ export const MapContainer = () => {
 
     setIsExpanded(!isExpanded);
     toggleExpandedResults(!expandedResults);
-    setCenter(mapState);
+    setCenter(facilityCoordinates);
     setZoom(8);
     setBounds([
-      [mapState.lat + 1, mapState.lng + 4],
-      [mapState.lat - 1, mapState.lng + 1]
+      [facilityCoordinates.lat + 1, facilityCoordinates.lng + 4],
+      [facilityCoordinates.lat - 1, facilityCoordinates.lng + 1]
     ]);
     setInputError([]);
 
     // first do initial processing to get TEA and substation results
-    const lat = mapState.lat;
-    const lng = mapState.lng;
-    // TODO: fill out obj
     const allYearInputs: RequestParamsAllYears = {
-      facilityLat: lat,
-      facilityLng: lng,
+      facilityLat: facilityCoordinates.lat,
+      facilityLng: facilityCoordinates.lng,
       transmission: {
         VoltageClass: '230 kV Single Circuit',
         ConductorType: 'ACSS',
@@ -304,8 +315,10 @@ export const MapContainer = () => {
         `year: ${years[index]}, # of clusters: ${clusterIds.length}, # of error clusters: ${errorIds.length}`
       );
       const reqBody: RequestParams = {
-        lat,
-        lng,
+        facilityLat: facilityCoordinates.lat,
+        facilityLng: facilityCoordinates.lng,
+        lat: biomassCoordinates.lat,
+        lng: biomassCoordinates.lng,
         system: frcsInputs.system,
         treatmentid: frcsInputs.treatmentid,
         dieselFuelPrice: frcsInputs.dieselFuelPrice,
@@ -407,7 +420,6 @@ export const MapContainer = () => {
   const style = {
     height: window.innerHeight
   };
-  const position: LatLngExpression = mapState;
   return (
     <div style={style}>
       {(yearlyResults.length > 0 || loading) && (
@@ -491,8 +503,12 @@ export const MapContainer = () => {
         <ExternalLayerLegend layers={externalLayers} />
         {!showResults && (
           <InputContainer
-            mapInputs={mapState}
-            setMapInputs={setMapState}
+            facilityCoordinates={facilityCoordinates}
+            setFacilityCoordinates={setFacilityCoordinates}
+            biomassCoordinates={biomassCoordinates}
+            setBiomassCoordinates={setBiomassCoordinates}
+            selectBiomassCoordinates={selectBiomassCoordinates}
+            setSelectBiomassCoordinates={setSelectBiomassCoordinates}
             frcsInputs={frcsInputs}
             setFrcsInputs={setFrcsInputs}
             teaInputs={teaInputs}
@@ -529,7 +545,15 @@ export const MapContainer = () => {
       <Map
         ref={mapRef}
         onClick={(e: any) => {
-          !loading && yearlyResults.length === 0 && setMapState(e.latlng);
+          if (!loading && yearlyResults.length === 0) {
+            // always set the biomass coordinates
+            setBiomassCoordinates(e.latlng);
+
+            // only change facility coords if we are not focusing on biomass coords
+            if (selectBiomassCoordinates === false) {
+              setFacilityCoordinates(e.latlng);
+            }
+          }
         }}
         bounds={bounds}
         zoom={zoom}
@@ -550,7 +574,8 @@ export const MapContainer = () => {
           position='topleft'
           eventHandlers={{
             results: (r: any) => {
-              r.results.length > 0 && setMapState(r.results[0].latlng);
+              r.results.length > 0 &&
+                setFacilityCoordinates(r.results[0].latlng);
             }
           }}
         />
@@ -633,7 +658,13 @@ export const MapContainer = () => {
             )}
           </>
         )}
-        <Marker position={position} />
+
+        <CustomMarker icon='facility' position={facilityCoordinates} />
+        {selectBiomassCoordinates &&
+          biomassCoordinates.lat !== facilityCoordinates.lat &&
+          biomassCoordinates.lng !== facilityCoordinates.lng && (
+            <CustomMarker icon='biomass' position={biomassCoordinates} />
+          )}
       </Map>
     </div>
   );
