@@ -199,7 +199,7 @@ export const LCATables = (props: Props) => {
           <td>
             PM<sub>10</sub>
           </td>
-          <td>mg</td>
+          <td>g</td>
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
@@ -218,7 +218,7 @@ export const LCATables = (props: Props) => {
           <td>
             PM<sub>25</sub>
           </td>
-          <td>mg</td>
+          <td>g</td>
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
@@ -237,7 +237,7 @@ export const LCATables = (props: Props) => {
           <td>
             SO<sub>x</sub>
           </td>
-          <td>mg</td>
+          <td>g</td>
           <td>
             {formatNumber(
               props.yearlyResults.reduce(

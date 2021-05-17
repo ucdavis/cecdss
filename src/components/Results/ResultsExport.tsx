@@ -259,7 +259,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'PM10',
-          'mg',
+          'g',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.PM10,
@@ -272,7 +272,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'PM2.5',
-          'mg',
+          'g',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.PM25,
