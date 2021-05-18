@@ -82,24 +82,20 @@ export const ResultsTable = (props: Props) => {
               {props.allYearResults.location.lng}
             </td>
           </tr>
-          {props.allYearResults.facilityCoordinates && (
-            <tr>
-              <td>Facility Coordinates</td>
-              <td>
-                {props.allYearResults.facilityCoordinates.lat},{' '}
-                {props.allYearResults.facilityCoordinates.lng}
-              </td>
-            </tr>
-          )}
-          {props.allYearResults.biomassCoordinates && (
-            <tr>
-              <td>Biomass Coordinates</td>
-              <td>
-                {props.allYearResults.biomassCoordinates.lat},{' '}
-                {props.allYearResults.biomassCoordinates.lng}
-              </td>
-            </tr>
-          )}
+          <tr>
+            <td>Facility Coordinates</td>
+            <td>
+              {props.allYearResults.facilityCoordinates.lat},{' '}
+              {props.allYearResults.facilityCoordinates.lng}
+            </td>
+          </tr>
+          <tr>
+            <td>Biomass Coordinates</td>
+            <td>
+              {props.allYearResults.biomassCoordinates.lat},{' '}
+              {props.allYearResults.biomassCoordinates.lng}
+            </td>
+          </tr>
           <tr>
             <td>Proximity to Substation (km)</td>
             <td>{props.allYearResults.distanceToNearestSubstation}</td>
