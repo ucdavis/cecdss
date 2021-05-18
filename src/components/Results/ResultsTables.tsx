@@ -77,7 +77,24 @@ export const ResultsTable = (props: Props) => {
           </tr>
           <tr>
             <td>Location</td>
-            <td>{props.allYearResults.location.lat}, {props.allYearResults.location.lng}</td>
+            <td>
+              {props.allYearResults.location.lat},{' '}
+              {props.allYearResults.location.lng}
+            </td>
+          </tr>
+          <tr>
+            <td>Facility Coordinates</td>
+            <td>
+              {props.allYearResults.facilityCoordinates.lat},{' '}
+              {props.allYearResults.facilityCoordinates.lng}
+            </td>
+          </tr>
+          <tr>
+            <td>Biomass Coordinates</td>
+            <td>
+              {props.allYearResults.biomassCoordinates.lat},{' '}
+              {props.allYearResults.biomassCoordinates.lng}
+            </td>
           </tr>
           <tr>
             <td>Proximity to Substation (km)</td>

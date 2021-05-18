@@ -1,5 +1,11 @@
 import React, { createRef, useState, useEffect } from 'react';
-import { Map, TileLayer, Marker, LayersControl, ScaleControl } from 'react-leaflet';
+import {
+  Map,
+  TileLayer,
+  Marker,
+  LayersControl,
+  ScaleControl
+} from 'react-leaflet';
 import 'esri-leaflet-renderers'; // allows rendering feature layers using their defined renderers
 import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet/v2';
 import EsriLeafletGeoSearch from 'react-esri-leaflet/v2/plugins/EsriLeafletGeoSearch';
@@ -259,6 +265,17 @@ export const MapContainer = () => {
       lat: allYearInputs.facilityLat,
       lng: allYearInputs.facilityLng
     };
+
+    allYearResults.facilityCoordinates = {
+      lat: facilityCoordinates.lat,
+      lng: facilityCoordinates.lng
+    };
+
+    allYearResults.biomassCoordinates = {
+      lat: biomassCoordinates.lat,
+      lng: biomassCoordinates.lng
+    };
+
     setAllYearResults(allYearResults);
     setTeaInputs(allYearResults.teaInputs);
     setSelectedYearIndex(years.length);

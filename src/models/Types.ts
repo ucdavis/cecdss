@@ -254,5 +254,7 @@ export interface AllYearsResults {
   transmissionResults: any;
   nearestSubstation: string;
   location: MapCoordinates;
+  facilityCoordinates: MapCoordinates;
+  biomassCoordinates: MapCoordinates;
   distanceToNearestSubstation: number; // km
 }

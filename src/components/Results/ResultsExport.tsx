@@ -77,6 +77,14 @@ export const ResultsExport = (props: Props) => {
           `${props.allYearResults.location.lat}, ${props.allYearResults.location.lng}`
         ],
         [
+          'Facility Coordinates',
+          `${props.allYearResults.facilityCoordinates.lat}, ${props.allYearResults.facilityCoordinates.lng}`
+        ],
+        [
+          'Biomass Coordinates',
+          `${props.allYearResults.biomassCoordinates.lat}, ${props.allYearResults.biomassCoordinates.lng}`
+        ],
+        [
           'Proximity to substation (km)',
           props.allYearResults.distanceToNearestSubstation
         ]
@@ -85,7 +93,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'supply',
-      ref: 'B13',
+      ref: 'B15',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -112,7 +120,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'analysis',
-      ref: 'B17',
+      ref: 'B19',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -182,7 +190,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'lci',
-      ref: 'B23',
+      ref: 'B25',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -314,7 +322,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'lcia',
-      ref: 'B34',
+      ref: 'B36',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -412,7 +420,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'technoeconomic',
-      ref: 'B42',
+      ref: 'B44',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -707,7 +715,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'lcoe',
-      ref: 'B66',
+      ref: 'B68',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'LCOE' }, { name: 'Result' }],
@@ -731,7 +739,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'assumptions',
-      ref: 'B104',
+      ref: 'B102',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Assumptions' }, { name: 'Total' }],
@@ -759,7 +767,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'keyReferences',
-      ref: 'B124',
+      ref: 'B122',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Key References' }],
@@ -775,7 +783,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'disclaimer',
-      ref: 'B132',
+      ref: 'B130',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Disclaimer' }],
@@ -806,8 +814,8 @@ export const ResultsExport = (props: Props) => {
       });
 
       // insert an image over B2:D6
-      worksheet.addImage(chartImageId2, 'B71:J96');
-      worksheet.addImage(legendImageId, 'B99:J102');
+      worksheet.addImage(chartImageId2, 'B73:J94');
+      worksheet.addImage(legendImageId, 'B97:J100');
     }
 
     const workbookBuffer = await workbook.xlsx.writeBuffer();
