@@ -276,8 +276,6 @@ export const MapContainer = () => {
       lng: biomassCoordinates.lng
     };
 
-    allYearResults.selectBiomassCoordinates = selectBiomassCoordinates;
-
     setAllYearResults(allYearResults);
     setTeaInputs(allYearResults.teaInputs);
     setSelectedYearIndex(years.length);

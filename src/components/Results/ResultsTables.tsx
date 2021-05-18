@@ -82,26 +82,24 @@ export const ResultsTable = (props: Props) => {
               {props.allYearResults.location.lng}
             </td>
           </tr>
-          {props.allYearResults.facilityCoordinates &&
-            props.allYearResults.selectBiomassCoordinates && (
-              <tr>
-                <td>Facility Coordinates</td>
-                <td>
-                  {props.allYearResults.facilityCoordinates.lat},{' '}
-                  {props.allYearResults.facilityCoordinates.lng}
-                </td>
-              </tr>
-            )}
-          {props.allYearResults.biomassCoordinates &&
-            props.allYearResults.selectBiomassCoordinates && (
-              <tr>
-                <td>Biomass Coordinates</td>
-                <td>
-                  {props.allYearResults.biomassCoordinates.lat},{' '}
-                  {props.allYearResults.biomassCoordinates.lng}
-                </td>
-              </tr>
-            )}
+          {props.allYearResults.facilityCoordinates && (
+            <tr>
+              <td>Facility Coordinates</td>
+              <td>
+                {props.allYearResults.facilityCoordinates.lat},{' '}
+                {props.allYearResults.facilityCoordinates.lng}
+              </td>
+            </tr>
+          )}
+          {props.allYearResults.biomassCoordinates && (
+            <tr>
+              <td>Biomass Coordinates</td>
+              <td>
+                {props.allYearResults.biomassCoordinates.lat},{' '}
+                {props.allYearResults.biomassCoordinates.lng}
+              </td>
+            </tr>
+          )}
           <tr>
             <td>Proximity to Substation (km)</td>
             <td>{props.allYearResults.distanceToNearestSubstation}</td>
