@@ -8,10 +8,13 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
-
+    
 steps:
   - checkout: self
     submodules: true
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '10.x'
   - task: AzureStaticWebApp@0
     inputs:
       app_location: '/'
