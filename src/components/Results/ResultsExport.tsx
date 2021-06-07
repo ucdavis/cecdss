@@ -10,7 +10,6 @@ import {
 } from '../../models/Types';
 import { Button } from 'reactstrap';
 import { formatCurrency, formatNumber } from '../Shared/util';
-import { NUM_YEARS_TO_RUN } from '../Shared/config';
 import { myBase64Image } from '../Shared/myBase64Image';
 
 interface Props {
@@ -24,7 +23,7 @@ interface Props {
 
 export const ResultsExport = (props: Props) => {
   // don't show export until all years are done running
-  if (!props.yearlyResults || props.yearlyResults.length < NUM_YEARS_TO_RUN) {
+  if (!props.yearlyResults || props.yearlyResults.length < props.teaInputs.Financing.EconomicLife) {
     return <></>;
   }
 
