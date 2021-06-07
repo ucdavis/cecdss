@@ -44,7 +44,7 @@ import {
 import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
 import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
 import { ExternalLayerSelection } from './ExternalLayerSelection';
-import { NUM_YEARS_TO_RUN, serviceUrl } from '../Shared/config';
+import { serviceUrl } from '../Shared/config';
 import { ExternalLayerLegend } from './ExternalLayerLegend';
 
 import {
@@ -106,11 +106,6 @@ export const MapContainer = () => {
     treatmentid: 1,
     dieselFuelPrice: 3.251
   };
-  const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
-  const years: number[] = [];
-  for (let index = 0; index < NUM_YEARS_TO_RUN; index++) {
-    years.push(2016 + index);
-  }
 
   const [teaInputs, setTeaInputs] = useState<
     InputModGPO | InputModCHP | InputModGP
@@ -118,6 +113,13 @@ export const MapContainer = () => {
   const [teaModel, setTeaModel] = useState(
     TechnoeconomicModels.genericPowerOnly
   );
+
+  const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
+  const years: number[] = [];
+  for (let index = 0; index < teaInputs.Financing.EconomicLife ; index++) {
+    years.push(2016 + index);
+  }
+
   useEffect(() => {
     // when teaModel changes, change default values
     if (teaModel === TechnoeconomicModels.genericPowerOnly) {
