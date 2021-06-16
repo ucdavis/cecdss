@@ -20,7 +20,7 @@ const AllLayers: { [key: string]: string } = {
 
 export const ExternalLayerSelection = (props: Props) => {
   const [layers, setLayers] = useState<string[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleClick = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

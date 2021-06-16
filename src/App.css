@@ -251,6 +251,6 @@
   background: transparent;
   border: none;
 }
-.svg-inline--fa {
+.leaflet-marker-icon .svg-inline--fa {
   color: var(--primary-color);
 }
