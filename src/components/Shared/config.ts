@@ -1,4 +1,4 @@
-const LOCAL_DEVEOPMENT_MODE = true;
+const LOCAL_DEVEOPMENT_MODE = false;
 
 export const serviceUrl = LOCAL_DEVEOPMENT_MODE
   ? 'http://localhost:3000/'
