@@ -135,7 +135,7 @@
   padding-bottom: 16px;
   border-radius: 8px;
   width: 11%;
-  top: 126px;
+  top: 228px;
   left: 0.5%;
   overflow-y: scroll;
   box-shadow: 0 0 0 1px rgba(49, 49, 93, 0.03),
@@ -168,19 +168,19 @@
   margin-left: 8px;
 }
 .cluster-toggle {
-  top: 438px;
+  bottom: 308px;
 }
 .error-toggle {
-  top: 392px;
+  bottom: 220px;
 }
 .expand-toggle {
-  top: 482px;
+  bottom: 264px;
 }
 .toggle-input-result {
   position: fixed;
   padding-bottom: 24px;
   border-radius: 8px;
-  top: 500px;
+  bottom: 114px;
   left: 0.5%;
   z-index: 2000;
 }
