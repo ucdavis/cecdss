@@ -251,3 +251,6 @@
   background: transparent;
   border: none;
 }
+.svg-inline--fa {
+  color: var(--primary-color);
+}
