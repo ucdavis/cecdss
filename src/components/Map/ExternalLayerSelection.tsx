@@ -14,13 +14,13 @@ const AllLayers: { [key: string]: string } = {
   substation: 'Substations',
   plant: 'Power plants',
   ownership: 'Ownership',
-  county: "County Lines",
+  county: 'County Lines',
   urbanCities: 'Urban City Limits'
 };
 
 export const ExternalLayerSelection = (props: Props) => {
   const [layers, setLayers] = useState<string[]>([]);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

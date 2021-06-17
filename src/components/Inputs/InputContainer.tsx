@@ -112,7 +112,7 @@ export const InputContainer = (props: Props) => {
               />
             </InputGroup>
           </FormGroup>
-          <FormGroup>
+          <FormGroup className='ml-4'>
             <Label check>
               <Input
                 type='checkbox'
