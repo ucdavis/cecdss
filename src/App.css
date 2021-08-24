@@ -158,7 +158,7 @@
   border-radius: 8px;
   left: 0.5%;
   z-index: 2000;
-  width: 200px;
+  width: 220px;
   display: flex;
   justify-content: space-between;
   box-shadow: 0 0 0 1px rgba(49, 49, 93, 0.03),
@@ -167,14 +167,23 @@
 .toggle-buttons svg {
   margin-left: 8px;
 }
+.movein-toggle {
+  bottom: 530px;
+}
+.transportation-toggle {
+  bottom: 470px;
+}
+.heatmap-toggle {
+  bottom: 410px;
+}
 .cluster-toggle {
   bottom: 350px;
 }
-.error-toggle {
-  bottom: 230px;
-}
 .expand-toggle {
   bottom: 290px;
+}
+.error-toggle {
+  bottom: 230px;
 }
 .toggle-input-result {
   position: fixed;
