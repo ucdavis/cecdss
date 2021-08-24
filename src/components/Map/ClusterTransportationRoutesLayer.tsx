@@ -12,6 +12,9 @@ interface Props {
 }
 
 export const ClusterTransportationRoutesLayer = (props: Props) => {
+  const [currentComputedYear, setCurrentComputedYear] = useState<number>(
+    props.selectedYearIndex
+  );
   const [geoJson, setGeoJson] = useState<FeatureCollection>();
 
   useEffect(() => {
@@ -19,6 +22,7 @@ export const ClusterTransportationRoutesLayer = (props: Props) => {
 
     if (!yearResult) {
       setGeoJson(undefined);
+      setCurrentComputedYear(-1);
       return;
     }
     const clusters = yearResult.clusters;
@@ -40,6 +44,7 @@ export const ClusterTransportationRoutesLayer = (props: Props) => {
       }).then(res => res.json());
 
       setGeoJson(routeResults);
+      setCurrentComputedYear(props.selectedYearIndex);
     };
 
     fetchRoutes();
@@ -51,7 +56,7 @@ export const ClusterTransportationRoutesLayer = (props: Props) => {
   ]);
 
   if (geoJson) {
-    return <GeoJSON data={geoJson} />;
+    return <GeoJSON key={`geoyear-${currentComputedYear}`} data={geoJson} />;
   } else {
     return <></>;
   }
