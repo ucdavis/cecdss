@@ -88,4 +88,35 @@ describe('MapContainer', () => {
     const treatment = container.querySelector('tbody tr');
     expect(treatment?.textContent).toContain('Timber Salvage');
   });
+
+  it('All Results', async () => {
+    await act(async () => {
+      (global as any).fetch = jest
+        .fn()
+        .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
+        .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+
+      render(<MapContainer />, container);
+    });
+
+    const dropdown = document.querySelector('select') as Element;
+    Simulate.change(dropdown, { target: { value: '4' } });
+
+    await act(async () => {
+      const modelButton = document.querySelector(
+        '.btn-block.btn.btn-primary'
+      ) as Element;
+      Simulate.click(modelButton);
+    });
+
+    const resultBtn = container.querySelectorAll('.page-item .page-link')[1];
+    Simulate.click(resultBtn);
+
+    const table = container.querySelector('table');
+    const capitolCost = table?.querySelectorAll('td')[5];
+    const kWe = table?.querySelectorAll('td')[7];
+
+    expect(capitolCost?.textContent).toBe('$96,256,611');
+    expect(kWe?.textContent).toBe('25000');
+  });
 });
