@@ -136,6 +136,35 @@ describe('MapContainer', () => {
     expect(kWe?.textContent).toBe('25000');
   });
 
+  it('All Years', async () => {
+    await act(async () => {
+      (global as any).fetch = jest
+        .fn()
+        .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
+        .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+
+      render(<MapContainer />, container);
+    });
+
+    const dropdown = document.querySelector('select') as Element;
+    Simulate.change(dropdown, { target: { value: '4' } });
+
+    // Click on a different treatment option
+    await act(async () => {
+      const modelButton = document.querySelector(
+        '.btn-block.btn.btn-primary'
+      ) as Element;
+      Simulate.click(modelButton);
+    });
+
+    // Click on the result button to display results page
+    const resultBtn = container.querySelectorAll('.page-item .page-link')[1];
+    Simulate.click(resultBtn);
+
+    const years = container.querySelectorAll(".years-pagination li")
+    expect(years.length).toBe(21)
+  });
+
   it('Results Year Click', async () => {
     await act(async () => {
       (global as any).fetch = jest
@@ -167,7 +196,6 @@ describe('MapContainer', () => {
 
     // Grab table data and make sure it matches
     const tableData = container.querySelectorAll("table td");
-
     expect(tableData[3].textContent).toBe("$25.94");
     expect(tableData[7].textContent).toBe("$29.56");
   });
