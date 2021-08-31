@@ -58,6 +58,7 @@ import { PrintControl } from './PrintControl';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { TripLayers } from './TripLayers';
 import { CustomMarker } from './CustomMarker';
+import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
 
 const { BaseLayer } = LayersControl;
 
@@ -86,7 +87,14 @@ export const MapContainer = () => {
   const [tripGeometries, setTripGeometries] = useState<Geometry[]>([]);
 
   const [showGeoJson, toggleGeoJson] = useState<boolean>(true);
+  const [showHeatmap, toggleHeatmap] = useState<boolean>(false);
   const [showErrorGeoJson, toggleErrorGeoJson] = useState<boolean>(false);
+  const [showMoveInGeoJson, toggleMoveInGeoJson] = useState<boolean>(false);
+  const [
+    showTransportationGeoJson,
+    toggleTransportationGeoJson
+  ] = useState<boolean>(false);
+
   const [zoom, setZoom] = useState<number>(0);
   const [center, setCenter] = useState<MapCoordinates>({
     lat: 0,
@@ -116,7 +124,7 @@ export const MapContainer = () => {
 
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
   const years: number[] = [];
-  for (let index = 0; index < teaInputs.Financing.EconomicLife ; index++) {
+  for (let index = 0; index < teaInputs.Financing.EconomicLife; index++) {
     years.push(2016 + index);
   }
 
@@ -445,6 +453,47 @@ export const MapContainer = () => {
         <div className='toggles'>
           <Button
             onClick={() => {
+              toggleMoveInGeoJson(h => !h);
+            }}
+            active={showMoveInGeoJson}
+            color='primary'
+            className='toggle-buttons movein-toggle'
+          >
+            <span>
+              {!showMoveInGeoJson ? 'Show Move In' : 'Hide Move In'}
+            </span>
+            <FontAwesomeIcon icon={showMoveInGeoJson ? faEye : faEyeSlash} />
+          </Button>
+          <Button
+            onClick={() => {
+              toggleTransportationGeoJson(h => !h);
+            }}
+            active={showTransportationGeoJson}
+            color='primary'
+            className='toggle-buttons transportation-toggle'
+          >
+            <span>
+              {!showTransportationGeoJson
+                ? 'Show Transportation'
+                : 'Hide Transportation'}
+            </span>
+            <FontAwesomeIcon
+              icon={showTransportationGeoJson ? faEye : faEyeSlash}
+            />
+          </Button>
+          <Button
+            onClick={() => {
+              toggleHeatmap(h => !h);
+            }}
+            active={showHeatmap}
+            color='primary'
+            className='toggle-buttons heatmap-toggle'
+          >
+            <span>{!showHeatmap ? 'Show Heatmap' : 'Hide Heatmap'}</span>
+            <FontAwesomeIcon icon={showHeatmap ? faEye : faEyeSlash} />
+          </Button>
+          <Button
+            onClick={() => {
               setIsErrorZone(!isErrorZone);
               toggleErrorGeoJson(!showErrorGeoJson);
             }}
@@ -649,22 +698,34 @@ export const MapContainer = () => {
             opacity={0.7}
           />
         )}
-        <HeatmapLayers
-          years={years}
-          yearlyGeoJson={geoJsonResults}
-          selectedYearIndex={selectedYearIndex}
-        />
         {yearlyResults.length > 0 && (
           <>
-            <TripLayers
-              years={years}
-              yearlyGeoJson={tripGeometries}
-              selectedYearIndex={selectedYearIndex}
-            />
+            {showMoveInGeoJson && (
+              <TripLayers
+                years={years}
+                yearlyGeoJson={tripGeometries}
+                selectedYearIndex={selectedYearIndex}
+              />
+            )}
+            {showHeatmap && (
+              <HeatmapLayers
+                years={years}
+                yearlyGeoJson={geoJsonResults}
+                selectedYearIndex={selectedYearIndex}
+              />
+            )}
             {showGeoJson && (
               <GeoJsonLayers
                 years={years}
                 yearlyGeoJson={geoJsonShapeResults}
+                selectedYearIndex={selectedYearIndex}
+              />
+            )}
+            {showTransportationGeoJson && (
+              <ClusterTransportationRoutesLayer
+                facilityCoordinates={facilityCoordinates}
+                years={years}
+                yearlyResults={yearlyResults}
                 selectedYearIndex={selectedYearIndex}
               />
             )}
