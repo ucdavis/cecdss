@@ -6,6 +6,15 @@ import { fakeallYearResults, fakeYearlyResult } from '../Shared/mockData';
 import 'jest-canvas-mock';
 
 jest.setTimeout(30000);
+
+jest.mock('./GeoJsonLayers', () => {
+  return {
+    GeoJsonLayers: () => {
+      return <div id='GeoJsonLayers'>GeoJsonLayers</div>;
+    }
+  };
+});
+
 jest.mock('./HeatmapLayers', () => {
   return {
     HeatmapLayers: () => {
@@ -14,10 +23,10 @@ jest.mock('./HeatmapLayers', () => {
   };
 });
 
-jest.mock('./GeoJsonLayers', () => {
+jest.mock('./TripLayers', () => {
   return {
-    GeoJsonLayers: () => {
-      return <div id='GeoJsonLayers'>GeoJsonLayers</div>;
+    TripLayers: () => {
+      return <div id='TripLayers'>TripLayers</div>;
     }
   };
 });
@@ -118,5 +127,37 @@ describe('MapContainer', () => {
 
     expect(capitolCost?.textContent).toBe('$96,256,611');
     expect(kWe?.textContent).toBe('25000');
+  });
+
+  it('Results Year Click', async () => {
+    await act(async () => {
+      (global as any).fetch = jest
+        .fn()
+        .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
+        .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+
+      render(<MapContainer />, container);
+    });
+
+    const dropdown = document.querySelector('select') as Element;
+    Simulate.change(dropdown, { target: { value: '4' } });
+
+    await act(async () => {
+      const modelButton = document.querySelector(
+        '.btn-block.btn.btn-primary'
+      ) as Element;
+      Simulate.click(modelButton);
+    });
+
+    const resultBtn = container.querySelectorAll('.page-item .page-link')[1];
+    Simulate.click(resultBtn);
+
+    const yearBtns = container.querySelectorAll(".years-pagination .page-item button")[1];
+    Simulate.click(yearBtns);
+
+    const tableData = container.querySelectorAll("table td");
+
+    expect(tableData[3].textContent).toBe("$25.94");
+    expect(tableData[7].textContent).toBe("$29.56");
   });
 });
