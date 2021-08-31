@@ -63,6 +63,7 @@ describe('MapContainer', () => {
       render(<MapContainer />, container);
     });
 
+    // Queries for lat and lng input and checks the default
     const coordinates = container.querySelectorAll('.input-group');
     const lat = coordinates[0].querySelector('input');
     const lng = coordinates[1].querySelector('input');
@@ -84,6 +85,7 @@ describe('MapContainer', () => {
     const dropdown = document.querySelector('select') as Element;
     Simulate.change(dropdown, { target: { value: '4' } });
 
+    // Click on a different treatment option
     await act(async () => {
       const modelButton = document.querySelector(
         '.btn-block.btn.btn-primary'
@@ -91,6 +93,8 @@ describe('MapContainer', () => {
       Simulate.click(modelButton);
     });
 
+    // Click on the result button and check if the treatment was 
+    // selected correctly
     const resultBtn = container.querySelectorAll('.page-item .page-link')[1];
     Simulate.click(resultBtn);
 
@@ -111,6 +115,7 @@ describe('MapContainer', () => {
     const dropdown = document.querySelector('select') as Element;
     Simulate.change(dropdown, { target: { value: '4' } });
 
+    // Click on a different treatment option
     await act(async () => {
       const modelButton = document.querySelector(
         '.btn-block.btn.btn-primary'
@@ -118,9 +123,11 @@ describe('MapContainer', () => {
       Simulate.click(modelButton);
     });
 
+    // Click on the result button to display results page
     const resultBtn = container.querySelectorAll('.page-item .page-link')[1];
     Simulate.click(resultBtn);
 
+    // Get the contents of the result page and check if they are correct
     const table = container.querySelector('table');
     const capitolCost = table?.querySelectorAll('td')[5];
     const kWe = table?.querySelectorAll('td')[7];
@@ -142,6 +149,7 @@ describe('MapContainer', () => {
     const dropdown = document.querySelector('select') as Element;
     Simulate.change(dropdown, { target: { value: '4' } });
 
+    // Click on a different treatment option
     await act(async () => {
       const modelButton = document.querySelector(
         '.btn-block.btn.btn-primary'
@@ -149,12 +157,15 @@ describe('MapContainer', () => {
       Simulate.click(modelButton);
     });
 
+    // Click on the result button to display results page
     const resultBtn = container.querySelectorAll('.page-item .page-link')[1];
     Simulate.click(resultBtn);
 
+    // Click on 2016 year button
     const yearBtns = container.querySelectorAll(".years-pagination .page-item button")[1];
     Simulate.click(yearBtns);
 
+    // Grab table data and make sure it matches
     const tableData = container.querySelectorAll("table td");
 
     expect(tableData[3].textContent).toBe("$25.94");
