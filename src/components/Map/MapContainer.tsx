@@ -565,8 +565,10 @@ export const MapContainer = () => {
         className={expandedResults ? 'expanded-results' : 'sidebar'}
         id='sidebar'
       >
-        <ExternalLayerSelection onChange={setExternalLayers} />
-        <ExternalLayerLegend layers={externalLayers} />
+        <div className="layers-container">
+          <ExternalLayerSelection onChange={setExternalLayers} />
+          <ExternalLayerLegend layers={externalLayers} />
+        </div>
         {!showResults && (
           <InputContainer
             facilityCoordinates={facilityCoordinates}

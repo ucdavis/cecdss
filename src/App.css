@@ -129,14 +129,19 @@
   transition: all 0.5s ease;
 }
 
-.layers {
+.layers-container {
   position: fixed;
+  top: 1%;
+  left: 3.5%;
+  width: 12%;
+  height: 50%;
+}
+.layers {
   background-color: #fff;
   padding-bottom: 16px;
   border-radius: 8px;
-  width: 11%;
-  top: 1%;
-  left: 3.5%;
+  margin-top: 7px;
+  max-height: 300px;
   overflow-y: scroll;
   box-shadow: 0 0 0 1px rgba(49, 49, 93, 0.03),
     0 2px 5px 0 rgba(49, 49, 93, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
@@ -145,9 +150,6 @@
   top: 1%;
   left: 18%;
   z-index: 2000;
-}
-.layers-legend {
-  top: 20%;
 }
 .esriLegendServiceLabel {
   font-weight: bold;
