@@ -459,9 +459,7 @@ export const MapContainer = () => {
             color='primary'
             className='toggle-buttons movein-toggle'
           >
-            <span>
-              {!showMoveInGeoJson ? 'Show Move In' : 'Hide Move In'}
-            </span>
+            <span>{!showMoveInGeoJson ? 'Show Move In' : 'Hide Move In'}</span>
             <FontAwesomeIcon icon={showMoveInGeoJson ? faEye : faEyeSlash} />
           </Button>
           <Button
@@ -680,6 +678,13 @@ export const MapContainer = () => {
           <FeatureLayer
             url={
               'https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Urban_Areas/FeatureServer/3'
+            }
+          />
+        )}
+        {externalLayers.includes('airQuality') && (
+          <FeatureLayer
+            url={
+              'https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/Air%20Now%20Current%20Monitor%20Data%20Public/FeatureServer/0'
             }
           />
         )}

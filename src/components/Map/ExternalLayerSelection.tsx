@@ -15,7 +15,8 @@ const AllLayers: { [key: string]: string } = {
   plant: 'Power plants',
   ownership: 'Ownership',
   county: 'County Lines',
-  urbanCities: 'Urban City Limits'
+  urbanCities: 'Urban City Limits',
+  airQuality: 'Air Quality'
 };
 
 export const ExternalLayerSelection = (props: Props) => {
