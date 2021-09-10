@@ -10,6 +10,7 @@ import { PlantLegend } from './Layers/PlantLegend';
 import { OwnershipLegend } from './Layers/OwnershipLegend';
 import { CountyLegend } from './Layers/CountyLegend';
 import { UrbanCitiesLegend } from './Layers/UrbanCitiesLegend';
+import { AirQualityLegend } from './Layers/AirQualityLegend';
 
 interface Props {
   layers: string[];
@@ -31,7 +32,7 @@ export const ExternalLayerLegend = (props: Props) => {
   }
 
   return (
-    <div className='layers layers-legend'>
+    <div className='layers'>
       <div
         className='cardheader d-flex align-items-center justify-content-between'
         onClick={() => setIsOpen(!isOpen)}
@@ -48,6 +49,7 @@ export const ExternalLayerLegend = (props: Props) => {
           {props.layers.includes('ownership') && <OwnershipLegend />}
           {props.layers.includes('county') && <CountyLegend />}
           {props.layers.includes('urbanCities') && <UrbanCitiesLegend />}
+          {props.layers.includes('airQuality') && <AirQualityLegend />}
         </div>
       </Collapse>
     </div>
