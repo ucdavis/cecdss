@@ -8,6 +8,7 @@ interface Props {
   yearlyResults: YearlyResult[];
   cashFlows: CashFlow[];
   presentWorth: number[];
+  system: String;
 }
 
 export const TechnoeconomicTables = (props: Props) => {
@@ -61,23 +62,25 @@ export const TechnoeconomicTables = (props: Props) => {
             </td>
           ))}
         </tr>
-        <tr>
-          <td>Move-in cost</td>
-          <td>$/ton</td>
-          <td>
-            {formatCurrency(
-              props.yearlyResults.reduce(
-                (sum, x) => sum + x.moveInCostPerDryTon,
-                0
-              )
-            )}
-          </td>
-          {props.yearlyResults.map((result, i) => (
-            <td key={`totalMoveInCost-${i}`}>
-              {formatCurrency(result.moveInCostPerDryTon)}
+        {props.system === 'Ground-Based CTL' && (
+          <tr>
+            <td>Move-in cost</td>
+            <td>$/ton</td>
+            <td>
+              {formatCurrency(
+                props.yearlyResults.reduce(
+                  (sum, x) => sum + x.moveInCostPerDryTon,
+                  0
+                )
+              )}
             </td>
-          ))}
-        </tr>
+            {props.yearlyResults.map((result, i) => (
+              <td key={`totalMoveInCost-${i}`}>
+                {formatCurrency(result.moveInCostPerDryTon)}
+              </td>
+            ))}
+          </tr>
+        )}
         <tr>
           <td>Feedstock cost</td>
           <td>$/ton</td>
