@@ -151,26 +151,6 @@
   z-index: 2000;
 }
 
-/* .layers {
-  position: fixed;
-  background-color: #fff;
-  padding-bottom: 16px;
-  border-radius: 8px;
-  width: 12%;
-  top: 1%;
-  left: 4%;
-  overflow-y: scroll;
-  box-shadow: 0 0 0 1px rgba(49, 49, 93, 0.03),
-    0 2px 5px 0 rgba(49, 49, 93, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-}
-.layers-toggle {
-  top: 1%;
-  left: 18%;
-  z-index: 2000;
-}
-.layers-legend {
-  top: 20%;
-} */
 .esriLegendServiceLabel {
   font-weight: bold;
 }
