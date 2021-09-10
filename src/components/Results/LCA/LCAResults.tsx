@@ -43,11 +43,6 @@ export const LCAResults = (props: Props) => {
             <td>g</td>
           </tr>
           <tr>
-            <td>CO2e</td>
-            <td>{formatNumber(props.results.lciResults.CO2e)}</td>
-            <td>g</td>
-          </tr>
-          <tr>
             <td>CO</td>
             <td>{formatNumber(props.results.lciResults.CO)}</td>
             <td>g</td>
