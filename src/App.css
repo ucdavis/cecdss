@@ -134,7 +134,6 @@
   top: 1%;
   left: 3.5%;
   width: 12%;
-  height: 50%;
 }
 .layers {
   background-color: #fff;
@@ -151,6 +150,7 @@
   left: 18%;
   z-index: 2000;
 }
+
 .esriLegendServiceLabel {
   font-weight: bold;
 }
