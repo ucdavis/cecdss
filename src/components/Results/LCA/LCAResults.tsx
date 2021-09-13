@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatNumber, formatCurrency } from '../../Shared/util';
+import { formatNumber } from '../../Shared/util';
 import { LCAresults } from '../../../models/LCAModels';
 
 interface Props {
@@ -74,24 +74,32 @@ export const LCAResults = (props: Props) => {
           </tr>
           <tr>
             <td>Acidification Air (kg SO2 eq / kg substance)</td>
-            <td>{formatNumber(props.results.lciaResults.acidification_air)}</td>
+            <td>
+              {formatNumber(props.results.lciaResults.acidification_air * 1000)}
+            </td>
           </tr>
           <tr>
             <td>HH Particulate Air (PM2.5 eq / kg substance)</td>
             <td>
-              {formatNumber(props.results.lciaResults.hh_particulate_air)}
+              {formatNumber(
+                props.results.lciaResults.hh_particulate_air * 1000
+              )}
             </td>
           </tr>
           <tr>
             <td>Eutrophication Air (kg N eq / kg substance)</td>
             <td>
-              {formatNumber(props.results.lciaResults.eutrophication_air)}
+              {formatNumber(
+                props.results.lciaResults.eutrophication_air * 1000
+              )}
             </td>
           </tr>
           <tr>
             <td>Eutrophication Water (kg N eq / kg substance)</td>
             <td>
-              {formatNumber(props.results.lciaResults.eutrophication_water)}
+              {formatNumber(
+                props.results.lciaResults.eutrophication_water * 1000
+              )}
             </td>
           </tr>
           <tr>
