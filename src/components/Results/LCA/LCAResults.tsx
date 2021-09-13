@@ -7,7 +7,6 @@ interface Props {
 }
 
 export const LCAResults = (props: Props) => {
-  console.log(props.results);
   if (!props.results) {
     return null;
   }
