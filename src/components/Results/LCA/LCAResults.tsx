@@ -7,6 +7,7 @@ interface Props {
 }
 
 export const LCAResults = (props: Props) => {
+  console.log(props.results);
   if (!props.results) {
     return null;
   }
@@ -28,23 +29,24 @@ export const LCAResults = (props: Props) => {
         </thead>
         <tbody>
           <tr>
-            <td>CO2</td>
+            <td>
+              CO<sub>2</sub>
+            </td>
             <td>{formatNumber(props.results.lciResults.CO2)}</td>
             <td>g</td>
           </tr>
           <tr>
-            <td>CH4</td>
+            <td>
+              CH<sub>4</sub>
+            </td>
             <td>{formatNumber(props.results.lciResults.CH4)}</td>
             <td>g</td>
           </tr>
           <tr>
-            <td>N20</td>
+            <td>
+              N<sub>2</sub>0
+            </td>
             <td>{formatNumber(props.results.lciResults.N2O)}</td>
-            <td>g</td>
-          </tr>
-          <tr>
-            <td>CO2e</td>
-            <td>{formatNumber(props.results.lciResults.CO2e)}</td>
             <td>g</td>
           </tr>
           <tr>
@@ -53,9 +55,39 @@ export const LCAResults = (props: Props) => {
             <td>g</td>
           </tr>
           <tr>
-            <td>NOx</td>
+            <td>
+              NO<sub>x</sub>
+            </td>
             <td>{formatNumber(props.results.lciResults.NOx)}</td>
             <td>g</td>
+          </tr>
+          <tr>
+            <td>
+              PM<sub>10</sub>
+            </td>
+            <td>{formatNumber(props.results.lciResults.PM10 * 1000)}</td>
+            <td>g</td>
+          </tr>
+          <tr>
+            <td>
+              PM<sub>25</sub>
+            </td>
+            <td>{formatNumber(props.results.lciResults.PM25 * 1000)}</td>
+            <td>g</td>
+          </tr>
+          <tr>
+            <td>
+              SO<sub>x</sub>
+            </td>
+            <td>{formatNumber(props.results.lciResults.SOx * 1000)}</td>
+            <td>g</td>
+          </tr>
+          <tr>
+            <td>Carbon Intensity</td>
+            <td>{formatNumber(props.results.lciResults.CI / 1000)}</td>
+            <td>
+              kg CO<sub>2</sub>e
+            </td>
           </tr>
         </tbody>
       </table>
@@ -67,13 +99,17 @@ export const LCAResults = (props: Props) => {
         </thead>
         <tbody>
           <tr>
-            <td>Global Warming Air (kg CO2 eq / kg substance)</td>
+            <td>
+              Global Warming Air (kg CO<sub>2</sub> eq / kg substance)
+            </td>
             <td>
               {formatNumber(props.results.lciaResults.global_warming_air)}
             </td>
           </tr>
           <tr>
-            <td>Acidification Air (kg SO2 eq / kg substance)</td>
+            <td>
+              Acidification Air (kg SO<sub>2</sub> eq / kg substance)
+            </td>
             <td>
               {formatNumber(props.results.lciaResults.acidification_air * 1000)}
             </td>
@@ -103,7 +139,9 @@ export const LCAResults = (props: Props) => {
             </td>
           </tr>
           <tr>
-            <td>Smog Air (kg O3 eq / kg substance)</td>
+            <td>
+              Smog Air (kg O<sub>3</sub> eq / kg substance)
+            </td>
             <td>{formatNumber(props.results.lciaResults.smog_air)}</td>
           </tr>
         </tbody>
