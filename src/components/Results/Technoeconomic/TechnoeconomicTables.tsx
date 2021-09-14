@@ -35,7 +35,7 @@ export const TechnoeconomicTables = (props: Props) => {
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.harvestCostPerDryTon,
                 0
-              )
+              ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
@@ -52,7 +52,7 @@ export const TechnoeconomicTables = (props: Props) => {
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.transportationCostPerDryTon,
                 0
-              )
+              ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
@@ -69,7 +69,7 @@ export const TechnoeconomicTables = (props: Props) => {
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.moveInCostPerDryTon,
                 0
-              )
+              ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (

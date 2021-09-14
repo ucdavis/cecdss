@@ -436,7 +436,7 @@ export const ResultsExport = (props: Props) => {
             props.yearlyResults.reduce(
               (sum, year) => sum + year.harvestCostPerDryTon,
               0
-            )
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatCurrency(r.harvestCostPerDryTon)
@@ -449,7 +449,7 @@ export const ResultsExport = (props: Props) => {
             props.yearlyResults.reduce(
               (sum, year) => sum + year.transportationCostPerDryTon,
               0
-            )
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatCurrency(r.transportationCostPerDryTon)
@@ -462,7 +462,7 @@ export const ResultsExport = (props: Props) => {
             props.yearlyResults.reduce(
               (sum, year) => sum + year.moveInCostPerDryTon,
               0
-            )
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatCurrency(r.totalMoveInCost / r.moveInCostPerDryTon)
