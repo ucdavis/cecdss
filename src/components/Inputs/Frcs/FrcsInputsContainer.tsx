@@ -28,7 +28,7 @@ export const FrcsInputsContainer = (props: Props) => {
       <h4>Forestry and Conversion</h4>
       <Form>
         <FormGroup>
-          <Label>Treatment</Label>
+          <Label>Forest Treatment</Label>
           <Input
             type='select'
             value={props.inputs.treatmentid}
