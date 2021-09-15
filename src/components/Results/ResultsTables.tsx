@@ -25,11 +25,6 @@ export const ResultsTable = (props: Props) => {
     x => x.id === props.frcsInputs.treatmentid
   );
   const treatmentName = Treatments[treatmentIndex].name;
-  console.log(
-    `index: ${treatmentIndex}, Treatment: ${JSON.stringify(
-      Treatments[treatmentIndex]
-    )}`
-  );
   const renderTechnicalPerformanceTable = () => {
     return (
       <Table responsive bordered hover>
