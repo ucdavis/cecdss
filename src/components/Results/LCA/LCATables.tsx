@@ -253,6 +253,23 @@ export const LCATables = (props: Props) => {
           ))}
         </tr>
         <tr>
+          <td>VOC</td>
+          <td>g</td>
+          <td>
+            {formatNumber(
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.lcaResults.lciResults.VOC,
+                0
+              )
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`VOC-${i}`}>
+              {formatNumber(result.lcaResults.lciResults.VOC)}
+            </td>
+          ))}
+        </tr>
+        <tr>
           <td>Carbon Intensity</td>
           <td>
             kg CO<sub>2</sub>e
