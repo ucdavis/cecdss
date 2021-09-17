@@ -167,7 +167,7 @@ export const LCATables = (props: Props) => {
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.lcaResults.lciResults.CO,
                 0
-              ) * 1000
+              )
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
@@ -205,7 +205,7 @@ export const LCATables = (props: Props) => {
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.lcaResults.lciResults.PM10,
                 0
-              ) * 1000
+              )
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
@@ -224,7 +224,7 @@ export const LCATables = (props: Props) => {
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.lcaResults.lciResults.PM25,
                 0
-              ) * 1000
+              )
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
@@ -243,7 +243,7 @@ export const LCATables = (props: Props) => {
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.lcaResults.lciResults.SOx,
                 0
-              ) * 1000
+              )
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
@@ -279,7 +279,7 @@ export const LCATables = (props: Props) => {
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.lcaResults.lciResults.CI,
                 0
-              ) / 1000
+              )
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
