@@ -32,7 +32,7 @@ export const LCAResults = (props: Props) => {
               CO<sub>2</sub>
             </td>
             <td>{formatNumber(props.results.lciResults.CO2)}</td>
-            <td>g</td>
+            <td>kg</td>
           </tr>
           <tr>
             <td>
@@ -43,7 +43,7 @@ export const LCAResults = (props: Props) => {
           </tr>
           <tr>
             <td>
-              N<sub>2</sub>0
+              N<sub>2</sub>O
             </td>
             <td>{formatNumber(props.results.lciResults.N2O)}</td>
             <td>g</td>
@@ -64,26 +64,26 @@ export const LCAResults = (props: Props) => {
             <td>
               PM<sub>10</sub>
             </td>
-            <td>{formatNumber(props.results.lciResults.PM10 * 1000)}</td>
+            <td>{formatNumber(props.results.lciResults.PM10)}</td>
             <td>g</td>
           </tr>
           <tr>
             <td>
               PM<sub>25</sub>
             </td>
-            <td>{formatNumber(props.results.lciResults.PM25 * 1000)}</td>
+            <td>{formatNumber(props.results.lciResults.PM25)}</td>
             <td>g</td>
           </tr>
           <tr>
             <td>
               SO<sub>x</sub>
             </td>
-            <td>{formatNumber(props.results.lciResults.SOx * 1000)}</td>
+            <td>{formatNumber(props.results.lciResults.SOx)}</td>
             <td>g</td>
           </tr>
           <tr>
             <td>Carbon Intensity</td>
-            <td>{formatNumber(props.results.lciResults.CI / 1000)}</td>
+            <td>{formatNumber(props.results.lciResults.CI)}</td>
             <td>
               kg CO<sub>2</sub>e
             </td>
