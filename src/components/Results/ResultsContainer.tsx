@@ -82,7 +82,6 @@ export const ResultsContainer = (props: Props) => {
         <Progress
           value={(props.yearlyResults.length / props.years.length) * 100}
         />
-        <Alert>Note: all results in tons refer to green short tons</Alert>
         {props.selectedYearIndex === props.years.length && (
           <AllResultsContainer {...props} />
         )}
