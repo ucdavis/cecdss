@@ -125,7 +125,7 @@ export const MapContainer = () => {
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
   const years: number[] = [];
   for (let index = 0; index < teaInputs.Financing.EconomicLife; index++) {
-    years.push(2016 + index);
+    years.push(2016 + index); // Note that the hardcoded 2016 is the first year
   }
 
   useEffect(() => {
@@ -349,13 +349,13 @@ export const MapContainer = () => {
         system: frcsInputs.system,
         treatmentid: frcsInputs.treatmentid,
         dieselFuelPrice: frcsInputs.dieselFuelPrice,
-        biomassTarget: allYearResults.biomassTarget,
+        biomassTarget: allYearResults.biomassTarget, // dry metric tons per year
         year: years[index],
         clusterIds,
         errorIds,
         radius,
         teaModel: teaModel,
-        annualGeneration: allYearResults.annualGeneration,
+        annualGeneration: allYearResults.annualGeneration, // kWh
         moistureContent:
           allYearResults.teaInputs.ElectricalFuelBaseYear.MoistureContent,
         cashFlow: allYearResults.teaResults.AnnualCashFlows[index],
