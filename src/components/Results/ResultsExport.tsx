@@ -39,7 +39,6 @@ export const ResultsExport = (props: Props) => {
   );
 
   const makeExcel = async () => {
-    console.log(props.yearlyResults);
     // https://github.com/exceljs/exceljs#interface
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('ExcelJS sheet');

@@ -329,18 +329,12 @@ export const MapContainer = () => {
     const sensitivity = calculateSensitivity(deepSensitivityInputs);
     setSensitivityResults(sensitivity.output);
 
-    console.log(sensitivityInputs);
-    console.log(sensitivity);
-
     let radius = 0;
     let clusterIds: string[] = [];
     let errorIds: string[] = [];
     let energyRevenueRequiredPresentYears: number[] = [];
     let cashFlows: any[] = [];
     for (let index = 0; index < years.length; index++) {
-      console.log(
-        `year: ${years[index]}, # of clusters: ${clusterIds.length}, # of error clusters: ${errorIds.length}`
-      );
       const reqBody: RequestParams = {
         facilityLat: facilityCoordinates.lat,
         facilityLng: facilityCoordinates.lng,
@@ -361,7 +355,6 @@ export const MapContainer = () => {
         cashFlow: allYearResults.teaResults.AnnualCashFlows[index],
         costOfEquity: allYearResults.teaInputs.Financing.CostOfEquity
       };
-      console.log(JSON.stringify(reqBody));
       const yearResult: YearlyResult = await fetch(serviceUrl + 'process', {
         mode: 'cors',
         method: 'POST',

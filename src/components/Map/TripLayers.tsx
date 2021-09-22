@@ -23,9 +23,6 @@ export const TripLayers = (props: Props) => {
     const currentGeometry = props.yearlyGeoJson[props.selectedYearIndex];
 
     if (!currentGeometry) {
-      console.log(
-        `geometry does not exist for year index ${props.selectedYearIndex}`
-      );
       return null;
     }
 
