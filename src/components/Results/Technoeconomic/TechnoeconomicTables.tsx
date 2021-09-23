@@ -40,7 +40,7 @@ export const TechnoeconomicTables = (props: Props) => {
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
-            <td key={`totalFeedstockCost-${i}`}>
+            <td key={`totalHarvestCost-${i}`}>
               {formatCurrency(result.harvestCostPerDryTon)}
             </td>
           ))}
