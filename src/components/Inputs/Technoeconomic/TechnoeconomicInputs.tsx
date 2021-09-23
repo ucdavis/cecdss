@@ -27,7 +27,9 @@ const determineScaledCapitalCost = (electricalCapacity: number) => {
   if (electricalCapacity === defaultElectricCapacity) {
     return defaultCapitalCost;
   } else {
-    const scaleCapitalCost = defaultCapitalCost * (electricalCapacity/defaultElectricCapacity)^scaleFactor 
+    const scaleCapitalCost =
+      (defaultCapitalCost * (electricalCapacity / defaultElectricCapacity)) ^
+      scaleFactor;
 
     return scaleCapitalCost;
   }
@@ -35,6 +37,10 @@ const determineScaledCapitalCost = (electricalCapacity: number) => {
 
 export const TechnoeconomicInputs = (props: Props) => {
   useEffect(() => {
+    if (props.teaInputs.CapitalCostManuallySet) {
+      return; // do nothing if the user has manually set the capital cost
+    }
+
     const scaledCapitalCost = determineScaledCapitalCost(
       props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity
     );
