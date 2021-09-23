@@ -432,7 +432,7 @@ export const ResultsExport = (props: Props) => {
       rows: [
         [
           'Harvest Cost',
-          '$/ton',
+          '$/BDT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.harvestCostPerDryTon,
@@ -445,7 +445,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Transport Cost',
-          '$/ton',
+          '$/BDT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.transportationCostPerDryTon,
@@ -458,7 +458,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Move-in Cost',
-          '$/ton',
+          '$/BDT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.moveInCostPerDryTon,
@@ -471,7 +471,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Feedstock Cost',
-          '$/ton',
+          '$/BDT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.totalCostPerDryTon,
