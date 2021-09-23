@@ -27,9 +27,8 @@ const determineScaledCapitalCost = (electricalCapacity: number) => {
   if (electricalCapacity === defaultElectricCapacity) {
     return defaultCapitalCost;
   } else {
-    const scaleCapitalCost =
-      (defaultCapitalCost * (electricalCapacity / defaultElectricCapacity)) ^
-      scaleFactor;
+    const scaleCapitalCost = defaultCapitalCost * (electricalCapacity/defaultElectricCapacity)^scaleFactor 
+
     return scaleCapitalCost;
   }
 };
