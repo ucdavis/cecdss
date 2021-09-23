@@ -167,7 +167,7 @@ export const fakeYearlyResult: YearlyResult = {
   totalArea: 15618.85937099989,
   totalFeedstock: 361095.7868752008,
   totalDryFeedstock: 180547.8934376004,
-  totalFeedstockCost: 4684057.157024427,
+  totalHarvestCost: 4684057.157024427,
   totalCoproduct: 810417.9680109116,
   totalDryCoproduct: 405208.9840054558,
   totalCoproductCost: 11455886.968386216,

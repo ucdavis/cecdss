@@ -163,7 +163,7 @@ export interface YearlyResult {
   totalArea: number;
   totalFeedstock: number; // total biomass from frcs residue output
   totalDryFeedstock: number; // feedstock multipled by (1-moistureContent)
-  totalFeedstockCost: number; // cost of harvesting residue biomass from frcs
+  totalHarvestCost: number; // cost of harvesting residue biomass from frcs
   totalCoproduct: number; // Frcs.Total - Frcs.Residue weight
   totalDryCoproduct: number;
   totalCoproductCost: number;
