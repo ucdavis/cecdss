@@ -21,6 +21,8 @@ interface Props {
   teaModel: string;
 }
 
+const MILE_TO_KM = 1.60934;
+
 export const ResultsExport = (props: Props) => {
   // don't show export until all years are done running
   if (!props.yearlyResults || props.yearlyResults.length < props.teaInputs.Financing.EconomicLife) {
@@ -177,10 +179,10 @@ export const ResultsExport = (props: Props) => {
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.distance,
               0
-            ) * 1000
+            ) * MILE_TO_KM * 1000 // lcaResults.inputs.distance is in miles and we want to convert it to meters here
           ),
           ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.distance * 1000)
+            formatNumber(year.lcaResults.inputs.distance * MILE_TO_KM * 1000)
           )
         ]
       ]
@@ -430,7 +432,7 @@ export const ResultsExport = (props: Props) => {
       rows: [
         [
           'Harvest Cost',
-          '$/ton',
+          '$/BDT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.harvestCostPerDryTon,
@@ -443,7 +445,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Transport Cost',
-          '$/ton',
+          '$/BDT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.transportationCostPerDryTon,
@@ -456,7 +458,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Move-in Cost',
-          '$/ton',
+          '$/BDT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.moveInCostPerDryTon,
@@ -469,7 +471,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Feedstock Cost',
-          '$/ton',
+          '$/BDT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.totalCostPerDryTon,

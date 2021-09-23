@@ -83,7 +83,7 @@ export const TechnoeconomicTables = (props: Props) => {
         )}
         <tr>
           <td>Feedstock cost</td>
-          <td>$/ton</td>
+          <td>$/BDT</td>
           <td>
             {formatCurrency(
               props.yearlyResults.reduce(
