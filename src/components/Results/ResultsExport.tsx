@@ -105,13 +105,13 @@ export const ResultsExport = (props: Props) => {
       rows: [
         [
           'Feedstock ',
-          'dry ton',
+          'BDT',
           props.yearlyResults.reduce((sum, x) => sum + x.totalDryFeedstock, 0),
           ...props.yearlyResults.map(r => r.totalDryFeedstock)
         ],
         [
           'Coproduct',
-          'dry ton',
+          'BDT',
           props.yearlyResults.reduce((sum, x) => sum + x.totalDryCoproduct, 0),
           ...props.yearlyResults.map(r => r.totalDryCoproduct)
         ]
@@ -583,6 +583,17 @@ export const ResultsExport = (props: Props) => {
           ...props.yearlyResults.map(r =>
             formatCurrency(r.cashFlow.DebtPrincipalRemaining)
           )
+        ],
+        [
+          'Feedstock Cost',
+          '$',
+          formatCurrency(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.cashFlow.BiomassFuelCost,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(r => formatCurrency(r.cashFlow.BiomassFuelCost))
         ],
         [
           'Non-fuel Expenses',
