@@ -135,54 +135,54 @@ export const ResultsExport = (props: Props) => {
       rows: [
         [
           'Diesel',
-          'mGal',
+          'Gal',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.diesel,
               0
-            ) * 1000
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.diesel * 1000)
+            formatNumber(year.lcaResults.inputs.diesel)
           )
         ],
         [
           'Gasoline',
-          'mGal',
+          'Gal',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.gasoline,
               0
-            ) * 1000
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.gasoline * 1000)
+            formatNumber(year.lcaResults.inputs.gasoline)
           )
         ],
         [
           'Jet Fuel',
-          'mGal',
+          'Gal',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.jetfuel,
               0
-            ) * 1000
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.jetfuel * 1000)
+            formatNumber(year.lcaResults.inputs.jetfuel)
           )
         ],
         [
           'Transport Distance',
-          'm',
+          'km',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.distance,
               0
-            ) * MILE_TO_KM * 1000 // lcaResults.inputs.distance is in miles and we want to convert it to meters here
+            ) * MILE_TO_KM / props.yearlyResults.length // lcaResults.inputs.distance is in miles and we want to convert it to meters here
           ),
           ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.distance * MILE_TO_KM * 1000)
+            formatNumber(year.lcaResults.inputs.distance * MILE_TO_KM)
           )
         ]
       ]
@@ -205,22 +205,22 @@ export const ResultsExport = (props: Props) => {
           'kg',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.CO2,
+              (sum, year) => sum + year.lcaResults.lciResults.CO2 * 1000,
               0
-            )
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.CO2)
+            formatNumber(r.lcaResults.lciResults.CO2 * 1000)
           )
         ],
         [
           'CH4',
-          'g',
+          'kg',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.CH4,
               0
-            )
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciResults.CH4)
@@ -228,12 +228,12 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'N2O',
-          'g',
+          'kg',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.N2O,
               0
-            )
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciResults.N2O)
@@ -241,25 +241,25 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'CO',
-          'g',
+          'kg',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.CO,
               0
-            ) * 1000
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.CO * 1000)
+            formatNumber(r.lcaResults.lciResults.CO)
           )
         ],
         [
           'NOx',
-          'g',
+          'kg',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.NOx,
               0
-            )
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciResults.NOx)
@@ -267,41 +267,41 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'PM10',
-          'g',
+          'kg',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.PM10,
               0
-            ) * 1000
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.PM10 * 1000)
+            formatNumber(r.lcaResults.lciResults.PM10)
           )
         ],
         [
           'PM2.5',
-          'g',
+          'kg',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.PM25,
               0
-            ) * 1000
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.PM25 * 1000)
+            formatNumber(r.lcaResults.lciResults.PM25)
           )
         ],
         [
           'SOx',
-          'mg',
+          'kg',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.SOx,
               0
-            ) * 1000
+            ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.SOx * 1000)
+            formatNumber(r.lcaResults.lciResults.SOx)
           )
         ],
         [
@@ -311,10 +311,10 @@ export const ResultsExport = (props: Props) => {
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.CO2e,
               0
-            )
+            ) * 1000 / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.CO2e)
+            formatNumber(r.lcaResults.lciResults.CO2e * 1000)
           )
         ]
       ]
@@ -340,21 +340,21 @@ export const ResultsExport = (props: Props) => {
               (sum, year) =>
                 sum + year.lcaResults.lciaResults.global_warming_air,
               0
-            )
+            ) * 1000 / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciaResults.global_warming_air)
+            formatNumber(r.lcaResults.lciaResults.global_warming_air * 1000)
           )
         ],
         [
           'Acidification Air',
-          'g SO2 eq',
+          'kg SO2 eq',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) =>
                 sum + year.lcaResults.lciaResults.acidification_air,
               0
-            ) * 1000
+            ) * 1000 / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciaResults.acidification_air * 1000)
@@ -362,13 +362,13 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'HH Particulate Air',
-          'g PM2.5 eq',
+          'kg PM2.5 eq',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) =>
                 sum + year.lcaResults.lciaResults.hh_particulate_air,
               0
-            ) * 1000
+            ) * 1000 / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciaResults.hh_particulate_air * 1000)
@@ -376,13 +376,13 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Euthrophication Air',
-          'g N eq',
+          'kg N eq',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) =>
                 sum + year.lcaResults.lciaResults.eutrophication_air,
               0
-            ) * 1000
+            ) * 1000 / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciaResults.eutrophication_air * 1000)
@@ -390,13 +390,13 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Euthrophication Water',
-          'g N eq',
+          'kg N eq',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) =>
                 sum + year.lcaResults.lciaResults.eutrophication_water,
               0
-            ) * 1000
+            ) * 1000 / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciaResults.eutrophication_water * 1000)
@@ -409,10 +409,10 @@ export const ResultsExport = (props: Props) => {
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciaResults.smog_air,
               0
-            )
+            ) * 1000 / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciaResults.smog_air)
+            formatNumber(r.lcaResults.lciaResults.smog_air * 1000)
           )
         ]
       ]
