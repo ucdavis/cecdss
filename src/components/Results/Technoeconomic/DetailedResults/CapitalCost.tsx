@@ -1,9 +1,9 @@
 import React from 'react';
 import { formatNumber, formatCurrency } from '../../../Shared/util';
-import { InputModGPO, InputModCHP } from '@ucdavis/tea/out/models/input.model';
+import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 
 interface Props {
-  inputs: InputModGPO | InputModCHP;
+  inputs: InputModGPO | InputModCHP | InputModGP;
 }
 
 export const CapitalCost = (props: Props) => {
