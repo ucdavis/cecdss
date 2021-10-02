@@ -1,15 +1,16 @@
-import { ElectricalFuelBaseYearModCHP } from '@ucdavis/tea/out/models/output.model';
+import { ElectricalFuelBaseYearModCHP } from '@ucdavis/tea/output.model';
 import {
   InputModCHP,
   ExpensesBaseYearInputMod,
   ElectricalFuelBaseYearInputModCHP
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import {
   HeatBaseYearInputModClass,
   TaxesInputModClass,
   FinancingInputModClass,
   IncomeOtherThanEnergyInputModClass,
-  EscalationInflationInputModClass
+  EscalationInflationInputModClass,
+  CarbonCreditClass
 } from './TEASharedClasses';
 
 export class InputModCHPClass implements InputModCHP {
@@ -22,6 +23,9 @@ export class InputModCHPClass implements InputModCHP {
   IncomeOtherThanEnergy = new IncomeOtherThanEnergyInputModClass();
   EscalationInflation = new EscalationInflationInputModClass();
   TaxCreditFrac = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  CarbonCredit = new CarbonCreditClass();
+  IncludeCarbonCredit = false;
+  FirstYear = 2016;
 }
 
 export class ElectricalFuelBaseYearInputModCHPClass
