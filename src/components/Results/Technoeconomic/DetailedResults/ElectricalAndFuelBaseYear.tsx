@@ -3,11 +3,11 @@ import { formatNumber } from '../../../Shared/util';
 import {
   ElectricalFuelBaseYearInputModGPO,
   ElectricalFuelBaseYearInputModCHP
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import {
   ElectricalFuelBaseYearModCHP,
   ElectricalFuelBaseYearModGPO
-} from '@ucdavis/tea/out/models/output.model';
+} from '@ucdavis/tea/output.model';
 import {
   ElectricalFuelBaseYearModCHPClass,
   ElectricalFuelBaseYearInputModCHPClass

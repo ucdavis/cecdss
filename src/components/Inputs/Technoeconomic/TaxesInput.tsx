@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   TaxesInputMod
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import {
   FormText,
   FormGroup,

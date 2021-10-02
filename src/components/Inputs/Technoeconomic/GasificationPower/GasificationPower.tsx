@@ -10,7 +10,7 @@ import {
   FinancingInputMod,
   IncomeOtherThanEnergyInputModGP,
   EscalationInflationInputModGP
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import { CapitalCostInputGP } from './CapitalCostInputGP';
 import { HeatBaseYearInput } from '../HeatBaseYearInput';
 import { ExpensesBaseYearInput } from '../ExpensesBaseYearInput';

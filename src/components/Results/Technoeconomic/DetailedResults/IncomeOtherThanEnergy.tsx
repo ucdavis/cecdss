@@ -3,11 +3,11 @@ import { formatNumber } from '../../../Shared/util';
 import {
   IncomeOtherThanEnergyInputMod,
   IncomeOtherThanEnergyInputModGP
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import {
   IncomeOtherThanEnergyMod,
   IncomeOtherThanEnergyModGP
-} from '@ucdavis/tea/out/models/output.model';
+} from '@ucdavis/tea/output.model';
 import {
   IncomeOtherThanEnergyModGPClass,
   IncomeOtherThanEnergyInputModGPClass

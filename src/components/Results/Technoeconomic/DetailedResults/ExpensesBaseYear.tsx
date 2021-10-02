@@ -3,11 +3,11 @@ import { formatNumber } from '../../../Shared/util';
 import {
   ExpensesBaseYearModGPO,
   ExpensesBaseYearModGP
-} from '@ucdavis/tea/out/models/output.model';
+} from '@ucdavis/tea/output.model';
 import {
   ExpensesBaseYearInputModGPO,
   ExpensesBaseYearInputModGP
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import {
   ExpensesBaseYearModGPOClass,
   ExpensesBaseYearInputModGPOClass

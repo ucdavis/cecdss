@@ -17,7 +17,7 @@ import {
   InputModGPO,
   InputModCHP,
   InputModGP
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 
 interface Props {
   facilityCoordinates: MapCoordinates;

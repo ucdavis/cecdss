@@ -1,16 +1,13 @@
 import React from 'react';
 import { formatNumber } from '../../../Shared/util';
 import {
-  InputModGPO,
-  InputModCHP,
-  InputModGP,
   TaxesInputMod
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import {
   OutputModGPO,
   OutputModCHP,
   OutputModGP
-} from '@ucdavis/tea/out/models/output.model';
+} from '@ucdavis/tea/output.model';
 
 interface Props {
   inputs: TaxesInputMod;

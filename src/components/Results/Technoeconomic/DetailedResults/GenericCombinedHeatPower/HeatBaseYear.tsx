@@ -4,8 +4,8 @@ import {
   InputModCHP,
   InputModGP,
   HeatBaseYearInputMod
-} from '@ucdavis/tea/out/models/input.model';
-import { HeatBaseYearMod } from '@ucdavis/tea/out/models/output.model';
+} from '@ucdavis/tea/input.model';
+import { HeatBaseYearMod } from '@ucdavis/tea/output.model';
 
 interface Props {
   results: HeatBaseYearMod;

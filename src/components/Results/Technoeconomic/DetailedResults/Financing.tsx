@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatNumber, formatCurrency } from '../../../Shared/util';
-import { FinancingInputMod } from '@ucdavis/tea/out/models/input.model';
-import { FinancingMod } from '@ucdavis/tea/out/models/output.model';
+import { FinancingInputMod } from '@ucdavis/tea/input.model';
+import { FinancingMod } from '@ucdavis/tea/output.model';
 
 interface Props {
   inputs: FinancingInputMod;

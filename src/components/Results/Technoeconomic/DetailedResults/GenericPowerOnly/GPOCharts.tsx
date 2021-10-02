@@ -6,8 +6,8 @@ import {
   VictoryStack,
   VictoryBar
 } from 'victory';
-import { InputModGPO } from '@ucdavis/tea/out/models/input.model';
-import { OutputModGPO, CashFlow } from '@ucdavis/tea/out/models/output.model';
+import { InputModGPO } from '@ucdavis/tea/input.model';
+import { OutputModGPO, CashFlow } from '@ucdavis/tea/output.model';
 
 interface Props {
   inputs: InputModGPO;

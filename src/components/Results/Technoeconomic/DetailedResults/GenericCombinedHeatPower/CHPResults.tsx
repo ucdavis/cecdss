@@ -9,8 +9,8 @@ import { Taxes } from '../Taxes';
 import { IncomeOtherThanEnergy } from '../IncomeOtherThanEnergy';
 import { EscalationInflation } from '../EscalationInflation';
 import { Financing } from '../Financing';
-import { InputModCHP } from '@ucdavis/tea/out/models/input.model';
-import { OutputModCHP } from '@ucdavis/tea/out/models/output.model';
+import { InputModCHP } from '@ucdavis/tea/input.model';
+import { OutputModCHP } from '@ucdavis/tea/output.model';
 import { AnnualCashFlow } from '../AnnualCashFlow';
 
 interface Props {

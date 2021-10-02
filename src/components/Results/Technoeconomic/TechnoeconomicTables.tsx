@@ -2,7 +2,7 @@ import React from 'react';
 import { formatCurrency } from '../../Shared/util';
 import { YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
-import { CashFlow } from '@ucdavis/tea/out/models/output.model';
+import { CashFlow } from '@ucdavis/tea/output.model';
 
 interface Props {
   yearlyResults: YearlyResult[];

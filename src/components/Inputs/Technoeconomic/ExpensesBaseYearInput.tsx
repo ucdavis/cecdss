@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExpensesBaseYearInputModGPO } from '@ucdavis/tea/out/models/input.model';
+import { ExpensesBaseYearInputModGPO } from '@ucdavis/tea/input.model';
 import {
   FormText,
   FormGroup,

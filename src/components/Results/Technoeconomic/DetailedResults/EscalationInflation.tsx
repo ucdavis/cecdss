@@ -3,7 +3,7 @@ import { formatNumber } from '../../../Shared/util';
 import {
   EscalationInflationInputMod,
   EscalationInflationInputModGP
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import { EscalationInflationInputModGPClass } from '../../../../models/GPClasses';
 
 interface Props {

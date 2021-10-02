@@ -6,7 +6,7 @@ import {
   CashFlow,
   CashFlowCHP,
   CashFlowGP
-} from '@ucdavis/tea/out/models/output.model';
+} from '@ucdavis/tea/output.model';
 
 interface Props {
   annualCashFlows: CashFlow[] | CashFlowCHP[] | CashFlowGP[];

@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatNumber } from '../../../../Shared/util';
-import { ElectricalFuelBaseYearModGP } from '@ucdavis/tea/out/models/output.model';
-import { ElectricalFuelBaseYearInputModGP } from '@ucdavis/tea/out/models/input.model';
+import { ElectricalFuelBaseYearModGP } from '@ucdavis/tea/output.model';
+import { ElectricalFuelBaseYearInputModGP } from '@ucdavis/tea/input.model';
 
 interface Props {
   results: ElectricalFuelBaseYearModGP;
@@ -46,7 +46,7 @@ export const ElectricalAndFuelBaseYearGP = (props: Props) => {
           </tr>
           <tr>
             <td>Net HHV Efficiency of Power Generation incl. Dual Fuel (%)</td>
-            <td>{formatNumber(props.inputs.NetHHVEfficiency)}</td>
+            <td>{formatNumber(props.inputs.HHVEfficiency)}</td>
           </tr>
           <tr>
             <td>Overall Net System Efficiency (%)</td>
