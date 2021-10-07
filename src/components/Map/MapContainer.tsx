@@ -27,7 +27,7 @@ import {
   InputModCHP,
   InputModGP,
   InputModSensitivity
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import { InputModGPOClass } from '../../models/GPOClasses';
 import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
@@ -37,11 +37,11 @@ import { PaginationItem, PaginationLink, Button, Pagination } from 'reactstrap';
 import { ResultsContainer } from '../Results/ResultsContainer';
 import { GeoJsonLayers } from './GeoJsonLayers';
 import {
-  calculateConstantLAC,
-  calculateCurrentLAC,
-  calculateSensitivity
-} from '@ucdavis/tea';
-import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
+  computeConstantLAC,
+  computeCurrentLAC,
+} from '@ucdavis/tea/utility';
+import { runSensitivityAnalysis} from '@ucdavis/tea/sensitivity'
+import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
 import { ExternalLayerSelection } from './ExternalLayerSelection';
 import { serviceUrl } from '../Shared/config';
@@ -326,7 +326,7 @@ export const MapContainer = () => {
 
     // the sensitivity calculation modifies the passed params, which isn't good so we deep copy them first
     const deepSensitivityInputs = JSON.parse(JSON.stringify(sensitivityInputs));
-    const sensitivity = calculateSensitivity(deepSensitivityInputs);
+    const sensitivity = runSensitivityAnalysis(deepSensitivityInputs);
     setSensitivityResults(sensitivity.output);
 
     let radius = 0;
@@ -344,6 +344,7 @@ export const MapContainer = () => {
         treatmentid: frcsInputs.treatmentid,
         dieselFuelPrice: frcsInputs.dieselFuelPrice,
         biomassTarget: allYearResults.biomassTarget, // dry metric tons per year
+        firstYear: years[0],
         year: years[index],
         clusterIds,
         errorIds,
@@ -353,7 +354,11 @@ export const MapContainer = () => {
         moistureContent:
           allYearResults.teaInputs.ElectricalFuelBaseYear.MoistureContent,
         cashFlow: allYearResults.teaResults.AnnualCashFlows[index],
-        costOfEquity: allYearResults.teaInputs.Financing.CostOfEquity
+        costOfEquity: allYearResults.teaInputs.Financing.CostOfEquity,
+        generalInflation: teaInputs.EscalationInflation.GeneralInflation,
+        carbonCreditPrice: 196, // hardcoded for now; should be replaced by user specified value
+        energyEconomyRatio: 1, // hardcoded for now; should be replaced by user specified value
+        includeCarbonCredit: false, // hardcoded for now; should be replaced by user specified option
       };
       const yearResult: YearlyResult = await fetch(serviceUrl + 'process', {
         mode: 'cors',
@@ -404,7 +409,7 @@ export const MapContainer = () => {
       (a, b) => a + b,
       0
     );
-    const currentLAC = calculateCurrentLAC(
+    const currentLAC = computeCurrentLAC(
       allYearInputs.teaInputs.Financing.CostOfEquity,
       allYearInputs.teaInputs.Financing.EconomicLife,
       totalPresentWorth,
@@ -416,7 +421,7 @@ export const MapContainer = () => {
     allYearResultsCopy.teaResults.CurrentLAC.TotalPresentWorth = totalPresentWorth;
     allYearResultsCopy.teaResults.CurrentLAC.PresentWorth = energyRevenueRequiredPresentYears;
 
-    const constantLAC = calculateConstantLAC(
+    const constantLAC = computeConstantLAC(
       allYearInputs.teaInputs.Financing.CostOfEquity,
       allYearInputs.teaInputs.EscalationInflation.GeneralInflation,
       allYearInputs.teaInputs.Financing.EconomicLife,

@@ -18,7 +18,7 @@ import {
 } from 'recharts';
 import { VictoryLabel } from 'victory';
 import { formatNumber } from '../Shared/util';
-import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
+import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 
 interface Props {
   results: YearlyResult[];

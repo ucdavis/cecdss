@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeatBaseYearInputMod } from '@ucdavis/tea/out/models/input.model';
+import { HeatBaseYearInputMod } from '@ucdavis/tea/input.model';
 import {
   FormText,
   FormGroup,

@@ -6,13 +6,14 @@ import {
   IncomeOtherThanEnergyInputModGP,
   EscalationInflationInputModGP,
   ElectricalFuelBaseYearInputModGP,
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import {
   ExpensesBaseYearModGP,
   IncomeOtherThanEnergyModGP,
   ElectricalFuelBaseYearModGP
-} from '@ucdavis/tea/out/models/output.model';
+} from '@ucdavis/tea/output.model';
 import {
+  CarbonCreditClass,
   HeatBaseYearInputModClass,
   TaxesInputModClass,
 } from './TEASharedClasses';
@@ -29,6 +30,9 @@ export class InputModGPClass implements InputModGP {
   IncomeOtherThanEnergy = new IncomeOtherThanEnergyInputModGPClass();
   EscalationInflation = new EscalationInflationInputModGPClass();
   TaxCreditFrac = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  CarbonCredit = new CarbonCreditClass();
+  IncludeCarbonCredit = false;
+  FirstYear = 2016;
 }
 
 export class CapitalCostInputModGPClass implements CapitalCostInputModGP {

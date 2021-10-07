@@ -17,9 +17,9 @@ import {
   InputModGPO,
   InputModCHP,
   InputModGP
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import { AllResultsContainer } from './AllResultsContainer';
-import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
+import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 
 interface Props {
   years: number[];

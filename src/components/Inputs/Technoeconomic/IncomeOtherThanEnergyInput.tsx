@@ -1,5 +1,5 @@
 import React from 'react';
-import { IncomeOtherThanEnergyInputMod } from '@ucdavis/tea/out/models/input.model';
+import { IncomeOtherThanEnergyInputMod } from '@ucdavis/tea/input.model';
 import {
   FormText,
   FormGroup,

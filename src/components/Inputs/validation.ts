@@ -4,7 +4,7 @@ import {
   InputModGPO,
   InputModCHP,
   InputModGP
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import { teaGPOSchema, teaCHPSchema, teaGPSchema } from '../../models/Schemas';
 import { FrcsInputs } from '../../models/Types';
 

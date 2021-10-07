@@ -6,8 +6,8 @@ import {
   InputModGPO,
   InputModCHP,
   InputModGP
-} from '@ucdavis/tea/out/models/input.model';
-import { OutputModSensitivity } from '@ucdavis/tea/out/models/output.model';
+} from '@ucdavis/tea/input.model';
+import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import { AssumptionsAndReferences } from './AssumptionsAndReferences';
 import ResultsExport from './ResultsExport';
 

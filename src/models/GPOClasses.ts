@@ -2,21 +2,23 @@ import {
   InputModGPO,
   ElectricalFuelBaseYearInputModGPO,
   ExpensesBaseYearInputModGPO
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import {
   ExpensesBaseYearModGPO,
   IncomeOtherThanEnergyMod,
   ElectricalFuelBaseYearMod
-} from '@ucdavis/tea/out/models/output.model';
+} from '@ucdavis/tea/output.model';
 import {
   TaxesInputModClass,
   FinancingInputModClass,
   IncomeOtherThanEnergyInputModClass,
-  EscalationInflationInputModClass
+  EscalationInflationInputModClass,
+  CarbonCreditClass
 } from './TEASharedClasses';
 
 export class InputModGPOClass implements InputModGPO {
   CapitalCost = 70000000;
+  CapitalCostManuallySet = false;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPOClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModGPOClass();
   Taxes = new TaxesInputModClass();
@@ -24,6 +26,9 @@ export class InputModGPOClass implements InputModGPO {
   IncomeOtherThanEnergy = new IncomeOtherThanEnergyInputModClass();
   EscalationInflation = new EscalationInflationInputModClass();
   TaxCreditFrac = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  CarbonCredit = new CarbonCreditClass();
+  IncludeCarbonCredit = false;
+  FirstYear = 2016;
 }
 
 export class ElectricalFuelBaseYearInputModGPOClass

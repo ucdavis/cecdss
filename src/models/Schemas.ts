@@ -16,8 +16,9 @@ import {
   InputModGPO,
   InputModCHP,
   InputModGP,
-  TaxesInputMod
-} from '@ucdavis/tea/out/models/input.model';
+  TaxesInputMod,
+  CarbonCredit
+} from '@ucdavis/tea/input.model';
 
 export const capitalCostElements: SchemaOf<CapitalCostInputModGP> = yup
   .object()
@@ -158,6 +159,12 @@ export const taxesSchema: SchemaOf<TaxesInputMod> = yup.object().shape({
   StateTaxRate: yup.number().required().min(0)
 });
 
+export const carbonCreditSchema: SchemaOf<CarbonCredit> = yup.object().shape({
+  CreditPrice: yup.number().required().min(0),
+  CIscore: yup.number().required().min(0),
+  EnergyEconomyRatio: yup.number().required().min(0)
+});
+
 export const teaGPOSchema: SchemaOf<InputModGPO> = yup.object().shape({
   CapitalCost: yup.number().required().min(0),
   ElectricalFuelBaseYear: electricalFuelBaseYearGPOSchema,
@@ -166,7 +173,10 @@ export const teaGPOSchema: SchemaOf<InputModGPO> = yup.object().shape({
   Financing: financingSchema,
   IncomeOtherThanEnergy: incomeOtherThanEnergySchema,
   TaxCreditFrac: yup.array().of(yup.number().required()),
-  Taxes: taxesSchema
+  Taxes: taxesSchema,
+  CarbonCredit: carbonCreditSchema,
+  IncludeCarbonCredit: yup.boolean().required(),
+  FirstYear: yup.number().required().min(2016)
 });
 
 export const teaCHPSchema: SchemaOf<InputModCHP> = yup.object().shape({
@@ -178,7 +188,10 @@ export const teaCHPSchema: SchemaOf<InputModCHP> = yup.object().shape({
   HeatBaseYear: heatBaseYearSchema,
   IncomeOtherThanEnergy: incomeOtherThanEnergySchema,
   TaxCreditFrac: yup.array().of(yup.number().required()),
-  Taxes: taxesSchema
+  Taxes: taxesSchema,
+  CarbonCredit: carbonCreditSchema,
+  IncludeCarbonCredit: yup.boolean().required(),
+  FirstYear: yup.number().required().min(2016)
 });
 
 export const teaGPSchema: SchemaOf<InputModGP> = yup.object().shape({
@@ -192,5 +205,8 @@ export const teaGPSchema: SchemaOf<InputModGP> = yup.object().shape({
   HeatBaseYear: heatBaseYearSchema,
   IncomeOtherThanEnergy: incomeOtherThanEnergyGPSchema,
   TaxCreditFrac: yup.array().of(yup.number().required()),
-  Taxes: taxesSchema
+  Taxes: taxesSchema,
+  CarbonCredit: carbonCreditSchema,
+  IncludeCarbonCredit: yup.boolean().required(),
+  FirstYear: yup.number().required().min(2016)
 });

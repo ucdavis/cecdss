@@ -309,7 +309,7 @@ export const ResultsExport = (props: Props) => {
           'kg CO2e',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.CO2e,
+              (sum, year) => sum + year.lcaResults.lciResults.CI,
               0
             ) * 1000 / props.yearlyResults.length
           ),
@@ -338,7 +338,7 @@ export const ResultsExport = (props: Props) => {
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) =>
-                sum + year.lcaResults.lciaResults.global_warming_air,
+                sum + year.lcaResults.lciaResults.global_warming_air * 1000,
               0
             ) * 1000 / props.yearlyResults.length
           ),
