@@ -6,7 +6,7 @@ import {
   InputModGPO,
   InputModCHP,
   InputModGP
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import { CombinedHeatAndPower } from './GenericCombinedHeatPower/CombinedHeatAndPower';
 import { GasificationPower } from './GasificationPower/GasificationPower';
 import { BasicTeaInputs } from './BasicTeaInputs';

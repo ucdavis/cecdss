@@ -1,5 +1,5 @@
 import React from 'react';
-import { ElectricalFuelBaseYearInputModGP } from '@ucdavis/tea/out/models/input.model';
+import { ElectricalFuelBaseYearInputModGP } from '@ucdavis/tea/input.model';
 import {
   FormText,
   FormGroup,

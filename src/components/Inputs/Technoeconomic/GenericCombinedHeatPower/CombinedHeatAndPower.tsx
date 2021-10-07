@@ -18,7 +18,7 @@ import {
   IncomeOtherThanEnergyInputMod,
   EscalationInflationInputMod,
   FinancingInputMod
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import { ElectricalAndFuelBaseYearInput } from '../ElectricalAndFuelBaseYearInput';
 import { HeatBaseYearInput } from '../HeatBaseYearInput';
 import { ExpensesBaseYearInput } from '../ExpensesBaseYearInput';

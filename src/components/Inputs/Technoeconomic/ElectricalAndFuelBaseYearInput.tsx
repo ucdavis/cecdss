@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ElectricalFuelBaseYearInputModGPO,
   ElectricalFuelBaseYearInputModCHP
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import {
   FormText,
   FormGroup,

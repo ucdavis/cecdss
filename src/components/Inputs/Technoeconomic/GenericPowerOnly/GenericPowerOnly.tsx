@@ -17,7 +17,7 @@ import {
   TaxesInputMod,
   EscalationInflationInputMod,
   FinancingInputMod
-} from '@ucdavis/tea/out/models/input.model';
+} from '@ucdavis/tea/input.model';
 import { ElectricalAndFuelBaseYearInput } from '../ElectricalAndFuelBaseYearInput';
 import { ExpensesBaseYearInput } from '../ExpensesBaseYearInput';
 import { TaxesInput } from '../TaxesInput';

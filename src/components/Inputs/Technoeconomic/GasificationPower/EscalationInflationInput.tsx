@@ -1,5 +1,5 @@
 import React from 'react';
-import { EscalationInflationInputModGP } from '@ucdavis/tea/out/models/input.model';
+import { EscalationInflationInputModGP } from '@ucdavis/tea/input.model';
 import {
   FormText,
   FormGroup,

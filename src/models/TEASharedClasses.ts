@@ -3,8 +3,9 @@ import {
   EscalationInflationInputMod,
   TaxesInputMod,
   FinancingInputMod,
-  HeatBaseYearInputMod
-} from '@ucdavis/tea/out/models/input.model';
+  HeatBaseYearInputMod,
+  CarbonCredit
+} from '@ucdavis/tea/input.model';
 
 export class IncomeOtherThanEnergyInputModClass
   implements IncomeOtherThanEnergyInputMod {
@@ -38,4 +39,10 @@ export class FinancingInputModClass implements FinancingInputMod {
 export class HeatBaseYearInputModClass implements HeatBaseYearInputMod {
   AggregateFractionOfHeatRecovered = 60;
   AggregateSalesPriceForHeat = 0.0102;
+}
+
+export class CarbonCreditClass implements CarbonCredit {
+  CreditPrice = 196;
+  CIscore = 0;
+  EnergyEconomyRatio = 1; 
 }

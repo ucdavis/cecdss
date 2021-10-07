@@ -7,12 +7,12 @@ import { Taxes } from '../Taxes';
 import { IncomeOtherThanEnergy } from '../IncomeOtherThanEnergy';
 import { EscalationInflation } from '../EscalationInflation';
 import { Financing } from '../Financing';
-import { InputModGP } from '@ucdavis/tea/out/models/input.model';
-import { OutputModGP } from '@ucdavis/tea/out/models/output.model';
-import { CapitalCostGP } from './CapitalCostGP';
+import { InputModGP } from '@ucdavis/tea/input.model';
+import { OutputModGP } from '@ucdavis/tea/output.model';
 import { ElectricalAndFuelBaseYearGP } from './ElectricalAndFuelBaseYearGP';
 import { HeatBaseYear } from '../GenericCombinedHeatPower/HeatBaseYear';
 import { AnnualCashFlow } from '../AnnualCashFlow';
+import { CapitalCost } from '../CapitalCost';
 
 interface Props {
   inputs: InputModGP;
@@ -23,10 +23,7 @@ export const GPResults = (props: Props) => {
   return (
     <div>
       <h2>Gasification Results</h2>
-      <CapitalCostGP
-        inputs={props.inputs.CapitalCost}
-        results={props.results.CapitalCost}
-      />
+      <CapitalCost inputs={props.inputs} />
       <ElectricalAndFuelBaseYearGP
         results={props.results.ElectricalAndFuelBaseYear}
         inputs={props.inputs.ElectricalFuelBaseYear}
