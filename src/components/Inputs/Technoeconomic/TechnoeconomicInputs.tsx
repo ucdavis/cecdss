@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  Input,
-  Label,
-  FormGroup,
-  Form
-} from 'reactstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Input, Label, FormGroup, Form } from 'reactstrap';
 import { GenericPowerOnly } from './GenericPowerOnly/GenericPowerOnly';
 import { TechnoeconomicModels } from '../../../models/Types';
 import {
@@ -25,7 +19,39 @@ interface Props {
   disabled: boolean;
 }
 
+const determineScaledCapitalCost = (electricalCapacity: number) => {
+  const scaleFactor = 0.82; // source: https://evcvaluation.com/cost-to-capacity-method-applications-and-considerations/
+  const defaultCapitalCost = 70_000_000;
+  const defaultElectricCapacity = 25_000;
+
+  if (electricalCapacity === defaultElectricCapacity) {
+    return defaultCapitalCost;
+  } else {
+    const scaleCapitalCost =
+      (defaultCapitalCost * (electricalCapacity / defaultElectricCapacity)) ^
+      scaleFactor;
+
+    return scaleCapitalCost;
+  }
+};
+
 export const TechnoeconomicInputs = (props: Props) => {
+  useEffect(() => {
+    if (props.teaInputs.CapitalCostManuallySet) {
+      return; // do nothing if the user has manually set the capital cost
+    }
+
+    const scaledCapitalCost = determineScaledCapitalCost(
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity
+    );
+
+    if (scaledCapitalCost !== props.teaInputs.CapitalCost) {
+      props.setTeaInputs({
+        ...props.teaInputs,
+        CapitalCost: scaledCapitalCost
+      });
+    }
+  }, [props, props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity]);
   const [showDetailedInputs, toggleShowDetailedInputs] = useState<boolean>(
     false
   );

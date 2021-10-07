@@ -17,6 +17,7 @@ import {
 
 export class InputModGPOClass implements InputModGPO {
   CapitalCost = 70000000;
+  CapitalCostManuallySet = false;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPOClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModGPOClass();
   Taxes = new TaxesInputModClass();

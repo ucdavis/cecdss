@@ -50,7 +50,8 @@ export const CombinedHeatAndPower = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                CapitalCost: e.target.value
+                CapitalCost: e.target.value,
+                CapitalCostManuallySet: true
               })
             }
             disabled={props.disabled}
