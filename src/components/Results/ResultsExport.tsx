@@ -66,7 +66,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Net Station Efficiency (%)',
-          props.teaInputs.ElectricalFuelBaseYear.NetStationEfficiency
+          formatNumber(props.teaInputs.ElectricalFuelBaseYear.NetStationEfficiency)
         ],
         [
           'Economic Life (y)',

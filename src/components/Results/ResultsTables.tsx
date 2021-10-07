@@ -55,7 +55,7 @@ export const ResultsTable = (props: Props) => {
           <tr>
             <td>Net Electrical Capacity (kWe)</td>
             <td>
-              {props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity}
+              {formatNumber(props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity)}
             </td>
           </tr>
           {props.teaModel === 'GPO' && (
