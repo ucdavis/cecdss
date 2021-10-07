@@ -35,52 +35,52 @@ export const LCATables = (props: Props) => {
         </tr>
         <tr>
           <td>Diesel</td>
-          <td>Gal</td>
+          <td>gal</td>
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.lcaResults.inputs.diesel,
                 0
-              ) / props.yearlyResults.length
+              ) / props.yearlyResults.length * 1000
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`diesel-${i}`}>
-              {formatNumber(result.lcaResults.inputs.diesel)}
+              {formatNumber(result.lcaResults.inputs.diesel * 1000)}
             </td>
           ))}
         </tr>
         <tr>
           <td>Gasoline</td>
-          <td>Gal</td>
+          <td>gal</td>
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.lcaResults.inputs.gasoline,
                 0
-              ) / props.yearlyResults.length
+              ) / props.yearlyResults.length * 1000
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`gasoline-${i}`}>
-              {formatNumber(result.lcaResults.inputs.gasoline)}
+              {formatNumber(result.lcaResults.inputs.gasoline * 1000)}
             </td>
           ))}
         </tr>
         <tr>
           <td>Jet Fuel</td>
-          <td>Gal</td>
+          <td>gal</td>
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.lcaResults.inputs.jetfuel,
                 0
-              ) / props.yearlyResults.length
+              ) / props.yearlyResults.length * 1000
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`jetfuel-${i}`}>
-              {formatNumber(result.lcaResults.inputs.jetfuel)}
+              {formatNumber(result.lcaResults.inputs.jetfuel * 1000)}
             </td>
           ))}
         </tr>
@@ -92,12 +92,12 @@ export const LCATables = (props: Props) => {
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.lcaResults.inputs.distance,
                 0
-              ) * MILE_TO_KM / props.yearlyResults.length
+              ) * MILE_TO_KM / props.yearlyResults.length * 1000
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`distance-${i}`}>
-              {formatNumber(result.lcaResults.inputs.distance * MILE_TO_KM)}
+              {formatNumber(result.lcaResults.inputs.distance * MILE_TO_KM * 1000)}
             </td>
           ))}
         </tr>

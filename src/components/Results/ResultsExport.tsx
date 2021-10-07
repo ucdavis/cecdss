@@ -135,41 +135,41 @@ export const ResultsExport = (props: Props) => {
       rows: [
         [
           'Diesel',
-          'Gal',
+          'gal',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.diesel,
               0
-            ) / props.yearlyResults.length
+            ) / props.yearlyResults.length * 1000
           ),
           ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.diesel)
+            formatNumber(year.lcaResults.inputs.diesel * 1000)
           )
         ],
         [
           'Gasoline',
-          'Gal',
+          'gal',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.gasoline,
               0
-            ) / props.yearlyResults.length
+            ) / props.yearlyResults.length * 1000
           ),
           ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.gasoline)
+            formatNumber(year.lcaResults.inputs.gasoline * 1000)
           )
         ],
         [
           'Jet Fuel',
-          'Gal',
+          'gal',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.jetfuel,
               0
-            ) / props.yearlyResults.length
+            ) / props.yearlyResults.length * 1000
           ),
           ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.jetfuel)
+            formatNumber(year.lcaResults.inputs.jetfuel * 1000)
           )
         ],
         [
@@ -179,10 +179,10 @@ export const ResultsExport = (props: Props) => {
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.distance,
               0
-            ) * MILE_TO_KM / props.yearlyResults.length // lcaResults.inputs.distance is in miles and we want to convert it to meters here
+            ) * MILE_TO_KM / props.yearlyResults.length * 1000
           ),
           ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.distance * MILE_TO_KM)
+            formatNumber(year.lcaResults.inputs.distance * MILE_TO_KM * 1000)
           )
         ]
       ]
