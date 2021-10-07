@@ -338,7 +338,7 @@ export const ResultsExport = (props: Props) => {
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) =>
-                sum + year.lcaResults.lciaResults.global_warming_air * 1000,
+                sum + year.lcaResults.lciaResults.global_warming_air,
               0
             ) * 1000 / props.yearlyResults.length
           ),
