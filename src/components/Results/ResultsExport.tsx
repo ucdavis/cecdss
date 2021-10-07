@@ -104,16 +104,30 @@ export const ResultsExport = (props: Props) => {
       ],
       rows: [
         [
-          'Feedstock ',
+          'Feedstock',
           'BDT',
-          props.yearlyResults.reduce((sum, x) => sum + x.totalDryFeedstock, 0),
-          ...props.yearlyResults.map(r => r.totalDryFeedstock)
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.totalDryFeedstock,
+              0
+            )
+          ),
+          ...props.yearlyResults.map(year =>
+            formatNumber(year.totalDryFeedstock)
+          )
         ],
         [
           'Coproduct',
           'BDT',
-          props.yearlyResults.reduce((sum, x) => sum + x.totalDryCoproduct, 0),
-          ...props.yearlyResults.map(r => r.totalDryCoproduct)
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.totalDryCoproduct, 
+              0
+            )
+          ),
+          ...props.yearlyResults.map(year => 
+            formatNumber(year.totalDryCoproduct)
+          )
         ]
       ]
     });
