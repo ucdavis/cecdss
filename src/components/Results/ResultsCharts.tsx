@@ -24,6 +24,7 @@ interface Props {
   results: YearlyResult[];
   sensitivityResults?: OutputModSensitivity;
   sensitivityChartRef: React.MutableRefObject<any>;
+  system: String;
 }
 
 export const ResultsCharts = (props: Props) => {
@@ -57,32 +58,38 @@ export const ResultsCharts = (props: Props) => {
           <Area
             type='monotone'
             dataKey='harvestCosts'
+            name='Harvest Cost'
             stackId='1'
             stroke='#8884d8'
             fill='#8884d8'
-            unit='$/green ton'
+            unit='$/BDT'
           />
           <Area
             type='monotone'
             dataKey='transportationCosts'
+            name='Transport Cost'
             stackId='1'
             stroke='#82ca9d'
             fill='#82ca9d'
-            unit='$/green ton'
+            unit='$/BDT'
           />
+          {props.system === 'Ground-Based CTL' && (
           <Area
             type='monotone'
             dataKey='moveInCosts'
+            name='Move-in Cost'
             stackId='1'
             stroke='#ffc658'
             fill='#ffc658'
-            unit='$/green ton'
+            unit='$/BDT'
           />
+          )}
           <Line
             type='monotone'
             dataKey='total'
+            name='Feedstock Cost'
             stroke='#ff7300'
-            unit='$/green ton'
+            unit='$/BDT'
           />
         </ComposedChart>
         {props.sensitivityResults && <></>}

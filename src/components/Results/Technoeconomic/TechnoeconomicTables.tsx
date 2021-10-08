@@ -29,7 +29,7 @@ export const TechnoeconomicTables = (props: Props) => {
       </thead>
       <tbody>
         <tr>
-          <td>Harvest cost</td>
+          <td>Harvest Cost</td>
           <td>$/BDT</td>
           <td>
             {formatCurrency(
@@ -46,7 +46,7 @@ export const TechnoeconomicTables = (props: Props) => {
           ))}
         </tr>
         <tr>
-          <td>Transport cost</td>
+          <td>Transport Cost</td>
           <td>$/BDT</td>
           <td>
             {formatCurrency(
@@ -64,7 +64,7 @@ export const TechnoeconomicTables = (props: Props) => {
         </tr>
         {props.system === 'Ground-Based CTL' && (
           <tr>
-            <td>Move-in cost</td>
+            <td>Move-in Cost</td>
             <td>$/BDT</td>
             <td>
               {formatCurrency(
@@ -82,7 +82,7 @@ export const TechnoeconomicTables = (props: Props) => {
           </tr>
         )}
         <tr>
-          <td>Feedstock cost</td>
+          <td>Feedstock Cost</td>
           <td>$/BDT</td>
           <td>
             {formatCurrency(

@@ -48,6 +48,7 @@ export const AllResultsContainer = (props: Props) => {
         results={props.yearlyResults}
         sensitivityResults={props.sensitivityResults}
         sensitivityChartRef={sensitivityChartRef}
+        system={props.frcsInputs.system}
       />
       <AssumptionsAndReferences />
       {/* {props.teaModel === TechnoeconomicModels.genericPowerOnly &&
