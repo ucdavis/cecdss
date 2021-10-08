@@ -271,11 +271,6 @@ export const MapContainer = () => {
       }
     ).then(res => res.json());
 
-    allYearResults.location = {
-      lat: allYearInputs.facilityLat,
-      lng: allYearInputs.facilityLng
-    };
-
     allYearResults.facilityCoordinates = {
       lat: facilityCoordinates.lat,
       lng: facilityCoordinates.lng
