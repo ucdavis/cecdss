@@ -71,13 +71,6 @@ export const ResultsTable = (props: Props) => {
             <td>{props.teaInputs.Financing.EconomicLife}</td>
           </tr>
           <tr>
-            <td>Location</td>
-            <td>
-              {props.allYearResults.location.lat},{' '}
-              {props.allYearResults.location.lng}
-            </td>
-          </tr>
-          <tr>
             <td>Facility Coordinates</td>
             <td>
               {props.allYearResults.facilityCoordinates.lat},{' '}

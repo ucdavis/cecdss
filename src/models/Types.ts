@@ -258,7 +258,6 @@ export interface AllYearsResults {
   teaInputs: InputModGPO | InputModCHP | InputModGP;
   transmissionResults: any;
   nearestSubstation: string;
-  location: MapCoordinates;
   facilityCoordinates: MapCoordinates;
   biomassCoordinates: MapCoordinates;
   distanceToNearestSubstation: number; // km

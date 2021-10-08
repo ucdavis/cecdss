@@ -73,10 +73,6 @@ export const ResultsExport = (props: Props) => {
           props.allYearResults.teaInputs.Financing.EconomicLife
         ],
         [
-          'Location',
-          `${props.allYearResults.location.lat}, ${props.allYearResults.location.lng}`
-        ],
-        [
           'Facility Coordinates',
           `${props.allYearResults.facilityCoordinates.lat}, ${props.allYearResults.facilityCoordinates.lng}`
         ],

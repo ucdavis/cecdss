@@ -138,10 +138,6 @@ export const fakeallYearResults: AllYearsResults = {
   },
   annualGeneration: 186150000,
   distanceToNearestSubstation: 24.402,
-  location: {
-    lat: 39.21204328248304,
-    lng: -121.07163446489723
-  },
   facilityCoordinates: {
     lat: 39.21204328248304,
     lng: -121.07163446489723
