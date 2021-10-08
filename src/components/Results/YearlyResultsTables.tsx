@@ -34,7 +34,7 @@ export const YearlyResultsTable = (props: Props) => {
             </td>
           </tr>
           <tr>
-            <td>Transportation Cost ($/BDMT)</td>
+            <td>Transport Cost ($/BDMT)</td>
             <td>
               {formatCurrency(props.results.transportationCostPerDryTon)}
             </td>
