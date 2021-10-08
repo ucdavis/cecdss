@@ -62,7 +62,7 @@ export const ResultsCharts = (props: Props) => {
             stackId='1'
             stroke='#8884d8'
             fill='#8884d8'
-            unit='$/BDT'
+            unit='$/BDMT'
           />
           <Area
             type='monotone'
@@ -71,7 +71,7 @@ export const ResultsCharts = (props: Props) => {
             stackId='1'
             stroke='#82ca9d'
             fill='#82ca9d'
-            unit='$/BDT'
+            unit='$/BDMT'
           />
           {props.system === 'Ground-Based CTL' && (
           <Area
@@ -81,7 +81,7 @@ export const ResultsCharts = (props: Props) => {
             stackId='1'
             stroke='#ffc658'
             fill='#ffc658'
-            unit='$/BDT'
+            unit='$/BDMT'
           />
           )}
           <Line
@@ -89,7 +89,7 @@ export const ResultsCharts = (props: Props) => {
             dataKey='total'
             name='Feedstock Cost'
             stroke='#ff7300'
-            unit='$/BDT'
+            unit='$/BDMT'
           />
         </ComposedChart>
         {props.sensitivityResults && <></>}
