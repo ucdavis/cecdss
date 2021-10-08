@@ -11,7 +11,7 @@ interface Props {
 export const YearlyResultsTable = (props: Props) => {
   return (
     <div>
-      {props.biomassTarget > props.results.totalFeedstock && (
+      {props.biomassTarget > props.results.totalDryFeedstock && (
         <Alert color='danger'>
           The settings you selected did not return enough biomass to meet the
           yearly requirement.
@@ -20,31 +20,35 @@ export const YearlyResultsTable = (props: Props) => {
       <table className='table'>
         <tbody>
           <tr>
-            <td>Annual Fuel Consumption (tons)</td>
-            <td>{formatNumber(props.biomassTarget)}</td>
+            <td>Feedstock (BDMT)</td>
+            <td>{formatNumber(props.results.totalDryFeedstock)}</td>
           </tr>
           <tr>
-            <td>Harvest Cost ($/ton)</td>
+            <td>Coproduct (BDMT)</td>
+            <td>{formatNumber(props.results.totalDryCoproduct)}</td>
+          </tr>
+          <tr>
+            <td>Harvest Cost ($/BDMT)</td>
             <td>
               {formatCurrency(props.results.harvestCostPerDryTon)}
             </td>
           </tr>
           <tr>
-            <td>Transportation Cost ($/ton)</td>
+            <td>Transportation Cost ($/BDMT)</td>
             <td>
               {formatCurrency(props.results.transportationCostPerDryTon)}
             </td>
           </tr>
           {props.results.totalMoveInCost > 0 && (
             <tr>
-              <td>Move In Cost ($/ton)</td>
+              <td>Move In Cost ($/BDMT)</td>
               <td>
                 {formatCurrency(props.results.moveInCostPerDryTon)}
               </td>
             </tr>
           )}
           <tr>
-            <td>Fuel Cost ($/ton)</td>
+            <td>Feedstock Cost ($/BDMT)</td>
             <td>{formatCurrency(props.results.totalCostPerDryTon)}</td>
           </tr>
           {/* <tr>
