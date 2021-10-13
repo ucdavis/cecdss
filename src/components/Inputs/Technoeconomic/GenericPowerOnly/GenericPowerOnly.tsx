@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Input,
   Label,
-  Button,
   InputGroup,
   InputGroupAddon,
   FormText,
-  Form,
   FormGroup
 } from 'reactstrap';
 import {
-  InputModGPO,
   ElectricalFuelBaseYearInputModGPO,
   IncomeOtherThanEnergyInputMod,
   ExpensesBaseYearInputModGPO,
   TaxesInputMod,
   EscalationInflationInputMod,
-  FinancingInputMod
+  FinancingInputMod,
+  CarbonCredit
 } from '@ucdavis/tea/input.model';
 import { ElectricalAndFuelBaseYearInput } from '../ElectricalAndFuelBaseYearInput';
 import { ExpensesBaseYearInput } from '../ExpensesBaseYearInput';
@@ -24,6 +22,7 @@ import { TaxesInput } from '../TaxesInput';
 import { IncomeOtherThanEnergyInput } from '../IncomeOtherThanEnergyInput';
 import { EscalationInflationInput } from '../EscalationInflationInput';
 import { FinancingInput } from '../FinancingInput';
+import { CarbonCreditInput } from '../CarbonCreditInput';
 
 interface Props {
   // inputs: InputModGPO;
@@ -91,6 +90,20 @@ export const GenericPowerOnly = (props: Props) => {
         }
         disabled={props.disabled}
       />
+      <CarbonCreditInput
+        inputs={props.inputs.CarbonCredit}
+        setInputs={(inputs: CarbonCredit) =>
+          props.setInputs({ ...props.inputs, CarbonCredit: inputs })
+        }
+        includeCredits={props.inputs.IncludeCarbonCredit}
+        setIncludeCredits={(includeCredits: boolean) => {
+          props.setInputs({
+            ...props.inputs,
+            IncludeCarbonCredit: includeCredits
+          });
+        }}
+        disabled={props.disabled}
+      ></CarbonCreditInput>
       <EscalationInflationInput
         inputs={props.inputs.EscalationInflation}
         setInputs={(inputs: EscalationInflationInputMod) =>

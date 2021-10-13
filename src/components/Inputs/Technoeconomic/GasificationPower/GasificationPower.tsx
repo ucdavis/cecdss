@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Form } from 'reactstrap';
+import React from 'react';
 import {
   InputModGP,
   CapitalCostInputModGP,
@@ -9,17 +8,18 @@ import {
   TaxesInputMod,
   FinancingInputMod,
   IncomeOtherThanEnergyInputModGP,
-  EscalationInflationInputModGP
+  EscalationInflationInputModGP,
+  CarbonCredit
 } from '@ucdavis/tea/input.model';
 import { CapitalCostInputGP } from './CapitalCostInputGP';
 import { HeatBaseYearInput } from '../HeatBaseYearInput';
-import { ExpensesBaseYearInput } from '../ExpensesBaseYearInput';
 import { TaxesInput } from '../TaxesInput';
 import { FinancingInput } from '../FinancingInput';
 import { IncomeOtherThanEnergyInput } from '../IncomeOtherThanEnergyInput';
 import { EscalationInflationInput } from '../EscalationInflationInput';
 import { ElectricalAndFuelBaseYearInputGP } from './ElectricalAndFuelBaseYearInputGP';
 import { ExpensesBaseYearInputGP } from './ExpensesBaseYearInputGP';
+import { CarbonCreditInput } from '../CarbonCreditInput';
 
 interface Props {
   inputs: InputModGP;
@@ -78,6 +78,20 @@ export const GasificationPower = (props: Props) => {
         }
         disabled={props.disabled}
       />
+      <CarbonCreditInput
+        inputs={props.inputs.CarbonCredit}
+        setInputs={(inputs: CarbonCredit) =>
+          props.setInputs({ ...props.inputs, CarbonCredit: inputs })
+        }
+        includeCredits={props.inputs.IncludeCarbonCredit}
+        setIncludeCredits={(includeCredits: boolean) => {
+          props.setInputs({
+            ...props.inputs,
+            IncludeCarbonCredit: includeCredits
+          });
+        }}
+        disabled={props.disabled}
+      ></CarbonCreditInput>
       <EscalationInflationInput
         inputs={props.inputs.EscalationInflation}
         setInputs={(inputs: EscalationInflationInputModGP) =>
