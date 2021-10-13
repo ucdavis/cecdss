@@ -21,8 +21,6 @@ interface Props {
   teaModel: string;
 }
 
-const MILE_TO_KM = 1.60934;
-
 export const ResultsExport = (props: Props) => {
   // don't show export until all years are done running
   if (!props.yearlyResults || props.yearlyResults.length < props.teaInputs.Financing.EconomicLife) {
@@ -101,7 +99,7 @@ export const ResultsExport = (props: Props) => {
       rows: [
         [
           'Feedstock',
-          'BDT',
+          'BDMT',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.totalDryFeedstock,
@@ -114,7 +112,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Coproduct',
-          'BDT',
+          'BDMT',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.totalDryCoproduct, 
@@ -145,7 +143,7 @@ export const ResultsExport = (props: Props) => {
       rows: [
         [
           'Diesel',
-          'gal',
+          'L',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.diesel,
@@ -158,7 +156,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Gasoline',
-          'gal',
+          'L',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.gasoline,
@@ -171,7 +169,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Jet Fuel',
-          'gal',
+          'L',
           formatNumber(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.jetfuel,
@@ -189,10 +187,10 @@ export const ResultsExport = (props: Props) => {
             props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.distance,
               0
-            ) * MILE_TO_KM / props.yearlyResults.length * 1000
+            ) / props.yearlyResults.length * 1000
           ),
           ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.distance * MILE_TO_KM * 1000)
+            formatNumber(year.lcaResults.inputs.distance * 1000)
           )
         ]
       ]
@@ -324,7 +322,7 @@ export const ResultsExport = (props: Props) => {
             ) * 1000 / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.CO2e * 1000)
+            formatNumber(r.lcaResults.lciResults.CI * 1000)
           )
         ]
       ]
@@ -442,7 +440,7 @@ export const ResultsExport = (props: Props) => {
       rows: [
         [
           'Harvest Cost',
-          '$/BDT',
+          '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.harvestCostPerDryTon,
@@ -455,7 +453,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Transport Cost',
-          '$/BDT',
+          '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.transportationCostPerDryTon,
@@ -468,7 +466,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Move-in Cost',
-          '$/BDT',
+          '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.moveInCostPerDryTon,
@@ -481,7 +479,7 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Feedstock Cost',
-          '$/BDT',
+          '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
               (sum, year) => sum + year.totalCostPerDryTon,

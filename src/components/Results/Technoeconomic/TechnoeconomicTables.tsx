@@ -30,7 +30,7 @@ export const TechnoeconomicTables = (props: Props) => {
       <tbody>
         <tr>
           <td>Harvest Cost</td>
-          <td>$/BDT</td>
+          <td>$/BDMT</td>
           <td>
             {formatCurrency(
               props.yearlyResults.reduce(
@@ -47,7 +47,7 @@ export const TechnoeconomicTables = (props: Props) => {
         </tr>
         <tr>
           <td>Transport Cost</td>
-          <td>$/BDT</td>
+          <td>$/BDMT</td>
           <td>
             {formatCurrency(
               props.yearlyResults.reduce(
@@ -65,7 +65,7 @@ export const TechnoeconomicTables = (props: Props) => {
         {props.system === 'Ground-Based CTL' && (
           <tr>
             <td>Move-in Cost</td>
-            <td>$/BDT</td>
+            <td>$/BDMT</td>
             <td>
               {formatCurrency(
                 props.yearlyResults.reduce(
@@ -83,7 +83,7 @@ export const TechnoeconomicTables = (props: Props) => {
         )}
         <tr>
           <td>Feedstock Cost</td>
-          <td>$/BDT</td>
+          <td>$/BDMT</td>
           <td>
             {formatCurrency(
               props.yearlyResults.reduce(

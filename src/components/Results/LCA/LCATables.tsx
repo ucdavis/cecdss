@@ -7,8 +7,6 @@ interface Props {
   yearlyResults: YearlyResult[];
 }
 
-const MILE_TO_KM = 1.60934;
-
 export const LCATables = (props: Props) => {
   return (
     <Table responsive bordered hover>
@@ -35,7 +33,7 @@ export const LCATables = (props: Props) => {
         </tr>
         <tr>
           <td>Diesel</td>
-          <td>gal</td>
+          <td>L</td>
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
@@ -52,7 +50,7 @@ export const LCATables = (props: Props) => {
         </tr>
         <tr>
           <td>Gasoline</td>
-          <td>gal</td>
+          <td>L</td>
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
@@ -69,7 +67,7 @@ export const LCATables = (props: Props) => {
         </tr>
         <tr>
           <td>Jet Fuel</td>
-          <td>gal</td>
+          <td>L</td>
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
@@ -92,12 +90,12 @@ export const LCATables = (props: Props) => {
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.lcaResults.inputs.distance,
                 0
-              ) * MILE_TO_KM / props.yearlyResults.length * 1000
+              ) / props.yearlyResults.length * 1000
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`distance-${i}`}>
-              {formatNumber(result.lcaResults.inputs.distance * MILE_TO_KM * 1000)}
+              {formatNumber(result.lcaResults.inputs.distance * 1000)}
             </td>
           ))}
         </tr>
