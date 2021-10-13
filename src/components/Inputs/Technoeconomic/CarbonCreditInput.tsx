@@ -48,9 +48,11 @@ export const CarbonCreditInput = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/tonne</InputGroupAddon>
+          <InputGroupAddon addonType='append'>$/MT</InputGroupAddon>
         </InputGroup>
-        <FormText color='muted'>Carbon Credit Price in $/tonne</FormText>
+        <FormText color='muted'>
+          Low Carbon Fuel Standard (LCFS) credit price
+        </FormText>
       </FormGroup>
       <FormGroup>
         <Label>Energy Economy Ratio</Label>
@@ -68,7 +70,11 @@ export const CarbonCreditInput = (props: Props) => {
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
-        <FormText color='muted'>TBD</FormText>
+        <FormText color='muted'>
+          Different vehicles have different fuel efficiencies. The EER allows
+          for fuel used through more efficient vehicle pathways to be given
+          credit for displacing conventional fuels.
+        </FormText>
       </FormGroup>
     </>
   );
