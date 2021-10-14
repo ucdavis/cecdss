@@ -21,7 +21,7 @@ export const GeoJsonLayers = (props: Props) => {
       props.selectedYearIndex === props.years.length
     ) {
       return (
-        <div>
+        <div key={`div-year-${i}`}>
           {(geojsonData as any).map((cluster: ClusterFeature) => (
             <GeoJSON key={`geoData-${cluster.id}`} data={cluster.geometry}>
               <Popup>
