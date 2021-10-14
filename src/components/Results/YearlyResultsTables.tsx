@@ -11,7 +11,7 @@ interface Props {
 export const YearlyResultsTable = (props: Props) => {
   return (
     <div>
-      {props.biomassTarget > props.results.totalDryFeedstock && (
+      {props.biomassTarget > props.results.totalFeedstock && (
         <Alert color='danger'>
           The settings you selected did not return enough biomass to meet the
           yearly requirement.
