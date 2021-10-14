@@ -13,11 +13,7 @@ import {
 import { FrcsInputs, MapCoordinates } from '../../models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
-import {
-  InputModGPO,
-  InputModCHP,
-  InputModGP
-} from '@ucdavis/tea/input.model';
+import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 
 interface Props {
   facilityCoordinates: MapCoordinates;
@@ -117,9 +113,15 @@ export const InputContainer = (props: Props) => {
               <Input
                 type='checkbox'
                 checked={props.selectBiomassCoordinates}
-                onChange={e =>
-                  props.setSelectBiomassCoordinates(e.target.checked)
-                }
+                onChange={e => {
+                  if (!e.target.checked) {
+                    // if we are unchecking the box, set the biomass to whatever the facility location is
+                    props.setBiomassCoordinates({
+                      ...props.facilityCoordinates
+                    });
+                  }
+                  props.setSelectBiomassCoordinates(e.target.checked);
+                }}
               />{' '}
               Select Separate Biomass Coordinates
             </Label>
