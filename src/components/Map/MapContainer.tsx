@@ -36,11 +36,8 @@ import { HeatmapLayers } from './HeatmapLayers';
 import { PaginationItem, PaginationLink, Button, Pagination } from 'reactstrap';
 import { ResultsContainer } from '../Results/ResultsContainer';
 import { GeoJsonLayers } from './GeoJsonLayers';
-import {
-  computeConstantLAC,
-  computeCurrentLAC,
-} from '@ucdavis/tea/utility';
-import { runSensitivityAnalysis} from '@ucdavis/tea/sensitivity'
+import { computeConstantLAC, computeCurrentLAC } from '@ucdavis/tea/utility';
+import { runSensitivityAnalysis } from '@ucdavis/tea/sensitivity';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
 import { ExternalLayerSelection } from './ExternalLayerSelection';
@@ -157,6 +154,12 @@ export const MapContainer = () => {
     selectBiomassCoordinates,
     setSelectBiomassCoordinates
   ] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!selectBiomassCoordinates) {
+      setBiomassCoordinates({ ...facilityCoordinates });
+    }
+  }, [selectBiomassCoordinates, facilityCoordinates]);
 
   let mapRef: any = createRef<Map>();
 
@@ -353,7 +356,7 @@ export const MapContainer = () => {
         generalInflation: teaInputs.EscalationInflation.GeneralInflation,
         carbonCreditPrice: 196, // hardcoded for now; should be replaced by user specified value
         energyEconomyRatio: 1, // hardcoded for now; should be replaced by user specified value
-        includeCarbonCredit: false, // hardcoded for now; should be replaced by user specified option
+        includeCarbonCredit: false // hardcoded for now; should be replaced by user specified option
       };
       const yearResult: YearlyResult = await fetch(serviceUrl + 'process', {
         mode: 'cors',
@@ -558,7 +561,7 @@ export const MapContainer = () => {
         className={expandedResults ? 'expanded-results' : 'sidebar'}
         id='sidebar'
       >
-        <div className="layers-container">
+        <div className='layers-container'>
           <ExternalLayerSelection onChange={setExternalLayers} />
           <ExternalLayerLegend layers={externalLayers} />
         </div>
