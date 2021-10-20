@@ -10,7 +10,7 @@ import { PlantLegend } from './Layers/PlantLegend';
 import { OwnershipLegend } from './Layers/OwnershipLegend';
 import { CountyLegend } from './Layers/CountyLegend';
 import { UrbanCitiesLegend } from './Layers/UrbanCitiesLegend';
-import { AirQualityLegend } from './Layers/AirQualityLegend';
+import { AirDistrictsLegend } from './Layers/AirDistrictsLegend';
 
 interface Props {
   layers: string[];
@@ -49,7 +49,7 @@ export const ExternalLayerLegend = (props: Props) => {
           {props.layers.includes('ownership') && <OwnershipLegend />}
           {props.layers.includes('county') && <CountyLegend />}
           {props.layers.includes('urbanCities') && <UrbanCitiesLegend />}
-          {props.layers.includes('airQuality') && <AirQualityLegend />}
+          {props.layers.includes('airDistricts') && <AirDistrictsLegend />}
         </div>
       </Collapse>
     </div>

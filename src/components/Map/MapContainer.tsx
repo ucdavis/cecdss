@@ -679,10 +679,10 @@ export const MapContainer = () => {
             }
           />
         )}
-        {externalLayers.includes('airQuality') && (
+        {externalLayers.includes('airDistricts') && (
           <FeatureLayer
             url={
-              'https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/Air%20Now%20Current%20Monitor%20Data%20Public/FeatureServer/0'
+              'https://services.arcgis.com/jDGuO8tYggdCCnUJ/ArcGIS/rest/services/California_Air_Districts/FeatureServer/0'
             }
           />
         )}
