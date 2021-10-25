@@ -29,27 +29,29 @@ export const YearlyResultsTable = (props: Props) => {
           </tr>
           <tr>
             <td>Harvest Cost ($/BDMT)</td>
-            <td>
-              {formatCurrency(props.results.harvestCostPerDryTon)}
-            </td>
+            <td>{formatCurrency(props.results.harvestCostPerDryTon)}</td>
           </tr>
           <tr>
             <td>Transport Cost ($/BDMT)</td>
-            <td>
-              {formatCurrency(props.results.transportationCostPerDryTon)}
-            </td>
+            <td>{formatCurrency(props.results.transportationCostPerDryTon)}</td>
           </tr>
           {props.results.totalMoveInCost > 0 && (
             <tr>
               <td>Move In Cost ($/BDMT)</td>
-              <td>
-                {formatCurrency(props.results.moveInCostPerDryTon)}
-              </td>
+              <td>{formatCurrency(props.results.moveInCostPerDryTon)}</td>
             </tr>
           )}
           <tr>
             <td>Feedstock Cost ($/BDMT)</td>
             <td>{formatCurrency(props.results.totalCostPerDryTon)}</td>
+          </tr>
+          <tr>
+            <td>Landing Site Spread (m)</td>
+            <td>
+              {Math.min(...props.results.clusters.map(c => c.landing_distance))}{' '}
+              to{' '}
+              {Math.max(...props.results.clusters.map(c => c.landing_distance))}
+            </td>
           </tr>
           {/* <tr>
             <td>Number of Clusters Used</td>

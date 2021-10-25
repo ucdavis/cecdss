@@ -205,6 +205,7 @@ export interface ClusterResult {
   center_lng: number;
   landing_lat: number;
   landing_lng: number;
+  landing_distance: number;
   county: string;
   land_use: string;
   site_class: number;
