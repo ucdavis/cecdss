@@ -701,6 +701,13 @@ export const MapContainer = () => {
             opacity={0.7}
           />
         )}
+        {externalLayers.includes('dataBoundary') && (
+          <FeatureLayer
+            url={
+              'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/ArcGIS/rest/services/FL_Sierra/FeatureServer/0'
+            }
+          />
+        )}
         {yearlyResults.length > 0 && (
           <>
             {showMoveInGeoJson && (
