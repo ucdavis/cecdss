@@ -354,9 +354,9 @@ export const MapContainer = () => {
         cashFlow: allYearResults.teaResults.AnnualCashFlows[index],
         costOfEquity: allYearResults.teaInputs.Financing.CostOfEquity,
         generalInflation: teaInputs.EscalationInflation.GeneralInflation,
-        carbonCreditPrice: 196, // hardcoded for now; should be replaced by user specified value
-        energyEconomyRatio: 1, // hardcoded for now; should be replaced by user specified value
-        includeCarbonCredit: false // hardcoded for now; should be replaced by user specified option
+        carbonCreditPrice: teaInputs.CarbonCredit.CreditPrice,
+        energyEconomyRatio: teaInputs.CarbonCredit.EnergyEconomyRatio,
+        includeCarbonCredit: teaInputs.IncludeCarbonCredit
       };
       const yearResult: YearlyResult = await fetch(serviceUrl + 'process', {
         mode: 'cors',
