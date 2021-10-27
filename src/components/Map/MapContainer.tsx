@@ -428,8 +428,12 @@ export const MapContainer = () => {
     allYearResults.teaResults.CurrentLAC.TotalPresentWorth = totalPresentWorth;
     allYearResults.teaResults.CurrentLAC.PresentWorth = energyRevenueRequiredPresentYears;
     allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy = constantLAC[-1];
-    allYearResults.levelizedCostOfElectricity.currentLCOE = currentLAC;
-    allYearResults.levelizedCostOfElectricity.constantLCOE = constantLAC;
+    // response from initialProcessing of backend does not include LCOE
+    // LCOE is computed after getting the response
+    allYearResults.levelizedCostOfElectricity = {
+      currentLCOE: currentLAC,
+      constantLCOE: constantLAC
+    };
     setAllYearResults(allYearResults);
   };
 
