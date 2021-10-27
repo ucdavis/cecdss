@@ -138,14 +138,6 @@ export const ResultsTable = (props: Props) => {
             0,
             props.yearlyResults.length
           )}
-          currentLCOE={props.allYearResults.levelizedCostOfElectricity.currentLCOE.slice(
-            0,
-            props.yearlyResults.length
-          )}
-          constantLCOE={props.allYearResults.levelizedCostOfElectricity.constantLCOE.slice(
-            0,
-            props.yearlyResults.length
-          )}
           system={props.frcsInputs.system}
         />
       </div>

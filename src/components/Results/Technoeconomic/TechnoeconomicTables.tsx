@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatCurrency } from '../../Shared/util';
+import { formatCurrency, formatNumber } from '../../Shared/util';
 import { YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
 import { CashFlow } from '@ucdavis/tea/output.model';
@@ -7,8 +7,6 @@ import { CashFlow } from '@ucdavis/tea/output.model';
 interface Props {
   yearlyResults: YearlyResult[];
   cashFlows: CashFlow[];
-  currentLCOE: number[];
-  constantLCOE: number[];
   system: String;
 }
 
@@ -440,11 +438,15 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$/MWh</td>
           <td>
             {formatCurrency(
-              props.currentLCOE.reduce((sum, x) => sum + x, 0) * 1000
+              (props.yearlyResults.reduce((sum, x) => sum + x.currentLCOE, 0) /
+                props.yearlyResults.length) *
+                1000
             )}
           </td>
-          {props.currentLCOE.map((result, i) => (
-            <td key={`currentLCOE-${i}`}>{formatCurrency(result * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`currentLCOE-${i}`}>
+              {formatCurrency(result.currentLCOE * 1000)}
+            </td>
           ))}
         </tr>
         <tr>
@@ -452,11 +454,15 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$/MWh</td>
           <td>
             {formatCurrency(
-              props.constantLCOE.reduce((sum, x) => sum + x, 0) * 1000
+              (props.yearlyResults.reduce((sum, x) => sum + x.constantLCOE, 0) /
+                props.yearlyResults.length) *
+                1000
             )}
           </td>
-          {props.constantLCOE.map((result, i) => (
-            <td key={`constantLCOE-${i}`}>{formatCurrency(result * 1000)}</td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`constantLCOE-${i}`}>
+              {formatCurrency(result.constantLCOE * 1000)}
+            </td>
           ))}
         </tr>
       </tbody>
