@@ -23,7 +23,10 @@ interface Props {
 
 export const ResultsExport = (props: Props) => {
   // don't show export until all years are done running
-  if (!props.yearlyResults || props.yearlyResults.length < props.teaInputs.Financing.EconomicLife) {
+  if (
+    !props.yearlyResults ||
+    props.yearlyResults.length < props.teaInputs.Financing.EconomicLife
+  ) {
     return <></>;
   }
 
@@ -64,7 +67,9 @@ export const ResultsExport = (props: Props) => {
         ],
         [
           'Net Station Efficiency (%)',
-          formatNumber(props.teaInputs.ElectricalFuelBaseYear.NetStationEfficiency)
+          formatNumber(
+            props.teaInputs.ElectricalFuelBaseYear.NetStationEfficiency
+          )
         ],
         [
           'Economic Life (y)',
@@ -115,11 +120,11 @@ export const ResultsExport = (props: Props) => {
           'BDMT',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.totalDryCoproduct, 
+              (sum, year) => sum + year.totalDryCoproduct,
               0
             )
           ),
-          ...props.yearlyResults.map(year => 
+          ...props.yearlyResults.map(year =>
             formatNumber(year.totalDryCoproduct)
           )
         ]
@@ -145,10 +150,12 @@ export const ResultsExport = (props: Props) => {
           'Diesel',
           'L',
           formatNumber(
-            props.yearlyResults.reduce(
+            (props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.diesel,
               0
-            ) / props.yearlyResults.length * 1000
+            ) /
+              props.yearlyResults.length) *
+              1000
           ),
           ...props.yearlyResults.map(year =>
             formatNumber(year.lcaResults.inputs.diesel * 1000)
@@ -158,10 +165,12 @@ export const ResultsExport = (props: Props) => {
           'Gasoline',
           'L',
           formatNumber(
-            props.yearlyResults.reduce(
+            (props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.gasoline,
               0
-            ) / props.yearlyResults.length * 1000
+            ) /
+              props.yearlyResults.length) *
+              1000
           ),
           ...props.yearlyResults.map(year =>
             formatNumber(year.lcaResults.inputs.gasoline * 1000)
@@ -171,10 +180,12 @@ export const ResultsExport = (props: Props) => {
           'Jet Fuel',
           'L',
           formatNumber(
-            props.yearlyResults.reduce(
+            (props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.jetfuel,
               0
-            ) / props.yearlyResults.length * 1000
+            ) /
+              props.yearlyResults.length) *
+              1000
           ),
           ...props.yearlyResults.map(year =>
             formatNumber(year.lcaResults.inputs.jetfuel * 1000)
@@ -184,10 +195,12 @@ export const ResultsExport = (props: Props) => {
           'Transport Distance',
           'km',
           formatNumber(
-            props.yearlyResults.reduce(
+            (props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.inputs.distance,
               0
-            ) / props.yearlyResults.length * 1000
+            ) /
+              props.yearlyResults.length) *
+              1000
           ),
           ...props.yearlyResults.map(year =>
             formatNumber(year.lcaResults.inputs.distance * 1000)
@@ -316,10 +329,12 @@ export const ResultsExport = (props: Props) => {
           'Carbon Intensity',
           'kg CO2e',
           formatNumber(
-            props.yearlyResults.reduce(
+            (props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciResults.CI,
               0
-            ) * 1000 / props.yearlyResults.length
+            ) *
+              1000) /
+              props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciResults.CI * 1000)
@@ -344,11 +359,13 @@ export const ResultsExport = (props: Props) => {
           'Global Warming Air',
           'kg CO2 eq',
           formatNumber(
-            props.yearlyResults.reduce(
+            (props.yearlyResults.reduce(
               (sum, year) =>
                 sum + year.lcaResults.lciaResults.global_warming_air,
               0
-            ) * 1000 / props.yearlyResults.length
+            ) *
+              1000) /
+              props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciaResults.global_warming_air * 1000)
@@ -358,11 +375,13 @@ export const ResultsExport = (props: Props) => {
           'Acidification Air',
           'kg SO2 eq',
           formatNumber(
-            props.yearlyResults.reduce(
+            (props.yearlyResults.reduce(
               (sum, year) =>
                 sum + year.lcaResults.lciaResults.acidification_air,
               0
-            ) * 1000 / props.yearlyResults.length
+            ) *
+              1000) /
+              props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciaResults.acidification_air * 1000)
@@ -372,11 +391,13 @@ export const ResultsExport = (props: Props) => {
           'HH Particulate Air',
           'kg PM2.5 eq',
           formatNumber(
-            props.yearlyResults.reduce(
+            (props.yearlyResults.reduce(
               (sum, year) =>
                 sum + year.lcaResults.lciaResults.hh_particulate_air,
               0
-            ) * 1000 / props.yearlyResults.length
+            ) *
+              1000) /
+              props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciaResults.hh_particulate_air * 1000)
@@ -386,11 +407,13 @@ export const ResultsExport = (props: Props) => {
           'Euthrophication Air',
           'kg N eq',
           formatNumber(
-            props.yearlyResults.reduce(
+            (props.yearlyResults.reduce(
               (sum, year) =>
                 sum + year.lcaResults.lciaResults.eutrophication_air,
               0
-            ) * 1000 / props.yearlyResults.length
+            ) *
+              1000) /
+              props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciaResults.eutrophication_air * 1000)
@@ -400,11 +423,13 @@ export const ResultsExport = (props: Props) => {
           'Euthrophication Water',
           'kg N eq',
           formatNumber(
-            props.yearlyResults.reduce(
+            (props.yearlyResults.reduce(
               (sum, year) =>
                 sum + year.lcaResults.lciaResults.eutrophication_water,
               0
-            ) * 1000 / props.yearlyResults.length
+            ) *
+              1000) /
+              props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciaResults.eutrophication_water * 1000)
@@ -414,10 +439,12 @@ export const ResultsExport = (props: Props) => {
           'Smog Air',
           'kg O3 eq',
           formatNumber(
-            props.yearlyResults.reduce(
+            (props.yearlyResults.reduce(
               (sum, year) => sum + year.lcaResults.lciaResults.smog_air,
               0
-            ) * 1000 / props.yearlyResults.length
+            ) *
+              1000) /
+              props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lciaResults.smog_air * 1000)
@@ -601,7 +628,9 @@ export const ResultsExport = (props: Props) => {
               0
             )
           ),
-          ...props.yearlyResults.map(r => formatCurrency(r.cashFlow.BiomassFuelCost))
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.cashFlow.BiomassFuelCost)
+          )
         ],
         [
           'Non-fuel Expenses',
@@ -728,6 +757,32 @@ export const ResultsExport = (props: Props) => {
           ...props.allYearResults.teaResults.CurrentLAC.PresentWorth.map(r =>
             formatCurrency(r)
           )
+        ],
+        [
+          'Current LCOE',
+          '$/MWh',
+          formatCurrency(
+            props.allYearResults.levelizedCostOfElectricity.currentLCOE.reduce(
+              (sum, x) => sum + x,
+              0
+            ) * 1000
+          ),
+          ...props.allYearResults.levelizedCostOfElectricity.currentLCOE.map(
+            r => formatCurrency(r * 1000)
+          )
+        ],
+        [
+          'Constant LCOE',
+          '$/MWh',
+          formatCurrency(
+            props.allYearResults.levelizedCostOfElectricity.constantLCOE.reduce(
+              (sum, x) => sum + x,
+              0
+            ) * 1000
+          ),
+          ...props.allYearResults.levelizedCostOfElectricity.constantLCOE.map(
+            r => formatCurrency(r * 1000)
+          )
         ]
       ]
     });
@@ -737,20 +792,21 @@ export const ResultsExport = (props: Props) => {
       ref: 'B68',
       headerRow: true,
       totalsRow: false,
-      columns: [{ name: 'LCOE' }, { name: 'Result' }],
+      columns: [{ name: 'LCOE' }, { name: 'Unit' }, { name: 'Result' }],
       rows: [
         [
           'Current $ LCOE',
+          '$/MWh',
           formatNumber(
-            props.allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy,
-            4
+            props.allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy * 1000
           )
         ],
         [
           'Constant $ LCOE',
+          '$/MWh',
           formatNumber(
-            props.allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy,
-            4
+            props.allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy *
+              1000
           )
         ]
       ]
