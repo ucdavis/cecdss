@@ -332,6 +332,9 @@ export const MapContainer = () => {
     let errorIds: string[] = [];
     let energyRevenueRequiredPresentYears: number[] = [];
     let cashFlows: any[] = [];
+    let currentLAC: number[] = [];
+    let constantLAC: number[] = [];
+    let totalPresentWorth = 0;
     for (let index = 0; index < years.length; index++) {
       const reqBody: RequestParams = {
         facilityLat: facilityCoordinates.lat,
@@ -341,7 +344,7 @@ export const MapContainer = () => {
         system: frcsInputs.system,
         treatmentid: frcsInputs.treatmentid,
         dieselFuelPrice: frcsInputs.dieselFuelPrice,
-        biomassTarget: allYearResults.biomassTarget, // dry metric tons per year
+        biomassTarget: allYearResults.biomassTarget, // green metric tons per year
         firstYear: years[0],
         year: years[index],
         clusterIds,
@@ -366,6 +369,24 @@ export const MapContainer = () => {
           'Content-Type': 'application/json'
         }
       }).then(res => res.json());
+
+      totalPresentWorth += yearResult.energyRevenueRequiredPW;
+      const yearlyCurrentLAC = computeCurrentLAC(
+        allYearInputs.teaInputs.Financing.CostOfEquity,
+        index + 1, // number of years
+        totalPresentWorth,
+        allYearResults.annualGeneration
+      );
+      currentLAC.push(yearlyCurrentLAC);
+      const yearlyConstantLAC = computeConstantLAC(
+        allYearInputs.teaInputs.Financing.CostOfEquity,
+        allYearInputs.teaInputs.EscalationInflation.GeneralInflation,
+        index + 1, // number of years
+        totalPresentWorth,
+        allYearResults.annualGeneration
+      );
+      constantLAC.push(yearlyConstantLAC);
+
       radius = yearResult.radius;
       const uniqueClusters = yearResult.clusterNumbers.filter(
         (item, index) => yearResult.clusterNumbers.indexOf(item) === index
@@ -402,32 +423,14 @@ export const MapContainer = () => {
       toggleShowResults(true);
       // TODO: update each year cashflow as it is done
     }
-    // get current LAC
-    const totalPresentWorth = energyRevenueRequiredPresentYears.reduce(
-      (a, b) => a + b,
-      0
-    );
-    const currentLAC = computeCurrentLAC(
-      allYearInputs.teaInputs.Financing.CostOfEquity,
-      allYearInputs.teaInputs.Financing.EconomicLife,
-      totalPresentWorth,
-      allYearResults.annualGeneration
-    );
-    const allYearResultsCopy = { ...allYearResults };
-    allYearResultsCopy.teaResults.AnnualCashFlows = cashFlows;
-    allYearResultsCopy.teaResults.CurrentLAC.CurrentLACofEnergy = currentLAC;
-    allYearResultsCopy.teaResults.CurrentLAC.TotalPresentWorth = totalPresentWorth;
-    allYearResultsCopy.teaResults.CurrentLAC.PresentWorth = energyRevenueRequiredPresentYears;
-
-    const constantLAC = computeConstantLAC(
-      allYearInputs.teaInputs.Financing.CostOfEquity,
-      allYearInputs.teaInputs.EscalationInflation.GeneralInflation,
-      allYearInputs.teaInputs.Financing.EconomicLife,
-      totalPresentWorth,
-      allYearResultsCopy.annualGeneration
-    );
-    allYearResultsCopy.teaResults.ConstantLAC.ConstantLACofEnergy = constantLAC;
-    setAllYearResults(allYearResultsCopy);
+    allYearResults.teaResults.AnnualCashFlows = cashFlows;
+    allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy = currentLAC[-1];
+    allYearResults.teaResults.CurrentLAC.TotalPresentWorth = totalPresentWorth;
+    allYearResults.teaResults.CurrentLAC.PresentWorth = energyRevenueRequiredPresentYears;
+    allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy = constantLAC[-1];
+    allYearResults.levelizedCostOfElectricity.currentLCOE = currentLAC;
+    allYearResults.levelizedCostOfElectricity.constantLCOE = constantLAC;
+    setAllYearResults(allYearResults);
   };
 
   const accessToken =
