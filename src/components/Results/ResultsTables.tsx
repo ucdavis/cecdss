@@ -55,7 +55,9 @@ export const ResultsTable = (props: Props) => {
           <tr>
             <td>Net Electrical Capacity (kWe)</td>
             <td>
-              {formatNumber(props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity)}
+              {formatNumber(
+                props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity
+              )}
             </td>
           </tr>
           {props.teaModel === 'GPO' && (
@@ -98,20 +100,20 @@ export const ResultsTable = (props: Props) => {
       <Table responsive bordered hover>
         <tbody>
           <tr>
-            <td>Current $ LCOE ($/kWh)</td>
+            <td>Current $ LCOE ($/MWh)</td>
             <td>
               {formatNumber(
-                props.allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy,
-                4
+                props.allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy *
+                  1000
               )}
             </td>
           </tr>
           <tr>
-            <td>Constant $ LCOE ($/kWh)</td>
+            <td>Constant $ LCOE ($/MWh)</td>
             <td>
               {formatNumber(
-                props.allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy,
-                4
+                props.allYearResults.teaResults.ConstantLAC
+                  .ConstantLACofEnergy * 1000
               )}
             </td>
           </tr>
@@ -136,7 +138,11 @@ export const ResultsTable = (props: Props) => {
             0,
             props.yearlyResults.length
           )}
-          presentWorth={props.allYearResults.teaResults.CurrentLAC.PresentWorth.slice(
+          currentLCOE={props.allYearResults.levelizedCostOfElectricity.currentLCOE.slice(
+            0,
+            props.yearlyResults.length
+          )}
+          constantLCOE={props.allYearResults.levelizedCostOfElectricity.constantLCOE.slice(
             0,
             props.yearlyResults.length
           )}
