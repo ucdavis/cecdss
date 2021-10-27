@@ -8,11 +8,7 @@ import {
 } from '@ucdavis/tea/output.model';
 import { OutputVarMod } from '@ucdavis/frcs/out/systems/frcs.model';
 import { LCAresults } from './LCAModels';
-import {
-  InputModGPO,
-  InputModCHP,
-  InputModGP
-} from '@ucdavis/tea/input.model';
+import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { Feature, FeatureCollection, GeoJsonObject, Point } from 'geojson';
 
 export interface RequestParams {
@@ -262,4 +258,5 @@ export interface AllYearsResults {
   facilityCoordinates: MapCoordinates;
   biomassCoordinates: MapCoordinates;
   distanceToNearestSubstation: number; // km
+  levelizedCostOfElectricity: { currentLCOE: number[]; constantLCOE: number[] };
 }

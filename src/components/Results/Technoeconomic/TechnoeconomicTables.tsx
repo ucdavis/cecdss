@@ -7,7 +7,8 @@ import { CashFlow } from '@ucdavis/tea/output.model';
 interface Props {
   yearlyResults: YearlyResult[];
   cashFlows: CashFlow[];
-  presentWorth: number[];
+  currentLCOE: number[];
+  constantLCOE: number[];
   system: String;
 }
 
@@ -435,13 +436,27 @@ export const TechnoeconomicTables = (props: Props) => {
           ))}
         </tr>
         <tr>
-          <td>Present Worth</td>
-          <td>$</td>
+          <td>Current LCOE</td>
+          <td>$/MWh</td>
           <td>
-            {formatCurrency(props.presentWorth.reduce((sum, x) => sum + x, 0))}
+            {formatCurrency(
+              props.currentLCOE.reduce((sum, x) => sum + x, 0) * 1000
+            )}
           </td>
-          {props.presentWorth.map((result, i) => (
-            <td key={`presentWorth-${i}`}>{formatCurrency(result)}</td>
+          {props.currentLCOE.map((result, i) => (
+            <td key={`currentLCOE-${i}`}>{formatCurrency(result * 1000)}</td>
+          ))}
+        </tr>
+        <tr>
+          <td>Constant LCOE</td>
+          <td>$/MWh</td>
+          <td>
+            {formatCurrency(
+              props.constantLCOE.reduce((sum, x) => sum + x, 0) * 1000
+            )}
+          </td>
+          {props.constantLCOE.map((result, i) => (
+            <td key={`constantLCOE-${i}`}>{formatCurrency(result * 1000)}</td>
           ))}
         </tr>
       </tbody>
