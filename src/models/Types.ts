@@ -187,6 +187,8 @@ export interface YearlyResult {
   cashFlow: any;
   geoJson: any;
   errorGeoJson: any;
+  currentLCOE: number;
+  constantLCOE: number;
 }
 export interface ClusterResult {
   cluster_no: string;
@@ -258,5 +260,4 @@ export interface AllYearsResults {
   facilityCoordinates: MapCoordinates;
   biomassCoordinates: MapCoordinates;
   distanceToNearestSubstation: number; // km
-  levelizedCostOfElectricity: { currentLCOE: number[]; constantLCOE: number[] };
 }

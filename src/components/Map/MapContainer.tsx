@@ -332,8 +332,8 @@ export const MapContainer = () => {
     let errorIds: string[] = [];
     let energyRevenueRequiredPresentYears: number[] = [];
     let cashFlows: any[] = [];
-    let currentLAC: number[] = [];
-    let constantLAC: number[] = [];
+    let currentLAC = 0;
+    let constantLAC = 0;
     let totalPresentWorth = 0;
     for (let index = 0; index < years.length; index++) {
       const reqBody: RequestParams = {
@@ -371,21 +371,21 @@ export const MapContainer = () => {
       }).then(res => res.json());
 
       totalPresentWorth += yearResult.energyRevenueRequiredPW;
-      const yearlyCurrentLAC = computeCurrentLAC(
+      currentLAC = computeCurrentLAC(
         allYearInputs.teaInputs.Financing.CostOfEquity,
         index + 1, // number of years
         totalPresentWorth,
         allYearResults.annualGeneration
       );
-      currentLAC.push(yearlyCurrentLAC);
-      const yearlyConstantLAC = computeConstantLAC(
+      yearResult.currentLCOE = currentLAC;
+      constantLAC = computeConstantLAC(
         allYearInputs.teaInputs.Financing.CostOfEquity,
         allYearInputs.teaInputs.EscalationInflation.GeneralInflation,
         index + 1, // number of years
         totalPresentWorth,
         allYearResults.annualGeneration
       );
-      constantLAC.push(yearlyConstantLAC);
+      yearResult.constantLCOE = constantLAC;
 
       radius = yearResult.radius;
       const uniqueClusters = yearResult.clusterNumbers.filter(
@@ -424,16 +424,10 @@ export const MapContainer = () => {
       // TODO: update each year cashflow as it is done
     }
     allYearResults.teaResults.AnnualCashFlows = cashFlows;
-    allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy = currentLAC[-1];
+    allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy = currentLAC;
     allYearResults.teaResults.CurrentLAC.TotalPresentWorth = totalPresentWorth;
     allYearResults.teaResults.CurrentLAC.PresentWorth = energyRevenueRequiredPresentYears;
-    allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy = constantLAC[-1];
-    // response from initialProcessing of backend does not include LCOE
-    // LCOE is computed after getting the response
-    allYearResults.levelizedCostOfElectricity = {
-      currentLCOE: currentLAC,
-      constantLCOE: constantLAC
-    };
+    allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy = constantLAC;
     setAllYearResults(allYearResults);
   };
 

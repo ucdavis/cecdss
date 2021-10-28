@@ -762,27 +762,27 @@ export const ResultsExport = (props: Props) => {
           'Current LCOE',
           '$/MWh',
           formatCurrency(
-            props.allYearResults.levelizedCostOfElectricity.currentLCOE.reduce(
-              (sum, x) => sum + x,
+            (props.yearlyResults.reduce(
+              (sum, year) => sum + year.currentLCOE,
               0
-            ) * 1000
+            ) /
+              props.yearlyResults.length) *
+              1000
           ),
-          ...props.allYearResults.levelizedCostOfElectricity.currentLCOE.map(
-            r => formatCurrency(r * 1000)
-          )
+          ...props.yearlyResults.map(r => formatCurrency(r.currentLCOE * 1000))
         ],
         [
           'Constant LCOE',
           '$/MWh',
           formatCurrency(
-            props.allYearResults.levelizedCostOfElectricity.constantLCOE.reduce(
-              (sum, x) => sum + x,
+            (props.yearlyResults.reduce(
+              (sum, year) => sum + year.constantLCOE,
               0
-            ) * 1000
+            ) /
+              props.yearlyResults.length) *
+              1000
           ),
-          ...props.allYearResults.levelizedCostOfElectricity.constantLCOE.map(
-            r => formatCurrency(r * 1000)
-          )
+          ...props.yearlyResults.map(r => formatCurrency(r.constantLCOE * 1000))
         ]
       ]
     });
