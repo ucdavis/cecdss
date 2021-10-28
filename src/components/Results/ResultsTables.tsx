@@ -95,33 +95,6 @@ export const ResultsTable = (props: Props) => {
     );
   };
 
-  const renderLCOETable = () => {
-    return (
-      <Table responsive bordered hover>
-        <tbody>
-          <tr>
-            <td>Current $ LCOE ($/MWh)</td>
-            <td>
-              {formatNumber(
-                props.allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy *
-                  1000
-              )}
-            </td>
-          </tr>
-          <tr>
-            <td>Constant $ LCOE ($/MWh)</td>
-            <td>
-              {formatNumber(
-                props.allYearResults.teaResults.ConstantLAC
-                  .ConstantLACofEnergy * 1000
-              )}
-            </td>
-          </tr>
-        </tbody>
-      </Table>
-    );
-  };
-
   return (
     <>
       <div className='results-table'>{renderTechnicalPerformanceTable()}</div>
@@ -141,7 +114,6 @@ export const ResultsTable = (props: Props) => {
           system={props.frcsInputs.system}
         />
       </div>
-      <div className='results-table'>{renderLCOETable()}</div>
     </>
   );
 };

@@ -746,19 +746,6 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'Energy Revenue Required (PW)',
-          '$',
-          formatCurrency(
-            props.allYearResults.teaResults.CurrentLAC.PresentWorth.reduce(
-              (sum, x) => sum + x,
-              0
-            )
-          ),
-          ...props.allYearResults.teaResults.CurrentLAC.PresentWorth.map(r =>
-            formatCurrency(r)
-          )
-        ],
-        [
           'Current LCOE',
           '$/MWh',
           formatCurrency(
@@ -783,31 +770,6 @@ export const ResultsExport = (props: Props) => {
               1000
           ),
           ...props.yearlyResults.map(r => formatCurrency(r.constantLCOE * 1000))
-        ]
-      ]
-    });
-
-    worksheet.addTable({
-      name: 'lcoe',
-      ref: 'B68',
-      headerRow: true,
-      totalsRow: false,
-      columns: [{ name: 'LCOE' }, { name: 'Unit' }, { name: 'Result' }],
-      rows: [
-        [
-          'Current $ LCOE',
-          '$/MWh',
-          formatNumber(
-            props.allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy * 1000
-          )
-        ],
-        [
-          'Constant $ LCOE',
-          '$/MWh',
-          formatNumber(
-            props.allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy *
-              1000
-          )
         ]
       ]
     });
