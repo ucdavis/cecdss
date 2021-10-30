@@ -1,7 +1,6 @@
 import * as yup from 'yup';
 import { SchemaOf } from 'yup';
 import {
-  CapitalCostInputModGP,
   ElectricalFuelBaseYearInputModCHP,
   ElectricalFuelBaseYearInputModGPO,
   ElectricalFuelBaseYearInputModGP,
@@ -19,16 +18,6 @@ import {
   TaxesInputMod,
   CarbonCredit
 } from '@ucdavis/tea/input.model';
-
-export const capitalCostElements: SchemaOf<CapitalCostInputModGP> = yup
-  .object()
-  .shape({
-    EmissionControlSystemCapitalCost: yup.number().required().min(0),
-    GasCleaningSystemCapitalCost: yup.number().required().min(0),
-    GasifierSystemCapitalCost: yup.number().required().min(0),
-    HeatRecoverySystemCapitalCost: yup.number().required().min(0),
-    PowerGenerationCapitalCost: yup.number().required().min(0)
-  });
 
 export const electricalFuelBaseYearGPOSchema: SchemaOf<ElectricalFuelBaseYearInputModGPO> = yup
   .object()
@@ -196,8 +185,6 @@ export const teaCHPSchema: SchemaOf<InputModCHP> = yup.object().shape({
 
 export const teaGPSchema: SchemaOf<InputModGP> = yup.object().shape({
   CapitalCost: yup.number().required().min(0),
-  CapitalCostElements: capitalCostElements,
-  doSensitivityAnalysis: yup.boolean().required(),
   ElectricalFuelBaseYear: electricalFuelBaseYearGPSchema,
   EscalationInflation: escalationInflationGPSchema,
   ExpensesBaseYear: expenseBaseYearGPSchema,

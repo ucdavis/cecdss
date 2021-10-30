@@ -1,6 +1,5 @@
 import {
   InputModGP,
-  CapitalCostInputModGP,
   ExpensesBaseYearInputModGP,
   FinancingInputMod,
   IncomeOtherThanEnergyInputModGP,
@@ -19,8 +18,6 @@ import {
 } from './TEASharedClasses';
 
 export class InputModGPClass implements InputModGP {
-  doSensitivityAnalysis = true;
-  CapitalCostElements = new CapitalCostInputModGPClass();
   CapitalCost = 875000;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPClass();
   HeatBaseYear = new HeatBaseYearInputModGPClass();
@@ -33,14 +30,6 @@ export class InputModGPClass implements InputModGP {
   CarbonCredit = new CarbonCreditClass();
   IncludeCarbonCredit = false;
   FirstYear = 2016;
-}
-
-export class CapitalCostInputModGPClass implements CapitalCostInputModGP {
-  GasifierSystemCapitalCost = 300000;
-  GasCleaningSystemCapitalCost = 50000;
-  PowerGenerationCapitalCost = 450000;
-  EmissionControlSystemCapitalCost = 25000;
-  HeatRecoverySystemCapitalCost = 50000;
 }
 
 export class ElectricalFuelBaseYearInputModGPClass
@@ -148,8 +137,7 @@ export class ElectricalFuelBaseYearModGPClass
   DualFuelFlowRate = 0;
   AnnualDualFuelConsumption = 0;
   BiomassFeedRate = 0;
-  AnnualBiomassConsumptionDryMass = 0;
-  AnnualBiomassConsumptionWetMass = 0;
+  AnnualBiomassConsumption = 0;
   CharProductionRate = 0;
   AnnualCharProduction = 0;
 }

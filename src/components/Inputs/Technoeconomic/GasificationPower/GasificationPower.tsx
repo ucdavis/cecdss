@@ -1,7 +1,13 @@
 import React from 'react';
 import {
-  InputModGP,
-  CapitalCostInputModGP,
+  Input,
+  Label,
+  InputGroup,
+  InputGroupAddon,
+  FormText,
+  FormGroup
+} from 'reactstrap';
+import {
   ElectricalFuelBaseYearInputModGP,
   HeatBaseYearInputMod,
   ExpensesBaseYearInputModGP,
@@ -11,7 +17,6 @@ import {
   EscalationInflationInputModGP,
   CarbonCredit
 } from '@ucdavis/tea/input.model';
-import { CapitalCostInputGP } from './CapitalCostInputGP';
 import { HeatBaseYearInput } from '../HeatBaseYearInput';
 import { TaxesInput } from '../TaxesInput';
 import { FinancingInput } from '../FinancingInput';
@@ -22,8 +27,10 @@ import { ExpensesBaseYearInputGP } from './ExpensesBaseYearInputGP';
 import { CarbonCreditInput } from '../CarbonCreditInput';
 
 interface Props {
-  inputs: InputModGP;
-  setInputs: (inputs: InputModGP) => void;
+  // inputs: InputModGP;
+  // setInputs: (inputs: InputModGP) => void;
+  inputs: any;
+  setInputs: (inputs: any) => void;
   disabled: boolean;
 }
 
@@ -33,13 +40,25 @@ export const GasificationPower = (props: Props) => {
   }
   return (
     <>
-      <CapitalCostInputGP
-        inputs={props.inputs.CapitalCostElements}
-        setInputs={(inputs: CapitalCostInputModGP) =>
-          props.setInputs({ ...props.inputs, CapitalCostElements: inputs })
-        }
-        disabled={props.disabled}
-      />
+      <FormGroup>
+        <Label>Capital Cost</Label>
+        <InputGroup>
+          <Input
+            type='text'
+            value={props.inputs.CapitalCost}
+            onChange={e =>
+              props.setInputs({
+                ...props.inputs,
+                CapitalCost: e.target.value,
+                CapitalCostManuallySet: true
+              })
+            }
+            disabled={props.disabled}
+          />
+          <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
+        </InputGroup>
+        <FormText color='muted'>Total installed cost of plant</FormText>
+      </FormGroup>
       <ElectricalAndFuelBaseYearInputGP
         inputs={props.inputs.ElectricalFuelBaseYear}
         setInputs={(inputs: ElectricalFuelBaseYearInputModGP) =>

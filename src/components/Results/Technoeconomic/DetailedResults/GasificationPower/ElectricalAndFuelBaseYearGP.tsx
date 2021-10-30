@@ -147,13 +147,7 @@ export const ElectricalAndFuelBaseYearGP = (props: Props) => {
           <tr>
             <td>Annual Biomass Consumption (t/y)--dry basis</td>
             <td>
-              {formatNumber(props.results.AnnualBiomassConsumptionDryMass)}
-            </td>
-          </tr>
-          <tr>
-            <td>Annual Biomass Consumption (t/y)--wet basis</td>
-            <td>
-              {formatNumber(props.results.AnnualBiomassConsumptionWetMass)}
+              {formatNumber(props.results.AnnualBiomassConsumption)}
             </td>
           </tr>
           <tr>
