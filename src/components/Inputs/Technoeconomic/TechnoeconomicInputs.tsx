@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Input, Label, FormGroup, Form } from 'reactstrap';
 import { GenericPowerOnly } from './GenericPowerOnly/GenericPowerOnly';
 import { TechnoeconomicModels } from '../../../models/Types';
-import {
-  InputModGPO,
-  InputModCHP,
-  InputModGP
-} from '@ucdavis/tea/input.model';
+import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { CombinedHeatAndPower } from './GenericCombinedHeatPower/CombinedHeatAndPower';
 import { GasificationPower } from './GasificationPower/GasificationPower';
 import { BasicTeaInputs } from './BasicTeaInputs';
@@ -77,7 +73,7 @@ export const TechnoeconomicInputs = (props: Props) => {
       {props.teaModel === TechnoeconomicModels.gasificationPower && (
         // props.teaInputs instanceof InputModGPClass && (
         <GasificationPower
-          inputs={props.teaInputs as InputModGP}
+          inputs={props.teaInputs}
           setInputs={props.setTeaInputs}
           disabled={props.disabled}
         />
