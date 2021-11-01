@@ -17,7 +17,7 @@ import {
 } from './TEASharedClasses';
 
 export class InputModGPOClass implements InputModGPO {
-  CapitalCost = 70000000;
+  CapitalCost = 71_000_000; // including $1,000,000 truck unloading cost
   CapitalCostManuallySet = false;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPOClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModGPOClass();

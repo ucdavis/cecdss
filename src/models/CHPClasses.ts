@@ -14,7 +14,7 @@ import {
 } from './TEASharedClasses';
 
 export class InputModCHPClass implements InputModCHP {
-  CapitalCost = 70000000;
+  CapitalCost = 71_000_000; // including $1,000,000 truck unloading cost
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModCHPClass();
   HeatBaseYear = new HeatBaseYearInputModClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModCHPClass();
