@@ -15,19 +15,27 @@ interface Props {
   disabled: boolean;
 }
 
-const determineScaledCapitalCost = (electricalCapacity: number) => {
+const determineScaledCapitalCost = (
+  electricalCapacity: number,
+  teaModel: string
+) => {
   const scaleFactor = 0.82; // source: https://evcvaluation.com/cost-to-capacity-method-applications-and-considerations/
-  const defaultCapitalCost = 70_000_000;
-  const defaultElectricCapacity = 25_000;
+  let defaultCapitalCost = 71_000_000;
+  let defaultElectricCapacity = 25_000;
+
+  if (teaModel === TechnoeconomicModels.gasificationPower) {
+    defaultCapitalCost = 920_000;
+    defaultElectricCapacity = 500;
+  }
 
   if (electricalCapacity === defaultElectricCapacity) {
     return defaultCapitalCost;
   } else {
-    const scaleCapitalCost =
+    const scaledCapitalCost =
       (defaultCapitalCost * (electricalCapacity / defaultElectricCapacity)) ^
       scaleFactor;
 
-    return scaleCapitalCost;
+    return scaledCapitalCost;
   }
 };
 
@@ -38,7 +46,8 @@ export const TechnoeconomicInputs = (props: Props) => {
     }
 
     const scaledCapitalCost = determineScaledCapitalCost(
-      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaModel
     );
 
     if (scaledCapitalCost !== props.teaInputs.CapitalCost) {
