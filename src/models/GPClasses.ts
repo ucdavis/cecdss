@@ -4,7 +4,7 @@ import {
   FinancingInputMod,
   IncomeOtherThanEnergyInputModGP,
   EscalationInflationInputModGP,
-  ElectricalFuelBaseYearInputModGP,
+  ElectricalFuelBaseYearInputModGP
 } from '@ucdavis/tea/input.model';
 import {
   ExpensesBaseYearModGP,
@@ -14,11 +14,11 @@ import {
 import {
   CarbonCreditClass,
   HeatBaseYearInputModClass,
-  TaxesInputModClass,
+  TaxesInputModClass
 } from './TEASharedClasses';
 
 export class InputModGPClass implements InputModGP {
-  CapitalCost = 875000;
+  CapitalCost = 920_000; // including $45,000 truck unloading cost
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPClass();
   HeatBaseYear = new HeatBaseYearInputModGPClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModGPClass();
@@ -56,7 +56,8 @@ export class HeatBaseYearInputModGPClass implements HeatBaseYearInputModClass {
   AggregateSalesPriceForHeat = 0.01;
 }
 
-export class ExpensesBaseYearInputModGPClass implements ExpensesBaseYearInputModGP {
+export class ExpensesBaseYearInputModGPClass
+  implements ExpensesBaseYearInputModGP {
   BiomassFuelCost = 22.05;
   LaborCost = 20000;
   MaintenanceCost = 4000;

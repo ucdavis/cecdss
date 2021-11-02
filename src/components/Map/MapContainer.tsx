@@ -258,9 +258,7 @@ export const MapContainer = () => {
         }
       },
       teaModel: teaModel,
-      teaInputs: teaInputs,
-      includeUnloadingCost: true,
-      unloadingCost: 10000 // default to 10,000
+      teaInputs: teaInputs
     };
     const allYearResults: AllYearsResults = await fetch(
       serviceUrl + 'initialProcessing',

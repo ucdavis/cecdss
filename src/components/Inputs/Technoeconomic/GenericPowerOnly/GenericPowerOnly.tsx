@@ -55,7 +55,9 @@ export const GenericPowerOnly = (props: Props) => {
           />
           <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
         </InputGroup>
-        <FormText color='muted'>Total installed cost of plant</FormText>
+        <FormText color='muted'>
+          Total installed cost of plant, including truck unloading cost
+        </FormText>
       </FormGroup>
 
       <ElectricalAndFuelBaseYearInput
