@@ -11,13 +11,13 @@ export const GeoJsonLayerPopup = (props: IProps) => {
 
   return (
     <div>
-      <b>Cluster: ${cluster.cluster_no}</b>
+      <b>Cluster: {cluster.cluster_no}</b>
       <hr />
-      <b>area:</b> ${formatNumber(cluster.area)}
+      <b>area:</b> {formatNumber(cluster.area)}
       <br />
-      <b>biomass:</b> ${formatNumber(cluster.biomass)}
+      <b>biomass:</b> {formatNumber(cluster.biomass)}
       <br />
-      <b>distance:</b> ${formatNumber(cluster.distance)}
+      <b>distance:</b> {formatNumber(cluster.distance)}
       <br />
       <b>combinedCost:</b> ${formatNumber(cluster.combinedCost)}
       <br />
@@ -25,15 +25,15 @@ export const GeoJsonLayerPopup = (props: IProps) => {
       <br />
       <b>transportationCost:</b> ${formatNumber(cluster.transportationCost)}
       <br />
-      <b>county:</b> ${cluster.county}
+      {/* <b>county:</b> {cluster.county}
+      <br /> */}
+      <b>land_use:</b> {cluster.land_use}
       <br />
-      <b>land_use:</b> ${cluster.land_use}
+      <b>haz_class:</b> {cluster.haz_class}
       <br />
-      <b>haz_class:</b> ${cluster.haz_class}
+      <b>forest_type:</b> {cluster.forest_type}
       <br />
-      <b>forest_type:</b> ${cluster.forest_type}
-      <br />
-      <b>site_class:</b> ${cluster.site_class}
+      <b>site_class:</b> {cluster.site_class}
       <br />
     </div>
   );
