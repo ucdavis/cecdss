@@ -42,7 +42,8 @@ const determineScaledCapitalCost = (
 export const TechnoeconomicInputs = (props: Props) => {
   useEffect(() => {
     if (props.teaInputs.CapitalCostManuallySet) {
-      return; // do nothing if the user has manually set the capital cost
+      props.teaInputs.CapitalCost = Number(props.teaInputs.CapitalCost);
+      return;
     }
 
     const scaledCapitalCost = determineScaledCapitalCost(
