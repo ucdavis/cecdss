@@ -194,6 +194,9 @@ export const MapContainer = () => {
 
     let teaInputsClone = { ...teaInputs };
     const cleanedInput = cleanTeaInput(teaInputsClone);
+    if (typeof cleanedInput.CapitalCost === 'string') {
+      cleanedInput.CapitalCost = Number(cleanedInput.CapitalCost);
+    }
     setTeaInputs(cleanedInput);
 
     // validate frcs inputs
