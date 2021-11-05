@@ -73,7 +73,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
+          <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
         <FormText color='muted'>
           Annual fraction that rated capacity is available from plant
