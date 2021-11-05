@@ -827,30 +827,6 @@ export const ResultsExport = (props: Props) => {
       ]
     });
 
-    // turn the chart into an image and embed it
-    if (props.sensitivityChart) {
-      // we should always have the chart but if it's null for some reason skip it instead of breaking
-      const chartSvg = props.sensitivityChart.current.container.children[0];
-
-      // TODO: legend isn't in SVG so it currently isn't included
-      const pngData = await svgToPng(chartSvg, 800, 600);
-
-      // add image to workbook by base64
-      const chartImageId2 = workbook.addImage({
-        base64: pngData,
-        extension: 'png'
-      });
-
-      const legendImageId = workbook.addImage({
-        base64: myBase64Image,
-        extension: 'png'
-      });
-
-      // insert an image over B2:D6
-      worksheet.addImage(chartImageId2, 'B73:J94');
-      worksheet.addImage(legendImageId, 'B97:J100');
-    }
-
     const workbookBuffer = await workbook.xlsx.writeBuffer();
 
     // send file to client
@@ -867,35 +843,6 @@ export const ResultsExport = (props: Props) => {
       </Button>
     </p>
   );
-};
-
-const svgToPng = (svg: any, width: number, height: number) => {
-  return new Promise<string>((resolve, reject) => {
-    let canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext('2d');
-
-    if (!ctx) throw Error('No canvas context found');
-
-    // Set background to white
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, width, height);
-
-    let xml = new XMLSerializer().serializeToString(svg);
-    let dataUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(xml);
-    let img = new Image(width, height);
-
-    img.onload = () => {
-      ctx.drawImage(img, 0, 0);
-      let imageData = canvas.toDataURL('image/png', 1.0);
-      resolve(imageData);
-    };
-
-    img.onerror = () => reject();
-
-    img.src = dataUrl;
-  });
 };
 
 export default ResultsExport;
