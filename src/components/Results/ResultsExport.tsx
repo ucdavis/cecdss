@@ -322,6 +322,19 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
+          'VOC',
+          'kg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lciResults.VOC,
+              0
+            ) / props.yearlyResults.length
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lciResults.VOC)
+          )
+        ],
+        [
           'Carbon Intensity',
           'kg CO2e',
           formatNumber(
