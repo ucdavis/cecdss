@@ -173,7 +173,7 @@ export const fakeYearlyResult: YearlyResult = {
   harvestCostPerDryTon: 25.9435713584955,
   transportationCostPerDryTon: 3.6153487276855683,
   moveInCostPerDryTon: 0,
-  totalCostPerDryTon: 29.558920086181065,
+  feedstockCostPerTon: 29.558920086181065,
   tripGeometries: [
     {
       coordinates: [

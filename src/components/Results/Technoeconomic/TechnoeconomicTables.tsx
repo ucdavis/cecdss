@@ -86,14 +86,14 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>
             {formatCurrency(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.totalCostPerDryTon,
+                (sum, x) => sum + x.feedstockCostPerTon,
                 0
               ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`fuelCost-${i}`}>
-              {formatCurrency(result.totalCostPerDryTon)}
+              {formatCurrency(result.feedstockCostPerTon)}
             </td>
           ))}
         </tr>
