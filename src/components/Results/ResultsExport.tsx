@@ -505,11 +505,11 @@ export const ResultsExport = (props: Props) => {
           '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.totalCostPerDryTon,
+              (sum, year) => sum + year.feedstockCostPerTon,
               0
             ) / props.yearlyResults.length
           ),
-          ...props.yearlyResults.map(r => formatCurrency(r.totalCostPerDryTon))
+          ...props.yearlyResults.map(r => formatCurrency(r.feedstockCostPerTon))
         ],
         [
           'Equity Recovery',

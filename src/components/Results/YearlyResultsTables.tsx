@@ -43,7 +43,7 @@ export const YearlyResultsTable = (props: Props) => {
           )}
           <tr>
             <td>Feedstock Cost ($/BDMT)</td>
-            <td>{formatCurrency(props.results.totalCostPerDryTon)}</td>
+            <td>{formatCurrency(props.results.feedstockCostPerTon)}</td>
           </tr>
           <tr>
             <td>Landing Site Spread (m)</td>
