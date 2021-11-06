@@ -31,10 +31,10 @@ export const ErrorGeoJsonLayers = (props: Props) => {
           onEachFeature={(feature: ErrorClusterFeature, layer: any) => {
             if (feature && feature.properties) {
               const cluster = feature.properties;
-              const customPopup = `<b>Cluster: ${cluster.cluster_no}</b><hr />
-          <b>area:</b> ${formatNumber(cluster.area)}<br/>
-          <b>slope:</b> ${formatNumber(cluster.slope)}<br/>
-          <b>error:</b> ${cluster.error}
+              const customPopup = `<b>Cluster no.${cluster.cluster_no}</b><hr />
+          <b>Area (acre):</b> ${formatNumber(cluster.area)}<br/>
+          <b>Slope (%):</b> ${formatNumber(cluster.slope)}<br/>
+          <b>Error:</b> ${cluster.error}
           `;
               layer.bindPopup(customPopup);
             }
