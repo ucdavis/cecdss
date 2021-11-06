@@ -11,29 +11,27 @@ export const GeoJsonLayerPopup = (props: IProps) => {
 
   return (
     <div>
-      <b>Cluster: ${cluster.cluster_no}</b>
+      <b>Cluster no.{cluster.cluster_no}</b>
       <hr />
-      <b>area:</b> ${formatNumber(cluster.area)}
+      <b>Area (acre):</b> {formatNumber(cluster.area)}
       <br />
-      <b>biomass:</b> ${formatNumber(cluster.biomass)}
+      <b>Feedstock (green tons):</b> {formatNumber(cluster.biomass)}
       <br />
-      <b>distance:</b> ${formatNumber(cluster.distance)}
+      <b>One-way transport distance (km):</b> {formatNumber(cluster.distance)}
       <br />
-      <b>combinedCost:</b> ${formatNumber(cluster.combinedCost)}
+      <b>Harvest cost:</b> ${formatNumber(cluster.residueCost)}
       <br />
-      <b>residueCost:</b> ${formatNumber(cluster.residueCost)}
+      <b>Transportation cost:</b> ${formatNumber(cluster.transportationCost)}
       <br />
-      <b>transportationCost:</b> ${formatNumber(cluster.transportationCost)}
+      <b>County:</b> {cluster.county}
       <br />
-      <b>county:</b> ${cluster.county}
+      <b>Land use:</b> {cluster.land_use}
       <br />
-      <b>land_use:</b> ${cluster.land_use}
+      <b>Fire hazard class:</b> {cluster.haz_class}
       <br />
-      <b>haz_class:</b> ${cluster.haz_class}
+      <b>Forest type:</b> {cluster.forest_type}
       <br />
-      <b>forest_type:</b> ${cluster.forest_type}
-      <br />
-      <b>site_class:</b> ${cluster.site_class}
+      <b>Site class:</b> {cluster.site_class}
       <br />
     </div>
   );
