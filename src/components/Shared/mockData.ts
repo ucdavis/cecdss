@@ -93,7 +93,7 @@ export const fakeallYearResults: AllYearsResults = {
     CapitalCost: 96256610.5084122,
     ElectricalFuelBaseYear: {
       NetElectricalCapacity: 25000,
-      CapacityFactor: 85,
+      CapacityFactor: 80,
       MoistureContent: 50,
       NetStationEfficiency: 20,
       FuelHeatingValue: 18608,
