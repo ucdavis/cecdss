@@ -23,8 +23,8 @@ export const GeoJsonLayerPopup = (props: IProps) => {
       <br />
       <b>Transportation cost:</b> ${formatNumber(cluster.transportationCost)}
       <br />
-      <b>County:</b> {cluster.county}
-      <br />
+      {/* <b>County:</b> {cluster.county}
+      <br /> */}
       <b>Land use:</b> {cluster.land_use}
       <br />
       <b>Fire hazard class:</b> {cluster.haz_class}
