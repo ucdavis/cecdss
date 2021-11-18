@@ -662,6 +662,7 @@ export const MapContainer = () => {
             url={
               'https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Power_Plant/FeatureServer/0'
             }
+            ignoreRenderer={true}
           />
         )}
         {externalLayers.includes('county') && (

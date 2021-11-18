@@ -6,6 +6,25 @@ export const PlantLegend = () => (
     className='esriLegendService'
     style={{ display: 'block' }}
   >
+    See{' '}
+    <a
+      target='_blank'
+      rel='noopener noreferrer'
+      href='http://www.arcgis.com/home/webmap/viewer.html?url=https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Power_Plant/FeatureServer/0&source=sd'
+    >
+      the ArcGIS map viewer
+    </a>
+    for an interactive map of the plant locations, including custom icons for
+    each plant type.
+  </div>
+);
+
+export const PlantLegendWithRenderer = () => (
+  <div
+    id='legend-main_Power_Plant_8615'
+    className='esriLegendService'
+    style={{ display: 'block' }}
+  >
     <table width='95%'>
       <tbody>
         <tr>
