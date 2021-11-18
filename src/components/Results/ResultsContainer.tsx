@@ -58,7 +58,7 @@ export const ResultsContainer = (props: Props) => {
     <>
       <div className='cardheader d-flex justify-content-between align-items-center'>
         <span>
-          <h4>CEC DSS</h4>
+          <h4>Forest Resource and Renewable Energy Decision Support System (FRREDSS)</h4>
           <h2>Results</h2>
         </span>
       </div>

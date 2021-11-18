@@ -67,7 +67,7 @@ export const InputContainer = (props: Props) => {
   return (
     <>
       <div className='cardheader'>
-        <h4>CEC DSS</h4>
+        <h4>Forest Resource and Renewable Energy Decision Support System (FRREDSS)</h4>
         <h2>Select Inputs</h2>
       </div>
       <div className='cardcontents'>

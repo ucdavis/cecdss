@@ -25,7 +25,6 @@ export const FrcsInputsContainer = (props: Props) => {
   ));
   return (
     <div className='cardcontents'>
-      <h4>Forestry and Conversion</h4>
       <Form>
         <FormGroup>
           <Label>Forest Treatment</Label>
@@ -60,7 +59,7 @@ export const FrcsInputsContainer = (props: Props) => {
           </FormText>
         </FormGroup>
         <FormGroup>
-          <Label>FRCS System</Label>
+          <Label>Harvesting System</Label>
           <Input
             type='select'
             value={props.inputs.system}
