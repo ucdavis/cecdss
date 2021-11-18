@@ -8,81 +8,101 @@ export const AssumptionsAndReferences = () => {
       <Table responsive bordered hover>
         <thead>
           <tr>
-            <th colSpan={2}>Assumptions</th>
+            <th>Assumptions</th>
+            <td>Unit</td>
+            <td>Quantity</td>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Log Length, ft</td>
+            <td>Log length</td>
+            <td>feet</td>
             <td>32</td>
           </tr>
           <tr>
-            <td>Loa dWeight, green tons (logs)</td>
+            <td>Load weight (logs)</td>
+            <td>green tons</td>
             <td>25</td>
           </tr>
           <tr>
-            <td>Load Weight, green tons (chips)</td>
+            <td>Load weight (chips)</td>
+            <td>green tons</td>
             <td>25</td>
           </tr>
           <tr>
-            <td>CTL Trail Spacing, ft</td>
+            <td>CTL trail spacing</td>
+            <td>feet</td>
             <td>50</td>
           </tr>
           <tr>
-            <td>Hardwood Cost Premium, fraction</td>
-            <td>0.2</td>
+            <td>Hardwood cost premium, fraction</td>
+            <td></td>
+            <td>20%</td>
           </tr>
           <tr>
-            <td>Residue Recovery Fraction for WT systems</td>
-            <td>0.8</td>
+            <td>Residue recovery fraction for WT systems</td>
+            <td></td>
+            <td>80%</td>
           </tr>
           <tr>
-            <td>Residue Recovery Fraction for CTL</td>
-            <td>0.5</td>
+            <td>Residue recovery fraction for CTL systems</td>
+            <td></td>
+            <td>50%</td>
           </tr>
           <tr>
-            <td>Hardwood Fraction CT</td>
-            <td>0.2</td>
+            <td>Hardwood fraction of chip trees</td>
+            <td></td>
+            <td>20%</td>
           </tr>
           <tr>
-            <td>Hardwood Fraction SLT</td>
-            <td>0</td>
+            <td>Hardwood fraction of small log trees</td>
+            <td></td>
+            <td>0%</td>
           </tr>
           <tr>
-            <td>Hardwood Fraction LLT</td>
-            <td>0</td>
+            <td>Hardwood fraction of large log trees</td>
+            <td></td>
+            <td>0%</td>
           </tr>
           <tr>
-            <td>Feller/Bucker wage (2019)</td>
-            <td>30.96</td>
+            <td>Feller/Bucker wage (2020)</td>
+            <td>$/hour</td>
+            <td>35.13</td>
           </tr>
           <tr>
-            <td>All Others wage (2019)</td>
-            <td>22.26</td>
+            <td>All Others wage (2020)</td>
+            <td>$/hour</td>
+            <td>22.07</td>
           </tr>
           <tr>
-            <td>Benefits and other payroll costsT</td>
+            <td>Logging worker benefits and overhead</td>
+            <td></td>
             <td>35%</td>
           </tr>
           <tr>
-            <td>OIL_ETC_COST ($/mile)</td>
+            <td>Truck oil cost</td>
+            <td>$/mile</td>
             <td>0.35</td>
           </tr>
           <tr>
-            <td>DRIVERS_PER_TRUCK </td>
-            <td>1.67</td>
+            <td>Truck driver benefits and overhead</td>
+            <td></td>
+            <td>67%</td>
           </tr>
           <tr>
-            <td>MILES_PER_GALLON</td>
+            <td>Truck fuel consumption rate</td>
+            <td>miles/gallon</td>
             <td>6</td>
           </tr>
           <tr>
-            <td>FUEL_COST ($/gallon)</td>
-            <td>3.251</td>
+            <td>Truck driver wage (2020)</td>
+            <td>$/hour</td>
+            <td>22.66</td>
           </tr>
           <tr>
-            <td>TRUCK_LABOR ($/hr)</td>
-            <td>23.29</td>
+            <td>Truck payload capacity</td>
+            <td>green tons</td>
+            <td>25</td>
           </tr>
         </tbody>
       </Table>
@@ -108,13 +128,21 @@ export const AssumptionsAndReferences = () => {
             <td>California Biomass Collaborative</td>
           </tr>
           <tr>
-            <td>EPA eGrid</td>
+            <td>
+              Emissions and Generation Resource Integrated Database (eGRID)
+            </td>
           </tr>
           <tr>
-            <td>GREET model </td>
+            <td>
+              The Greenhouse gases, Regulated Emissions, and Energy use in
+              Technologies Model (GREET 2021)
+            </td>
           </tr>
           <tr>
-            <td>Literature for emission factors</td>
+            <td>CA-GREET3.0 Model</td>
+          </tr>
+          <tr>
+            <td>California Air Resources Board Emission Factor (EMFAC 2021)</td>
           </tr>
         </tbody>
       </Table>

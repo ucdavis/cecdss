@@ -788,26 +788,30 @@ export const ResultsExport = (props: Props) => {
       ref: 'B102',
       headerRow: true,
       totalsRow: false,
-      columns: [{ name: 'Assumptions' }, { name: 'Total' }],
+      columns: [
+        { name: 'Assumptions' },
+        { name: 'Unit' },
+        { name: 'Quantity' }
+      ],
       rows: [
-        ['LogLength, ft', 32],
-        ['LoadWeight, green tons (logs)', 25],
-        ['LoadWeight, green tons (chips)', 25],
-        ['CTLTrailSpacing, ft', 50],
-        ['HardwoodCostPremium, fraction', 0.2],
-        ['ResidueRecoveryFraction for WT systems', 0.8],
-        ['ResidueRecoveryFraction for CTL', 0.5],
-        ['HardwoodFractionCT', 0.2],
-        ['HardwoodFractionSLT', 0],
-        ['HardwoodFractionLLT', 0],
-        ['Feller/Bucker wage (2019)', 30.96],
-        ['All Others wage (2019)', 22.26],
-        ['Benefits and other payroll costs', '35%'],
-        ['OIL_ETC_COST ($/mile)', 0.35],
-        ['DRIVERS_PER_TRUCK', 1.67],
-        ['MILES_PER_GALLON', 6],
-        ['FUEL_COST ($/gallon)', 3.251],
-        ['TRUCK_LABOR ($/hr)', 23.29]
+        ['Log length', 'feet', 32],
+        ['Load weight (logs)', 'green tons', 25],
+        ['Load weight (chips)', 'green tons', 25],
+        ['CTL trail spacing', 'feet', 50],
+        ['Hardwood cost premium, fraction', '', '20%'],
+        ['Residue recovery fraction for WT systems', '', '80%'],
+        ['Residue recovery fraction for CTL systems', '', '50%'],
+        ['Hardwood fraction of chip trees', '', '20%'],
+        ['Hardwood fraction of small log trees', '', '0%'],
+        ['Hardwood fraction of large log trees', '', '0%'],
+        ['Feller/Bucker wage (2020)', '$/hour', 35.13],
+        ['All Others wage (2020)', '$/hour', 22.07],``
+        ['Logging worker benefits and overhead', '', '35%'],
+        ['Truck oil cost', '$/mile', 0.35],
+        ['Truck driver benefits and overhead', '', '67%'],
+        ['Truck fuel consumption rate', 'miles/gallon', 6],
+        ['Truck driver wage (2020)', '$/hour', 22.66],
+        ['Truck payload capacity', 'green tons', 25]
       ]
     });
 
@@ -821,9 +825,12 @@ export const ResultsExport = (props: Props) => {
         ['Fuel Reduction Cost Simulator'],
         ['Advanced Hardwood Biofuels Northwest'],
         ['California Biomass Collaborative'],
-        ['EPA eGrid'],
-        ['GREET model'],
-        ['Literature for emission factors']
+        ['Emissions and Generation Resource Integrated Database (eGRID)'],
+        [
+          'The Greenhouse gases, Regulated Emissions, and Energy use in Technologies Model (GREET 2021)'
+        ],
+        ['CA-GREET3.0 Model'],
+        ['California Air Resources Board Emission Factor (EMFAC 2021)']
       ]
     });
 
