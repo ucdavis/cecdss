@@ -44,7 +44,7 @@ export const ResultsTable = (props: Props) => {
           </tr>
           <tr>
             <td>Capital Cost ($)</td>
-            <td>{formatCurrency(props.teaInputs.CapitalCost)}</td>
+            <td>{formatCurrency(props.allYearResults.teaInputs.CapitalCost)}</td>
           </tr>
           <tr>
             <td>Net Electrical Capacity (kWe)</td>

@@ -283,7 +283,7 @@ export const MapContainer = () => {
     };
 
     setAllYearResults(allYearResults);
-    setTeaInputs(allYearResults.teaInputs);
+    setTeaInputs({ ...teaInputs });
     setSelectedYearIndex(years.length);
 
     // combine input values with default bounds for a the sensitivity analysis

@@ -35,7 +35,7 @@ export const ResultsExport = (props: Props) => {
   );
   const treatmentName = Treatments[treatmentIndex].name;
 
-  const capitalCost = formatCurrency(props.teaInputs.CapitalCost);
+  const capitalCost = formatCurrency(props.allYearResults.teaInputs.CapitalCost);
 
   const makeExcel = async () => {
     // https://github.com/exceljs/exceljs#interface
