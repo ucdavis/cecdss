@@ -29,64 +29,64 @@ export const LCAResults = (props: Props) => {
             <td>
               CO<sub>2</sub>
             </td>
-            <td>{formatNumber(props.results.lciResults.CO2 * 1000)}</td>
+            <td>{formatNumber(props.results.lifeCycleEmissions.CO2 * 1000)}</td>
             <td>kg</td>
           </tr>
           <tr>
             <td>
               CH<sub>4</sub>
             </td>
-            <td>{formatNumber(props.results.lciResults.CH4)}</td>
+            <td>{formatNumber(props.results.lifeCycleEmissions.CH4)}</td>
             <td>kg</td>
           </tr>
           <tr>
             <td>
               N<sub>2</sub>O
             </td>
-            <td>{formatNumber(props.results.lciResults.N2O)}</td>
+            <td>{formatNumber(props.results.lifeCycleEmissions.N2O)}</td>
             <td>kg</td>
           </tr>
           <tr>
             <td>CO</td>
-            <td>{formatNumber(props.results.lciResults.CO)}</td>
+            <td>{formatNumber(props.results.lifeCycleEmissions.CO)}</td>
             <td>kg</td>
           </tr>
           <tr>
             <td>
               NO<sub>x</sub>
             </td>
-            <td>{formatNumber(props.results.lciResults.NOx)}</td>
+            <td>{formatNumber(props.results.lifeCycleEmissions.NOx)}</td>
             <td>kg</td>
           </tr>
           <tr>
             <td>
               PM<sub>10</sub>
             </td>
-            <td>{formatNumber(props.results.lciResults.PM10)}</td>
+            <td>{formatNumber(props.results.lifeCycleEmissions.PM10)}</td>
             <td>kg</td>
           </tr>
           <tr>
             <td>
               PM<sub>2.5</sub>
             </td>
-            <td>{formatNumber(props.results.lciResults.PM25)}</td>
+            <td>{formatNumber(props.results.lifeCycleEmissions.PM25)}</td>
             <td>kg</td>
           </tr>
           <tr>
             <td>
               SO<sub>x</sub>
             </td>
-            <td>{formatNumber(props.results.lciResults.SOx)}</td>
+            <td>{formatNumber(props.results.lifeCycleEmissions.SOx)}</td>
             <td>kg</td>
           </tr>
           <tr>
             <td>VOC</td>
-            <td>{formatNumber(props.results.lciResults.VOC)}</td>
+            <td>{formatNumber(props.results.lifeCycleEmissions.VOC)}</td>
             <td>kg</td>
           </tr>
           <tr>
             <td>Carbon Intensity</td>
-            <td>{formatNumber(props.results.lciResults.CI * 1000)}</td>
+            <td>{formatNumber(props.results.lifeCycleEmissions.CI * 1000)}</td>
             <td>
               kg CO<sub>2</sub>e
             </td>
@@ -109,7 +109,7 @@ export const LCAResults = (props: Props) => {
             <td>Global Warming Air</td>
             <td>
               {formatNumber(
-                props.results.lciaResults.global_warming_air * 1000
+                props.results.lifeCycleImpacts.global_warming_air * 1000
               )}
             </td>
             <td>
@@ -119,7 +119,7 @@ export const LCAResults = (props: Props) => {
           <tr>
             <td>Acidification Air</td>
             <td>
-              {formatNumber(props.results.lciaResults.acidification_air * 1000)}
+              {formatNumber(props.results.lifeCycleImpacts.acidification_air * 1000)}
             </td>
             <td>
               kg SO<sub>2</sub> eq
@@ -129,7 +129,7 @@ export const LCAResults = (props: Props) => {
             <td>HH Particulate Air</td>
             <td>
               {formatNumber(
-                props.results.lciaResults.hh_particulate_air * 1000
+                props.results.lifeCycleImpacts.hh_particulate_air * 1000
               )}
             </td>
             <td>
@@ -140,7 +140,7 @@ export const LCAResults = (props: Props) => {
             <td>Eutrophication Air</td>
             <td>
               {formatNumber(
-                props.results.lciaResults.eutrophication_air * 1000
+                props.results.lifeCycleImpacts.eutrophication_air * 1000
               )}
             </td>
             <td>kg N eq</td>
@@ -149,14 +149,14 @@ export const LCAResults = (props: Props) => {
             <td>Eutrophication Water</td>
             <td>
               {formatNumber(
-                props.results.lciaResults.eutrophication_water * 1000
+                props.results.lifeCycleImpacts.eutrophication_water * 1000
               )}
             </td>
             <td>kg N eq</td>
           </tr>
           <tr>
             <td>Smog Air</td>
-            <td>{formatNumber(props.results.lciaResults.smog_air * 1000)}</td>
+            <td>{formatNumber(props.results.lifeCycleImpacts.smog_air * 1000)}</td>
             <td>
               kg O<sub>3</sub> eq
             </td>

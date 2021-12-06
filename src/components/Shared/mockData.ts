@@ -538,7 +538,7 @@ export const fakeYearlyResult: YearlyResult = {
     BiomassFuelCost: 5322607.133102263
   },
   lcaResults: {
-    lciResults: {
+    lifeCycleEmissions: {
       CO2: 1.5078754178268505,
       CH4: 0.4940711367282557,
       N2O: 0.06618964889893827,
@@ -550,7 +550,7 @@ export const fakeYearlyResult: YearlyResult = {
       VOC: 0.13601772051157965,
       CI: 1.5478870713629864
     },
-    lciaResults: {
+    lifeCycleImpacts: {
       global_warming_air: 1.5399517116169406,
       acidification_air: 0.0013081506226568914,
       hh_particulate_air: 0.0026255782497927446,
