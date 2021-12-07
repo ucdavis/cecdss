@@ -110,14 +110,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.CO2 * 1000,
+                (sum, x) => sum + x.lcaResults.lifeCycleEmissions.CO2 * 1000,
                 0
               ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`CO2-${i}`}>
-              {formatNumber(result.lcaResults.lciResults.CO2 * 1000)}
+              {formatNumber(result.lcaResults.lifeCycleEmissions.CO2 * 1000)}
             </td>
           ))}
         </tr>
@@ -129,14 +129,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.CH4,
+                (sum, x) => sum + x.lcaResults.lifeCycleEmissions.CH4,
                 0
               ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`CH4-${i}`}>
-              {formatNumber(result.lcaResults.lciResults.CH4)}
+              {formatNumber(result.lcaResults.lifeCycleEmissions.CH4)}
             </td>
           ))}
         </tr>
@@ -148,14 +148,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.N2O,
+                (sum, x) => sum + x.lcaResults.lifeCycleEmissions.N2O,
                 0
               ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`N2O-${i}`}>
-              {formatNumber(result.lcaResults.lciResults.N2O)}
+              {formatNumber(result.lcaResults.lifeCycleEmissions.N2O)}
             </td>
           ))}
         </tr>
@@ -165,14 +165,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.CO,
+                (sum, x) => sum + x.lcaResults.lifeCycleEmissions.CO,
                 0
               ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`CO-${i}`}>
-              {formatNumber(result.lcaResults.lciResults.CO)}
+              {formatNumber(result.lcaResults.lifeCycleEmissions.CO)}
             </td>
           ))}
         </tr>
@@ -184,14 +184,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.NOx,
+                (sum, x) => sum + x.lcaResults.lifeCycleEmissions.NOx,
                 0
               ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`NOx-${i}`}>
-              {formatNumber(result.lcaResults.lciResults.NOx)}
+              {formatNumber(result.lcaResults.lifeCycleEmissions.NOx)}
             </td>
           ))}
         </tr>
@@ -203,14 +203,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.PM10,
+                (sum, x) => sum + x.lcaResults.lifeCycleEmissions.PM10,
                 0
               ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`PM10-${i}`}>
-              {formatNumber(result.lcaResults.lciResults.PM10)}
+              {formatNumber(result.lcaResults.lifeCycleEmissions.PM10)}
             </td>
           ))}
         </tr>
@@ -222,14 +222,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.PM25,
+                (sum, x) => sum + x.lcaResults.lifeCycleEmissions.PM25,
                 0
               ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`PM25-${i}`}>
-              {formatNumber(result.lcaResults.lciResults.PM25)}
+              {formatNumber(result.lcaResults.lifeCycleEmissions.PM25)}
             </td>
           ))}
         </tr>
@@ -241,14 +241,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.SOx,
+                (sum, x) => sum + x.lcaResults.lifeCycleEmissions.SOx,
                 0
               ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`SOx-${i}`}>
-              {formatNumber(result.lcaResults.lciResults.SOx)}
+              {formatNumber(result.lcaResults.lifeCycleEmissions.SOx)}
             </td>
           ))}
         </tr>
@@ -258,14 +258,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.VOC,
+                (sum, x) => sum + x.lcaResults.lifeCycleEmissions.VOC,
                 0
               ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`VOC-${i}`}>
-              {formatNumber(result.lcaResults.lciResults.VOC)}
+              {formatNumber(result.lcaResults.lifeCycleEmissions.VOC)}
             </td>
           ))}
         </tr>
@@ -277,14 +277,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciResults.CI * 1000,
+                (sum, x) => sum + x.lcaResults.lifeCycleEmissions.CI * 1000,
                 0
               ) / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`CI-${i}`}>
-              {formatNumber(result.lcaResults.lciResults.CI * 1000)}
+              {formatNumber(result.lcaResults.lifeCycleEmissions.CI * 1000)}
             </td>
           ))}
         </tr>
@@ -299,14 +299,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciaResults.global_warming_air,
+                (sum, x) => sum + x.lcaResults.lifeCycleImpacts.global_warming_air,
                 0
               ) * 1000 / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`globalWarmingAir-${i}`}>
-              {formatNumber(result.lcaResults.lciaResults.global_warming_air * 1000)}
+              {formatNumber(result.lcaResults.lifeCycleImpacts.global_warming_air * 1000)}
             </td>
           ))}
         </tr>
@@ -318,7 +318,7 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciaResults.acidification_air,
+                (sum, x) => sum + x.lcaResults.lifeCycleImpacts.acidification_air,
                 0
               ) * 1000 / props.yearlyResults.length
             )}
@@ -326,7 +326,7 @@ export const LCATables = (props: Props) => {
           {props.yearlyResults.map((result, i) => (
             <td key={`acidificationAir-${i}`}>
               {formatNumber(
-                result.lcaResults.lciaResults.acidification_air * 1000
+                result.lcaResults.lifeCycleImpacts.acidification_air * 1000
               )}
             </td>
           ))}
@@ -339,7 +339,7 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciaResults.hh_particulate_air,
+                (sum, x) => sum + x.lcaResults.lifeCycleImpacts.hh_particulate_air,
                 0
               ) * 1000 / props.yearlyResults.length
             )}
@@ -347,7 +347,7 @@ export const LCATables = (props: Props) => {
           {props.yearlyResults.map((result, i) => (
             <td key={`hhParticulateAir-${i}`}>
               {formatNumber(
-                result.lcaResults.lciaResults.hh_particulate_air * 1000
+                result.lcaResults.lifeCycleImpacts.hh_particulate_air * 1000
               )}
             </td>
           ))}
@@ -358,7 +358,7 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciaResults.eutrophication_air,
+                (sum, x) => sum + x.lcaResults.lifeCycleImpacts.eutrophication_air,
                 0
               ) * 1000 / props.yearlyResults.length
             )}
@@ -366,7 +366,7 @@ export const LCATables = (props: Props) => {
           {props.yearlyResults.map((result, i) => (
             <td key={`eutrophicationAir-${i}`}>
               {formatNumber(
-                result.lcaResults.lciaResults.eutrophication_air * 1000
+                result.lcaResults.lifeCycleImpacts.eutrophication_air * 1000
               )}
             </td>
           ))}
@@ -377,7 +377,7 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciaResults.eutrophication_water,
+                (sum, x) => sum + x.lcaResults.lifeCycleImpacts.eutrophication_water,
                 0
               ) * 1000 / props.yearlyResults.length
             )}
@@ -385,7 +385,7 @@ export const LCATables = (props: Props) => {
           {props.yearlyResults.map((result, i) => (
             <td key={`eutrophicationWater-${i}`}>
               {formatNumber(
-                result.lcaResults.lciaResults.eutrophication_water * 1000
+                result.lcaResults.lifeCycleImpacts.eutrophication_water * 1000
               )}
             </td>
           ))}
@@ -398,14 +398,14 @@ export const LCATables = (props: Props) => {
           <td>
             {formatNumber(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.lcaResults.lciaResults.smog_air,
+                (sum, x) => sum + x.lcaResults.lifeCycleImpacts.smog_air,
                 0
               ) * 1000 / props.yearlyResults.length
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`smogAir-${i}`}>
-              {formatNumber(result.lcaResults.lciaResults.smog_air * 1000)}
+              {formatNumber(result.lcaResults.lifeCycleImpacts.smog_air * 1000)}
             </td>
           ))}
         </tr>

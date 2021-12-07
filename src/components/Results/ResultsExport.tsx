@@ -222,12 +222,12 @@ export const ResultsExport = (props: Props) => {
           'kg',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.CO2 * 1000,
+              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.CO2 * 1000,
               0
             ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.CO2 * 1000)
+            formatNumber(r.lcaResults.lifeCycleEmissions.CO2 * 1000)
           )
         ],
         [
@@ -235,12 +235,12 @@ export const ResultsExport = (props: Props) => {
           'kg',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.CH4,
+              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.CH4,
               0
             ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.CH4)
+            formatNumber(r.lcaResults.lifeCycleEmissions.CH4)
           )
         ],
         [
@@ -248,12 +248,12 @@ export const ResultsExport = (props: Props) => {
           'kg',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.N2O,
+              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.N2O,
               0
             ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.N2O)
+            formatNumber(r.lcaResults.lifeCycleEmissions.N2O)
           )
         ],
         [
@@ -261,12 +261,12 @@ export const ResultsExport = (props: Props) => {
           'kg',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.CO,
+              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.CO,
               0
             ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.CO)
+            formatNumber(r.lcaResults.lifeCycleEmissions.CO)
           )
         ],
         [
@@ -274,12 +274,12 @@ export const ResultsExport = (props: Props) => {
           'kg',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.NOx,
+              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.NOx,
               0
             ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.NOx)
+            formatNumber(r.lcaResults.lifeCycleEmissions.NOx)
           )
         ],
         [
@@ -287,12 +287,12 @@ export const ResultsExport = (props: Props) => {
           'kg',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.PM10,
+              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.PM10,
               0
             ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.PM10)
+            formatNumber(r.lcaResults.lifeCycleEmissions.PM10)
           )
         ],
         [
@@ -300,12 +300,12 @@ export const ResultsExport = (props: Props) => {
           'kg',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.PM25,
+              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.PM25,
               0
             ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.PM25)
+            formatNumber(r.lcaResults.lifeCycleEmissions.PM25)
           )
         ],
         [
@@ -313,12 +313,12 @@ export const ResultsExport = (props: Props) => {
           'kg',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.SOx,
+              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.SOx,
               0
             ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.SOx)
+            formatNumber(r.lcaResults.lifeCycleEmissions.SOx)
           )
         ],
         [
@@ -326,12 +326,12 @@ export const ResultsExport = (props: Props) => {
           'kg',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.VOC,
+              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.VOC,
               0
             ) / props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.VOC)
+            formatNumber(r.lcaResults.lifeCycleEmissions.VOC)
           )
         ],
         [
@@ -339,14 +339,14 @@ export const ResultsExport = (props: Props) => {
           'kg CO2e',
           formatNumber(
             (props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciResults.CI,
+              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.CI,
               0
             ) *
               1000) /
               props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciResults.CI * 1000)
+            formatNumber(r.lcaResults.lifeCycleEmissions.CI * 1000)
           )
         ]
       ]
@@ -370,14 +370,14 @@ export const ResultsExport = (props: Props) => {
           formatNumber(
             (props.yearlyResults.reduce(
               (sum, year) =>
-                sum + year.lcaResults.lciaResults.global_warming_air,
+                sum + year.lcaResults.lifeCycleImpacts.global_warming_air,
               0
             ) *
               1000) /
               props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciaResults.global_warming_air * 1000)
+            formatNumber(r.lcaResults.lifeCycleImpacts.global_warming_air * 1000)
           )
         ],
         [
@@ -386,14 +386,14 @@ export const ResultsExport = (props: Props) => {
           formatNumber(
             (props.yearlyResults.reduce(
               (sum, year) =>
-                sum + year.lcaResults.lciaResults.acidification_air,
+                sum + year.lcaResults.lifeCycleImpacts.acidification_air,
               0
             ) *
               1000) /
               props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciaResults.acidification_air * 1000)
+            formatNumber(r.lcaResults.lifeCycleImpacts.acidification_air * 1000)
           )
         ],
         [
@@ -402,14 +402,14 @@ export const ResultsExport = (props: Props) => {
           formatNumber(
             (props.yearlyResults.reduce(
               (sum, year) =>
-                sum + year.lcaResults.lciaResults.hh_particulate_air,
+                sum + year.lcaResults.lifeCycleImpacts.hh_particulate_air,
               0
             ) *
               1000) /
               props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciaResults.hh_particulate_air * 1000)
+            formatNumber(r.lcaResults.lifeCycleImpacts.hh_particulate_air * 1000)
           )
         ],
         [
@@ -418,14 +418,14 @@ export const ResultsExport = (props: Props) => {
           formatNumber(
             (props.yearlyResults.reduce(
               (sum, year) =>
-                sum + year.lcaResults.lciaResults.eutrophication_air,
+                sum + year.lcaResults.lifeCycleImpacts.eutrophication_air,
               0
             ) *
               1000) /
               props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciaResults.eutrophication_air * 1000)
+            formatNumber(r.lcaResults.lifeCycleImpacts.eutrophication_air * 1000)
           )
         ],
         [
@@ -434,14 +434,14 @@ export const ResultsExport = (props: Props) => {
           formatNumber(
             (props.yearlyResults.reduce(
               (sum, year) =>
-                sum + year.lcaResults.lciaResults.eutrophication_water,
+                sum + year.lcaResults.lifeCycleImpacts.eutrophication_water,
               0
             ) *
               1000) /
               props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciaResults.eutrophication_water * 1000)
+            formatNumber(r.lcaResults.lifeCycleImpacts.eutrophication_water * 1000)
           )
         ],
         [
@@ -449,14 +449,14 @@ export const ResultsExport = (props: Props) => {
           'kg O3 eq',
           formatNumber(
             (props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lciaResults.smog_air,
+              (sum, year) => sum + year.lcaResults.lifeCycleImpacts.smog_air,
               0
             ) *
               1000) /
               props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lciaResults.smog_air * 1000)
+            formatNumber(r.lcaResults.lifeCycleImpacts.smog_air * 1000)
           )
         ]
       ]
@@ -805,7 +805,7 @@ export const ResultsExport = (props: Props) => {
         ['Hardwood fraction of small log trees', '', '0%'],
         ['Hardwood fraction of large log trees', '', '0%'],
         ['Feller/Bucker wage (2020)', '$/hour', 35.13],
-        ['All Others wage (2020)', '$/hour', 22.07],``
+        ['All Others wage (2020)', '$/hour', 22.07],
         ['Logging worker benefits and overhead', '', '35%'],
         ['Truck oil cost', '$/mile', 0.35],
         ['Truck driver benefits and overhead', '', '67%'],

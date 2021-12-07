@@ -1,7 +1,7 @@
-import { LCIAresults, LCIresults, RunParams } from '@ucdavis/lca/out/lca.model';
+import { LcaInputs, LifeCycleEmissions, LifeCycleImpacts } from '@ucdavis/lca/model';
 
 export interface LCAresults {
-  lciResults: LCIresults;
-  lciaResults: LCIAresults;
-  inputs: RunParams;
+  lifeCycleEmissions: LifeCycleEmissions;
+  lifeCycleImpacts: LifeCycleImpacts;
+  inputs: LcaInputs;
 }
