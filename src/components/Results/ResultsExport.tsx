@@ -35,7 +35,9 @@ export const ResultsExport = (props: Props) => {
   );
   const treatmentName = Treatments[treatmentIndex].name;
 
-  const capitalCost = formatCurrency(props.allYearResults.teaInputs.CapitalCost);
+  const capitalCost = formatCurrency(
+    props.allYearResults.teaInputs.CapitalCost
+  );
 
   const makeExcel = async () => {
     // https://github.com/exceljs/exceljs#interface
@@ -222,7 +224,8 @@ export const ResultsExport = (props: Props) => {
           'kg',
           formatNumber(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.CO2 * 1000,
+              (sum, year) =>
+                sum + year.lcaResults.lifeCycleEmissions.CO2 * 1000,
               0
             ) / props.yearlyResults.length
           ),
@@ -377,7 +380,9 @@ export const ResultsExport = (props: Props) => {
               props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lifeCycleImpacts.global_warming_air * 1000)
+            formatNumber(
+              r.lcaResults.lifeCycleImpacts.global_warming_air * 1000
+            )
           )
         ],
         [
@@ -409,7 +414,9 @@ export const ResultsExport = (props: Props) => {
               props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lifeCycleImpacts.hh_particulate_air * 1000)
+            formatNumber(
+              r.lcaResults.lifeCycleImpacts.hh_particulate_air * 1000
+            )
           )
         ],
         [
@@ -425,7 +432,9 @@ export const ResultsExport = (props: Props) => {
               props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lifeCycleImpacts.eutrophication_air * 1000)
+            formatNumber(
+              r.lcaResults.lifeCycleImpacts.eutrophication_air * 1000
+            )
           )
         ],
         [
@@ -441,7 +450,9 @@ export const ResultsExport = (props: Props) => {
               props.yearlyResults.length
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lifeCycleImpacts.eutrophication_water * 1000)
+            formatNumber(
+              r.lcaResults.lifeCycleImpacts.eutrophication_water * 1000
+            )
           )
         ],
         [
@@ -785,7 +796,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'assumptions',
-      ref: 'B102',
+      ref: 'B70',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -817,7 +828,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'keyReferences',
-      ref: 'B122',
+      ref: 'B90',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Key References' }],
@@ -836,7 +847,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'disclaimer',
-      ref: 'B130',
+      ref: 'B99',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Disclaimer' }],
