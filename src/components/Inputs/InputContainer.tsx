@@ -22,6 +22,8 @@ interface Props {
   setBiomassCoordinates: (coordinates: MapCoordinates) => void;
   selectBiomassCoordinates: boolean;
   setSelectBiomassCoordinates: (val: boolean) => void;
+  expansionFactor: number;
+  setExpansionFactor: (val: number) => void;
   frcsInputs: FrcsInputs;
   setFrcsInputs: (inputs: FrcsInputs) => void;
   teaInputs: InputModGPO | InputModCHP | InputModGP;
@@ -67,7 +69,9 @@ export const InputContainer = (props: Props) => {
   return (
     <>
       <div className='cardheader'>
-        <h4>Forest Resource and Renewable Energy Decision Support System (FRREDSS)</h4>
+        <h4>
+          Forest Resource and Renewable Energy Decision Support System (FRREDSS)
+        </h4>
         <h2>Select Inputs</h2>
       </div>
       <div className='cardcontents'>
@@ -163,6 +167,17 @@ export const InputContainer = (props: Props) => {
               </InputGroup>
             </FormGroup>
           )}
+          <FormGroup>
+            <Label>Expansion Factor</Label>
+            <InputGroup>
+              <Input
+                type='text'
+                value={props.expansionFactor}
+                onChange={e => props.setExpansionFactor(Number(e.target.value))}
+                disabled={props.disabled}
+              />
+            </InputGroup>
+          </FormGroup>
         </Form>
       </div>
 
