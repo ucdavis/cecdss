@@ -34,12 +34,25 @@ export interface RequestParams {
   carbonCreditPrice: number;
   energyEconomyRatio: number;
   includeCarbonCredit: boolean;
+  wageFaller: number;
+  wageOther: number;
+  laborBenefits: number;
+  ppiCurrent: number;
+  residueRecovFracWT: number;
+  residueRecovFracCTL: number;
+  expansionFactor: number;
 }
 
 export interface FrcsInputs {
   system: string;
   treatmentid: number;
   dieselFuelPrice: number;
+  wageFaller: number;
+  wageOther: number;
+  laborBenefits: number;
+  ppiCurrent: number;
+  residueRecovFracWT: number;
+  residueRecovFracCTL: number;
 }
 
 export const TechnoeconomicModels = {
