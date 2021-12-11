@@ -6,7 +6,7 @@ import {
   CashFlowGP,
   CashFlow
 } from '@ucdavis/tea/output.model';
-import { OutputVarMod } from '@ucdavis/frcs/out/systems/frcs.model';
+import { FrcsOutputs } from '@ucdavis/frcs/out/model';
 import { LCAresults } from './LCAModels';
 import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { Feature, FeatureCollection, GeoJsonObject, Point } from 'geojson';
@@ -198,7 +198,7 @@ export interface ClusterResult {
   distance: number;
   residueCost: number;
   transportationCost: number;
-  frcsResult: OutputVarMod;
+  frcsResult: FrcsOutputs;
   center_lat: number;
   center_lng: number;
   landing_lat: number;

@@ -79,39 +79,39 @@ export const FrcsClusterResultsContainer = (props: Props) => {
       },
       {
         Header: 'Total Cost Per Acre',
-        accessor: 'frcsResult.Total.CostPerAcre',
+        accessor: 'frcsResult.total.costPerAcre',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.Total.CostPerAcre)
+          formatNumber(row.original.frcsResult.total.costPerAcre)
       },
       {
         Header: 'Total Cost Per Bole CCF',
-        accessor: 'frcsResult.Total.CostPerBoleCCF',
+        accessor: 'frcsResult.total.costPerBoleCCF',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.Total.CostPerBoleCCF)
+          formatNumber(row.original.frcsResult.total.costPerBoleCCF)
       },
       {
         Header: 'Total Cost Per GT',
-        accessor: 'frcsResult.Total.CostPerGT',
+        accessor: 'frcsResult.total.costPerGT',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.Total.CostPerGT)
+          formatNumber(row.original.frcsResult.total.costPerGT)
       },
       {
         Header: 'Residue Cost Per Acre',
-        accessor: 'frcsResult.Residue.CostPerAcre',
+        accessor: 'frcsResult.biomass.costPerAcre',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.Residue.CostPerAcre)
+          formatNumber(row.original.frcsResult.biomass.costPerAcre)
       },
       {
         Header: 'Residue Cost Per Bole CCF',
-        accessor: 'frcsResult.Residue.CostPerBoleCCF',
+        accessor: 'frcsResult.biomass.costPerBoleCCF',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.Residue.CostPerBoleCCF)
+          formatNumber(row.original.frcsResult.biomass.costPerBoleCCF)
       },
       {
         Header: 'Residue Cost Per GT',
-        accessor: 'frcsResult.Residue.CostPerGT',
+        accessor: 'frcsResult.biomass.costPerGT',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.Residue.CostPerGT)
+          formatNumber(row.original.frcsResult.biomass.costPerGT)
       }
     ],
     [props.results]
