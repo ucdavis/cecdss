@@ -40,16 +40,6 @@ export const AssumptionsAndReferences = () => {
             <td>20%</td>
           </tr>
           <tr>
-            <td>Residue recovery fraction for WT systems</td>
-            <td></td>
-            <td>80%</td>
-          </tr>
-          <tr>
-            <td>Residue recovery fraction for CTL systems</td>
-            <td></td>
-            <td>50%</td>
-          </tr>
-          <tr>
             <td>Hardwood fraction of chip trees</td>
             <td></td>
             <td>20%</td>
@@ -63,21 +53,6 @@ export const AssumptionsAndReferences = () => {
             <td>Hardwood fraction of large log trees</td>
             <td></td>
             <td>0%</td>
-          </tr>
-          <tr>
-            <td>Feller/Bucker wage (2020)</td>
-            <td>$/hour</td>
-            <td>35.13</td>
-          </tr>
-          <tr>
-            <td>All Others wage (2020)</td>
-            <td>$/hour</td>
-            <td>22.07</td>
-          </tr>
-          <tr>
-            <td>Logging worker benefits and overhead</td>
-            <td></td>
-            <td>35%</td>
           </tr>
           <tr>
             <td>Truck oil cost</td>

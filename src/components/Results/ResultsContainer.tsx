@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  AllYearsResults,
-  FrcsInputs,
-  YearlyResult
-} from '../../models/Types';
+import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
 import {
   PaginationItem,
   PaginationLink,
@@ -13,11 +9,7 @@ import {
   Progress
 } from 'reactstrap';
 import { YearlyResultsContainer } from './YearlyResultsContainer';
-import {
-  InputModGPO,
-  InputModCHP,
-  InputModGP
-} from '@ucdavis/tea/input.model';
+import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { AllResultsContainer } from './AllResultsContainer';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 
@@ -38,6 +30,7 @@ interface Props {
   showResults: boolean;
   frcsInputs: FrcsInputs;
   sensitivityResults?: OutputModSensitivity;
+  expansionFactor: number;
 }
 
 export const ResultsContainer = (props: Props) => {
@@ -58,7 +51,10 @@ export const ResultsContainer = (props: Props) => {
     <>
       <div className='cardheader d-flex justify-content-between align-items-center'>
         <span>
-          <h4>Forest Resource and Renewable Energy Decision Support System (FRREDSS)</h4>
+          <h4>
+            Forest Resource and Renewable Energy Decision Support System
+            (FRREDSS)
+          </h4>
           <h2>Results</h2>
         </span>
       </div>

@@ -2,11 +2,7 @@ import React, { useRef } from 'react';
 import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
 import { ResultsCharts } from './ResultsCharts';
 import { ResultsTable } from './ResultsTables';
-import {
-  InputModGPO,
-  InputModCHP,
-  InputModGP
-} from '@ucdavis/tea/input.model';
+import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import { AssumptionsAndReferences } from './AssumptionsAndReferences';
 import ResultsExport from './ResultsExport';
@@ -21,6 +17,7 @@ interface Props {
   teaModel: string;
   frcsInputs: FrcsInputs;
   sensitivityResults?: OutputModSensitivity;
+  expansionFactor: number;
 }
 
 export const AllResultsContainer = (props: Props) => {
@@ -36,6 +33,7 @@ export const AllResultsContainer = (props: Props) => {
         frcsInputs={props.frcsInputs}
         teaModel={props.teaModel}
         teaInputs={props.teaInputs}
+        expansionFactor={props.expansionFactor}
       />
       <ResultsTable
         yearlyResults={props.yearlyResults}
