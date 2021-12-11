@@ -6,7 +6,7 @@ import {
   CashFlowGP,
   CashFlow
 } from '@ucdavis/tea/output.model';
-import { OutputVarMod } from '@ucdavis/frcs/out/systems/frcs.model';
+import { FrcsOutputs } from '@ucdavis/frcs/out/model';
 import { LCAresults } from './LCAModels';
 import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { Feature, FeatureCollection, GeoJsonObject, Point } from 'geojson';
@@ -34,12 +34,25 @@ export interface RequestParams {
   carbonCreditPrice: number;
   energyEconomyRatio: number;
   includeCarbonCredit: boolean;
+  wageFaller: number;
+  wageOther: number;
+  laborBenefits: number;
+  ppiCurrent: number;
+  residueRecovFracWT: number;
+  residueRecovFracCTL: number;
+  expansionFactor: number;
 }
 
 export interface FrcsInputs {
   system: string;
   treatmentid: number;
   dieselFuelPrice: number;
+  wageFaller: number;
+  wageOther: number;
+  laborBenefits: number;
+  ppiCurrent: number;
+  residueRecovFracWT: number;
+  residueRecovFracCTL: number;
 }
 
 export const TechnoeconomicModels = {
@@ -198,7 +211,7 @@ export interface ClusterResult {
   distance: number;
   residueCost: number;
   transportationCost: number;
-  frcsResult: OutputVarMod;
+  frcsResult: FrcsOutputs;
   center_lat: number;
   center_lng: number;
   landing_lat: number;

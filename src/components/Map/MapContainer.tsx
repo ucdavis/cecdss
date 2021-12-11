@@ -109,7 +109,13 @@ export const MapContainer = () => {
   const frcsInputsExample: FrcsInputs = {
     system: 'Ground-Based Mech WT',
     treatmentid: 1,
-    dieselFuelPrice: 3.251
+    dieselFuelPrice: 3.61,
+    wageFaller: 35.13, // CA FallBuckWage May 2020
+    wageOther: 22.07, // CA AllOthersWage May 2020
+    laborBenefits: 35, // Assume a nationwide average of 35% for benefits and other payroll costs
+    ppiCurrent: 284.7, // Oct 2021
+    residueRecovFracWT: 80, // FRCS default 80%
+    residueRecovFracCTL: 50 // FRCS default 50%
   };
 
   const [teaInputs, setTeaInputs] = useState<
@@ -154,6 +160,11 @@ export const MapContainer = () => {
     selectBiomassCoordinates,
     setSelectBiomassCoordinates
   ] = useState<boolean>(false);
+
+  const [
+    expansionFactor,
+    setExpansionFactor
+  ] = useState<number>(1);
 
   useEffect(() => {
     if (!selectBiomassCoordinates) {
@@ -357,7 +368,14 @@ export const MapContainer = () => {
         generalInflation: teaInputs.EscalationInflation.GeneralInflation,
         carbonCreditPrice: teaInputs.CarbonCredit.CreditPrice,
         energyEconomyRatio: teaInputs.CarbonCredit.EnergyEconomyRatio,
-        includeCarbonCredit: teaInputs.IncludeCarbonCredit
+        includeCarbonCredit: teaInputs.IncludeCarbonCredit,
+        wageFaller: frcsInputs.wageFaller,
+        wageOther: frcsInputs.wageOther,
+        laborBenefits: frcsInputs.laborBenefits,
+        ppiCurrent: frcsInputs.ppiCurrent,
+        residueRecovFracWT: frcsInputs.residueRecovFracWT,
+        residueRecovFracCTL: frcsInputs.residueRecovFracCTL,
+        expansionFactor: expansionFactor
       };
       const yearResult: YearlyResult = await fetch(serviceUrl + 'process', {
         mode: 'cors',
@@ -572,6 +590,8 @@ export const MapContainer = () => {
             setBiomassCoordinates={setBiomassCoordinates}
             selectBiomassCoordinates={selectBiomassCoordinates}
             setSelectBiomassCoordinates={setSelectBiomassCoordinates}
+            expansionFactor={expansionFactor}
+            setExpansionFactor={setExpansionFactor}
             frcsInputs={frcsInputs}
             setFrcsInputs={setFrcsInputs}
             teaInputs={teaInputs}
