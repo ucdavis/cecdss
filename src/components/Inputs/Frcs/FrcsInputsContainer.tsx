@@ -28,7 +28,7 @@ export const FrcsInputsContainer = (props: Props) => {
   return (
     <div className='cardcontents'>
       <Form>
-        <h4>FRCS Inputs</h4>
+        <h4>Fuel Reduction Cost Simulator</h4>
         <Button color='outline-primary' onClick={() => setHide(!hide)}>
           {hide ? 'View More Detailed Inputs' : 'Hide More Detailed Inputs'}
         </Button>
@@ -180,12 +180,13 @@ export const FrcsInputsContainer = (props: Props) => {
               <Label>Diesel Fuel Price</Label>
               <InputGroup>
                 <Input
-                  type='text'
-                  value={props.inputs.dieselFuelPrice}
+                  type='number'
+                  value={props.inputs.dieselFuelPrice.toString()}
+                  min={0}
                   onChange={e =>
                     props.setInputs({
                       ...props.inputs,
-                      dieselFuelPrice: Number(e.target.value)
+                      dieselFuelPrice: parseFloat(e.target.value) || 0
                     })
                   }
                   disabled={props.disabled}
@@ -197,12 +198,13 @@ export const FrcsInputsContainer = (props: Props) => {
               <Label>Hourly wage for Fallers</Label>
               <InputGroup>
                 <Input
-                  type='text'
-                  value={props.inputs.wageFaller}
+                  type='number'
+                  value={props.inputs.wageFaller.toString()}
+                  min={0}
                   onChange={e =>
                     props.setInputs({
                       ...props.inputs,
-                      wageFaller: Number(e.target.value)
+                      wageFaller: parseFloat(e.target.value) || 0
                     })
                   }
                   disabled={props.disabled}
@@ -214,12 +216,13 @@ export const FrcsInputsContainer = (props: Props) => {
               <Label>Hourly wage for Other Workers</Label>
               <InputGroup>
                 <Input
-                  type='text'
-                  value={props.inputs.wageOther}
+                  type='number'
+                  value={props.inputs.wageOther.toString()}
+                  min={0}
                   onChange={e =>
                     props.setInputs({
                       ...props.inputs,
-                      wageOther: Number(e.target.value)
+                      wageOther: parseFloat(e.target.value) || 0
                     })
                   }
                   disabled={props.disabled}
@@ -228,15 +231,17 @@ export const FrcsInputsContainer = (props: Props) => {
               </InputGroup>
             </FormGroup>
             <FormGroup>
-              <Label>Percent benefits</Label>
+              <Label>Percent benefits and overhead for workers</Label>
               <InputGroup>
                 <Input
-                  type='text'
-                  value={props.inputs.laborBenefits}
+                  type='number'
+                  value={props.inputs.laborBenefits.toString()}
+                  min={0}
+                  max={100}
                   onChange={e =>
                     props.setInputs({
                       ...props.inputs,
-                      laborBenefits: Number(e.target.value)
+                      laborBenefits: parseFloat(e.target.value) || 0
                     })
                   }
                   disabled={props.disabled}
@@ -248,12 +253,13 @@ export const FrcsInputsContainer = (props: Props) => {
               <Label>Current Producer Price Index</Label>
               <InputGroup>
                 <Input
-                  type='text'
-                  value={props.inputs.ppiCurrent}
+                  type='number'
+                  value={props.inputs.ppiCurrent.toString()}
+                  min={0}
                   onChange={e =>
                     props.setInputs({
                       ...props.inputs,
-                      ppiCurrent: Number(e.target.value)
+                      ppiCurrent: parseFloat(e.target.value) || 0
                     })
                   }
                   disabled={props.disabled}
@@ -261,15 +267,17 @@ export const FrcsInputsContainer = (props: Props) => {
               </InputGroup>
             </FormGroup>
             <FormGroup>
-              <Label>Recovery Fraction of Residues for WT systems</Label>
+              <Label>Residue recovery fraction for WT systems</Label>
               <InputGroup>
                 <Input
-                  type='text'
-                  value={props.inputs.residueRecovFracWT}
+                  type='number'
+                  value={props.inputs.residueRecovFracWT.toString()}
+                  min={0}
+                  max={100}
                   onChange={e =>
                     props.setInputs({
                       ...props.inputs,
-                      residueRecovFracWT: Number(e.target.value)
+                      residueRecovFracWT: parseFloat(e.target.value) || 0
                     })
                   }
                   disabled={props.disabled}
@@ -278,15 +286,19 @@ export const FrcsInputsContainer = (props: Props) => {
               </InputGroup>
             </FormGroup>
             <FormGroup>
-              <Label>Recovery Fraction of Residues for CTL</Label>
+              <Label>
+                Residue recovery fraction for ground-based CTL system
+              </Label>
               <InputGroup>
                 <Input
-                  type='text'
-                  value={props.inputs.residueRecovFracCTL}
+                  type='number'
+                  value={props.inputs.residueRecovFracCTL.toString()}
+                  min={0}
+                  max={100}
                   onChange={e =>
                     props.setInputs({
                       ...props.inputs,
-                      residueRecovFracCTL: Number(e.target.value)
+                      residueRecovFracCTL: parseFloat(e.target.value) || 0
                     })
                   }
                   disabled={props.disabled}
