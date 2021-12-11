@@ -19,6 +19,7 @@ interface Props {
   frcsInputs: FrcsInputs;
   teaInputs: any;
   teaModel: string;
+  expansionFactor: number;
 }
 
 export const ResultsExport = (props: Props) => {
@@ -81,6 +82,7 @@ export const ResultsExport = (props: Props) => {
           'Biomass Coordinates',
           `${props.allYearResults.biomassCoordinates.lat}, ${props.allYearResults.biomassCoordinates.lng}`
         ],
+        ['Expansion Factor', props.expansionFactor],
         [
           'Proximity to substation (km)',
           props.allYearResults.distanceToNearestSubstation
@@ -810,14 +812,9 @@ export const ResultsExport = (props: Props) => {
         ['Load weight (chips)', 'green tons', 25],
         ['CTL trail spacing', 'feet', 50],
         ['Hardwood cost premium, fraction', '', '20%'],
-        ['Residue recovery fraction for WT systems', '', '80%'],
-        ['Residue recovery fraction for CTL systems', '', '50%'],
         ['Hardwood fraction of chip trees', '', '20%'],
         ['Hardwood fraction of small log trees', '', '0%'],
         ['Hardwood fraction of large log trees', '', '0%'],
-        ['Feller/Bucker wage (2020)', '$/hour', 35.13],
-        ['All Others wage (2020)', '$/hour', 22.07],
-        ['Logging worker benefits and overhead', '', '35%'],
         ['Truck oil cost', '$/mile', 0.35],
         ['Truck driver benefits and overhead', '', '67%'],
         ['Truck fuel consumption rate', 'miles/gallon', 6],

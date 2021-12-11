@@ -161,10 +161,7 @@ export const MapContainer = () => {
     setSelectBiomassCoordinates
   ] = useState<boolean>(false);
 
-  const [
-    expansionFactor,
-    setExpansionFactor
-  ] = useState<number>(1);
+  const [expansionFactor, setExpansionFactor] = useState<number>(1);
 
   useEffect(() => {
     if (!selectBiomassCoordinates) {
@@ -622,6 +619,7 @@ export const MapContainer = () => {
             teaModel={teaModel}
             frcsInputs={frcsInputs}
             sensitivityResults={sensitvityResults}
+            expansionFactor={expansionFactor}
           />
         )}
       </div>

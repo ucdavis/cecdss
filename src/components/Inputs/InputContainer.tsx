@@ -84,12 +84,12 @@ export const InputContainer = (props: Props) => {
                 <InputGroupText>lat</InputGroupText>
               </InputGroupAddon>
               <Input
-                type='text'
-                value={props.facilityCoordinates.lat}
+                type='number'
+                value={props.facilityCoordinates.lat.toString()}
                 onChange={e =>
                   props.setFacilityCoordinates({
                     ...props.facilityCoordinates,
-                    lat: Number(e.target.value)
+                    lat: parseFloat(e.target.value) || 0
                   })
                 }
                 disabled={props.disabled}
@@ -100,12 +100,12 @@ export const InputContainer = (props: Props) => {
                 <InputGroupText>lng</InputGroupText>
               </InputGroupAddon>
               <Input
-                type='text'
-                value={props.facilityCoordinates.lng}
+                type='number'
+                value={props.facilityCoordinates.lng.toString()}
                 onChange={e =>
                   props.setFacilityCoordinates({
                     ...props.facilityCoordinates,
-                    lng: Number(e.target.value)
+                    lng: parseFloat(e.target.value) || 0
                   })
                 }
                 disabled={props.disabled}
@@ -138,12 +138,12 @@ export const InputContainer = (props: Props) => {
                   <InputGroupText>lat</InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  type='text'
-                  value={props.biomassCoordinates.lat}
+                  type='number'
+                  value={props.biomassCoordinates.lat.toString()}
                   onChange={e =>
                     props.setBiomassCoordinates({
                       ...props.biomassCoordinates,
-                      lat: Number(e.target.value)
+                      lat: parseFloat(e.target.value) || 0
                     })
                   }
                   disabled={props.disabled}
@@ -154,12 +154,12 @@ export const InputContainer = (props: Props) => {
                   <InputGroupText>lng</InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  type='text'
-                  value={props.biomassCoordinates.lng}
+                  type='number'
+                  value={props.biomassCoordinates.lng.toString()}
                   onChange={e =>
                     props.setBiomassCoordinates({
                       ...props.biomassCoordinates,
-                      lng: Number(e.target.value)
+                      lng: parseFloat(e.target.value) || 0
                     })
                   }
                   disabled={props.disabled}
@@ -171,9 +171,11 @@ export const InputContainer = (props: Props) => {
             <Label>Expansion Factor</Label>
             <InputGroup>
               <Input
-                type='text'
-                value={props.expansionFactor}
-                onChange={e => props.setExpansionFactor(Number(e.target.value))}
+                type='number'
+                value={props.expansionFactor.toString()}
+                onChange={e =>
+                  props.setExpansionFactor(parseFloat(e.target.value) || 0)
+                }
                 disabled={props.disabled}
               />
             </InputGroup>
