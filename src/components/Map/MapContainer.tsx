@@ -367,10 +367,12 @@ export const MapContainer = () => {
         carbonCreditPrice: teaInputs.CarbonCredit.CreditPrice,
         energyEconomyRatio: teaInputs.CarbonCredit.EnergyEconomyRatio,
         includeCarbonCredit: teaInputs.IncludeCarbonCredit,
-        wageFaller: frcsInputs.wageFaller * (generalInflation / 100) ** index,
-        wageOther: frcsInputs.wageOther * (generalInflation / 100) ** index,
+        wageFaller:
+          frcsInputs.wageFaller * (1 + generalInflation / 100) ** index,
+        wageOther: frcsInputs.wageOther * (1 + generalInflation / 100) ** index,
         laborBenefits: frcsInputs.laborBenefits,
-        ppiCurrent: frcsInputs.ppiCurrent * (generalInflation / 100) ** index,
+        ppiCurrent:
+          frcsInputs.ppiCurrent * (1 + generalInflation / 100) ** index,
         residueRecovFracWT: frcsInputs.residueRecovFracWT,
         residueRecovFracCTL: frcsInputs.residueRecovFracCTL,
         expansionFactor: expansionFactor
