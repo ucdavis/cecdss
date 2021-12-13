@@ -341,6 +341,7 @@ export const MapContainer = () => {
     let currentLAC = 0;
     let constantLAC = 0;
     let totalPresentWorth = 0;
+    const generalInflation = teaInputs.EscalationInflation.GeneralInflation;
     for (let index = 0; index < years.length; index++) {
       const reqBody: RequestParams = {
         facilityLat: facilityCoordinates.lat,
@@ -362,14 +363,14 @@ export const MapContainer = () => {
           allYearResults.teaInputs.ElectricalFuelBaseYear.MoistureContent,
         cashFlow: allYearResults.teaResults.AnnualCashFlows[index],
         costOfEquity: allYearResults.teaInputs.Financing.CostOfEquity,
-        generalInflation: teaInputs.EscalationInflation.GeneralInflation,
+        generalInflation: generalInflation,
         carbonCreditPrice: teaInputs.CarbonCredit.CreditPrice,
         energyEconomyRatio: teaInputs.CarbonCredit.EnergyEconomyRatio,
         includeCarbonCredit: teaInputs.IncludeCarbonCredit,
-        wageFaller: frcsInputs.wageFaller,
-        wageOther: frcsInputs.wageOther,
+        wageFaller: frcsInputs.wageFaller * (generalInflation / 100) ** index,
+        wageOther: frcsInputs.wageOther * (generalInflation / 100) ** index,
         laborBenefits: frcsInputs.laborBenefits,
-        ppiCurrent: frcsInputs.ppiCurrent,
+        ppiCurrent: frcsInputs.ppiCurrent * (generalInflation / 100) ** index,
         residueRecovFracWT: frcsInputs.residueRecovFracWT,
         residueRecovFracCTL: frcsInputs.residueRecovFracCTL,
         expansionFactor: expansionFactor
