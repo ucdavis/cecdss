@@ -193,6 +193,10 @@ export const FrcsInputsContainer = (props: Props) => {
                 />
                 <InputGroupAddon addonType='append'>$/gal</InputGroupAddon>
               </InputGroup>
+              <FormText color='muted'>
+                The default reflects 2021 wholesale diesel price and retail
+                price may be higher
+              </FormText>
             </FormGroup>
             <FormGroup>
               <Label>Hourly wage for Fallers</Label>
