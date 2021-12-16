@@ -99,19 +99,19 @@ export const FrcsClusterResultsContainer = (props: Props) => {
         Header: 'Residue Cost Per Acre',
         accessor: 'frcsResult.biomass.costPerAcre',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.biomass.costPerAcre)
+          formatNumber(row.original.frcsResult.residual.costPerAcre)
       },
       {
         Header: 'Residue Cost Per Bole CCF',
         accessor: 'frcsResult.biomass.costPerBoleCCF',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.biomass.costPerBoleCCF)
+          formatNumber(row.original.frcsResult.residual.costPerBoleCCF)
       },
       {
         Header: 'Residue Cost Per GT',
         accessor: 'frcsResult.biomass.costPerGT',
         Cell: ({ row }: Cell<ClusterResult>) =>
-          formatNumber(row.original.frcsResult.biomass.costPerGT)
+          formatNumber(row.original.frcsResult.residual.costPerGT)
       }
     ],
     [props.results]
