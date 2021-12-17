@@ -265,3 +265,8 @@
 .leaflet-marker-icon .svg-inline--fa {
   color: var(--primary-color);
 }
+
+/* remove spin button shown in firefox  */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
