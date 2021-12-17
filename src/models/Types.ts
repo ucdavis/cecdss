@@ -41,6 +41,9 @@ export interface RequestParams {
   residueRecovFracWT: number;
   residueRecovFracCTL: number;
   expansionFactor: number;
+  wageTruckDriver: number;
+  driverBenefits: number;
+  oilCost: number;
 }
 
 export interface FrcsInputs {
@@ -53,6 +56,12 @@ export interface FrcsInputs {
   ppiCurrent: number;
   residueRecovFracWT: number;
   residueRecovFracCTL: number;
+}
+
+export interface TransportInputs {
+  wageTruckDriver: number;
+  driverBenefits: number;
+  oilCost: number;
 }
 
 export const TechnoeconomicModels = {
