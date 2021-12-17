@@ -10,10 +10,11 @@ import {
   InputGroupAddon,
   InputGroupText
 } from 'reactstrap';
-import { FrcsInputs, MapCoordinates } from '../../models/Types';
+import { FrcsInputs, MapCoordinates, TransportInputs } from '../../models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
+import { TransportInputsContainer } from './Transportation/TransportationInputs';
 
 interface Props {
   facilityCoordinates: MapCoordinates;
@@ -26,6 +27,8 @@ interface Props {
   setExpansionFactor: (val: number) => void;
   frcsInputs: FrcsInputs;
   setFrcsInputs: (inputs: FrcsInputs) => void;
+  transportInputs: TransportInputs;
+  setTransportInputs: (inputs: TransportInputs) => void;
   teaInputs: InputModGPO | InputModCHP | InputModGP;
   setTeaInputs: (inputs: InputModGPO | InputModCHP | InputModGP) => void;
   teaModel: string;
@@ -186,6 +189,11 @@ export const InputContainer = (props: Props) => {
       <FrcsInputsContainer
         inputs={props.frcsInputs}
         setInputs={props.setFrcsInputs}
+        disabled={props.disabled}
+      />
+      <TransportInputsContainer
+        inputs={props.transportInputs}
+        setTransportInputs={props.setTransportInputs}
         disabled={props.disabled}
       />
       <TechnoeconomicInputs

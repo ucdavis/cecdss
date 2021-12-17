@@ -20,7 +20,8 @@ import {
   MapCoordinates,
   RequestParamsAllYears,
   AllYearsResults,
-  Geometry
+  Geometry,
+  TransportInputs
 } from '../../models/Types';
 import {
   InputModGPO,
@@ -118,6 +119,12 @@ export const MapContainer = () => {
     residueRecovFracCTL: 50 // FRCS default 50%
   };
 
+  const transportInputsExample: TransportInputs = {
+    wageTruckDriver: 24.71, // Hourly mean wage for tractor-trailer truck drivers May 2020
+    driverBenefits: 67,
+    oilCost: 0.35
+  };
+
   const [teaInputs, setTeaInputs] = useState<
     InputModGPO | InputModCHP | InputModGP
   >(new InputModGPOClass());
@@ -126,6 +133,11 @@ export const MapContainer = () => {
   );
 
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
+
+  const [transportInputs, setTransportInputs] = useState<TransportInputs>(
+    transportInputsExample
+  );
+
   const years: number[] = [];
   for (let index = 0; index < teaInputs.Financing.EconomicLife; index++) {
     years.push(2016 + index); // Note that the hardcoded 2016 is the first year
@@ -376,7 +388,12 @@ export const MapContainer = () => {
           frcsInputs.ppiCurrent * (1 + generalInflation / 100) ** index,
         residueRecovFracWT: frcsInputs.residueRecovFracWT,
         residueRecovFracCTL: frcsInputs.residueRecovFracCTL,
-        expansionFactor: expansionFactor
+        expansionFactor: expansionFactor,
+        wageTruckDriver:
+          transportInputs.wageTruckDriver *
+          (1 + generalInflation / 100) ** index,
+        driverBenefits: transportInputs.driverBenefits,
+        oilCost: transportInputs.oilCost * (1 + generalInflation / 100) ** index
       };
       const yearResult: YearlyResult = await fetch(serviceUrl + 'process', {
         mode: 'cors',
@@ -596,6 +613,8 @@ export const MapContainer = () => {
             frcsInputs={frcsInputs}
             setFrcsInputs={setFrcsInputs}
             teaInputs={teaInputs}
+            setTransportInputs={setTransportInputs}
+            transportInputs={transportInputs}
             setTeaInputs={setTeaInputs}
             teaModel={teaModel}
             setTeaModel={setTeaModel}

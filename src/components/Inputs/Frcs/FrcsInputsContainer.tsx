@@ -199,7 +199,7 @@ export const FrcsInputsContainer = (props: Props) => {
               </FormText>
             </FormGroup>
             <FormGroup>
-              <Label>Hourly wage for Fallers</Label>
+              <Label>Hourly Wage for Fallers</Label>
               <InputGroup>
                 <Input
                   type='number'
@@ -217,7 +217,7 @@ export const FrcsInputsContainer = (props: Props) => {
               </InputGroup>
             </FormGroup>
             <FormGroup>
-              <Label>Hourly wage for Other Workers</Label>
+              <Label>Hourly Wage for Other Workers</Label>
               <InputGroup>
                 <Input
                   type='number'
@@ -235,7 +235,7 @@ export const FrcsInputsContainer = (props: Props) => {
               </InputGroup>
             </FormGroup>
             <FormGroup>
-              <Label>Percent benefits and overhead for workers</Label>
+              <Label>Percent Benefits and Overhead for Logging Workers</Label>
               <InputGroup>
                 <Input
                   type='number'
@@ -271,7 +271,7 @@ export const FrcsInputsContainer = (props: Props) => {
               </InputGroup>
             </FormGroup>
             <FormGroup>
-              <Label>Residue recovery fraction for WT systems</Label>
+              <Label>Residue Recovery Fraction for WT Systems</Label>
               <InputGroup>
                 <Input
                   type='number'
@@ -291,7 +291,7 @@ export const FrcsInputsContainer = (props: Props) => {
             </FormGroup>
             <FormGroup>
               <Label>
-                Residue recovery fraction for ground-based CTL system
+                Residue Recovery Fraction for Ground-based CTL System
               </Label>
               <InputGroup>
                 <Input
