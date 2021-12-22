@@ -54,9 +54,9 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PrintControl } from './PrintControl';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
-import { TripLayers } from './TripLayers';
 import { CustomMarker } from './CustomMarker';
 import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
+import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
 
 const { BaseLayer } = LayersControl;
 
@@ -752,9 +752,10 @@ export const MapContainer = () => {
         {yearlyResults.length > 0 && (
           <>
             {showMoveInGeoJson && (
-              <TripLayers
+              <ClusterTransportationMoveInLayer
+                facilityCoordinates={facilityCoordinates}
                 years={years}
-                yearlyGeoJson={tripGeometries}
+                yearlyResults={yearlyResults}
                 selectedYearIndex={selectedYearIndex}
               />
             )}
