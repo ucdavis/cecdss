@@ -66,6 +66,7 @@ export const MapContainer = () => {
   const [isErrorZone, setIsErrorZone] = useState(true);
   // used for collapse const [isOpen, setIsOpen] = useState(true);
   const [loading, toggleLoading] = useState<boolean>(false);
+  const [hasProcessingError, setHasProcessingError] = useState<boolean>(false);
   const [allYearResults, setAllYearResults] = useState<AllYearsResults>();
   const [yearlyResults, setYearlyResults] = useState<YearlyResult[]>([]);
   const [
@@ -280,6 +281,9 @@ export const MapContainer = () => {
       teaModel: teaModel,
       teaInputs: teaInputs
     };
+
+    let continueProcessing = true;
+
     const allYearResults: AllYearsResults = await fetch(
       serviceUrl + 'initialProcessing',
       {
@@ -290,7 +294,12 @@ export const MapContainer = () => {
           'Content-Type': 'application/json'
         }
       }
-    ).then(res => res.json());
+    ).then(res => (res.ok ? res.json() : (continueProcessing = false)));
+
+    if (!continueProcessing) {
+      setHasProcessingError(true);
+      return;
+    }
 
     allYearResults.facilityCoordinates = {
       lat: facilityCoordinates.lat,
@@ -355,6 +364,7 @@ export const MapContainer = () => {
     let totalPresentWorth = 0;
     const generalInflation = teaInputs.EscalationInflation.GeneralInflation;
     for (let index = 0; index < years.length; index++) {
+      let continueProcessingYear = true;
       const reqBody: RequestParams = {
         facilityLat: facilityCoordinates.lat,
         facilityLng: facilityCoordinates.lng,
@@ -402,7 +412,12 @@ export const MapContainer = () => {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then(res => res.json());
+      }).then(res => (res.ok ? res.json() : (continueProcessingYear = false)));
+
+      if (!continueProcessingYear) {
+        setHasProcessingError(true);
+        return;
+      }
 
       totalPresentWorth += yearResult.energyRevenueRequiredPW;
       currentLAC = computeCurrentLAC(
@@ -600,6 +615,14 @@ export const MapContainer = () => {
           <ExternalLayerSelection onChange={setExternalLayers} />
           <ExternalLayerLegend layers={externalLayers} />
         </div>
+        {hasProcessingError && (
+          <div className='alert alert-danger'>
+            There was a problem processing your results. This is most likely due
+            to an inability to find enough biomass to satify your requirements
+            within a reasonable radius, but could also be due to API performance
+            or avilability issues. Please refresh the page and try again.
+          </div>
+        )}
         {!showResults && (
           <InputContainer
             facilityCoordinates={facilityCoordinates}
