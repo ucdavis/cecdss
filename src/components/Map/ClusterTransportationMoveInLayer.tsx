@@ -11,7 +11,7 @@ interface Props {
   selectedYearIndex: number;
 }
 
-export const ClusterTransportationRoutesLayer = (props: Props) => {
+export const ClusterTransportationMoveInLayer = (props: Props) => {
   const [currentComputedYear, setCurrentComputedYear] = useState<number>(
     props.selectedYearIndex
   );
@@ -34,7 +34,7 @@ export const ClusterTransportationRoutesLayer = (props: Props) => {
     };
 
     const fetchRoutes = async () => {
-      const routeResults = await fetch(serviceUrl + 'processRoutes', {
+      const routeResults = await fetch(serviceUrl + 'processMoveIn', {
         mode: 'cors',
         method: 'POST',
         body: JSON.stringify(body),
@@ -56,7 +56,7 @@ export const ClusterTransportationRoutesLayer = (props: Props) => {
   ]);
 
   if (geoJson) {
-    return <GeoJSON color="orange" key={`geoyear-${currentComputedYear}`} data={geoJson} />;
+    return <GeoJSON color="purple" key={`geoyear-movein-${currentComputedYear}`} data={geoJson} />;
   } else {
     return <></>;
   }
