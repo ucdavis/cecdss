@@ -8,7 +8,8 @@ import {
   Line,
   Tooltip,
   XAxis,
-  YAxis} from 'recharts';
+  YAxis
+} from 'recharts';
 import { formatNumber } from '../Shared/util';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 
@@ -65,7 +66,6 @@ export const ResultsCharts = (props: Props) => {
             fill='#82ca9d'
             unit='$/BDMT'
           />
-          {props.system === 'Ground-Based CTL' && (
           <Area
             type='monotone'
             dataKey='moveInCosts'
@@ -75,7 +75,6 @@ export const ResultsCharts = (props: Props) => {
             fill='#ffc658'
             unit='$/BDMT'
           />
-          )}
           <Line
             type='monotone'
             dataKey='total'
@@ -89,9 +88,5 @@ export const ResultsCharts = (props: Props) => {
     );
   };
 
-  return (
-    <>
-      {renderCostCharts()}
-    </>
-  );
+  return <>{renderCostCharts()}</>;
 };
