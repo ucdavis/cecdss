@@ -522,9 +522,7 @@ export const ResultsExport = (props: Props) => {
               0
             ) / props.yearlyResults.length
           ),
-          ...props.yearlyResults.map(r =>
-            formatCurrency(r.totalMoveInCost / r.moveInCostPerDryTon)
-          )
+          ...props.yearlyResults.map(r => formatCurrency(r.moveInCostPerDryTon))
         ],
         [
           'Feedstock Cost',
