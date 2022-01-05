@@ -440,24 +440,6 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'Euthrophication Water',
-          'kg N eq',
-          formatNumber(
-            (props.yearlyResults.reduce(
-              (sum, year) =>
-                sum + year.lcaResults.lifeCycleImpacts.eutrophication_water,
-              0
-            ) *
-              1000) /
-              props.yearlyResults.length
-          ),
-          ...props.yearlyResults.map(r =>
-            formatNumber(
-              r.lcaResults.lifeCycleImpacts.eutrophication_water * 1000
-            )
-          )
-        ],
-        [
           'Smog Formation',
           'kg O3 eq',
           formatNumber(
