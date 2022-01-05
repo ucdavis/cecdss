@@ -805,7 +805,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'keyReferences',
-      ref: 'B90',
+      ref: 'B85',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Key References' }],
@@ -824,7 +824,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'disclaimer',
-      ref: 'B99',
+      ref: 'B94',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Disclaimer' }],
