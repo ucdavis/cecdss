@@ -370,7 +370,7 @@ export const ResultsExport = (props: Props) => {
       ],
       rows: [
         [
-          'Global Warming Air',
+          'Global Warming',
           'kg CO2 eq',
           formatNumber(
             (props.yearlyResults.reduce(
@@ -388,7 +388,7 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'Acidification Air',
+          'Acidification',
           'kg SO2 eq',
           formatNumber(
             (props.yearlyResults.reduce(
@@ -404,7 +404,7 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'HH Particulate Air',
+          'Human Health Particulate',
           'kg PM2.5 eq',
           formatNumber(
             (props.yearlyResults.reduce(
@@ -422,7 +422,7 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'Euthrophication Air',
+          'Euthrophication',
           'kg N eq',
           formatNumber(
             (props.yearlyResults.reduce(
@@ -458,7 +458,7 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'Smog Air',
+          'Smog Formation',
           'kg O3 eq',
           formatNumber(
             (props.yearlyResults.reduce(

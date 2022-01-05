@@ -292,7 +292,7 @@ export const LCATables = (props: Props) => {
           <th colSpan={3 + props.yearlyResults.length}>LCIA Results</th>
         </tr>
         <tr>
-          <td>Global Warming Air</td>
+          <td>Global Warming</td>
           <td>
             kg CO<sub>2</sub> eq
           </td>
@@ -311,7 +311,7 @@ export const LCATables = (props: Props) => {
           ))}
         </tr>
         <tr>
-          <td>Acidification Air</td>
+          <td>Acidification</td>
           <td>
             kg SO<sub>2</sub> eq
           </td>
@@ -332,7 +332,7 @@ export const LCATables = (props: Props) => {
           ))}
         </tr>
         <tr>
-          <td>HH Particulate Air</td>
+          <td>Human Health Particulate</td>
           <td>
             kg PM<sub>2.5</sub> eq
           </td>
@@ -353,7 +353,7 @@ export const LCATables = (props: Props) => {
           ))}
         </tr>
         <tr>
-          <td>Eutrophication Air</td>
+          <td>Eutrophication</td>
           <td>kg N eq</td>
           <td>
             {formatNumber(
@@ -391,7 +391,7 @@ export const LCATables = (props: Props) => {
           ))}
         </tr>
         <tr>
-          <td>Smog Air</td>
+          <td>Smog Formation</td>
           <td>
             kg O<sub>3</sub> eq
           </td>
