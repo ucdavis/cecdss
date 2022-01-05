@@ -370,7 +370,7 @@ export const ResultsExport = (props: Props) => {
       ],
       rows: [
         [
-          'Global Warming Air',
+          'Global Warming',
           'kg CO2 eq',
           formatNumber(
             (props.yearlyResults.reduce(
@@ -388,7 +388,7 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'Acidification Air',
+          'Acidification',
           'kg SO2 eq',
           formatNumber(
             (props.yearlyResults.reduce(
@@ -404,7 +404,7 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'HH Particulate Air',
+          'Human Health Particulate',
           'kg PM2.5 eq',
           formatNumber(
             (props.yearlyResults.reduce(
@@ -422,7 +422,7 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'Euthrophication Air',
+          'Euthrophication',
           'kg N eq',
           formatNumber(
             (props.yearlyResults.reduce(
@@ -440,25 +440,7 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
-          'Euthrophication Water',
-          'kg N eq',
-          formatNumber(
-            (props.yearlyResults.reduce(
-              (sum, year) =>
-                sum + year.lcaResults.lifeCycleImpacts.eutrophication_water,
-              0
-            ) *
-              1000) /
-              props.yearlyResults.length
-          ),
-          ...props.yearlyResults.map(r =>
-            formatNumber(
-              r.lcaResults.lifeCycleImpacts.eutrophication_water * 1000
-            )
-          )
-        ],
-        [
-          'Smog Air',
+          'Smog Formation',
           'kg O3 eq',
           formatNumber(
             (props.yearlyResults.reduce(
@@ -823,7 +805,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'keyReferences',
-      ref: 'B90',
+      ref: 'B85',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Key References' }],
@@ -842,7 +824,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'disclaimer',
-      ref: 'B99',
+      ref: 'B94',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Disclaimer' }],
