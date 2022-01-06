@@ -315,44 +315,44 @@ export const MapContainer = () => {
     setTeaInputs({ ...teaInputs });
     setSelectedYearIndex(years.length);
 
-    // combine input values with default bounds for a the sensitivity analysis
-    const sensitivityInputs: InputModSensitivity = {
-      model: teaModel,
-      input: teaInputs,
-      CapitalCost: {
-        high: 200000000,
-        low: 0
-      },
-      BiomassFuelCost: {
-        high: 100,
-        low: 0
-      },
-      DebtRatio: {
-        high: 100,
-        low: 0
-      },
-      DebtInterestRate: {
-        high: 15,
-        low: 1
-      },
-      CostOfEquity: {
-        high: 50,
-        low: 1
-      },
-      NetStationEfficiency: {
-        high: 50,
-        low: 5
-      },
-      CapacityFactor: {
-        high: 100,
-        low: 40
-      }
-    };
+    // // combine input values with default bounds for a the sensitivity analysis
+    // const sensitivityInputs: InputModSensitivity = {
+    //   model: teaModel,
+    //   input: teaInputs,
+    //   CapitalCost: {
+    //     high: 200000000,
+    //     low: 0
+    //   },
+    //   BiomassFuelCost: {
+    //     high: 100,
+    //     low: 0
+    //   },
+    //   DebtRatio: {
+    //     high: 100,
+    //     low: 0
+    //   },
+    //   DebtInterestRate: {
+    //     high: 15,
+    //     low: 1
+    //   },
+    //   CostOfEquity: {
+    //     high: 50,
+    //     low: 1
+    //   },
+    //   NetStationEfficiency: {
+    //     high: 50,
+    //     low: 5
+    //   },
+    //   CapacityFactor: {
+    //     high: 100,
+    //     low: 40
+    //   }
+    // };
 
-    // the sensitivity calculation modifies the passed params, which isn't good so we deep copy them first
-    const deepSensitivityInputs = JSON.parse(JSON.stringify(sensitivityInputs));
-    const sensitivity = runSensitivityAnalysis(deepSensitivityInputs);
-    setSensitivityResults(sensitivity.output);
+    // // the sensitivity calculation modifies the passed params, which isn't good so we deep copy them first
+    // const deepSensitivityInputs = JSON.parse(JSON.stringify(sensitivityInputs));
+    // const sensitivity = runSensitivityAnalysis(deepSensitivityInputs);
+    // setSensitivityResults(sensitivity.output);
 
     let radius = 0;
     let clusterIds: string[] = [];
