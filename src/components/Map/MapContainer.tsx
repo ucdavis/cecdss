@@ -403,7 +403,9 @@ export const MapContainer = () => {
           transportInputs.wageTruckDriver *
           (1 + generalInflation / 100) ** index,
         driverBenefits: transportInputs.driverBenefits,
-        oilCost: transportInputs.oilCost * (1 + generalInflation / 100) ** index
+        oilCost:
+          transportInputs.oilCost * (1 + generalInflation / 100) ** index,
+        capitalCost: allYearResults.teaInputs.CapitalCost
       };
       const yearResult: YearlyResult = await fetch(serviceUrl + 'process', {
         mode: 'cors',

@@ -44,6 +44,7 @@ export interface RequestParams {
   wageTruckDriver: number;
   driverBenefits: number;
   oilCost: number;
+  capitalCost: number;
 }
 
 export interface FrcsInputs {
