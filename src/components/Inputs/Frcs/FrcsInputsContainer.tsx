@@ -97,8 +97,8 @@ export const FrcsInputsContainer = (props: Props) => {
                 <option value='Cable Manual WT'>Cable Manual Whole Tree</option>
                 <option value='Cable Manual Log'>Cable Manual Log</option>
                 <option value='Cable CTL'>Cable Cut To Length</option>
-                <option value='Helicopter Manual WT'>
-                  Helicopter Manual Whole Tree
+                <option value='Helicopter Manual Log'>
+                  Helicopter Manual Log
                 </option>
                 <option value='Helicopter CTL'>Helicopter Cut To Length</option>
               </Input>
@@ -170,8 +170,8 @@ export const FrcsInputsContainer = (props: Props) => {
                 <option value='Cable Manual WT'>Cable Manual Whole Tree</option>
                 <option value='Cable Manual Log'>Cable Manual Log</option>
                 <option value='Cable CTL'>Cable Cut To Length</option>
-                <option value='Helicopter Manual WT'>
-                  Helicopter Manual Whole Tree
+                <option value='Helicopter Manual Log'>
+                  Helicopter Manual Log
                 </option>
                 <option value='Helicopter CTL'>Helicopter Cut To Length</option>
               </Input>
