@@ -205,9 +205,7 @@ export interface YearlyResult {
   errorClusterNumbers: string[];
   radius: number;
   fuelCost: number;
-  energyRevenueRequired: number;
-  energyRevenueRequiredPW: number;
-  cashFlow: any;
+  cashFlow: CashFlow;
   geoJson: any;
   errorGeoJson: any;
   currentLCOE: number;

@@ -236,15 +236,15 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
-                (sum: number, x: CashFlow) => sum + x.BiomassFuelCost,
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.cashFlow.BiomassFuelCost,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {props.yearlyResults.map((result, i) => (
             <td key={`biomassFuelCost-${i}`}>
-              {formatCurrency(result.BiomassFuelCost)}
+              {formatCurrency(result.cashFlow.BiomassFuelCost)}
             </td>
           ))}
         </tr>
@@ -419,15 +419,15 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
-                (sum: number, x: CashFlow) => sum + x.EnergyRevenueRequired,
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.cashFlow.EnergyRevenueRequired,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {props.yearlyResults.map((result, i) => (
             <td key={`energyRevenueRequired-${i}`}>
-              {formatCurrency(result.EnergyRevenueRequired)}
+              {formatCurrency(result.cashFlow.EnergyRevenueRequired)}
             </td>
           ))}
         </tr>
