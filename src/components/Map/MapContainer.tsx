@@ -37,7 +37,11 @@ import { HeatmapLayers } from './HeatmapLayers';
 import { PaginationItem, PaginationLink, Button, Pagination } from 'reactstrap';
 import { ResultsContainer } from '../Results/ResultsContainer';
 import { GeoJsonLayers } from './GeoJsonLayers';
-import { computeConstantLAC, computeCurrentLAC } from '@ucdavis/tea/utility';
+import {
+  computeConstantLAC,
+  computeCurrentLAC,
+  computeEnergyRevenueRequiredPW
+} from '@ucdavis/tea/utility';
 import { runSensitivityAnalysis } from '@ucdavis/tea/sensitivity';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
@@ -421,7 +425,12 @@ export const MapContainer = () => {
         return;
       }
 
-      totalPresentWorth += yearResult.energyRevenueRequiredPW;
+      const energyRevenueRequiredPW = computeEnergyRevenueRequiredPW(
+        index + 1,
+        teaInputs.Financing.CostOfEquity,
+        yearResult.cashFlow.EnergyRevenueRequired
+      );
+      totalPresentWorth += energyRevenueRequiredPW;
       currentLAC = computeCurrentLAC(
         allYearInputs.teaInputs.Financing.CostOfEquity,
         index + 1, // number of years
@@ -448,9 +457,7 @@ export const MapContainer = () => {
       clusterIds.push(...uniqueClusters);
       errorIds.push(...uniqueErrors);
       cashFlows.push(yearResult.cashFlow);
-      energyRevenueRequiredPresentYears.push(
-        yearResult.energyRevenueRequiredPW
-      );
+      energyRevenueRequiredPresentYears.push(energyRevenueRequiredPW);
       const geoJsonClusters: Feature[] = convertGeoJSON(yearResult.clusters);
       setGeoJsonResults(results => [
         ...results,
