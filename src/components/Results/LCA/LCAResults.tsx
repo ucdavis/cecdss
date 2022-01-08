@@ -29,7 +29,9 @@ export const LCAResults = (props: Props) => {
             <td>
               CO<sub>2</sub>
             </td>
-            <td>{formatNumber(props.results.lifeCycleEmissions.CO2 * 1000)}</td>
+            <td>
+              {formatNumber(props.results.lifeCycleEmissions.CO2 * 1000, 2)}
+            </td>
             <td>kg</td>
           </tr>
           <tr>
@@ -86,7 +88,9 @@ export const LCAResults = (props: Props) => {
           </tr>
           <tr>
             <td>Carbon Intensity</td>
-            <td>{formatNumber(props.results.lifeCycleEmissions.CI * 1000)}</td>
+            <td>
+              {formatNumber(props.results.lifeCycleEmissions.CI * 1000, 2)}
+            </td>
             <td>
               kg CO<sub>2</sub>e
             </td>
@@ -109,7 +113,8 @@ export const LCAResults = (props: Props) => {
             <td>Global Warming Air</td>
             <td>
               {formatNumber(
-                props.results.lifeCycleImpacts.global_warming_air * 1000
+                props.results.lifeCycleImpacts.global_warming_air * 1000,
+                2
               )}
             </td>
             <td>
@@ -119,7 +124,9 @@ export const LCAResults = (props: Props) => {
           <tr>
             <td>Acidification Air</td>
             <td>
-              {formatNumber(props.results.lifeCycleImpacts.acidification_air * 1000)}
+              {formatNumber(
+                props.results.lifeCycleImpacts.acidification_air * 1000
+              )}
             </td>
             <td>
               kg SO<sub>2</sub> eq
@@ -146,17 +153,10 @@ export const LCAResults = (props: Props) => {
             <td>kg N eq</td>
           </tr>
           <tr>
-            <td>Eutrophication Water</td>
-            <td>
-              {formatNumber(
-                props.results.lifeCycleImpacts.eutrophication_water * 1000
-              )}
-            </td>
-            <td>kg N eq</td>
-          </tr>
-          <tr>
             <td>Smog Air</td>
-            <td>{formatNumber(props.results.lifeCycleImpacts.smog_air * 1000)}</td>
+            <td>
+              {formatNumber(props.results.lifeCycleImpacts.smog_air * 1000)}
+            </td>
             <td>
               kg O<sub>3</sub> eq
             </td>
