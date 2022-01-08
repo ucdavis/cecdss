@@ -229,10 +229,11 @@ export const ResultsExport = (props: Props) => {
               (sum, year) =>
                 sum + year.lcaResults.lifeCycleEmissions.CO2 * 1000,
               0
-            ) / props.yearlyResults.length
+            ) / props.yearlyResults.length,
+            2
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lifeCycleEmissions.CO2 * 1000)
+            formatNumber(r.lcaResults.lifeCycleEmissions.CO2 * 1000, 2)
           )
         ],
         [
@@ -348,10 +349,11 @@ export const ResultsExport = (props: Props) => {
               0
             ) *
               1000) /
-              props.yearlyResults.length
+              props.yearlyResults.length,
+            2
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lifeCycleEmissions.CI * 1000)
+            formatNumber(r.lcaResults.lifeCycleEmissions.CI * 1000, 2)
           )
         ]
       ]
@@ -379,11 +381,13 @@ export const ResultsExport = (props: Props) => {
               0
             ) *
               1000) /
-              props.yearlyResults.length
+              props.yearlyResults.length,
+            2
           ),
           ...props.yearlyResults.map(r =>
             formatNumber(
-              r.lcaResults.lifeCycleImpacts.global_warming_air * 1000
+              r.lcaResults.lifeCycleImpacts.global_warming_air * 1000,
+              2
             )
           )
         ],
