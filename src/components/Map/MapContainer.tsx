@@ -165,12 +165,12 @@ export const MapContainer = () => {
     facilityCoordinates,
     setFacilityCoordinates
   ] = useState<MapCoordinates>({
-    lat: 39.21204328248304,
-    lng: -121.07163446489723
+    lat: 37.874369,
+    lng: -120.477336
   });
   const [biomassCoordinates, setBiomassCoordinates] = useState<MapCoordinates>({
-    lat: 39.21204328248304,
-    lng: -121.07163446489723
+    lat: 37.874369,
+    lng: -120.477336
   });
 
   const [
