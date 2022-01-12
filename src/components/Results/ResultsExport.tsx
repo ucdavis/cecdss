@@ -57,6 +57,7 @@ export const ResultsExport = (props: Props) => {
       columns: [{ name: 'Technical Performance' }, { name: ' ' }],
       rows: [
         ['Project Prescription', treatmentName],
+        ['Harvesting System', props.frcsInputs.system],
         ['Facility Type', props.teaModel],
         ['Capital Cost ($)', capitalCost],
         [
@@ -506,9 +507,12 @@ export const ResultsExport = (props: Props) => {
             props.yearlyResults.reduce(
               (sum, year) => sum + year.moveInCostPerDryTon,
               0
-            ) / props.yearlyResults.length
+            ) / props.yearlyResults.length,
+            3
           ),
-          ...props.yearlyResults.map(r => formatCurrency(r.moveInCostPerDryTon))
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.moveInCostPerDryTon, 3)
+          )
         ],
         [
           'Feedstock Cost',
@@ -844,7 +848,7 @@ export const ResultsExport = (props: Props) => {
     // send file to client
     saveAs(
       new Blob([workbookBuffer], { type: 'application/octet-stream' }),
-      `cecdata.xlsx`
+      `${treatmentName}+${props.frcsInputs.system}+${props.teaModel}+ef${props.expansionFactor}.xlsx`
     );
   };
 
