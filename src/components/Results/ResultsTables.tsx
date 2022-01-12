@@ -91,10 +91,10 @@ export const ResultsTable = (props: Props) => {
             <td>Expansion Factor</td>
             <td>{props.expansionFactor}</td>
           </tr>
-          <tr>
+          {/* <tr>
             <td>Proximity to Substation (km)</td>
             <td>{props.allYearResults.distanceToNearestSubstation}</td>
-          </tr>
+          </tr> */}
         </tbody>
       </Table>
     );

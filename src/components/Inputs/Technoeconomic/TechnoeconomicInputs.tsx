@@ -33,10 +33,10 @@ const determineScaledCapitalCost = (
     return defaultCapitalCost;
   } else {
     const scaledCapitalCost =
-      (defaultCapitalCost * (electricalCapacity / defaultElectricCapacity)) ^
-      scaleFactor;
+      defaultCapitalCost *
+      Math.pow(electricalCapacity / defaultElectricCapacity, scaleFactor);
 
-    return scaledCapitalCost;
+    return Math.round(scaledCapitalCost);
   }
 };
 
