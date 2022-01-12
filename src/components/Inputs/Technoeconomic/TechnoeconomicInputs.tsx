@@ -19,12 +19,13 @@ const determineScaledCapitalCost = (
   electricalCapacity: number,
   teaModel: string
 ) => {
-  const scaleFactor = 0.82; // source: https://evcvaluation.com/cost-to-capacity-method-applications-and-considerations/
-  let defaultCapitalCost = 71_000_000;
+  // source: https://evcvaluation.com/wp-content/uploads/2019/06/Cost-to-Capacity-Method_Applications-and-Considerations.pdf
+  const scaleFactor = 0.82;
+  let defaultCapitalCost = 100_000_000; // assuming $4000/kWe
   let defaultElectricCapacity = 25_000;
 
   if (teaModel === TechnoeconomicModels.gasificationPower) {
-    defaultCapitalCost = 920_000;
+    defaultCapitalCost = 3_000_000; // assuming $6000/kWe
     defaultElectricCapacity = 500;
   }
 
