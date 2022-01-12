@@ -18,7 +18,7 @@ import {
 } from './TEASharedClasses';
 
 export class InputModGPClass implements InputModGP {
-  CapitalCost = 920_000; // including $45,000 truck unloading cost
+  CapitalCost = 3_000_000;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPClass();
   HeatBaseYear = new HeatBaseYearInputModGPClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModGPClass();
@@ -59,14 +59,14 @@ export class HeatBaseYearInputModGPClass implements HeatBaseYearInputModClass {
 export class ExpensesBaseYearInputModGPClass
   implements ExpensesBaseYearInputModGP {
   BiomassFuelCost = 22.05;
-  LaborCost = 20000;
-  MaintenanceCost = 4000;
-  InsurancePropertyTax = 1000;
-  Utilities = 1000;
-  Management = 1000;
-  OtherOperatingExpenses = 1000;
+  LaborCost = 70_000;
+  MaintenanceCost = 15_000;
+  WasteTreatment = 7_000;
+  InsurancePropertyTax = 3500;
+  Utilities = 3500;
+  Management = 3500;
+  OtherOperatingExpenses = 3500;
   DualFuelCost = 0.3;
-  WasteTreatment = 2000;
 }
 
 export class IncomeOtherThanEnergyInputModGPClass
