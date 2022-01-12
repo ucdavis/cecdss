@@ -41,6 +41,7 @@ export const AllResultsContainer = (props: Props) => {
         frcsInputs={props.frcsInputs}
         teaInputs={props.teaInputs}
         teaModel={props.teaModel}
+        expansionFactor={props.expansionFactor}
       />
       <ResultsCharts
         results={props.yearlyResults}
