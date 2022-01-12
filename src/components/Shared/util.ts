@@ -20,8 +20,12 @@ export const formatNumber = (num: number, digits?: number) => {
   return num.toLocaleString('en', options);
 };
 
-export const formatCurrency = (num: number) => {
-  return `\$${formatNumber(num)}`;
+export const formatCurrency = (num: number, digits?: number) => {
+  if (!digits) {
+    return `\$${formatNumber(num)}`;
+  } else {
+    return `\$${formatNumber(num, digits)}`;
+  }
 
   // if (!num) {
   //   return '';
