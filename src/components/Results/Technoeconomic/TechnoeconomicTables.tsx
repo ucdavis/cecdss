@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatCurrency } from '../../Shared/util';
+import { formatCurrency, formatNumber } from '../../Shared/util';
 import { YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
 import { CashFlow } from '@ucdavis/tea/output.model';
@@ -69,12 +69,13 @@ export const TechnoeconomicTables = (props: Props) => {
               props.yearlyResults.reduce(
                 (sum, x) => sum + x.moveInCostPerDryTon,
                 0
-              ) / props.yearlyResults.length
+              ) / props.yearlyResults.length,
+              3
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`totalMoveInCost-${i}`}>
-              {formatCurrency(result.moveInCostPerDryTon)}
+              {formatCurrency(result.moveInCostPerDryTon, 3)}
             </td>
           ))}
         </tr>
