@@ -18,6 +18,7 @@ interface Props {
   // todo: location
   allYearResults: AllYearsResults;
   yearlyResults: YearlyResult[];
+  expansionFactor: number;
 }
 
 export const ResultsTable = (props: Props) => {
@@ -39,12 +40,18 @@ export const ResultsTable = (props: Props) => {
             <td>{treatmentName}</td>
           </tr>
           <tr>
+            <td>Harvesting System</td>
+            <td>{props.frcsInputs.system}</td>
+          </tr>
+          <tr>
             <td>Facility Type</td>
             <td>{props.teaModel}</td>
           </tr>
           <tr>
             <td>Capital Cost ($)</td>
-            <td>{formatCurrency(props.allYearResults.teaInputs.CapitalCost)}</td>
+            <td>
+              {formatCurrency(props.allYearResults.teaInputs.CapitalCost)}
+            </td>
           </tr>
           <tr>
             <td>Net Electrical Capacity (kWe)</td>
@@ -79,6 +86,10 @@ export const ResultsTable = (props: Props) => {
               {props.allYearResults.biomassCoordinates.lat},{' '}
               {props.allYearResults.biomassCoordinates.lng}
             </td>
+          </tr>
+          <tr>
+            <td>Expansion Factor</td>
+            <td>{props.expansionFactor}</td>
           </tr>
           <tr>
             <td>Proximity to Substation (km)</td>
