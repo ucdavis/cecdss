@@ -34,7 +34,7 @@ export class InputModGPOClass implements InputModGPO {
 export class ElectricalFuelBaseYearInputModGPOClass
   implements ElectricalFuelBaseYearInputModGPO {
   NetElectricalCapacity = 25000;
-  CapacityFactor = 85;
+  CapacityFactor = 80;
   MoistureContent = 50;
   NetStationEfficiency = 20;
   FuelHeatingValue = 18608;
