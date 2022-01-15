@@ -97,7 +97,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'supply',
-      ref: 'B15',
+      ref: 'B16',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -138,7 +138,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'analysis',
-      ref: 'B19',
+      ref: 'B20',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -216,7 +216,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'lci',
-      ref: 'B25',
+      ref: 'B26',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -366,7 +366,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'lcia',
-      ref: 'B36',
+      ref: 'B37',
       headerRow: true,
       totalsRow: false,
       columns: [
