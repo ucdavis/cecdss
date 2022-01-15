@@ -83,11 +83,11 @@ export const ResultsExport = (props: Props) => {
           'Biomass Coordinates',
           `${props.allYearResults.biomassCoordinates.lat}, ${props.allYearResults.biomassCoordinates.lng}`
         ],
-        ['Expansion Factor', props.expansionFactor]
-        // [
-        //   'Proximity to substation (km)',
-        //   props.allYearResults.distanceToNearestSubstation
-        // ]
+        ['Expansion Factor', props.expansionFactor],
+        [
+          'Proximity to substation (km)',
+          props.allYearResults.distanceToNearestSubstation
+        ]
       ]
     });
 
