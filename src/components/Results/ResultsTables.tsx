@@ -70,6 +70,12 @@ export const ResultsTable = (props: Props) => {
             </tr>
           )}
           <tr>
+            <td>Capacity Factor (%)</td>
+            <td>
+              {props.teaInputs.ElectricalFuelBaseYear.CapacityFactor}
+            </td>
+          </tr>
+          <tr>
             <td>Economic Life (y)</td>
             <td>{props.teaInputs.Financing.EconomicLife}</td>
           </tr>

@@ -72,6 +72,10 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
+          'Capacity Factor (%)',
+          formatNumber(props.teaInputs.ElectricalFuelBaseYear.CapacityFactor)
+        ],
+        [
           'Economic Life (y)',
           props.allYearResults.teaInputs.Financing.EconomicLife
         ],
