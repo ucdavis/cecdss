@@ -81,7 +81,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
           <InputGroupAddon addonType='append'>% wet basis</InputGroupAddon>
         </InputGroup>
         <FormText color='muted'>
-          Moisture Content of Biomass Feedstock to Gasifier
+          Moisture Content of Biomass Feedstock
         </FormText>
       </FormGroup>
       <FormGroup>
