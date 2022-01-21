@@ -483,9 +483,13 @@ export const ResultsExport = (props: Props) => {
           '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.harvestCostPerDryTon,
+              (sum, x) => sum + x.harvestCostPerDryTon * x.totalDryFeedstock,
               0
-            ) / props.yearlyResults.length
+            ) /
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.totalDryFeedstock,
+                0
+              )
           ),
           ...props.yearlyResults.map(r =>
             formatCurrency(r.harvestCostPerDryTon)
@@ -496,9 +500,14 @@ export const ResultsExport = (props: Props) => {
           '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.transportationCostPerDryTon,
+              (sum, x) =>
+                sum + x.transportationCostPerDryTon * x.totalDryFeedstock,
               0
-            ) / props.yearlyResults.length
+            ) /
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.totalDryFeedstock,
+                0
+              )
           ),
           ...props.yearlyResults.map(r =>
             formatCurrency(r.transportationCostPerDryTon)
@@ -509,9 +518,13 @@ export const ResultsExport = (props: Props) => {
           '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.moveInCostPerDryTon,
+              (sum, x) => sum + x.moveInCostPerDryTon * x.totalDryFeedstock,
               0
-            ) / props.yearlyResults.length,
+            ) /
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.totalDryFeedstock,
+                0
+              ),
             3
           ),
           ...props.yearlyResults.map(r =>
@@ -523,9 +536,13 @@ export const ResultsExport = (props: Props) => {
           '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.feedstockCostPerTon,
+              (sum, x) => sum + x.feedstockCostPerTon * x.totalDryFeedstock,
               0
-            ) / props.yearlyResults.length
+            ) /
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.totalDryFeedstock,
+                0
+              )
           ),
           ...props.yearlyResults.map(r => formatCurrency(r.feedstockCostPerTon))
         ],
