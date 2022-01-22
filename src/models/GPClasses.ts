@@ -35,7 +35,7 @@ export class InputModGPClass implements InputModGP {
 export class ElectricalFuelBaseYearInputModGPClass
   implements ElectricalFuelBaseYearInputModGP {
   NetElectricalCapacity = 500;
-  CapacityFactor = 85;
+  CapacityFactor = 80;
   MoistureContent = 50;
   GrossElectricalCapacity = 650;
   HHVEfficiency = 65;
