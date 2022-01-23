@@ -17,7 +17,7 @@ import {
 } from './TEASharedClasses';
 
 export class InputModGPOClass implements InputModGPO {
-  CapitalCost = 71_000_000; // including $1,000,000 truck unloading cost
+  CapitalCost = 100_000_000;
   CapitalCostManuallySet = false;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPOClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModGPOClass();
@@ -34,7 +34,7 @@ export class InputModGPOClass implements InputModGPO {
 export class ElectricalFuelBaseYearInputModGPOClass
   implements ElectricalFuelBaseYearInputModGPO {
   NetElectricalCapacity = 25000;
-  CapacityFactor = 85;
+  CapacityFactor = 80;
   MoistureContent = 50;
   NetStationEfficiency = 20;
   FuelHeatingValue = 18608;
@@ -44,13 +44,13 @@ export class ElectricalFuelBaseYearInputModGPOClass
 export class ExpensesBaseYearInputModGPOClass
   implements ExpensesBaseYearInputModGPO {
   BiomassFuelCost = 22.05;
-  LaborCost = 2000000;
-  MaintenanceCost = 1500000;
-  InsurancePropertyTax = 1400000;
-  Utilities = 200000;
-  Management = 200000;
-  OtherOperatingExpenses = 400000;
-  AshDisposal = 100000;
+  LaborCost = 3_000_000;
+  MaintenanceCost = 2_000_000;
+  InsurancePropertyTax = 2_000_000;
+  Utilities = 300_000;
+  AshDisposal = 150_000;
+  Management = 300_000;
+  OtherOperatingExpenses = 600_000;
 }
 
 export class ExpensesBaseYearModGPOClass implements ExpensesBaseYearModGPO {

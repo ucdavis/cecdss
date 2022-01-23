@@ -27,7 +27,7 @@ export const ResultsCharts = (props: Props) => {
         name: result.year,
         harvestCosts: formatNumber(result.harvestCostPerDryTon),
         transportationCosts: formatNumber(result.transportationCostPerDryTon),
-        moveInCosts: formatNumber(result.moveInCostPerDryTon),
+        moveInCosts: formatNumber(result.moveInCostPerDryTon, 3),
         total: formatNumber(result.feedstockCostPerTon)
       };
     });

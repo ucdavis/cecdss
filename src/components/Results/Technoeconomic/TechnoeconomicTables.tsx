@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatCurrency } from '../../Shared/util';
+import { formatCurrency, formatNumber } from '../../Shared/util';
 import { YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
 import { CashFlow } from '@ucdavis/tea/output.model';
@@ -33,9 +33,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>
             {formatCurrency(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.harvestCostPerDryTon,
+                (sum, x) => sum + x.harvestCostPerDryTon * x.totalDryFeedstock,
                 0
-              ) / props.yearlyResults.length
+              ) /
+                props.yearlyResults.reduce(
+                  (sum, x) => sum + x.totalDryFeedstock,
+                  0
+                )
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
@@ -50,9 +54,14 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>
             {formatCurrency(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.transportationCostPerDryTon,
+                (sum, x) =>
+                  sum + x.transportationCostPerDryTon * x.totalDryFeedstock,
                 0
-              ) / props.yearlyResults.length
+              ) /
+                props.yearlyResults.reduce(
+                  (sum, x) => sum + x.totalDryFeedstock,
+                  0
+                )
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
@@ -67,14 +76,19 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>
             {formatCurrency(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.moveInCostPerDryTon,
+                (sum, x) => sum + x.moveInCostPerDryTon * x.totalDryFeedstock,
                 0
-              ) / props.yearlyResults.length
+              ) /
+                props.yearlyResults.reduce(
+                  (sum, x) => sum + x.totalDryFeedstock,
+                  0
+                ),
+              3
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
             <td key={`totalMoveInCost-${i}`}>
-              {formatCurrency(result.moveInCostPerDryTon)}
+              {formatCurrency(result.moveInCostPerDryTon, 3)}
             </td>
           ))}
         </tr>
@@ -84,9 +98,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>
             {formatCurrency(
               props.yearlyResults.reduce(
-                (sum, x) => sum + x.feedstockCostPerTon,
+                (sum, x) => sum + x.feedstockCostPerTon * x.totalDryFeedstock,
                 0
-              ) / props.yearlyResults.length
+              ) /
+                props.yearlyResults.reduce(
+                  (sum, x) => sum + x.totalDryFeedstock,
+                  0
+                )
             )}
           </td>
           {props.yearlyResults.map((result, i) => (

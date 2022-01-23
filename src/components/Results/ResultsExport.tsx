@@ -57,6 +57,7 @@ export const ResultsExport = (props: Props) => {
       columns: [{ name: 'Technical Performance' }, { name: ' ' }],
       rows: [
         ['Project Prescription', treatmentName],
+        ['Harvesting System', props.frcsInputs.system],
         ['Facility Type', props.teaModel],
         ['Capital Cost ($)', capitalCost],
         [
@@ -69,6 +70,10 @@ export const ResultsExport = (props: Props) => {
           formatNumber(
             props.teaInputs.ElectricalFuelBaseYear.NetStationEfficiency
           )
+        ],
+        [
+          'Capacity Factor (%)',
+          formatNumber(props.teaInputs.ElectricalFuelBaseYear.CapacityFactor)
         ],
         [
           'Economic Life (y)',
@@ -92,7 +97,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'supply',
-      ref: 'B15',
+      ref: 'B16',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -133,7 +138,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'analysis',
-      ref: 'B19',
+      ref: 'B20',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -211,7 +216,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'lci',
-      ref: 'B25',
+      ref: 'B26',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -361,7 +366,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'lcia',
-      ref: 'B36',
+      ref: 'B37',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -478,9 +483,13 @@ export const ResultsExport = (props: Props) => {
           '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.harvestCostPerDryTon,
+              (sum, x) => sum + x.harvestCostPerDryTon * x.totalDryFeedstock,
               0
-            ) / props.yearlyResults.length
+            ) /
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.totalDryFeedstock,
+                0
+              )
           ),
           ...props.yearlyResults.map(r =>
             formatCurrency(r.harvestCostPerDryTon)
@@ -491,9 +500,14 @@ export const ResultsExport = (props: Props) => {
           '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.transportationCostPerDryTon,
+              (sum, x) =>
+                sum + x.transportationCostPerDryTon * x.totalDryFeedstock,
               0
-            ) / props.yearlyResults.length
+            ) /
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.totalDryFeedstock,
+                0
+              )
           ),
           ...props.yearlyResults.map(r =>
             formatCurrency(r.transportationCostPerDryTon)
@@ -504,20 +518,31 @@ export const ResultsExport = (props: Props) => {
           '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.moveInCostPerDryTon,
+              (sum, x) => sum + x.moveInCostPerDryTon * x.totalDryFeedstock,
               0
-            ) / props.yearlyResults.length
+            ) /
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.totalDryFeedstock,
+                0
+              ),
+            3
           ),
-          ...props.yearlyResults.map(r => formatCurrency(r.moveInCostPerDryTon))
+          ...props.yearlyResults.map(r =>
+            formatCurrency(r.moveInCostPerDryTon, 3)
+          )
         ],
         [
           'Feedstock Cost',
           '$/BDMT',
           formatCurrency(
             props.yearlyResults.reduce(
-              (sum, year) => sum + year.feedstockCostPerTon,
+              (sum, x) => sum + x.feedstockCostPerTon * x.totalDryFeedstock,
               0
-            ) / props.yearlyResults.length
+            ) /
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.totalDryFeedstock,
+                0
+              )
           ),
           ...props.yearlyResults.map(r => formatCurrency(r.feedstockCostPerTon))
         ],
@@ -844,7 +869,7 @@ export const ResultsExport = (props: Props) => {
     // send file to client
     saveAs(
       new Blob([workbookBuffer], { type: 'application/octet-stream' }),
-      `cecdata.xlsx`
+      `${treatmentName}+${props.frcsInputs.system}+${props.teaModel}+ef${props.expansionFactor}.xlsx`
     );
   };
 

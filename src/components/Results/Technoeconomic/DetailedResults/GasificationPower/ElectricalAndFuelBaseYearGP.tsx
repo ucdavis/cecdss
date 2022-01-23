@@ -136,7 +136,7 @@ export const ElectricalAndFuelBaseYearGP = (props: Props) => {
           </tr>
           <tr>
             <td>
-              Moisture Content of Biomass Feedstock to Gasifier (% wet basis)
+              Moisture Content of Biomass Feedstock (% wet basis)
             </td>
             <td>{formatNumber(props.inputs.MoistureContent)}</td>
           </tr>

@@ -14,7 +14,7 @@ import {
 } from './TEASharedClasses';
 
 export class InputModCHPClass implements InputModCHP {
-  CapitalCost = 71_000_000; // including $1,000,000 truck unloading cost
+  CapitalCost = 100_000_000;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModCHPClass();
   HeatBaseYear = new HeatBaseYearInputModClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModCHPClass();
@@ -31,7 +31,7 @@ export class InputModCHPClass implements InputModCHP {
 export class ElectricalFuelBaseYearInputModCHPClass
   implements ElectricalFuelBaseYearInputModCHP {
   NetElectricalCapacity = 25000;
-  CapacityFactor = 85;
+  CapacityFactor = 80;
   MoistureContent = 50;
   NetStationEfficiency = 20;
   FuelHeatingValue = 18608;
@@ -42,13 +42,13 @@ export class ElectricalFuelBaseYearInputModCHPClass
 export class ExpensesBaseYearInputModCHPClass
   implements ExpensesBaseYearInputMod {
   BiomassFuelCost = 22.05;
-  LaborCost = 2000000;
-  MaintenanceCost = 1500000;
-  InsurancePropertyTax = 1400000;
-  Utilities = 200000;
-  Management = 200000;
-  OtherOperatingExpenses = 400000;
-  AshDisposal = 100000;
+  LaborCost = 3_000_000;
+  MaintenanceCost = 2_000_000;
+  InsurancePropertyTax = 2_000_000;
+  Utilities = 300_000;
+  AshDisposal = 150_000;
+  Management = 300_000;
+  OtherOperatingExpenses = 600_000;
 }
 
 export class ElectricalFuelBaseYearModCHPClass
