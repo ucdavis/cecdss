@@ -18,7 +18,7 @@ import {
 } from './TEASharedClasses';
 
 export class InputModGPClass implements InputModGP {
-  CapitalCost = 3_000_000;
+  CapitalCost = 18_000_000;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPClass();
   HeatBaseYear = new HeatBaseYearInputModGPClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModGPClass();
@@ -34,10 +34,10 @@ export class InputModGPClass implements InputModGP {
 
 export class ElectricalFuelBaseYearInputModGPClass
   implements ElectricalFuelBaseYearInputModGP {
-  NetElectricalCapacity = 500;
+  NetElectricalCapacity = 3000;
   CapacityFactor = 80;
   MoistureContent = 50;
-  GrossElectricalCapacity = 650;
+  GrossElectricalCapacity = 3000;
   HHVEfficiency = 65;
   NetStationEfficiency = 23;
   FractionOfInputEnergy = 20;
@@ -59,13 +59,13 @@ export class HeatBaseYearInputModGPClass implements HeatBaseYearInputModClass {
 export class ExpensesBaseYearInputModGPClass
   implements ExpensesBaseYearInputModGP {
   BiomassFuelCost = 22.05;
-  LaborCost = 70_000;
-  MaintenanceCost = 15_000;
-  WasteTreatment = 7_000;
-  InsurancePropertyTax = 3500;
-  Utilities = 3500;
-  Management = 3500;
-  OtherOperatingExpenses = 3500;
+  LaborCost = 500_000;
+  MaintenanceCost = 100_000;
+  WasteTreatment = 50_000;
+  InsurancePropertyTax = 360_000;
+  Utilities = 100_000;
+  Management = 100_000;
+  OtherOperatingExpenses = 100_000;
   DualFuelCost = 0.3;
 }
 

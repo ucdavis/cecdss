@@ -27,7 +27,7 @@ export class EscalationInflationInputModClass
 export class TaxesInputModClass implements TaxesInputMod {
   FederalTaxRate = 34;
   StateTaxRate = 9.6;
-  ProductionTaxCredit = 0.009;
+  ProductionTaxCredit = 0;
 }
 export class FinancingInputModClass implements FinancingInputMod {
   DebtRatio = 75;

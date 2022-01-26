@@ -25,8 +25,8 @@ const determineScaledCapitalCost = (
   let defaultElectricCapacity = 25_000;
 
   if (teaModel === TechnoeconomicModels.gasificationPower) {
-    defaultCapitalCost = 3_000_000; // assuming $6000/kWe
-    defaultElectricCapacity = 500;
+    defaultCapitalCost = 18_000_000; // assuming $6000/kWe
+    defaultElectricCapacity = 3000;
   }
 
   if (electricalCapacity === defaultElectricCapacity) {

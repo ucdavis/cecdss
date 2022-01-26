@@ -134,7 +134,7 @@ export const MapContainer = () => {
     InputModGPO | InputModCHP | InputModGP
   >(new InputModGPOClass());
   const [teaModel, setTeaModel] = useState(
-    TechnoeconomicModels.genericPowerOnly
+    TechnoeconomicModels.gasificationPower
   );
 
   const [frcsInputs, setFrcsInputs] = useState<FrcsInputs>(frcsInputsExample);
@@ -165,12 +165,12 @@ export const MapContainer = () => {
     facilityCoordinates,
     setFacilityCoordinates
   ] = useState<MapCoordinates>({
-    lat: 37.87439641742907,
-    lng: -120.47592259245009
+    lat: 40.903335006376,
+    lng: -121.64782090187
   });
   const [biomassCoordinates, setBiomassCoordinates] = useState<MapCoordinates>({
-    lat: 37.87439641742907,
-    lng: -120.47592259245009
+    lat: 40.903335006376,
+    lng: -121.64782090187
   });
 
   const [
