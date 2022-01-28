@@ -29,7 +29,10 @@ export const FrcsTables = (props: Props) => {
           <td>BDMT</td>
           <td>
             {formatNumber(
-              props.yearlyResults.reduce((sum, x) => sum + x.totalDryFeedstock, 0)
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.totalDryFeedstock,
+                0
+              )
             )}
           </td>
           {props.yearlyResults.map((result, i) => (
@@ -43,7 +46,10 @@ export const FrcsTables = (props: Props) => {
           <td>BDMT</td>
           <td>
             {formatNumber(
-              props.yearlyResults.reduce((sum, x) => sum + x.totalDryCoproduct, 0)
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.totalDryCoproduct,
+                0
+              )
             )}
           </td>
           {props.yearlyResults.map((result, i) => (

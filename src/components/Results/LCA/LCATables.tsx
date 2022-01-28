@@ -1,10 +1,11 @@
 import React from 'react';
 import { formatNumber } from '../../Shared/util';
-import { YearlyResult } from '../../../models/Types';
+import { AllYearsResults, YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
 
 interface Props {
   yearlyResults: YearlyResult[];
+  allYearResults: AllYearsResults;
 }
 
 export const LCATables = (props: Props) => {
@@ -90,7 +91,7 @@ export const LCATables = (props: Props) => {
         </tr>
         <tr>
           <td>Transport Distance</td>
-          <td> km</td>
+          <td>km</td>
           <td>
             {formatNumber(
               (props.yearlyResults.reduce(
@@ -104,6 +105,28 @@ export const LCATables = (props: Props) => {
           {props.yearlyResults.map((result, i) => (
             <td key={`distance-${i}`}>
               {formatNumber(result.lcaResults.inputs.distance * 1000)}
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td>Move-in Distance</td>
+          <td>m</td>
+          <td>
+            {formatNumber(
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.totalMoveInDistance,
+                0
+              ) /
+                ((props.allYearResults.annualGeneration / 1000) *
+                  props.yearlyResults.length)
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`distance-${i}`}>
+              {formatNumber(
+                result.totalMoveInDistance /
+                  (props.allYearResults.annualGeneration / 1000)
+              )}
             </td>
           ))}
         </tr>
