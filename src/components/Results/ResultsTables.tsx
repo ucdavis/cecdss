@@ -71,9 +71,7 @@ export const ResultsTable = (props: Props) => {
           )}
           <tr>
             <td>Capacity Factor (%)</td>
-            <td>
-              {props.teaInputs.ElectricalFuelBaseYear.CapacityFactor}
-            </td>
+            <td>{props.teaInputs.ElectricalFuelBaseYear.CapacityFactor}</td>
           </tr>
           <tr>
             <td>Economic Life (y)</td>
@@ -113,7 +111,10 @@ export const ResultsTable = (props: Props) => {
         <FrcsTables yearlyResults={props.yearlyResults} />
       </div>
       <div className='results-table'>
-        <LCATables yearlyResults={props.yearlyResults} />
+        <LCATables
+          yearlyResults={props.yearlyResults}
+          allYearResults={props.allYearResults}
+        />
       </div>
       <div className='results-table'>
         <TechnoeconomicTables

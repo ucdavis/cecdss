@@ -210,13 +210,31 @@ export const ResultsExport = (props: Props) => {
           ...props.yearlyResults.map(year =>
             formatNumber(year.lcaResults.inputs.distance * 1000)
           )
+        ],
+        [
+          'Move-in Distance',
+          'm',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.totalMoveInDistance,
+              0
+            ) /
+              ((props.allYearResults.annualGeneration / 1000) *
+                props.yearlyResults.length)
+          ),
+          ...props.yearlyResults.map(year =>
+            formatNumber(
+              year.totalMoveInDistance /
+                (props.allYearResults.annualGeneration / 1000)
+            )
+          )
         ]
       ]
     });
 
     worksheet.addTable({
       name: 'lci',
-      ref: 'B26',
+      ref: 'B27',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -366,7 +384,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'lcia',
-      ref: 'B37',
+      ref: 'B38',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -468,7 +486,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'technoeconomic',
-      ref: 'B44',
+      ref: 'B45',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -807,7 +825,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'assumptions',
-      ref: 'B70',
+      ref: 'B71',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -834,7 +852,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'keyReferences',
-      ref: 'B85',
+      ref: 'B86',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Key References' }],
@@ -853,7 +871,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'disclaimer',
-      ref: 'B94',
+      ref: 'B95',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Disclaimer' }],
