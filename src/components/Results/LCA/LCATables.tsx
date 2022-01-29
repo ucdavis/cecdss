@@ -301,7 +301,7 @@ export const LCATables = (props: Props) => {
             </td>
           ))}
         </tr>
-        <tr>
+        {/* <tr>
           <td>Carbon Intensity</td>
           <td>
             kg CO<sub>2</sub>e
@@ -318,6 +318,112 @@ export const LCATables = (props: Props) => {
           {props.yearlyResults.map((result, i) => (
             <td key={`CI-${i}`}>
               {formatNumber(result.lcaResults.lifeCycleEmissions.CI * 1000, 2)}
+            </td>
+          ))}
+        </tr> */}
+        <tr>
+          <td>
+            Harvest(CO<sub>2</sub>)
+          </td>
+          <td>kg</td>
+          <td>
+            {formatNumber(
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.lcaResults.lifeStageCO2.harvest * 1000,
+                0
+              ) / props.yearlyResults.length,
+              2
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`CO2-${i}`}>
+              {formatNumber(result.lcaResults.lifeStageCO2.harvest * 1000, 2)}
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td>
+            Transport(CO<sub>2</sub>)
+          </td>
+          <td>kg</td>
+          <td>
+            {formatNumber(
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.lcaResults.lifeStageCO2.transport * 1000,
+                0
+              ) / props.yearlyResults.length,
+              2
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`CO2-${i}`}>
+              {formatNumber(result.lcaResults.lifeStageCO2.transport * 1000, 2)}
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td>
+            Conversion(CO<sub>2</sub>)
+          </td>
+          <td>kg</td>
+          <td>
+            {formatNumber(
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.lcaResults.lifeStageCO2.conversion * 1000,
+                0
+              ) / props.yearlyResults.length,
+              2
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`CO2-${i}`}>
+              {formatNumber(
+                result.lcaResults.lifeStageCO2.conversion * 1000,
+                2
+              )}
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td>
+            Construction(CO<sub>2</sub>)
+          </td>
+          <td>kg</td>
+          <td>
+            {formatNumber(
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.lcaResults.lifeStageCO2.construction * 1000,
+                0
+              ) / props.yearlyResults.length,
+              2
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`CO2-${i}`}>
+              {formatNumber(
+                result.lcaResults.lifeStageCO2.construction * 1000,
+                2
+              )}
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td>
+            Equipment(CO<sub>2</sub>)
+          </td>
+          <td>kg</td>
+          <td>
+            {formatNumber(
+              props.yearlyResults.reduce(
+                (sum, x) => sum + x.lcaResults.lifeStageCO2.equipment * 1000,
+                0
+              ) / props.yearlyResults.length,
+              2
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`CO2-${i}`}>
+              {formatNumber(result.lcaResults.lifeStageCO2.equipment * 1000, 2)}
             </td>
           ))}
         </tr>
@@ -438,6 +544,122 @@ export const LCATables = (props: Props) => {
           {props.yearlyResults.map((result, i) => (
             <td key={`smogAir-${i}`}>
               {formatNumber(result.lcaResults.lifeCycleImpacts.smog_air * 1000)}
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td>Harvest(GWP)</td>
+          <td>
+            kg CO<sub>2</sub> eq
+          </td>
+          <td>
+            {formatNumber(
+              (props.yearlyResults.reduce(
+                (sum, x) => sum + x.lcaResults.lifeStageGWP.harvest,
+                0
+              ) *
+                1000) /
+                props.yearlyResults.length,
+              2
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`globalWarmingAir-${i}`}>
+              {formatNumber(result.lcaResults.lifeStageGWP.harvest * 1000, 2)}
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td>Transport(GWP)</td>
+          <td>
+            kg CO<sub>2</sub> eq
+          </td>
+          <td>
+            {formatNumber(
+              (props.yearlyResults.reduce(
+                (sum, x) => sum + x.lcaResults.lifeStageGWP.transport,
+                0
+              ) *
+                1000) /
+                props.yearlyResults.length,
+              2
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`globalWarmingAir-${i}`}>
+              {formatNumber(result.lcaResults.lifeStageGWP.transport * 1000, 2)}
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td>Conversion(GWP)</td>
+          <td>
+            kg CO<sub>2</sub> eq
+          </td>
+          <td>
+            {formatNumber(
+              (props.yearlyResults.reduce(
+                (sum, x) => sum + x.lcaResults.lifeStageGWP.conversion,
+                0
+              ) *
+                1000) /
+                props.yearlyResults.length,
+              2
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`globalWarmingAir-${i}`}>
+              {formatNumber(
+                result.lcaResults.lifeStageGWP.conversion * 1000,
+                2
+              )}
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td>Construction(GWP)</td>
+          <td>
+            kg CO<sub>2</sub> eq
+          </td>
+          <td>
+            {formatNumber(
+              (props.yearlyResults.reduce(
+                (sum, x) => sum + x.lcaResults.lifeStageGWP.construction,
+                0
+              ) *
+                1000) /
+                props.yearlyResults.length,
+              2
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`globalWarmingAir-${i}`}>
+              {formatNumber(
+                result.lcaResults.lifeStageGWP.construction * 1000,
+                2
+              )}
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td>Equipment(GWP)</td>
+          <td>
+            kg CO<sub>2</sub> eq
+          </td>
+          <td>
+            {formatNumber(
+              (props.yearlyResults.reduce(
+                (sum, x) => sum + x.lcaResults.lifeStageGWP.equipment,
+                0
+              ) *
+                1000) /
+                props.yearlyResults.length,
+              2
+            )}
+          </td>
+          {props.yearlyResults.map((result, i) => (
+            <td key={`globalWarmingAir-${i}`}>
+              {formatNumber(result.lcaResults.lifeStageGWP.equipment * 1000, 2)}
             </td>
           ))}
         </tr>

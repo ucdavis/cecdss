@@ -86,7 +86,7 @@ export const LCAResults = (props: Props) => {
             <td>{formatNumber(props.results.lifeCycleEmissions.VOC)}</td>
             <td>kg</td>
           </tr>
-          <tr>
+          {/* <tr>
             <td>Carbon Intensity</td>
             <td>
               {formatNumber(props.results.lifeCycleEmissions.CI * 1000, 2)}
@@ -94,6 +94,51 @@ export const LCAResults = (props: Props) => {
             <td>
               kg CO<sub>2</sub>e
             </td>
+          </tr> */}
+          <tr>
+            <td>
+              Harvest(CO<sub>2</sub>)
+            </td>
+            <td>
+              {formatNumber(props.results.lifeStageCO2.harvest * 1000, 2)}
+            </td>
+            <td>kg</td>
+          </tr>
+          <tr>
+            <td>
+              Transport(CO<sub>2</sub>)
+            </td>
+            <td>
+              {formatNumber(props.results.lifeStageCO2.transport * 1000, 2)}
+            </td>
+            <td>kg</td>
+          </tr>
+          <tr>
+            <td>
+              Conversion(CO<sub>2</sub>)
+            </td>
+            <td>
+              {formatNumber(props.results.lifeStageCO2.conversion * 1000, 2)}
+            </td>
+            <td>kg</td>
+          </tr>
+          <tr>
+            <td>
+              Construction(CO<sub>2</sub>)
+            </td>
+            <td>
+              {formatNumber(props.results.lifeStageCO2.construction * 1000, 2)}
+            </td>
+            <td>kg</td>
+          </tr>
+          <tr>
+            <td>
+              Equipment(CO<sub>2</sub>)
+            </td>
+            <td>
+              {formatNumber(props.results.lifeStageCO2.equipment * 1000, 2)}
+            </td>
+            <td>kg</td>
           </tr>
         </tbody>
       </table>
@@ -159,6 +204,51 @@ export const LCAResults = (props: Props) => {
             </td>
             <td>
               kg O<sub>3</sub> eq
+            </td>
+          </tr>
+          <tr>
+            <td>Harvest(GWP)</td>
+            <td>
+              {formatNumber(props.results.lifeStageGWP.harvest * 1000, 2)}
+            </td>
+            <td>
+              kg CO<sub>2</sub>eq
+            </td>
+          </tr>
+          <tr>
+            <td>Transport(GWP)</td>
+            <td>
+              {formatNumber(props.results.lifeStageGWP.transport * 1000, 2)}
+            </td>
+            <td>
+              kg CO<sub>2</sub>eq
+            </td>
+          </tr>
+          <tr>
+            <td>Conversion(GWP)</td>
+            <td>
+              {formatNumber(props.results.lifeStageGWP.conversion * 1000, 2)}
+            </td>
+            <td>
+              kg CO<sub>2</sub>eq
+            </td>
+          </tr>
+          <tr>
+            <td>Construction(GWP)</td>
+            <td>
+              {formatNumber(props.results.lifeStageGWP.construction * 1000, 2)}
+            </td>
+            <td>
+              kg CO<sub>2</sub>eq
+            </td>
+          </tr>
+          <tr>
+            <td>Equipment(GWP)</td>
+            <td>
+              {formatNumber(props.results.lifeStageGWP.equipment * 1000, 2)}
+            </td>
+            <td>
+              kg CO<sub>2</sub>eq
             </td>
           </tr>
         </tbody>
