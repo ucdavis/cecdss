@@ -183,7 +183,7 @@ export interface Results {
 export interface YearlyResult {
   tripGeometries: Geometry[];
   year: number;
-  lcaResults?: LCAresults;
+  lcaResults: LCAresults;
   totalArea: number;
   totalFeedstock: number; // total biomass from frcs residue output
   totalDryFeedstock: number; // feedstock multipled by (1-moistureContent)
