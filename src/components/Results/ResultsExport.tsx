@@ -363,20 +363,94 @@ export const ResultsExport = (props: Props) => {
             formatNumber(r.lcaResults.lifeCycleEmissions.VOC)
           )
         ],
+        // [
+        //   'Carbon Intensity',
+        //   'kg CO2e',
+        //   formatNumber(
+        //     (props.yearlyResults.reduce(
+        //       (sum, year) => sum + year.lcaResults.lifeCycleEmissions.CI,
+        //       0
+        //     ) *
+        //       1000) /
+        //       props.yearlyResults.length,
+        //     2
+        //   ),
+        //   ...props.yearlyResults.map(r =>
+        //     formatNumber(r.lcaResults.lifeCycleEmissions.CI * 1000, 2)
+        //   )
+        // ]
         [
-          'Carbon Intensity',
-          'kg CO2e',
+          'Harvest(CO2)',
+          'kg',
           formatNumber(
-            (props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.lifeCycleEmissions.CI,
+            props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lifeStageCO2.harvest * 1000,
               0
-            ) *
-              1000) /
-              props.yearlyResults.length,
+            ) / props.yearlyResults.length,
             2
           ),
           ...props.yearlyResults.map(r =>
-            formatNumber(r.lcaResults.lifeCycleEmissions.CI * 1000, 2)
+            formatNumber(r.lcaResults.lifeStageCO2.harvest * 1000, 2)
+          )
+        ],
+        [
+          'Transport(CO2)',
+          'kg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) =>
+                sum + year.lcaResults.lifeStageCO2.transport * 1000,
+              0
+            ) / props.yearlyResults.length,
+            2
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lifeStageCO2.transport * 1000, 2)
+          )
+        ],
+        [
+          'Conversion(CO2)',
+          'kg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) =>
+                sum + year.lcaResults.lifeStageCO2.conversion * 1000,
+              0
+            ) / props.yearlyResults.length,
+            2
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lifeStageCO2.conversion * 1000, 2)
+          )
+        ],
+        [
+          'Construction(CO2)',
+          'kg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) =>
+                sum + year.lcaResults.lifeStageCO2.construction * 1000,
+              0
+            ) / props.yearlyResults.length,
+            2
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lifeStageCO2.construction * 1000, 2)
+          )
+        ],
+        [
+          'Equipment(CO2)',
+          'kg',
+          formatNumber(
+            props.yearlyResults.reduce(
+              (sum, year) =>
+                sum + year.lcaResults.lifeStageCO2.equipment * 1000,
+              0
+            ) / props.yearlyResults.length,
+            2
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lifeStageCO2.equipment * 1000, 2)
           )
         ]
       ]
@@ -384,7 +458,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'lcia',
-      ref: 'B38',
+      ref: 'B43',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -480,13 +554,93 @@ export const ResultsExport = (props: Props) => {
           ...props.yearlyResults.map(r =>
             formatNumber(r.lcaResults.lifeCycleImpacts.smog_air * 1000)
           )
+        ],
+        [
+          'Harvest(GWP)',
+          'kg CO2 eq',
+          formatNumber(
+            (props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lifeStageGWP.harvest,
+              0
+            ) *
+              1000) /
+              props.yearlyResults.length,
+            2
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lifeStageGWP.harvest * 1000, 2)
+          )
+        ],
+        [
+          'Transport(GWP)',
+          'kg CO2 eq',
+          formatNumber(
+            (props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lifeStageGWP.transport,
+              0
+            ) *
+              1000) /
+              props.yearlyResults.length,
+            2
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lifeStageGWP.transport * 1000, 2)
+          )
+        ],
+        [
+          'Conversion(GWP)',
+          'kg CO2 eq',
+          formatNumber(
+            (props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lifeStageGWP.conversion,
+              0
+            ) *
+              1000) /
+              props.yearlyResults.length,
+            2
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lifeStageGWP.conversion * 1000, 2)
+          )
+        ],
+        [
+          'Construction(GWP)',
+          'kg CO2 eq',
+          formatNumber(
+            (props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lifeStageGWP.construction,
+              0
+            ) *
+              1000) /
+              props.yearlyResults.length,
+            2
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lifeStageGWP.construction * 1000, 2)
+          )
+        ],
+        [
+          'Equipment(GWP)',
+          'kg CO2 eq',
+          formatNumber(
+            (props.yearlyResults.reduce(
+              (sum, year) => sum + year.lcaResults.lifeStageGWP.equipment,
+              0
+            ) *
+              1000) /
+              props.yearlyResults.length,
+            2
+          ),
+          ...props.yearlyResults.map(r =>
+            formatNumber(r.lcaResults.lifeStageGWP.equipment * 1000, 2)
+          )
         ]
       ]
     });
 
     worksheet.addTable({
       name: 'technoeconomic',
-      ref: 'B45',
+      ref: 'B55',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -825,7 +979,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'assumptions',
-      ref: 'B71',
+      ref: 'B81',
       headerRow: true,
       totalsRow: false,
       columns: [
@@ -852,7 +1006,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'keyReferences',
-      ref: 'B86',
+      ref: 'B96',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Key References' }],
@@ -871,7 +1025,7 @@ export const ResultsExport = (props: Props) => {
 
     worksheet.addTable({
       name: 'disclaimer',
-      ref: 'B95',
+      ref: 'B105',
       headerRow: true,
       totalsRow: false,
       columns: [{ name: 'Disclaimer' }],

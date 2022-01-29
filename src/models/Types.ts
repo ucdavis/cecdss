@@ -7,9 +7,9 @@ import {
   CashFlow
 } from '@ucdavis/tea/output.model';
 import { FrcsOutputs } from '@ucdavis/frcs/out/model';
-import { LCAresults } from './LCAModels';
 import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { Feature, FeatureCollection, GeoJsonObject, Point } from 'geojson';
+import { LcaInputs, LcaOutputs } from '@ucdavis/lca/model';
 
 export interface RequestParams {
   facilityLat: number;
@@ -71,6 +71,10 @@ export const TechnoeconomicModels = {
   gasificationPower: 'GP',
   hydrogen: 'Hydrogen'
 };
+
+export interface LCAresults extends LcaOutputs {
+  inputs: LcaInputs;
+}
 
 export interface Treatment {
   id: number;
@@ -183,7 +187,7 @@ export interface Results {
 export interface YearlyResult {
   tripGeometries: Geometry[];
   year: number;
-  lcaResults?: LCAresults;
+  lcaResults: LCAresults;
   totalArea: number;
   totalFeedstock: number; // total biomass from frcs residue output
   totalDryFeedstock: number; // feedstock multipled by (1-moistureContent)
