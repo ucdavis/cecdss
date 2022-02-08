@@ -10,7 +10,11 @@ import {
   InputGroupAddon,
   InputGroupText
 } from 'reactstrap';
-import { FrcsInputs, MapCoordinates, TransportInputs } from '../../models/Types';
+import {
+  FrcsInputs,
+  MapCoordinates,
+  TransportInputs
+} from '../../models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
@@ -71,81 +75,29 @@ export const InputContainer = (props: Props) => {
   );
   return (
     <>
-      <div className='cardheader'>
-        <h4>
-          Forest Resource and Renewable Energy Decision Support System (FRREDSS)
-        </h4>
-        <h2>Select Inputs</h2>
-      </div>
-      <div className='cardcontents'>
-        <h4>Forestry and Conversion</h4>
-        <Form>
-          <FormGroup>
-            <Label>Facility Coordinates</Label>
-            <InputGroup>
-              <InputGroupAddon addonType='prepend'>
-                <InputGroupText>lat</InputGroupText>
-              </InputGroupAddon>
-              <Input
-                type='number'
-                value={props.facilityCoordinates.lat.toString()}
-                onChange={e =>
-                  props.setFacilityCoordinates({
-                    ...props.facilityCoordinates,
-                    lat: parseFloat(e.target.value) || 0
-                  })
-                }
-                disabled={props.disabled}
-              />
-            </InputGroup>
-            <InputGroup>
-              <InputGroupAddon addonType='prepend'>
-                <InputGroupText>lng</InputGroupText>
-              </InputGroupAddon>
-              <Input
-                type='number'
-                value={props.facilityCoordinates.lng.toString()}
-                onChange={e =>
-                  props.setFacilityCoordinates({
-                    ...props.facilityCoordinates,
-                    lng: parseFloat(e.target.value) || 0
-                  })
-                }
-                disabled={props.disabled}
-              />
-            </InputGroup>
-          </FormGroup>
-          <FormGroup className='ml-4'>
-            <Label check>
-              <Input
-                type='checkbox'
-                checked={props.selectBiomassCoordinates}
-                onChange={e => {
-                  if (!e.target.checked) {
-                    // if we are unchecking the box, set the biomass to whatever the facility location is
-                    props.setBiomassCoordinates({
-                      ...props.facilityCoordinates
-                    });
-                  }
-                  props.setSelectBiomassCoordinates(e.target.checked);
-                }}
-              />{' '}
-              Select Separate Biomass Coordinates
-            </Label>
-          </FormGroup>
-          {props.selectBiomassCoordinates && (
+      <div className='sidebar-wrapper'>
+        <div className='cardheader'>
+          <h4>
+            Forest Resource and Renewable Energy Decision Support System
+            (FRREDSS)
+          </h4>
+          <h2>Select Inputs</h2>
+        </div>
+        <div className='cardcontents'>
+          <h4>Forestry and Conversion</h4>
+          <Form>
             <FormGroup>
-              <Label>Biomass Coordinates</Label>
+              <Label>Facility Coordinates</Label>
               <InputGroup>
                 <InputGroupAddon addonType='prepend'>
                   <InputGroupText>lat</InputGroupText>
                 </InputGroupAddon>
                 <Input
                   type='number'
-                  value={props.biomassCoordinates.lat.toString()}
+                  value={props.facilityCoordinates.lat.toString()}
                   onChange={e =>
-                    props.setBiomassCoordinates({
-                      ...props.biomassCoordinates,
+                    props.setFacilityCoordinates({
+                      ...props.facilityCoordinates,
                       lat: parseFloat(e.target.value) || 0
                     })
                   }
@@ -158,10 +110,10 @@ export const InputContainer = (props: Props) => {
                 </InputGroupAddon>
                 <Input
                   type='number'
-                  value={props.biomassCoordinates.lng.toString()}
+                  value={props.facilityCoordinates.lng.toString()}
                   onChange={e =>
-                    props.setBiomassCoordinates({
-                      ...props.biomassCoordinates,
+                    props.setFacilityCoordinates({
+                      ...props.facilityCoordinates,
                       lng: parseFloat(e.target.value) || 0
                     })
                   }
@@ -169,41 +121,96 @@ export const InputContainer = (props: Props) => {
                 />
               </InputGroup>
             </FormGroup>
-          )}
-          <FormGroup>
-            <Label>Expansion Factor</Label>
-            <InputGroup>
-              <Input
-                type='number'
-                value={props.expansionFactor.toString()}
-                onChange={e =>
-                  props.setExpansionFactor(parseFloat(e.target.value) || 0)
-                }
-                disabled={props.disabled}
-              />
-            </InputGroup>
-          </FormGroup>
-        </Form>
-      </div>
+            <FormGroup className='ml-4'>
+              <Label check>
+                <Input
+                  type='checkbox'
+                  checked={props.selectBiomassCoordinates}
+                  onChange={e => {
+                    if (!e.target.checked) {
+                      // if we are unchecking the box, set the biomass to whatever the facility location is
+                      props.setBiomassCoordinates({
+                        ...props.facilityCoordinates
+                      });
+                    }
+                    props.setSelectBiomassCoordinates(e.target.checked);
+                  }}
+                />{' '}
+                Select Separate Biomass Coordinates
+              </Label>
+            </FormGroup>
+            {props.selectBiomassCoordinates && (
+              <FormGroup>
+                <Label>Biomass Coordinates</Label>
+                <InputGroup>
+                  <InputGroupAddon addonType='prepend'>
+                    <InputGroupText>lat</InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    type='number'
+                    value={props.biomassCoordinates.lat.toString()}
+                    onChange={e =>
+                      props.setBiomassCoordinates({
+                        ...props.biomassCoordinates,
+                        lat: parseFloat(e.target.value) || 0
+                      })
+                    }
+                    disabled={props.disabled}
+                  />
+                </InputGroup>
+                <InputGroup>
+                  <InputGroupAddon addonType='prepend'>
+                    <InputGroupText>lng</InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    type='number'
+                    value={props.biomassCoordinates.lng.toString()}
+                    onChange={e =>
+                      props.setBiomassCoordinates({
+                        ...props.biomassCoordinates,
+                        lng: parseFloat(e.target.value) || 0
+                      })
+                    }
+                    disabled={props.disabled}
+                  />
+                </InputGroup>
+              </FormGroup>
+            )}
+            <FormGroup>
+              <Label>Expansion Factor</Label>
+              <InputGroup>
+                <Input
+                  type='number'
+                  value={props.expansionFactor.toString()}
+                  onChange={e =>
+                    props.setExpansionFactor(parseFloat(e.target.value) || 0)
+                  }
+                  disabled={props.disabled}
+                />
+              </InputGroup>
+            </FormGroup>
+          </Form>
+        </div>
 
-      <FrcsInputsContainer
-        inputs={props.frcsInputs}
-        setInputs={props.setFrcsInputs}
-        disabled={props.disabled}
-      />
-      <TransportInputsContainer
-        inputs={props.transportInputs}
-        setTransportInputs={props.setTransportInputs}
-        disabled={props.disabled}
-      />
-      <TechnoeconomicInputs
-        teaInputs={props.teaInputs}
-        setTeaInputs={props.setTeaInputs}
-        teaModel={props.teaModel}
-        setTeaModel={props.setTeaModel}
-        disabled={props.disabled}
-      />
-      {button}
+        <FrcsInputsContainer
+          inputs={props.frcsInputs}
+          setInputs={props.setFrcsInputs}
+          disabled={props.disabled}
+        />
+        <TransportInputsContainer
+          inputs={props.transportInputs}
+          setTransportInputs={props.setTransportInputs}
+          disabled={props.disabled}
+        />
+        <TechnoeconomicInputs
+          teaInputs={props.teaInputs}
+          setTeaInputs={props.setTeaInputs}
+          teaModel={props.teaModel}
+          setTeaModel={props.setTeaModel}
+          disabled={props.disabled}
+        />
+        {button}
+      </div>
     </>
   );
 };
