@@ -134,6 +134,7 @@
   top: 1%;
   left: 3.5%;
   width: 12%;
+  z-index: 9999;
 }
 .layers {
   background-color: #fff;

@@ -616,15 +616,15 @@ export const MapContainer = () => {
           </div> */}
         </div>
       )}
+      <div className='layers-container'>
+        <ExternalLayerSelection onChange={setExternalLayers} />
+        <ExternalLayerLegend layers={externalLayers} />
+      </div>
       <div
         className={expandedResults ? 'expanded-results' : 'sidebar'}
         id='sidebar'
       >
-        <div className='layers-container'>
-          <ExternalLayerSelection onChange={setExternalLayers} />
-          <ExternalLayerLegend layers={externalLayers} />
-        </div>
-        {hasProcessingError && (
+        {true && (
           <div className='alert alert-danger'>
             There was a problem processing your results. This is most likely due
             to an inability to find enough biomass to satify your requirements
