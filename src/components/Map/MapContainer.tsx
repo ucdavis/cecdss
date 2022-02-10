@@ -624,7 +624,7 @@ export const MapContainer = () => {
         className={expandedResults ? 'expanded-results' : 'sidebar'}
         id='sidebar'
       >
-        {true && (
+        {hasProcessingError && (
           <div className='alert alert-danger'>
             There was a problem processing your results. This is most likely due
             to an inability to find enough biomass to satify your requirements
