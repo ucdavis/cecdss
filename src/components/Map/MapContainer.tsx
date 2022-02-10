@@ -298,7 +298,9 @@ export const MapContainer = () => {
           'Content-Type': 'application/json'
         }
       }
-    ).then(res => (res.ok ? res.json() : (continueProcessing = false)));
+    )
+      .then(res => (res.ok ? res.json() : (continueProcessing = false)))
+      .catch(_ => (continueProcessing = false));
 
     if (!continueProcessing) {
       setHasProcessingError(true);
@@ -418,7 +420,9 @@ export const MapContainer = () => {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then(res => (res.ok ? res.json() : (continueProcessingYear = false)));
+      })
+        .then(res => (res.ok ? res.json() : (continueProcessingYear = false)))
+        .catch(_ => (continueProcessingYear = false));
 
       if (!continueProcessingYear) {
         setHasProcessingError(true);
