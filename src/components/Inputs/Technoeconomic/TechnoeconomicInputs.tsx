@@ -15,25 +15,18 @@ interface Props {
   disabled: boolean;
 }
 
-const determineScaledCapitalCost = (
+export const determineScaledCost = (
+  defaultElectricCapacity: number,
   electricalCapacity: number,
-  teaModel: string
+  defaultCost: number
 ) => {
   // source: https://evcvaluation.com/wp-content/uploads/2019/06/Cost-to-Capacity-Method_Applications-and-Considerations.pdf
   const scaleFactor = 0.82;
-  let defaultCapitalCost = 100_000_000; // assuming $4000/kWe
-  let defaultElectricCapacity = 25_000;
-
-  if (teaModel === TechnoeconomicModels.gasificationPower) {
-    defaultCapitalCost = 3_000_000; // assuming $6000/kWe
-    defaultElectricCapacity = 500;
-  }
-
   if (electricalCapacity === defaultElectricCapacity) {
-    return defaultCapitalCost;
+    return defaultCost;
   } else {
     const scaledCapitalCost =
-      defaultCapitalCost *
+      defaultCost *
       Math.pow(electricalCapacity / defaultElectricCapacity, scaleFactor);
 
     return Math.round(scaledCapitalCost);
@@ -47,10 +40,20 @@ export const TechnoeconomicInputs = (props: Props) => {
       return;
     }
 
-    const scaledCapitalCost = determineScaledCapitalCost(
-      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
-      props.teaModel
-    );
+    let scaledCapitalCost = props.teaInputs.CapitalCost;
+    if (props.teaModel === TechnoeconomicModels.gasificationPower) {
+      scaledCapitalCost = determineScaledCost(
+        500,
+        props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+        3_000_000
+      );
+    } else {
+      scaledCapitalCost = determineScaledCost(
+        25_000,
+        props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+        100_000_000
+      );
+    }
 
     if (scaledCapitalCost !== props.teaInputs.CapitalCost) {
       props.setTeaInputs({
