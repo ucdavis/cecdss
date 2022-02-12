@@ -156,14 +156,21 @@ export const ResultsExport = (props: Props) => {
           'L',
           formatNumber(
             (props.yearlyResults.reduce(
-              (sum, year) => sum + year.lcaResults.inputs.diesel,
+              (sum, year) =>
+                sum +
+                (year.lcaResults.inputs.harvestDiesel +
+                  year.lcaResults.inputs.unloadDiesel),
               0
             ) /
               props.yearlyResults.length) *
               1000
           ),
           ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.diesel * 1000)
+            formatNumber(
+              (year.lcaResults.inputs.harvestDiesel +
+                year.lcaResults.inputs.unloadDiesel) *
+                1000
+            )
           )
         ],
         [
