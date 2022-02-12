@@ -27,7 +27,7 @@ export class EscalationInflationInputModClass
 export class TaxesInputModClass implements TaxesInputMod {
   FederalTaxRate = 34;
   StateTaxRate = 9.6;
-  ProductionTaxCredit = 0.009;
+  ProductionTaxCredit = 0;
 }
 export class FinancingInputModClass implements FinancingInputMod {
   DebtRatio = 75;
@@ -44,5 +44,5 @@ export class HeatBaseYearInputModClass implements HeatBaseYearInputMod {
 export class CarbonCreditClass implements CarbonCredit {
   CreditPrice = 196;
   CIscore = 0;
-  EnergyEconomyRatio = 1; 
+  EnergyEconomyRatio = 1;
 }

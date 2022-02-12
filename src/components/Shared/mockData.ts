@@ -112,7 +112,7 @@ export const fakeallYearResults: AllYearsResults = {
     Taxes: {
       FederalTaxRate: 34,
       StateTaxRate: 9.6,
-      ProductionTaxCredit: 0.009
+      ProductionTaxCredit: 0
     },
     Financing: {
       DebtRatio: 75,
