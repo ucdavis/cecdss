@@ -6,6 +6,9 @@ import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { CombinedHeatAndPower } from './GenericCombinedHeatPower/CombinedHeatAndPower';
 import { GasificationPower } from './GasificationPower/GasificationPower';
 import { BasicTeaInputs } from './BasicTeaInputs';
+import { InputModGPOClass } from '../../../models/GPOClasses';
+import { InputModGPClass } from '../../../models/GPClasses';
+import { InputModCHPClass } from '../../../models/CHPClasses';
 
 interface Props {
   teaInputs: InputModGPO | InputModCHP | InputModGP;
@@ -33,6 +36,10 @@ export const determineScaledCost = (
   }
 };
 
+const defaultInputsGPO = new InputModGPOClass();
+const defaultInputsCHP = new InputModCHPClass();
+const defaultInputsGP = new InputModGPClass();
+
 export const TechnoeconomicInputs = (props: Props) => {
   useEffect(() => {
     if (props.teaInputs.CapitalCostManuallySet) {
@@ -41,18 +48,28 @@ export const TechnoeconomicInputs = (props: Props) => {
     }
 
     let scaledCapitalCost = props.teaInputs.CapitalCost;
-    if (props.teaModel === TechnoeconomicModels.gasificationPower) {
-      scaledCapitalCost = determineScaledCost(
-        500,
-        props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
-        3_000_000
-      );
-    } else {
-      scaledCapitalCost = determineScaledCost(
-        25_000,
-        props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
-        100_000_000
-      );
+    switch (props.teaModel) {
+      case TechnoeconomicModels.genericPowerOnly:
+        scaledCapitalCost = determineScaledCost(
+          defaultInputsGPO.ElectricalFuelBaseYear.NetElectricalCapacity,
+          props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+          defaultInputsGPO.CapitalCost
+        );
+        break;
+      case TechnoeconomicModels.genericCombinedHeatAndPower:
+        scaledCapitalCost = determineScaledCost(
+          defaultInputsCHP.ElectricalFuelBaseYear.NetElectricalCapacity,
+          props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+          defaultInputsCHP.CapitalCost
+        );
+        break;
+      case TechnoeconomicModels.gasificationPower:
+        scaledCapitalCost = determineScaledCost(
+          defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+          props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+          defaultInputsGP.CapitalCost
+        );
+        break;
     }
 
     if (scaledCapitalCost !== props.teaInputs.CapitalCost) {
