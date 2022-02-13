@@ -9,7 +9,7 @@
     "@types/recharts": "^1.8.16",
     "@ucdavis/frcs": "^1.2.7",
     "@ucdavis/lca": "^1.6.4",
-    "@ucdavis/tea": "^1.4.1",
+    "@ucdavis/tea": "^1.4.2",
     "bootstrap": "^4.6.0",
     "d3": "^5.16.0",
     "d3-hexbin": "^0.2.2",
