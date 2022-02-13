@@ -53,7 +53,7 @@ export class ElectricalFuelBaseYearInputModGPClass
 
 export class HeatBaseYearInputModGPClass implements HeatBaseYearInputModClass {
   AggregateFractionOfHeatRecovered = 50;
-  AggregateSalesPriceForHeat = 0.01;
+  AggregateSalesPriceForHeat = 0.0207;
 }
 
 export class ExpensesBaseYearInputModGPClass
