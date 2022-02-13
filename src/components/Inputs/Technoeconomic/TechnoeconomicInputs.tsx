@@ -42,10 +42,10 @@ const defaultInputsGP = new InputModGPClass();
 
 export const TechnoeconomicInputs = (props: Props) => {
   useEffect(() => {
-    if (props.teaInputs.CapitalCostManuallySet) {
-      props.teaInputs.CapitalCost = Number(props.teaInputs.CapitalCost);
-      return;
-    }
+    // if (props.teaInputs.CapitalCostManuallySet) {
+    //   props.teaInputs.CapitalCost = Number(props.teaInputs.CapitalCost);
+    //   return;
+    // }
 
     let scaledCapitalCost = props.teaInputs.CapitalCost;
     switch (props.teaModel) {
@@ -90,6 +90,7 @@ export const TechnoeconomicInputs = (props: Props) => {
         <GenericPowerOnly
           inputs={props.teaInputs}
           setInputs={props.setTeaInputs}
+          teaModel={props.teaModel}
           disabled={props.disabled}
         />
       )}
@@ -98,6 +99,8 @@ export const TechnoeconomicInputs = (props: Props) => {
         <CombinedHeatAndPower
           inputs={props.teaInputs}
           setInputs={props.setTeaInputs}
+          teaInputs={props.teaInputs}
+          teaModel={props.teaModel}
           disabled={props.disabled}
         />
       )}
@@ -106,6 +109,8 @@ export const TechnoeconomicInputs = (props: Props) => {
         <GasificationPower
           inputs={props.teaInputs}
           setInputs={props.setTeaInputs}
+          teaInputs={props.teaInputs}
+          teaModel={props.teaModel}
           disabled={props.disabled}
         />
       )}

@@ -31,6 +31,8 @@ interface Props {
   // setInputs: (inputs: InputModGP) => void;
   inputs: any;
   setInputs: (inputs: any) => void;
+  teaInputs: any;
+  teaModel: string;
   disabled: boolean;
 }
 
@@ -83,6 +85,8 @@ export const GasificationPower = (props: Props) => {
         setInputs={(inputs: ExpensesBaseYearInputModGP) =>
           props.setInputs({ ...props.inputs, ExpensesBaseYear: inputs })
         }
+        teaInputs={props.inputs}
+        teaModel={props.teaModel}
         disabled={props.disabled}
       />
       <TaxesInput

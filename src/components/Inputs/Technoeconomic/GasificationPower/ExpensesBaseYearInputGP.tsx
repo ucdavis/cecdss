@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ExpensesBaseYearInputModGP } from '@ucdavis/tea/input.model';
 import {
   FormText,
@@ -9,14 +9,116 @@ import {
   InputGroupAddon
 } from 'reactstrap';
 import { ExpensesBaseYearInputModGPClass } from '../../../../models/GPClasses';
+import { determineScaledCost } from '../TechnoeconomicInputs';
+import { InputModGPClass } from '../../../../models/GPClasses';
 
 interface Props {
   inputs: ExpensesBaseYearInputModGP;
   setInputs: (inputs: any) => void;
+  teaInputs: any;
+  teaModel: string;
   disabled: boolean;
 }
 
+const defaultInputsGP = new InputModGPClass();
+
 export const ExpensesBaseYearInputGP = (props: Props) => {
+  useEffect(() => {
+    let scaledLaborCost = props.inputs.LaborCost;
+    let scaledMaintenanceCost = props.inputs.MaintenanceCost;
+    let scaledWasteTreatment = props.inputs.WasteTreatment;
+    let scaledInsurancePropertyTax = props.inputs.InsurancePropertyTax;
+    let scaledUtilities = props.inputs.Utilities;
+    let scaledManagement = props.inputs.Management;
+    let scaledOtherOperatingExpenses = props.inputs.OtherOperatingExpenses;
+
+    scaledLaborCost = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.LaborCost
+    );
+
+    scaledMaintenanceCost = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.MaintenanceCost
+    );
+
+    scaledWasteTreatment = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.WasteTreatment
+    );
+
+    scaledInsurancePropertyTax = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.InsurancePropertyTax
+    );
+
+    scaledUtilities = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.Utilities
+    );
+
+    scaledManagement = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.Management
+    );
+
+    scaledOtherOperatingExpenses = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.OtherOperatingExpenses
+    );
+    //     break;
+    // }
+
+    if (scaledLaborCost !== props.inputs.LaborCost) {
+      props.setInputs({
+        ...props.inputs,
+        LaborCost: scaledLaborCost
+      });
+    }
+
+    if (scaledMaintenanceCost !== props.inputs.MaintenanceCost) {
+      props.setInputs({
+        ...props.inputs,
+        MaintenanceCost: scaledMaintenanceCost
+      });
+    }
+
+    if (scaledInsurancePropertyTax !== props.inputs.InsurancePropertyTax) {
+      props.setInputs({
+        ...props.inputs,
+        InsurancePropertyTax: scaledInsurancePropertyTax
+      });
+    }
+
+    if (scaledUtilities !== props.inputs.Utilities) {
+      props.setInputs({
+        ...props.inputs,
+        Utilities: scaledUtilities
+      });
+    }
+
+    if (scaledManagement !== props.inputs.Management) {
+      props.setInputs({
+        ...props.inputs,
+        Management: scaledManagement
+      });
+    }
+
+    if (scaledOtherOperatingExpenses !== props.inputs.OtherOperatingExpenses) {
+      props.setInputs({
+        ...props.inputs,
+        OtherOperatingExpenses: scaledOtherOperatingExpenses
+      });
+    }
+  }, [props, props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity]);
+
   if (!props.inputs) {
     return null;
   }

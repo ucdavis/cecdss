@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ExpensesBaseYearInputModGPO } from '@ucdavis/tea/input.model';
 import {
   FormText,
@@ -8,14 +8,108 @@ import {
   Input,
   InputGroupAddon
 } from 'reactstrap';
+import { determineScaledCost } from './TechnoeconomicInputs';
+import { InputModGPOClass } from '../../../models/GPOClasses';
+import { TechnoeconomicModels } from '../../../models/Types';
 
 interface Props {
   inputs: ExpensesBaseYearInputModGPO;
   setInputs: (inputs: any) => void;
+  teaInputs: any;
+  teaModel: string;
   disabled: boolean;
 }
 
+const defaultInputsGPO = new InputModGPOClass();
+
 export const ExpensesBaseYearInput = (props: Props) => {
+  useEffect(() => {
+    let scaledLaborCost = props.inputs.LaborCost;
+    let scaledMaintenanceCost = props.inputs.MaintenanceCost;
+    let scaledInsurancePropertyTax = props.inputs.InsurancePropertyTax;
+    let scaledUtilities = props.inputs.Utilities;
+    let scaledManagement = props.inputs.Management;
+    let scaledOtherOperatingExpenses = props.inputs.OtherOperatingExpenses;
+
+    scaledLaborCost = determineScaledCost(
+      defaultInputsGPO.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGPO.ExpensesBaseYear.LaborCost
+    );
+
+    scaledMaintenanceCost = determineScaledCost(
+      defaultInputsGPO.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGPO.ExpensesBaseYear.MaintenanceCost
+    );
+
+    scaledInsurancePropertyTax = determineScaledCost(
+      defaultInputsGPO.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGPO.ExpensesBaseYear.InsurancePropertyTax
+    );
+
+    scaledUtilities = determineScaledCost(
+      defaultInputsGPO.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGPO.ExpensesBaseYear.Utilities
+    );
+
+    scaledManagement = determineScaledCost(
+      defaultInputsGPO.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGPO.ExpensesBaseYear.Management
+    );
+
+    scaledOtherOperatingExpenses = determineScaledCost(
+      defaultInputsGPO.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGPO.ExpensesBaseYear.OtherOperatingExpenses
+    );
+
+    if (scaledLaborCost !== props.inputs.LaborCost) {
+      props.setInputs({
+        ...props.inputs,
+        LaborCost: scaledLaborCost
+      });
+    }
+
+    if (scaledMaintenanceCost !== props.inputs.MaintenanceCost) {
+      props.setInputs({
+        ...props.inputs,
+        MaintenanceCost: scaledMaintenanceCost
+      });
+    }
+
+    if (scaledInsurancePropertyTax !== props.inputs.InsurancePropertyTax) {
+      props.setInputs({
+        ...props.inputs,
+        InsurancePropertyTax: scaledInsurancePropertyTax
+      });
+    }
+
+    if (scaledUtilities !== props.inputs.Utilities) {
+      props.setInputs({
+        ...props.inputs,
+        Utilities: scaledUtilities
+      });
+    }
+
+    if (scaledManagement !== props.inputs.Management) {
+      props.setInputs({
+        ...props.inputs,
+        Management: scaledManagement
+      });
+    }
+
+    if (scaledOtherOperatingExpenses !== props.inputs.OtherOperatingExpenses) {
+      props.setInputs({
+        ...props.inputs,
+        OtherOperatingExpenses: scaledOtherOperatingExpenses
+      });
+    }
+  }, [props, props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity]);
+
   if (!props.inputs) {
     return null;
   }

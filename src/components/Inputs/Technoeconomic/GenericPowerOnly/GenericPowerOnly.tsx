@@ -29,6 +29,7 @@ interface Props {
   // setInputs: (inputs: InputModGPO) => void;
   inputs: any;
   setInputs: (inputs: any) => void;
+  teaModel: string;
   disabled: boolean;
 }
 
@@ -76,6 +77,8 @@ export const GenericPowerOnly = (props: Props) => {
         setInputs={(inputs: ExpensesBaseYearInputModGPO) =>
           props.setInputs({ ...props.inputs, ExpensesBaseYear: inputs })
         }
+        teaInputs={props.inputs}
+        teaModel={props.teaModel}
         disabled={props.disabled}
       />
       <TaxesInput
