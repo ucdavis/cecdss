@@ -38,7 +38,7 @@ export class FinancingInputModClass implements FinancingInputMod {
 
 export class HeatBaseYearInputModClass implements HeatBaseYearInputMod {
   AggregateFractionOfHeatRecovered = 60;
-  AggregateSalesPriceForHeat = 0.0102;
+  AggregateSalesPriceForHeat = 0.0207;
 }
 
 export class CarbonCreditClass implements CarbonCredit {
