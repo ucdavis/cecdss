@@ -36,7 +36,7 @@ export class ElectricalFuelBaseYearInputModCHPClass
   NetStationEfficiency = 20;
   FuelHeatingValue = 18608;
   FuelAshConcentration = 5;
-  GrossElectricalCapacity = 28000;
+  GrossElectricalCapacity = 25000;
 }
 
 export class ExpensesBaseYearInputModCHPClass
