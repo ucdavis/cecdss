@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   FormText,
   FormGroup,
@@ -14,6 +14,8 @@ interface Props {
   // | ElectricalFuelBaseYearInputModCHP
   // | ElectricalFuelBaseYearInputModGP;
   setInputs: (inputs: any) => void;
+  teaInputs: any;
+  setTeaInputs: (inputs: any) => void;
   teaModel: string;
   disabled: boolean;
 }
@@ -80,9 +82,7 @@ export const BasicTeaInputs = (props: Props) => {
           />
           <InputGroupAddon addonType='append'>% wet basis</InputGroupAddon>
         </InputGroup>
-        <FormText color='muted'>
-          Moisture Content of Biomass Feedstock
-        </FormText>
+        <FormText color='muted'>Moisture Content of Biomass Feedstock</FormText>
       </FormGroup>
       {props.teaModel !== 'GP' && (
         <FormGroup>

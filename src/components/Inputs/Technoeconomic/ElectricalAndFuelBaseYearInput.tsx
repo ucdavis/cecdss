@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ElectricalFuelBaseYearInputModGPO,
   ElectricalFuelBaseYearInputModCHP
@@ -15,6 +15,7 @@ import {
 interface Props {
   inputs: ElectricalFuelBaseYearInputModGPO | ElectricalFuelBaseYearInputModCHP;
   setInputs: (inputs: any) => void;
+  teaInputs: any;
   disabled: boolean;
 }
 
@@ -80,9 +81,7 @@ export const ElectricalAndFuelBaseYearInput = (props: Props) => {
           />
           <InputGroupAddon addonType='append'>% wet basis</InputGroupAddon>
         </InputGroup>
-        <FormText color='muted'>
-          Moisture Content of Biomass Feedstock
-        </FormText>
+        <FormText color='muted'>Moisture Content of Biomass Feedstock</FormText>
       </FormGroup>
       <FormGroup>
         <Label>Net Station Efficiency</Label>

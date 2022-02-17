@@ -45,12 +45,18 @@ export class ExpensesBaseYearInputModGPOClass
   implements ExpensesBaseYearInputModGPO {
   BiomassFuelCost = 22.05;
   LaborCost = 3_000_000;
+  LaborCostManuallySet = false;
   MaintenanceCost = 2_000_000;
+  MaintenanceCostManuallySet = false;
   InsurancePropertyTax = 2_000_000;
+  InsurancePropertyTaxManuallySet = false;
   Utilities = 300_000;
+  UtilitiesManuallySet = false;
   AshDisposal = 150_000;
   Management = 300_000;
+  ManagementManuallySet = false;
   OtherOperatingExpenses = 600_000;
+  OtherOperatingExpensesManuallySet = false;
 }
 
 export class ExpensesBaseYearModGPOClass implements ExpensesBaseYearModGPO {

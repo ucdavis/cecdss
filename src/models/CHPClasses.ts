@@ -15,6 +15,7 @@ import {
 
 export class InputModCHPClass implements InputModCHP {
   CapitalCost = 100_000_000;
+  CapitalCostManuallySet = false;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModCHPClass();
   HeatBaseYear = new HeatBaseYearInputModClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModCHPClass();
@@ -43,12 +44,18 @@ export class ExpensesBaseYearInputModCHPClass
   implements ExpensesBaseYearInputMod {
   BiomassFuelCost = 22.05;
   LaborCost = 3_000_000;
+  LaborCostManuallySet = false;
   MaintenanceCost = 2_000_000;
+  MaintenanceCostManuallySet = false;
   InsurancePropertyTax = 2_000_000;
+  InsurancePropertyTaxManuallySet = false;
   Utilities = 300_000;
+  UtilitiesManuallySet = false;
   AshDisposal = 150_000;
   Management = 300_000;
+  ManagementManuallySet = false;
   OtherOperatingExpenses = 600_000;
+  OtherOperatingExpensesManuallySet = false;
 }
 
 export class ElectricalFuelBaseYearModCHPClass
@@ -73,4 +80,11 @@ export class ExpensesBaseYearInputModClass implements ExpensesBaseYearInputMod {
   Utilities = 0;
   Management = 0;
   OtherOperatingExpenses = 0;
+
+  LaborCostManuallySet = false;
+  MaintenanceCostManuallySet = false;
+  InsurancePropertyTaxManuallySet = false;
+  UtilitiesManuallySet = false;
+  ManagementManuallySet = false;
+  OtherOperatingExpensesManuallySet = false;
 }

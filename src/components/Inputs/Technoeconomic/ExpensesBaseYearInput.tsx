@@ -67,42 +67,60 @@ export const ExpensesBaseYearInput = (props: Props) => {
       defaultInputsGPO.ExpensesBaseYear.OtherOperatingExpenses
     );
 
-    if (scaledLaborCost !== props.inputs.LaborCost) {
+    if (
+      scaledLaborCost !== props.inputs.LaborCost &&
+      !props.inputs.LaborCostManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         LaborCost: scaledLaborCost
       });
     }
 
-    if (scaledMaintenanceCost !== props.inputs.MaintenanceCost) {
+    if (
+      scaledMaintenanceCost !== props.inputs.MaintenanceCost &&
+      !props.inputs.MaintenanceCostManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         MaintenanceCost: scaledMaintenanceCost
       });
     }
 
-    if (scaledInsurancePropertyTax !== props.inputs.InsurancePropertyTax) {
+    if (
+      scaledInsurancePropertyTax !== props.inputs.InsurancePropertyTax &&
+      !props.inputs.InsurancePropertyTaxManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         InsurancePropertyTax: scaledInsurancePropertyTax
       });
     }
 
-    if (scaledUtilities !== props.inputs.Utilities) {
+    if (
+      scaledUtilities !== props.inputs.Utilities &&
+      !props.inputs.UtilitiesManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         Utilities: scaledUtilities
       });
     }
 
-    if (scaledManagement !== props.inputs.Management) {
+    if (
+      scaledManagement !== props.inputs.Management &&
+      !props.inputs.ManagementManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         Management: scaledManagement
       });
     }
 
-    if (scaledOtherOperatingExpenses !== props.inputs.OtherOperatingExpenses) {
+    if (
+      scaledOtherOperatingExpenses !== props.inputs.OtherOperatingExpenses &&
+      !props.inputs.OtherOperatingExpensesManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         OtherOperatingExpenses: scaledOtherOperatingExpenses
@@ -144,7 +162,8 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                LaborCost: e.target.value
+                LaborCost: e.target.value,
+                LaborCostManuallySet: true
               })
             }
             disabled={props.disabled}
@@ -162,7 +181,8 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                MaintenanceCost: e.target.value
+                MaintenanceCost: e.target.value,
+                MaintenanceCostManuallySet: true
               })
             }
             disabled={props.disabled}
@@ -180,7 +200,8 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                InsurancePropertyTax: e.target.value
+                InsurancePropertyTax: e.target.value,
+                InsurancePropertyTaxManuallySet: true
               })
             }
             disabled={props.disabled}
@@ -200,7 +221,8 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                Utilities: e.target.value
+                Utilities: e.target.value,
+                UtilitiesManuallySet: true
               })
             }
             disabled={props.disabled}
@@ -220,7 +242,8 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                Management: e.target.value
+                Management: e.target.value,
+                ManagementManuallySet: true
               })
             }
             disabled={props.disabled}
@@ -240,7 +263,8 @@ export const ExpensesBaseYearInput = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                OtherOperatingExpenses: e.target.value
+                OtherOperatingExpenses: e.target.value,
+                OtherOperatingExpensesManuallySet: true
               })
             }
             disabled={props.disabled}

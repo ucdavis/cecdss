@@ -84,42 +84,60 @@ export const CombinedHeatAndPower = (props: Props) => {
       defaultInputsCHP.ExpensesBaseYear.OtherOperatingExpenses
     );
 
-    if (scaledLaborCost !== props.inputs.LaborCost) {
+    if (
+      scaledLaborCost !== props.inputs.LaborCost &&
+      !props.inputs.LaborCostManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         LaborCost: scaledLaborCost
       });
     }
 
-    if (scaledMaintenanceCost !== props.inputs.MaintenanceCost) {
+    if (
+      scaledMaintenanceCost !== props.inputs.MaintenanceCost &&
+      !props.inputs.MaintenanceCostManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         MaintenanceCost: scaledMaintenanceCost
       });
     }
 
-    if (scaledInsurancePropertyTax !== props.inputs.InsurancePropertyTax) {
+    if (
+      scaledInsurancePropertyTax !== props.inputs.InsurancePropertyTax &&
+      !props.inputs.InsurancePropertyTaxManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         InsurancePropertyTax: scaledInsurancePropertyTax
       });
     }
 
-    if (scaledUtilities !== props.inputs.Utilities) {
+    if (
+      scaledUtilities !== props.inputs.Utilities &&
+      !props.inputs.UtilitiesManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         Utilities: scaledUtilities
       });
     }
 
-    if (scaledManagement !== props.inputs.Management) {
+    if (
+      scaledManagement !== props.inputs.Management &&
+      !props.inputs.ManagementManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         Management: scaledManagement
       });
     }
 
-    if (scaledOtherOperatingExpenses !== props.inputs.OtherOperatingExpenses) {
+    if (
+      scaledOtherOperatingExpenses !== props.inputs.OtherOperatingExpenses &&
+      !props.inputs.OtherOperatingExpensesManuallySet
+    ) {
       props.setInputs({
         ...props.inputs,
         OtherOperatingExpenses: scaledOtherOperatingExpenses
@@ -163,6 +181,7 @@ export const CombinedHeatAndPower = (props: Props) => {
           })
         }
         disabled={props.disabled}
+        teaInputs={props.teaInputs}
       />
       <HeatBaseYearInput
         inputs={props.inputs.HeatBaseYear}
