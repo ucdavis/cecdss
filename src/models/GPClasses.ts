@@ -19,6 +19,7 @@ import {
 
 export class InputModGPClass implements InputModGP {
   CapitalCost = 3_000_000;
+  CapitalCostManuallySet = false;
   ElectricalFuelBaseYear = new ElectricalFuelBaseYearInputModGPClass();
   HeatBaseYear = new HeatBaseYearInputModGPClass();
   ExpensesBaseYear = new ExpensesBaseYearInputModGPClass();
@@ -60,12 +61,19 @@ export class ExpensesBaseYearInputModGPClass
   implements ExpensesBaseYearInputModGP {
   BiomassFuelCost = 22.05;
   LaborCost = 70_000;
+  LaborCostManuallySet = false;
   MaintenanceCost = 15_000;
+  MaintenanceCostManuallySet = false;
   WasteTreatment = 7_000;
+  WasteTreatmentManuallySet = false;
   InsurancePropertyTax = 3500;
+  InsurancePropertyTaxManuallySet = false;
   Utilities = 3500;
+  UtilitiesManuallySet = false;
   Management = 3500;
+  ManagementManuallySet = false;
   OtherOperatingExpenses = 3500;
+  OtherOperatingExpensesManuallySet = false;
   DualFuelCost = 0.3;
 }
 

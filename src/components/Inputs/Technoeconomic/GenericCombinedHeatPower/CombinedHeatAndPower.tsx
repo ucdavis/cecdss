@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Input,
   Label,
@@ -25,16 +25,126 @@ import { IncomeOtherThanEnergyInput } from '../IncomeOtherThanEnergyInput';
 import { EscalationInflationInput } from '../EscalationInflationInput';
 import { FinancingInput } from '../FinancingInput';
 import { CarbonCreditInput } from '../CarbonCreditInput';
+import { determineScaledCost } from '../TechnoeconomicInputs';
+import { InputModCHPClass } from '../../../../models/CHPClasses';
 
 interface Props {
   // inputs: InputModCHP;
   // setInputs: (inputs: InputModCHP) => void;
   inputs: any;
   setInputs: (inputs: any) => void;
+  teaInputs: any;
+  teaModel: string;
   disabled: boolean;
 }
+const defaultInputsCHP = new InputModCHPClass();
 
 export const CombinedHeatAndPower = (props: Props) => {
+  useEffect(() => {
+    let scaledLaborCost = props.inputs.LaborCost;
+    let scaledMaintenanceCost = props.inputs.MaintenanceCost;
+    let scaledInsurancePropertyTax = props.inputs.InsurancePropertyTax;
+    let scaledUtilities = props.inputs.Utilities;
+    let scaledManagement = props.inputs.Management;
+    let scaledOtherOperatingExpenses = props.inputs.OtherOperatingExpenses;
+
+    scaledLaborCost = determineScaledCost(
+      defaultInputsCHP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsCHP.ExpensesBaseYear.LaborCost
+    );
+
+    scaledMaintenanceCost = determineScaledCost(
+      defaultInputsCHP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsCHP.ExpensesBaseYear.MaintenanceCost
+    );
+
+    scaledInsurancePropertyTax = determineScaledCost(
+      defaultInputsCHP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsCHP.ExpensesBaseYear.InsurancePropertyTax
+    );
+
+    scaledUtilities = determineScaledCost(
+      defaultInputsCHP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsCHP.ExpensesBaseYear.Utilities
+    );
+
+    scaledManagement = determineScaledCost(
+      defaultInputsCHP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsCHP.ExpensesBaseYear.Management
+    );
+
+    scaledOtherOperatingExpenses = determineScaledCost(
+      defaultInputsCHP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsCHP.ExpensesBaseYear.OtherOperatingExpenses
+    );
+
+    if (
+      scaledLaborCost !== props.inputs.LaborCost &&
+      !props.inputs.LaborCostManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        LaborCost: scaledLaborCost
+      });
+    }
+
+    if (
+      scaledMaintenanceCost !== props.inputs.MaintenanceCost &&
+      !props.inputs.MaintenanceCostManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        MaintenanceCost: scaledMaintenanceCost
+      });
+    }
+
+    if (
+      scaledInsurancePropertyTax !== props.inputs.InsurancePropertyTax &&
+      !props.inputs.InsurancePropertyTaxManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        InsurancePropertyTax: scaledInsurancePropertyTax
+      });
+    }
+
+    if (
+      scaledUtilities !== props.inputs.Utilities &&
+      !props.inputs.UtilitiesManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        Utilities: scaledUtilities
+      });
+    }
+
+    if (
+      scaledManagement !== props.inputs.Management &&
+      !props.inputs.ManagementManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        Management: scaledManagement
+      });
+    }
+
+    if (
+      scaledOtherOperatingExpenses !== props.inputs.OtherOperatingExpenses &&
+      !props.inputs.OtherOperatingExpensesManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        OtherOperatingExpenses: scaledOtherOperatingExpenses
+      });
+    }
+  }, [props, props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity]);
+
   if (!props.inputs) {
     return null;
   }
@@ -71,6 +181,7 @@ export const CombinedHeatAndPower = (props: Props) => {
           })
         }
         disabled={props.disabled}
+        teaInputs={props.teaInputs}
       />
       <HeatBaseYearInput
         inputs={props.inputs.HeatBaseYear}
@@ -84,6 +195,8 @@ export const CombinedHeatAndPower = (props: Props) => {
         setInputs={(inputs: ExpensesBaseYearInputModGPO) =>
           props.setInputs({ ...props.inputs, ExpensesBaseYear: inputs })
         }
+        teaInputs={props.teaInputs}
+        teaModel={props.teaModel}
         disabled={props.disabled}
       />
       <TaxesInput

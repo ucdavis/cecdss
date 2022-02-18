@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ExpensesBaseYearInputModGP } from '@ucdavis/tea/input.model';
 import {
   FormText,
@@ -8,15 +8,142 @@ import {
   Input,
   InputGroupAddon
 } from 'reactstrap';
-import { ExpensesBaseYearInputModGPClass } from '../../../../models/GPClasses';
+import { determineScaledCost } from '../TechnoeconomicInputs';
+import { InputModGPClass } from '../../../../models/GPClasses';
 
 interface Props {
   inputs: ExpensesBaseYearInputModGP;
   setInputs: (inputs: any) => void;
+  teaInputs: any;
+  teaModel: string;
   disabled: boolean;
 }
 
+const defaultInputsGP = new InputModGPClass();
+
 export const ExpensesBaseYearInputGP = (props: Props) => {
+  useEffect(() => {
+    let scaledLaborCost = props.inputs.LaborCost;
+    let scaledMaintenanceCost = props.inputs.MaintenanceCost;
+    let scaledWasteTreatment = props.inputs.WasteTreatment;
+    let scaledInsurancePropertyTax = props.inputs.InsurancePropertyTax;
+    let scaledUtilities = props.inputs.Utilities;
+    let scaledManagement = props.inputs.Management;
+    let scaledOtherOperatingExpenses = props.inputs.OtherOperatingExpenses;
+
+    scaledLaborCost = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.LaborCost
+    );
+
+    scaledMaintenanceCost = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.MaintenanceCost
+    );
+
+    scaledWasteTreatment = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.WasteTreatment
+    );
+
+    scaledInsurancePropertyTax = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.InsurancePropertyTax
+    );
+
+    scaledUtilities = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.Utilities
+    );
+
+    scaledManagement = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.Management
+    );
+
+    scaledOtherOperatingExpenses = determineScaledCost(
+      defaultInputsGP.ElectricalFuelBaseYear.NetElectricalCapacity,
+      props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity,
+      defaultInputsGP.ExpensesBaseYear.OtherOperatingExpenses
+    );
+
+    if (
+      scaledLaborCost !== props.inputs.LaborCost &&
+      !props.inputs.LaborCostManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        LaborCost: scaledLaborCost
+      });
+    }
+
+    if (
+      scaledMaintenanceCost !== props.inputs.MaintenanceCost &&
+      !props.inputs.MaintenanceCostManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        MaintenanceCost: scaledMaintenanceCost
+      });
+    }
+
+    if (
+      scaledWasteTreatment !== props.inputs.WasteTreatment &&
+      !props.inputs.WasteTreatmentManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        WasteTreatment: scaledWasteTreatment
+      });
+    }
+
+    if (
+      scaledInsurancePropertyTax !== props.inputs.InsurancePropertyTax &&
+      !props.inputs.InsurancePropertyTaxManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        InsurancePropertyTax: scaledInsurancePropertyTax
+      });
+    }
+
+    if (
+      scaledUtilities !== props.inputs.Utilities &&
+      !props.inputs.UtilitiesManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        Utilities: scaledUtilities
+      });
+    }
+
+    if (
+      scaledManagement !== props.inputs.Management &&
+      !props.inputs.ManagementManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        Management: scaledManagement
+      });
+    }
+
+    if (
+      scaledOtherOperatingExpenses !== props.inputs.OtherOperatingExpenses &&
+      !props.inputs.OtherOperatingExpensesManuallySet
+    ) {
+      props.setInputs({
+        ...props.inputs,
+        OtherOperatingExpenses: scaledOtherOperatingExpenses
+      });
+    }
+  }, [props, props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity]);
+
   if (!props.inputs) {
     return null;
   }
@@ -71,7 +198,8 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                LaborCost: e.target.value
+                LaborCost: e.target.value,
+                LaborCostManuallySet: true
               })
             }
             disabled={props.disabled}
@@ -89,7 +217,8 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                MaintenanceCost: e.target.value
+                MaintenanceCost: e.target.value,
+                MaintenanceCostManuallySet: true
               })
             }
             disabled={props.disabled}
@@ -107,7 +236,8 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                WasteTreatment: e.target.value
+                WasteTreatment: e.target.value,
+                WasteTreatmentManuallySet: true
               })
             }
             disabled={props.disabled}
@@ -125,7 +255,8 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                InsurancePropertyTax: e.target.value
+                InsurancePropertyTax: e.target.value,
+                InsurancePropertyTaxManuallySet: true
               })
             }
             disabled={props.disabled}
@@ -145,7 +276,8 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                Utilities: e.target.value
+                Utilities: e.target.value,
+                UtilitiesManuallySet: true
               })
             }
             disabled={props.disabled}
@@ -165,7 +297,8 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                Management: e.target.value
+                Management: e.target.value,
+                ManagementManuallySet: true
               })
             }
             disabled={props.disabled}
@@ -185,7 +318,8 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             onChange={e =>
               props.setInputs({
                 ...props.inputs,
-                OtherOperatingExpenses: e.target.value
+                OtherOperatingExpenses: e.target.value,
+                OtherOperatingExpensesManuallySet: true
               })
             }
             disabled={props.disabled}

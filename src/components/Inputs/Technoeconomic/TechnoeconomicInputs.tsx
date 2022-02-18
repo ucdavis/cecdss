@@ -28,11 +28,11 @@ export const determineScaledCost = (
   if (electricalCapacity === defaultElectricCapacity) {
     return defaultCost;
   } else {
-    const scaledCapitalCost =
+    const scaledCost =
       defaultCost *
       Math.pow(electricalCapacity / defaultElectricCapacity, scaleFactor);
 
-    return Math.round(scaledCapitalCost);
+    return Math.round(scaledCost);
   }
 };
 
@@ -79,6 +79,7 @@ export const TechnoeconomicInputs = (props: Props) => {
       });
     }
   }, [props, props.teaInputs.ElectricalFuelBaseYear.NetElectricalCapacity]);
+
   const [showDetailedInputs, toggleShowDetailedInputs] = useState<boolean>(
     false
   );
@@ -90,6 +91,8 @@ export const TechnoeconomicInputs = (props: Props) => {
         <GenericPowerOnly
           inputs={props.teaInputs}
           setInputs={props.setTeaInputs}
+          teaInputs={props.teaInputs}
+          teaModel={props.teaModel}
           disabled={props.disabled}
         />
       )}
@@ -98,6 +101,8 @@ export const TechnoeconomicInputs = (props: Props) => {
         <CombinedHeatAndPower
           inputs={props.teaInputs}
           setInputs={props.setTeaInputs}
+          teaInputs={props.teaInputs}
+          teaModel={props.teaModel}
           disabled={props.disabled}
         />
       )}
@@ -106,6 +111,8 @@ export const TechnoeconomicInputs = (props: Props) => {
         <GasificationPower
           inputs={props.teaInputs}
           setInputs={props.setTeaInputs}
+          teaInputs={props.teaInputs}
+          teaModel={props.teaModel}
           disabled={props.disabled}
         />
       )}
@@ -122,6 +129,8 @@ export const TechnoeconomicInputs = (props: Props) => {
         }
         teaModel={props.teaModel}
         disabled={props.disabled}
+        teaInputs={props.teaInputs}
+        setTeaInputs={props.setTeaInputs}
       />
     </>
   );
