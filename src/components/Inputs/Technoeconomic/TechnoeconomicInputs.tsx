@@ -28,11 +28,11 @@ export const determineScaledCost = (
   if (electricalCapacity === defaultElectricCapacity) {
     return defaultCost;
   } else {
-    const scaledCapitalCost =
+    const scaledCost =
       defaultCost *
       Math.pow(electricalCapacity / defaultElectricCapacity, scaleFactor);
 
-    return Math.round(scaledCapitalCost);
+    return Math.round(scaledCost);
   }
 };
 
