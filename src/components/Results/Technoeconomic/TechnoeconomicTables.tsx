@@ -267,6 +267,25 @@ export const TechnoeconomicTables = (props: Props) => {
             </td>
           ))}
         </tr>
+        {props.teaModel === TechnoeconomicModels.gasificationPower && (
+          <tr>
+            <td>Dual Fuel Cost</td>
+            <td>$</td>
+            <td>
+              {formatCurrency(
+                props.cashFlows.reduce(
+                  (sum: number, x: CashFlow) => sum + x.DualFuelCost,
+                  0
+                )
+              )}
+            </td>
+            {props.cashFlows.map((result, i) => (
+              <td key={`dualFuelCost-${i}`}>
+                {formatCurrency(result.DualFuelCost)}
+              </td>
+            ))}
+          </tr>
+        )}
         <tr>
           <td>Non-fuel Expenses</td>
           <td>$</td>
