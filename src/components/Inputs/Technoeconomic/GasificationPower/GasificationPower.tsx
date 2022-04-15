@@ -103,7 +103,7 @@ export const GasificationPower = (props: Props) => {
         }
         disabled={props.disabled}
       />
-      <CarbonCreditInput
+      {/* <CarbonCreditInput
         inputs={props.inputs.CarbonCredit}
         setInputs={(inputs: CarbonCredit) =>
           props.setInputs({ ...props.inputs, CarbonCredit: inputs })
@@ -116,7 +116,7 @@ export const GasificationPower = (props: Props) => {
           });
         }}
         disabled={props.disabled}
-      ></CarbonCreditInput>
+      ></CarbonCreditInput> */}
       <EscalationInflationInput
         inputs={props.inputs.EscalationInflation}
         setInputs={(inputs: EscalationInflationInputModGP) =>
