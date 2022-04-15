@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatCurrency, formatNumber } from '../../Shared/util';
-import { YearlyResult } from '../../../models/Types';
+import { TechnoeconomicModels, YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
 import { CashFlow } from '@ucdavis/tea/output.model';
 
@@ -8,6 +8,7 @@ interface Props {
   yearlyResults: YearlyResult[];
   cashFlows: CashFlow[];
   system: String;
+  teaModel: string;
 }
 
 export const TechnoeconomicTables = (props: Props) => {
@@ -334,6 +335,26 @@ export const TechnoeconomicTables = (props: Props) => {
             </td>
           ))}
         </tr>
+        {(props.teaModel === TechnoeconomicModels.genericPowerOnly ||
+          TechnoeconomicModels.gasificationPower) && (
+          <tr>
+            <td>Income--Heat</td>
+            <td>$</td>
+            <td>
+              {formatCurrency(
+                props.cashFlows.reduce(
+                  (sum: number, x: CashFlow) => sum + x.IncomeHeat,
+                  0
+                )
+              )}
+            </td>
+            {props.cashFlows.map((result, i) => (
+              <td key={`incomeHeat-${i}`}>
+                {formatCurrency(result.IncomeHeat)}
+              </td>
+            ))}
+          </tr>
+        )}
         <tr>
           <td>Interest On Debt Reserve</td>
           <td>$</td>
