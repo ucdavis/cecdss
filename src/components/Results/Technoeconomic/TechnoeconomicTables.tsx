@@ -335,8 +335,8 @@ export const TechnoeconomicTables = (props: Props) => {
             </td>
           ))}
         </tr>
-        {(props.teaModel === TechnoeconomicModels.genericPowerOnly ||
-          TechnoeconomicModels.gasificationPower) && (
+        {(props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower ||
+          props.teaModel === TechnoeconomicModels.gasificationPower) && (
           <tr>
             <td>Income--Heat</td>
             <td>$</td>
@@ -368,23 +368,6 @@ export const TechnoeconomicTables = (props: Props) => {
           </td>
           {props.cashFlows.map((result, i) => (
             <td key={`interestOnDebtReserve-${i}`}>
-              {formatCurrency(result.InterestOnDebtReserve)}
-            </td>
-          ))}
-        </tr>
-        <tr>
-          <td>Interest On Debt Reserve</td>
-          <td>$</td>
-          <td>
-            {formatCurrency(
-              props.cashFlows.reduce(
-                (sum: number, x: CashFlow) => sum + x.InterestOnDebtReserve,
-                0
-              )
-            )}
-          </td>
-          {props.cashFlows.map((result, i) => (
-            <td key={`interestonDebtReserve-${i}`}>
               {formatCurrency(result.InterestOnDebtReserve)}
             </td>
           ))}
