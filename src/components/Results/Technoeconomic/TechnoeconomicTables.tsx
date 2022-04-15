@@ -319,7 +319,7 @@ export const TechnoeconomicTables = (props: Props) => {
           ))}
         </tr>
         <tr>
-          <td>Income Capacity</td>
+          <td>Income--Capacity</td>
           <td>$</td>
           <td>
             {formatCurrency(
@@ -369,23 +369,6 @@ export const TechnoeconomicTables = (props: Props) => {
           {props.cashFlows.map((result, i) => (
             <td key={`interestOnDebtReserve-${i}`}>
               {formatCurrency(result.InterestOnDebtReserve)}
-            </td>
-          ))}
-        </tr>
-        <tr>
-          <td>Income -- Capacity</td>
-          <td>$</td>
-          <td>
-            {formatCurrency(
-              props.cashFlows.reduce(
-                (sum: number, x: CashFlow) => sum + x.IncomeCapacity,
-                0
-              )
-            )}
-          </td>
-          {props.cashFlows.map((result, i) => (
-            <td key={`incomeCapacity-${i}`}>
-              {formatCurrency(result.IncomeCapacity)}
             </td>
           ))}
         </tr>
