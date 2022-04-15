@@ -355,6 +355,25 @@ export const TechnoeconomicTables = (props: Props) => {
             ))}
           </tr>
         )}
+        {props.teaModel === TechnoeconomicModels.gasificationPower && (
+          <tr>
+            <td>Income--Char/Ash</td>
+            <td>$</td>
+            <td>
+              {formatCurrency(
+                props.cashFlows.reduce(
+                  (sum: number, x: CashFlow) => sum + x.IncomeChar,
+                  0
+                )
+              )}
+            </td>
+            {props.cashFlows.map((result, i) => (
+              <td key={`incomeChar-${i}`}>
+                {formatCurrency(result.IncomeChar)}
+              </td>
+            ))}
+          </tr>
+        )}
         <tr>
           <td>Interest On Debt Reserve</td>
           <td>$</td>
