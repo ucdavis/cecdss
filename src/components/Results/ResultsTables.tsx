@@ -124,6 +124,7 @@ export const ResultsTable = (props: Props) => {
             props.yearlyResults.length
           )}
           system={props.frcsInputs.system}
+          teaModel={props.teaModel}
         />
       </div>
     </>

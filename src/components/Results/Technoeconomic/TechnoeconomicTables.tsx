@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatCurrency, formatNumber } from '../../Shared/util';
-import { YearlyResult } from '../../../models/Types';
+import { TechnoeconomicModels, YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
 import { CashFlow } from '@ucdavis/tea/output.model';
 
@@ -8,6 +8,7 @@ interface Props {
   yearlyResults: YearlyResult[];
   cashFlows: CashFlow[];
   system: String;
+  teaModel: string;
 }
 
 export const TechnoeconomicTables = (props: Props) => {
@@ -266,6 +267,25 @@ export const TechnoeconomicTables = (props: Props) => {
             </td>
           ))}
         </tr>
+        {props.teaModel === TechnoeconomicModels.gasificationPower && (
+          <tr>
+            <td>Dual Fuel Cost</td>
+            <td>$</td>
+            <td>
+              {formatCurrency(
+                props.cashFlows.reduce(
+                  (sum: number, x: CashFlow) => sum + x.DualFuelCost,
+                  0
+                )
+              )}
+            </td>
+            {props.cashFlows.map((result, i) => (
+              <td key={`dualFuelCost-${i}`}>
+                {formatCurrency(result.DualFuelCost)}
+              </td>
+            ))}
+          </tr>
+        )}
         <tr>
           <td>Non-fuel Expenses</td>
           <td>$</td>
@@ -318,7 +338,7 @@ export const TechnoeconomicTables = (props: Props) => {
           ))}
         </tr>
         <tr>
-          <td>Income Capacity</td>
+          <td>Income--Capacity</td>
           <td>$</td>
           <td>
             {formatCurrency(
@@ -334,6 +354,45 @@ export const TechnoeconomicTables = (props: Props) => {
             </td>
           ))}
         </tr>
+        {(props.teaModel === TechnoeconomicModels.genericCombinedHeatAndPower ||
+          props.teaModel === TechnoeconomicModels.gasificationPower) && (
+          <tr>
+            <td>Income--Heat</td>
+            <td>$</td>
+            <td>
+              {formatCurrency(
+                props.cashFlows.reduce(
+                  (sum: number, x: CashFlow) => sum + x.IncomeHeat,
+                  0
+                )
+              )}
+            </td>
+            {props.cashFlows.map((result, i) => (
+              <td key={`incomeHeat-${i}`}>
+                {formatCurrency(result.IncomeHeat)}
+              </td>
+            ))}
+          </tr>
+        )}
+        {props.teaModel === TechnoeconomicModels.gasificationPower && (
+          <tr>
+            <td>Income--Char/Ash</td>
+            <td>$</td>
+            <td>
+              {formatCurrency(
+                props.cashFlows.reduce(
+                  (sum: number, x: CashFlow) => sum + x.IncomeChar,
+                  0
+                )
+              )}
+            </td>
+            {props.cashFlows.map((result, i) => (
+              <td key={`incomeChar-${i}`}>
+                {formatCurrency(result.IncomeChar)}
+              </td>
+            ))}
+          </tr>
+        )}
         <tr>
           <td>Interest On Debt Reserve</td>
           <td>$</td>
@@ -347,40 +406,6 @@ export const TechnoeconomicTables = (props: Props) => {
           </td>
           {props.cashFlows.map((result, i) => (
             <td key={`interestOnDebtReserve-${i}`}>
-              {formatCurrency(result.InterestOnDebtReserve)}
-            </td>
-          ))}
-        </tr>
-        <tr>
-          <td>Income -- Capacity</td>
-          <td>$</td>
-          <td>
-            {formatCurrency(
-              props.cashFlows.reduce(
-                (sum: number, x: CashFlow) => sum + x.IncomeCapacity,
-                0
-              )
-            )}
-          </td>
-          {props.cashFlows.map((result, i) => (
-            <td key={`incomeCapacity-${i}`}>
-              {formatCurrency(result.IncomeCapacity)}
-            </td>
-          ))}
-        </tr>
-        <tr>
-          <td>Interest On Debt Reserve</td>
-          <td>$</td>
-          <td>
-            {formatCurrency(
-              props.cashFlows.reduce(
-                (sum: number, x: CashFlow) => sum + x.InterestOnDebtReserve,
-                0
-              )
-            )}
-          </td>
-          {props.cashFlows.map((result, i) => (
-            <td key={`interestonDebtReserve-${i}`}>
               {formatCurrency(result.InterestOnDebtReserve)}
             </td>
           ))}
