@@ -12,6 +12,7 @@ import {
 interface Props {
   inputs: EscalationInflationInputModGP;
   setInputs: (inputs: any) => void;
+  disabled: boolean;
 }
 
 export const EscalationInflationInputGP = (props: Props) => {
@@ -32,6 +33,7 @@ export const EscalationInflationInputGP = (props: Props) => {
                 GeneralInflation: e.target.value
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -52,6 +54,7 @@ export const EscalationInflationInputGP = (props: Props) => {
                 EscalationBiomassFuel: e.target.value
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>
@@ -71,6 +74,7 @@ export const EscalationInflationInputGP = (props: Props) => {
                 EscalationDualFuel: e.target.value
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>
@@ -90,6 +94,7 @@ export const EscalationInflationInputGP = (props: Props) => {
                 EscalationProductionTaxCredit: e.target.value
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%</InputGroupAddon>
         </InputGroup>
@@ -109,6 +114,7 @@ export const EscalationInflationInputGP = (props: Props) => {
                 EscalationHeatSales: e.target.value
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>
@@ -126,6 +132,7 @@ export const EscalationInflationInputGP = (props: Props) => {
                 EscalationCharSales: e.target.value
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>
@@ -145,6 +152,7 @@ export const EscalationInflationInputGP = (props: Props) => {
                 EscalationOther: e.target.value
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>

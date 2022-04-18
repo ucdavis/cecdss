@@ -8,11 +8,11 @@ import {
   Input,
   InputGroupAddon
 } from 'reactstrap';
-import { IncomeOtherThanEnergyInputModGPClass } from '../../../../models/GPClasses';
 
 interface Props {
   inputs: IncomeOtherThanEnergyInputModGP;
   setInputs: (inputs: any) => void;
+  disabled: boolean;
 }
 
 export const IncomeOtherThanEnergyInputGP = (props: Props) => {
@@ -33,6 +33,7 @@ export const IncomeOtherThanEnergyInputGP = (props: Props) => {
                 CapacityPayment: e.target.value
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/kW-year</InputGroupAddon>
         </InputGroup>
@@ -53,6 +54,7 @@ export const IncomeOtherThanEnergyInputGP = (props: Props) => {
                 InterestRateOnDebtReserve: e.target.value
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
         </InputGroup>
@@ -73,6 +75,7 @@ export const IncomeOtherThanEnergyInputGP = (props: Props) => {
                 SalesPriceForChar: e.target.value
               })
             }
+            disabled={props.disabled}
           />
           <InputGroupAddon addonType='append'>$/t</InputGroupAddon>
         </InputGroup>
