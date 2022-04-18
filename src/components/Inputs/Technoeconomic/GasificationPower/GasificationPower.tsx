@@ -20,11 +20,11 @@ import {
 import { HeatBaseYearInput } from '../HeatBaseYearInput';
 import { TaxesInput } from '../TaxesInput';
 import { FinancingInput } from '../FinancingInput';
-import { IncomeOtherThanEnergyInput } from '../IncomeOtherThanEnergyInput';
-import { EscalationInflationInput } from '../EscalationInflationInput';
 import { ElectricalAndFuelBaseYearInputGP } from './ElectricalAndFuelBaseYearInputGP';
 import { ExpensesBaseYearInputGP } from './ExpensesBaseYearInputGP';
 import { CarbonCreditInput } from '../CarbonCreditInput';
+import { IncomeOtherThanEnergyInputGP } from './IncomeOtherThanEnergyInputGP';
+import { EscalationInflationInputGP } from './EscalationInflationInputGP';
 
 interface Props {
   // inputs: InputModGP;
@@ -96,7 +96,7 @@ export const GasificationPower = (props: Props) => {
         }
         disabled={props.disabled}
       />
-      <IncomeOtherThanEnergyInput
+      <IncomeOtherThanEnergyInputGP
         inputs={props.inputs.IncomeOtherThanEnergy}
         setInputs={(inputs: IncomeOtherThanEnergyInputModGP) =>
           props.setInputs({ ...props.inputs, IncomeOtherThanEnergy: inputs })
@@ -117,7 +117,7 @@ export const GasificationPower = (props: Props) => {
         }}
         disabled={props.disabled}
       ></CarbonCreditInput> */}
-      <EscalationInflationInput
+      <EscalationInflationInputGP
         inputs={props.inputs.EscalationInflation}
         setInputs={(inputs: EscalationInflationInputModGP) =>
           props.setInputs({ ...props.inputs, EscalationInflation: inputs })

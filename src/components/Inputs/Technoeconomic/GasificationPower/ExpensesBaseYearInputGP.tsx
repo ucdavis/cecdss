@@ -228,7 +228,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
         <FormText color='muted'>Cost of maintaining the plant</FormText>
       </FormGroup>
       <FormGroup>
-        <Label>WasteTreatment</Label>
+        <Label>Waste Treatment</Label>
         <InputGroup>
           <Input
             type='text'
