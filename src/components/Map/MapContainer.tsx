@@ -559,10 +559,11 @@ export const MapContainer = () => {
               toggleErrorGeoJson(!showErrorGeoJson);
             }}
             active={showErrorGeoJson}
+            title='Cluster zones which cannot be used for biomass'
             color='primary'
             className='toggle-buttons error-toggle'
           >
-            <span>{isErrorZone ? 'Show Error Zones' : 'Hide Error Zones'}</span>
+            <span>{isErrorZone ? 'Show Unusable Zones' : 'Hide Unusable Zones'}</span>
             <FontAwesomeIcon icon={isErrorZone ? faEye : faEyeSlash} />
           </Button>
           <Button
