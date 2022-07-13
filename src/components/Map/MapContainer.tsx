@@ -502,6 +502,9 @@ export const MapContainer = () => {
   const style = {
     height: window.innerHeight
   };
+
+  const allResultsSelected = selectedYearIndex === years.length;
+
   return (
     <div style={style}>
       {(yearlyResults.length > 0 || loading) && (
@@ -511,6 +514,8 @@ export const MapContainer = () => {
               toggleMoveInGeoJson(h => !h);
             }}
             active={showMoveInGeoJson}
+            disabled={allResultsSelected}
+            title='Show Move-In Geometry in selected year'
             color='primary'
             className='toggle-buttons movein-toggle'
           >
@@ -522,6 +527,8 @@ export const MapContainer = () => {
               toggleTransportationGeoJson(h => !h);
             }}
             active={showTransportationGeoJson}
+            disabled={allResultsSelected}
+            title='Show Transportation Geometry in selected year'
             color='primary'
             className='toggle-buttons transportation-toggle'
           >
@@ -539,6 +546,7 @@ export const MapContainer = () => {
               toggleHeatmap(h => !h);
             }}
             active={showHeatmap}
+            title='Heatmap scaled by density of biomass'
             color='primary'
             className='toggle-buttons heatmap-toggle'
           >
