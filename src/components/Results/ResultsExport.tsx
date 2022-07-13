@@ -72,6 +72,10 @@ export const ResultsExport = (props: Props) => {
           )
         ],
         [
+          'Annual Generation (kWh)',
+          formatNumber(props.allYearResults.annualGeneration)
+        ],
+        [
           'Capacity Factor (%)',
           formatNumber(props.teaInputs.ElectricalFuelBaseYear.CapacityFactor)
         ],
