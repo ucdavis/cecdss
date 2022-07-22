@@ -114,7 +114,7 @@ export const MapContainer = () => {
 
   const frcsInputsExample: FrcsInputs = {
     system: 'Ground-Based Mech WT',
-    treatmentid: 1,
+    treatmentid: 3,
     dieselFuelPrice: 2.24,
     wageFaller: 35.13, // CA FallBuckWage May 2020
     wageOther: 22.07, // CA AllOthersWage May 2020
