@@ -26,6 +26,7 @@ export const ResultsTable = (props: Props) => {
     x => x.id === props.frcsInputs.treatmentid
   );
   const treatmentName = Treatments[treatmentIndex].name;
+
   const renderTechnicalPerformanceTable = () => {
     return (
       <Table responsive bordered hover>
@@ -69,6 +70,12 @@ export const ResultsTable = (props: Props) => {
               </td>
             </tr>
           )}
+          <tr>
+            <td>Annual Generation (kWh)</td>
+            <td>
+              {formatNumber(props.allYearResults.annualGeneration)}
+            </td>
+          </tr>
           <tr>
             <td>Capacity Factor (%)</td>
             <td>{props.teaInputs.ElectricalFuelBaseYear.CapacityFactor}</td>
