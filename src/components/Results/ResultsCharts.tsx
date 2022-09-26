@@ -33,7 +33,7 @@ export const ResultsCharts = (props: Props) => {
     });
     return (
       <>
-        <h3>Delivered Cost of Feedstock</h3>
+        <h3>Total delivered feedstock cost</h3>
         <ComposedChart
           width={1000}
           height={500}
