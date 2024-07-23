@@ -42,7 +42,8 @@ const defaultInputsGP = new InputModGPClass();
 
 export const TechnoeconomicInputs = (props: Props) => {
   useEffect(() => {
-    if (props.teaInputs.CapitalCostManuallySet) {
+    // ! WHY IS CapitalCostManuallySet USED BELOW?????? Looks like a bool val
+    if ((props.teaInputs as any).CapitalCostManuallySet) {
       props.teaInputs.CapitalCost = Number(props.teaInputs.CapitalCost);
       return;
     }

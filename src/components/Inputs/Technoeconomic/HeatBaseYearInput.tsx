@@ -6,7 +6,7 @@ import {
   Label,
   InputGroup,
   Input,
-  InputGroupAddon
+  InputGroupText
 } from 'reactstrap';
 
 interface Props {
@@ -19,6 +19,17 @@ export const HeatBaseYearInput = (props: Props) => {
   if (!props.inputs) {
     return null;
   }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
+    const value = parseFloat(e.target.value);
+        if (!isNaN(value)) {
+      props.setInputs({
+        ...props.inputs,
+        [type]: value
+      });
+    }
+  };
+  
   return (
     <>
       <FormGroup>
@@ -27,15 +38,10 @@ export const HeatBaseYearInput = (props: Props) => {
           <Input
             type='text'
             value={props.inputs.AggregateFractionOfHeatRecovered}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                AggregateFractionOfHeatRecovered: e.target.value
-              })
-            }
+            onChange={e => handleChange(e, 'AggregateFractionOfHeatRecovered')}
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Aggregate fraction of heat recovered</FormText>
       </FormGroup>
@@ -45,15 +51,10 @@ export const HeatBaseYearInput = (props: Props) => {
           <Input
             type='text'
             value={props.inputs.AggregateSalesPriceForHeat}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                AggregateSalesPriceForHeat: e.target.value
-              })
-            }
+            onChange={e => handleChange(e, 'AggregateSalesPriceForHeat')}
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/kWh</InputGroupAddon>
+          <InputGroupText>$/kWh</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Aggregrate sales price for heat</FormText>
       </FormGroup>

@@ -8,7 +8,7 @@ import {
   Label,
   InputGroup,
   Input,
-  InputGroupAddon
+  InputGroupText
 } from 'reactstrap';
 
 interface Props {
@@ -21,6 +21,17 @@ export const FinancingInput = (props: Props) => {
   if (!props.inputs) {
     return null;
   }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
+    const value = parseFloat(e.target.value);
+        if (!isNaN(value)) {
+      props.setInputs({
+        ...props.inputs,
+        [type]: value
+      });
+    }
+  };
+
   return (
     <>
       <FormGroup>
@@ -29,15 +40,10 @@ export const FinancingInput = (props: Props) => {
           <Input
             type='text'
             value={props.inputs.DebtRatio}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                DebtRatio: e.target.value
-              })
-            }
+            onChange={e => handleChange(e, 'DebtRatio')}
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Fraction of financing covered by debt borrowing
@@ -49,15 +55,10 @@ export const FinancingInput = (props: Props) => {
           <Input
             type='text'
             value={props.inputs.InterestRateOnDebt}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                InterestRateOnDebt: e.target.value
-              })
-            }
+            onChange={e => handleChange(e, 'InterestRateOnDebt')}
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Interest rate applied to debt portion of investment
@@ -69,15 +70,10 @@ export const FinancingInput = (props: Props) => {
           <Input
             type='text'
             value={props.inputs.EconomicLife}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                EconomicLife: e.target.value
-              })
-            }
+            onChange={e => handleChange(e, 'EconomicLife')}
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>years</InputGroupAddon>
+          <InputGroupText>years</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Life of Loan</FormText>
       </FormGroup>
@@ -87,15 +83,10 @@ export const FinancingInput = (props: Props) => {
           <Input
             type='text'
             value={props.inputs.CostOfEquity}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                CostOfEquity: e.target.value
-              })
-            }
+            onChange={e => handleChange(e, 'CostOfEquity')}
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
+          <InputGroupText>%/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Rate of return on equity portion of investment

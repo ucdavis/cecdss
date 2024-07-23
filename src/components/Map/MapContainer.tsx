@@ -64,6 +64,19 @@ import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInL
 
 const { BaseLayer } = LayersControl;
 
+const processDieselFuelPrice = (price: string | number): number => {
+  if (typeof price === 'string') {
+    const parsedValue = parseFloat(price.replace(/,/g, ''));
+    if (!isNaN(parsedValue)) {
+      return parsedValue;
+    } else {
+      console.error('Invalid diesel fuel price');
+      return 0; 
+    }
+  }
+  return price;
+};
+
 export const MapContainer = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isClusterZone, setIsClusterZone] = useState(true);
@@ -207,15 +220,7 @@ export const MapContainer = () => {
   const submitInputs = async () => {
     toggleLoading(true);
 
-    if (typeof frcsInputs.dieselFuelPrice === 'string') {
-      frcsInputs.dieselFuelPrice = parseFloat(
-        frcsInputs.dieselFuelPrice.replace(/\,/g, '')
-      );
-
-      if (isNaN(frcsInputs.dieselFuelPrice)) {
-        frcsInputs.dieselFuelPrice = frcsInputs.dieselFuelPrice.toString();
-      }
-    }
+    frcsInputs.dieselFuelPrice = processDieselFuelPrice(frcsInputs.dieselFuelPrice)
 
     let teaInputsClone = { ...teaInputs };
     const cleanedInput = cleanTeaInput(teaInputsClone);

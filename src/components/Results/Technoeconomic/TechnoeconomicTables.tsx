@@ -4,6 +4,12 @@ import { TechnoeconomicModels, YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
 import { CashFlow } from '@ucdavis/tea/output.model';
 
+export interface CashFlowMod extends CashFlow {
+  DualFuelCost: number;
+  IncomeChar: number;
+  IncomeHeat: number;
+}
+
 interface Props {
   yearlyResults: YearlyResult[];
   cashFlows: CashFlow[];
@@ -11,7 +17,19 @@ interface Props {
   teaModel: string;
 }
 
+const transformToCashFlowMod = (cashFlows: CashFlow[]): CashFlowMod[] => {
+  return cashFlows.map(cashFlow => ({
+    ...cashFlow,
+    DualFuelCost: 0,
+    IncomeChar: 0,  
+    IncomeHeat: 0   
+  }));
+}
+
 export const TechnoeconomicTables = (props: Props) => {
+
+  const transformedCashFlows = transformToCashFlowMod(props.cashFlows);
+
   return (
     <Table responsive bordered hover>
       <thead>
@@ -119,7 +137,7 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.EquityRecovery,
                 0
               )
@@ -136,13 +154,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.EquityInterest,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`equityInterest-${i}`}>
               {formatCurrency(result.EquityInterest)}
             </td>
@@ -153,13 +171,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.EquityPrincipalPaid,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`equityPrincipalPaid-${i}`}>
               {formatCurrency(result.EquityPrincipalPaid)}
             </td>
@@ -170,13 +188,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.EquityPrincipalRemaining,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`equityPrincipalRemaining-${i}`}>
               {formatCurrency(result.EquityPrincipalRemaining)}
             </td>
@@ -187,13 +205,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.DebtRecovery,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`debtRecovery-${i}`}>
               {formatCurrency(result.DebtRecovery)}
             </td>
@@ -204,13 +222,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.DebtInterest,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`debtInterest-${i}`}>
               {formatCurrency(result.DebtInterest)}
             </td>
@@ -221,13 +239,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.DebtPrincipalPaid,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`debtPrinciaplPaid-${i}`}>
               {formatCurrency(result.DebtPrincipalPaid)}
             </td>
@@ -238,13 +256,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.DebtPrincipalRemaining,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`debtPrincipalRemaining-${i}`}>
               {formatCurrency(result.DebtPrincipalRemaining)}
             </td>
@@ -273,13 +291,13 @@ export const TechnoeconomicTables = (props: Props) => {
             <td>$</td>
             <td>
               {formatCurrency(
-                props.cashFlows.reduce(
-                  (sum: number, x: CashFlow) => sum + x.DualFuelCost,
+                transformedCashFlows.reduce(
+                  (sum: number, x: CashFlowMod) => sum + x.DualFuelCost,
                   0
                 )
               )}
             </td>
-            {props.cashFlows.map((result, i) => (
+            {transformedCashFlows.map((result, i) => (
               <td key={`dualFuelCost-${i}`}>
                 {formatCurrency(result.DualFuelCost)}
               </td>
@@ -291,13 +309,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.NonFuelExpenses,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`nonFuelExpenses-${i}`}>
               {formatCurrency(result.NonFuelExpenses)}
             </td>
@@ -308,13 +326,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.DebtReserve,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`debtReserve-${i}`}>
               {formatCurrency(result.DebtReserve)}
             </td>
@@ -325,13 +343,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.Depreciation,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`depreciation-${i}`}>
               {formatCurrency(result.Depreciation)}
             </td>
@@ -342,13 +360,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.IncomeCapacity,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`incomeCapacity-${i}`}>
               {formatCurrency(result.IncomeCapacity)}
             </td>
@@ -361,13 +379,13 @@ export const TechnoeconomicTables = (props: Props) => {
             <td>$</td>
             <td>
               {formatCurrency(
-                props.cashFlows.reduce(
-                  (sum: number, x: CashFlow) => sum + x.IncomeHeat,
+                transformedCashFlows.reduce(
+                  (sum: number, x: CashFlowMod) => sum + x.IncomeHeat,
                   0
                 )
               )}
             </td>
-            {props.cashFlows.map((result, i) => (
+            {transformedCashFlows.map((result, i) => (
               <td key={`incomeHeat-${i}`}>
                 {formatCurrency(result.IncomeHeat)}
               </td>
@@ -380,13 +398,13 @@ export const TechnoeconomicTables = (props: Props) => {
             <td>$</td>
             <td>
               {formatCurrency(
-                props.cashFlows.reduce(
-                  (sum: number, x: CashFlow) => sum + x.IncomeChar,
+                transformedCashFlows.reduce(
+                  (sum: number, x: CashFlowMod) => sum + x.IncomeChar,
                   0
                 )
               )}
             </td>
-            {props.cashFlows.map((result, i) => (
+            {transformedCashFlows.map((result, i) => (
               <td key={`incomeChar-${i}`}>
                 {formatCurrency(result.IncomeChar)}
               </td>
@@ -398,13 +416,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.InterestOnDebtReserve,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`interestOnDebtReserve-${i}`}>
               {formatCurrency(result.InterestOnDebtReserve)}
             </td>
@@ -415,13 +433,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.TaxesWoCredit,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`texesWOCredit-${i}`}>
               {formatCurrency(result.TaxesWoCredit)}
             </td>
@@ -432,13 +450,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.TaxCredit,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`taxCredit-${i}`}>{formatCurrency(result.TaxCredit)}</td>
           ))}
         </tr>
@@ -447,13 +465,13 @@ export const TechnoeconomicTables = (props: Props) => {
           <td>$</td>
           <td>
             {formatCurrency(
-              props.cashFlows.reduce(
+              transformedCashFlows.reduce(
                 (sum: number, x: CashFlow) => sum + x.Taxes,
                 0
               )
             )}
           </td>
-          {props.cashFlows.map((result, i) => (
+          {transformedCashFlows.map((result, i) => (
             <td key={`taxes-${i}`}>{formatCurrency(result.Taxes)}</td>
           ))}
         </tr>

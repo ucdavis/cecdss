@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const CountyLegend = () => (
-  <div id='legend-main' widgetid='legend-main' style={{ position: 'relative' }}>
+  <div id='legend-main' data-widgetid='legend-main' style={{ position: 'relative' }}>
     <div
       id='legend-main_California_County_Boundaries_2639'
       className='esriLegendService'
@@ -60,7 +60,7 @@ export const CountyLegend = () => (
                       d='M-10-10L 10 0L 10 10L-10 10L-10-10Z'
                       fill-rule='evenodd'
                       stroke-dasharray='none'
-                      dojoGfxStrokeStyle='solid'
+                      data-dojo-gfx-stroke-style='solid'
                       transform='matrix(1.00000000,0.00000000,0.00000000,1.00000000,15.00000000,15.00000000)'
                     ></path>
                   </svg>

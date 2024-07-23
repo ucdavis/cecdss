@@ -6,13 +6,25 @@ import {
   Label,
   InputGroup,
   Input,
-  InputGroupAddon
+  InputGroupText
 } from 'reactstrap';
 import { determineScaledCost } from '../TechnoeconomicInputs';
 import { InputModGPClass } from '../../../../models/GPClasses';
 
+// ! CHECK THE BELOW DECLARATION
+export interface ExpensesBaseYearInputModGPNew extends ExpensesBaseYearInputModGP {
+  LaborCostManuallySet: number;
+  MaintenanceCostManuallySet: number;
+  InsurancePropertyTaxManuallySet: number;
+  UtilitiesManuallySet: number;
+  ManagementManuallySet: number;
+  OtherOperatingExpensesManuallySet: number;
+  WasteTreatmentManuallySet: number;
+}
+
+
 interface Props {
-  inputs: ExpensesBaseYearInputModGP;
+  inputs: ExpensesBaseYearInputModGPNew;
   setInputs: (inputs: any) => void;
   teaInputs: any;
   teaModel: string;
@@ -163,7 +175,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/t</InputGroupAddon>
+          <InputGroupText addonType='append'>$/t</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Biomass Fuel Cost, use negative value for tipping fee
@@ -183,7 +195,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/L</InputGroupAddon>
+          <InputGroupText addonType='append'>$/L</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Dual Fuel Cost, Default assumes heavy diesel fuel
@@ -204,7 +216,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/year</InputGroupAddon>
+          <InputGroupText addonType='append'>$/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Cost of labor to operate facility</FormText>
       </FormGroup>
@@ -223,7 +235,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/year</InputGroupAddon>
+          <InputGroupText addonType='append'>$/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Cost of maintaining the plant</FormText>
       </FormGroup>
@@ -242,7 +254,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='prepend'>$/year</InputGroupAddon>
+          <InputGroupText addonType='prepend'>$/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Waste Treatment/Disposal</FormText>
       </FormGroup>
@@ -261,7 +273,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='prepend'>$/year</InputGroupAddon>
+          <InputGroupText addonType='prepend'>$/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Cost of insurance for the plant plus any property or other local taxes
@@ -282,7 +294,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/year</InputGroupAddon>
+          <InputGroupText addonType='append'>$/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Purchased utilities including power, gas, water, waste disposal
@@ -303,7 +315,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/year</InputGroupAddon>
+          <InputGroupText addonType='append'>$/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Cost for administrative personnel and other administration
@@ -324,7 +336,7 @@ export const ExpensesBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/year</InputGroupAddon>
+          <InputGroupText addonType='append'>$/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           All other expenses for operating the plant, for example natural gas

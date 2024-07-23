@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { SchemaOf } from 'yup';
+import { Schema } from 'yup';
 import {
   ElectricalFuelBaseYearInputModCHP,
   ElectricalFuelBaseYearInputModGPO,
@@ -19,7 +19,7 @@ import {
   CarbonCredit
 } from '@ucdavis/tea/input.model';
 
-export const electricalFuelBaseYearGPOSchema: SchemaOf<ElectricalFuelBaseYearInputModGPO> = yup
+export const electricalFuelBaseYearGPOSchema: Schema<ElectricalFuelBaseYearInputModGPO> = yup
   .object()
   .shape({
     CapacityFactor: yup.number().required().min(0),
@@ -30,7 +30,7 @@ export const electricalFuelBaseYearGPOSchema: SchemaOf<ElectricalFuelBaseYearInp
     NetStationEfficiency: yup.number().required().min(0)
   });
 
-export const electricalFuelBaseYearCHPSchema: SchemaOf<ElectricalFuelBaseYearInputModCHP> = yup
+export const electricalFuelBaseYearCHPSchema: Schema<ElectricalFuelBaseYearInputModCHP> = yup
   .object()
   .shape({
     CapacityFactor: yup.number().required().min(0),
@@ -42,7 +42,7 @@ export const electricalFuelBaseYearCHPSchema: SchemaOf<ElectricalFuelBaseYearInp
     NetStationEfficiency: yup.number().required().min(0)
   });
 
-export const electricalFuelBaseYearGPSchema: SchemaOf<ElectricalFuelBaseYearInputModGP> = yup
+export const electricalFuelBaseYearGPSchema: Schema<ElectricalFuelBaseYearInputModGP> = yup
   .object()
   .shape({
     AshContent: yup.number().required().min(0),
@@ -62,7 +62,7 @@ export const electricalFuelBaseYearGPSchema: SchemaOf<ElectricalFuelBaseYearInpu
     O2: yup.number().required().min(0)
   });
 
-export const escalationInflationSchema: SchemaOf<EscalationInflationInputMod> = yup
+export const escalationInflationSchema: Schema<EscalationInflationInputMod> = yup
   .object()
   .shape({
     EscalationBiomassFuel: yup.number().required().min(0),
@@ -74,7 +74,7 @@ export const escalationInflationSchema: SchemaOf<EscalationInflationInputMod> = 
     GeneralInflation: yup.number().required().min(0)
   });
 
-export const escalationInflationGPSchema: SchemaOf<EscalationInflationInputModGP> = yup
+export const escalationInflationGPSchema: Schema<EscalationInflationInputModGP> = yup
   .object()
   .shape({
     EscalationBiomassFuel: yup.number().required().min(0),
@@ -86,7 +86,7 @@ export const escalationInflationGPSchema: SchemaOf<EscalationInflationInputModGP
     GeneralInflation: yup.number().required().min(0)
   });
 
-export const expenseBaseYearGPOSchema: SchemaOf<ExpensesBaseYearInputModGPO> = yup
+export const expenseBaseYearGPOSchema: Schema<ExpensesBaseYearInputModGPO> = yup
   .object()
   .shape({
     AshDisposal: yup.number().required().min(0),
@@ -99,7 +99,7 @@ export const expenseBaseYearGPOSchema: SchemaOf<ExpensesBaseYearInputModGPO> = y
     Utilities: yup.number().required().min(0)
   });
 
-export const expenseBaseYearGPSchema: SchemaOf<ExpensesBaseYearInputModGP> = yup
+export const expenseBaseYearGPSchema: Schema<ExpensesBaseYearInputModGP> = yup
   .object()
   .shape({
     BiomassFuelCost: yup.number().required().min(0),
@@ -113,28 +113,28 @@ export const expenseBaseYearGPSchema: SchemaOf<ExpensesBaseYearInputModGP> = yup
     WasteTreatment: yup.number().required().min(0)
   });
 
-export const financingSchema: SchemaOf<FinancingInputMod> = yup.object().shape({
+export const financingSchema: Schema<FinancingInputMod> = yup.object().shape({
   CostOfEquity: yup.number().required().min(0),
   DebtRatio: yup.number().required().min(0),
   EconomicLife: yup.number().required().min(0),
   InterestRateOnDebt: yup.number().required().min(0)
 });
 
-export const heatBaseYearSchema: SchemaOf<HeatBaseYearInputMod> = yup
+export const heatBaseYearSchema: Schema<HeatBaseYearInputMod> = yup
   .object()
   .shape({
     AggregateFractionOfHeatRecovered: yup.number().required().min(0),
     AggregateSalesPriceForHeat: yup.number().required().min(0)
   });
 
-export const incomeOtherThanEnergySchema: SchemaOf<IncomeOtherThanEnergyInputMod> = yup
+export const incomeOtherThanEnergySchema: Schema<IncomeOtherThanEnergyInputMod> = yup
   .object()
   .shape({
     CapacityPayment: yup.number().required().min(0),
     InterestRateOnDebtReserve: yup.number().required().min(0)
   });
 
-export const incomeOtherThanEnergyGPSchema: SchemaOf<IncomeOtherThanEnergyInputModGP> = yup
+export const incomeOtherThanEnergyGPSchema: Schema<IncomeOtherThanEnergyInputModGP> = yup
   .object()
   .shape({
     CapacityPayment: yup.number().required().min(0),
@@ -142,33 +142,33 @@ export const incomeOtherThanEnergyGPSchema: SchemaOf<IncomeOtherThanEnergyInputM
     SalesPriceForChar: yup.number().required().min(0)
   });
 
-export const taxesSchema: SchemaOf<TaxesInputMod> = yup.object().shape({
+export const taxesSchema: Schema<TaxesInputMod> = yup.object().shape({
   FederalTaxRate: yup.number().required().min(0),
   ProductionTaxCredit: yup.number().required().min(0),
   StateTaxRate: yup.number().required().min(0)
 });
 
-export const carbonCreditSchema: SchemaOf<CarbonCredit> = yup.object().shape({
+export const carbonCreditSchema: Schema<CarbonCredit> = yup.object().shape({
   CreditPrice: yup.number().required().min(0),
   CIscore: yup.number().required().min(0),
   EnergyEconomyRatio: yup.number().required().min(0)
 });
 
-export const teaGPOSchema: SchemaOf<InputModGPO> = yup.object().shape({
+export const teaGPOSchema: Schema<InputModGPO> = yup.object().shape({
   CapitalCost: yup.number().required().min(0),
   ElectricalFuelBaseYear: electricalFuelBaseYearGPOSchema,
   EscalationInflation: escalationInflationSchema,
   ExpensesBaseYear: expenseBaseYearGPOSchema,
   Financing: financingSchema,
   IncomeOtherThanEnergy: incomeOtherThanEnergySchema,
-  TaxCreditFrac: yup.array().of(yup.number().required()),
+  TaxCreditFrac: yup.array().of(yup.number().required()).default([]).required(),
   Taxes: taxesSchema,
   CarbonCredit: carbonCreditSchema,
   IncludeCarbonCredit: yup.boolean().required(),
   FirstYear: yup.number().required().min(2016)
 });
 
-export const teaCHPSchema: SchemaOf<InputModCHP> = yup.object().shape({
+export const teaCHPSchema: Schema<InputModCHP> = yup.object().shape({
   CapitalCost: yup.number().required().min(0),
   ElectricalFuelBaseYear: electricalFuelBaseYearCHPSchema,
   EscalationInflation: escalationInflationSchema,
@@ -176,14 +176,14 @@ export const teaCHPSchema: SchemaOf<InputModCHP> = yup.object().shape({
   Financing: financingSchema,
   HeatBaseYear: heatBaseYearSchema,
   IncomeOtherThanEnergy: incomeOtherThanEnergySchema,
-  TaxCreditFrac: yup.array().of(yup.number().required()),
+  TaxCreditFrac: yup.array().of(yup.number().required()).default([]).required(),
   Taxes: taxesSchema,
   CarbonCredit: carbonCreditSchema,
   IncludeCarbonCredit: yup.boolean().required(),
   FirstYear: yup.number().required().min(2016)
 });
 
-export const teaGPSchema: SchemaOf<InputModGP> = yup.object().shape({
+export const teaGPSchema: Schema<InputModGP> = yup.object().shape({
   CapitalCost: yup.number().required().min(0),
   ElectricalFuelBaseYear: electricalFuelBaseYearGPSchema,
   EscalationInflation: escalationInflationGPSchema,
@@ -191,7 +191,7 @@ export const teaGPSchema: SchemaOf<InputModGP> = yup.object().shape({
   Financing: financingSchema,
   HeatBaseYear: heatBaseYearSchema,
   IncomeOtherThanEnergy: incomeOtherThanEnergyGPSchema,
-  TaxCreditFrac: yup.array().of(yup.number().required()),
+  TaxCreditFrac: yup.array().of(yup.number().required()).default([]).required(),
   Taxes: taxesSchema,
   CarbonCredit: carbonCreditSchema,
   IncludeCarbonCredit: yup.boolean().required(),

@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { SchemaOf, ValidationError } from 'yup';
+import { Schema, ValidationError } from 'yup';
 import {
   InputModGPO,
   InputModCHP,
@@ -9,11 +9,18 @@ import { teaGPOSchema, teaCHPSchema, teaGPSchema } from '../../models/Schemas';
 import { FrcsInputs } from '../../models/Types';
 
 // FrcsInputs
-let frcsSchema: SchemaOf<FrcsInputs> = yup.object().shape({
+let frcsSchema: Schema<FrcsInputs> = yup.object().shape({
   system: yup.string().required(),
+  treatmentid: yup.number().required().min(0),
   dieselFuelPrice: yup.number().required().min(0),
-  treatmentid: yup.number().required().min(0)
+  wageFaller: yup.number().required().min(0),
+  wageOther: yup.number().required().min(0),
+  laborBenefits: yup.number().required().min(0),
+  ppiCurrent: yup.number().required().min(0),
+  residueRecovFracWT: yup.number().required().min(0),
+  residueRecovFracCTL: yup.number().required().min(0),
 });
+
 
 export const checkFrcsValidity = async (inputs: FrcsInputs) => {
   try {

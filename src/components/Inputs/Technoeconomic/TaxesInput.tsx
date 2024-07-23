@@ -8,7 +8,7 @@ import {
   Label,
   InputGroup,
   Input,
-  InputGroupAddon
+  InputGroupText
 } from 'reactstrap';
 
 interface Props {
@@ -21,6 +21,17 @@ export const TaxesInput = (props: Props) => {
   if (!props.inputs) {
     return null;
   }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
+    const value = parseFloat(e.target.value);
+        if (!isNaN(value)) {
+      props.setInputs({
+        ...props.inputs,
+        [type]: value
+      });
+    }
+  };
+
   return (
     <>
       <FormGroup>
@@ -29,15 +40,10 @@ export const TaxesInput = (props: Props) => {
           <Input
             type='text'
             value={props.inputs.FederalTaxRate}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                FederalTaxRate: e.target.value
-              })
-            }
+            onChange={e => handleChange(e, 'FederalTaxRate')}
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Federal Tax Rate</FormText>
       </FormGroup>
@@ -47,15 +53,10 @@ export const TaxesInput = (props: Props) => {
           <Input
             type='text'
             value={props.inputs.StateTaxRate}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                StateTaxRate: e.target.value
-              })
-            }
+            onChange={e => handleChange(e, 'StateTaxRate')}
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>State Tax Rate </FormText>
       </FormGroup>
@@ -65,15 +66,10 @@ export const TaxesInput = (props: Props) => {
           <Input
             type='text'
             value={props.inputs.ProductionTaxCredit}
-            onChange={e =>
-              props.setInputs({
-                ...props.inputs,
-                ProductionTaxCredit: e.target.value
-              })
-            }
+            onChange={e => handleChange(e, 'ProductionTaxCredit')}
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/kWh</InputGroupAddon>
+          <InputGroupText>$/kWh</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Production Tax Credit</FormText>
       </FormGroup>

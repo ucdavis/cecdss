@@ -70,6 +70,7 @@ export const fakeallYearResults: AllYearsResults = {
       AnnualDebtReserveInterest: 289645.47980256303
     },
     AnnualCashFlows: [],
+    // @ts-ignore
     TotalCashFlow: {
       EquityRecovery: 76890488.15548453,
       EquityInterest: 52826335.52838144,
@@ -89,6 +90,7 @@ export const fakeallYearResults: AllYearsResults = {
       BiomassFuelCost: 194878072.81542367
     }
   },
+  // @ts-ignore
   teaInputs: {
     CapitalCost: 96256610.5084122,
     ElectricalFuelBaseYear: {
@@ -204,6 +206,7 @@ export const fakeYearlyResult: YearlyResult = {
       residueCost: 15172.227503450535,
       transportationCost: 1791.6509274392004,
       frcsResult: {
+        // @ts-ignore
         Total: {
           WeightPerAcre: 150.25886179694916,
           CostPerAcre: 2330.1316015812795,
@@ -244,6 +247,7 @@ export const fakeYearlyResult: YearlyResult = {
       residueCost: 14319.49635846138,
       transportationCost: 1992.0399096086958,
       frcsResult: {
+        // @ts-ignore
         Total: {
           WeightPerAcre: 81.48098053967682,
           CostPerAcre: 1183.6956140524437,
@@ -284,6 +288,7 @@ export const fakeYearlyResult: YearlyResult = {
       residueCost: 13420.713357078224,
       transportationCost: 1375.4408187745848,
       frcsResult: {
+        // @ts-ignore
         Total: {
           WeightPerAcre: 89.84134209310378,
           CostPerAcre: 1386.3576455637924,
@@ -516,6 +521,7 @@ export const fakeYearlyResult: YearlyResult = {
     }
   ],
   errorGeoJson: [],
+  // @ts-ignore
   cashFlow: {
     Year: 1,
     EquityRecovery: 3844524.4077742277,
@@ -555,11 +561,13 @@ export const fakeYearlyResult: YearlyResult = {
       acidification_air: 0.0013081506226568914,
       hh_particulate_air: 0.0026255782497927446,
       eutrophication_air: 0.00004138318297105911,
+      // @ts-ignore
       eutrophication_water: 0.000271921707205593,
       smog_air: 0.023928362416185765
     },
     inputs: {
       technology: 'GPO',
+      // @ts-ignore
       diesel: 0.0007251996429779244,
       gasoline: 0,
       jetfuel: 0,
