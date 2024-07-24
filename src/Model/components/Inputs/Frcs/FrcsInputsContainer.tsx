@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
+  Button,
+  Form,
+  FormGroup,
+  FormText,
   Input,
   InputGroup,
   InputGroupText,
   Label,
-  FormGroup,
-  Form,
-  FormText,
-  UncontrolledTooltip,
-  Button
+  UncontrolledTooltip
 } from 'reactstrap';
 import { FrcsInputs, Treatments } from '../../../models/Types';
 

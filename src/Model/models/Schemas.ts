@@ -1,23 +1,23 @@
-import * as yup from 'yup';
-import { Schema } from 'yup';
 import {
+  CarbonCredit,
   ElectricalFuelBaseYearInputModCHP,
-  ElectricalFuelBaseYearInputModGPO,
   ElectricalFuelBaseYearInputModGP,
-  ExpensesBaseYearInputModGPO,
-  ExpensesBaseYearInputModGP,
+  ElectricalFuelBaseYearInputModGPO,
   EscalationInflationInputMod,
   EscalationInflationInputModGP,
+  ExpensesBaseYearInputModGP,
+  ExpensesBaseYearInputModGPO,
   FinancingInputMod,
   HeatBaseYearInputMod,
   IncomeOtherThanEnergyInputMod,
   IncomeOtherThanEnergyInputModGP,
-  InputModGPO,
   InputModCHP,
   InputModGP,
-  TaxesInputMod,
-  CarbonCredit
+  InputModGPO,
+  TaxesInputMod
 } from '@ucdavis/tea/input.model';
+import * as yup from 'yup';
+import { Schema } from 'yup';
 
 export const electricalFuelBaseYearGPOSchema: Schema<ElectricalFuelBaseYearInputModGPO> = yup
   .object()

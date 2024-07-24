@@ -1,19 +1,19 @@
 import {
-  InputModGPO,
   ElectricalFuelBaseYearInputModGPO,
-  ExpensesBaseYearInputModGPO
+  ExpensesBaseYearInputModGPO,
+  InputModGPO
 } from '@ucdavis/tea/input.model';
 import {
+  ElectricalFuelBaseYearMod,
   ExpensesBaseYearModGPO,
-  IncomeOtherThanEnergyMod,
-  ElectricalFuelBaseYearMod
+  IncomeOtherThanEnergyMod
 } from '@ucdavis/tea/output.model';
 import {
-  TaxesInputModClass,
+  CarbonCreditClass,
+  EscalationInflationInputModClass,
   FinancingInputModClass,
   IncomeOtherThanEnergyInputModClass,
-  EscalationInflationInputModClass,
-  CarbonCreditClass
+  TaxesInputModClass
 } from './TEASharedClasses';
 
 export class InputModGPOClass implements InputModGPO {

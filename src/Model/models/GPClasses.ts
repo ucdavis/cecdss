@@ -1,15 +1,15 @@
 import {
-  InputModGP,
+  ElectricalFuelBaseYearInputModGP,
+  EscalationInflationInputModGP,
   ExpensesBaseYearInputModGP,
   FinancingInputMod,
   IncomeOtherThanEnergyInputModGP,
-  EscalationInflationInputModGP,
-  ElectricalFuelBaseYearInputModGP
+  InputModGP
 } from '@ucdavis/tea/input.model';
 import {
+  ElectricalFuelBaseYearModGP,
   ExpensesBaseYearModGP,
-  IncomeOtherThanEnergyModGP,
-  ElectricalFuelBaseYearModGP
+  IncomeOtherThanEnergyModGP
 } from '@ucdavis/tea/output.model';
 import {
   CarbonCreditClass,

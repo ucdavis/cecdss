@@ -1,15 +1,15 @@
+import { FrcsOutputs } from '@ucdavis/frcs/out/model';
+import { LcaInputs, LcaOutputs } from '@ucdavis/lca/model';
+import { InputModCHP, InputModGP, InputModGPO } from '@ucdavis/tea/input.model';
 import {
-  OutputModCHP,
-  OutputModGPO,
-  OutputModGP,
+  CashFlow,
   CashFlowCHP,
   CashFlowGP,
-  CashFlow
+  OutputModCHP,
+  OutputModGP,
+  OutputModGPO
 } from '@ucdavis/tea/output.model';
-import { FrcsOutputs } from '@ucdavis/frcs/out/model';
-import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
-import { Feature, FeatureCollection, GeoJsonObject, Point } from 'geojson';
-import { LcaInputs, LcaOutputs } from '@ucdavis/lca/model';
+import { Feature } from 'geojson';
 
 export interface RequestParams {
   facilityLat: number;
