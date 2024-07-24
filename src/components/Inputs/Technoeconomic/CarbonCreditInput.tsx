@@ -6,7 +6,7 @@ import {
   Label,
   InputGroup,
   Input,
-  InputGroupAddon
+  InputGroupText
 } from 'reactstrap';
 
 interface Props {
@@ -48,7 +48,7 @@ export const CarbonCreditInput = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/MT</InputGroupAddon>
+          <InputGroupText>$/MT</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Low Carbon Fuel Standard (LCFS) credit price
@@ -68,7 +68,7 @@ export const CarbonCreditInput = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Different vehicles have different fuel efficiencies. The EER allows

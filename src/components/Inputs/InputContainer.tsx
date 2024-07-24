@@ -7,8 +7,7 @@ import {
   Label,
   Input,
   InputGroup,
-  InputGroupAddon,
-  InputGroupText
+  InputGroupText,
 } from 'reactstrap';
 import { FrcsInputs, MapCoordinates, TransportInputs } from '../../models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
@@ -83,9 +82,9 @@ export const InputContainer = (props: Props) => {
           <FormGroup>
             <Label>Facility Coordinates</Label>
             <InputGroup>
-              <InputGroupAddon addonType='prepend'>
+              <InputGroupText addonType='prepend'>
                 <InputGroupText>lat</InputGroupText>
-              </InputGroupAddon>
+              </InputGroupText>
               <Input
                 type='number'
                 value={props.facilityCoordinates.lat.toString()}
@@ -99,9 +98,9 @@ export const InputContainer = (props: Props) => {
               />
             </InputGroup>
             <InputGroup>
-              <InputGroupAddon addonType='prepend'>
+              <InputGroupText addonType='prepend'>
                 <InputGroupText>lng</InputGroupText>
-              </InputGroupAddon>
+              </InputGroupText>
               <Input
                 type='number'
                 value={props.facilityCoordinates.lng.toString()}
@@ -137,9 +136,9 @@ export const InputContainer = (props: Props) => {
             <FormGroup>
               <Label>Biomass Coordinates</Label>
               <InputGroup>
-                <InputGroupAddon addonType='prepend'>
+                <InputGroupText addonType='prepend'>
                   <InputGroupText>lat</InputGroupText>
-                </InputGroupAddon>
+                </InputGroupText>
                 <Input
                   type='number'
                   value={props.biomassCoordinates.lat.toString()}
@@ -153,9 +152,9 @@ export const InputContainer = (props: Props) => {
                 />
               </InputGroup>
               <InputGroup>
-                <InputGroupAddon addonType='prepend'>
+                <InputGroupText addonType='prepend'>
                   <InputGroupText>lng</InputGroupText>
-                </InputGroupAddon>
+                </InputGroupText>
                 <Input
                   type='number'
                   value={props.biomassCoordinates.lng.toString()}

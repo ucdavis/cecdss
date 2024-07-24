@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   Input,
   InputGroup,
-  InputGroupAddon,
+  InputGroupText,
   Label,
   FormGroup,
   Form,
@@ -37,6 +37,7 @@ export const FrcsInputsContainer = (props: Props) => {
             <FormGroup>
               <Label>Forest Treatment</Label>
               <Input
+                bsSize="sm"
                 type='select'
                 value={props.inputs.treatmentid}
                 onChange={e =>
@@ -191,7 +192,7 @@ export const FrcsInputsContainer = (props: Props) => {
                   }
                   disabled={props.disabled}
                 />
-                <InputGroupAddon addonType='append'>$/gal</InputGroupAddon>
+                <InputGroupText>$/gal</InputGroupText>
               </InputGroup>
               <FormText color='muted'>
                 The default reflects 2021 wholesale diesel price and retail
@@ -213,7 +214,7 @@ export const FrcsInputsContainer = (props: Props) => {
                   }
                   disabled={props.disabled}
                 />
-                <InputGroupAddon addonType='append'>$/hour</InputGroupAddon>
+                <InputGroupText>$/hour</InputGroupText>
               </InputGroup>
             </FormGroup>
             <FormGroup>
@@ -231,7 +232,7 @@ export const FrcsInputsContainer = (props: Props) => {
                   }
                   disabled={props.disabled}
                 />
-                <InputGroupAddon addonType='append'>$/hour</InputGroupAddon>
+                <InputGroupText>$/hour</InputGroupText>
               </InputGroup>
             </FormGroup>
             <FormGroup>
@@ -250,7 +251,7 @@ export const FrcsInputsContainer = (props: Props) => {
                   }
                   disabled={props.disabled}
                 />
-                <InputGroupAddon addonType='append'>%</InputGroupAddon>
+                <InputGroupText>%</InputGroupText>
               </InputGroup>
             </FormGroup>
             <FormGroup>
@@ -286,7 +287,7 @@ export const FrcsInputsContainer = (props: Props) => {
                   }
                   disabled={props.disabled}
                 />
-                <InputGroupAddon addonType='append'>%</InputGroupAddon>
+                <InputGroupText>%</InputGroupText>
               </InputGroup>
             </FormGroup>
             <FormGroup>
@@ -307,7 +308,7 @@ export const FrcsInputsContainer = (props: Props) => {
                   }
                   disabled={props.disabled}
                 />
-                <InputGroupAddon addonType='append'>%</InputGroupAddon>
+                <InputGroupText>%</InputGroupText>
               </InputGroup>
             </FormGroup>
           </>

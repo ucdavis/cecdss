@@ -3,7 +3,7 @@ import {
   Input,
   Label,
   InputGroup,
-  InputGroupAddon,
+  InputGroupText,
   FormText,
   FormGroup
 } from 'reactstrap';
@@ -165,7 +165,7 @@ export const CombinedHeatAndPower = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='prepend'>$</InputGroupAddon>
+          <InputGroupText>$</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Total installed cost of plant, including truck unloading cost

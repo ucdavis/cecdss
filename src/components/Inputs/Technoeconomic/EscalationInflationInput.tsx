@@ -8,7 +8,7 @@ import {
   Label,
   InputGroup,
   Input,
-  InputGroupAddon
+  InputGroupText
 } from 'reactstrap';
 
 interface Props {
@@ -37,7 +37,7 @@ export const EscalationInflationInput = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Overall inflation rate used to adjust current dollar result to
@@ -58,7 +58,7 @@ export const EscalationInflationInput = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
+          <InputGroupText>%/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Rate at which biomass fuel cost escalates over time
@@ -78,7 +78,7 @@ export const EscalationInflationInput = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Specified index for production tax credit
@@ -98,7 +98,7 @@ export const EscalationInflationInput = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
+          <InputGroupText>%/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Escalation rate applied to heat sales</FormText>
       </FormGroup>
@@ -116,7 +116,7 @@ export const EscalationInflationInput = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
+          <InputGroupText>%/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Rate at which other expenses escalate over time

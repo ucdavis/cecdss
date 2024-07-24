@@ -6,7 +6,7 @@ import {
   Label,
   InputGroup,
   Input,
-  InputGroupAddon
+  InputGroupText
 } from 'reactstrap';
 
 interface Props {
@@ -35,7 +35,7 @@ export const IncomeOtherThanEnergyInput = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>$/kW-year</InputGroupAddon>
+          <InputGroupText>$/kW-year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Payment made from power purchaser if plant can guarantee capacity
@@ -56,7 +56,7 @@ export const IncomeOtherThanEnergyInput = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%/year</InputGroupAddon>
+          <InputGroupText>%/year</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Interest income earned on reserve account if financing institution

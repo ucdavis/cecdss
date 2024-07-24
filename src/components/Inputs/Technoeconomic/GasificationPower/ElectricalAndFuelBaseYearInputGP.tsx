@@ -6,7 +6,7 @@ import {
   Label,
   InputGroup,
   Input,
-  InputGroupAddon
+  InputGroupText
 } from 'reactstrap';
 
 interface Props {
@@ -35,7 +35,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
+          <InputGroupText>kWe</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Total gross generating capacity</FormText>
       </FormGroup>
@@ -53,7 +53,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
+          <InputGroupText>kWe</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Net power available for on-site use or grid sales
@@ -73,7 +73,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Annual fraction that rated capacity is available from plant
@@ -93,7 +93,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>% wet basis</InputGroupAddon>
+          <InputGroupText>% wet basis</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Moisture Content of Biomass Feedstock
@@ -113,7 +113,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           HHV Efficiency of Gasification System--Biomass to Clean Gas
@@ -133,7 +133,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Net HHV Efficiency of Power Generation incl. Dual Fuel
@@ -153,7 +153,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Dual Fuel -{'>'} Fraction of Input Energy
@@ -173,7 +173,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>% by volume, dry</InputGroupAddon>
+          <InputGroupText>% by volume, dry</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Clean Gas Composition -{'>'} CO</FormText>
       </FormGroup>
@@ -191,7 +191,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>% by volume, dry</InputGroupAddon>
+          <InputGroupText>% by volume, dry</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Clean Gas Composition -{'>'} H2</FormText>
       </FormGroup>
@@ -209,7 +209,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>% by volume, dry</InputGroupAddon>
+          <InputGroupText>% by volume, dry</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Clean Gas Composition -{'>'} Hydrocarbons (as CH4)
@@ -229,7 +229,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>% by volume, dry</InputGroupAddon>
+          <InputGroupText>% by volume, dry</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Clean Gas Composition -{'>'} CO2</FormText>
       </FormGroup>
@@ -247,7 +247,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>% by volume, dry</InputGroupAddon>
+          <InputGroupText>% by volume, dry</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Clean Gas Composition -{'>'} O2</FormText>
       </FormGroup>
@@ -265,7 +265,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>kJ/kg</InputGroupAddon>
+          <InputGroupText>kJ/kg</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Higher Heating Value of Biomass Feedstock to Gasifier
@@ -285,7 +285,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>% dry matter</InputGroupAddon>
+          <InputGroupText>% dry matter</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Ash Content of Biomass</FormText>
       </FormGroup>
@@ -303,7 +303,7 @@ export const ElectricalAndFuelBaseYearInputGP = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>% dry basis</InputGroupAddon>
+          <InputGroupText>% dry basis</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Carbon Concentration of Char</FormText>
       </FormGroup>

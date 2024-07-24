@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   Input,
   InputGroup,
-  InputGroupAddon,
+  InputGroupText,
   Label,
   FormGroup,
   Form
@@ -42,7 +42,7 @@ export const TransportInputsContainer = (props: Props) => {
                 }
                 disabled={props.disabled}
               />
-              <InputGroupAddon addonType='append'>$/hour</InputGroupAddon>
+              <InputGroupText>$/hour</InputGroupText>
             </InputGroup>
           </FormGroup>
           <FormGroup>
@@ -61,7 +61,7 @@ export const TransportInputsContainer = (props: Props) => {
                 }
                 disabled={props.disabled}
               />
-              <InputGroupAddon addonType='append'>%</InputGroupAddon>
+              <InputGroupText>%</InputGroupText>
             </InputGroup>
           </FormGroup>
           <FormGroup>
@@ -79,7 +79,7 @@ export const TransportInputsContainer = (props: Props) => {
                 }
                 disabled={props.disabled}
               />
-              <InputGroupAddon addonType='append'>$/mile</InputGroupAddon>
+              <InputGroupText>$/mile</InputGroupText>
             </InputGroup>
           </FormGroup>
         </>

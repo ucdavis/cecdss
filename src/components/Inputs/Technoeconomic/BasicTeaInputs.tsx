@@ -5,7 +5,7 @@ import {
   Label,
   InputGroup,
   Input,
-  InputGroupAddon
+  InputGroupText
 } from 'reactstrap';
 
 interface Props {
@@ -40,7 +40,7 @@ export const BasicTeaInputs = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>kWe</InputGroupAddon>
+          <InputGroupText>kWe</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Net power available for on-site use or grid sales
@@ -60,7 +60,7 @@ export const BasicTeaInputs = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>%</InputGroupAddon>
+          <InputGroupText>%</InputGroupText>
         </InputGroup>
         <FormText color='muted'>
           Annual fraction that rated capacity is available from plant
@@ -80,7 +80,7 @@ export const BasicTeaInputs = (props: Props) => {
             }
             disabled={props.disabled}
           />
-          <InputGroupAddon addonType='append'>% wet basis</InputGroupAddon>
+          <InputGroupText>% wet basis</InputGroupText>
         </InputGroup>
         <FormText color='muted'>Moisture Content of Biomass Feedstock</FormText>
       </FormGroup>
@@ -99,7 +99,7 @@ export const BasicTeaInputs = (props: Props) => {
               }
               disabled={props.disabled}
             />
-            <InputGroupAddon addonType='append'>kJ/kg</InputGroupAddon>
+            <InputGroupText>kJ/kg</InputGroupText>
           </InputGroup>
           <FormText color='muted'>
             Higher heating value (heat of combustion) of fuel expressed on a dry
