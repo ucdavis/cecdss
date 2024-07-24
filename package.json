@@ -23,6 +23,8 @@
     "isomorphic-fetch": "^3.0.0",
     "leaflet": "^1.9.4",
     "leaflet-easyprint": "^2.1.9",
+    "postcss": "^8.4.39",
+    "postcss-cli": "^11.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-esri-leaflet": "^2.0.1",
@@ -42,7 +44,9 @@
     "dev": "cross-env PORT=3001 react-scripts start",
     "build": "node node_modules/react-scripts/scripts/build.js",
     "test": "node node_modules/react-scripts/scripts/test.js",
-    "eject": "node node_modules/react-scripts/scripts/eject.js"
+    "eject": "node node_modules/react-scripts/scripts/eject.js",
+    "build:styles": "postcss src/Styles/index.css -o src/Styles/App.css",
+    "prebuild": "npm run build:styles"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -77,6 +81,7 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "jest-canvas-mock": "^2.3.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "tailwindcss": "^3.4.6"
   }
 }
