@@ -56,7 +56,7 @@ export const ClusterTransportationRoutesLayer = (props: Props) => {
   ]);
 
   if (geoJson) {
-    return <GeoJSON color="orange" key={`geoyear-${currentComputedYear}`} data={geoJson} />;
+    return <GeoJSON style={() => ({ color: 'orange'})} key={`geoyear-${currentComputedYear}`} data={geoJson} />;
   } else {
     return <></>;
   }

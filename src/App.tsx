@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { MapContainer } from './components/Map/MapContainer';
+import { MapContainerComponent } from './components/Map/MapContainer';
 
 const App = () => {
   return (
     <div className='App'>
-      <MapContainer />
+      <MapContainerComponent />
     </div>
   );
 };

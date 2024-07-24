@@ -56,7 +56,7 @@ export const ClusterTransportationMoveInLayer = (props: Props) => {
   ]);
 
   if (geoJson) {
-    return <GeoJSON color="purple" key={`geoyear-movein-${currentComputedYear}`} data={geoJson} />;
+    return <GeoJSON style={() => ({ color: 'purple'})} key={`geoyear-movein-${currentComputedYear}`} data={geoJson} />;
   } else {
     return <></>;
   }

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet-easyprint';
-import { useLeaflet } from 'react-leaflet';
+import { useMap } from 'react-leaflet';
 
 export const PrintControl = () => {
-  const { map } = useLeaflet();
+  const map = useMap ();
 
   useEffect(() => {
     (L as any) // since L types do not have our easyPrint extension, we'll just cast as any type

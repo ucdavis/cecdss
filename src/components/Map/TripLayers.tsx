@@ -38,7 +38,7 @@ export const TripLayers = (props: Props) => {
   }, [props.selectedYearIndex, props.yearlyGeoJson, props.years.length]);
 
   if (currentGeoJson) {
-    return <GeoJSON color="green" key={`trip-${props.selectedYearIndex}`} data={currentGeoJson} />;
+    return <GeoJSON style={() => ({ color: 'green'})} key={`trip-${props.selectedYearIndex}`} data={currentGeoJson} />;
   }
 
   // in case we don't have any geojson, which shouldn't be possible unless there are no active trips for the selected year

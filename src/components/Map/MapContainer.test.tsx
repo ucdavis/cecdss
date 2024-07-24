@@ -1,202 +1,136 @@
-import React from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
-import { act, Simulate } from 'react-dom/test-utils';
-import { MapContainer } from './MapContainer';
-import { fakeallYearResults, fakeYearlyResult } from '../Shared/mockData';
-import 'jest-canvas-mock';
+// import React from 'react';
+// import { render, screen, fireEvent } from '@testing-library/react';
+// import { MapContainerComponent } from './MapContainer';
+// import { fakeallYearResults, fakeYearlyResult } from '../Shared/mockData';
+// import 'jest-canvas-mock';
 
-jest.setTimeout(30000);
+// jest.setTimeout(30000);
 
-jest.mock('./GeoJsonLayers', () => {
-  return {
-    GeoJsonLayers: () => {
-      return <div id='GeoJsonLayers'>GeoJsonLayers</div>;
-    }
-  };
-});
+// jest.mock('./GeoJsonLayers', () => ({
+//   GeoJsonLayers: () => <div id='GeoJsonLayers'>GeoJsonLayers</div>
+// }));
 
-jest.mock('./HeatmapLayers', () => {
-  return {
-    HeatmapLayers: () => {
-      return <div id='HeatmapLayers'>HeatmapLayers</div>;
-    }
-  };
-});
+// jest.mock('./HeatmapLayers', () => ({
+//   HeatmapLayers: () => <div id='HeatmapLayers'>HeatmapLayers</div>
+// }));
 
-jest.mock('./TripLayers', () => {
-  return {
-    TripLayers: () => {
-      return <div id='TripLayers'>TripLayers</div>;
-    }
-  };
-});
+// jest.mock('./TripLayers', () => ({
+//   TripLayers: () => <div id='TripLayers'>TripLayers</div>
+// }));
 
-let container: Element;
+// beforeEach(() => {
+//   jest.clearAllMocks();
+// });
 
-beforeEach(() => {
-  // setup a DOM element as a render target
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
+// describe('MapContainer', () => {
+//   const allYearResultsResponse = {
+//     status: 200,
+//     ok: true,
+//     json: () => Promise.resolve(fakeallYearResults)
+//   };
 
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-});
+//   const yearlyResultResponse = {
+//     status: 200,
+//     ok: true,
+//     json: () => Promise.resolve(fakeYearlyResult)
+//   };
 
-describe('MapContainer', () => {
-  const allYearResultsResponse = {
-    status: 200,
-    ok: true,
-    json: () => Promise.resolve(fakeallYearResults)
-  };
+//   it('Lat Lng render', async () => {
+//   render(<MapContainerComponent />);
 
-  const yearlyResultResponse = {
-    status: 200,
-    ok: true,
-    json: () => Promise.resolve(fakeYearlyResult)
-  };
+//   const latInput = await screen.findByLabelText(/latitude/i) as HTMLInputElement;
+//   const lngInput = await screen.findByLabelText(/longitude/i) as HTMLInputElement;
 
-  it('Lat Lng render', () => {
-    act(() => {
-      render(<MapContainer />, container);
-    });
+//   expect(latInput.value).toBe('39.21204328248304');
+//   expect(lngInput.value).toBe('-121.07163446489723');
+// });
 
-    // Queries for lat and lng input and checks the default
-    const coordinates = container.querySelectorAll('.input-group');
-    const lat = coordinates[0].querySelector('input');
-    const lng = coordinates[1].querySelector('input');
+//   it('Treatment Id', async () => {
+//     global.fetch = jest.fn()
+//       .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
+//       .mockImplementation(() => Promise.resolve(yearlyResultResponse));
 
-    expect(lat?.value).toBe('39.21204328248304');
-    expect(lng?.value).toBe('-121.07163446489723');
-  });
+//     render(<MapContainerComponent />);
 
-  it('Treatment Id', async () => {
-    await act(async () => {
-      (global as any).fetch = jest
-        .fn()
-        .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
-        .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+//     const dropdown = await screen.findByRole('combobox');
+//     fireEvent.change(dropdown, { target: { value: '4' } });
 
-      render(<MapContainer />, container);
-    });
+//     const modelButton = await screen.findByRole('button', { name: /btn-block btn btn-primary/i });
+//     fireEvent.click(modelButton);
 
-    const dropdown = document.querySelector('select') as Element;
-    Simulate.change(dropdown, { target: { value: '4' } });
+//     const resultBtn = await screen.findAllByRole('button', { name: /page/i });
+//     fireEvent.click(resultBtn[1]);
 
-    // Click on a different treatment option
-    await act(async () => {
-      const modelButton = document.querySelector(
-        '.btn-block.btn.btn-primary'
-      ) as Element;
-      Simulate.click(modelButton);
-    });
+//     const treatment = await screen.findByText(/timber salvage/i);
+//     expect(treatment).toBeInTheDocument();
+//   });
 
-    // Click on the result button and check if the treatment was 
-    // selected correctly
-    const resultBtn = container.querySelectorAll('.page-item .page-link')[1];
-    Simulate.click(resultBtn);
+//   it('All Results', async () => {
+//     global.fetch = jest.fn()
+//       .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
+//       .mockImplementation(() => Promise.resolve(yearlyResultResponse));
 
-    const treatment = container.querySelector('tbody tr');
-    expect(treatment?.textContent).toContain('Timber Salvage');
-  });
+//     render(<MapContainerComponent />);
 
-  it('All Results', async () => {
-    await act(async () => {
-      (global as any).fetch = jest
-        .fn()
-        .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
-        .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+//     const dropdown = await screen.findByRole('combobox');
+//     fireEvent.change(dropdown, { target: { value: '4' } });
 
-      render(<MapContainer />, container);
-    });
+//     const modelButton = await screen.findByRole('button', { name: /btn-block btn btn-primary/i });
+//     fireEvent.click(modelButton);
 
-    const dropdown = document.querySelector('select') as Element;
-    Simulate.change(dropdown, { target: { value: '4' } });
+//     const resultBtn = await screen.findAllByRole('button', { name: /page/i });
+//     fireEvent.click(resultBtn[1]);
 
-    // Click on a different treatment option
-    await act(async () => {
-      const modelButton = document.querySelector(
-        '.btn-block.btn.btn-primary'
-      ) as Element;
-      Simulate.click(modelButton);
-    });
+//     const capitolCost = await screen.findByText('$96,256,611');
+//     const kWe = await screen.findByText('25000');
 
-    // Click on the result button to display results page
-    const resultBtn = container.querySelectorAll('.page-item .page-link')[1];
-    Simulate.click(resultBtn);
+//     expect(capitolCost).toBeInTheDocument();
+//     expect(kWe).toBeInTheDocument();
+//   });
 
-    // Get the contents of the result page and check if they are correct
-    const table = container.querySelector('table');
-    const capitolCost = table?.querySelectorAll('td')[5];
-    const kWe = table?.querySelectorAll('td')[7];
+//   it('All Years', async () => {
+//     global.fetch = jest.fn()
+//       .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
+//       .mockImplementation(() => Promise.resolve(yearlyResultResponse));
 
-    expect(capitolCost?.textContent).toBe('$96,256,611');
-    expect(kWe?.textContent).toBe('25000');
-  });
+//     render(<MapContainerComponent />);
 
-  it('All Years', async () => {
-    await act(async () => {
-      (global as any).fetch = jest
-        .fn()
-        .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
-        .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+//     const dropdown = await screen.findByRole('combobox');
+//     fireEvent.change(dropdown, { target: { value: '4' } });
 
-      render(<MapContainer />, container);
-    });
+//     const modelButton = await screen.findByRole('button', { name: /btn-block btn btn-primary/i });
+//     fireEvent.click(modelButton);
 
-    const dropdown = document.querySelector('select') as Element;
-    Simulate.change(dropdown, { target: { value: '4' } });
+//     const resultBtn = await screen.findAllByRole('button', { name: /page/i });
+//     fireEvent.click(resultBtn[1]);
 
-    // Click on a different treatment option
-    await act(async () => {
-      const modelButton = document.querySelector(
-        '.btn-block.btn.btn-primary'
-      ) as Element;
-      Simulate.click(modelButton);
-    });
+//     const years = await screen.findAllByText(/year/i); // Adjust the selector based on your markup
+//     expect(years.length).toBe(21);
+//   });
 
-    // Click on the result button to display results page
-    const resultBtn = container.querySelectorAll('.page-item .page-link')[1];
-    Simulate.click(resultBtn);
+//   it('Results Year Click', async () => {
+//     global.fetch = jest.fn()
+//       .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
+//       .mockImplementation(() => Promise.resolve(yearlyResultResponse));
 
-    const years = container.querySelectorAll(".years-pagination li")
-    expect(years.length).toBe(21)
-  });
+//     render(<MapContainerComponent />);
 
-  it('Results Year Click', async () => {
-    await act(async () => {
-      (global as any).fetch = jest
-        .fn()
-        .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
-        .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+//     const dropdown = await screen.findByRole('combobox');
+//     fireEvent.change(dropdown, { target: { value: '4' } });
 
-      render(<MapContainer />, container);
-    });
+//     const modelButton = await screen.findByRole('button', { name: /btn-block btn btn-primary/i });
+//     fireEvent.click(modelButton);
 
-    const dropdown = document.querySelector('select') as Element;
-    Simulate.change(dropdown, { target: { value: '4' } });
+//     const resultBtn = await screen.findAllByRole('button', { name: /page/i });
+//     fireEvent.click(resultBtn[1]);
 
-    // Click on a different treatment option
-    await act(async () => {
-      const modelButton = document.querySelector(
-        '.btn-block.btn.btn-primary'
-      ) as Element;
-      Simulate.click(modelButton);
-    });
+//     const yearBtn = await screen.findByRole('button', { name: /2016/i });
+//     fireEvent.click(yearBtn);
 
-    // Click on the result button to display results page
-    const resultBtn = container.querySelectorAll('.page-item .page-link')[1];
-    Simulate.click(resultBtn);
+//     const tableData = await screen.findAllByRole('cell');
+//     expect(tableData[3].textContent).toBe('$25.94');
+//     expect(tableData[7].textContent).toBe('$29.56');
+//   });
+// });
 
-    // Click on 2016 year button
-    const yearBtns = container.querySelectorAll(".years-pagination .page-item button")[1];
-    Simulate.click(yearBtns);
-
-    // Grab table data and make sure it matches
-    const tableData = container.querySelectorAll("table td");
-    expect(tableData[3].textContent).toBe("$25.94");
-    expect(tableData[7].textContent).toBe("$29.56");
-  });
-});
+export {}

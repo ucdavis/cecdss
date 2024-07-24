@@ -1,14 +1,15 @@
 import React, { createRef, useState, useEffect } from 'react';
 import {
-  Map,
+  MapContainer,
   TileLayer,
   Marker,
   LayersControl,
-  ScaleControl
+  ScaleControl,
+  useMapEvents
 } from 'react-leaflet';
 import 'esri-leaflet-renderers'; // allows rendering feature layers using their defined renderers
-import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet/v2';
-import EsriLeafletGeoSearch from 'react-esri-leaflet/v2/plugins/EsriLeafletGeoSearch';
+import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet';
+import EsriLeafletGeoSearch from "react-esri-leaflet/plugins/EsriLeafletGeoSearch";
 import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { FeatureCollection, Feature } from 'geojson';
 import { InputContainer } from '../Inputs/InputContainer';
@@ -33,7 +34,7 @@ import { InputModGPOClass } from '../../models/GPOClasses';
 import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
 import { convertGeoJSON } from '../Shared/util';
-import { HeatmapLayers } from './HeatmapLayers';
+// import { HeatmapLayers } from './HeatmapLayers';
 import { PaginationItem, PaginationLink, Button, Pagination } from 'reactstrap';
 import { ResultsContainer } from '../Results/ResultsContainer';
 import { GeoJsonLayers } from './GeoJsonLayers';
@@ -64,6 +65,25 @@ import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInL
 
 const { BaseLayer } = LayersControl;
 
+const MapClickHandler = ({ setBiomassCoordinates, setFacilityCoordinates, selectBiomassCoordinates, loading, yearlyResults }: any) => {
+  useMapEvents({
+    click(e: any) {
+      if (!loading && yearlyResults.length === 0) {
+        // always set the biomass coordinates
+        setBiomassCoordinates(e.latlng);
+
+        // only change facility coords if we are not focusing on biomass coords
+        if (selectBiomassCoordinates === false) {
+          setFacilityCoordinates(e.latlng);
+        }
+      }
+    }
+  });
+
+  return null;
+};
+
+
 const processDieselFuelPrice = (price: string | number): number => {
   if (typeof price === 'string') {
     const parsedValue = parseFloat(price.replace(/,/g, ''));
@@ -77,11 +97,10 @@ const processDieselFuelPrice = (price: string | number): number => {
   return price;
 };
 
-export const MapContainer = () => {
+export const MapContainerComponent = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isClusterZone, setIsClusterZone] = useState(true);
   const [isErrorZone, setIsErrorZone] = useState(true);
-  // used for collapse const [isOpen, setIsOpen] = useState(true);
   const [loading, toggleLoading] = useState<boolean>(false);
   const [hasProcessingError, setHasProcessingError] = useState<boolean>(false);
   const [allYearResults, setAllYearResults] = useState<AllYearsResults>();
@@ -199,7 +218,7 @@ export const MapContainer = () => {
     }
   }, [selectBiomassCoordinates, facilityCoordinates]);
 
-  let mapRef: any = createRef<Map>();
+  let mapRef: any = createRef<typeof MapContainer>();
 
   const cleanTeaInput = (inputs: any) => {
     for (var key in inputs) {
@@ -618,16 +637,6 @@ export const MapContainer = () => {
               </PaginationItem>
             </Pagination>
           </div>
-          {/* COLLAPSE OPTION <div className='layers layers-toggle'>
-            <div
-              className='cardheader d-flex align-items-center justify-content-between'
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <h3>View Options</h3>
-              <p>{layerIcon()}</p>
-            </div>
-            <Collapse isOpen={isOpen}></Collapse>
-          </div> */}
         </div>
       )}
       <div className='layers-container'>
@@ -692,23 +701,20 @@ export const MapContainer = () => {
           />
         )}
       </div>
-      <Map
+      <MapContainer
         ref={mapRef}
-        onClick={(e: any) => {
-          if (!loading && yearlyResults.length === 0) {
-            // always set the biomass coordinates
-            setBiomassCoordinates(e.latlng);
-
-            // only change facility coords if we are not focusing on biomass coords
-            if (selectBiomassCoordinates === false) {
-              setFacilityCoordinates(e.latlng);
-            }
-          }
-        }}
         bounds={bounds}
         zoom={zoom}
         center={center}
+        style={{ height: '100%', width: '100%' }}
       >
+        <MapClickHandler
+          setBiomassCoordinates={setBiomassCoordinates}
+          setFacilityCoordinates={setFacilityCoordinates}
+          selectBiomassCoordinates={selectBiomassCoordinates}
+          loading={loading}
+          yearlyResults={yearlyResults}
+        />
         <ScaleControl />
         <LayersControl position='bottomleft'>
           <BaseLayer checked name='Outdoors'>
@@ -719,7 +725,7 @@ export const MapContainer = () => {
           </BaseLayer>
         </LayersControl>
         <TileLayer attribution={attribution} url={mapboxTiles} />
-        <EsriLeafletGeoSearch
+        {/* <EsriLeafletGeoSearch
           useMapBounds={false}
           position='topleft'
           eventHandlers={{
@@ -728,7 +734,7 @@ export const MapContainer = () => {
                 setFacilityCoordinates(r.results[0].latlng);
             }
           }}
-        />
+        /> */}
         <PrintControl />
         {externalLayers.includes('transmission') && (
           <FeatureLayer
@@ -805,13 +811,13 @@ export const MapContainer = () => {
                 selectedYearIndex={selectedYearIndex}
               />
             )}
-            {showHeatmap && (
+            {/* {showHeatmap && (
               <HeatmapLayers
                 years={years}
                 yearlyGeoJson={geoJsonResults}
                 selectedYearIndex={selectedYearIndex}
               />
-            )}
+            )} */}
             {showGeoJson && (
               <GeoJsonLayers
                 years={years}
@@ -843,7 +849,7 @@ export const MapContainer = () => {
           biomassCoordinates.lng !== facilityCoordinates.lng && (
             <CustomMarker icon='biomass' position={biomassCoordinates} />
           )}
-      </Map>
+      </MapContainer>
     </div>
   );
 };

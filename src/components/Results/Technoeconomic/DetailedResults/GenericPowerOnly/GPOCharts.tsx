@@ -20,9 +20,10 @@ export const GPOCharts = (props: Props) => {
       <div className='chart'>
         <VictoryChart height={400} width={400}>
           <VictoryLine
-            data={props.results.AnnualCashFlows}
-            x={(d: CashFlow) => d.IncomeCapacity}
-            y={(d: CashFlow) => d.Year}
+            data={props.results.AnnualCashFlows.map((cashFlow: CashFlow) => ({
+              x: cashFlow.Year,
+              y: cashFlow.IncomeCapacity,
+            }))}
             animate={{
               duration: 2000,
               onLoad: { duration: 1000 }
