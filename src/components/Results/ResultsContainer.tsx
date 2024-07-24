@@ -42,7 +42,9 @@ export const ResultsContainer = (props: Props) => {
         onClick={() => props.setSelectedYearIndex(i)}
       >
         {year}
-        {!props.yearlyResults[i] && <Spinner color='primary' size='sm' />}
+        {!props.yearlyResults[i] && <Spinner size="sm" color='primary'>
+              {''}
+            </Spinner>}
       </PaginationLink>
     </PaginationItem>
   ));

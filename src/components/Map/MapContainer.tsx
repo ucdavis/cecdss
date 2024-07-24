@@ -565,7 +565,7 @@ export const MapContainerComponent = () => {
               icon={showTransportationGeoJson ? faEye : faEyeSlash}
             />
           </Button>
-          <Button
+          {/* <Button
             onClick={() => {
               toggleHeatmap(h => !h);
             }}
@@ -576,7 +576,7 @@ export const MapContainerComponent = () => {
           >
             <span>{!showHeatmap ? 'Show Heatmap' : 'Hide Heatmap'}</span>
             <FontAwesomeIcon icon={showHeatmap ? faEye : faEyeSlash} />
-          </Button>
+          </Button> */}
           <Button
             onClick={() => {
               setIsErrorZone(!isErrorZone);
