@@ -130,10 +130,10 @@ export const MapContainerComponent = () => {
     toggleTransportationGeoJson
   ] = useState<boolean>(false);
 
-  const [zoom, setZoom] = useState<number>(0);
+  const [zoom, setZoom] = useState<number>(8);
   const [center, setCenter] = useState<MapCoordinates>({
-    lat: 0,
-    lng: 0
+    lat: 37.87439641742907,
+    lng: -120.47592259245009
   });
   const [bounds, setBounds] = useState<LatLngBoundsExpression>([
     [40.1, -122.5],
