@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './Styles/App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { MapContainerComponent } from './Model/components/Map/MapContainer';
 import Home from './Landing/Home'

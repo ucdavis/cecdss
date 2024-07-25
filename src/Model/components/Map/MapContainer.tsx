@@ -62,6 +62,7 @@ import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { CustomMarker } from './CustomMarker';
 import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
 import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
+import { ATTRIBUTION, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../Resources/Constants';
 
 const { BaseLayer } = LayersControl;
 
@@ -343,45 +344,6 @@ export const MapContainerComponent = () => {
     setTeaInputs({ ...teaInputs });
     setSelectedYearIndex(years.length);
 
-    // // combine input values with default bounds for a the sensitivity analysis
-    // const sensitivityInputs: InputModSensitivity = {
-    //   model: teaModel,
-    //   input: teaInputs,
-    //   CapitalCost: {
-    //     high: 200000000,
-    //     low: 0
-    //   },
-    //   BiomassFuelCost: {
-    //     high: 100,
-    //     low: 0
-    //   },
-    //   DebtRatio: {
-    //     high: 100,
-    //     low: 0
-    //   },
-    //   DebtInterestRate: {
-    //     high: 15,
-    //     low: 1
-    //   },
-    //   CostOfEquity: {
-    //     high: 50,
-    //     low: 1
-    //   },
-    //   NetStationEfficiency: {
-    //     high: 50,
-    //     low: 5
-    //   },
-    //   CapacityFactor: {
-    //     high: 100,
-    //     low: 40
-    //   }
-    // };
-
-    // // the sensitivity calculation modifies the passed params, which isn't good so we deep copy them first
-    // const deepSensitivityInputs = JSON.parse(JSON.stringify(sensitivityInputs));
-    // const sensitivity = runSensitivityAnalysis(deepSensitivityInputs);
-    // setSensitivityResults(sensitivity.output);
-
     let radius = 0;
     let clusterIds: string[] = [];
     let errorIds: string[] = [];
@@ -513,16 +475,6 @@ export const MapContainerComponent = () => {
     setAllYearResults(allYearResults);
   };
 
-  const accessToken =
-    'pk.eyJ1IjoibGF1cmFob2xzdGVnZSIsImEiOiJjazZnc3U3c3gybWw5M25xamc2M2RnNTl2In0.Zcg_-cmP110dT_JzIN3QdA';
-  const mapboxTiles =
-    'https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/{z}/{x}/{y}?access_token=' +
-    accessToken;
-  const mapboxTilesSatellite =
-    'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token=' +
-    accessToken;
-  const attribution =
-    '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
   const style = {
     height: window.innerHeight
   };
@@ -650,9 +602,9 @@ export const MapContainerComponent = () => {
         {hasProcessingError && (
           <div className='alert alert-danger'>
             There was a problem processing your results. This is most likely due
-            to an inability to find enough biomass to satify your requirements
+            to an inability to find enough biomass to satisfy your requirements
             within a reasonable radius, but could also be due to API performance
-            or avilability issues. Please refresh the page and try again.
+            or availability issues. Please refresh the page and try again.
           </div>
         )}
         {!showResults && (
@@ -718,13 +670,13 @@ export const MapContainerComponent = () => {
         <ScaleControl />
         <LayersControl position='bottomleft'>
           <BaseLayer checked name='Outdoors'>
-            <TileLayer attribution={attribution} url={mapboxTiles} />
+            <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
           </BaseLayer>
           <BaseLayer name='Satellite'>
-            <TileLayer attribution={attribution} url={mapboxTilesSatellite} />
+            <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES_SATELLITE} />
           </BaseLayer>
         </LayersControl>
-        <TileLayer attribution={attribution} url={mapboxTiles} />
+        <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
         {/* <EsriLeafletGeoSearch
           useMapBounds={false}
           position='topleft'
