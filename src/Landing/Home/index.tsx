@@ -73,6 +73,7 @@ const Home = () => {
 
   return (
     <>
+        <Navbar />
         <div
             style={{ height: '100vh', width: '100%', position: 'relative' }}
         >

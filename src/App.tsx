@@ -8,12 +8,10 @@ import NotFound from './Shared/NotFound';
 import { URL_LANDING_PAGE, URL_LOGIN_PAGE, URL_MODEL_PAGE, URL_REGISTER_PAGE, URL_REROUTE_PAGE } from './Resources/Constants';
 import Login from './Landing/Login/Login';
 import Register from './Landing/Register/Register';
-import Navbar from './Landing/Shared/Navbar';
 
 const App = () => {
   return (
     <div className='App'>
-      <Navbar />
       <BrowserRouter>
         <Routes>
           <Route path={`${URL_MODEL_PAGE}`} element={<MapContainerComponent />} />
