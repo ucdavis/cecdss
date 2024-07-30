@@ -1,12 +1,16 @@
-import React from 'react'
-import Navbar from '../Shared/Navbar'
+import React from 'react';
+import '../../Styles/Landing.css'
+import Navbar from '../Shared/Navbar';
 
-const Register = () => {
+const SignupPage = () => {
   return (
     <>
         <Navbar />
-    </>
-  )
-}
+        <div className="screen-container bg-brand">
 
-export default Register
+        </div>
+    </>
+  );
+};
+
+export default SignupPage;

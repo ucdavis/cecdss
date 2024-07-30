@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './Styles/index.css';
 import App from './App';
+import './Styles/Landing.css'
 import * as serviceWorker from './serviceWorker';
 
 const rootElement = document.getElementById('root');

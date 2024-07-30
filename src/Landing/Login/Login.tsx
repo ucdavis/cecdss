@@ -5,6 +5,7 @@ const Login = () => {
   return (
     <>
         <Navbar />
+        
     </>
   )
 }

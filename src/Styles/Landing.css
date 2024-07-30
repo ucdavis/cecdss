@@ -59,3 +59,18 @@
 .custom-button:hover {
     background-color: #2f4538;
 }
+
+/* COMMON CLASSES */
+
+.flex {
+    display: flex;
+}
+
+.screen-container {
+    height: 100vh;
+    width: 100vw;
+}
+
+.bg-brand {
+    background-color: #395442;
+}
