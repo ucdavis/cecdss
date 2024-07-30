@@ -8,7 +8,7 @@ import { ATTRIBUTION, MAP_BOX_TILES, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../
 import '../../Styles/Landing.css';
 import Navbar from '../Shared/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faBookOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const TitleOverlay: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const TitleOverlay: React.FC = () => {
       <h1 className="main-title mb-5" style={{ color: '#395442' }}>
         Forest Resource and Renewable Energy Decision Support System
       </h1>
-      <div className="button-group d-flex" style={{ columnGap: '1em' }}>
+      <div className="button-group d-flex justify-content-center" style={{ columnGap: '1em'}}>
         <Button
             style={{
             background:'#395442'
@@ -43,6 +43,17 @@ const TitleOverlay: React.FC = () => {
             <FontAwesomeIcon icon={faBookOpen} className="mr-2" />
             User Guide
         </Button>
+        <Button
+            style={{
+            background:'#395442'
+            }}
+        >
+            <FontAwesomeIcon icon={faBook} className="mr-2" />
+            Publications
+        </Button>
+      </div>
+      <div className="flex justify-content-center mt-4">
+
       </div>
     </div>
   );
@@ -62,9 +73,8 @@ const Home = () => {
 
   return (
     <>
-        <Navbar />
         <div
-            style={{ height: '90vh', width: '100%', position: 'relative' }}
+            style={{ height: '100vh', width: '100%', position: 'relative' }}
         >
             <MapContainer 
                 center={center} 
