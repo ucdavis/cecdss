@@ -4,11 +4,10 @@ import React, { useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { Button } from 'reactstrap';
 import { MapCoordinates } from '../../Model/models/Types';
-import { ATTRIBUTION, MAP_BOX_TILES, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../Resources/Constants';
-import '../../Styles/Landing.css';
 import Navbar from '../Shared/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faBookOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { ATTRIBUTION, MAP_BOX_TILES, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
 
 const TitleOverlay: React.FC = () => {
   return (

@@ -1,20 +1,20 @@
+import { faArrowRightFromBracket, faHome, faPlus, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import {
+  Button,
   Collapse,
-  Navbar as ReactstrapNavbar,
-  NavbarToggler,
-  NavbarBrand,
   Nav,
+  NavbarBrand,
+  NavbarToggler,
   NavItem,
   NavLink,
-  Button,
+  Navbar as ReactstrapNavbar,
 } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightFromBracket, faHome, faPlus, faRightFromBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import logo from '../../Resources/Images/logo.svg'; // Replace with your logo path
-import '../../Styles/Landing.css'; // Import the CSS for custom styling
-import { URL_LANDING_PAGE, URL_LOGIN_PAGE, URL_MODEL_PAGE, URL_REGISTER_PAGE } from '../../Resources/Constants';
 import styled from 'styled-components';
+import { URL_LANDING_PAGE, URL_LOGIN_PAGE, URL_MODEL_PAGE, URL_REGISTER_PAGE } from '../../../Resources/Constants';
+import logo from '../../../Resources/Images/logo.svg';
+import '../../../Styles/Landing.css';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <ReactstrapNavbar className="custom-navbar fixed-top px-5" color="light" light expand="md">
+    <ReactstrapNavbar className="shadow-md fixed-top px-5" color="light" light expand="md">
       <div className="d-flex w-100 justify-content-between">
         <div className="flex items-center justify-center">
           <NavbarBrand href="/" className="navbar-brand-bold flex align-items gap-x-2">

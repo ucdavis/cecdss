@@ -1206,6 +1206,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       width: 550px;
     }
 
+    .w-400p {
+      width: 400px;
+    }
+
     .w-6 {
       width: 1.5rem;
     }

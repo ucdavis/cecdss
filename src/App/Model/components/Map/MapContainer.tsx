@@ -62,7 +62,7 @@ import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { CustomMarker } from './CustomMarker';
 import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
 import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
-import { ATTRIBUTION, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../Resources/Constants';
+import { ATTRIBUTION, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
 
 const { BaseLayer } = LayersControl;
 

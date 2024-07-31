@@ -318,7 +318,6 @@ export const FrcsInputsContainer = (props: Props) => {
           </>
         )}
       </Form>
-
       <br />
       <hr />
     </div>

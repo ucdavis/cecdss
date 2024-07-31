@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { EXPT_TYPE_OPTS, ORG_TYPE_OPTS, URL_LOGIN_PAGE, URL_PRIVACY_POLICY } from '../../Resources/Constants';
-import logo from '../../Resources/Images/logoBig.svg';
-import '../../Styles/Landing.css';
+import { EXPT_TYPE_OPTS, ORG_TYPE_OPTS, URL_LOGIN_PAGE, URL_PRIVACY_POLICY } from '../../../Resources/Constants';
+import logo from '../../../Resources/Images/logoBig.svg';
+import '../../../Styles/Landing.css';
 import Navbar from '../Shared/Navbar';
 import styled from 'styled-components';
-import { useSubmitForm } from '../../Hooks/Form';
-import { registerAPI } from '../../API';
+import { useSubmitForm } from '../../../Hooks/Form';
+import { registerAPI } from '../../../API';
 import { Link } from 'react-router-dom';
 
 interface SignUpProps {
@@ -73,6 +73,7 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 placeholder="Enter New Password"
                                 required
                                 bsSize="sm"
+                                type='password'
                                 />
                             </FormGroup>
                         </div>
@@ -217,7 +218,7 @@ const SignupPage = () => {
   return (
     <>
         <Navbar />
-        <div className="h-screen w-screen flex align-items justify-center">
+        <div className="h-screen w-screen flex items-center justify-center">
             <div className="w-1/2 h-full bg-brand flex flex-col align-items justify-center text-white p-4 gap-y-14">
                 <div className='text-4xl font-bold text-center'>
                     FRREDDS

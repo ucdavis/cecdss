@@ -1,13 +1,13 @@
 import React from 'react';
 import './Styles/App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { MapContainerComponent } from './Model/components/Map/MapContainer';
-import Home from './Landing/Home'
+import { MapContainerComponent } from './App/Model/components/Map/MapContainer';
+import Home from './App/Landing/Home'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import NotFound from './Shared/NotFound';
 import { URL_LANDING_PAGE, URL_LOGIN_PAGE, URL_MODEL_PAGE, URL_REGISTER_PAGE, URL_REROUTE_PAGE } from './Resources/Constants';
-import Login from './Landing/Login/Login';
-import Register from './Landing/Register/Register';
+import Login from './App/Landing/Login/Login';
+import Register from './App/Landing/Register/Register';
 
 const App = () => {
   return (
