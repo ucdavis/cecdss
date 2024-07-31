@@ -6,6 +6,8 @@ import { loginAPI } from '../../../API';
 import { StyledButton } from '../Register/Register';
 import { Link } from 'react-router-dom';
 import { URL_REGISTER_PAGE } from '../../../Resources/Constants';
+import triangle from '../../../Resources/Images/triangle.svg'
+import triangleTree from '../../../Resources/Images/triangleTreeCrop.svg'
 
 interface LoginProps {
   email: string;
@@ -72,7 +74,7 @@ const Login = () => {
   return (
     <>
         <Navbar />
-        <div className="h-screen w-screen flex items-center justify-center">
+        <div className="h-screen w-screen flex items-center justify-center relative">
           <div className="w-400p max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 h-auto mt-6 flex flex-col items-center justify-center gap-y-6">
             <div className='w-full'>
               <div className="text-xl font-bold text-brand leading-7 text-gray-900 text-center">
@@ -93,6 +95,12 @@ const Login = () => {
                         Don't have an account? Register
                     </Link>
                 </div>
+          </div>
+          <div className='absolute bottom-0' style={{ left: '-8%' }}>
+            <img src={triangle} alt="FREDDS Logo" className='h-full' />
+          </div>
+          <div className='absolute top-0 h-full right-0'>
+            <img src={triangleTree} alt="FREDDS Logo" className='h-full' />
           </div>
         </div>
     </>
