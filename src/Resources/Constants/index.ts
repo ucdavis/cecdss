@@ -21,3 +21,113 @@ export const ATTRIBUTION =
 
 // USER GUIDE 
 export const USER_GUIDE_LINK = 'https://ucdavis.box.com/s/ptum3pvtfarexagd1nmgy479gej1otmz';
+
+
+// REGISTER 
+// Organization Types
+export const ORG_TYPE_OPTS = [
+    {
+        name: 'Federal Government',
+        val: 'federalGovernment'
+    },
+    {
+        name: 'State or Local Government',
+        val: 'stateOrLocalGovernment'
+    },
+    {
+        name: 'Non-Profit',
+        val: 'nonProfit'
+    },
+    {
+        name: 'Educational Institution',
+        val: 'educationalInstitution'
+    },
+    {
+        name: 'Industry',
+        val: 'industry'
+    },
+    {
+        name: 'Consulting',
+        val: 'consulting'
+    },
+    {
+        name: 'National Lab',
+        val: 'nationalLab'
+    },
+    {
+        name: 'Other',
+        val: 'other'
+    },
+]
+
+// Expertise Types
+export const EXPT_TYPE_OPTS = [
+    {
+        name: 'Biodiesel',
+        val: 'biodiesel'
+    },
+    {
+        name: 'Portfolio Analysis',
+        val: 'portfolioAnalysis'
+    },
+    {
+        name: 'Thermochemical Conversion',
+        val: 'thermochemicalConversion'
+    },
+    {
+        name: 'Biorefineries',
+        val: 'biorefineries'
+    },
+    {
+        name: 'Heat & Power',
+        val: 'heatAndPower'
+    },
+    {
+        name: 'Technoeconomic Analysis',
+        val: 'technoeconomicAnalysis'
+    },
+    {
+        name: 'Feedstock Production',
+        val: 'feedstockProduction'
+    },
+    {
+        name: 'Biofuel Distribution',
+        val: 'biofuelDistribution'
+    },
+    {
+        name: 'Policy',
+        val: 'policy'
+    },
+    {
+        name: 'Strategic Analysis',
+        val: 'strategic Analysis'
+    },
+    {
+        name: 'Feedstock Logistics',
+        val: 'feedstockLogistics'
+    },
+    {
+        name: 'Biofuel Enduse',
+        val: 'biofuelEnduse'
+    },
+    {
+        name: 'Project Finance',
+        val: 'projectFinance'
+    },
+    {
+        name: 'Engineer',
+        val: 'engineer'
+    },
+    {
+        name: 'Biochemical Conversion',
+        val: 'biochemicalConversion'
+    },
+    {
+        name: 'Algae',
+        val: 'algae'
+    },
+    {
+        name: 'Sustainability',
+        val: 'sustainability'
+    },
+]

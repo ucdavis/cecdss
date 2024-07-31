@@ -25,9 +25,11 @@ const Navbar: React.FC = () => {
       <div className="d-flex w-100 justify-content-between">
         {/* Left Section */}
         <div className="d-flex align-items-center">
-          <NavbarBrand href="/" className="navbar-brand-bold">
+          <NavbarBrand href="/" className="navbar-brand-bold flex align-items">
             <img src={logo} alt="Logo" style={{ height: '30px', marginRight: '10px' }} />
-            FRREDDS
+            <div>
+              FRREDDS
+            </div>
           </NavbarBrand>
           <NavbarToggler onClick={toggle} />
         </div>
