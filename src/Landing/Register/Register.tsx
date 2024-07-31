@@ -219,11 +219,11 @@ const SignupPage = () => {
         <Navbar />
         <div className="h-screen w-screen flex align-items justify-center">
             <div className="w-1/2 h-full bg-brand flex flex-col align-items justify-center text-white p-4 gap-y-14">
-                <div className='text-3xl font-bold text-center'>
+                <div className='text-4xl font-bold text-center'>
                     FRREDDS
                 </div>
                 <div className='flex items-center justify-center'>
-                    <img src={logo} alt="" />
+                    <img src={logo} alt="FREDDSS Logo" className='h-20' />
                 </div>
                 <div className='text-center font-bold text-xl'>
                     Forest Resource and Renewable Energy Decision Support System
@@ -249,7 +249,20 @@ const SignupPage = () => {
                     </Link>
                 </div>
                 <div className='text-gray-500 mt-1 text-12p'>
-                    By clicking continue you agree to our <span><Link to={''} className='text-12p'>Terms of Service</Link></span> and <span><Link to={URL_PRIVACY_POLICY} className='text-12p'>Privacy Policy</Link></span> 
+                    By clicking continue you agree to our <span>
+                        <Link 
+                            to={''} 
+                            className='text-12p'
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >Terms of Service</Link>
+                        </span> and <span>
+                        <Link 
+                            to={URL_PRIVACY_POLICY} className='text-12p'
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >Privacy Policy
+                        </Link></span> 
                 </div>
             </div>
             </div>

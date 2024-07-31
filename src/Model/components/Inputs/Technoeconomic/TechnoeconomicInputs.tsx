@@ -9,6 +9,7 @@ import { BasicTeaInputs } from './BasicTeaInputs';
 import { InputModGPOClass } from '../../../models/GPOClasses';
 import { InputModGPClass } from '../../../models/GPClasses';
 import { InputModCHPClass } from '../../../models/CHPClasses';
+import { StyledInput } from '../Frcs/FrcsInputsContainer';
 
 interface Props {
   teaInputs: InputModGPO | InputModCHP | InputModGP;
@@ -147,24 +148,25 @@ export const TechnoeconomicInputs = (props: Props) => {
           : 'View More Detailed Inputs'}
       </Button>
       <Form>
-        <FormGroup>
+        <FormGroup className='flex flex-col items-start justify-center mt-2'>
           <Label>Model</Label>
-          <Input
+          <StyledInput
+            className='w-full text-gray-700'
             type='select'
-            onChange={x => props.setTeaModel(x.target.value)}
+            onChange={(x:any) => props.setTeaModel(x.target.value)}
             value={props.teaModel}
             disabled={props.disabled}
-          >
-            <option value={TechnoeconomicModels.genericPowerOnly}>
-              Generic Power Only (GPO)
-            </option>
-            <option value={TechnoeconomicModels.genericCombinedHeatAndPower}>
-              Generic Combined Heat and Power (CHP)
-            </option>
-            <option value={TechnoeconomicModels.gasificationPower}>
-              Gasification Power (GP)
-            </option>
-          </Input>
+            >
+              <option value={TechnoeconomicModels.genericPowerOnly}>
+                Generic Power Only (GPO)
+              </option>
+              <option value={TechnoeconomicModels.genericCombinedHeatAndPower}>
+                Generic Combined Heat and Power (CHP)
+              </option>
+              <option value={TechnoeconomicModels.gasificationPower}>
+                Gasification Power (GP)
+              </option>
+            </StyledInput>
         </FormGroup>
         {renderInputs}
       </Form>

@@ -84,9 +84,7 @@ export const InputContainer = (props: Props) => {
           <FormGroup>
             <Label>Facility Coordinates</Label>
             <InputGroup>
-              <InputGroupText addonType='prepend'>
                 <InputGroupText>lat</InputGroupText>
-              </InputGroupText>
               <Input
                 type='number'
                 value={props.facilityCoordinates.lat.toString()}
@@ -100,9 +98,7 @@ export const InputContainer = (props: Props) => {
               />
             </InputGroup>
             <InputGroup>
-              <InputGroupText addonType='prepend'>
                 <InputGroupText>lng</InputGroupText>
-              </InputGroupText>
               <Input
                 type='number'
                 value={props.facilityCoordinates.lng.toString()}
@@ -138,9 +134,7 @@ export const InputContainer = (props: Props) => {
             <FormGroup>
               <Label>Biomass Coordinates</Label>
               <InputGroup>
-                <InputGroupText addonType='prepend'>
                   <InputGroupText>lat</InputGroupText>
-                </InputGroupText>
                 <Input
                   type='number'
                   value={props.biomassCoordinates.lat.toString()}
@@ -154,9 +148,7 @@ export const InputContainer = (props: Props) => {
                 />
               </InputGroup>
               <InputGroup>
-                <InputGroupText addonType='prepend'>
                   <InputGroupText>lng</InputGroupText>
-                </InputGroupText>
                 <Input
                   type='number'
                   value={props.biomassCoordinates.lng.toString()}

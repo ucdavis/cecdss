@@ -14,6 +14,7 @@ import { faArrowRightFromBracket, faHome, faPlus, faRightFromBracket, faUserPlus
 import logo from '../../Resources/Images/logo.svg'; // Replace with your logo path
 import '../../Styles/Landing.css'; // Import the CSS for custom styling
 import { URL_LANDING_PAGE, URL_LOGIN_PAGE, URL_MODEL_PAGE, URL_REGISTER_PAGE } from '../../Resources/Constants';
+import styled from 'styled-components';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,37 +24,34 @@ const Navbar: React.FC = () => {
   return (
     <ReactstrapNavbar className="custom-navbar fixed-top px-5" color="light" light expand="md">
       <div className="d-flex w-100 justify-content-between">
-        {/* Left Section */}
-        <div className="d-flex align-items-center">
-          <NavbarBrand href="/" className="navbar-brand-bold flex align-items">
-            <img src={logo} alt="Logo" style={{ height: '30px', marginRight: '10px' }} />
+        <div className="flex items-center justify-center">
+          <NavbarBrand href="/" className="navbar-brand-bold flex align-items gap-x-2">
+            <img src={logo} alt="Logo" className='h-8' />
             <div>
               FRREDDS
             </div>
           </NavbarBrand>
           <NavbarToggler onClick={toggle} />
         </div>
-
-        {/* Right Section */}
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto d-flex align-items-center">
             <NavItem className="mr-3">
-              <NavLink href={URL_LANDING_PAGE} className="nav-link-bold">
+              <StyledNavLink href={URL_LANDING_PAGE} className="nav-link-bold">
                 <FontAwesomeIcon icon={faHome} className="mr-1" />
                 Home
-              </NavLink>
+              </StyledNavLink>
             </NavItem>
             <NavItem className="mr-3">
-              <NavLink href={URL_LOGIN_PAGE} className="nav-link-bold">
+              <StyledNavLink href={URL_LOGIN_PAGE} className="nav-link-bold">
                 <FontAwesomeIcon icon={faArrowRightFromBracket} className="mr-1" />
                 Login
-              </NavLink>
+              </StyledNavLink>
             </NavItem>
             <NavItem className="mr-3">
-              <NavLink href={URL_REGISTER_PAGE} className="nav-link-bold">
+              <StyledNavLink href={URL_REGISTER_PAGE} className="nav-link-bold">
                 <FontAwesomeIcon icon={faUserPlus} className="mr-1" />
                 Register
-              </NavLink>
+              </StyledNavLink>
             </NavItem>
             <NavItem>
               <Button
@@ -74,3 +72,18 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
+const StyledNavLink = styled(NavLink)`
+  color: #4a5568;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+    color: green;
+    text-decoration: none;
+  }
+
+  & .mr-1 {
+    margin-right: 0.25rem;
+  }
+`;

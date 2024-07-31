@@ -1102,6 +1102,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       height: 2rem;
     }
 
+    .h-20 {
+      height: 20rem;
+    }
+
     .h-80per {
       height: 80%;
     }

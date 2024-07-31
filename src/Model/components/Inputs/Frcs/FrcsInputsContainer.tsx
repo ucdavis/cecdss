@@ -11,6 +11,7 @@ import {
   UncontrolledTooltip
 } from 'reactstrap';
 import { FrcsInputs, Treatments } from '../../../models/Types';
+import styled from 'styled-components';
 
 interface Props {
   inputs: FrcsInputs;
@@ -34,22 +35,22 @@ export const FrcsInputsContainer = (props: Props) => {
         </Button>
         {hide && (
           <>
-            <FormGroup>
+            <FormGroup className='flex items-start justify-center flex-col mt-2'>
               <Label>Forest Treatment</Label>
-              <Input
-                bsSize="sm"
+              <StyledInput
+                className='w-full text-gray-700'
                 type='select'
                 value={props.inputs.treatmentid}
-                onChange={e =>
+                onChange={(e:any) =>
                   props.setInputs({
                     ...props.inputs,
                     treatmentid: Number(e.target.value)
                   })
                 }
                 disabled={props.disabled}
-              >
-                {treatments}
-              </Input>
+                >
+                  {treatments}
+                </StyledInput>
               <FormText>
                 <span id='treatmentTooltip'>
                   Description:
@@ -67,12 +68,13 @@ export const FrcsInputsContainer = (props: Props) => {
                 </UncontrolledTooltip>
               </FormText>
             </FormGroup>
-            <FormGroup>
+            <FormGroup className='flex items-start justify-center flex-col'>
               <Label>Harvesting System</Label>
-              <Input
+              <StyledInput
+                className='w-full text-gray-700'
                 type='select'
                 value={props.inputs.system}
-                onChange={e =>
+                onChange={(e:any) =>
                   props.setInputs({
                     ...props.inputs,
                     system: e.target.value
@@ -102,27 +104,28 @@ export const FrcsInputsContainer = (props: Props) => {
                   Helicopter Manual Log
                 </option>
                 <option value='Helicopter CTL'>Helicopter Cut To Length</option>
-              </Input>
+              </StyledInput>
             </FormGroup>
           </>
         )}
         {!hide && (
           <>
-            <FormGroup>
+            <FormGroup className='flex items-start justify-center flex-col mt-2'>
               <Label>Forest Treatment</Label>
-              <Input
+              <StyledInput
+                className='w-full text-gray-700'
                 type='select'
                 value={props.inputs.treatmentid}
-                onChange={e =>
+                onChange={(e:any) =>
                   props.setInputs({
                     ...props.inputs,
                     treatmentid: Number(e.target.value)
                   })
                 }
                 disabled={props.disabled}
-              >
-                {treatments}
-              </Input>
+                >
+                  {treatments}
+                </StyledInput>
               <FormText>
                 <span id='treatmentTooltip'>
                   Description:
@@ -140,42 +143,43 @@ export const FrcsInputsContainer = (props: Props) => {
                 </UncontrolledTooltip>
               </FormText>
             </FormGroup>
-            <FormGroup>
+            <FormGroup className='flex items-start justify-center flex-col'>
               <Label>Harvesting System</Label>
-              <Input
+              <StyledInput
+                className='w-full text-gray-700'
                 type='select'
                 value={props.inputs.system}
-                onChange={e =>
+                onChange={(e: any) =>
                   props.setInputs({
                     ...props.inputs,
                     system: e.target.value
                   })
                 }
                 disabled={props.disabled}
-              >
-                <option value='Ground-Based Mech WT'>
+                >
+                  <option value='Ground-Based Mech WT'>
                   Ground-Based Mechanized Whole Tree
-                </option>
-                <option value='Ground-Based Manual WT'>
-                  Ground-Based Manual Whole Tree
-                </option>
-                <option value='Ground-Based Manual Log'>
-                  Ground-Based Manual Log
-                </option>
-                <option value='Ground-Based CTL'>
-                  Ground-Based Cut To Length
-                </option>
-                <option value='Cable Manual WT/Log'>
-                  Cable Manual Whole Tree/Log
-                </option>
-                <option value='Cable Manual WT'>Cable Manual Whole Tree</option>
-                <option value='Cable Manual Log'>Cable Manual Log</option>
-                <option value='Cable CTL'>Cable Cut To Length</option>
-                <option value='Helicopter Manual Log'>
-                  Helicopter Manual Log
-                </option>
-                <option value='Helicopter CTL'>Helicopter Cut To Length</option>
-              </Input>
+                  </option>
+                  <option value='Ground-Based Manual WT'>
+                    Ground-Based Manual Whole Tree
+                  </option>
+                  <option value='Ground-Based Manual Log'>
+                    Ground-Based Manual Log
+                  </option>
+                  <option value='Ground-Based CTL'>
+                    Ground-Based Cut To Length
+                  </option>
+                  <option value='Cable Manual WT/Log'>
+                    Cable Manual Whole Tree/Log
+                  </option>
+                  <option value='Cable Manual WT'>Cable Manual Whole Tree</option>
+                  <option value='Cable Manual Log'>Cable Manual Log</option>
+                  <option value='Cable CTL'>Cable Cut To Length</option>
+                  <option value='Helicopter Manual Log'>
+                    Helicopter Manual Log
+                  </option>
+                  <option value='Helicopter CTL'>Helicopter Cut To Length</option>
+              </StyledInput>
             </FormGroup>
             <FormGroup>
               <Label>Diesel Fuel Price</Label>
@@ -320,3 +324,22 @@ export const FrcsInputsContainer = (props: Props) => {
     </div>
   );
 };
+
+export const StyledInput = styled(Input)`
+  border: 1px solid #CED4DA;
+  border-radius: 3px;
+  padding-left: 5px;
+  background-color: transparent;
+  transition: border-color 0.2s,
+  color: #495057;
+  height: 40px;
+
+  &:focus {
+    border-color: #395442;
+    outline: none;
+  }
+
+  &:active {
+    border-color: #395442;
+  }
+`;
