@@ -1106,6 +1106,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       height: 80%;
     }
 
+    .h-85per {
+      height: 85%;
+    }
+
     .h-90per {
       height: 90%;
     }
@@ -1132,6 +1136,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
     .h-1\/2 {
       height: 50%;
+    }
+
+    .max-h-75per {
+      max-height: 75%;
     }
 
     .max-h-80per {
@@ -1355,6 +1363,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
     .items-start {
       align-items: flex-start;
+    }
+
+    .items-end {
+      align-items: flex-end;
     }
 
     .items-center {

@@ -131,3 +131,6 @@ export const EXPT_TYPE_OPTS = [
         val: 'sustainability'
     },
 ]
+
+// PRIVACY POLICY 
+export const URL_PRIVACY_POLICY = 'https://privacy.ucdavis.edu/web-page-privacy'

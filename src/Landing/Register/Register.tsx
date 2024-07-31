@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { EXPT_TYPE_OPTS, ORG_TYPE_OPTS } from '../../Resources/Constants';
+import { EXPT_TYPE_OPTS, ORG_TYPE_OPTS, URL_LOGIN_PAGE, URL_PRIVACY_POLICY } from '../../Resources/Constants';
 import logo from '../../Resources/Images/logoBig.svg';
 import '../../Styles/Landing.css';
 import Navbar from '../Shared/Navbar';
 import styled from 'styled-components';
 import { useSubmitForm } from '../../Hooks/Form';
 import { registerAPI } from '../../API';
+import { Link } from 'react-router-dom';
 
 interface SignUpProps {
     firstName: string;
@@ -23,7 +24,7 @@ interface SignUpFormProps {
 const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
     return (
         <Form>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="grid grid-cols-2 gap-x-6 px-1">
                             <FormGroup>
                                 <Label for="firstName" className='text-gray-170 font-semibold text-14p'>
                                 First Name
@@ -48,7 +49,7 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 />
                             </FormGroup>
                         </div>
-                        <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div className="mt-2 grid grid-cols-2 gap-x-6 px-1">
                             <FormGroup>
                                 <Label for="email" className='text-gray-170 font-semibold text-14p'>
                                 Email ID
@@ -75,7 +76,7 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 />
                             </FormGroup>
                         </div>
-                        <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div className="mt-2 grid grid-cols-2 gap-x-6 px-1">
                             <FormGroup>
                                 <Label for="organization" className='text-gray-170 font-semibold text-14p'>
                                 Organization
@@ -109,7 +110,7 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 </StyledInput>
                             </FormGroup>
                         </div>
-                        <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div className="mt-2 grid grid-cols-2 gap-x-6 px-1">
                             <FormGroup>
                                 <Label for="orgWebsite" className='text-gray-170 font-semibold text-14p'>
                                 Organization Website
@@ -134,7 +135,7 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 />
                             </FormGroup>
                         </div>
-                        <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div className="mt-2 grid grid-cols-2 gap-x-6 px-1">
                             <FormGroup>
                                 <Label for="linkedin" className='text-gray-170 font-semibold text-14p'>
                                 Linkedin
@@ -218,29 +219,37 @@ const SignupPage = () => {
         <Navbar />
         <div className="h-screen w-screen flex align-items justify-center">
             <div className="w-1/2 h-full bg-brand flex flex-col align-items justify-center text-white p-4 gap-y-14">
-                <div className='text-4xl font-bold text-center'>
+                <div className='text-3xl font-bold text-center'>
                     FRREDDS
                 </div>
                 <div className='flex items-center justify-center'>
                     <img src={logo} alt="" />
                 </div>
-                <div className='text-center font-bold text-2xl'>
+                <div className='text-center font-bold text-xl'>
                     Forest Resource and Renewable Energy Decision Support System
                 </div>
             </div>
-            <div className="w-1/2 h-full flex items-center justify-center text-white p-4">     
-            <div className="w-80per max-w-sm px-4 pt-3 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 h-80per">
+            <div className="w-1/2 h-full flex flex-col items-center justify-center text-white p-4">     
+            <div className="w-80per max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 h-85per mt-4 flex flex-col items-center justify-between gap-y-3">
                 <div className="text-xl font-bold text-brand leading-7 text-gray-900 text-center">
                 Create an Account
                 </div>
                 <div className="mt-1 text-sm leading-6 text-gray-600 text-center">
                 Enter your details below to create an account.
                 </div>
-                <div className="max-h-80per overflow-y-auto mt-4">
+                <div className="max-h-75per overflow-y-auto mt-4 w-full">
                 <SignUpForm handleChange={handleChange} inputs={inputs} />
                 </div>
                 <div className='flex items-center justify-center mt-3'>
                 <StyledButton >Sign Up</StyledButton>
+                </div>
+                <div className="flex items-center justify-center mt-2">
+                    <Link to={URL_LOGIN_PAGE} className='text-14p'>
+                        Already have and account? Login
+                    </Link>
+                </div>
+                <div className='text-gray-500 mt-1 text-12p'>
+                    By clicking continue you agree to our <span><Link to={''} className='text-12p'>Terms of Service</Link></span> and <span><Link to={URL_PRIVACY_POLICY} className='text-12p'>Privacy Policy</Link></span> 
                 </div>
             </div>
             </div>
