@@ -65,12 +65,22 @@ import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesL
 import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
 import { ATTRIBUTION, BE_APP_URL, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
 import { useParams } from 'react-router-dom';
+import Loader from '../../../../Shared/Loader';
+import triangle from '../../../../Resources/Images/triangle.svg'
+import triangleTree from '../../../../Resources/Images/triangleTreeCrop.svg'
 
 export interface RequestParamsAllYearsNoTransmission {
   facilityLat: number;
   facilityLng: number;
   teaModel: string;
   teaInputs: InputModGPO | InputModCHP | InputModGP;
+}
+
+type HandleUrlLoadingChangeType = (value: boolean) => void;
+
+interface MapContainerComponentProps {
+  urlLoading: boolean;
+  handleUrlLoadingChange: HandleUrlLoadingChangeType;
 }
 
 const { BaseLayer } = LayersControl;
@@ -92,7 +102,6 @@ const MapClickHandler = ({ setBiomassCoordinates, setFacilityCoordinates, select
 
   return null;
 };
-
 
 const processDieselFuelPrice = (price: string | number): number => {
   if (typeof price === 'string') {
@@ -167,9 +176,8 @@ const getShortUrlData = async (modelID:string) => {
   return originalUrl;
 };
 
-export const MapContainerComponent = () => {
+const MapContainerComponent = ({ urlLoading, handleUrlLoadingChange }: MapContainerComponentProps) => {
   const { modelID } = useParams();
-  const [urlLoading, setUrlLoading] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const [isClusterZone, setIsClusterZone] = useState(true);
   const [isErrorZone, setIsErrorZone] = useState(true);
@@ -543,7 +551,7 @@ export const MapContainerComponent = () => {
   const allResultsSelected = selectedYearIndex === years.length;
 
   useEffect(() => {
-    setUrlLoading(true)
+    handleUrlLoadingChange(true)
     if (modelID) {
       const fetchOriginalUrl = async () => {
         try {
@@ -571,7 +579,7 @@ export const MapContainerComponent = () => {
       };
       fetchOriginalUrl();
     }
-    setUrlLoading(false)
+    handleUrlLoadingChange(false)
   }, [modelID]);
 
   return (
@@ -898,3 +906,29 @@ export const MapContainerComponent = () => {
     </div>
   );
 };
+
+export const MapContainerWrapper = () => {
+  const [urlLoading, setUrlLoading] = useState<boolean>(false);
+
+  const handleUrlLoadingChange = (value: boolean) => setUrlLoading(value)
+  return (
+    <>
+      {urlLoading ? (
+        <div className="h-screen w-screen flex items-center justify-center relative">
+          <Loader />
+          <div className='absolute bottom-0' style={{ left: '-8%' }}>
+            <img src={triangle} alt="FREDDS Logo" className='h-full' />
+          </div>
+          <div className='absolute top-0 h-full right-0'>
+            <img src={triangleTree} alt="FREDDS Logo" className='h-full' />
+          </div>
+        </div>
+      ) : (
+        <MapContainerComponent 
+          urlLoading={urlLoading} 
+          handleUrlLoadingChange={handleUrlLoadingChange} 
+        />
+      )}
+    </>
+  )
+};  

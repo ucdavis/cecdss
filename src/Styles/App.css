@@ -1042,6 +1042,8 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       height: 2.75rem;
     }
 
+    
+
     .h-250p {
       height: 250px;
     }
@@ -1220,6 +1222,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
     .w-8 {
       width: 2rem;
+    }
+
+    .w-12 {
+      width: 4rem;
     }
 
     .w-80p {

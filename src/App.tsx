@@ -1,7 +1,7 @@
 import React from 'react';
 import './Styles/App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { MapContainerComponent } from './App/Model/components/Map/MapContainer';
+import { MapContainerWrapper } from './App/Model/components/Map/MapContainer';
 import Home from './App/Landing/Home'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import NotFound from './Shared/NotFound';
@@ -14,8 +14,8 @@ const App = () => {
     <div className='App'>
       <BrowserRouter>
         <Routes>
-          <Route path={`${URL_MODEL_PAGE}`} element={<MapContainerComponent />} />
-          <Route path={`${URL_MODEL_ID_PAGE}`} element={<MapContainerComponent />} />
+          <Route path={`${URL_MODEL_PAGE}`} element={<MapContainerWrapper />} />
+          <Route path={`${URL_MODEL_ID_PAGE}`} element={<MapContainerWrapper />} />
           <Route path={`${URL_LANDING_PAGE}`} element={<Home />} />
           <Route path={`${URL_LOGIN_PAGE}`} element={<Login />} />
           <Route path={`${URL_REGISTER_PAGE}`} element={<Register />} />
