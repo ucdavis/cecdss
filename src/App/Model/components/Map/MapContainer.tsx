@@ -41,7 +41,8 @@ import { GeoJsonLayers } from './GeoJsonLayers';
 import {
   computeConstantLAC,
   computeCurrentLAC,
-  computeEnergyRevenueRequiredPW
+  computeEnergyRevenueRequiredPW,
+  transmission
 } from '@ucdavis/tea/utility';
 import { runSensitivityAnalysis } from '@ucdavis/tea/sensitivity';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
@@ -62,7 +63,15 @@ import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { CustomMarker } from './CustomMarker';
 import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
 import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
-import { ATTRIBUTION, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
+import { ATTRIBUTION, BE_APP_URL, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
+import { useParams } from 'react-router-dom';
+
+export interface RequestParamsAllYearsNoTransmission {
+  facilityLat: number;
+  facilityLng: number;
+  teaModel: string;
+  teaInputs: InputModGPO | InputModCHP | InputModGP;
+}
 
 const { BaseLayer } = LayersControl;
 
@@ -98,7 +107,69 @@ const processDieselFuelPrice = (price: string | number): number => {
   return price;
 };
 
+const createQueryStr = (object: any) => {
+  const { transmission, ...rest } = object;
+  const queryParams = new URLSearchParams();
+
+  const flattenObject = (obj:any, parentKey = '') => {
+    Object.keys(obj).forEach(key => {
+      const fullKey = parentKey ? `${parentKey}.${key}` : key;
+      if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
+        flattenObject(obj[key], fullKey);
+      } else {
+        queryParams.append(fullKey, JSON.stringify(obj[key]));
+      }
+    });
+  };
+
+  flattenObject(rest);
+  return `${queryParams.toString()}`;
+};
+
+function parseQueryString(queryString:string) {
+  const params = new URLSearchParams(queryString);
+  const result = {};
+
+  params.forEach((value, key) => {
+    const keys = key.split('.');
+    keys.reduce((acc:any, k, i) => {
+      if (i === keys.length - 1) {
+        try {
+          acc[k] = JSON.parse(value);
+        } catch (e) {
+          acc[k] = value;
+        }
+      } else {
+        if (!acc[k]) acc[k] = {};
+        return acc[k];
+      }
+    }, result);
+  });
+
+  return result;
+}
+
+const getShortUrlData = async (modelID:string) => {
+  const serviceUrl = `${BE_APP_URL}/saved-model/`;
+
+  const originalUrl = await fetch(serviceUrl + modelID, {
+    mode: 'cors',
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(res => (res.ok ? res.json() : ('')))
+
+  if (!originalUrl) {
+    throw new Error('Failed to retrieve original URL');
+  }
+
+  return originalUrl;
+};
+
 export const MapContainerComponent = () => {
+  const { modelID } = useParams();
+  const [urlLoading, setUrlLoading] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const [isClusterZone, setIsClusterZone] = useState(true);
   const [isErrorZone, setIsErrorZone] = useState(true);
@@ -277,41 +348,31 @@ export const MapContainerComponent = () => {
     const allYearInputs: RequestParamsAllYears = {
       facilityLat: facilityCoordinates.lat,
       facilityLng: facilityCoordinates.lng,
-      transmission: {
-        VoltageClass: '230 kV Single Circuit',
-        ConductorType: 'ACSS',
-        Structure: 'Lattice',
-        LengthCategory: '> 10 miles',
-        NewOrReconductor: 'New',
-        AverageTerrainMultiplier: 1,
-        Miles: {
-          Forested: 0,
-          Flat: 0,
-          Wetland: 0,
-          Farmland: 0,
-          Desert: 0,
-          Urban: 0,
-          Hills: 0,
-          Mountain: 0,
-          Zone1: 1,
-          Zone2: 0,
-          Zone3: 0,
-          Zone4: 0,
-          Zone5: 0,
-          Zone6: 0,
-          Zone7: 0,
-          Zone8: 0,
-          Zone9: 0,
-          Zone10: 0,
-          Zone11: 0,
-          Zone12: 0
-        }
-      },
+      transmission: DEFAULT_TRANSMISSION_VAL,
       teaModel: teaModel,
       teaInputs: teaInputs
     };
 
     let continueProcessing = true;
+
+    const allYearInputsStr = createQueryStr(allYearInputs);
+    const biomassCoordinatesStr = createQueryStr(biomassCoordinates);
+    const frcsInputsStr = createQueryStr(frcsInputs);
+    const transportInputsStr = createQueryStr(transportInputs);
+
+    const shortenUrl = await fetch(
+      `${BE_APP_URL}/shorten-url`,
+      {
+        mode: 'cors',
+        method: 'POST',
+        body: JSON.stringify({allYearInputsStr, biomassCoordinatesStr, frcsInputsStr, transportInputsStr}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then(res => (res.ok ? res.json() : ('')));
+
+    console.log('ShortenURL', shortenUrl)
 
     const allYearResults: AllYearsResults = await fetch(
       serviceUrl + 'initialProcessing',
@@ -480,6 +541,38 @@ export const MapContainerComponent = () => {
   };
 
   const allResultsSelected = selectedYearIndex === years.length;
+
+  useEffect(() => {
+    setUrlLoading(true)
+    if (modelID) {
+      const fetchOriginalUrl = async () => {
+        try {
+          const result = await getShortUrlData(modelID);
+          const allYearInputsObj = parseQueryString(result.allYearInputs) as RequestParamsAllYearsNoTransmission
+          const biomassCoordinatesObj = parseQueryString(result.biomassCoordinates) as MapCoordinates
+          const frcsInputsObj = parseQueryString(result.frcsInputs) as FrcsInputs
+          const transportInputsObj = parseQueryString(result.transportInputs) as TransportInputs
+
+          setTeaModel(allYearInputsObj.teaModel)
+          setTeaInputs(allYearInputsObj.teaInputs)
+          setFacilityCoordinates({
+            lat: allYearInputsObj.facilityLat,
+            lng: allYearInputsObj.facilityLng
+          })
+          setBiomassCoordinates({
+            lat: biomassCoordinatesObj.lat,
+            lng: biomassCoordinatesObj.lng
+          })
+          setFrcsInputs(frcsInputsObj)
+          setTransportInputs(transportInputsObj)
+        } catch (error) {
+          console.error('Error fetching original URL:', error);
+        }
+      };
+      fetchOriginalUrl();
+    }
+    setUrlLoading(false)
+  }, [modelID]);
 
   return (
     <div style={style}>

@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
           <NavbarBrand href="/" className="navbar-brand-bold flex align-items gap-x-2">
             <img src={logo} alt="Logo" className='h-8' />
             <div>
-              FRREDDS
+              FRREDSS
             </div>
           </NavbarBrand>
           <NavbarToggler onClick={toggle} />
@@ -39,6 +39,7 @@ const Navbar: React.FC = () => {
               <StyledNavLink href={URL_LANDING_PAGE} className="nav-link-bold">
                 <FontAwesomeIcon icon={faHome} className="mr-1" />
                 Home
+
               </StyledNavLink>
             </NavItem>
             <NavItem className="mr-3">

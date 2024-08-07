@@ -9,17 +9,22 @@ import { URL_REGISTER_PAGE } from '../../../Resources/Constants';
 import triangle from '../../../Resources/Images/triangle.svg'
 import triangleTree from '../../../Resources/Images/triangleTreeCrop.svg'
 
+interface ErrorProps {
+  [key: string]: boolean;
+}
+
 interface LoginProps {
   email: string;
   password: string;
 }
 
 interface LoginFormProps {
-    handleChange: (name: string, val: string) => void;
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     inputs: LoginProps;
+    errors: ErrorProps
 }
 
-const LoginForm = ({ handleChange, inputs }: LoginFormProps) => {
+const LoginForm = ({ handleChange, inputs, errors }: LoginFormProps) => {
   return (
     <Form className='w-full'>
       <FormGroup>
@@ -27,11 +32,14 @@ const LoginForm = ({ handleChange, inputs }: LoginFormProps) => {
           Email ID
           </Label>
           <Input
-          id="email"
-          name="email"
-          placeholder="Enter your email"
-          required
-          type='email'
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+            type="email"
+            value={inputs.email}
+            onChange={handleChange}
+            invalid={!!errors.email}
           />
       </FormGroup>
       <FormGroup>
@@ -44,6 +52,8 @@ const LoginForm = ({ handleChange, inputs }: LoginFormProps) => {
           placeholder="Enter New Password"
           required
           type='password'
+          value={inputs.password}
+          onChange={handleChange}
           />
       </FormGroup>
     </Form>
@@ -55,16 +65,18 @@ const Login = () => {
       email: '',
       password: '',
   });
+  const [errors, setErrors] = useState({ email: false, password: false });
 
   const { handleSubmit, loading, error } = useSubmitForm<FormData>(loginAPI);
 
 
-    const handleChange = (name: string, value: string) => {
-        setInputs({
-            ...inputs,
-            [name]: value
-        })
-    }
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      [name]: value,
+    }));
+  };
 
     const onSubmit = () => {
         console.log('Submit', inputs)
@@ -85,10 +97,10 @@ const Login = () => {
               </div>
             </div>
             <div className='w-full mt-2'>
-              <LoginForm handleChange={handleChange} inputs={inputs} />
+              <LoginForm handleChange={handleChange} inputs={inputs} errors={errors} />
             </div>
             <div>
-              <StyledButton>Login</StyledButton>
+              <StyledButton onClick={onSubmit}>Login</StyledButton>
             </div>
             <div className="flex items-center justify-center mt-2">
                     <Link to={URL_REGISTER_PAGE} className='text-14p text-gray-700'>

@@ -2,6 +2,7 @@
 export const URL_REROUTE_PAGE = '/pages/home'
 export const URL_LANDING_PAGE = '/pages/home'
 export const URL_MODEL_PAGE = '/pages/model'
+export const URL_MODEL_ID_PAGE = '/pages/model/:modelID'
 export const URL_LOGIN_PAGE = '/pages/login'
 export const URL_REGISTER_PAGE = '/pages/register'
 
@@ -28,35 +29,35 @@ export const USER_GUIDE_LINK = 'https://ucdavis.box.com/s/ptum3pvtfarexagd1nmgy4
 export const ORG_TYPE_OPTS = [
     {
         name: 'Federal Government',
-        val: 'federalGovernment'
+        value: 'federalGovernment'
     },
     {
         name: 'State or Local Government',
-        val: 'stateOrLocalGovernment'
+        value: 'stateOrLocalGovernment'
     },
     {
         name: 'Non-Profit',
-        val: 'nonProfit'
+        value: 'nonProfit'
     },
     {
         name: 'Educational Institution',
-        val: 'educationalInstitution'
+        value: 'educationalInstitution'
     },
     {
         name: 'Industry',
-        val: 'industry'
+        value: 'industry'
     },
     {
         name: 'Consulting',
-        val: 'consulting'
+        value: 'consulting'
     },
     {
         name: 'National Lab',
-        val: 'nationalLab'
+        value: 'nationalLab'
     },
     {
         name: 'Other',
-        val: 'other'
+        value: 'other'
     },
 ]
 
@@ -64,73 +65,106 @@ export const ORG_TYPE_OPTS = [
 export const EXPT_TYPE_OPTS = [
     {
         name: 'Biodiesel',
-        val: 'biodiesel'
+        value: 'biodiesel'
     },
     {
         name: 'Portfolio Analysis',
-        val: 'portfolioAnalysis'
+        value: 'portfolioAnalysis'
     },
     {
         name: 'Thermochemical Conversion',
-        val: 'thermochemicalConversion'
+        value: 'thermochemicalConversion'
     },
     {
         name: 'Biorefineries',
-        val: 'biorefineries'
+        value: 'biorefineries'
     },
     {
         name: 'Heat & Power',
-        val: 'heatAndPower'
+        value: 'heatAndPower'
     },
     {
         name: 'Technoeconomic Analysis',
-        val: 'technoeconomicAnalysis'
+        value: 'technoeconomicAnalysis'
     },
     {
         name: 'Feedstock Production',
-        val: 'feedstockProduction'
+        value: 'feedstockProduction'
     },
     {
         name: 'Biofuel Distribution',
-        val: 'biofuelDistribution'
+        value: 'biofuelDistribution'
     },
     {
         name: 'Policy',
-        val: 'policy'
+        value: 'policy'
     },
     {
         name: 'Strategic Analysis',
-        val: 'strategic Analysis'
+        value: 'strategicAnalysis'
     },
     {
         name: 'Feedstock Logistics',
-        val: 'feedstockLogistics'
+        value: 'feedstockLogistics'
     },
     {
         name: 'Biofuel Enduse',
-        val: 'biofuelEnduse'
+        value: 'biofuelEnduse'
     },
     {
         name: 'Project Finance',
-        val: 'projectFinance'
+        value: 'projectFinance'
     },
     {
         name: 'Engineer',
-        val: 'engineer'
+        value: 'engineer'
     },
     {
         name: 'Biochemical Conversion',
-        val: 'biochemicalConversion'
+        value: 'biochemicalConversion'
     },
     {
         name: 'Algae',
-        val: 'algae'
+        value: 'algae'
     },
     {
         name: 'Sustainability',
-        val: 'sustainability'
+        value: 'sustainability'
     },
 ]
 
 // PRIVACY POLICY 
 export const URL_PRIVACY_POLICY = 'https://privacy.ucdavis.edu/web-page-privacy'
+
+export const DEFAULT_TRANSMISSION_VAL: any = {
+        VoltageClass: '230 kV Single Circuit',
+        ConductorType: 'ACSS',
+        Structure: 'Lattice',
+        LengthCategory: '> 10 miles',
+        NewOrReconductor: 'New',
+        AverageTerrainMultiplier: 1,
+        Miles: {
+          Forested: 0,
+          Flat: 0,
+          Wetland: 0,
+          Farmland: 0,
+          Desert: 0,
+          Urban: 0,
+          Hills: 0,
+          Mountain: 0,
+          Zone1: 1,
+          Zone2: 0,
+          Zone3: 0,
+          Zone4: 0,
+          Zone5: 0,
+          Zone6: 0,
+          Zone7: 0,
+          Zone8: 0,
+          Zone9: 0,
+          Zone10: 0,
+          Zone11: 0,
+          Zone12: 0
+        }
+      }
+
+export const BE_APP_URL = 'http://localhost:3000'

@@ -9,15 +9,23 @@ import { useSubmitForm } from '../../../Hooks/Form';
 import { registerAPI } from '../../../API';
 import { Link } from 'react-router-dom';
 
+
 interface SignUpProps {
     firstName: string;
     lastName: string;
+    email: string;
+    password: string;
+    organization?: string;
     orgType?: string;
+    orgWebsite?: string;
+    jobTitle?: string;
+    linkedin?: string;
     expertise?: string;
+    aboutMe: string;
 }
 
 interface SignUpFormProps {
-    handleChange: (name: string, val: string) => void;
+    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     inputs: SignUpProps;
 }
 
@@ -35,6 +43,8 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 placeholder="First Name"
                                 required
                                 bsSize="sm"
+                                value={inputs.firstName}
+                                onChange={handleChange}
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -46,6 +56,8 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 name="lastName"
                                 placeholder="Last Name"
                                 bsSize="sm"
+                                value={inputs.lastName}
+                                onChange={handleChange}
                                 />
                             </FormGroup>
                         </div>
@@ -61,6 +73,8 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 required
                                 type='email'
                                 bsSize="sm"
+                                value={inputs.email}
+                                onChange={handleChange}
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -74,6 +88,8 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 required
                                 bsSize="sm"
                                 type='password'
+                                value={inputs.password}
+                                onChange={handleChange}
                                 />
                             </FormGroup>
                         </div>
@@ -87,6 +103,8 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 name="organization"
                                 placeholder="Organization Name"
                                 bsSize="sm"
+                                value={inputs.organization}
+                                onChange={handleChange}
                                 />
                             </FormGroup>
                             <FormGroup className='flex flex-col'>
@@ -98,12 +116,12 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 className='h-full text-gray-500 text-14p'
                                 bsSize="sm"
                                 type='select'
+                                name='orgType'
                                 value={inputs.orgType}
-                                onChange={(e: any) => handleChange('orgType', e.target.value)
-                                }
+                                onChange={handleChange}
                                 >
                                     {ORG_TYPE_OPTS.length > 0 && ORG_TYPE_OPTS.map((element, index) => (
-                                        <option value={element.val} className='text-gray-700'
+                                        <option value={element.value} className='text-gray-700'
                                         key={index}>
                                             {element.name}
                                         </option>
@@ -122,6 +140,8 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 placeholder="Organization Website"
                                 bsSize="sm"
                                 type='url'
+                                value={inputs.orgWebsite}
+                                onChange={handleChange}
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -133,6 +153,8 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 name="jobTitle"
                                 placeholder="Enter Job Title"
                                 bsSize="sm"
+                                value={inputs.jobTitle}
+                                onChange={handleChange}
                                 />
                             </FormGroup>
                         </div>
@@ -147,6 +169,8 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 placeholder="Enter your Linkedin profile link"
                                 bsSize="sm"
                                 type='url'
+                                value={inputs.linkedin}
+                                onChange={handleChange}
                                 />
                             </FormGroup>
                             <FormGroup className='flex flex-col'>
@@ -158,13 +182,12 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 className='h-full text-gray-500 text-14p'
                                 bsSize="sm"
                                 type='select'
+                                name='expertise'
                                 value={inputs.expertise}
-                                onChange={(e: any) =>
-                                handleChange('expertise', e.target.value)
-                                }
+                                onChange={handleChange}
                                 >
                                     {EXPT_TYPE_OPTS.length > 0 && EXPT_TYPE_OPTS.map((element, index) => (
-                                        <option value={element.val} className='text-gray-700'
+                                        <option value={element.value} className='text-gray-700'
                                         key={index}
                                         >
                                             {element.name}
@@ -184,6 +207,8 @@ const SignUpForm = ({ handleChange, inputs }: SignUpFormProps) => {
                                 placeholder=""
                                 bsSize="sm"
                                 type='textarea'
+                                value={inputs.aboutMe}
+                                onChange={handleChange}
                                 />
                             </FormGroup>
                         </div>
@@ -195,20 +220,28 @@ const SignupPage = () => {
     const [inputs, setInputs] = useState<SignUpProps>({
         firstName: '',
         lastName: '',
+        email: '',
+        password: '',
+        organization: '',
         orgType: '',
+        orgWebsite: '',
+        jobTitle: '',
+        linkedin: '',
         expertise: '',
+        aboutMe: '',
     });
 
 
     const { handleSubmit, loading, error } = useSubmitForm<FormData>(registerAPI);
 
 
-    const handleChange = (name: string, value: string) => {
-        setInputs({
-            ...inputs,
-            [name]: value
-        })
-    }
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      [name]: value,
+    }));
+  };
 
     const onSubmit = () => {
         console.log('Submit', inputs)
@@ -242,11 +275,11 @@ const SignupPage = () => {
                 <SignUpForm handleChange={handleChange} inputs={inputs} />
                 </div>
                 <div className='flex items-center justify-center mt-3'>
-                <StyledButton >Sign Up</StyledButton>
+                <StyledButton onClick={onSubmit}>Sign Up</StyledButton>
                 </div>
                 <div className="flex items-center justify-center mt-2">
-                    <Link to={URL_LOGIN_PAGE} className='text-14p'>
-                        Already have and account? Login
+                    <Link to={URL_LOGIN_PAGE} className='text-14p text-gray-700'>
+                        Already have an account? Login
                     </Link>
                 </div>
                 <div className='text-gray-500 mt-1 text-12p'>
