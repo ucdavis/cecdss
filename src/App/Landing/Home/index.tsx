@@ -6,8 +6,9 @@ import { Button } from 'reactstrap';
 import { MapCoordinates } from '../../Model/models/Types';
 import Navbar from '../Shared/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faBookOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faBookOpen, faCheck, faDownload, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ATTRIBUTION, MAP_BOX_TILES, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 const TitleOverlay: React.FC = () => {
   return (
@@ -52,7 +53,7 @@ const TitleOverlay: React.FC = () => {
         </Button>
       </div>
       <div className="flex justify-content-center mt-4">
-
+            
       </div>
     </div>
   );
@@ -69,6 +70,11 @@ const Home = () => {
         lat: 37.87439641742907,
         lng: -120.47592259245009
     });
+
+  const [linkCopied, setLinkCopied] = useState<boolean>(false);
+  const handleCopy = () => {
+    setLinkCopied(true)
+  };
 
   return (
     <>
@@ -90,9 +96,6 @@ const Home = () => {
             <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
             </MapContainer>
             <TitleOverlay />
-        </div>
-        <div style={{height: '90vh', width: '100%', position: 'relative', borderTop: '1px solid #395442'}}>
-
         </div>
     </>
   )

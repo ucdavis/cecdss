@@ -176,9 +176,10 @@ const getShortUrlData = async (modelID:string) => {
   return originalUrl;
 };
 
-const MapContainerComponent = ({ urlLoading, handleUrlLoadingChange }: MapContainerComponentProps) => {
+const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponentProps) => {
   const { modelID } = useParams();
   const [isExpanded, setIsExpanded] = useState(true);
+  const [saveUrl, setSaveUrl] = useState<string>('');
   const [isClusterZone, setIsClusterZone] = useState(true);
   const [isErrorZone, setIsErrorZone] = useState(true);
   const [loading, toggleLoading] = useState<boolean>(false);
@@ -380,7 +381,7 @@ const MapContainerComponent = ({ urlLoading, handleUrlLoadingChange }: MapContai
       }
     ).then(res => (res.ok ? res.json() : ('')));
 
-    console.log('ShortenURL', shortenUrl)
+    setSaveUrl(shortenUrl.shortUrl)
 
     const allYearResults: AllYearsResults = await fetch(
       serviceUrl + 'initialProcessing',
@@ -751,6 +752,7 @@ const MapContainerComponent = ({ urlLoading, handleUrlLoadingChange }: MapContai
             frcsInputs={frcsInputs}
             sensitivityResults={sensitvityResults}
             expansionFactor={expansionFactor}
+            saveUrl={saveUrl}
           />
         )}
       </div>

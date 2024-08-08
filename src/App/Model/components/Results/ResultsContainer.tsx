@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
 import {
   PaginationItem,
@@ -12,6 +12,9 @@ import { YearlyResultsContainer } from './YearlyResultsContainer';
 import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { AllResultsContainer } from './AllResultsContainer';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faDownload } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   years: number[];
@@ -31,9 +34,12 @@ interface Props {
   frcsInputs: FrcsInputs;
   sensitivityResults?: OutputModSensitivity;
   expansionFactor: number;
+  saveUrl: string | '';
 }
 
 export const ResultsContainer = (props: Props) => {
+  const [linkCopied, setLinkCopied] = useState<boolean>(false);
+
   const pages = props.years.map((year, i) => (
     <PaginationItem key={`year-${i}`} active={props.selectedYearIndex === i}>
       <PaginationLink
@@ -49,16 +55,37 @@ export const ResultsContainer = (props: Props) => {
     </PaginationItem>
   ));
 
+  const handleCopy = () => {
+    setLinkCopied(true)
+  };
+
   return (
     <>
-      <div className='cardheader d-flex justify-content-between align-items-center'>
-        <span>
+      <div className='cardheader flex flex-col justify-between items-start'>
           <h4>
             Forest Resource and Renewable Energy Decision Support System
             (FRREDSS)
           </h4>
-          <h2>Results</h2>
-        </span>
+          <div className="flex items-center justify-between w-full">
+            <h2>Results</h2>
+            <div className="flex items-center justify-center gap-x-4">
+              <CopyToClipboard text={props.saveUrl} onCopy={handleCopy}>
+                <button className="bg-white hover:bg-gray-400 text-gray-800 text-14p font-bold py-2 px-2 rounded-lg inline-flex items-center border-white border-2p w-200p">
+                  {!linkCopied ? (
+                    <div className="flex items-center justify-center gap-x-2">
+                      <FontAwesomeIcon icon={faDownload} />
+                      <span>Save Model Link</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center gap-x-2">
+                      <FontAwesomeIcon icon={faCheck} style={{ color: '#069e39' }} />
+                      <span className='text-green-100'>Link Copied to Clipboard!</span>
+                    </div>
+                  )}
+                </button>
+              </CopyToClipboard>
+            </div>
+          </div>
       </div>
       <div className='cardcontents'>
         <div className='years-pagination'>

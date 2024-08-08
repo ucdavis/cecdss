@@ -2119,6 +2119,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       color: rgb(255 255 255 / var(--tw-text-opacity));
     }
 
+    .text-green-100 {
+      color: #069e39;
+    }
+
     .text-brand {
       color: #395442;
     }
