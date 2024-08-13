@@ -1,14 +1,21 @@
+import { faBook, faBookOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LatLngBoundsExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import React, { useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { Button } from 'reactstrap';
+import { ATTRIBUTION, MAP_BOX_TILES, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
 import { MapCoordinates } from '../../Model/models/Types';
 import Navbar from '../Shared/Navbar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faBookOpen, faCheck, faDownload, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { ATTRIBUTION, MAP_BOX_TILES, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
-import CopyToClipboard from 'react-copy-to-clipboard';
+import { publications } from './data';
+import Publications from './Publications';
+import map from '../../../Resources/Images/map.png'
+import Title from '../Shared/Title';
+import Footer from '../Shared/Footer';
+import ModelFeatures from './ModelFeatures';
+import AppFeatures from './AppFeatures';
+import Team from './Team';
 
 const TitleOverlay: React.FC = () => {
   return (
@@ -27,6 +34,7 @@ const TitleOverlay: React.FC = () => {
             href={URL_MODEL_PAGE}
             target="_blank"
             rel="noopener noreferrer"
+            size='lg'
         >
             <FontAwesomeIcon icon={faPlus} className="mr-1" />
             Run New Model
@@ -39,21 +47,20 @@ const TitleOverlay: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             download="User_Guide_FREDDSS.pdf"
+            size='lg'
         >
-            <FontAwesomeIcon icon={faBookOpen} className="mr-2" />
+            <FontAwesomeIcon icon={faBookOpen} className="mr-1" />
             User Guide
         </Button>
         <Button
             style={{
             background:'#395442'
             }}
+            size='lg'
         >
-            <FontAwesomeIcon icon={faBook} className="mr-2" />
+            <FontAwesomeIcon icon={faBook} className="mr-1" />
             Publications
         </Button>
-      </div>
-      <div className="flex justify-content-center mt-4">
-            
       </div>
     </div>
   );
@@ -79,23 +86,54 @@ const Home = () => {
   return (
     <>
         <Navbar />
-        <div
-            style={{ height: '100vh', width: '100%', position: 'relative' }}
-        >
-            <MapContainer 
-                center={center} 
-                zoom={9} 
-                className="fullscreen-map" 
-                style={{ width: '100%', height: '100%', zIndex: 1 }}
-                scrollWheelZoom={false}
-                dragging={false} 
-                doubleClickZoom={false}
-                boxZoom={false}    
-                keyboard={false}  
-            >
-            <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
-            </MapContainer>
-            <TitleOverlay />
+        <div className="flex flex-col items-center justify-center overflow-x-hidden gap-y-24">
+          <div
+            className='w-screen h-screen relative flex flex-col items-center justify-center'
+          >
+              <div className='w-full h-full mt-10 rounded-b'>
+                <img src={map} alt="" className='object-fill rounded-xl shadow w-full h-full rounded-b' />
+              </div>
+              <TitleOverlay />
+          </div>
+          <div className="max-w-1028p flex items-center justify-center flex-col mb-10">
+            <div className='w-full'>
+              <Title title={'Model Features'} />
+            </div>
+            <div className='mt-10'>
+              <ModelFeatures />
+            </div>
+          </div>
+          <div className="w-full flex items-center justify-center flex-col bg-brand px-4 pt-4 pb-16" id='publications'>
+            <div className="max-w-1028p  flex items-center justify-center flex-col">
+              <div className='w-full'>
+                <Title title={'Publications'} light />
+              </div>
+              <div>
+                <Publications />
+              </div>
+            </div>
+          </div>
+          <div className="max-w-1028p flex items-center justify-center flex-col">
+            <div className='w-full'>
+              <Title title={'App Features'} />
+            </div>
+            <div className='mt-10'>
+              <AppFeatures />
+            </div>
+          </div>
+          <div className="w-full flex items-center justify-center flex-col bg-brand px-4 pt-4 pb-16">
+            <div className="max-w-1028p flex items-center justify-center flex-col">
+              <div className='w-full'>
+                <Title title={'Our Team'} light />
+              </div>
+              <div className='w-full' id='team'>
+                <Team />
+              </div>
+            </div>
+          </div>
+          <div className='w-full'>
+            <Footer />
+          </div>
         </div>
     </>
   )

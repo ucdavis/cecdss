@@ -30,6 +30,7 @@
     "react-esri-leaflet": "^2.0.1",
     "react-leaflet": "^4.2.1",
     "react-leaflet-kml": "^2.1.2",
+    "react-multi-carousel": "^2.8.5",
     "react-router-dom": "^6.25.1",
     "react-scripts": "^5.0.1",
     "react-table": "^7.8.0",

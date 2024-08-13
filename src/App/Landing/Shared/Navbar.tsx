@@ -12,7 +12,7 @@ import {
   Navbar as ReactstrapNavbar,
 } from 'reactstrap';
 import styled from 'styled-components';
-import { URL_LANDING_PAGE, URL_LOGIN_PAGE, URL_MODEL_PAGE, URL_REGISTER_PAGE } from '../../../Resources/Constants';
+import { URL_LANDING_PAGE, URL_LOGIN_PAGE, URL_MODEL_PAGE, URL_REGISTER_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
 import logo from '../../../Resources/Images/logo.svg';
 import '../../../Styles/Landing.css';
 
@@ -37,21 +37,33 @@ const Navbar: React.FC = () => {
           <Nav className="ml-auto d-flex align-items-center">
             <NavItem className="mr-3">
               <StyledNavLink href={URL_LANDING_PAGE} className="nav-link-bold">
-                <FontAwesomeIcon icon={faHome} className="mr-1" />
                 Home
-
               </StyledNavLink>
             </NavItem>
             <NavItem className="mr-3">
-              <StyledNavLink href={URL_LOGIN_PAGE} className="nav-link-bold">
-                <FontAwesomeIcon icon={faArrowRightFromBracket} className="mr-1" />
-                Login
+              <StyledNavLink 
+                href={USER_GUIDE_LINK} 
+                className="nav-link-bold"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="User_Guide_FREDDSS.pdf"
+              >
+                User Guide
+              </StyledNavLink>
+            </NavItem>
+            <NavItem className="mr-3">
+              <StyledNavLink href={`${URL_LANDING_PAGE}#publications`} className="nav-link-bold">
+                Publications
+              </StyledNavLink>
+            </NavItem>
+            <NavItem className="mr-3">
+              <StyledNavLink href={`${URL_LANDING_PAGE}#team`} className="nav-link-bold">
+                Team
               </StyledNavLink>
             </NavItem>
             <NavItem className="mr-3">
               <StyledNavLink href={URL_REGISTER_PAGE} className="nav-link-bold">
-                <FontAwesomeIcon icon={faUserPlus} className="mr-1" />
-                Register
+                Login/Register
               </StyledNavLink>
             </NavItem>
             <NavItem>

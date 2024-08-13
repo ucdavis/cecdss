@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
+import { faCheck, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { InputModCHP, InputModGP, InputModGPO } from '@ucdavis/tea/input.model';
+import { OutputModSensitivity } from '@ucdavis/tea/output.model';
+import { useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
+  Pagination,
   PaginationItem,
   PaginationLink,
-  Spinner,
-  Pagination,
-  Alert,
-  Progress
+  Progress,
+  Spinner
 } from 'reactstrap';
-import { YearlyResultsContainer } from './YearlyResultsContainer';
-import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
+import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
 import { AllResultsContainer } from './AllResultsContainer';
-import { OutputModSensitivity } from '@ucdavis/tea/output.model';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { YearlyResultsContainer } from './YearlyResultsContainer';
 
 interface Props {
   years: number[];

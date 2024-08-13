@@ -954,6 +954,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       margin-top: 2.5rem;
     }
 
+    .mt-100p {
+      margin-top: 100px;
+    }
+
     .mt-12 {
       margin-top: 3rem;
     }
@@ -1030,6 +1034,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       height: 0px;
     }
 
+    .h-180p {
+      height: 180px;
+    }
+
     .h-0\.5 {
       height: 0.125rem;
     }
@@ -1038,11 +1046,13 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       height: 100px;
     }
 
+    .h-150p {
+      height: 150px;
+    }
+
     .h-11 {
       height: 2.75rem;
     }
-
-    
 
     .h-250p {
       height: 250px;
@@ -1106,6 +1116,22 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
     .h-20 {
       height: 20rem;
+    }
+
+    .h-30per {
+      height: 30%;
+    }
+
+    .h-40per {
+      height: 40%;
+    }
+
+    .h-60per {
+      height: 60%;
+    }
+
+    .h-70per {
+      height: 70%;
     }
 
     .h-80per {
@@ -1172,6 +1198,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       width: 180px;
     }
 
+    .w-200p {
+      width: 200px;
+    }
+
     .w-220p {
       width: 220px;
     }
@@ -1236,6 +1266,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       width: 80%;
     }
 
+    .w-90per {
+      width: 90%;
+    }
+
     .w-920p {
       width: 920px;
     }
@@ -1264,8 +1298,28 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       max-width: 250px;
     }
 
+    .max-w-820p {
+      max-width: 820px;
+    }
+
+    .max-w-1028p {
+      max-width: 1028px;
+    }
+
+    .max-w-80per {
+      max-width: 80%;
+    }
+
+    .min-w-200p {
+      min-width: 200px;
+    }
+
     .flex-1 {
       flex: 1 1 0%;
+    }
+
+    .flex-wrap {
+      flex-wrap: wrap;
     }
 
     .flex-initial {
@@ -1359,6 +1413,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
+    .grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
     .grid-cols-3f-1f {
       grid-template-columns: 3fr 1fr;
     }
@@ -1403,6 +1461,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       justify-content: space-evenly;
     }
 
+    .gap-8 {
+      gap: 2rem;
+    }
+    
     .gap-16 {
       gap: 4rem;
     }
@@ -1503,6 +1565,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       border-radius: 0.5rem;
     }
 
+    .rounded-xl {
+      border-radius: 1rem;
+    }
+
     .rounded-md {
       border-radius: 0.375rem;
     }
@@ -1510,6 +1576,11 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
     .rounded-t {
       border-top-left-radius: 0.25rem;
       border-top-right-radius: 0.25rem;
+    }
+
+    .rounded-b {
+      border-bottom-left-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
     }
 
     .rounded-bl-md {
@@ -1547,6 +1618,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
     .border-b-2 {
       border-bottom-width: 2px;
+    }
+
+    .border-b-1p {
+      border-bottom-width: 1px;
     }
 
     .border-b-2p {
@@ -1683,6 +1758,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       background-color: rgb(20 83 45 / var(--tw-bg-opacity));
     }
 
+    .bg-green-10 {
+      background-color: #e4fde6;
+    }
+
     .bg-red-100 {
       --tw-bg-opacity: 1;
       background-color: rgb(254 226 226 / var(--tw-bg-opacity));
@@ -1737,6 +1816,18 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
     .p-1 {
       padding: 0.25rem;
+    }
+
+    .p-8 {
+      padding: 1rem;
+    }
+
+    .object-fill {
+      object-fit: fill;
+    }
+
+    .object-cover {
+      object-fit: cover;
     }
 
     .p-2 {
@@ -1874,6 +1965,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       padding-bottom: 2rem;
     }
 
+    .pb-16 {
+      padding-bottom: 4rem;
+    }
+
     .pl-4 {
       padding-left: 1rem;
     }
@@ -1956,6 +2051,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
     .text-22p {
       font-size: 22px;
+    }
+
+    .text-24p {
+      font-size: 24px;
+    }
+
+    .text-28p {
+      font-size: 28px;
     }
 
     .text-2xl {
@@ -2227,6 +2330,7 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       -moz-osx-font-smoothing: grayscale;
       /* background: var(--background-color); */
       transition: background-image 1s;
+      background-image: linear-gradient(-225deg, #FFFEFF 0%, #e4fde6 100%);
     }
 
     code {
@@ -2299,6 +2403,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       100% {
         transform: rotate(405deg);
       }
+    }
+
+    .duration-300 {
+      transition-duration: 300ms;
     }
 
     .before\:absolute::before {
@@ -2731,6 +2839,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       content: var(--tw-content);
       --tw-border-opacity: 1;
       border-color: rgb(185 28 28 / var(--tw-border-opacity));
+    }
+
+    .skew-y-2 {
+      transform: skewY(2deg);
     }
 
     @media (max-width: 640px) {
