@@ -1,4 +1,4 @@
-import { faArrowRightFromBracket, faHome, faPlus, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import {
@@ -12,12 +12,15 @@ import {
   Navbar as ReactstrapNavbar,
 } from 'reactstrap';
 import styled from 'styled-components';
-import { URL_LANDING_PAGE, URL_LOGIN_PAGE, URL_MODEL_PAGE, URL_REGISTER_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
+import { URL_LANDING_PAGE, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
 import logo from '../../../Resources/Images/logo.svg';
 import '../../../Styles/Landing.css';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { loginWithRedirect } = useAuth0();
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -61,8 +64,8 @@ const Navbar: React.FC = () => {
                 Team
               </StyledNavLink>
             </NavItem>
-            <NavItem className="mr-3">
-              <StyledNavLink href={URL_REGISTER_PAGE} className="nav-link-bold">
+            <NavItem className="mr-3 cursor-pointer" onClick={() => loginWithRedirect()}>
+              <StyledNavLink className="nav-link-bold">
                 Login/Register
               </StyledNavLink>
             </NavItem>

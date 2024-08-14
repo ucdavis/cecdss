@@ -6,16 +6,16 @@ import React, { useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { Button } from 'reactstrap';
 import { ATTRIBUTION, MAP_BOX_TILES, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
-import { MapCoordinates } from '../../Model/models/Types';
+import { MapCoordinates } from '../../App/Model/models/Types';
 import Navbar from '../Shared/Navbar';
 import { publications } from './data';
-import Publications from './Publications';
+import Publications from './Sections/Publications';
 import map from '../../../Resources/Images/map.png'
 import Title from '../Shared/Title';
 import Footer from '../Shared/Footer';
-import ModelFeatures from './ModelFeatures';
-import AppFeatures from './AppFeatures';
-import Team from './Team';
+import ModelFeatures from './Sections/ModelFeatures';
+import AppFeatures from './Sections/AppFeatures';
+import Team from './Sections/Team';
 
 const TitleOverlay: React.FC = () => {
   return (
@@ -103,8 +103,8 @@ const Home = () => {
               <ModelFeatures />
             </div>
           </div>
-          <div className="w-full flex items-center justify-center flex-col bg-brand px-4 pt-4 pb-16" id='publications'>
-            <div className="max-w-1028p  flex items-center justify-center flex-col">
+          <div className="w-full flex items-center justify-center flex-col bg-brand px-4 pt-4 pb-16">
+            <div className="max-w-1028p  flex items-center justify-center flex-col" id='publications'>
               <div className='w-full'>
                 <Title title={'Publications'} light />
               </div>

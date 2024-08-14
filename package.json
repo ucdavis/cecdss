@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.4",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -15,6 +16,7 @@
     "bootstrap": "^4.6.0",
     "d3": "^5.16.0",
     "d3-hexbin": "^0.2.2",
+    "dotenv": "^16.4.5",
     "esri-leaflet": "^3.0.12",
     "esri-leaflet-geocoder": "^3.1.4",
     "esri-leaflet-renderers": "^3.0.1",
@@ -30,7 +32,6 @@
     "react-esri-leaflet": "^2.0.1",
     "react-leaflet": "^4.2.1",
     "react-leaflet-kml": "^2.1.2",
-    "react-multi-carousel": "^2.8.5",
     "react-router-dom": "^6.25.1",
     "react-scripts": "^5.0.1",
     "react-table": "^7.8.0",

@@ -1,6 +1,6 @@
 import React from 'react'
-import { publications } from './data'
-import { PublicationCard } from './Card'
+import { publications } from '../data'
+import { PublicationCard } from '../Components/Card'
 
 const Publications = () => {
   return (

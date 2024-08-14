@@ -1,6 +1,6 @@
 import React from 'react'
 
-import defaultImage from '../../../Resources/Images/default.jpg'
+import defaultImage from '../../../../Resources/Images/default.jpg'
 
 import { Button } from 'reactstrap';
 

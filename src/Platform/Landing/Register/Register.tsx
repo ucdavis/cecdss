@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { EXPT_TYPE_OPTS, ORG_TYPE_OPTS, URL_LOGIN_PAGE, URL_PRIVACY_POLICY } from '../../../Resources/Constants';
+import { EXPT_TYPE_OPTS, ORG_TYPE_OPTS, URL_PRIVACY_POLICY } from '../../../Resources/Constants';
 import logo from '../../../Resources/Images/logoBig.svg';
 import '../../../Styles/Landing.css';
 import Navbar from '../Shared/Navbar';
 import styled from 'styled-components';
 import { useSubmitForm } from '../../../Hooks/Form';
-import { registerAPI } from '../../../API';
+import { registerAPI } from '../../../Api';
 import { Link } from 'react-router-dom';
 
 
@@ -276,11 +276,6 @@ const SignupPage = () => {
                 </div>
                 <div className='flex items-center justify-center mt-3'>
                 <StyledButton onClick={onSubmit}>Sign Up</StyledButton>
-                </div>
-                <div className="flex items-center justify-center mt-2">
-                    <Link to={URL_LOGIN_PAGE} className='text-14p text-gray-700'>
-                        Already have an account? Login
-                    </Link>
                 </div>
                 <div className='text-gray-500 mt-1 text-12p'>
                     By clicking continue you agree to our <span>

@@ -2330,7 +2330,7 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       -moz-osx-font-smoothing: grayscale;
       /* background: var(--background-color); */
       transition: background-image 1s;
-      background-image: linear-gradient(-225deg, #FFFEFF 0%, #e4fde6 100%);
+      background-image: linear-gradient(-225deg, #FFFEFF 0%, #f0f8f1 100%);
     }
 
     code {

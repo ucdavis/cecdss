@@ -1,6 +1,6 @@
 import React from 'react'
-import { team } from './data'
-import { TeamCard } from './Card'
+import { team } from '../data'
+import { TeamCard } from '../Components/Card'
 
 
 const Team = () => {
