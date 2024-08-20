@@ -1,20 +1,18 @@
-import { faBook, faBookOpen, faDownload, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faBookOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LatLngBoundsExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import React, { useState } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
 import { Button } from 'reactstrap';
-import { ATTRIBUTION, MAP_BOX_TILES, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
-import { MapCoordinates } from '../../App/Model/models/Types';
-import Navbar from '../Shared/Navbar';
-import { publications } from './data';
-import Publications from './Sections/Publications';
-import map from '../../../Resources/Images/map.png'
-import Title from '../Shared/Title';
+import { URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
+import map from '../../../Resources/Images/map.png';
+import { MapCoordinates } from '../../Model/models/Types';
 import Footer from '../Shared/Footer';
-import ModelFeatures from './Sections/ModelFeatures';
+import Navbar from '../Shared/Navbar';
+import Title from '../Shared/Title';
 import AppFeatures from './Sections/AppFeatures';
+import ModelFeatures from './Sections/ModelFeatures';
+import Publications from './Sections/Publications';
 import Team from './Sections/Team';
 
 const TitleOverlay: React.FC = () => {

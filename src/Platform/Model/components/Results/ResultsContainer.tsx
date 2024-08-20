@@ -61,13 +61,14 @@ export const ResultsContainer = (props: Props) => {
   return (
     <>
       <div className='cardheader flex flex-col justify-between items-start'>
-          <h4>
+          <div className='text-white text-20p'>
             Forest Resource and Renewable Energy Decision Support System
             (FRREDSS)
-          </h4>
-          <div className="flex items-center justify-between w-full mt-3">
-            <h2>Results</h2>
-            <div className="flex items-center justify-center gap-x-4">
+          </div>
+          <div className="flex items-center justify-between w-full mt-2">
+            <div className='text-white text-36p'>Results</div>
+           {props.saveUrl && (
+             <div className="flex items-center justify-center gap-x-4">
               <CopyToClipboard text={props.saveUrl} onCopy={handleCopy}>
                 <button className="bg-white hover:bg-gray-400 text-gray-800 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p">
                   {!linkCopied ? (
@@ -84,6 +85,7 @@ export const ResultsContainer = (props: Props) => {
                 </button>
               </CopyToClipboard>
             </div>
+           )}
           </div>
       </div>
       <div className='cardcontents'>

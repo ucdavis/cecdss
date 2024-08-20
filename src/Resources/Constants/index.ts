@@ -3,10 +3,6 @@ export const URL_REROUTE_PAGE = '/pages/home'
 export const URL_LANDING_PAGE = '/pages/home'
 export const URL_MODEL_PAGE = '/pages/model'
 export const URL_MODEL_ID_PAGE = '/pages/model/:modelID'
-export const URL_COMPLETE_REGISTER_PAGE = '/pages/register';
-export const URL_SETTINGS_PAGE = '/pages/settings'
-export const URL_DASHBOARD_PAGE = '/pages/dashboard'
-export const URL_LOGOUT = ''
 
 // LEAFLET MAP LAYERS
 export const ACCESS_TOKEN =

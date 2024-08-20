@@ -4,7 +4,6 @@ import App from './App';
 import './Styles/Landing.css';
 import './Styles/index.css';
 import * as serviceWorker from './serviceWorker';
-import { AppContextProvider } from './Context/AppContextProvider';
 
 const rootElement = document.getElementById('root');
 
@@ -15,9 +14,7 @@ if (rootElement) {
 
   root.render(
     <React.StrictMode>
-      <AppContextProvider>
         <App />
-      </AppContextProvider>
     </React.StrictMode>
   );
 

@@ -15,12 +15,9 @@ import styled from 'styled-components';
 import { URL_LANDING_PAGE, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
 import logo from '../../../Resources/Images/logo.svg';
 import '../../../Styles/Landing.css';
-import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const { loginWithRedirect } = useAuth0();
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -62,11 +59,6 @@ const Navbar: React.FC = () => {
             <NavItem className="mr-3">
               <StyledNavLink href={`${URL_LANDING_PAGE}#team`} className="nav-link-bold">
                 Team
-              </StyledNavLink>
-            </NavItem>
-            <NavItem className="mr-3 cursor-pointer" onClick={() => loginWithRedirect()}>
-              <StyledNavLink className="nav-link-bold">
-                Login/Register
               </StyledNavLink>
             </NavItem>
             <NavItem>
