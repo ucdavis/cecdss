@@ -65,7 +65,7 @@ export const ResultsContainer = (props: Props) => {
             Forest Resource and Renewable Energy Decision Support System
             (FRREDSS)
           </h4>
-          <div className="flex items-center justify-between w-full">
+          <div className="flex items-center justify-between w-full mt-3">
             <h2>Results</h2>
             <div className="flex items-center justify-center gap-x-4">
               <CopyToClipboard text={props.saveUrl} onCopy={handleCopy}>

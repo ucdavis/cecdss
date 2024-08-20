@@ -619,19 +619,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
               icon={showTransportationGeoJson ? faEye : faEyeSlash}
             />
           </Button>
-          {/* <Button
-            onClick={() => {
-              toggleHeatmap(h => !h);
-            }}
-            active={showHeatmap}
-            title='Heatmap scaled by density of biomass'
-            color='primary'
-            className='toggle-buttons heatmap-toggle'
-          >
-            <span>{!showHeatmap ? 'Show Heatmap' : 'Hide Heatmap'}</span>
-            <FontAwesomeIcon icon={showHeatmap ? faEye : faEyeSlash} />
-          </Button> */}
-          <Button
+                    <Button
             onClick={() => {
               setIsErrorZone(!isErrorZone);
               toggleErrorGeoJson(!showErrorGeoJson);
@@ -639,7 +627,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             active={showErrorGeoJson}
             title='Cluster zones which cannot be used for biomass'
             color='primary'
-            className='toggle-buttons error-toggle'
+            className='toggle-buttons expand-toggle'
           >
             <span>{isErrorZone ? 'Show Unusable Zones' : 'Hide Unusable Zones'}</span>
             <FontAwesomeIcon icon={isErrorZone ? faEye : faEyeSlash} />
@@ -651,7 +639,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             }}
             active={showGeoJson}
             color='primary'
-            className='toggle-buttons cluster-toggle'
+            className='toggle-buttons heatmap-toggle'
           >
             <span>
               {isClusterZone ? 'Hide Cluster Zones' : 'Show Cluster Zones'}
@@ -659,7 +647,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             <FontAwesomeIcon icon={isClusterZone ? faEyeSlash : faEye} />
           </Button>
           <Button
-            className='toggle-buttons expand-toggle'
+            className='toggle-buttons cluster-toggle'
             color='primary'
             onClick={() => {
               setIsExpanded(!isExpanded);
