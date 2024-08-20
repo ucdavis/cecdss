@@ -604,7 +604,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             disabled={allResultsSelected}
             title='Show Move-In Geometry in selected year'
             color='primary'
-            className='toggle-buttons movein-toggle'
+            className='toggle-buttons movein-toggle flex items-center justify-between gap-x-2'
           >
             <span>{!showMoveInGeoJson ? 'Show Move In' : 'Hide Move In'}</span>
             <FontAwesomeIcon icon={showMoveInGeoJson ? faEye : faEyeSlash} />
@@ -617,7 +617,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             disabled={allResultsSelected}
             title='Show Transportation Geometry in selected year'
             color='primary'
-            className='toggle-buttons transportation-toggle'
+            className='toggle-buttons transportation-toggle flex items-center justify-between gap-x-2'
           >
             <span>
               {!showTransportationGeoJson
@@ -636,7 +636,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             active={showErrorGeoJson}
             title='Cluster zones which cannot be used for biomass'
             color='primary'
-            className='toggle-buttons expand-toggle'
+            className='toggle-buttons expand-toggle flex items-center justify-between gap-x-2'
           >
             <span>{isErrorZone ? 'Show Unusable Zones' : 'Hide Unusable Zones'}</span>
             <FontAwesomeIcon icon={isErrorZone ? faEye : faEyeSlash} />
@@ -648,7 +648,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             }}
             active={showGeoJson}
             color='primary'
-            className='toggle-buttons heatmap-toggle'
+            className='toggle-buttons heatmap-toggle flex items-center justify-between gap-x-2'
           >
             <span>
               {isClusterZone ? 'Hide Cluster Zones' : 'Show Cluster Zones'}
@@ -656,7 +656,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             <FontAwesomeIcon icon={isClusterZone ? faEyeSlash : faEye} />
           </Button>
           <Button
-            className='toggle-buttons cluster-toggle'
+            className='toggle-buttons cluster-toggle flex items-center justify-between gap-x-2'
             color='primary'
             onClick={() => {
               setIsExpanded(!isExpanded);

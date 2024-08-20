@@ -157,7 +157,7 @@
 }
 .toggle-buttons {
   position: fixed;
-  padding-bottom: 24px;
+  padding-bottom: 8px;
   border-radius: 8px;
   left: 0.5%;
   z-index: 2000;
