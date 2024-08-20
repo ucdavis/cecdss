@@ -1,4 +1,4 @@
-import { faBook, faBookOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faBookOpen, faDownload, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LatLngBoundsExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';

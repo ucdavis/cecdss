@@ -69,7 +69,7 @@ export const ResultsContainer = (props: Props) => {
             <h2>Results</h2>
             <div className="flex items-center justify-center gap-x-4">
               <CopyToClipboard text={props.saveUrl} onCopy={handleCopy}>
-                <button className="bg-white hover:bg-gray-400 text-gray-800 text-14p font-bold py-2 px-2 rounded-lg inline-flex items-center border-white border-2p w-200p">
+                <button className="bg-white hover:bg-gray-400 text-gray-800 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p">
                   {!linkCopied ? (
                     <div className="flex items-center justify-center gap-x-2">
                       <FontAwesomeIcon icon={faDownload} />

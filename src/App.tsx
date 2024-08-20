@@ -6,7 +6,7 @@ import NotFound from './Shared/NotFound';
 import { URL_COMPLETE_REGISTER_PAGE, URL_DASHBOARD_PAGE, URL_LANDING_PAGE, URL_MODEL_ID_PAGE, URL_MODEL_PAGE, URL_REROUTE_PAGE, URL_SETTINGS_PAGE } from './Resources/Constants';
 import { MapContainerWrapper } from './Platform/App/Model/components/Map/MapContainer';
 import Home from './Platform/Landing/Home';
-import { AuthenticationGuard } from './Platform/App/Auth/AuthenticationGuard';
+import { AuthenticationGuard } from './AuthenticationGuard';
 import Dashboard from './Platform/App/Dashboard'
 import Register from './Platform/App/Register'
 import Settings from './Platform/App/Settings'
@@ -21,15 +21,15 @@ const App = () => {
           <Route path={`${URL_LANDING_PAGE}`} element={<Home />} />
           <Route 
             path={`${URL_DASHBOARD_PAGE}`} 
-            element={<AuthenticationGuard component={Dashboard} />}
+            element={<AuthenticationGuard component={Dashboard} name='dashboard' />}
           />
           <Route 
             path={`${URL_COMPLETE_REGISTER_PAGE}`} 
-            element={<AuthenticationGuard component={Register} />}
+            element={<AuthenticationGuard component={Register} name='register' />}
           />
           <Route 
             path={`${URL_SETTINGS_PAGE}`} 
-            element={<AuthenticationGuard component={Settings} />}
+            element={<AuthenticationGuard component={Settings} name='settings' />}
           />
           <Route path='*' element={<NotFound />} />
           <Route index element={<Navigate to={`${URL_REROUTE_PAGE}`} />} />

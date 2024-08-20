@@ -1,16 +1,18 @@
-import React from 'react';
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
+import React, { useState } from 'react';
 
+import { faDownload, faFileExcel } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, Spinner } from 'reactstrap';
 import {
   AllYearsResults,
+  ClusterResult,
   FrcsInputs,
   Treatments,
   YearlyResult
 } from '../../models/Types';
-import { Button } from 'reactstrap';
 import { formatCurrency, formatNumber } from '../Shared/util';
-import { myBase64Image } from '../Shared/myBase64Image';
 
 interface Props {
   allYearResults: AllYearsResults;
@@ -23,6 +25,8 @@ interface Props {
 }
 
 export const ResultsExport = (props: Props) => {
+  const [clusterExcelLoading, setClusterExcelLoading] = useState<boolean>(false);
+  const [makeExcelLoading, setMakeExcelLoading] = useState<boolean>(false);
   // don't show export until all years are done running
   if (
     !props.yearlyResults ||
@@ -30,6 +34,8 @@ export const ResultsExport = (props: Props) => {
   ) {
     return <></>;
   }
+
+  const moistureContent = props.teaInputs.ElectricalFuelBaseYear.MoistureContent ? (props.teaInputs.ElectricalFuelBaseYear.MoistureContent/100) : 1;
 
   const treatmentIndex = Treatments.findIndex(
     x => x.id === props.frcsInputs.treatmentid
@@ -40,7 +46,154 @@ export const ResultsExport = (props: Props) => {
     props.allYearResults.teaInputs.CapitalCost
   );
 
+  const makeClusterExcel = async () => {
+    setClusterExcelLoading(true);
+    const workbook = new ExcelJS.Workbook();
+
+    props.yearlyResults.forEach((data, _) => {
+      const { year, clusters } = data;
+
+      const worksheet = workbook.addWorksheet(String(year));
+
+      worksheet.columns = [
+        { header: 'Cluster No', key: 'cluster_no', width: 15 },
+        { header: 'Area', key: 'area', width: 10 },
+        { header: 'Biomass', key: 'biomass', width: 20 },
+        { header: 'Center Lat', key: 'center_lat', width: 20 },
+        { header: 'Center Lng', key: 'center_lng', width: 20 },
+        { header: 'Combined Cost', key: 'combinedCost', width: 30 },
+        { header: 'County', key: 'county', width: 15 },
+        { header: 'Distance', key: 'distance', width: 15 },
+        { header: 'Forest Type', key: 'forest_type', width: 15 },
+        { header: 'Haz Class', key: 'haz_class', width: 15 },
+        { header: 'Land Use', key: 'land_use', width: 15 },
+        { header: 'Landing Distance', key: 'landing_distance', width: 15 },
+        { header: 'Landing Lat', key: 'landing_lat', width: 20 },
+        { header: 'Landing Lng', key: 'landing_lng', width: 20 },
+        { header: 'Residue Cost', key: 'residueCost', width: 20 },
+        { header: 'Site Class', key: 'site_class', width: 20 },
+        { header: 'Transportation Cost', key: 'transportationCost', width: 25 },
+
+        { header: 'Yield Per Acre', key: 'frcsResult_total_yieldPerAcre', width: 15 },
+        { header: 'Cost Per Acre', key: 'frcsResult_total_costPerAcre', width: 15 },
+        { header: 'Cost Per Bole CCF', key: 'frcsResult_total_costPerBoleCCF', width: 15 },
+        { header: 'Cost Per GT', key: 'frcsResult_total_costPerGT', width: 15 },
+        { header: 'Diesel Per Acre', key: 'frcsResult_total_dieselPerAcre', width: 15 },
+        { header: 'Diesel Per Bole CCF', key: 'frcsResult_total_dieselPerBoleCCF', width: 15 },
+        { header: 'Gasoline Per Acre', key: 'frcsResult_total_gasolinePerAcre', width: 15 },
+        { header: 'Gasoline Per Bole CCF', key: 'frcsResult_total_gasolinePerBoleCCF', width: 15 },
+        { header: 'Jet Fuel Per Acre', key: 'frcsResult_total_jetFuelPerAcre', width: 15 },
+        { header: 'Jet Fuel Per Bole CCF', key: 'frcsResult_total_jetFuelPerBoleCCF', width: 15 },
+
+        { header: 'Yield Per Acre', key: 'frcsResult_residual_yieldPerAcre', width: 15 },
+        { header: 'Cost Per Acre', key: 'frcsResult_residual_costPerAcre', width: 15 },
+        { header: 'Cost Per Bole CCF', key: 'frcsResult_residual_costPerBoleCCF', width: 15 },
+        { header: 'Cost Per GT', key: 'frcsResult_residual_costPerGT', width: 15 },
+        { header: 'Diesel Per Acre', key: 'frcsResult_residual_dieselPerAcre', width: 15 },
+        { header: 'Diesel Per Bole CCF', key: 'frcsResult_residual_dieselPerBoleCCF', width: 15 },
+        { header: 'Gasoline Per Acre', key: 'frcsResult_residual_gasolinePerAcre', width: 15 },
+        { header: 'Gasoline Per Bole CCF', key: 'frcsResult_residual_gasolinePerBoleCCF', width: 15 },
+        { header: 'Jet Fuel Per Acre', key: 'frcsResult_residual_jetFuelPerAcre', width: 15 },
+        { header: 'Jet Fuel Per Bole CCF', key: 'frcsResult_residual_jetFuelPerBoleCCF', width: 15 },
+      ];
+
+
+        worksheet.mergeCells('R1:AA1');
+        worksheet.mergeCells('AB1:AK1');
+        worksheet.getCell('R1').value = 'FRCS Result (Total)';
+        worksheet.getCell('AB1').value = 'FRCS Result (Residual)';
+
+        worksheet.getCell('R2').value = 'Yield Per Acre';
+        worksheet.getCell('S2').value = 'Cost Per Acre';
+        worksheet.getCell('T2').value = 'Cost Per Bole CCF';
+        worksheet.getCell('U2').value = 'Cost Per GT';
+        worksheet.getCell('V2').value = 'Diesel Per Acre';
+        worksheet.getCell('W2').value = 'Diesel Per Bole CCF';
+        worksheet.getCell('X2').value = 'Gasoline Per Acre';
+        worksheet.getCell('Y2').value = 'Gasoline Per Bole CCF';
+        worksheet.getCell('Z2').value = 'Jet Fuel Per Acre';
+        worksheet.getCell('AA2').value = 'Jet Fuel Per Bole CCF';
+
+        worksheet.getCell('AB2').value = 'Yield Per Acre';
+        worksheet.getCell('AC2').value = 'Cost Per Acre';
+        worksheet.getCell('AD2').value = 'Cost Per Bole CCF';
+        worksheet.getCell('AE2').value = 'Cost Per GT';
+        worksheet.getCell('AF2').value = 'Diesel Per Acre';
+        worksheet.getCell('AG2').value = 'Diesel Per Bole CCF';
+        worksheet.getCell('AH2').value = 'Gasoline Per Acre';
+        worksheet.getCell('AI2').value = 'Gasoline Per Bole CCF';
+        worksheet.getCell('AJ2').value = 'Jet Fuel Per Acre';
+        worksheet.getCell('AK2').value = 'Jet Fuel Per Bole CCF';
+
+      clusters.forEach((cluster) => {
+        const { total, residual } = cluster.frcsResult;
+        const row = worksheet.addRow({
+          cluster_no: cluster.cluster_no,
+          area: cluster.area,
+          biomass: (cluster.biomass)*moistureContent,
+          center_lat: cluster.center_lat,
+          center_lng: cluster.center_lng,
+          combinedCost: cluster.combinedCost,
+          county: cluster.county,
+          distance: cluster.distance,
+          forest_type: cluster.forest_type,
+          haz_class: cluster.haz_class,
+          land_use: cluster.land_use,
+          landing_distance: cluster.landing_distance,
+          landing_lat: cluster.landing_lat,
+          landing_lng: cluster.landing_lng,
+          residueCost: cluster.residueCost,
+          site_class: cluster.site_class,
+          transportationCost: cluster.transportationCost,
+
+          frcsResult_total_yieldPerAcre: total.yieldPerAcre,
+          frcsResult_total_costPerAcre: total.costPerAcre,
+          frcsResult_total_costPerBoleCCF: total.costPerBoleCCF,
+          frcsResult_total_costPerGT: total.costPerGT,
+          frcsResult_total_dieselPerAcre: total.dieselPerAcre,
+          frcsResult_total_dieselPerBoleCCF: total.dieselPerBoleCCF,
+          frcsResult_total_gasolinePerAcre: total.gasolinePerAcre,
+          frcsResult_total_gasolinePerBoleCCF: total.gasolinePerBoleCCF,
+          frcsResult_total_jetFuelPerAcre: total.jetFuelPerAcre,
+          frcsResult_total_jetFuelPerBoleCCF: total.jetFuelPerBoleCCF,
+
+          frcsResult_residual_yieldPerAcre: residual.yieldPerAcre,
+          frcsResult_residual_costPerAcre: residual.costPerAcre,
+          frcsResult_residual_costPerBoleCCF: residual.costPerBoleCCF,
+          frcsResult_residual_costPerGT: residual.costPerGT,
+          frcsResult_residual_dieselPerAcre: residual.dieselPerAcre,
+          frcsResult_residual_dieselPerBoleCCF: residual.dieselPerBoleCCF,
+          frcsResult_residual_gasolinePerAcre: residual.gasolinePerAcre,
+          frcsResult_residual_gasolinePerBoleCCF: residual.gasolinePerBoleCCF,
+          frcsResult_residual_jetFuelPerAcre: residual.jetFuelPerAcre,
+          frcsResult_residual_jetFuelPerBoleCCF: residual.jetFuelPerBoleCCF,
+        });
+
+        row.eachCell((cell) => {
+          cell.alignment = { vertical: 'middle', horizontal: 'center' };
+        }); 
+      });
+
+      worksheet.getRow(1).eachCell((cell) => {
+        cell.font = { bold: true };
+        cell.alignment = { vertical: 'middle', horizontal: 'center' };
+      });
+
+      worksheet.getRow(2).eachCell((cell) => {
+          cell.font = { bold: true };
+          cell.alignment = { vertical: 'middle', horizontal: 'center' };
+      });
+    });
+
+    const workbookBuffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([workbookBuffer], { type: 'application/octet-stream' });
+    saveAs(blob, `clusters.xlsx`);
+    
+    setClusterExcelLoading(false);
+  };
+
   const makeExcel = async () => {
+    setMakeExcelLoading(true);
     // https://github.com/exceljs/exceljs#interface
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('ExcelJS sheet');
@@ -1054,14 +1207,43 @@ export const ResultsExport = (props: Props) => {
       new Blob([workbookBuffer], { type: 'application/octet-stream' }),
       `${treatmentName}+${props.frcsInputs.system}+${props.teaModel}+ef${props.expansionFactor}.xlsx`
     );
+
+    setMakeExcelLoading(false);
   };
 
   return (
-    <p>
-      <Button color='primary' onClick={makeExcel}>
-        Export results to Excel
+    <div className='flex items-center justify-center gap-x-8 m-3'>
+      <Button 
+        color="primary"
+        outline
+        size="sm"
+        onClick={makeExcel}
+      >
+        {makeExcelLoading ? (
+          <Spinner size="sm" className='mr-1'>
+            {' '}
+          </Spinner>
+          ) : (
+          <FontAwesomeIcon icon={faFileExcel} className='mr-1' fontSize={'14'} />
+        )}
+        Export Results CSV
       </Button>
-    </p>
+      <Button 
+        color="primary"
+        outline
+        size="sm"
+        onClick={makeClusterExcel}
+      >
+        {clusterExcelLoading ? (
+          <Spinner size="sm" className='mr-1'>
+            {' '}
+          </Spinner>
+          ) : (
+          <FontAwesomeIcon icon={faFileExcel} className='mr-1' fontSize={'14'} />
+        )}
+        Export Cluster Data CSV
+      </Button>
+    </div>
   );
 };
 

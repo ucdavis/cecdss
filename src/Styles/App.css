@@ -1822,6 +1822,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       padding: 1rem;
     }
 
+    .p-12 {
+      padding: 1.5rem;
+    }
+
     .object-fill {
       object-fit: fill;
     }
