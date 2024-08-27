@@ -72,11 +72,12 @@ export const InputContainer = (props: Props) => {
   );
   return (
     <>
-      <div className='cardheader'>
-        <h4>
-          Forest Resource and Renewable Energy Decision Support System (FRREDSS)
-        </h4>
-        <h2>Select Inputs</h2>
+      <div className='cardheader flex flex-col justify-between items-start'>
+        <div className='text-white text-12p'>
+            Forest Resource and Renewable Energy Decision Support System
+            (FRREDSS)
+          </div>
+          <div className='text-white text-24p'>Select Inputs</div>
       </div>
       <div className='cardcontents'>
         <h4>Forestry and Conversion</h4>

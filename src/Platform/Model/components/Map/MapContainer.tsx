@@ -595,7 +595,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
   return (
     <div style={style}>
       {(yearlyResults.length > 0 || loading) && (
-        <div className='toggles'>
+        <div className='toggle-buttons flex flex-col items-center justify-center gap-y-6'>
           <Button
             onClick={() => {
               toggleMoveInGeoJson(h => !h);
@@ -604,7 +604,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             disabled={allResultsSelected}
             title='Show Move-In Geometry in selected year'
             color='primary'
-            className='toggle-buttons movein-toggle flex items-center justify-between gap-x-2'
+            className='flex items-center justify-between gap-x-2 w-full px-2'
           >
             <span>{!showMoveInGeoJson ? 'Show Move In' : 'Hide Move In'}</span>
             <FontAwesomeIcon icon={showMoveInGeoJson ? faEye : faEyeSlash} />
@@ -617,7 +617,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             disabled={allResultsSelected}
             title='Show Transportation Geometry in selected year'
             color='primary'
-            className='toggle-buttons transportation-toggle flex items-center justify-between gap-x-2'
+            className='flex items-center justify-between gap-x-2 w-full px-2'
           >
             <span>
               {!showTransportationGeoJson
@@ -628,7 +628,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
               icon={showTransportationGeoJson ? faEye : faEyeSlash}
             />
           </Button>
-                    <Button
+          <Button
             onClick={() => {
               setIsErrorZone(!isErrorZone);
               toggleErrorGeoJson(!showErrorGeoJson);
@@ -636,7 +636,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             active={showErrorGeoJson}
             title='Cluster zones which cannot be used for biomass'
             color='primary'
-            className='toggle-buttons expand-toggle flex items-center justify-between gap-x-2'
+            className='flex items-center justify-between gap-x-2 w-full px-2'
           >
             <span>{isErrorZone ? 'Show Unusable Zones' : 'Hide Unusable Zones'}</span>
             <FontAwesomeIcon icon={isErrorZone ? faEye : faEyeSlash} />
@@ -648,7 +648,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             }}
             active={showGeoJson}
             color='primary'
-            className='toggle-buttons heatmap-toggle flex items-center justify-between gap-x-2'
+            className='flex items-center justify-between gap-x-2 w-full px-2'
           >
             <span>
               {isClusterZone ? 'Hide Cluster Zones' : 'Show Cluster Zones'}
@@ -656,7 +656,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             <FontAwesomeIcon icon={isClusterZone ? faEyeSlash : faEye} />
           </Button>
           <Button
-            className='toggle-buttons cluster-toggle flex items-center justify-between gap-x-2'
+            className='flex items-center justify-between gap-x-2 w-full px-2'
             color='primary'
             onClick={() => {
               setIsExpanded(!isExpanded);

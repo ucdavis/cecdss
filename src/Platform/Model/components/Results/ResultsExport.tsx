@@ -1226,7 +1226,7 @@ export const ResultsExport = (props: Props) => {
           ) : (
           <FontAwesomeIcon icon={faFileExcel} className='mr-1' fontSize={'14'} />
         )}
-        Export Results CSV
+        Export Total Result
       </Button>
       <Button 
         color="primary"
@@ -1241,7 +1241,7 @@ export const ResultsExport = (props: Props) => {
           ) : (
           <FontAwesomeIcon icon={faFileExcel} className='mr-1' fontSize={'14'} />
         )}
-        Export Cluster Data CSV
+        Export Cluster Data
       </Button>
     </div>
   );
