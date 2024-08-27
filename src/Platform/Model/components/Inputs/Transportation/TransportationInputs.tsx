@@ -25,7 +25,7 @@ export const TransportInputsContainer = (props: Props) => {
   return (
     <div className='cardcontents'>
       <Form>
-        <h4>Transportation</h4>
+        <h4 className='font-bold mb-2'>Transportation</h4>
         <>
           <FormGroup>
             <Label>Hourly Wage for Truck Drivers</Label>

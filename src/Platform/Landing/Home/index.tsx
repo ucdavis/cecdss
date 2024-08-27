@@ -13,7 +13,6 @@ import Title from '../Shared/Title';
 import AppFeatures from './Sections/AppFeatures';
 import ModelFeatures from './Sections/ModelFeatures';
 import Publications from './Sections/Publications';
-import Team from './Sections/Team';
 
 const TitleOverlay: React.FC = () => {
   return (
@@ -119,17 +118,7 @@ const Home = () => {
               <AppFeatures />
             </div>
           </div>
-          <div className="w-full flex items-center justify-center flex-col bg-brand px-4 pt-4 pb-16">
-            <div className="max-w-1028p flex items-center justify-center flex-col">
-              <div className='w-full'>
-                <Title title={'Our Team'} light />
-              </div>
-              <div className='w-full' id='team'>
-                <Team />
-              </div>
-            </div>
-          </div>
-          <div className='w-full'>
+          <div className='w-full mt-10'>
             <Footer />
           </div>
         </div>

@@ -163,8 +163,6 @@
   top: 30%;
   z-index: 2000;
   width: 220px;
-  box-shadow: 0 0 0 1px rgba(49, 49, 93, 0.03),
-    0 2px 5px 0 rgba(49, 49, 93, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
 }
 .toggle-buttons svg {
   margin-left: 8px;
@@ -1507,6 +1505,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       row-gap: 1rem;
     }
 
+    .gap-y-2 {
+      row-gap: 0.5rem;
+    }
+
+    .gap-y-3 {
+      row-gap: 0.75rem;
+    }
+
     .gap-y-6 {
       row-gap: 1.5rem;
     }
@@ -1989,6 +1995,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
     .pt-6 {
       padding-top: 1.5rem;
+    }
+
+    .pt-8 {
+      padding-top: 2rem;
     }
 
     .text-left {

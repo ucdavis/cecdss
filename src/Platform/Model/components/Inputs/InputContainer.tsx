@@ -80,7 +80,7 @@ export const InputContainer = (props: Props) => {
           <div className='text-white text-24p'>Select Inputs</div>
       </div>
       <div className='cardcontents'>
-        <h4>Forestry and Conversion</h4>
+        <h4 className='font-bold mb-2'>Forestry and Conversion</h4>
         <Form>
           <FormGroup>
             <Label>Facility Coordinates</Label>

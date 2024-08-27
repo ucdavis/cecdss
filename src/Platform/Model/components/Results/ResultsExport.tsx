@@ -50,51 +50,51 @@ export const ResultsExport = (props: Props) => {
     setClusterExcelLoading(true);
     const workbook = new ExcelJS.Workbook();
 
-    props.yearlyResults.forEach((data, _) => {
+    props.yearlyResults.forEach((data, index) => {
       const { year, clusters } = data;
 
       const worksheet = workbook.addWorksheet(String(year));
 
       worksheet.columns = [
         { header: 'Cluster No', key: 'cluster_no', width: 15 },
-        { header: 'Area', key: 'area', width: 10 },
-        { header: 'Biomass', key: 'biomass', width: 20 },
+        { header: 'Area (acres)', key: 'area', width: 10 },
+        { header: 'Biomass (BDMT)', key: 'biomass', width: 20 },
         { header: 'Center Lat', key: 'center_lat', width: 20 },
         { header: 'Center Lng', key: 'center_lng', width: 20 },
-        { header: 'Combined Cost', key: 'combinedCost', width: 30 },
+        { header: 'Combined Cost ($)', key: 'combinedCost', width: 30 },
         { header: 'County', key: 'county', width: 15 },
-        { header: 'Distance', key: 'distance', width: 15 },
+        { header: 'Distance (ft)', key: 'distance', width: 15 },
         { header: 'Forest Type', key: 'forest_type', width: 15 },
         { header: 'Haz Class', key: 'haz_class', width: 15 },
         { header: 'Land Use', key: 'land_use', width: 15 },
-        { header: 'Landing Distance', key: 'landing_distance', width: 15 },
+        { header: 'Landing Distance (ft)', key: 'landing_distance', width: 15 },
         { header: 'Landing Lat', key: 'landing_lat', width: 20 },
         { header: 'Landing Lng', key: 'landing_lng', width: 20 },
-        { header: 'Residue Cost', key: 'residueCost', width: 20 },
+        { header: 'Residue Cost ($)', key: 'residueCost', width: 20 },
         { header: 'Site Class', key: 'site_class', width: 20 },
-        { header: 'Transportation Cost', key: 'transportationCost', width: 25 },
+        { header: 'Transportation Cost ($)', key: 'transportationCost', width: 25 },
 
-        { header: 'Yield Per Acre', key: 'frcsResult_total_yieldPerAcre', width: 15 },
-        { header: 'Cost Per Acre', key: 'frcsResult_total_costPerAcre', width: 15 },
-        { header: 'Cost Per Bole CCF', key: 'frcsResult_total_costPerBoleCCF', width: 15 },
-        { header: 'Cost Per GT', key: 'frcsResult_total_costPerGT', width: 15 },
-        { header: 'Diesel Per Acre', key: 'frcsResult_total_dieselPerAcre', width: 15 },
-        { header: 'Diesel Per Bole CCF', key: 'frcsResult_total_dieselPerBoleCCF', width: 15 },
-        { header: 'Gasoline Per Acre', key: 'frcsResult_total_gasolinePerAcre', width: 15 },
-        { header: 'Gasoline Per Bole CCF', key: 'frcsResult_total_gasolinePerBoleCCF', width: 15 },
-        { header: 'Jet Fuel Per Acre', key: 'frcsResult_total_jetFuelPerAcre', width: 15 },
-        { header: 'Jet Fuel Per Bole CCF', key: 'frcsResult_total_jetFuelPerBoleCCF', width: 15 },
+        { header: 'Yield Per Acre (Green Tons)', key: 'frcsResult_total_yieldPerAcre', width: 15 },
+        { header: 'Cost Per Acre ($)', key: 'frcsResult_total_costPerAcre', width: 15 },
+        { header: 'Cost Per Bole CCF ($)', key: 'frcsResult_total_costPerBoleCCF', width: 15 },
+        { header: 'Cost Per GT ($)', key: 'frcsResult_total_costPerGT', width: 15 },
+        { header: 'Diesel Per Acre (gal)', key: 'frcsResult_total_dieselPerAcre', width: 15 },
+        { header: 'Diesel Per Bole CCF (gal)', key: 'frcsResult_total_dieselPerBoleCCF', width: 15 },
+        { header: 'Gasoline Per Acre (gal)', key: 'frcsResult_total_gasolinePerAcre', width: 15 },
+        { header: 'Gasoline Per Bole CCF (gal)', key: 'frcsResult_total_gasolinePerBoleCCF', width: 15 },
+        { header: 'Jet Fuel Per Acre (gal)', key: 'frcsResult_total_jetFuelPerAcre', width: 15 },
+        { header: 'Jet Fuel Per Bole CCF (gal)', key: 'frcsResult_total_jetFuelPerBoleCCF', width: 15 },
 
-        { header: 'Yield Per Acre', key: 'frcsResult_residual_yieldPerAcre', width: 15 },
-        { header: 'Cost Per Acre', key: 'frcsResult_residual_costPerAcre', width: 15 },
-        { header: 'Cost Per Bole CCF', key: 'frcsResult_residual_costPerBoleCCF', width: 15 },
-        { header: 'Cost Per GT', key: 'frcsResult_residual_costPerGT', width: 15 },
-        { header: 'Diesel Per Acre', key: 'frcsResult_residual_dieselPerAcre', width: 15 },
-        { header: 'Diesel Per Bole CCF', key: 'frcsResult_residual_dieselPerBoleCCF', width: 15 },
-        { header: 'Gasoline Per Acre', key: 'frcsResult_residual_gasolinePerAcre', width: 15 },
-        { header: 'Gasoline Per Bole CCF', key: 'frcsResult_residual_gasolinePerBoleCCF', width: 15 },
-        { header: 'Jet Fuel Per Acre', key: 'frcsResult_residual_jetFuelPerAcre', width: 15 },
-        { header: 'Jet Fuel Per Bole CCF', key: 'frcsResult_residual_jetFuelPerBoleCCF', width: 15 },
+        { header: 'Yield Per Acre (Green Tons)', key: 'frcsResult_residual_yieldPerAcre', width: 15 },
+        { header: 'Cost Per Acre ($)', key: 'frcsResult_residual_costPerAcre', width: 15 },
+        { header: 'Cost Per Bole CCF ($)', key: 'frcsResult_residual_costPerBoleCCF', width: 15 },
+        { header: 'Cost Per GT ($)', key: 'frcsResult_residual_costPerGT', width: 15 },
+        { header: 'Diesel Per Acre (gal)', key: 'frcsResult_residual_dieselPerAcre', width: 15 },
+        { header: 'Diesel Per Bole CCF (gal)', key: 'frcsResult_residual_dieselPerBoleCCF', width: 15 },
+        { header: 'Gasoline Per Acre (gal)', key: 'frcsResult_residual_gasolinePerAcre', width: 15 },
+        { header: 'Gasoline Per Bole CCF (gal)', key: 'frcsResult_residual_gasolinePerBoleCCF', width: 15 },
+        { header: 'Jet Fuel Per Acre (gal)', key: 'frcsResult_residual_jetFuelPerAcre', width: 15 },
+        { header: 'Jet Fuel Per Bole CCF (gal)', key: 'frcsResult_residual_jetFuelPerBoleCCF', width: 15 },
       ];
 
 
@@ -103,27 +103,27 @@ export const ResultsExport = (props: Props) => {
         worksheet.getCell('R1').value = 'FRCS Result (Total)';
         worksheet.getCell('AB1').value = 'FRCS Result (Residual)';
 
-        worksheet.getCell('R2').value = 'Yield Per Acre';
-        worksheet.getCell('S2').value = 'Cost Per Acre';
-        worksheet.getCell('T2').value = 'Cost Per Bole CCF';
-        worksheet.getCell('U2').value = 'Cost Per GT';
-        worksheet.getCell('V2').value = 'Diesel Per Acre';
-        worksheet.getCell('W2').value = 'Diesel Per Bole CCF';
-        worksheet.getCell('X2').value = 'Gasoline Per Acre';
-        worksheet.getCell('Y2').value = 'Gasoline Per Bole CCF';
-        worksheet.getCell('Z2').value = 'Jet Fuel Per Acre';
-        worksheet.getCell('AA2').value = 'Jet Fuel Per Bole CCF';
+        worksheet.getCell('R2').value = 'Yield Per Acre (Green Tons)';
+        worksheet.getCell('S2').value = 'Cost Per Acre ($)';
+        worksheet.getCell('T2').value = 'Cost Per Bole CCF ($)';
+        worksheet.getCell('U2').value = 'Cost Per GT ($)';
+        worksheet.getCell('V2').value = 'Diesel Per Acre (gal)';
+        worksheet.getCell('W2').value = 'Diesel Per Bole CCF (gal)';
+        worksheet.getCell('X2').value = 'Gasoline Per Acre (gal)';
+        worksheet.getCell('Y2').value = 'Gasoline Per Bole CCF (gal)';
+        worksheet.getCell('Z2').value = 'Jet Fuel Per Acre (gal)';
+        worksheet.getCell('AA2').value = 'Jet Fuel Per Bole CCF (gal)';
 
-        worksheet.getCell('AB2').value = 'Yield Per Acre';
-        worksheet.getCell('AC2').value = 'Cost Per Acre';
-        worksheet.getCell('AD2').value = 'Cost Per Bole CCF';
-        worksheet.getCell('AE2').value = 'Cost Per GT';
-        worksheet.getCell('AF2').value = 'Diesel Per Acre';
-        worksheet.getCell('AG2').value = 'Diesel Per Bole CCF';
-        worksheet.getCell('AH2').value = 'Gasoline Per Acre';
-        worksheet.getCell('AI2').value = 'Gasoline Per Bole CCF';
-        worksheet.getCell('AJ2').value = 'Jet Fuel Per Acre';
-        worksheet.getCell('AK2').value = 'Jet Fuel Per Bole CCF';
+        worksheet.getCell('AB2').value = 'Yield Per Acre (Green Tons)';
+        worksheet.getCell('AC2').value = 'Cost Per Acre ($)';
+        worksheet.getCell('AD2').value = 'Cost Per Bole CCF ($)';
+        worksheet.getCell('AE2').value = 'Cost Per GT ($)';
+        worksheet.getCell('AF2').value = 'Diesel Per Acre (gal)';
+        worksheet.getCell('AG2').value = 'Diesel Per Bole CCF (gal)';
+        worksheet.getCell('AH2').value = 'Gasoline Per Acre (gal)';
+        worksheet.getCell('AI2').value = 'Gasoline Per Bole CCF(gal)';
+        worksheet.getCell('AJ2').value = 'Jet Fuel Per Acre (gal)';
+        worksheet.getCell('AK2').value = 'Jet Fuel Per Bole CCF (gal)';
 
       clusters.forEach((cluster) => {
         const { total, residual } = cluster.frcsResult;
@@ -167,12 +167,45 @@ export const ResultsExport = (props: Props) => {
           frcsResult_residual_gasolinePerBoleCCF: residual.gasolinePerBoleCCF,
           frcsResult_residual_jetFuelPerAcre: residual.jetFuelPerAcre,
           frcsResult_residual_jetFuelPerBoleCCF: residual.jetFuelPerBoleCCF,
-        });
-
-        row.eachCell((cell) => {
-          cell.alignment = { vertical: 'middle', horizontal: 'center' };
-        }); 
+        });      
       });
+
+        const colOneLen= worksheet.getColumn('A').values.length - 1;
+
+        const sumRow = worksheet.addRow({
+        cluster_no: 'TOTAL',
+        area: { formula: `SUM(B3:B${colOneLen})` },
+        biomass: { formula: `SUM(C3:C${colOneLen})` },
+        combinedCost: { formula: `SUM(F3:F${colOneLen})` },
+        distance: { formula: `SUM(H3:H${colOneLen})` },
+        residueCost: { formula: `SUM(O3:O${colOneLen})` },
+        transportationCost: { formula: `SUM(Q3:Q${colOneLen})` },
+        frcsResult_total_yieldPerAcre: { formula: `SUM(R3:R${colOneLen})` },
+        frcsResult_total_costPerAcre: { formula: `SUM(S3:S${colOneLen})` },
+        frcsResult_total_costPerBoleCCF: { formula: `SUM(T3:T${colOneLen})` },
+        frcsResult_total_costPerGT: { formula: `SUM(U3:U${colOneLen})` },
+        frcsResult_total_dieselPerAcre: { formula: `SUM(V3:V${colOneLen})` },
+        frcsResult_total_dieselPerBoleCCF: { formula: `SUM(W3:W${colOneLen})` },
+        frcsResult_total_gasolinePerAcre: { formula: `SUM(X3:X${colOneLen})` },
+        frcsResult_total_gasolinePerBoleCCF: { formula: `SUM(Y3:Y${colOneLen})` },
+        frcsResult_total_jetFuelPerAcre: { formula: `SUM(Z3:Z${colOneLen})` },
+        frcsResult_total_jetFuelPerBoleCCF: { formula: `SUM(AA3:AA${colOneLen})` },
+        frcsResult_residual_yieldPerAcre: { formula: `SUM(AB3:AB${colOneLen})` },
+        frcsResult_residual_costPerAcre: { formula: `SUM(AC3:AC${colOneLen})` },
+        frcsResult_residual_costPerBoleCCF: { formula: `SUM(AD3:AD${colOneLen})` },
+        frcsResult_residual_costPerGT: { formula: `SUM(AE3:AE${colOneLen})` },
+        frcsResult_residual_dieselPerAcre: { formula: `SUM(AF3:AF${colOneLen})` },
+        frcsResult_residual_dieselPerBoleCCF: { formula: `SUM(AG3:AG${colOneLen})` },
+        frcsResult_residual_gasolinePerAcre: { formula: `SUM(AH3:AH${colOneLen})` },
+        frcsResult_residual_gasolinePerBoleCCF: { formula: `SUM(AI3:AI${colOneLen})` },
+        frcsResult_residual_jetFuelPerAcre: { formula: `SUM(AJ3:AJ${colOneLen})` },
+        frcsResult_residual_jetFuelPerBoleCCF: { formula: `SUM(AK3:AK${colOneLen})` },
+      });
+
+      worksheet.getRow(worksheet.getColumn('A').values.length - 1).eachCell((cell) => {
+          cell.font = { bold: true };
+          cell.alignment = { vertical: 'middle', horizontal: 'center' };
+      }); 
 
       worksheet.getRow(1).eachCell((cell) => {
         cell.font = { bold: true };

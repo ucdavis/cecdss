@@ -138,7 +138,7 @@ export const TechnoeconomicInputs = (props: Props) => {
   );
   return (
     <div className='cardcontents'>
-      <h4>Techno-Economic Assessment </h4>
+      <h4 className='font-bold mb-2'>Techno-Economic Assessment </h4>
       <Button
         color='outline-primary'
         onClick={() => toggleShowDetailedInputs(!showDetailedInputs)}

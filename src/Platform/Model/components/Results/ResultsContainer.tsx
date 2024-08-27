@@ -105,9 +105,11 @@ export const ResultsContainer = (props: Props) => {
             {pages}
           </Pagination>
         </div>
-        <Progress
-          value={(props.yearlyResults.length / props.years.length) * 100}
-        />
+        <div className="my-1">
+          <Progress
+            value={(props.yearlyResults.length / props.years.length) *100}
+          />
+        </div>
         {props.selectedYearIndex === props.years.length && (
           <AllResultsContainer {...props} />
         )}
