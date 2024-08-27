@@ -23,24 +23,13 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 50px;
-    width: 60%;
+    width: 70%;
     font-weight: bold;
     padding: 10px 20px;
     border-radius: 8px;
     z-index: 2;
     color: #395442;
     text-align: center;
-}
-
-.subtitle {
-    font-size: 25px;
-    margin-bottom: 10px;
-}
-
-.main-title {
-    font-size: 65px;
-    font-weight: bold;
-    margin-bottom: 30px;
 }
 
 .custom-button {

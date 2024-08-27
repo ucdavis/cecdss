@@ -56,11 +56,6 @@ const Navbar: React.FC = () => {
                 Publications
               </StyledNavLink>
             </NavItem>
-            <NavItem className="mr-3">
-              <StyledNavLink href={`${URL_LANDING_PAGE}#team`} className="nav-link-bold">
-                Team
-              </StyledNavLink>
-            </NavItem>
             <NavItem>
               <Button
                 style={{ background: '#395442', borderColor: '#395442' }}

@@ -17,12 +17,12 @@ import Publications from './Sections/Publications';
 const TitleOverlay: React.FC = () => {
   return (
     <div className="title-overlay text-white">
-      <h5 className="subtitle mb-2" style={{ color: '#395442' }}>
+      <div className="mb-2 text-20p" style={{ color: '#395442' }}>
         Fuel Reduction Cost Simulator | Techno-Economic Assessment | Transportation
-      </h5>
-      <h1 className="main-title mb-5" style={{ color: '#395442' }}>
+      </div>
+      <div className=" mb-5 text-7xl" style={{ color: '#395442' }}>
         Forest Resource and Renewable Energy Decision Support System
-      </h1>
+      </div>
       <div className="button-group d-flex justify-content-center" style={{ columnGap: '1em'}}>
         <Button
             style={{

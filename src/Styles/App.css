@@ -2079,14 +2079,29 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       line-height: 1;
     }
 
+        .text-7xl {
+          font-size: 5rem;
+          line-height: 1;
+        }
+
     .text-6xl {
       font-size: 4rem;
+      line-height: 1;
+    }
+
+    .text-5xl {
+      font-size: 3.5rem;
       line-height: 1;
     }
 
     .text-4xl {
       font-size: 3rem;
       line-height: 1;
+    }
+
+    .text-3xl {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
     }
 
     .text-base {
