@@ -25,11 +25,12 @@
     font-size: 50px;
     width: 70%;
     font-weight: bold;
-    padding: 10px 20px;
     border-radius: 8px;
     z-index: 2;
-    color: #395442;
     text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: #395442;
 }
 
 .custom-button {
@@ -58,4 +59,391 @@
 
 .bg-brand {
     background-color: #395442;
+}
+
+
+/* Title Text */
+.title-overlay .title {
+    margin-bottom: 0.5rem;
+    /* mb-2 */
+    font-size: 1rem;
+    /* text-lg */
+}
+
+@media (min-width: 640px) {
+    .title-overlay .title {
+        font-size: 1.25rem;
+        /* sm:text-xl */
+    }
+}
+
+@media (min-width: 768px) {
+    .title-overlay .title {
+        font-size: 1.5rem;
+        /* md:text-2xl */
+    }
+}
+
+@media (min-width: 1024px) {
+    .title-overlay .title {
+        font-size: 1.5rem;
+        /* lg:text-3xl */
+    }
+}
+
+/* Subtitle Text */
+.title-overlay .subtitle {
+    margin-bottom: 1.25rem;
+    /* mb-5 */
+    font-size: 2.1rem;
+    /* text-2xl */
+    font-weight: bold;
+    /* font-bold */
+}
+
+@media (max-width: 450px) {
+    .title-overlay .subtitle {
+        font-size: 1.8rem;
+        /* sm:text-4xl */
+    }
+}
+
+@media (min-width: 640px) {
+    .title-overlay .subtitle {
+        font-size: 2.85rem;
+        /* sm:text-4xl */
+    }
+}
+
+@media (min-width: 768px) {
+    .title-overlay .subtitle {
+        font-size: 3.75rem;
+        /* md:text-6xl */
+    }
+}
+
+@media (min-width: 1024px) {
+    .title-overlay .subtitle {
+        font-size: 4.5rem;
+        /* lg:text-7xl */
+    }
+}
+
+/* Button Group */
+.title-overlay .button-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    /* gap-4 */
+}
+
+@media (min-width: 640px) {
+    .title-overlay .button-group {
+        flex-direction: row;
+        /* sm:flex-row */
+    }
+}
+
+.title-overlay .button {
+    background-color: #395442;
+    /* bg-green-900 */
+    color: white;
+    /* text-white */
+    padding: 0.5rem 1rem;
+    /* py-2 px-4 */
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    font-size: 1rem;
+    /* text-lg */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, text-decoration 0.2s ease;
+}
+
+.title-overlay .button:hover {
+    transform: scale(1.05);
+    /* Slightly increase the size on hover */
+    text-decoration: none;
+    /* Ensure underline is removed on hover */
+}
+
+@media (min-width: 640px) {
+    .title-overlay .button{
+        font-size: 0.7rem;
+        /* sm:text-4xl */
+        padding: 0.5rem 0.7rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .title-overlay .button{
+        font-size: 0.8rem;
+        /* md:text-6xl */
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .title-overlay .button{
+        font-size: 0.9rem;
+        /* lg:text-7xl */
+        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.9rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .title-overlay .button {
+        font-size: 0.7rem;
+        /* sm:text-4xl */
+        padding: 0.5rem 0.7rem;
+    }
+}
+
+.model-features-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+@media (max-width: 1100px) {
+    .model-features-container {
+        flex-direction: column;
+    }
+}
+
+.feature-item {
+    text-align: center;
+}
+
+@media (min-width: 1100px) {
+    .feature-item {
+        text-align: left;
+    }
+}
+
+.publication-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 400px;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    margin-bottom: 16px;
+}
+
+.publication-card:hover {
+    transform: scale(1.05);
+}
+
+/* Image styling */
+.publication-card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Content styling */
+.publication-card-content {
+    padding: 16px;
+        display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.publication-card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.publication-card-description {
+    list-style-type: disc;
+    padding-left: 16px;
+    margin-bottom: 16px;
+}
+
+.publication-card-description li {
+    font-size: 0.875rem;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+
+.publications-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px;
+}
+
+/* Common card styling to ensure equal height */
+.publications-container>* {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 30%;
+    /* Approximately 3 cards per row */
+    max-width: 30%;
+    min-width: 300px;
+    /* Minimum width for each card */
+    box-sizing: border-box;
+    margin-bottom: 16px;
+}
+
+/* 1028px and above: display three cards per row */
+@media (min-width: 1028px) {
+    .publications-container {
+        justify-content: space-between;
+    }
+}
+
+/* 768px to 1028px: display two cards per row */
+@media (min-width: 768px) and (max-width: 1027px) {
+    .publications-container>* {
+        flex: 1 1 45%;
+        /* Approximately 2 cards per row */
+        max-width: 45%;
+    }
+}
+
+/* 600px and below: stack cards vertically */
+@media (max-width: 767px) {
+    .publications-container>* {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+/* Flex container for the features */
+.app-features-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    padding: 8px;
+}
+
+/* Individual feature item */
+.app-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1 1 30%;
+    max-width: 30%;
+    min-width: 250px;
+    padding: 16px;
+    border-radius: 12px;
+}
+
+/* Title of the feature */
+.feature-title {
+    margin-top: 16px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Description text for the feature */
+.feature-description {
+    margin-top: 8px;
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Responsive layout */
+@media (min-width: 1028px) {
+    .app-feature {
+        flex: 1 1 30%;
+        /* Display 3 items per row on large screens */
+    }
+}
+
+@media (max-width: 1028px) and (min-width: 768px) {
+    .app-feature {
+        flex: 1 1 45%;
+        /* Display 2 items per row on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .app-feature {
+        flex: 1 1 100%;
+        /* Stack items vertically on small screens */
+    }
+}
+
+/* Container for the footer content */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: auto;
+}
+
+/* Footer logo */
+.footer-logo {
+    flex: 1;
+}
+
+/* Footer links and sections */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+}
+
+/* Individual footer section */
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+}
+
+/* Divider styling */
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    margin: 16px 0;
+}
+
+/* Responsive layout for screens smaller than 748px */
+@media (max-width: 748px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 16px;
+    }
+
+    .footer-section {
+        margin-left: 0;
+    }
+
+    .footer-logo {
+        margin-bottom: 16px;
+    }
 }

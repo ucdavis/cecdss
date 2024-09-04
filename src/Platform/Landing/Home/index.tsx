@@ -4,7 +4,7 @@ import { LatLngBoundsExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import React, { useState } from 'react';
 import { Button } from 'reactstrap';
-import { URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
+import { URL_LANDING_PAGE, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
 import map from '../../../Resources/Images/map.png';
 import { MapCoordinates } from '../../Model/models/Types';
 import Footer from '../Shared/Footer';
@@ -16,69 +16,32 @@ import Publications from './Sections/Publications';
 
 const TitleOverlay: React.FC = () => {
   return (
-    <div className="title-overlay text-white">
-      <div className="mb-2 text-20p" style={{ color: '#395442' }}>
-        Fuel Reduction Cost Simulator | Techno-Economic Assessment | Transportation
-      </div>
-      <div className=" mb-5 text-7xl" style={{ color: '#395442' }}>
-        Forest Resource and Renewable Energy Decision Support System
-      </div>
-      <div className="button-group d-flex justify-content-center" style={{ columnGap: '1em'}}>
-        <Button
-            style={{
-            background:'#395442'
-            }}
-            href={URL_MODEL_PAGE}
-            target="_blank"
-            rel="noopener noreferrer"
-            size='lg'
-        >
-            <FontAwesomeIcon icon={faPlus} className="mr-1" />
-            Run New Model
-        </Button>
-        <Button
-            style={{
-            background:'#395442'
-            }}
-            href={USER_GUIDE_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            download="User_Guide_FREDDSS.pdf"
-            size='lg'
-        >
-            <FontAwesomeIcon icon={faBookOpen} className="mr-1" />
-            User Guide
-        </Button>
-        <Button
-            style={{
-            background:'#395442'
-            }}
-            size='lg'
-        >
-            <FontAwesomeIcon icon={faBook} className="mr-1" />
-            Publications
-        </Button>
-      </div>
-    </div>
+    <div className="title-overlay">
+  <div className="title">
+    Fuel Reduction Cost Simulator | Techno-Economic Assessment | Transportation
+  </div>
+  <div className="subtitle">
+    Forest Resource and Renewable Energy Decision Support System
+  </div>
+  <div className="button-group">
+    <a className="button shadow-md" href={URL_MODEL_PAGE} target="_blank" rel="noopener noreferrer">
+      <FontAwesomeIcon icon={faPlus} className="mr-2" />
+      Run New Model
+    </a>
+    <a className="button shadow-md" href={USER_GUIDE_LINK} target="_blank" rel="noopener noreferrer" download="User_Guide_FREDDSS.pdf">
+      <FontAwesomeIcon icon={faBookOpen} className="mr-2" />
+      User Guide
+    </a>
+    <a className="button shadow-md" href={`${URL_LANDING_PAGE}#publications`}>
+      <FontAwesomeIcon icon={faBook} className="mr-2" />
+      Publications
+    </a>
+  </div>
+</div>
   );
 };
 
 const Home = () => {
-
-    const [bounds, setBounds] = useState<LatLngBoundsExpression>([
-    [40.1, -122.5],
-    [39.2, -120]
-    ]);
-
-    const [center, setCenter] = useState<MapCoordinates>({
-        lat: 37.87439641742907,
-        lng: -120.47592259245009
-    });
-
-  const [linkCopied, setLinkCopied] = useState<boolean>(false);
-  const handleCopy = () => {
-    setLinkCopied(true)
-  };
 
   return (
     <>
@@ -114,11 +77,11 @@ const Home = () => {
             <div className='w-full'>
               <Title title={'App Features'} />
             </div>
-            <div className='mt-10'>
+            <div className='mt-1'>
               <AppFeatures />
             </div>
           </div>
-          <div className='w-full mt-10'>
+          <div className='w-full'>
             <Footer />
           </div>
         </div>

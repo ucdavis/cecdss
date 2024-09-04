@@ -18,6 +18,7 @@ const AllLayers: { [key: string]: string } = {
   urbanCities: 'Urban City Limits',
   airDistricts: 'Air Districts',
   dataBoundary: 'Biomass Data Boundary',
+  feedstockCompetition: 'Basic Feedstock Competition'
 };
 
 export const ExternalLayerSelection = (props: Props) => {

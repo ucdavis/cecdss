@@ -23,53 +23,46 @@ const Navbar: React.FC = () => {
 
   return (
     <ReactstrapNavbar className="shadow-md fixed-top px-5" color="light" light expand="md">
-      <div className="d-flex w-100 justify-content-between">
-        <div className="flex items-center justify-center">
-          <NavbarBrand href="/" className="navbar-brand-bold flex align-items gap-x-2">
-            <img src={logo} alt="Logo" className='h-8' />
-            <div>
-              FRREDSS
-            </div>
-          </NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-        </div>
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto d-flex align-items-center">
-            <NavItem className="mr-3">
-              <StyledNavLink href={URL_LANDING_PAGE} className="nav-link-bold">
-                Home
-              </StyledNavLink>
-            </NavItem>
-            <NavItem className="mr-3">
-              <StyledNavLink 
-                href={USER_GUIDE_LINK} 
-                className="nav-link-bold"
-                target="_blank"
-                rel="noopener noreferrer"
-                download="User_Guide_FREDDSS.pdf"
-              >
-                User Guide
-              </StyledNavLink>
-            </NavItem>
-            <NavItem className="mr-3">
-              <StyledNavLink href={`${URL_LANDING_PAGE}#publications`} className="nav-link-bold">
-                Publications
-              </StyledNavLink>
-            </NavItem>
-            <NavItem>
-              <Button
-                style={{ background: '#395442', borderColor: '#395442' }}
-                href={URL_MODEL_PAGE}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FontAwesomeIcon icon={faPlus} className="mr-1" />
-                Run New Model
-              </Button>
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </div>
+      <NavbarBrand href="/" className="d-flex align-items-center gap-x-2">
+        <img src={logo} alt="Logo" className="h-8" />
+        <div className="navbar-brand-bold">FRREDSS</div>
+      </NavbarBrand>
+      <NavbarToggler onClick={toggle} />
+      <Collapse isOpen={isOpen} navbar>
+        <Nav className="ml-auto flex flex-column flex-md-row align-items-center justify-content-center gap-y-2 gap-md-4">
+          <NavItem>
+            <StyledNavLink href={URL_LANDING_PAGE}>
+              Home
+            </StyledNavLink>
+          </NavItem>
+          <NavItem>
+            <StyledNavLink 
+              href={USER_GUIDE_LINK} 
+              target="_blank"
+              rel="noopener noreferrer"
+              download="User_Guide_FREDDSS.pdf"
+            >
+              User Guide
+            </StyledNavLink>
+          </NavItem>
+          <NavItem>
+            <StyledNavLink href={`${URL_LANDING_PAGE}#publications`}>
+              Publications
+            </StyledNavLink>
+          </NavItem>
+          <NavItem>
+            <Button
+              style={{ background: '#395442', borderColor: '#395442' }}
+              href={URL_MODEL_PAGE}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon={faPlus} className="mr-1" />
+              Run New Model
+            </Button>
+          </NavItem>
+        </Nav>
+      </Collapse>
     </ReactstrapNavbar>
   );
 };
@@ -84,9 +77,5 @@ const StyledNavLink = styled(NavLink)`
   &:hover {
     color: green;
     text-decoration: none;
-  }
-
-  & .mr-1 {
-    margin-right: 0.25rem;
   }
 `;

@@ -853,6 +853,13 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             }
           />
         )}
+        {externalLayers.includes('feedstockCompetition') && (
+          <FeatureLayer
+            url={
+              'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/arcgis/rest/services/Task_5_Basic_Feedstock_Competition/FeatureServer/1'
+            }
+          />
+        )}
         {yearlyResults.length > 0 && (
           <>
             {showMoveInGeoJson && (
