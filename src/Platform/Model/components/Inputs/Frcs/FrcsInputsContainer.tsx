@@ -30,7 +30,7 @@ export const FrcsInputsContainer = (props: Props) => {
     <div className='cardcontents'>
       <Form>
         <h4 className='font-bold mb-2'>Fuel Reduction Cost Simulator</h4>
-        <Button color='outline-primary' onClick={() => setHide(!hide)}>
+        <Button color='outline-primary' size='sm' onClick={() => setHide(!hide)}>
           {hide ? 'View More Detailed Inputs' : 'Hide More Detailed Inputs'}
         </Button>
         {hide && (
