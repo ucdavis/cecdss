@@ -853,10 +853,17 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
             }
           />
         )}
-        {externalLayers.includes('feedstockCompetition') && (
+        {externalLayers.includes('feedstockBiomassCompetition') && (
           <FeatureLayer
             url={
               'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/arcgis/rest/services/Task_5_Basic_Feedstock_Competition/FeatureServer/1'
+            }
+          />
+        )}
+        {externalLayers.includes('feedstockWoodProcessingCompetition') && (
+          <FeatureLayer
+            url={
+              'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/arcgis/rest/services/Task_5_Basic_Feedstock_Competition/FeatureServer/0'
             }
           />
         )}
