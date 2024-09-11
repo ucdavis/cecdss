@@ -63,6 +63,7 @@ export interface TransportInputs {
   wageTruckDriver: number;
   driverBenefits: number;
   oilCost: number;
+  fullyLoadedRate: number;
 }
 
 export const TechnoeconomicModels = {
