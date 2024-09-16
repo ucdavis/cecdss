@@ -787,7 +787,8 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
                 setFacilityCoordinates(r.results[0].latlng);
             }
           }}
-        /> */}
+        />
+        console.log('ESRI LEAFLET', EsriLeafletGeoSearch) */}
         <PrintControl />
         {externalLayers.includes('transmission') && (
           <FeatureLayer

@@ -120,7 +120,6 @@ export const TechnoeconomicInputs = (props: Props) => {
       )}
     </>
   ) : (
-    <>
       <BasicTeaInputs
         inputs={props.teaInputs.ElectricalFuelBaseYear}
         setInputs={(inputs: any) =>
@@ -134,7 +133,6 @@ export const TechnoeconomicInputs = (props: Props) => {
         teaInputs={props.teaInputs}
         setTeaInputs={props.setTeaInputs}
       />
-    </>
   );
   return (
     <div className='cardcontents'>
