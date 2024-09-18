@@ -1,13 +1,12 @@
-import React, { createRef, useState, useEffect } from 'react';
+import { createRef, useState, useEffect } from 'react';
 import {
   MapContainer,
   TileLayer,
-  Marker,
   LayersControl,
   ScaleControl,
-  useMapEvents
+  useMapEvents,
 } from 'react-leaflet';
-import 'esri-leaflet-renderers'; // allows rendering feature layers using their defined renderers
+import 'esri-leaflet-renderers';
 import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet';
 import EsriLeafletGeoSearch from "react-esri-leaflet/plugins/EsriLeafletGeoSearch";
 import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
@@ -89,10 +88,8 @@ const MapClickHandler = ({ setBiomassCoordinates, setFacilityCoordinates, select
   useMapEvents({
     click(e: any) {
       if (!loading && yearlyResults.length === 0) {
-        // always set the biomass coordinates
         setBiomassCoordinates(e.latlng);
 
-        // only change facility coords if we are not focusing on biomass coords
         if (selectBiomassCoordinates === false) {
           setFacilityCoordinates(e.latlng);
         }
@@ -178,6 +175,7 @@ const getShortUrlData = async (modelID:string) => {
 
 const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponentProps) => {
   const { modelID } = useParams();
+  const [mapReady, setMapReady] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const [saveUrl, setSaveUrl] = useState<string>('');
   const [isClusterZone, setIsClusterZone] = useState(true);
@@ -593,6 +591,10 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
     handleUrlLoadingChange(false)
   }, [modelID]);
 
+  useEffect(() => {
+    setMapReady(true);
+  }, []); 
+
   return (
     <div style={style}>
       {(yearlyResults.length > 0 || loading) && (
@@ -778,17 +780,24 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
           </BaseLayer>
         </LayersControl>
         <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
-        {/* <EsriLeafletGeoSearch
+       <EsriLeafletGeoSearch
           useMapBounds={false}
           position='topleft'
+          providers={{
+            arcgisOnlineProvider: {
+              token: 
+              // ! CHANGE THE BELOW TOKEN TO AN API KEY
+              '3NKHt6i2urmWtqOuugvr9cDBEZwSgApoGG0QT0wBSCYZfcvYYyw4cOPrV3eewzlKEBY7M8O7TIQQrMKtDEs3KfBSNKqxj2EOP7zWQxUWQf7lI-ctQPyd7LHBUbFyB1hx'
+            }
+          }}
           eventHandlers={{
-            results: (r: any) => {
-              r.results.length > 0 &&
+            results: (r:any) => {
+              if (r && r.results && r.results.length > 0) {
                 setFacilityCoordinates(r.results[0].latlng);
+              }
             }
           }}
         />
-        console.log('ESRI LEAFLET', EsriLeafletGeoSearch) */}
         <PrintControl />
         {externalLayers.includes('transmission') && (
           <FeatureLayer
