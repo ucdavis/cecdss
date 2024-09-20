@@ -28,9 +28,10 @@
     border-radius: 8px;
     z-index: 2;
     text-align: center;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    color: #395442;
+    padding: 2rem;
+    color: #e4efe8;
+    background-color: rgba(57, 84, 66, 0.3);
+    backdrop-filter: blur(5px);
 }
 
 .custom-button {
