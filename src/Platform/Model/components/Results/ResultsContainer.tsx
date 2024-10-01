@@ -1,3 +1,4 @@
+import ReactGA from 'react-ga4';
 import { faCheck, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { InputModCHP, InputModGP, InputModGPO } from '@ucdavis/tea/input.model';
@@ -56,6 +57,11 @@ export const ResultsContainer = (props: Props) => {
 
   const handleCopy = () => {
     setLinkCopied(true)
+    ReactGA.event({
+      category: 'Model Save',
+      action: 'Click',
+      label: 'FRREDSS App',
+    });
   };
 
   return (

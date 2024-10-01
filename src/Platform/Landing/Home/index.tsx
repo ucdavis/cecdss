@@ -1,8 +1,9 @@
+import ReactGA from 'react-ga4';
 import { faBook, faBookOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LatLngBoundsExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import { Button } from 'reactstrap';
 import { URL_LANDING_PAGE, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
@@ -15,11 +16,12 @@ import AppFeatures from './Sections/AppFeatures';
 import ModelFeatures from './Sections/ModelFeatures';
 import Publications from './Sections/Publications';
 import frredssLandingPage from '../../../Resources/Images/frredssLandingPage.mp4'
-
+import WaveBackground from './Components/WaveBackground';
+import { useLocation } from 'react-router-dom';
 
 const TitleOverlay: React.FC = () => {
   return (
-    <div className="title-overlay">
+    <div className="title-overlay mt-4">
       <div className="title">
         <TypeAnimation
           sequence={[
@@ -61,6 +63,12 @@ const Home = () => {
 
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
+  const location = useLocation();
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: location.pathname });
+  }, [location]);
+
   return (
     <>
         <Navbar />
@@ -98,7 +106,7 @@ const Home = () => {
               <ModelFeatures />
             </div>
           </div>
-          <div className="w-full flex items-center justify-center flex-col bg-brand px-4 pt-4 pb-16">
+          <WaveBackground>
             <div className="max-w-1028p  flex items-center justify-center flex-col" id='publications'>
               <div className='w-full'>
                 <Title title={'Publications'} light />
@@ -107,7 +115,7 @@ const Home = () => {
                 <Publications />
               </div>
             </div>
-          </div>
+          </WaveBackground>
           <div className="max-w-1028p flex items-center justify-center flex-col">
             <div className='w-full'>
               <Title title={'App Features'} />
@@ -116,9 +124,9 @@ const Home = () => {
               <AppFeatures />
             </div>
           </div>
-          <div className='w-full'>
+          <WaveBackground>
             <Footer />
-          </div>
+          </WaveBackground>
         </div>
     </>
   )

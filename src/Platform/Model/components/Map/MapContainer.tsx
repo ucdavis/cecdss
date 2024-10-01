@@ -1,3 +1,4 @@
+import ReactGA from 'react-ga4';
 import { createRef, useState, useEffect } from 'react';
 import {
   MapContainer,
@@ -63,7 +64,7 @@ import { CustomMarker } from './CustomMarker';
 import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
 import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
 import { ATTRIBUTION, BE_APP_URL, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Loader from '../../../../Shared/Loader';
 import triangle from '../../../../Resources/Images/triangle.svg'
 import triangleTree from '../../../../Resources/Images/triangleTreeCrop.svg'
@@ -318,6 +319,12 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
 
   const submitInputs = async () => {
     toggleLoading(true);
+
+    ReactGA.event({
+      category: 'Model Run',
+      action: 'Click',
+      label: 'FRREDSS App',
+    });
 
     frcsInputs.dieselFuelPrice = processDieselFuelPrice(frcsInputs.dieselFuelPrice)
 
@@ -935,6 +942,13 @@ export const MapContainerWrapper = () => {
   const [urlLoading, setUrlLoading] = useState<boolean>(false);
 
   const handleUrlLoadingChange = (value: boolean) => setUrlLoading(value)
+
+  const location = useLocation();
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: location.pathname });
+  }, [location]);
+
   return (
     <>
       {urlLoading ? (

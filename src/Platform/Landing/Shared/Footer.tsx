@@ -4,7 +4,7 @@ import ucDavisLogo from '../../../Resources/Images/ucDavisLogo.svg';
 
 const Footer = () => {
     return (
-        <div className="bg-brand w-full h-auto pt-8 pb-2 px-8 flex flex-col">
+        <div className="w-full h-auto pt-8 pb-2 px-8 flex flex-col">
             <div className="footer-content">
               <div className="footer-logo">
                  <img src={ucDavisLogo} alt="UC Davis Logo" className="w-200p" />
