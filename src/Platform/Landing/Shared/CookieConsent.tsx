@@ -20,7 +20,7 @@ const CookieConsentBanner = () => {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white shadow-md z-50 border-t-2p border-solid border-brand" style={{ height: '100px' }}>
+    <div className="fixed bottom-0 left-0 right-0 bg-white shadow-md z-50 border-t-2p border-solid border-brand" style={{ maxHeight: '250px' }}>
       <div className="flex items-center justify-between p-4 h-full">
         <div className="flex items-center gap-x-4 flex-grow">
           <FontAwesomeIcon icon={faCookieBite} style={{color: "#395442", fontSize: '24px'}} />
