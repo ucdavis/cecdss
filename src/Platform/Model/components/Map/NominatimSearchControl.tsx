@@ -36,6 +36,7 @@ const SearchInput = styled.input<{ isVisible: boolean }>`
   border-radius: 4px;
   font-size: 12px;
   margin-top: 20px;
+  margin-left: 5px;
   transition: all 0.3s ease-in-out;
   outline: none;
   position: absolute;
@@ -50,11 +51,12 @@ const SearchInput = styled.input<{ isVisible: boolean }>`
 
 const IconContainer = styled.div`
   cursor: pointer;
-  padding: 8px;
+  padding: 9px;
   background-color: #fff;
   border-radius: 4px;
   margin-top: 20px;
   z-index: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.65);
 `;
 
 const SuggestionsList = styled.ul<{ isVisible: boolean }>`
