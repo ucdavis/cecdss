@@ -1278,6 +1278,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       max-width: 250px;
     }
 
+    .max-w-500p {
+      max-width: 500px;
+    }
+
     .max-w-820p {
       max-width: 820px;
     }
@@ -1604,6 +1608,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       border-bottom-width: 1px;
     }
 
+    .border-brand {
+      border-color: #395442;
+    }
+
     .border-b-2 {
       border-bottom-width: 2px;
     }
@@ -1706,6 +1714,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       background-color: rgb(0 0 0 / var(--tw-bg-opacity));
     }
 
+    .bg-brand {
+      background-color: #395442;
+    }
+
     .bg-blue-190 {
       --tw-bg-opacity: 1;
       background-color: rgb(24 151 136 / var(--tw-bg-opacity));
@@ -1719,6 +1731,11 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
     .bg-gray-100 {
       --tw-bg-opacity: 1;
       background-color: rgb(119 119 119 / var(--tw-bg-opacity));
+    }
+
+    .bg-gray-10 {
+      --tw-bg-opacity: 1;
+      background-color: rgb(245 245 245 / var(--tw-bg-opacity));
     }
 
     .bg-gray-200 {

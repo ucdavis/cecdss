@@ -565,3 +565,41 @@
     transform: translateX(1);
   }
 }
+
+.cookie-consent-button {
+    border: 2px solid #395442;
+    background-color: white;
+    color: #395442;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease-in-out;
+    margin-left: 1rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.cookie-consent-button span {
+    position: relative;
+    z-index: 1;
+}
+
+.cookie-consent-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #395442;
+    transition: all 0.3s ease-out;
+}
+
+.cookie-consent-button:hover::before {
+    width: 100%;
+}
+
+.cookie-consent-button:hover {
+    color: white;
+}

@@ -18,6 +18,7 @@ import Publications from './Sections/Publications';
 import frredssLandingPage from '../../../Resources/Images/frredssLandingPage.mp4'
 import WaveBackground from './Components/WaveBackground';
 import { useLocation } from 'react-router-dom';
+import CookieConsentBanner from '../Shared/CookieConsent';
 
 const TitleOverlay: React.FC = () => {
   return (
@@ -72,6 +73,7 @@ const Home = () => {
   return (
     <>
         <Navbar />
+        <CookieConsentBanner />
         <div className="flex flex-col items-center justify-center overflow-x-hidden gap-y-24">
           <div
             className='w-screen h-screen relative flex flex-col items-center justify-center'
