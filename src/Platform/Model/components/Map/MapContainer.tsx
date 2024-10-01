@@ -9,7 +9,6 @@ import {
 } from 'react-leaflet';
 import 'esri-leaflet-renderers';
 import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet';
-import EsriLeafletGeoSearch from "react-esri-leaflet/plugins/EsriLeafletGeoSearch";
 import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
 import { FeatureCollection, Feature } from 'geojson';
 import { InputContainer } from '../Inputs/InputContainer';
@@ -68,6 +67,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import Loader from '../../../../Shared/Loader';
 import triangle from '../../../../Resources/Images/triangle.svg'
 import triangleTree from '../../../../Resources/Images/triangleTreeCrop.svg'
+import NominatimSearchControl from './NominatimSearchControl';
 
 export interface RequestParamsAllYearsNoTransmission {
   facilityLat: number;
@@ -787,24 +787,7 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
           </BaseLayer>
         </LayersControl>
         <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
-       <EsriLeafletGeoSearch
-          useMapBounds={false}
-          position='topleft'
-          providers={{
-            arcgisOnlineProvider: {
-              token: 
-              // ! CHANGE THE BELOW TOKEN TO AN API KEY
-              '3NKHt6i2urmWtqOuugvr9cDBEZwSgApoGG0QT0wBSCYZfcvYYyw4cOPrV3eewzlKEBY7M8O7TIQQrMKtDEs3KfBSNKqxj2EOP7zWQxUWQf7lI-ctQPyd7LHBUbFyB1hx'
-            }
-          }}
-          eventHandlers={{
-            results: (r:any) => {
-              if (r && r.results && r.results.length > 0) {
-                setFacilityCoordinates(r.results[0].latlng);
-              }
-            }
-          }}
-        />
+        <NominatimSearchControl setFacilityCoordinates={setFacilityCoordinates} />
         <PrintControl />
         {externalLayers.includes('transmission') && (
           <FeatureLayer

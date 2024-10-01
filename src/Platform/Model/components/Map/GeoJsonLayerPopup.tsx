@@ -6,6 +6,7 @@ interface IProps {
   feature: ClusterFeature;
 }
 
+
 export const GeoJsonLayerPopup = (props: IProps) => {
   const cluster = props.feature.properties;
 

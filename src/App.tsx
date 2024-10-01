@@ -1,4 +1,4 @@
-import ReactGA from 'react-ga4';
+import ReactGA, { ReactGAImplementation } from 'react-ga4';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Home from './Platform/Landing/Home';
@@ -7,7 +7,6 @@ import NotFound from './Shared/NotFound';
 import './Styles/App.css';
 import { MapContainerWrapper } from './Platform/Model/components/Map/MapContainer';
 import { useEffect } from 'react';
-import { ReactGAImplementation } from 'react-ga4';
 
 const REACT_APP_GA_MEASUREMENT_ID = 'G-R6MSB6V25R';
 
