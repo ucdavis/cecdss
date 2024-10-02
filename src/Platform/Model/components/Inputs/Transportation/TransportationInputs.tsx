@@ -17,27 +17,16 @@ interface Props {
 }
 
 export const TransportInputsContainer = (props: Props) => {
-  const treatments = Treatments.map(treatment => (
-    <option key={treatment.id} value={treatment.id}>
-      {treatment.name}
-    </option>
-  ));
-  const [showDetailedInputs, setShowDetailedInputs] = useState(true);
   return (
     <div className='cardcontents'>
       <Form>
         <h4 className='font-bold mb-2'>Transportation</h4>
         <>
          <div className="flex gap-x-2 w-full my-2">
-          <Button color={showDetailedInputs ? 'primary' : 'outline-primary'} size='sm' onClick={() => setShowDetailedInputs(true)}>
+          <Button color={'primary'} size='sm'>
             Detail Inputs
           </Button>
-          <Button color={!showDetailedInputs ? 'primary' : 'outline-primary'} size='sm' onClick={() => setShowDetailedInputs(false)}>
-            Fully Loaded Rate
-          </Button>
          </div>
-          {showDetailedInputs ? (
-            <>
               <FormGroup>
             <Label>Hourly Wage for Truck Drivers</Label>
             <InputGroup>
@@ -94,27 +83,6 @@ export const TransportInputsContainer = (props: Props) => {
             </InputGroup>
           </FormGroup>
             </>
-          ) : (
-              <FormGroup>
-                <Label>Fully Loaded Rate</Label>
-                <InputGroup>
-                  <Input
-                    type='number'
-                    value={props.inputs.fullyLoadedRate.toString()}
-                    min={0}
-                    onChange={e =>
-                      props.setTransportInputs({
-                        ...props.inputs,
-                        fullyLoadedRate: parseFloat(e.target.value) || 0
-                      })
-                    }
-                    disabled={props.disabled}
-                  />
-                  <InputGroupText>$/hour</InputGroupText>
-                </InputGroup>
-              </FormGroup>
-          )}
-        </>
       </Form>
 
       <br />
