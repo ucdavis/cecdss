@@ -1161,6 +1161,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
       max-height: 90%;
     }
 
+    .max-h-200p {
+      max-height: 200px;
+    }
+
     .w-100p {
       width: 100px;
     }
