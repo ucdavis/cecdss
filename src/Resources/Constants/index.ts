@@ -60,7 +60,7 @@ export const ORG_TYPE_OPTS = [
 ]
 
 // Expertise Types
-export const EXPT_TYPE_OPTS = [
+export const EXPERTISE_TYPE_OPTS = [
     {
         name: 'Biodiesel',
         value: 'biodiesel'
