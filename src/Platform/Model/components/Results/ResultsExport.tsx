@@ -226,6 +226,7 @@ export const ResultsExport = (props: Props) => {
   };
 
   const makeExcel = async () => {
+    console.log('EXCEL OUTPUT', props.yearlyResults)
     setMakeExcelLoading(true);
     // https://github.com/exceljs/exceljs#interface
     const workbook = new ExcelJS.Workbook();
@@ -404,9 +405,10 @@ export const ResultsExport = (props: Props) => {
               props.yearlyResults.length) *
               1000
           ),
-          ...props.yearlyResults.map(year =>
-            formatNumber(year.lcaResults.inputs.distance * 1000)
-          )
+          ...props.yearlyResults.map(year =>{
+            console.log(`DISTANCE ${year}`, year.lcaResults.inputs.distance, formatNumber(year.lcaResults.inputs.distance * 1000))
+            return formatNumber(year.lcaResults.inputs.distance * 1000)
+        })
         ],
         [
           'Move-in Distance',

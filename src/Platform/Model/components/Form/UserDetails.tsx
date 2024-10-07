@@ -1,4 +1,7 @@
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import styled from 'styled-components';
 import * as Yup from 'yup';
@@ -18,6 +21,12 @@ interface UserDetailsProps {
     aboutMe?: string;
 }
 
+interface Props {
+    toggle: () => void;
+    onSubmitSuccess: () => void;
+    saveUrl: string;
+}
+
 const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('Full Name is required'),
     email: Yup.string().email('Invalid email format').required('Email is required'),
@@ -30,7 +39,7 @@ const validationSchema = Yup.object().shape({
     aboutMe: Yup.string()
 });
 
-const UserDetails: React.FC = () => {
+const UserDetails = ({ toggle, onSubmitSuccess, saveUrl }: Props) => {
     const [inputs, setInputs] = useState<UserDetailsProps>({
         fullName: '',
         email: '',
@@ -44,6 +53,7 @@ const UserDetails: React.FC = () => {
     });
 
     const [errors, setErrors] = useState<Partial<UserDetailsProps>>({});
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const { handleSubmit, loading, error } = useSubmitForm<UserDetailsProps>(registerAPI);
 
@@ -78,15 +88,28 @@ const UserDetails: React.FC = () => {
         event.preventDefault();
         const isValid = await validateForm();
         if (isValid) {
-            handleSubmit(inputs);
+            try {
+                await handleSubmit(inputs);
+                setIsSubmitted(true);
+                // Don't call onSubmitSuccess here, let the user decide when to copy the link
+            } catch (err) {
+                // Handle error if needed
+                console.error("Error submitting form:", err);
+            }
         }
     };
 
     return (
-        <div className="w-1/2 h-full flex flex-col items-center justify-center text-white p-4">     
-            <div className="w-400p max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 h-85per mt-4 flex flex-col items-center justify-between gap-y-3">
-                <div className="text-xl font-bold text-brand leading-7 text-gray-900 text-center">
+        <ModalBackground>     
+            <FormContainer>
+                <div className="flex items-center justify-between gap-x-1">
+                    <div className='w-50p' />
+                    <div className="text-xl font-bold text-brand leading-7 text-gray-900 text-center w-180p">
                     Enter your details 
+                    </div>
+                    <div className='w-50p text-right cursor-pointer' onClick={toggle}>
+                        <FontAwesomeIcon icon={faXmark} style={{color: "#dc2e2e"}} size='xl' />
+                    </div>
                 </div>
                 <div className="mt-1 text-sm leading-6 text-gray-600 text-center">
                     Enter details to save the model link.
@@ -267,12 +290,48 @@ const UserDetails: React.FC = () => {
                         {error && <ErrorMessage>{error}</ErrorMessage>}
                     </div>
                 </div>
-            </div>
-        </div>
+                
+                {isSubmitted && !loading && !error && (
+                    <CopyToClipboard text={saveUrl} onCopy={() => {
+                        onSubmitSuccess();
+                        toggle();
+                    }}>
+                        <button className="mt-2 text-blue-500 underline">
+                            Copy Model Link and Close
+                        </button>
+                    </CopyToClipboard>
+                )}
+            </FormContainer>
+        </ModalBackground>
     );
 };
 
 export default UserDetails;
+
+const ModalBackground = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+`;
+
+const FormContainer = styled.div`
+    width: 90%;
+    max-width: 500px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    overflow-y: auto;
+    max-height: 90vh;
+`;
 
 const ErrorMessage = styled.div`
     color: #dc3545;
@@ -310,7 +369,7 @@ const StyledSelect = styled.select<{ invalid?: boolean }>`
     border: 1px solid ${props => props.invalid ? '#dc3545' : '#CED4DA'};
     border-radius: 3px;
     padding-left: 5px;
-    padding-right: 25px; // Increased padding-right to accommodate the caret
+    padding-right: 25px;
     background-color: transparent;
     color: #495057;
     font-size: 14px;

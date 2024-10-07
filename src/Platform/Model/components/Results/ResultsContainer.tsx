@@ -6,6 +6,7 @@ import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
+  Modal,
   Pagination,
   PaginationItem,
   PaginationLink,
@@ -15,6 +16,7 @@ import {
 import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
 import { AllResultsContainer } from './AllResultsContainer';
 import { YearlyResultsContainer } from './YearlyResultsContainer';
+import UserDetails from '../Form/UserDetails';
 
 interface Props {
   years: number[];
@@ -39,6 +41,7 @@ interface Props {
 
 export const ResultsContainer = (props: Props) => {
   const [linkCopied, setLinkCopied] = useState<boolean>(false);
+  const [modal, setModal] = useState(false);
 
   const pages = props.years.map((year, i) => (
     <PaginationItem key={`year-${i}`} active={props.selectedYearIndex === i}>
@@ -64,6 +67,13 @@ export const ResultsContainer = (props: Props) => {
     });
   };
 
+  const toggleModal = () => setModal(!modal);
+
+  const handleFormSubmitSuccess = () => {
+    handleCopy();
+    toggleModal();
+  };
+
   return (
     <>
       <div className='cardheader flex flex-col justify-between items-start'>
@@ -73,23 +83,17 @@ export const ResultsContainer = (props: Props) => {
           </div>
           <div className="flex items-center justify-between w-full mt-2">
             <div className='text-white text-36p'>Results</div>
-           {props.saveUrl && (
+           {true && (
              <div className="flex items-center justify-center gap-x-4">
-              <CopyToClipboard text={props.saveUrl} onCopy={handleCopy}>
-                <button className="bg-white hover:bg-gray-400 text-gray-800 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p">
-                  {!linkCopied ? (
-                    <div className="flex items-center justify-center gap-x-2">
-                      <FontAwesomeIcon icon={faDownload} />
-                      <span>Save Model Link</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center gap-x-2">
-                      <FontAwesomeIcon icon={faCheck} style={{ color: '#069e39' }} />
-                      <span className='text-green-100'>Link Copied to Clipboard!</span>
-                    </div>
-                  )}
-                </button>
-              </CopyToClipboard>
+              <button 
+                className="bg-white hover:bg-gray-400 text-gray-800 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p"
+                onClick={toggleModal}
+              >
+                <div className="flex items-center justify-center gap-x-2">
+                  <FontAwesomeIcon icon={faDownload} />
+                  <span>Save Model Link</span>
+                </div>
+              </button>
             </div>
            )}
           </div>
@@ -129,6 +133,9 @@ export const ResultsContainer = (props: Props) => {
             />
           )}
       </div>
+      <Modal isOpen={modal} toggle={toggleModal}>
+          <UserDetails toggle={toggleModal} onSubmitSuccess={handleFormSubmitSuccess} saveUrl={props.saveUrl} />
+      </Modal>
     </>
   );
 };

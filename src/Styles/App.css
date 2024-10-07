@@ -98,7 +98,7 @@
 }
 .sidebar {
   position: fixed;
-  z-index: 2000;
+  z-index: 1000;
   width: 36%;
   height: 96%;
   background-color: #fff;
@@ -134,7 +134,7 @@
   top: 5px;
   left: 3.5%;
   width: 12%;
-  z-index: 9999;
+  z-index: 1000;
 }
 .layers {
   background-color: #fff;
@@ -148,7 +148,7 @@
 .layers-toggle {
   top: 1%;
   left: 18%;
-  z-index: 2000;
+  z-index: 1000;
 }
 
 .esriLegendServiceLabel {
@@ -160,7 +160,7 @@
   border-radius: 8px;
   left: 0.5%;
   top: 30%;
-  z-index: 2000;
+  z-index: 1000;
   width: 220px;
 }
 .toggle-buttons svg {
