@@ -14,6 +14,7 @@ import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { TransportInputsContainer } from './Transportation/TransportationInputs';
+import { useSaveModel } from '../../../Context/saveModel';
 
 interface Props {
   facilityCoordinates: MapCoordinates;
@@ -39,6 +40,8 @@ interface Props {
 }
 
 export const InputContainer = (props: Props) => {
+  const { updateLinkCopied } = useSaveModel();
+
   const button = (!props.disabled || props.loading) && (
     <div className='cardcontents'>
       <ul>
@@ -53,7 +56,10 @@ export const InputContainer = (props: Props) => {
       <Button
         className='btn-block'
         color='primary'
-        onClick={props.submitInputs}
+        onClick={() => {
+          updateLinkCopied(false);
+          props.submitInputs();
+        }}
         disabled={props.loading}
       >
         {props.loading ? (

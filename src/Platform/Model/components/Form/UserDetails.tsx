@@ -58,7 +58,7 @@ const UserDetails = ({ toggle, onSubmitSuccess, saveUrl }: Props) => {
 
     const { handleSubmit, loading, error } = useSubmitForm<UserDetailsProps>(saveUserDetailsAPI);
 
-    const { linkCopied, updateLinkCopied } = useSaveModel();
+    const { updateLinkCopied } = useSaveModel();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
@@ -287,7 +287,7 @@ const UserDetails = ({ toggle, onSubmitSuccess, saveUrl }: Props) => {
                                 />
                             </FormGroup>
                         </div>
-                        <div className="flex items-center justify-center mt-3">
+                        <div className="flex items-center justify-center mt-3 w-full">
                             {(isSubmitted) ? (
                                 <CopyToClipboard text={saveUrl} onCopy={onCopy}
                                 >
