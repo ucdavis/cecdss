@@ -6,7 +6,8 @@ import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import { EXPERTISE_TYPE_OPTS, ORG_TYPE_OPTS } from '../../../../Resources/Constants';
-import { registerAPI } from '../../../API';
+import { saveUserDetailsAPI } from '../../../API';
+import { useSaveModel } from '../../../Context/saveModel';
 import { useSubmitForm } from '../../../Hooks/Form';
 
 interface UserDetailsProps {
@@ -55,7 +56,9 @@ const UserDetails = ({ toggle, onSubmitSuccess, saveUrl }: Props) => {
     const [errors, setErrors] = useState<Partial<UserDetailsProps>>({});
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    const { handleSubmit, loading, error } = useSubmitForm<UserDetailsProps>(registerAPI);
+    const { handleSubmit, loading, error } = useSubmitForm<UserDetailsProps>(saveUserDetailsAPI);
+
+    const { linkCopied, updateLinkCopied } = useSaveModel();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
@@ -91,13 +94,17 @@ const UserDetails = ({ toggle, onSubmitSuccess, saveUrl }: Props) => {
             try {
                 await handleSubmit(inputs);
                 setIsSubmitted(true);
-                // Don't call onSubmitSuccess here, let the user decide when to copy the link
             } catch (err) {
-                // Handle error if needed
                 console.error("Error submitting form:", err);
             }
         }
     };
+
+    const onCopy = () => {
+        onSubmitSuccess();
+        toggle();
+        updateLinkCopied(true);
+    }
 
     return (
         <ModalBackground>     
@@ -280,27 +287,25 @@ const UserDetails = ({ toggle, onSubmitSuccess, saveUrl }: Props) => {
                                 />
                             </FormGroup>
                         </div>
-                        <div className='flex items-center justify-center mt-3'>
-                            <StyledButton type="submit" disabled={loading}>
-                                {loading ? 'Saving...' : 'Save Model'}
-                            </StyledButton>
+                        <div className="flex items-center justify-center mt-3">
+                            {(isSubmitted) ? (
+                                <CopyToClipboard text={saveUrl} onCopy={onCopy}
+                                >
+                                    <StyledButton>
+                                        Copy Model Link and Close
+                                    </StyledButton>
+                                </CopyToClipboard>
+                            ) : (
+                                <StyledButton type="submit" disabled={loading}>
+                                    {loading ? 'Saving...' : 'Save Model'}
+                                </StyledButton>
+                            )}
                         </div>
                     </Form>
                     <div className="w-full flex items-center justify-center mt-1">
                         {error && <ErrorMessage>{error}</ErrorMessage>}
                     </div>
                 </div>
-                
-                {isSubmitted && !loading && !error && (
-                    <CopyToClipboard text={saveUrl} onCopy={() => {
-                        onSubmitSuccess();
-                        toggle();
-                    }}>
-                        <button className="mt-2 text-blue-500 underline">
-                            Copy Model Link and Close
-                        </button>
-                    </CopyToClipboard>
-                )}
             </FormContainer>
         </ModalBackground>
     );

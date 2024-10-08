@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 type MethodTypes = 'post' | 'put' | 'patch';
 
@@ -9,18 +9,29 @@ interface ApiResponse<T> {
 }
 
 export interface SubmitFormHookProps {
-  url: string;
+  endpoint: string;
   method: MethodTypes;
 }
 
 export const useSubmitForm = <T>(apiDetails: SubmitFormHookProps) => {
-  const { url, method } = apiDetails;
+  const { endpoint, method } = apiDetails;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (data: T): Promise<ApiResponse<T>> => {
     setLoading(true);
     setError(null);
+
+    const baseUrl =
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000'
+        : process.env.REACT_APP_BE_URL;
+
+    const url = baseUrl
+      ? new URL(endpoint, baseUrl).toString()
+      : `/${endpoint}`;
+
+    console.log('Submitting to URL:', url);
 
     try {
       const response: AxiosResponse<T> = await axios({
@@ -30,11 +41,21 @@ export const useSubmitForm = <T>(apiDetails: SubmitFormHookProps) => {
       });
 
       return { data: response.data };
-    } catch (err: any) {
-      const errorMessage =
-        axios.isAxiosError(err) && err.response
-          ? err.response.data.message || 'An error occurred'
-          : 'An unknown error occurred';
+    } catch (err) {
+      console.error('API Error:', err);
+      let errorMessage = 'An unknown error occurred';
+
+      if (axios.isAxiosError(err)) {
+        const axiosError = err as AxiosError<{ message?: string }>;
+        errorMessage =
+          axiosError.response?.data?.message ||
+          axiosError.message ||
+          errorMessage;
+        console.error(
+          'Full error details:',
+          JSON.stringify(axiosError.toJSON(), null, 2)
+        );
+      }
 
       setError(errorMessage);
       return { error: errorMessage };

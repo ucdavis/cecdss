@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import AppWrapper from './App';
 import './Styles/Landing.css';
 import './Styles/index.css';
 import * as serviceWorker from './serviceWorker';
@@ -14,7 +14,7 @@ if (rootElement) {
 
   root.render(
     <React.StrictMode>
-        <App />
+      <AppWrapper />
     </React.StrictMode>
   );
 

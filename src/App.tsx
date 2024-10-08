@@ -7,6 +7,7 @@ import { MapContainerWrapper } from './Platform/Model/components/Map/MapContaine
 import { URL_LANDING_PAGE, URL_MODEL_ID_PAGE, URL_MODEL_PAGE, URL_REROUTE_PAGE } from './Resources/Constants';
 import NotFound from './Shared/NotFound';
 import './Styles/App.css';
+import { AllProviders } from './Platform/Context';
 
 const REACT_APP_GA_MEASUREMENT_ID = 'G-R6MSB6V25R';
 
@@ -32,4 +33,12 @@ const App = () => {
   );
 };
 
-export default App;
+const AppWrapper = () => {
+  return (
+    <AllProviders>
+      <App />
+    </AllProviders>
+  )
+};
+
+export default AppWrapper;

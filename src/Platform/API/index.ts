@@ -2,7 +2,7 @@
 
 import { SubmitFormHookProps } from '../Hooks/Form';
 
-export const registerAPI: SubmitFormHookProps = {
-  url: '/api/submit',
+export const saveUserDetailsAPI: SubmitFormHookProps = {
+  endpoint: '/save-user-details',
   method: 'post'
 };
