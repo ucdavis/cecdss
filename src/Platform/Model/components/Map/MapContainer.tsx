@@ -926,11 +926,10 @@ export const MapContainerWrapper = () => {
 
   const handleUrlLoadingChange = (value: boolean) => setUrlLoading(value)
 
-  const location = useLocation();
 
   useEffect(() => {
-    ReactGA.send({ hitType: "pageview", page: location.pathname });
-  }, [location]);
+    ReactGA.send({ hitType: "pageview", page: '/pages/model', title: 'Model Page' });
+  }, []);
 
   return (
     <>

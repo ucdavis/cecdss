@@ -1,6 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 import ucDavisLogo from '../../../Resources/Images/ucDavisLogo.svg';
+import { trackEvent } from "../../Utils/gaAnalytics";
 
 const Footer = () => {
     return (
@@ -19,15 +19,14 @@ const Footer = () => {
                     </div>
                     <div className="footer-section">
                         <div className="text-18p font-bold mb-6 text-white">Legal</div>
-                        <FooterLink href="#">Terms of Use</FooterLink>
-                        <FooterLink href="https://privacy.ucdavis.edu/web-page-privacy">Privacy Policy</FooterLink>
+                        <FooterLink href="https://privacy.ucdavis.edu/web-page-privacy" onClick={() => trackEvent('Footer Links', 'Click', 'Open Privacy Policy')}>Privacy Policy</FooterLink>
                         <div className="text-18p font-bold mb-2 text-white">Last Updated</div>
-                        <div className="text-white text-16p">27 Aug, 2024</div>
+                        <div className="text-white text-16p">9 Oct, 2024</div>
                     </div>
                     <div className="footer-section">
                         <div className="text-18p font-bold mb-6 text-white">Contact Us</div>
-                        <FooterLink href="mailto:frredss@ucdavis.edu">Mail Us</FooterLink>
-                        <FooterLink href="https://www.ucdavis.edu/">UC Davis Site</FooterLink>
+                        <FooterLink href="mailto:frredss@ucdavis.edu" onClick={() => trackEvent('Footer Links', 'Click', 'Contact Us')}>Mail Us</FooterLink>
+                        <FooterLink href="https://www.ucdavis.edu/" onClick={() => trackEvent('Footer Links', 'Click', 'Go to UC Davis Site')}>UC Davis Site</FooterLink>
                     </div>
                </div>
             </div>

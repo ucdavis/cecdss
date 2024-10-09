@@ -15,6 +15,7 @@ import { FrcsInputs, MapCoordinates, TransportInputs } from '../../models/Types'
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 import { TransportInputsContainer } from './Transportation/TransportationInputs';
+import { trackEvent } from '../../../Utils/gaAnalytics';
 
 interface Props {
   facilityCoordinates: MapCoordinates;
@@ -43,11 +44,7 @@ export const InputContainer = (props: Props) => {
   const { updateLinkCopied } = useSaveModel();
 
   const handleClick = () => {
-    ReactGA.event({
-        category: 'Model Run',
-        action: 'Click',
-        label: 'Run Model',
-    });
+    trackEvent('Model Run', 'Click', 'Run Model')
     updateLinkCopied(false);
     props.submitInputs();
   };
@@ -83,7 +80,7 @@ export const InputContainer = (props: Props) => {
       <br />
     </div>
   );
-  
+
   return (
     <>
       <div className='cardheader flex flex-col justify-between items-start'>

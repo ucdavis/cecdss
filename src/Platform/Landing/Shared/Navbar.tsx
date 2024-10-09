@@ -15,6 +15,7 @@ import styled, { keyframes } from 'styled-components';
 import { URL_LANDING_PAGE, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
 import logo from '../../../Resources/Images/logo.svg';
 import '../../../Styles/Landing.css';
+import { trackEvent } from '../../Utils/gaAnalytics';
 
 
 interface NavbarProps {
@@ -36,12 +37,12 @@ const Navbar: React.FC<NavbarProps> = ({ isParallaxScrolled, isMobile }) => {
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto flex flex-column flex-md-row align-items-center justify-content-center gap-y-2 gap-md-4">
-          <NavItem>
+          <NavItem onClick={() => trackEvent('Navbar Links', 'Click', 'Go to Home')}>
             <StyledNavLink href={URL_LANDING_PAGE}>
               {(!isMobile && isParallaxScrolled) ? <FontAwesomeIcon icon={faHome} style={{ fontSize: '1.3em', margin: '0' }}  /> : 'Home'}
             </StyledNavLink>
           </NavItem>
-          <NavItem>
+          <NavItem onClick={() => trackEvent('Navbar Links', 'Click', 'Go to User Guide')}>
             <StyledNavLink 
               href={USER_GUIDE_LINK} 
               target="_blank"
@@ -51,12 +52,12 @@ const Navbar: React.FC<NavbarProps> = ({ isParallaxScrolled, isMobile }) => {
               {(!isMobile && isParallaxScrolled) ? <FontAwesomeIcon icon={faBook} style={{ fontSize: '1.3em', margin: '0 0 0 1em' }}  /> : 'User Guide'}
             </StyledNavLink>
           </NavItem>
-          <NavItem>
+          <NavItem onClick={() => trackEvent('Navbar Links', 'Click', 'Go to Publications')}>
             <StyledNavLink href={`${URL_LANDING_PAGE}#publications`}>
               {(!isMobile && isParallaxScrolled) ? <FontAwesomeIcon icon={faNewspaper} style={{ fontSize: '1.3em', margin: '0 1.2em 0 1em' }} /> : 'Publications'}
             </StyledNavLink>
           </NavItem>
-          <NavItem>
+          <NavItem onClick={() => trackEvent('Navbar Links', 'Click', 'Go to New Model Run')}>
             <Button
               style={{ background: '#395442', borderColor: '#395442' }}
               href={URL_MODEL_PAGE}

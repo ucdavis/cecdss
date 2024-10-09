@@ -16,6 +16,7 @@ import WaveBackground from './Components/WaveBackground';
 import AppFeatures from './Sections/AppFeatures';
 import ModelFeatures from './Sections/ModelFeatures';
 import Publications from './Sections/Publications';
+import { trackEvent } from '../../Utils/gaAnalytics';
 
 interface TitleOverlayProps {
   fontSize: number;
@@ -46,15 +47,15 @@ const TitleOverlay: React.FC<TitleOverlayProps> = ({ fontSize, subtitleFontSize,
         Forest Resource and Renewable Energy Decision Support System
       </div>
       <div className="button-group">
-        <a className="button shadow-md" href={URL_MODEL_PAGE} target="_blank" rel="noopener noreferrer">
+        <a className="button shadow-md" href={URL_MODEL_PAGE} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('Main Page Links', 'Click', 'Go to New Model Run')}>
           <FontAwesomeIcon icon={faPlus} className="mr-2" />
           Run New Model
         </a>
-        <a className="button shadow-md" href={USER_GUIDE_LINK} target="_blank" rel="noopener noreferrer" download="User_Guide_FREDDSS.pdf">
+        <a className="button shadow-md" href={USER_GUIDE_LINK} target="_blank" rel="noopener noreferrer" download="User_Guide_FREDDSS.pdf" onClick={() => trackEvent('Main Page Links', 'Click', 'Go to User Guide')}>
           <FontAwesomeIcon icon={faBookOpen} className="mr-2" />
           User Guide
         </a>
-        <a className="button shadow-md" href={`${URL_LANDING_PAGE}#publications`}>
+        <a className="button shadow-md" href={`${URL_LANDING_PAGE}#publications`} onClick={() => trackEvent('Main Page Links', 'Click', 'Go to User Guide')}>
           <FontAwesomeIcon icon={faBook} className="mr-2" />
           Publications
         </a>

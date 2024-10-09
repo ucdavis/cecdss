@@ -1,6 +1,7 @@
 import { faCookieBite } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react';
+import { trackEvent } from '../../Utils/gaAnalytics';
 
 const CookieConsentBanner = () => {
   const [showBanner, setShowBanner] = useState(false);
@@ -15,6 +16,7 @@ const CookieConsentBanner = () => {
   const handleConsent = () => {
     localStorage.setItem('cookieConsentGiven', 'true');
     setShowBanner(false);
+    trackEvent('Consent Banner', 'Click', 'Ok Clicked')
   };
 
   if (!showBanner) return null;

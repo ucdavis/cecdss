@@ -12,6 +12,7 @@ import {
   YearlyResult
 } from '../../models/Types';
 import { formatCurrency, formatNumber } from '../Shared/util';
+import { trackEvent } from '../../../Utils/gaAnalytics';
 
 interface Props {
   allYearResults: AllYearsResults;
@@ -46,11 +47,7 @@ export const ResultsExport = (props: Props) => {
   );
 
   const makeClusterExcel = async () => {
-    ReactGA.event({
-        category: 'Export Data',
-        action: 'Click',
-        label: 'Cluster Data Export',
-    });
+    trackEvent('Export Data', 'Click', 'Cluster Data Export')
 
     setClusterExcelLoading(true);
     const workbook = new ExcelJS.Workbook();
@@ -231,11 +228,7 @@ export const ResultsExport = (props: Props) => {
   };
 
   const makeExcel = async () => {
-    ReactGA.event({
-        category: 'Export Data',
-        action: 'Click',
-        label: 'Total Data Export',
-    });
+    trackEvent('Export Data', 'Click', 'Total Data Export')
 
     setMakeExcelLoading(true);
     // https://github.com/exceljs/exceljs#interface

@@ -9,6 +9,7 @@ import { EXPERTISE_TYPE_OPTS, ORG_TYPE_OPTS } from '../../../../Resources/Consta
 import { saveUserDetailsAPI } from '../../../API';
 import { useSaveModel } from '../../../Context/saveModel';
 import { useSubmitForm } from '../../../Hooks/Form';
+import { trackEvent } from '../../../Utils/gaAnalytics';
 
 interface UserDetailsProps {
     fullName: string;
@@ -104,6 +105,7 @@ const UserDetails = ({ toggle, onSubmitSuccess, saveUrl }: Props) => {
         onSubmitSuccess();
         toggle();
         updateLinkCopied(true);
+        trackEvent('Copy Model Link', 'Click', 'Model Link Copied');
     }
 
     return (
@@ -296,8 +298,8 @@ const UserDetails = ({ toggle, onSubmitSuccess, saveUrl }: Props) => {
                                     </StyledButton>
                                 </CopyToClipboard>
                             ) : (
-                                <StyledButton type="submit" disabled={loading}>
-                                    {loading ? 'Saving...' : 'Save Model'}
+                                <StyledButton type="submit" disabled={loading} onClick={() => trackEvent('Save User Details', 'Click', 'User Details Saved')}>
+                                    {loading ? 'Saving...' : 'Save Details'}
                                 </StyledButton>
                             )}
                         </div>
