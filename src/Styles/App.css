@@ -117,7 +117,7 @@
 }
 .expanded-results {
   position: fixed;
-  z-index: 2000;
+  z-index: 1000;
   width: 66%;
   height: 96%;
   background-color: #fff;

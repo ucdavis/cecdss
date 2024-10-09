@@ -1,6 +1,5 @@
 import { faDollarSign, faOilCan, faTruck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
 
 const ModelFeatures = () => {
   return (
@@ -10,10 +9,10 @@ const ModelFeatures = () => {
           <FontAwesomeIcon icon={faDollarSign} fontSize={40} />
         </div>
         <div className="text-28p font-bold mt-4">
-          Techno-Economic Sim
+          Techno-Econ Sim
         </div>
         <div className="text-18p mt-2 text-center">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem temporibus reprehenderit.
+            Evaluate financial viability and economic performance of forest biomass projects.
         </div>
       </div>
       <div className="flex flex-col items-center feature-item">
@@ -24,7 +23,7 @@ const ModelFeatures = () => {
           Fuel Cost Simulator
         </div>
         <div className="text-18p mt-2 text-center">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem temporibus reprehenderit.
+          Estimate and analyze fuel costs for various biomass feedstocks and supply scenarios.
         </div>
       </div>
       <div className="flex flex-col items-center feature-item">
@@ -35,8 +34,7 @@ const ModelFeatures = () => {
           Transportation
         </div>
         <div className="text-18p mt-2 text-center">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem temporibus reprehenderit.
-        </div>
+          Optimize biomass transportation logistics and calculate associated costs and emissions.        </div>
       </div>
     </div>
   );

@@ -30,7 +30,7 @@
     text-align: center;
     padding: 2rem;
     color: #fff;
-    background-color: rgba(57, 84, 66, 0.3);
+    background-color: rgba(57, 84, 66, 0.5);
     backdrop-filter: blur(2px);
 }
 
@@ -292,37 +292,30 @@
     padding: 16px;
 }
 
-/* Common card styling to ensure equal height */
 .publications-container>* {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex: 1 1 30%;
-    /* Approximately 3 cards per row */
     max-width: 30%;
     min-width: 300px;
-    /* Minimum width for each card */
     box-sizing: border-box;
     margin-bottom: 16px;
 }
 
-/* 1028px and above: display three cards per row */
 @media (min-width: 1028px) {
     .publications-container {
         justify-content: space-between;
     }
 }
 
-/* 768px to 1028px: display two cards per row */
 @media (min-width: 768px) and (max-width: 1027px) {
     .publications-container>* {
         flex: 1 1 45%;
-        /* Approximately 2 cards per row */
         max-width: 45%;
     }
 }
 
-/* 600px and below: stack cards vertically */
 @media (max-width: 767px) {
     .publications-container>* {
         flex: 1 1 100%;
@@ -330,7 +323,6 @@
     }
 }
 
-/* Flex container for the features */
 .app-features-container {
     display: flex;
     flex-wrap: wrap;
@@ -339,7 +331,6 @@
     padding: 8px;
 }
 
-/* Individual feature item */
 .app-feature {
     display: flex;
     flex-direction: column;
@@ -352,7 +343,6 @@
     border-radius: 12px;
 }
 
-/* Title of the feature */
 .feature-title {
     margin-top: 16px;
     font-size: 1.5rem;
@@ -360,36 +350,30 @@
     color: #333;
 }
 
-/* Description text for the feature */
 .feature-description {
     margin-top: 8px;
     font-size: 1rem;
     color: #666;
 }
 
-/* Responsive layout */
 @media (min-width: 1028px) {
     .app-feature {
         flex: 1 1 30%;
-        /* Display 3 items per row on large screens */
     }
 }
 
 @media (max-width: 1028px) and (min-width: 768px) {
     .app-feature {
         flex: 1 1 45%;
-        /* Display 2 items per row on medium screens */
     }
 }
 
 @media (max-width: 768px) {
     .app-feature {
         flex: 1 1 100%;
-        /* Stack items vertically on small screens */
     }
 }
 
-/* Container for the footer content */
 .footer-content {
     display: flex;
     justify-content: space-between;
@@ -398,26 +382,22 @@
     height: auto;
 }
 
-/* Footer logo */
 .footer-logo {
     flex: 1;
 }
 
-/* Footer links and sections */
 .footer-links {
     display: flex;
     justify-content: center;
     gap: 32px;
 }
 
-/* Individual footer section */
 .footer-section {
     display: flex;
     flex-direction: column;
     margin-left: 8px;
 }
 
-/* Divider styling */
 .divider {
     width: 100%;
     height: 1px;
@@ -425,7 +405,6 @@
     margin: 16px 0;
 }
 
-/* Responsive layout for screens smaller than 748px */
 @media (max-width: 748px) {
     .footer-content {
         flex-direction: column;
@@ -449,13 +428,7 @@
 
 .wave-background {
   position: relative;
-  background: linear-gradient(135deg, 
-    rgba(37, 64, 46, 0.9) 0%, 
-    rgba(53, 78, 61, 0.9) 25%, 
-    rgba(37, 64, 46, 0.9) 50%, 
-    rgba(48, 67, 54, 0.9) 25%,
-    rgba(37, 64, 46, 0.9) 100%
-  );
+  background: rgba(37, 64, 46, 0.9);
   background-size: 400% 400%;
   animation: gradient 5s ease infinite;
   overflow: hidden;
