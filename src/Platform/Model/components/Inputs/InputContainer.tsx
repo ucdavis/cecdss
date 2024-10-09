@@ -1,20 +1,20 @@
-import React from 'react';
+import { InputModCHP, InputModGP, InputModGPO } from '@ucdavis/tea/input.model';
+import ReactGA from 'react-ga4';
 import {
   Button,
-  Spinner,
   Form,
   FormGroup,
-  Label,
   Input,
   InputGroup,
   InputGroupText,
+  Label,
+  Spinner,
 } from 'reactstrap';
+import { useSaveModel } from '../../../Context/saveModel';
 import { FrcsInputs, MapCoordinates, TransportInputs } from '../../models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
-import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { TransportInputsContainer } from './Transportation/TransportationInputs';
-import { useSaveModel } from '../../../Context/saveModel';
 
 interface Props {
   facilityCoordinates: MapCoordinates;
@@ -42,6 +42,16 @@ interface Props {
 export const InputContainer = (props: Props) => {
   const { updateLinkCopied } = useSaveModel();
 
+  const handleClick = () => {
+    ReactGA.event({
+        category: 'Model Run',
+        action: 'Click',
+        label: 'Run Model',
+    });
+    updateLinkCopied(false);
+    props.submitInputs();
+  };
+
   const button = (!props.disabled || props.loading) && (
     <div className='cardcontents'>
       <ul>
@@ -56,10 +66,7 @@ export const InputContainer = (props: Props) => {
       <Button
         className='btn-block'
         color='primary'
-        onClick={() => {
-          updateLinkCopied(false);
-          props.submitInputs();
-        }}
+        onClick={handleClick}
         disabled={props.loading}
       >
         {props.loading ? (
@@ -76,6 +83,7 @@ export const InputContainer = (props: Props) => {
       <br />
     </div>
   );
+  
   return (
     <>
       <div className='cardheader flex flex-col justify-between items-start'>

@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     ReactGA.initialize(REACT_APP_GA_MEASUREMENT_ID);
-    ReactGA.send("pageview");
+    ReactGA.send({ hitType: "pageview", page: "/pages/home", title: "Landing Page" });
   }, []);
 
   return (

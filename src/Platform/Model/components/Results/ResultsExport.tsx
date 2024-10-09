@@ -1,13 +1,12 @@
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 import React, { useState } from 'react';
-
-import { faDownload, faFileExcel } from '@fortawesome/free-solid-svg-icons';
+import ReactGA from 'react-ga4';
+import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Spinner } from 'reactstrap';
 import {
   AllYearsResults,
-  ClusterResult,
   FrcsInputs,
   Treatments,
   YearlyResult
@@ -47,6 +46,12 @@ export const ResultsExport = (props: Props) => {
   );
 
   const makeClusterExcel = async () => {
+    ReactGA.event({
+        category: 'Export Data',
+        action: 'Click',
+        label: 'Cluster Data Export',
+    });
+
     setClusterExcelLoading(true);
     const workbook = new ExcelJS.Workbook();
 
@@ -226,7 +231,12 @@ export const ResultsExport = (props: Props) => {
   };
 
   const makeExcel = async () => {
-    console.log('EXCEL OUTPUT', props.yearlyResults)
+    ReactGA.event({
+        category: 'Export Data',
+        action: 'Click',
+        label: 'Total Data Export',
+    });
+
     setMakeExcelLoading(true);
     // https://github.com/exceljs/exceljs#interface
     const workbook = new ExcelJS.Workbook();
