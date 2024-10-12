@@ -20,19 +20,19 @@ interface TeamCardProps {
 export const PublicationCard = ({ title, description, link, image }: PublicationCardProps) => {
   return (
     <div className="publication-card">
-      <div className='publication-card-content'>
+      <div className='publication-card-content scrollbar'>
         <div className="publication-card-title">{title}</div>
         <ul className='publication-card-description'>
           {description.length > 0 && description.map((val, index) => (
             <li key={index}>{val}</li>
           ))}
         </ul>
-        <a href={link} target={'_blank'} rel='noreferrer nofollow' className='cursor-pointer'>
-            <Button color="success">
-                Read More
-            </Button>
-        </a>
       </div>
+      <a href={link} target={'_blank'} rel='noreferrer nofollow' className='cursor-pointer pb-3'>
+        <Button color="success">
+        Read More
+        </Button>
+      </a>
     </div>
   );
 };

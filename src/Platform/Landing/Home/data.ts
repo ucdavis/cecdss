@@ -1,3 +1,27 @@
+import { faAsterisk, faCircleNodes, faClone, faCopy, faDollarSign, faLayerGroup, faOilCan, faSatellite, faTruck } from "@fortawesome/free-solid-svg-icons";
+
+export const modelFeatures = [
+  {
+    title: 'TEA',
+    description:
+      'Evaluate financial viability and economic performance of forest biomass projects.',
+    icon: faDollarSign
+  },
+  {
+    title: 'Fuel Cost Simulator',
+    description:
+      'Estimate and analyze fuel costs for various biomass feed stocks and supply scenarios.',
+    icon: faOilCan
+  },
+  {
+    title: 'Transportation',
+    description:
+      'Optimize biomass transportation logistics and calculate associated costs and emissions.',
+    icon: faTruck
+  }
+];
+
+
 export const publications = [
   {
     title:
@@ -29,4 +53,43 @@ export const publications = [
     link:
       'https://www.sciencedirect.com/science/article/pii/S0961953423000727?via%3Dihub'
   }
+];
+
+export const appFeatures = [
+  {
+    title: 'Save Model Runs',
+    description:
+      'Evaluate financial viability and economic performance of forest biomass projects.',
+    icon: faCopy
+  },
+  {
+    title: 'Cluster Visualization',
+    description:
+      'Evaluate financial viability and economic performance of forest biomass projects.',
+    icon: faCircleNodes
+  },
+  {
+    title: 'Detailed Assessment',
+    description:
+      'Evaluate financial viability and economic performance of forest biomass projects.',
+    icon: faAsterisk
+  },
+  {
+    title: 'Map Types',
+    description:
+      'Evaluate financial viability and economic performance of forest biomass projects.',
+    icon: faSatellite
+  },
+  {
+    title: 'Varied Models',
+    description:
+      'Evaluate financial viability and economic performance of forest biomass projects.',
+    icon: faClone
+  },
+  {
+    title: 'Map Layers',
+    description:
+      'Evaluate financial viability and economic performance of forest biomass projects.',
+    icon: faLayerGroup
+  },
 ];
