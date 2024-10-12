@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Input, Label, FormGroup, Form } from 'reactstrap';
 import { GenericPowerOnly } from './GenericPowerOnly/GenericPowerOnly';
-import { TechnoeconomicModels } from '../../../models/Types';
+import { TechnoeconomicModels } from '../../../Models/Types';
 import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
 import { CombinedHeatAndPower } from './GenericCombinedHeatPower/CombinedHeatAndPower';
 import { GasificationPower } from './GasificationPower/GasificationPower';
 import { BasicTeaInputs } from './BasicTeaInputs';
-import { InputModGPOClass } from '../../../models/GPOClasses';
-import { InputModGPClass } from '../../../models/GPClasses';
-import { InputModCHPClass } from '../../../models/CHPClasses';
+import { InputModGPOClass } from '../../../Models/GPOClasses';
+import { InputModGPClass } from '../../../Models/GPClasses';
+import { InputModCHPClass } from '../../../Models/CHPClasses';
 import { StyledInput } from '../Frcs/FrcsInputsContainer';
 
 interface Props {

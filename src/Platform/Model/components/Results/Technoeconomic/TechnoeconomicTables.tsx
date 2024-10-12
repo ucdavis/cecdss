@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatCurrency, formatNumber } from '../../Shared/util';
-import { TechnoeconomicModels, YearlyResult } from '../../../models/Types';
+import { TechnoeconomicModels, YearlyResult } from '../../../Models/Types';
 import { Table } from 'reactstrap';
 import { CashFlow } from '@ucdavis/tea/output.model';
 

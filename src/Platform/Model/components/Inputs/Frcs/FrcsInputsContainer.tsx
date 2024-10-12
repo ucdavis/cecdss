@@ -10,7 +10,7 @@ import {
   Label,
   UncontrolledTooltip
 } from 'reactstrap';
-import { FrcsInputs, Treatments } from '../../../models/Types';
+import { FrcsInputs, Treatments } from '../../../Models/Types';
 import styled from 'styled-components';
 
 interface Props {

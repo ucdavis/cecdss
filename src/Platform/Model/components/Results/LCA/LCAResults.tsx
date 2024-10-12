@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatNumber } from '../../Shared/util';
-import { LCAresults } from '../../../models/Types';
+import { LCAresults } from '../../../Models/Types';
 
 interface Props {
   results: LCAresults;

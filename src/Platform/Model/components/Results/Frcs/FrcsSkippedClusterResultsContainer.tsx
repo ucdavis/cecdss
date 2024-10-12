@@ -3,7 +3,7 @@ import {
   YearlyResult,
   ClusterResult,
   ClusterErrorResult
-} from '../../../models/Types';
+} from '../../../Models/Types';
 import { Button } from 'reactstrap';
 import { ReactTable } from '../../Shared/ReactTable';
 import { formatNumber } from '../../Shared/util';

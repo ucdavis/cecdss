@@ -11,7 +11,7 @@ import {
 import {
   IncomeOtherThanEnergyModGPClass,
   IncomeOtherThanEnergyInputModGPClass
-} from '../../../../models/GPClasses';
+} from '../../../../Models/GPClasses';
 
 interface Props {
   inputs: IncomeOtherThanEnergyInputMod | IncomeOtherThanEnergyInputModGP;

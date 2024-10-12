@@ -7,7 +7,7 @@ import { Marker } from 'react-leaflet';
 import { faIndustry, faTree } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { MapCoordinates } from '../../models/Types';
+import { MapCoordinates } from '../../Models/Types';
 
 interface Props {
   position: MapCoordinates;

@@ -5,7 +5,7 @@ import {
   FrcsInputs,
   Treatments,
   YearlyResult
-} from '../../models/Types';
+} from '../../Models/Types';
 import { LCATables } from './LCA/LCATables';
 import { TechnoeconomicTables } from './Technoeconomic/TechnoeconomicTables';
 import { FrcsTables } from './Frcs/FrcsTables';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { YearlyResult } from '../../models/Types';
+import { YearlyResult } from '../../Models/Types';
 import {
   Area,
   CartesianGrid,

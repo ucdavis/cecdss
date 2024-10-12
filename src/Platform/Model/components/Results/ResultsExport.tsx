@@ -10,7 +10,7 @@ import {
   FrcsInputs,
   Treatments,
   YearlyResult
-} from '../../models/Types';
+} from '../../Models/Types';
 import { formatCurrency, formatNumber } from '../Shared/util';
 import { trackEvent } from '../../../Utils/gaAnalytics';
 

@@ -8,7 +8,7 @@ import {
   Form,
   Button
 } from 'reactstrap';
-import { TransportInputs, Treatments } from '../../../models/Types';
+import { TransportInputs, Treatments } from '../../../Models/Types';
 
 interface Props {
   inputs: TransportInputs;

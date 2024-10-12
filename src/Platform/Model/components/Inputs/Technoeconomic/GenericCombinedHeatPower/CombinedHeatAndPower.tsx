@@ -26,7 +26,7 @@ import { EscalationInflationInput } from '../EscalationInflationInput';
 import { FinancingInput } from '../FinancingInput';
 import { CarbonCreditInput } from '../CarbonCreditInput';
 import { determineScaledCost } from '../TechnoeconomicInputs';
-import { InputModCHPClass } from '../../../../models/CHPClasses';
+import { InputModCHPClass } from '../../../../Models/CHPClasses';
 
 interface Props {
   // inputs: InputModCHP;

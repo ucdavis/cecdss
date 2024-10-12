@@ -4,7 +4,7 @@ import {
   EscalationInflationInputMod,
   EscalationInflationInputModGP
 } from '@ucdavis/tea/input.model';
-import { EscalationInflationInputModGPClass } from '../../../../models/GPClasses';
+import { EscalationInflationInputModGPClass } from '../../../../Models/GPClasses';
 
 interface Props {
   inputs: EscalationInflationInputMod | EscalationInflationInputModGP;

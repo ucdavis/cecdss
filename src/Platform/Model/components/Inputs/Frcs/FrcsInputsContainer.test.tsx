@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { FrcsInputs } from '../../../models/Types';
+import { FrcsInputs } from '../../../Models/Types';
 import { FrcsInputsContainer } from './FrcsInputsContainer';
 
 const frcsInputsExample: FrcsInputs = {

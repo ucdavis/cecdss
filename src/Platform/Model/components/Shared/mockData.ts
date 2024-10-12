@@ -1,4 +1,4 @@
-import { AllYearsResults, YearlyResult } from '../../models/Types';
+import { AllYearsResults, YearlyResult } from '../../Models/Types';
 
 export const fakeallYearResults: AllYearsResults = {
   biomassTarget: 360135.42562338786,
@@ -331,9 +331,7 @@ export const fakeYearlyResult: YearlyResult = {
       id: '153224',
       geometry: {
         bbox: [
-          -121.07760556650561,
-          39.22586044746567,
-          -121.07244463824074,
+          -121.07760556650561, 39.22586044746567, -121.07244463824074,
           39.22979907265777
         ],
         type: 'Polygon',
@@ -393,9 +391,7 @@ export const fakeYearlyResult: YearlyResult = {
       id: '153244',
       geometry: {
         bbox: [
-          -121.08529264625295,
-          39.24756648835897,
-          -121.08012993301745,
+          -121.08529264625295, 39.24756648835897, -121.08012993301745,
           39.251505316619884
         ],
         type: 'Polygon',
@@ -462,9 +458,7 @@ export const fakeYearlyResult: YearlyResult = {
       id: '153306',
       geometry: {
         bbox: [
-          -121.08012993301745,
-          39.245303569710735,
-          -121.07496754204043,
+          -121.08012993301745, 39.245303569710735, -121.07496754204043,
           39.249242272921485
         ],
         type: 'Polygon',

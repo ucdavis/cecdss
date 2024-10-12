@@ -11,11 +11,11 @@ import {
   Spinner,
 } from 'reactstrap';
 import { useSaveModel } from '../../../Context/saveModel';
-import { FrcsInputs, MapCoordinates, TransportInputs } from '../../models/Types';
-import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
-import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
-import { TransportInputsContainer } from './Transportation/TransportationInputs';
+import { FrcsInputs, MapCoordinates, TransportInputs } from '../../Models/Types';
 import { trackEvent } from '../../../Utils/gaAnalytics';
+import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
+import { TransportInputsContainer } from './Transportation/TransportationInputs';
+import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 
 interface Props {
   facilityCoordinates: MapCoordinates;

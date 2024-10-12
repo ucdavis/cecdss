@@ -13,7 +13,7 @@ import {
   Progress,
   Spinner
 } from 'reactstrap';
-import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
+import { AllYearsResults, FrcsInputs, YearlyResult } from '../../Models/Types';
 import { AllResultsContainer } from './AllResultsContainer';
 import { YearlyResultsContainer } from './YearlyResultsContainer';
 import UserDetails from '../Form/UserDetails';

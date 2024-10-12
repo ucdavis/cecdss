@@ -22,16 +22,16 @@ import {
   AllYearsResults,
   Geometry,
   TransportInputs
-} from '../../models/Types';
+} from '../../Models/Types';
 import {
   InputModGPO,
   InputModCHP,
   InputModGP,
   InputModSensitivity
 } from '@ucdavis/tea/input.model';
-import { InputModGPOClass } from '../../models/GPOClasses';
-import { InputModCHPClass } from '../../models/CHPClasses';
-import { InputModGPClass } from '../../models/GPClasses';
+import { InputModGPOClass } from '../../Models/GPOClasses';
+import { InputModCHPClass } from '../../Models/CHPClasses';
+import { InputModGPClass } from '../../Models/GPClasses';
 import { convertGeoJSON } from '../Shared/util';
 // import { HeatmapLayers } from './HeatmapLayers';
 import { PaginationItem, PaginationLink, Button, Pagination } from 'reactstrap';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { YearlyResult, ClusterResult } from '../../../models/Types';
+import { YearlyResult, ClusterResult } from '../../../Models/Types';
 import { Button } from 'reactstrap';
 import { ReactTable } from '../../Shared/ReactTable';
 import { formatNumber, formatCurrency } from '../../Shared/util';

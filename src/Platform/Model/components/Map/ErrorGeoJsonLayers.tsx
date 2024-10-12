@@ -1,7 +1,7 @@
 import React from 'react';
 import { GeoJSON } from 'react-leaflet';
 import { FeatureCollection, Feature } from 'geojson';
-import { ClusterFeature, ErrorClusterFeature } from '../../models/Types';
+import { ClusterFeature, ErrorClusterFeature } from '../../Models/Types';
 import { formatNumber } from '../Shared/util';
 
 interface Props {

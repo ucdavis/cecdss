@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
+import { AllYearsResults, FrcsInputs, YearlyResult } from '../../Models/Types';
 import { ResultsCharts } from './ResultsCharts';
 import { ResultsTable } from './ResultsTables';
 import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
