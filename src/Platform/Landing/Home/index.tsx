@@ -8,6 +8,7 @@ import { TypeAnimation } from 'react-type-animation';
 import { URL_LANDING_PAGE, URL_MODEL_PAGE, USER_GUIDE_LINK } from '../../../Resources/Constants';
 import frredssLandingPage from '../../../Resources/Images/frredssLandingPage.mp4';
 import map from '../../../Resources/Images/map.png';
+import { trackEvent } from '../../Utils/gaAnalytics';
 import CookieConsentBanner from '../Shared/CookieConsent';
 import Footer from '../Shared/Footer';
 import Navbar from '../Shared/Navbar';
@@ -16,7 +17,7 @@ import WaveBackground from './Components/WaveBackground';
 import AppFeatures from './Sections/AppFeatures';
 import ModelFeatures from './Sections/ModelFeatures';
 import Publications from './Sections/Publications';
-import { trackEvent } from '../../Utils/gaAnalytics';
+import Team from './Sections/Team';
 
 interface TitleOverlayProps {
   fontSize: number;
@@ -149,8 +150,8 @@ const Home = () => {
               <ModelFeatures />
             </div>
           </div>
-          <div className='w-full bg-brand flex items-center justify-center p-4'>
-            <div className="max-w-1028p flex items-center justify-center flex-col bg-brand" id='publications'>
+          <div className='w-full bg-brand-grad-green flex items-center justify-center p-4'>
+            <div className="max-w-1028p flex items-center justify-center flex-col" id='publications'>
               <div className='w-full'>
                 <Title title={'Publications'} light />
               </div>

@@ -20,6 +20,7 @@ export const CustomMarker = (props: Props) => {
       color='blue'
       icon={props.icon === 'facility' ? faIndustry : faTree}
       size='3x'
+      style={{ color: '#43694f' }}
     />
   );
   const customMarkerIcon = new Leaflet.DivIcon({

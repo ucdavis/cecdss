@@ -428,7 +428,7 @@
 
 .wave-background {
   position: relative;
-  background: rgba(37, 64, 46, 0.9);
+  background-image: linear-gradient(109.6deg, rgba(61, 131, 97, 1) 11.2%, rgba(28, 103, 88, 1) 91.1%);
   background-size: 400% 400%;
   animation: gradient 5s ease infinite;
   overflow: hidden;
@@ -578,4 +578,8 @@
 
 .cookie-consent-button:hover {
     color: white;
+}
+
+.bg-brand-grad-green {
+background-image: linear-gradient(109.6deg, rgba(61, 131, 97, 1) 11.2%, rgba(28, 103, 88, 1) 91.1%);
 }

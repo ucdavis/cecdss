@@ -33,37 +33,22 @@ export const publications = [
 
 export const team = [
     {
-        name: 'John Doe',
+        name: 'Dr. Boon-Ling Yeo',
         designation: 'Tech Lead',
         image: ''
     },
     {
-        name: 'John Doe',
+        name: 'Scott Kirkland',
         designation: 'Tech Lead',
         image: ''
     },
     {
-        name: 'John Doe',
+        name: 'Michael Smith',
         designation: 'Tech Lead',
         image: ''
     },
     {
-        name: 'John Doe',
-        designation: 'Tech Lead',
-        image: ''
-    },
-    {
-        name: 'John Doe',
-        designation: 'Tech Lead',
-        image: ''
-    },
-    {
-        name: 'John Doe',
-        designation: 'Tech Lead',
-        image: ''
-    },
-    {
-        name: 'John Doe',
+        name: 'Aunsh Bandivadekar',
         designation: 'Tech Lead',
         image: ''
     },

@@ -878,13 +878,6 @@ const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponent
                 selectedYearIndex={selectedYearIndex}
               />
             )}
-            {/* {showHeatmap && (
-              <HeatmapLayers
-                years={years}
-                yearlyGeoJson={geoJsonResults}
-                selectedYearIndex={selectedYearIndex}
-              />
-            )} */}
             {showGeoJson && (
               <GeoJsonLayers
                 years={years}
