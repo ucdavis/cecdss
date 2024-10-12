@@ -17,7 +17,6 @@ import WaveBackground from './Components/WaveBackground';
 import AppFeatures from './Sections/AppFeatures';
 import ModelFeatures from './Sections/ModelFeatures';
 import Publications from './Sections/Publications';
-import Team from './Sections/Team';
 
 interface TitleOverlayProps {
   fontSize: number;

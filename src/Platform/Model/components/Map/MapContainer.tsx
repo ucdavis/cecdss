@@ -1,73 +1,70 @@
-import ReactGA from 'react-ga4';
-import { createRef, useState, useEffect } from 'react';
 import {
-  MapContainer,
-  TileLayer,
-  LayersControl,
-  ScaleControl,
-  useMapEvents,
-} from 'react-leaflet';
-import 'esri-leaflet-renderers';
-import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet';
-import { LatLngExpression, LatLngBoundsExpression } from 'leaflet';
-import { FeatureCollection, Feature } from 'geojson';
-import { InputContainer } from '../Inputs/InputContainer';
-import {
-  FrcsInputs,
-  TechnoeconomicModels,
-  YearlyResult,
-  RequestParams,
-  MapCoordinates,
-  RequestParamsAllYears,
-  AllYearsResults,
-  Geometry,
-  TransportInputs
-} from '../../Models/Types';
-import {
-  InputModGPO,
   InputModCHP,
   InputModGP,
-  InputModSensitivity
+  InputModGPO
 } from '@ucdavis/tea/input.model';
-import { InputModGPOClass } from '../../Models/GPOClasses';
+import 'esri-leaflet-renderers';
+import { Feature, FeatureCollection } from 'geojson';
+import { LatLngBoundsExpression } from 'leaflet';
+import { createRef, useEffect, useState } from 'react';
+import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet';
+import ReactGA from 'react-ga4';
+import {
+  LayersControl,
+  MapContainer,
+  ScaleControl,
+  TileLayer,
+  useMapEvents,
+} from 'react-leaflet';
 import { InputModCHPClass } from '../../Models/CHPClasses';
 import { InputModGPClass } from '../../Models/GPClasses';
+import { InputModGPOClass } from '../../Models/GPOClasses';
+import {
+  AllYearsResults,
+  FrcsInputs,
+  Geometry,
+  MapCoordinates,
+  RequestParams,
+  RequestParamsAllYears,
+  TechnoeconomicModels,
+  TransportInputs,
+  YearlyResult
+} from '../../Models/Types';
+import { InputContainer } from '../Inputs/InputContainer';
 import { convertGeoJSON } from '../Shared/util';
 // import { HeatmapLayers } from './HeatmapLayers';
-import { PaginationItem, PaginationLink, Button, Pagination } from 'reactstrap';
-import { ResultsContainer } from '../Results/ResultsContainer';
-import { GeoJsonLayers } from './GeoJsonLayers';
+import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import {
   computeConstantLAC,
   computeCurrentLAC,
-  computeEnergyRevenueRequiredPW,
-  transmission
+  computeEnergyRevenueRequiredPW
 } from '@ucdavis/tea/utility';
-import { runSensitivityAnalysis } from '@ucdavis/tea/sensitivity';
-import { OutputModSensitivity } from '@ucdavis/tea/output.model';
-import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
-import { ExternalLayerSelection } from './ExternalLayerSelection';
+import { Button, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { ResultsContainer } from '../Results/ResultsContainer';
 import { serviceUrl } from '../Shared/config';
+import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
 import { ExternalLayerLegend } from './ExternalLayerLegend';
+import { ExternalLayerSelection } from './ExternalLayerSelection';
+import { GeoJsonLayers } from './GeoJsonLayers';
 
 import {
   faExpandArrowsAlt,
-  faMinusSquare,
   faEye,
-  faEyeSlash
+  faEyeSlash,
+  faMinusSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { PrintControl } from './PrintControl';
-import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
-import { CustomMarker } from './CustomMarker';
-import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
-import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
+import { useParams } from 'react-router-dom';
 import { ATTRIBUTION, BE_APP_URL, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
-import { useLocation, useParams } from 'react-router-dom';
+import triangle from '../../../../Resources/Images/triangle.svg';
+import triangleTree from '../../../../Resources/Images/triangleTreeCrop.svg';
 import Loader from '../../../../Shared/Loader';
-import triangle from '../../../../Resources/Images/triangle.svg'
-import triangleTree from '../../../../Resources/Images/triangleTreeCrop.svg'
+import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
+import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
+import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
+import { CustomMarker } from './CustomMarker';
 import NominatimSearchControl from './NominatimSearchControl';
+import { PrintControl } from './PrintControl';
 
 export interface RequestParamsAllYearsNoTransmission {
   facilityLat: number;

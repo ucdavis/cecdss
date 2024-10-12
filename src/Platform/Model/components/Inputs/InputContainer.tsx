@@ -1,5 +1,4 @@
 import { InputModCHP, InputModGP, InputModGPO } from '@ucdavis/tea/input.model';
-import ReactGA from 'react-ga4';
 import {
   Button,
   Form,
@@ -11,11 +10,11 @@ import {
   Spinner,
 } from 'reactstrap';
 import { useSaveModel } from '../../../Context/saveModel';
-import { FrcsInputs, MapCoordinates, TransportInputs } from '../../Models/Types';
 import { trackEvent } from '../../../Utils/gaAnalytics';
+import { FrcsInputs, MapCoordinates, TransportInputs } from '../../Models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
-import { TransportInputsContainer } from './Transportation/TransportationInputs';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
+import { TransportInputsContainer } from './Transportation/TransportationInputs';
 
 interface Props {
   facilityCoordinates: MapCoordinates;
