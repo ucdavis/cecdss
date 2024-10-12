@@ -62,6 +62,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.5.0",
     "@types/file-saver": "^2.0.1",
     "@types/geojson": "^7946.0.14",
     "@types/isomorphic-fetch": "0.0.35",

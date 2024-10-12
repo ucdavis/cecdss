@@ -171,7 +171,7 @@ const getShortUrlData = async (modelID:string) => {
   return originalUrl;
 };
 
-const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponentProps) => {
+export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponentProps) => {
   const { modelID } = useParams();
   const [mapReady, setMapReady] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);

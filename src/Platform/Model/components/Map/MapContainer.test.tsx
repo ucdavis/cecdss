@@ -1,136 +1,162 @@
-// import React from 'react';
-// import { render, screen, fireEvent } from '@testing-library/react';
-// import { MapContainerComponent } from './MapContainer';
-// import { fakeallYearResults, fakeYearlyResult } from '../Shared/mockData';
-// import 'jest-canvas-mock';
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { MapContainerComponent } from './MapContainer';
+import { fakeallYearResults, fakeYearlyResult } from '../Shared/mockData';
+import '@testing-library/jest-dom';
+import 'jest-canvas-mock';
 
-// jest.setTimeout(30000);
+jest.mock('react-ga4', () => ({
+  event: jest.fn(),
+}));
 
-// jest.mock('./GeoJsonLayers', () => ({
-//   GeoJsonLayers: () => <div id='GeoJsonLayers'>GeoJsonLayers</div>
-// }));
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: () => ({
+    modelID: 'test-model-id',
+  }),
+}));
 
-// jest.mock('./HeatmapLayers', () => ({
-//   HeatmapLayers: () => <div id='HeatmapLayers'>HeatmapLayers</div>
-// }));
+jest.mock('./GeoJsonLayers', () => ({
+  GeoJsonLayers: () => <div data-testid='GeoJsonLayers'>GeoJsonLayers</div>
+}));
 
-// jest.mock('./TripLayers', () => ({
-//   TripLayers: () => <div id='TripLayers'>TripLayers</div>
-// }));
+jest.mock('./HeatmapLayers', () => ({
+  HeatmapLayers: () => <div data-testid='HeatmapLayers'>HeatmapLayers</div>
+}));
 
-// beforeEach(() => {
-//   jest.clearAllMocks();
-// });
+jest.mock('./TripLayers', () => ({
+  TripLayers: () => <div data-testid='TripLayers'>TripLayers</div>
+}));
 
-// describe('MapContainer', () => {
-//   const allYearResultsResponse = {
-//     status: 200,
-//     ok: true,
-//     json: () => Promise.resolve(fakeallYearResults)
-//   };
+jest.mock('./utils', () => ({
+  getShortUrlData: jest.fn().mockResolvedValue({
+    allYearInputs: 'facilityLat=39&facilityLng=-121&teaModel=genericPowerOnly&teaInputs.CapitalCost.TotalProjectCost=100000000',
+    biomassCoordinates: 'lat=39&lng=-121',
+    frcsInputs: 'system=Ground-Based%20Mech%20WT&treatmentid=3&dieselFuelPrice=2.24',
+    transportInputs: 'wageTruckDriver=24.71&driverBenefits=67&oilCost=0.35',
+  }),
+}));
 
-//   const yearlyResultResponse = {
-//     status: 200,
-//     ok: true,
-//     json: () => Promise.resolve(fakeYearlyResult)
-//   };
+describe('MapContainer', () => {
+  const allYearResultsResponse = {
+    status: 200,
+    ok: true,
+    json: () => Promise.resolve(fakeallYearResults)
+  };
 
-//   it('Lat Lng render', async () => {
-//   render(<MapContainerComponent />);
+  const yearlyResultResponse = {
+    status: 200,
+    ok: true,
+    json: () => Promise.resolve(fakeYearlyResult)
+  };
 
-//   const latInput = await screen.findByLabelText(/latitude/i) as HTMLInputElement;
-//   const lngInput = await screen.findByLabelText(/longitude/i) as HTMLInputElement;
+  beforeEach(() => {
+    (global as any).fetch = jest.fn()
+      .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
+      .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+  });
 
-//   expect(latInput.value).toBe('39.21204328248304');
-//   expect(lngInput.value).toBe('-121.07163446489723');
-// });
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
 
-//   it('Treatment Id', async () => {
-//     global.fetch = jest.fn()
-//       .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
-//       .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+  it('renders initial lat and lng', async () => {
+    render(<MapContainerComponent urlLoading={false} handleUrlLoadingChange={() => {}} />);
+    
+    await waitFor(() => {
+      const latInput = screen.getByLabelText('Latitude:') as HTMLInputElement;
+      const lngInput = screen.getByLabelText('Longitude:') as HTMLInputElement;
+      expect(latInput.value).toBe('39');
+      expect(lngInput.value).toBe('-121');
+    });
+  });
 
-//     render(<MapContainerComponent />);
+  it('handles treatment id selection', async () => {
+    render(<MapContainerComponent urlLoading={false} handleUrlLoadingChange={() => {}} />);
 
-//     const dropdown = await screen.findByRole('combobox');
-//     fireEvent.change(dropdown, { target: { value: '4' } });
+    const dropdown = await screen.findByRole('combobox') as HTMLSelectElement;
+    fireEvent.change(dropdown, { target: { value: '4' } });
 
-//     const modelButton = await screen.findByRole('button', { name: /btn-block btn btn-primary/i });
-//     fireEvent.click(modelButton);
+    const modelButton = await screen.findByRole('button', { name: /run model/i });
+    fireEvent.click(modelButton);
 
-//     const resultBtn = await screen.findAllByRole('button', { name: /page/i });
-//     fireEvent.click(resultBtn[1]);
+    await waitFor(() => {
+      const resultBtn = screen.getAllByRole('button', { name: /results/i })[0];
+      fireEvent.click(resultBtn);
+    });
 
-//     const treatment = await screen.findByText(/timber salvage/i);
-//     expect(treatment).toBeInTheDocument();
-//   });
+    await waitFor(() => {
+      const treatmentRow = screen.getByText(/Timber Salvage/i);
+      expect(treatmentRow).toBeInTheDocument();
+    });
+  });
 
-//   it('All Results', async () => {
-//     global.fetch = jest.fn()
-//       .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
-//       .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+  it('displays all results', async () => {
+    render(<MapContainerComponent urlLoading={false} handleUrlLoadingChange={() => {}} />);
 
-//     render(<MapContainerComponent />);
+    const dropdown = await screen.findByRole('combobox') as HTMLSelectElement;
+    fireEvent.change(dropdown, { target: { value: '4' } });
 
-//     const dropdown = await screen.findByRole('combobox');
-//     fireEvent.change(dropdown, { target: { value: '4' } });
+    const modelButton = await screen.findByRole('button', { name: /run model/i });
+    fireEvent.click(modelButton);
 
-//     const modelButton = await screen.findByRole('button', { name: /btn-block btn btn-primary/i });
-//     fireEvent.click(modelButton);
+    await waitFor(() => {
+      const resultBtn = screen.getAllByRole('button', { name: /results/i })[0];
+      fireEvent.click(resultBtn);
+    });
 
-//     const resultBtn = await screen.findAllByRole('button', { name: /page/i });
-//     fireEvent.click(resultBtn[1]);
+    await waitFor(() => {
+      const capitolCost = screen.getByText('$96,256,611');
+      const kWe = screen.getByText('25000');
+      expect(capitolCost).toBeInTheDocument();
+      expect(kWe).toBeInTheDocument();
+    });
+  });
 
-//     const capitolCost = await screen.findByText('$96,256,611');
-//     const kWe = await screen.findByText('25000');
+  it('displays all years', async () => {
+    render(<MapContainerComponent urlLoading={false} handleUrlLoadingChange={() => {}} />);
 
-//     expect(capitolCost).toBeInTheDocument();
-//     expect(kWe).toBeInTheDocument();
-//   });
+    const dropdown = await screen.findByRole('combobox') as HTMLSelectElement;
+    fireEvent.change(dropdown, { target: { value: '4' } });
 
-//   it('All Years', async () => {
-//     global.fetch = jest.fn()
-//       .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
-//       .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+    const modelButton = await screen.findByRole('button', { name: /run model/i });
+    fireEvent.click(modelButton);
 
-//     render(<MapContainerComponent />);
+    await waitFor(() => {
+      const resultBtn = screen.getAllByRole('button', { name: /results/i })[0];
+      fireEvent.click(resultBtn);
+    });
 
-//     const dropdown = await screen.findByRole('combobox');
-//     fireEvent.change(dropdown, { target: { value: '4' } });
+    await waitFor(() => {
+      const yearButtons = screen.getAllByRole('button', { name: /20\d{2}/i });
+      expect(yearButtons.length).toBe(21);
+    });
+  });
 
-//     const modelButton = await screen.findByRole('button', { name: /btn-block btn btn-primary/i });
-//     fireEvent.click(modelButton);
+  it('handles year selection in results', async () => {
+    render(<MapContainerComponent urlLoading={false} handleUrlLoadingChange={() => {}} />);
 
-//     const resultBtn = await screen.findAllByRole('button', { name: /page/i });
-//     fireEvent.click(resultBtn[1]);
+    const dropdown = await screen.findByRole('combobox') as HTMLSelectElement;
+    fireEvent.change(dropdown, { target: { value: '4' } });
 
-//     const years = await screen.findAllByText(/year/i); // Adjust the selector based on your markup
-//     expect(years.length).toBe(21);
-//   });
+    const modelButton = await screen.findByRole('button', { name: /run model/i });
+    fireEvent.click(modelButton);
 
-//   it('Results Year Click', async () => {
-//     global.fetch = jest.fn()
-//       .mockImplementationOnce(() => Promise.resolve(allYearResultsResponse))
-//       .mockImplementation(() => Promise.resolve(yearlyResultResponse));
+    await waitFor(() => {
+      const resultBtn = screen.getAllByRole('button', { name: /results/i })[0];
+      fireEvent.click(resultBtn);
+    });
 
-//     render(<MapContainerComponent />);
+    await waitFor(() => {
+      const yearButton = screen.getByRole('button', { name: '2017' });
+      fireEvent.click(yearButton);
+    });
 
-//     const dropdown = await screen.findByRole('combobox');
-//     fireEvent.change(dropdown, { target: { value: '4' } });
-
-//     const modelButton = await screen.findByRole('button', { name: /btn-block btn btn-primary/i });
-//     fireEvent.click(modelButton);
-
-//     const resultBtn = await screen.findAllByRole('button', { name: /page/i });
-//     fireEvent.click(resultBtn[1]);
-
-//     const yearBtn = await screen.findByRole('button', { name: /2016/i });
-//     fireEvent.click(yearBtn);
-
-//     const tableData = await screen.findAllByRole('cell');
-//     expect(tableData[3].textContent).toBe('$25.94');
-//     expect(tableData[7].textContent).toBe('$29.56');
-//   });
-// });
-
-export {}
+    await waitFor(() => {
+      const priceElement = screen.getByText('$25.94');
+      const anotherPriceElement = screen.getByText('$29.56');
+      expect(priceElement).toBeInTheDocument();
+      expect(anotherPriceElement).toBeInTheDocument();
+    });
+  });
+});
