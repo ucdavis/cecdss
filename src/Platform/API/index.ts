@@ -1,5 +1,3 @@
-// Register
-
 import { SubmitFormHookProps } from '../Hooks/Form';
 
 export const saveUserDetailsAPI: SubmitFormHookProps = {

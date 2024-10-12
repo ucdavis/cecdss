@@ -54,7 +54,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams } from 'react-router-dom';
-import { ATTRIBUTION, BE_APP_URL, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
+import { ATTRIBUTION, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
 import triangle from '../../../../Resources/Images/triangle.svg';
 import triangleTree from '../../../../Resources/Images/triangleTreeCrop.svg';
 import Loader from '../../../../Shared/Loader';
@@ -153,7 +153,7 @@ function parseQueryString(queryString:string) {
 }
 
 const getShortUrlData = async (modelID:string) => {
-  const serviceUrl = `${BE_APP_URL}/saved-model/`;
+  const serviceUrl = `${baseUrl}/saved-model/`;
 
   const originalUrl = await fetch(serviceUrl + modelID, {
     mode: 'cors',
@@ -169,6 +169,11 @@ const getShortUrlData = async (modelID:string) => {
 
   return originalUrl;
 };
+
+const baseUrl =
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000'
+        : process.env.REACT_APP_BE_URL;
 
 export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponentProps) => {
   const { modelID } = useParams();
@@ -371,7 +376,7 @@ export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerCo
     const transportInputsStr = createQueryStr(transportInputs);
 
     const shortenUrl = await fetch(
-      `${BE_APP_URL}/shorten-url`,
+      `${baseUrl}/shorten-url`,
       {
         mode: 'cors',
         method: 'POST',
