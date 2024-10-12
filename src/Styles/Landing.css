@@ -60,101 +60,101 @@
     background-color: #395442;
 }
 
-/* Title Text */
+
 .title-overlay .title {
     margin-bottom: 0.5rem;
-    /* mb-2 */
+   
     font-size: 1rem;
-    /* text-lg */
+   
 }
 
 @media (min-width: 640px) {
     .title-overlay .title {
         font-size: 1.25rem;
-        /* sm:text-xl */
+       
     }
 }
 
 @media (min-width: 768px) {
     .title-overlay .title {
         font-size: 1.5rem;
-        /* md:text-2xl */
+       
     }
 }
 
 @media (min-width: 1024px) {
     .title-overlay .title {
         font-size: 1.5rem;
-        /* lg:text-3xl */
+       
     }
 }
 
-/* Subtitle Text */
+
 .title-overlay .subtitle {
     margin-bottom: 1.25rem;
-    /* mb-5 */
+   
     font-size: 1.9rem;
-    /* text-2xl */
+   
     font-weight: bold;
-    /* font-bold */
+   
 }
 
 @media (max-width: 450px) {
     .title-overlay .subtitle {
         font-size: 1.7rem;
-        /* sm:text-4xl */
+       
     }
 }
 
 @media (min-width: 640px) {
     .title-overlay .subtitle {
         font-size: 2.6rem;
-        /* sm:text-4xl */
+       
     }
 }
 
 @media (min-width: 768px) {
     .title-overlay .subtitle {
         font-size: 3.6rem;
-        /* md:text-6xl */
+       
     }
 }
 
 @media (min-width: 1024px) {
     .title-overlay .subtitle {
         font-size: 4rem;
-        /* lg:text-7xl */
+       
     }
 }
 
-/* Button Group */
+
 .title-overlay .button-group {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-    /* gap-4 */
+   
 }
 
 @media (min-width: 640px) {
     .title-overlay .button-group {
         flex-direction: row;
-        /* sm:flex-row */
+       
     }
 }
 
 .title-overlay .button {
     background-color: #395442;
-    /* bg-green-900 */
+   
     color: white;
-    /* text-white */
+   
     padding: 0.5rem 1rem;
-    /* py-2 px-4 */
+   
     border-radius: 0.5rem;
-    /* rounded-lg */
+   
     font-size: 1rem;
-    /* text-lg */
+   
     display: flex;
     align-items: center;
     justify-content: center;
@@ -164,15 +164,15 @@
 
 .title-overlay .button:hover {
     transform: scale(1.05);
-    /* Slightly increase the size on hover */
+   
     text-decoration: none;
-    /* Ensure underline is removed on hover */
+   
 }
 
 @media (min-width: 640px) {
     .title-overlay .button{
         font-size: 0.7rem;
-        /* sm:text-4xl */
+       
         padding: 0.5rem 0.7rem;
     }
 }
@@ -180,7 +180,7 @@
 @media (min-width: 768px) {
     .title-overlay .button{
         font-size: 0.8rem;
-        /* md:text-6xl */
+       
         padding: 0.5rem 0.75rem;
     }
 }
@@ -188,7 +188,7 @@
 @media (min-width: 1024px) {
     .title-overlay .button{
         font-size: 0.9rem;
-        /* lg:text-7xl */
+       
         padding: 0.5rem 1rem;
         padding: 0.5rem 0.9rem;
     }
@@ -197,7 +197,7 @@
 @media (max-width: 640px) {
     .title-overlay .button {
         font-size: 0.7rem;
-        /* sm:text-4xl */
+       
         padding: 0.5rem 0.7rem;
     }
 }
@@ -249,7 +249,7 @@
     transform: scale(1.05);
 }
 
-/* Content styling */
+
 .publication-card-content {
     padding: 8px 16px;
     display: flex;
