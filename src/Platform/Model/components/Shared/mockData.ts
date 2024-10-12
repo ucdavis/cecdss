@@ -1,4 +1,4 @@
-import { AllYearsResults, YearlyResult } from '../../Models/Types';
+import { AllYearsResults, YearlyResult } from '../../models/Types';
 
 export const fakeallYearResults: AllYearsResults = {
   biomassTarget: 360135.42562338786,

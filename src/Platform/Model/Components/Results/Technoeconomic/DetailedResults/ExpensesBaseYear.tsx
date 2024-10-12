@@ -11,11 +11,11 @@ import {
 import {
   ExpensesBaseYearModGPOClass,
   ExpensesBaseYearInputModGPOClass
-} from '../../../../Models/GPOClasses';
+} from '../../../../models/GPOClasses';
 import {
   ExpensesBaseYearModGPClass,
   ExpensesBaseYearInputModGPClass
-} from '../../../../Models/GPClasses';
+} from '../../../../models/GPClasses';
 
 interface Props {
   results: ExpensesBaseYearModGPO | ExpensesBaseYearModGP;

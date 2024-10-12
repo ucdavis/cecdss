@@ -1,4 +1,4 @@
-import { ClusterResult } from '../../Models/Types';
+import { ClusterResult } from '../../models/Types';
 import { Feature, FeatureCollection } from 'geojson';
 
 export const formatNumber = (num: number, digits?: number) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { YearlyResult } from '../../Models/Types';
+import { YearlyResult } from '../../models/Types';
 import { Alert } from 'reactstrap';
 import { formatNumber, formatCurrency } from '../Shared/util';
 

@@ -9,8 +9,8 @@ import {
   InputGroupText
 } from 'reactstrap';
 import { determineScaledCost } from './TechnoeconomicInputs';
-import { InputModGPOClass } from '../../../Models/GPOClasses';
-import { TechnoeconomicModels } from '../../../Models/Types';
+import { InputModGPOClass } from '../../../models/GPOClasses';
+import { TechnoeconomicModels } from '../../../models/Types';
 
 // ! CHECK THE BELOW DECLARATION
 export interface ExpensesBaseYearInputModGPONew extends ExpensesBaseYearInputModGPO {

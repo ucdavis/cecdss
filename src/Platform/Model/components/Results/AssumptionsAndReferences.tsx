@@ -1,5 +1,5 @@
 import React from 'react';
-import { AllYearsResults, FrcsInputs, YearlyResult } from '../../Models/Types';
+import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
 import { Alert, Table } from 'reactstrap';
 
 export const AssumptionsAndReferences = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { GeoJSON, Popup } from 'react-leaflet';
 import { FeatureCollection } from 'geojson';
-import { ClusterFeature } from '../../Models/Types';
+import { ClusterFeature } from '../../models/Types';
 import { GeoJsonLayerPopup } from './GeoJsonLayerPopup';
 
 interface Props {

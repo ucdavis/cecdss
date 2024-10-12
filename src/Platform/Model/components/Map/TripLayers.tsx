@@ -1,7 +1,7 @@
 import { Feature } from 'geojson';
 import React, { useMemo } from 'react';
 import { GeoJSON } from 'react-leaflet';
-import { Geometry } from '../../Models/Types';
+import { Geometry } from '../../models/Types';
 
 interface Props {
   years: number[];

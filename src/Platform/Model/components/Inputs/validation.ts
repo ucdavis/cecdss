@@ -1,8 +1,8 @@
 import * as yup from 'yup';
 import { Schema, ValidationError } from 'yup';
 import { InputModGPO, InputModCHP, InputModGP } from '@ucdavis/tea/input.model';
-import { teaGPOSchema, teaCHPSchema, teaGPSchema } from '../../Models/Schemas';
-import { FrcsInputs } from '../../Models/Types';
+import { teaGPOSchema, teaCHPSchema, teaGPSchema } from '../../models/Schemas';
+import { FrcsInputs } from '../../models/Types';
 
 // FrcsInputs
 let frcsSchema: Schema<FrcsInputs> = yup.object().shape({

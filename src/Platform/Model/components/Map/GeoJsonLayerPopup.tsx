@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClusterFeature } from '../../Models/Types';
+import { ClusterFeature } from '../../models/Types';
 import { formatNumber } from '../Shared/util';
 
 interface IProps {

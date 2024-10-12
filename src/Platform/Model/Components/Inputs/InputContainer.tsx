@@ -11,7 +11,7 @@ import {
 } from 'reactstrap';
 import { useSaveModel } from '../../../Context/saveModel';
 import { trackEvent } from '../../../Utils/gaAnalytics';
-import { FrcsInputs, MapCoordinates, TransportInputs } from '../../Models/Types';
+import { FrcsInputs, MapCoordinates, TransportInputs } from '../../models/Types';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 import { TransportInputsContainer } from './Transportation/TransportationInputs';

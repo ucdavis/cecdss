@@ -1,5 +1,5 @@
 import React from 'react';
-import { YearlyResult } from '../../Models/Types';
+import { YearlyResult } from '../../models/Types';
 import { YearlyResultsTable } from './YearlyResultsTables';
 import {
   InputModGPO,

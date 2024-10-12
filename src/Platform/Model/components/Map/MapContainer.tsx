@@ -16,9 +16,9 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
-import { InputModCHPClass } from '../../Models/CHPClasses';
-import { InputModGPClass } from '../../Models/GPClasses';
-import { InputModGPOClass } from '../../Models/GPOClasses';
+import { InputModCHPClass } from '../../models/CHPClasses';
+import { InputModGPClass } from '../../models/GPClasses';
+import { InputModGPOClass } from '../../models/GPOClasses';
 import {
   AllYearsResults,
   FrcsInputs,
@@ -29,9 +29,7 @@ import {
   TechnoeconomicModels,
   TransportInputs,
   YearlyResult
-} from '../../Models/Types';
-import { InputContainer } from '../Inputs/InputContainer';
-import { convertGeoJSON } from '../Shared/util';
+} from '../../models/Types';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import {
   computeConstantLAC,
@@ -39,12 +37,6 @@ import {
   computeEnergyRevenueRequiredPW
 } from '@ucdavis/tea/utility';
 import { Button, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
-import { ResultsContainer } from '../Results/ResultsContainer';
-import { serviceUrl } from '../Shared/config';
-import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
-import { ExternalLayerLegend } from './ExternalLayerLegend';
-import { ExternalLayerSelection } from './ExternalLayerSelection';
-import { GeoJsonLayers } from './GeoJsonLayers';
 
 import {
   faExpandArrowsAlt,
@@ -59,11 +51,20 @@ import triangle from '../../../../Resources/Images/triangle.svg';
 import triangleTree from '../../../../Resources/Images/triangleTreeCrop.svg';
 import Loader from '../../../../Shared/Loader';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
-import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
-import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
-import { CustomMarker } from './CustomMarker';
+import { serviceUrl } from '../Shared/config';
+import { convertGeoJSON } from '../Shared/util';
+import { ExternalLayerSelection } from './ExternalLayerSelection';
+import { ExternalLayerLegend } from './ExternalLayerLegend';
+import { InputContainer } from '../Inputs/InputContainer';
+import { ResultsContainer } from '../Results/ResultsContainer';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
+import { CustomMarker } from './CustomMarker';
+import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
+import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
+import { GeoJsonLayers } from './GeoJsonLayers';
+import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
+
 
 export interface RequestParamsAllYearsNoTransmission {
   facilityLat: number;

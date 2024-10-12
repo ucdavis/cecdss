@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GeoJSON } from 'react-leaflet';
 import { FeatureCollection } from 'geojson';
-import { MapCoordinates, YearlyResult } from '../../Models/Types';
+import { MapCoordinates, YearlyResult } from '../../models/Types';
 import { serviceUrl } from '../Shared/config';
 
 interface Props {

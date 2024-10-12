@@ -11,7 +11,7 @@ import {
 import {
   ElectricalFuelBaseYearModCHPClass,
   ElectricalFuelBaseYearInputModCHPClass
-} from '../../../../Models/CHPClasses';
+} from '../../../../models/CHPClasses';
 
 interface Props {
   results: ElectricalFuelBaseYearModGPO | ElectricalFuelBaseYearModCHP;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatNumber } from '../../Shared/util';
-import { YearlyResult } from '../../../Models/Types';
+import { YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
 
 interface Props {
