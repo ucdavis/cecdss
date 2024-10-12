@@ -59,37 +59,37 @@ export const appFeatures = [
   {
     title: 'Save Model Runs',
     description:
-      'Evaluate financial viability and economic performance of forest biomass projects.',
+      'Store and retrieve multiple simulation scenarios for comparative analysis and future reference.',
     icon: faCopy
   },
   {
     title: 'Cluster Visualization',
     description:
-      'Evaluate financial viability and economic performance of forest biomass projects.',
+      'Visually represent biomass resource clusters on interactive maps for efficient spatial analysis.',
     icon: faCircleNodes
   },
   {
     title: 'Detailed Assessment',
     description:
-      'Evaluate financial viability and economic performance of forest biomass projects.',
+      'Conduct comprehensive evaluations of forest biomass projects, including economic, environmental, and logistical factors.',
     icon: faAsterisk
   },
   {
     title: 'Map Types',
     description:
-      'Evaluate financial viability and economic performance of forest biomass projects.',
+      'Toggle between various map views, including topographic, satellite, and hybrid, to enhance geographical context.',
     icon: faSatellite
   },
   {
     title: 'Varied Models',
     description:
-      'Evaluate financial viability and economic performance of forest biomass projects.',
+      'Access a range of analytical models for diverse aspects of forest resource management and renewable energy planning.',
     icon: faClone
   },
   {
     title: 'Map Layers',
     description:
-      'Evaluate financial viability and economic performance of forest biomass projects.',
+      'Customize map displays with overlays for factors such as forest density, transportation routes, and facility locations.',
     icon: faLayerGroup
-  },
+  }
 ];
