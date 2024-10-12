@@ -30,27 +30,3 @@ export const publications = [
       'https://www.sciencedirect.com/science/article/pii/S0961953423000727?via%3Dihub'
   }
 ];
-
-export const team = [
-    {
-        name: 'Dr. Boon-Ling Yeo',
-        designation: 'Tech Lead',
-        image: ''
-    },
-    {
-        name: 'Scott Kirkland',
-        designation: 'Tech Lead',
-        image: ''
-    },
-    {
-        name: 'Michael Smith',
-        designation: 'Tech Lead',
-        image: ''
-    },
-    {
-        name: 'Aunsh Bandivadekar',
-        designation: 'Tech Lead',
-        image: ''
-    },
-];
-
