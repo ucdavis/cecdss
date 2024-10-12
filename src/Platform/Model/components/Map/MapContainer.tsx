@@ -32,7 +32,6 @@ import {
 } from '../../Models/Types';
 import { InputContainer } from '../Inputs/InputContainer';
 import { convertGeoJSON } from '../Shared/util';
-// import { HeatmapLayers } from './HeatmapLayers';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import {
   computeConstantLAC,
@@ -199,7 +198,6 @@ export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerCo
   const [tripGeometries, setTripGeometries] = useState<Geometry[]>([]);
 
   const [showGeoJson, toggleGeoJson] = useState<boolean>(true);
-  const [showHeatmap, toggleHeatmap] = useState<boolean>(false);
   const [showErrorGeoJson, toggleErrorGeoJson] = useState<boolean>(false);
   const [showMoveInGeoJson, toggleMoveInGeoJson] = useState<boolean>(false);
   const [
@@ -882,6 +880,7 @@ export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerCo
                 selectedYearIndex={selectedYearIndex}
               />
             )}
+            
             {showTransportationGeoJson && (
               <ClusterTransportationRoutesLayer
                 facilityCoordinates={facilityCoordinates}
