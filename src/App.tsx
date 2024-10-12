@@ -5,9 +5,9 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Home from './Platform/Landing/Home';
 import { URL_LANDING_PAGE, URL_MODEL_ID_PAGE, URL_MODEL_PAGE, URL_REROUTE_PAGE } from './Resources/Constants';
 import NotFound from './Shared/NotFound';
-import './Styles/App.css';
 import { AllProviders } from './Platform/Context';
 import { MapContainerWrapper } from './Platform/Model/Components/Map/MapContainer';
+import './Styles/App.css';
 
 const REACT_APP_GA_MEASUREMENT_ID = 'G-R6MSB6V25R';
 

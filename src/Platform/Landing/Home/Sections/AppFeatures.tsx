@@ -1,4 +1,3 @@
-import { faAsterisk, faCircleNodes, faClone, faCopy, faLayerGroup, faSatellite } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { appFeatures } from '../data';
 
