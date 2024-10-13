@@ -1,3 +1,4 @@
+#Include files you don't want to push to the origin here
 # Logs
 logs
 *.log

@@ -2,7 +2,7 @@
 
 ## Local setup
 
-1. Make sure you are using node v10
+1. Make sure you are using node v18
 1. `npm install` the dependencies
 
 ## Choose your backend
