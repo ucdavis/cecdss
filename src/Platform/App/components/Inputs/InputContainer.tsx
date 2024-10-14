@@ -67,8 +67,8 @@ export const InputContainer = (props: Props) => {
       >
         {props.loading ? (
           <>
-            Running Model...
-            <Spinner size="sm" color='light'>
+            Running Model
+            <Spinner size="sm" color='light' className='ml-2'>
               {''}
             </Spinner>
           </>

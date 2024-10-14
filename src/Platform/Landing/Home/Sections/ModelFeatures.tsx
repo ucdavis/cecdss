@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { modelFeatures } from '../data';
+import { modelFeatures } from '../../../../Resources/Constants';
 
 const ModelFeatures = () => {
   return (

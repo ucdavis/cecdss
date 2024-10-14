@@ -3,6 +3,12 @@ import {
   InputModGP,
   InputModGPO
 } from '@ucdavis/tea/input.model';
+import { OutputModSensitivity } from '@ucdavis/tea/output.model';
+import {
+  computeConstantLAC,
+  computeCurrentLAC,
+  computeEnergyRevenueRequiredPW
+} from '@ucdavis/tea/utility';
 import 'esri-leaflet-renderers';
 import { Feature, FeatureCollection } from 'geojson';
 import { LatLngBoundsExpression } from 'leaflet';
@@ -16,6 +22,7 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
+import { Button, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
 import { InputModGPOClass } from '../../models/GPOClasses';
@@ -30,13 +37,6 @@ import {
   TransportInputs,
   YearlyResult
 } from '../../models/Types';
-import { OutputModSensitivity } from '@ucdavis/tea/output.model';
-import {
-  computeConstantLAC,
-  computeCurrentLAC,
-  computeEnergyRevenueRequiredPW
-} from '@ucdavis/tea/utility';
-import { Button, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 import {
   faExpandArrowsAlt,
@@ -47,24 +47,21 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams } from 'react-router-dom';
 import { ATTRIBUTION, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
-import triangle from '../../../../Resources/Images/triangle.svg';
-import triangleTree from '../../../../Resources/Images/triangleTreeCrop.svg';
-import Loader from '../../../../Shared/Loader';
+import { trackEvent } from '../../../Utils/gaAnalytics';
+import { InputContainer } from '../Inputs/InputContainer';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
+import { ResultsContainer } from '../Results/ResultsContainer';
 import { serviceUrl } from '../Shared/config';
 import { convertGeoJSON } from '../Shared/util';
-import { ExternalLayerSelection } from './ExternalLayerSelection';
-import { ExternalLayerLegend } from './ExternalLayerLegend';
-import { InputContainer } from '../Inputs/InputContainer';
-import { ResultsContainer } from '../Results/ResultsContainer';
-import NominatimSearchControl from './NominatimSearchControl';
-import { PrintControl } from './PrintControl';
+import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
+import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
 import { CustomMarker } from './CustomMarker';
 import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
-import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
+import { ExternalLayerLegend } from './ExternalLayerLegend';
+import { ExternalLayerSelection } from './ExternalLayerSelection';
 import { GeoJsonLayers } from './GeoJsonLayers';
-import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
-import { trackEvent } from '../../../Utils/gaAnalytics';
+import NominatimSearchControl from './NominatimSearchControl';
+import { PrintControl } from './PrintControl';
 
 
 export interface RequestParamsAllYearsNoTransmission {
@@ -104,48 +101,6 @@ const processDieselFuelPrice = (price: string | number): number => {
   }
   return price;
 };
-
-const createQueryStr = (object: any) => {
-  const { transmission, ...rest } = object;
-  const queryParams = new URLSearchParams();
-
-  const flattenObject = (obj:any, parentKey = '') => {
-    Object.keys(obj).forEach(key => {
-      const fullKey = parentKey ? `${parentKey}.${key}` : key;
-      if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
-        flattenObject(obj[key], fullKey);
-      } else {
-        queryParams.append(fullKey, JSON.stringify(obj[key]));
-      }
-    });
-  };
-
-  flattenObject(rest);
-  return `${queryParams.toString()}`;
-};
-
-function parseQueryString(queryString:string) {
-  const params = new URLSearchParams(queryString);
-  const result = {};
-
-  params.forEach((value, key) => {
-    const keys = key.split('.');
-    keys.reduce((acc:any, k, i) => {
-      if (i === keys.length - 1) {
-        try {
-          acc[k] = JSON.parse(value);
-        } catch (e) {
-          acc[k] = value;
-        }
-      } else {
-        if (!acc[k]) acc[k] = {};
-        return acc[k];
-      }
-    }, result);
-  });
-
-  return result;
-}
 
 const getShortUrlData = async (modelID:string) => {
   const serviceUrl = `${baseUrl}/saved-model/`;
@@ -363,11 +318,6 @@ export const MapContainerComponent = () => {
     };
 
     let continueProcessing = true;
-
-    const allYearInputsStr = createQueryStr(allYearInputs);
-    const biomassCoordinatesStr = createQueryStr(biomassCoordinates);
-    const frcsInputsStr = createQueryStr(frcsInputs);
-    const transportInputsStr = createQueryStr(transportInputs);
 
     const data = {
       allYearInputs: {

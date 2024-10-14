@@ -1,5 +1,5 @@
+import { publications } from '../../../../Resources/Constants';
 import { PublicationCard } from '../Components/Card';
-import { publications } from '../data';
 
 const Publications = () => {
   return (

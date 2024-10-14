@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { appFeatures } from '../data';
+import { appFeatures } from '../../../../Resources/Constants';
 
 const AppFeatures = () => {
   return (
