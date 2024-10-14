@@ -61,7 +61,7 @@ describe('MapContainer', () => {
   });
 
   it('renders initial lat and lng', async () => {
-    render(<MapContainerComponent urlLoading={false} handleUrlLoadingChange={() => {}} />);
+    render(<MapContainerComponent />);
     
     await waitFor(() => {
       const latInput = screen.getByLabelText('Latitude:') as HTMLInputElement;
@@ -72,7 +72,7 @@ describe('MapContainer', () => {
   });
 
   it('handles treatment id selection', async () => {
-    render(<MapContainerComponent urlLoading={false} handleUrlLoadingChange={() => {}} />);
+    render(<MapContainerComponent />);
 
     const dropdown = await screen.findByRole('combobox') as HTMLSelectElement;
     fireEvent.change(dropdown, { target: { value: '4' } });
@@ -92,7 +92,7 @@ describe('MapContainer', () => {
   });
 
   it('displays all results', async () => {
-    render(<MapContainerComponent urlLoading={false} handleUrlLoadingChange={() => {}} />);
+    render(<MapContainerComponent />);
 
     const dropdown = await screen.findByRole('combobox') as HTMLSelectElement;
     fireEvent.change(dropdown, { target: { value: '4' } });
@@ -114,7 +114,7 @@ describe('MapContainer', () => {
   });
 
   it('displays all years', async () => {
-    render(<MapContainerComponent urlLoading={false} handleUrlLoadingChange={() => {}} />);
+    render(<MapContainerComponent />);
 
     const dropdown = await screen.findByRole('combobox') as HTMLSelectElement;
     fireEvent.change(dropdown, { target: { value: '4' } });
@@ -134,7 +134,7 @@ describe('MapContainer', () => {
   });
 
   it('handles year selection in results', async () => {
-    render(<MapContainerComponent urlLoading={false} handleUrlLoadingChange={() => {}} />);
+    render(<MapContainerComponent />);
 
     const dropdown = await screen.findByRole('combobox') as HTMLSelectElement;
     fireEvent.change(dropdown, { target: { value: '4' } });

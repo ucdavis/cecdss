@@ -64,6 +64,7 @@ import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
 import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
 import { GeoJsonLayers } from './GeoJsonLayers';
 import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
+import { trackEvent } from '../../../Utils/gaAnalytics';
 
 
 export interface RequestParamsAllYearsNoTransmission {
@@ -71,13 +72,6 @@ export interface RequestParamsAllYearsNoTransmission {
   facilityLng: number;
   teaModel: string;
   teaInputs: InputModGPO | InputModCHP | InputModGP;
-}
-
-type HandleUrlLoadingChangeType = (value: boolean) => void;
-
-interface MapContainerComponentProps {
-  urlLoading: boolean;
-  handleUrlLoadingChange: HandleUrlLoadingChangeType;
 }
 
 const { BaseLayer } = LayersControl;
@@ -176,7 +170,7 @@ const baseUrl =
         ? 'http://localhost:3000'
         : process.env.REACT_APP_BE_URL;
 
-export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerComponentProps) => {
+export const MapContainerComponent = () => {
   const { modelID } = useParams();
   const [mapReady, setMapReady] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
@@ -321,11 +315,11 @@ export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerCo
   const submitInputs = async () => {
     toggleLoading(true);
 
-    ReactGA.event({
-      category: 'Model Run',
-      action: 'Click',
-      label: 'FRREDSS App',
-    });
+    trackEvent(
+      'Model Run',
+      'Click',
+      'FRREDSS App',
+    );
 
     frcsInputs.dieselFuelPrice = processDieselFuelPrice(frcsInputs.dieselFuelPrice)
 
@@ -360,7 +354,6 @@ export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerCo
     ]);
     setInputError([]);
 
-    // first do initial processing to get TEA and substation results
     const allYearInputs: RequestParamsAllYears = {
       facilityLat: facilityCoordinates.lat,
       facilityLng: facilityCoordinates.lng,
@@ -376,12 +369,25 @@ export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerCo
     const frcsInputsStr = createQueryStr(frcsInputs);
     const transportInputsStr = createQueryStr(transportInputs);
 
+    const data = {
+      allYearInputs: {
+        facilityLat: facilityCoordinates.lat,
+        facilityLng: facilityCoordinates.lng,
+        transmission: DEFAULT_TRANSMISSION_VAL,
+        teaModel: teaModel,
+        teaInputs: teaInputs
+      },
+      biomassCoordinates,
+      frcsInputs,
+      transportInputs
+    };
+
     const shortenUrl = await fetch(
       `${baseUrl}/shorten-url`,
       {
         mode: 'cors',
         method: 'POST',
-        body: JSON.stringify({allYearInputsStr, biomassCoordinatesStr, frcsInputsStr, transportInputsStr}),
+        body: JSON.stringify({ data }),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -389,8 +395,8 @@ export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerCo
     )
     .then(res => (res.ok ? res.json() : ''))
     .catch(error => {
-        console.error('Error:', error);
-        return null;
+      console.error('Error:', error);
+      return null;
     });
 
     if (shortenUrl && shortenUrl.shortUrl) {
@@ -568,35 +574,27 @@ export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerCo
   const allResultsSelected = selectedYearIndex === years.length;
 
   useEffect(() => {
-    handleUrlLoadingChange(true)
-    if (modelID) {
-      const fetchOriginalUrl = async () => {
+    const fetchOriginalUrl = async () => {
+      if (modelID) {
         try {
           const result = await getShortUrlData(modelID);
-          const allYearInputsObj = parseQueryString(result.allYearInputs) as RequestParamsAllYearsNoTransmission
-          const biomassCoordinatesObj = parseQueryString(result.biomassCoordinates) as MapCoordinates
-          const frcsInputsObj = parseQueryString(result.frcsInputs) as FrcsInputs
-          const transportInputsObj = parseQueryString(result.transportInputs) as TransportInputs
-
-          setTeaModel(allYearInputsObj.teaModel)
-          setTeaInputs(allYearInputsObj.teaInputs)
+          
+          setTeaModel(result.allYearInputs.teaModel);
+          setTeaInputs(result.allYearInputs.teaInputs);
           setFacilityCoordinates({
-            lat: allYearInputsObj.facilityLat,
-            lng: allYearInputsObj.facilityLng
-          })
-          setBiomassCoordinates({
-            lat: biomassCoordinatesObj.lat,
-            lng: biomassCoordinatesObj.lng
-          })
-          setFrcsInputs(frcsInputsObj)
-          setTransportInputs(transportInputsObj)
+            lat: result.allYearInputs.facilityLat,
+            lng: result.allYearInputs.facilityLng
+          });
+          setBiomassCoordinates(result.biomassCoordinates);
+          setFrcsInputs(result.frcsInputs);
+          setTransportInputs(result.transportInputs);
         } catch (error) {
           console.error('Error fetching original URL:', error);
         }
-      };
-      fetchOriginalUrl();
-    }
-    handleUrlLoadingChange(false)
+      }
+    };
+
+    fetchOriginalUrl();
   }, [modelID]);
 
   useEffect(() => {
@@ -917,33 +915,11 @@ export const MapContainerComponent = ({ handleUrlLoadingChange }: MapContainerCo
 };
 
 export const MapContainerWrapper = () => {
-  const [urlLoading, setUrlLoading] = useState<boolean>(false);
-
-  const handleUrlLoadingChange = (value: boolean) => setUrlLoading(value)
-
-
   useEffect(() => {
     ReactGA.send({ hitType: "pageview", page: '/pages/model', title: 'Model Page' });
   }, []);
 
   return (
-    <>
-      {urlLoading ? (
-        <div className="h-screen w-screen flex items-center justify-center relative">
-          <Loader />
-          <div className='absolute bottom-0' style={{ left: '-8%' }}>
-            <img src={triangle} alt="FREDDS Logo" className='h-full' />
-          </div>
-          <div className='absolute top-0 h-full right-0'>
-            <img src={triangleTree} alt="FREDDS Logo" className='h-full' />
-          </div>
-        </div>
-      ) : (
-        <MapContainerComponent 
-          urlLoading={urlLoading} 
-          handleUrlLoadingChange={handleUrlLoadingChange} 
-        />
-      )}
-    </>
+    <MapContainerComponent />
   )
 };  
