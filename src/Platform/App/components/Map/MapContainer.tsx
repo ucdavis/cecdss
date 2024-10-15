@@ -62,6 +62,7 @@ import { ExternalLayerSelection } from './ExternalLayerSelection';
 import { GeoJsonLayers } from './GeoJsonLayers';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
+import Loader from '../../../../Shared/Loader';
 
 
 export interface RequestParamsAllYearsNoTransmission {
@@ -127,6 +128,8 @@ const baseUrl =
 
 export const MapContainerComponent = () => {
   const { modelID } = useParams();
+  const [isLoading, setIsLoading] = useState(!!modelID);
+  const [hasLoaded, setHasLoaded] = useState(false);
   const [mapReady, setMapReady] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const [saveUrl, setSaveUrl] = useState<string>('');
@@ -525,8 +528,9 @@ export const MapContainerComponent = () => {
 
   useEffect(() => {
     const fetchOriginalUrl = async () => {
-      if (modelID) {
+      if (modelID && !hasLoaded) {
         try {
+          setIsLoading(true);
           const result = await getShortUrlData(modelID);
           
           setTeaModel(result.allYearInputs.teaModel);
@@ -540,6 +544,9 @@ export const MapContainerComponent = () => {
           setTransportInputs(result.transportInputs);
         } catch (error) {
           console.error('Error fetching original URL:', error);
+        } finally {
+          setIsLoading(false);
+          setHasLoaded(true);
         }
       }
     };
@@ -550,6 +557,14 @@ export const MapContainerComponent = () => {
   useEffect(() => {
     setMapReady(true);
   }, []); 
+
+  if (isLoading) {
+    return (
+      <div className="h-screen w-screen flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div style={style}>
@@ -865,6 +880,7 @@ export const MapContainerComponent = () => {
 };
 
 export const MapContainerWrapper = () => {
+
   useEffect(() => {
     ReactGA.send({ hitType: "pageview", page: '/pages/model', title: 'Model Page' });
   }, []);
