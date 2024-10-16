@@ -210,15 +210,6 @@ export const publications = [
   },
   {
     title:
-      'Design of a GIS-Based Web Application for Simulating Biofuel Feedstock Yields',
-    description: [
-      'Developed a web application that uses a GIS-based interface to predict poplar biomass yields under different management and climate conditions.',
-      'The application allows stakeholders to make informed decisions about feedstock growing locations and management strategies in the U.S. Pacific Northwest.'
-    ],
-    link: 'https://www.researchgate.net/publication/264159830_Design_of_a_GIS-Based_Web_Application_for_Simulating_Biofuel_Feedstock_Yields'
-  },
-  {
-    title:
       'Integrated Economic and Environmental Modeling of Forest Biomass for Renewable Energy in California',
     description: [
       'Developed the FRREDSS model for lifecycle and technoeconomic assessment, estimating the economic and environmental performance of potential biopower projects in California.',
