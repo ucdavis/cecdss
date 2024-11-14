@@ -194,7 +194,7 @@ export const modelFeatures = [
   {
     title: 'Life Cycle Assessment',
     description:
-      'Estimate and analyze fuel costs for various biomass feed stocks and supply scenarios.',
+      'Evaluate environmental impacts and emissions across the complete biomass-to-energy process.',
     icon: faArrowsSpin
   },
   {
@@ -202,7 +202,7 @@ export const modelFeatures = [
     description:
       'Optimize biomass transportation logistics and calculate associated costs and emissions.',
     icon: faTruck
-  },
+  }
 ];
 
 export const publications = [

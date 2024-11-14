@@ -3,9 +3,9 @@ import { modelFeatures } from '../../../../Resources/Constants';
 
 const ModelFeatures = () => {
   return (
-    <div className="model-features-container flex items-center justify-center gap-8 px-4">
+    <div className="model-features-container">
       {modelFeatures.length > 0 && modelFeatures.map(({ title, description, icon }, index) => (
-        <div className="flex flex-col items-center feature-item" key={index}>
+        <div className="feature-item flex flex-col items-center" key={index}>
           <div>
             <FontAwesomeIcon icon={icon} fontSize={40} />
           </div>
