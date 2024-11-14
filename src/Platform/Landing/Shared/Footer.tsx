@@ -33,7 +33,7 @@ const Footer = () => {
             <div className="divider"></div>
             <div className="w-full flex items-center justify-center p-8">
               <span className="text-sm text-white sm:text-center dark:text-gray-400">
-                © 2024 <a href="https://ucdavis.edu/" className="hover:underline">University of California</a>. All Rights Reserved.
+                © 2024 <a href="https://ucdavis.edu/" className="hover:underline">The Regents of the University of California</a>. All Rights Reserved.
               </span>
             </div>
         </div>

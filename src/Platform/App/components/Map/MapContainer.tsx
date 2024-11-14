@@ -42,11 +42,12 @@ import {
   faExpandArrowsAlt,
   faEye,
   faEyeSlash,
+  faHome,
   faMinusSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useParams } from 'react-router-dom';
-import { ATTRIBUTION, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
+import { useParams, useBeforeUnload } from 'react-router-dom';
+import { ATTRIBUTION, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE, URL_LANDING_PAGE } from '../../../../Resources/Constants';
 import { trackEvent } from '../../../Utils/gaAnalytics';
 import { InputContainer } from '../Inputs/InputContainer';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
@@ -63,6 +64,7 @@ import { GeoJsonLayers } from './GeoJsonLayers';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
 import Loader from '../../../../Shared/Loader';
+import { Link } from 'react-router-dom';
 
 
 export interface RequestParamsAllYearsNoTransmission {
@@ -558,6 +560,21 @@ export const MapContainerComponent = () => {
     setMapReady(true);
   }, []); 
 
+  useEffect(() => {
+    const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string; }) => {
+      if (loading) {
+        event.preventDefault();
+        event.returnValue = "You have unsaved changes. Are you sure you want to leave?";
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [loading]);
+
   if (isLoading) {
     return (
       <div className="h-screen w-screen flex items-center justify-center">
@@ -665,6 +682,16 @@ export const MapContainerComponent = () => {
         </div>
       )}
       <div className='layers-container'>
+        <Button
+          style={{ background: '#395442', borderColor: '#395442', height: '35px' }}
+          href={URL_LANDING_PAGE}
+          className='cursor-pointer flex items-center justify-center gap-x-2'
+        >
+          <FontAwesomeIcon icon={faHome} style={{ fontSize: '12px' }} />
+          <span className='text-14p'>
+            Home
+          </span>
+        </Button>
         <ExternalLayerSelection onChange={setExternalLayers} />
         <ExternalLayerLegend layers={externalLayers} />
       </div>

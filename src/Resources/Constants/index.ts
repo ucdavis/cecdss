@@ -1,4 +1,5 @@
 import {
+  faArrowsSpin,
   faAsterisk,
   faCircleNodes,
   faClone,
@@ -179,7 +180,7 @@ export const DEFAULT_TRANSMISSION_VAL: any = {
 
 export const modelFeatures = [
   {
-    title: 'TEA',
+    title: 'Technoeconomic Assessment',
     description:
       'Evaluate financial viability and economic performance of forest biomass projects.',
     icon: faDollarSign
@@ -191,11 +192,17 @@ export const modelFeatures = [
     icon: faOilCan
   },
   {
+    title: 'Life Cycle Assessment',
+    description:
+      'Estimate and analyze fuel costs for various biomass feed stocks and supply scenarios.',
+    icon: faArrowsSpin
+  },
+  {
     title: 'Transportation',
     description:
       'Optimize biomass transportation logistics and calculate associated costs and emissions.',
     icon: faTruck
-  }
+  },
 ];
 
 export const publications = [

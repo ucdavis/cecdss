@@ -32,7 +32,7 @@ const TitleOverlay: React.FC<TitleOverlayProps> = ({ fontSize, subtitleFontSize,
           sequence={[
             'Fuel Reduction Cost Simulator',
             1000,
-            'Techno-Economic Assessment',
+            'Technoeconomic Assessment',
             1000,
             'Transportation',
             1000,

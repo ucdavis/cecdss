@@ -131,16 +131,21 @@
 
 .layers-container {
   position: fixed;
-  top: 5px;
+  top: 10px;
   left: 3.5%;
-  width: 12%;
+  width: 20%;
   z-index: 1000;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
 }
+
 .layers {
   background-color: #fff;
   border-radius: 8px;
-  margin-top: 7px;
   max-height: 300px;
+  min-width: 180px;
   overflow-y: scroll;
   box-shadow: 0 0 0 1px rgba(49, 49, 93, 0.03),
     0 2px 5px 0 rgba(49, 49, 93, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);

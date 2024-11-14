@@ -9,7 +9,7 @@ const ModelFeatures = () => {
           <div>
             <FontAwesomeIcon icon={icon} fontSize={40} />
           </div>
-          <div className="text-28p font-bold mt-4">
+          <div className="text-28p font-bold mt-4 text-center">
             {title}
           </div>
           <div className="text-18p mt-2 text-center">

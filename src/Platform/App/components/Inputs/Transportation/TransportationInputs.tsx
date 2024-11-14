@@ -22,12 +22,7 @@ export const TransportInputsContainer = (props: Props) => {
       <Form>
         <h4 className='font-bold mb-2'>Transportation</h4>
         <>
-         <div className="flex gap-x-2 w-full my-2">
-          <Button color={'primary'} size='sm'>
-            Detail Inputs
-          </Button>
-         </div>
-              <FormGroup>
+          <FormGroup>
             <Label>Hourly Wage for Truck Drivers</Label>
             <InputGroup>
               <Input
