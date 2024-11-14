@@ -564,7 +564,7 @@ export const MapContainerComponent = () => {
     const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string; }) => {
       if (loading) {
         event.preventDefault();
-        event.returnValue = "You have unsaved changes. Are you sure you want to leave?";
+        event.returnValue = "Your model is still running. Are you sure you want to leave?";
       }
     };
 
@@ -682,16 +682,6 @@ export const MapContainerComponent = () => {
         </div>
       )}
       <div className='layers-container'>
-        <Button
-          style={{ background: '#395442', borderColor: '#395442', height: '35px' }}
-          href={URL_LANDING_PAGE}
-          className='cursor-pointer flex items-center justify-center gap-x-2'
-        >
-          <FontAwesomeIcon icon={faHome} style={{ fontSize: '12px' }} />
-          <span className='text-14p'>
-            Home
-          </span>
-        </Button>
         <ExternalLayerSelection onChange={setExternalLayers} />
         <ExternalLayerLegend layers={externalLayers} />
       </div>

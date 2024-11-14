@@ -15,6 +15,11 @@ import { FrcsInputs, MapCoordinates, TransportInputs } from '../../models/Types'
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 import { TransportInputsContainer } from './Transportation/TransportationInputs';
+import { URL_LANDING_PAGE } from '../../../../Resources/Constants';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+import TooltipWrapper from '../../../../Shared/TooltipWrapper';
+import { HomeButton } from '../Shared/Button';
 
 interface Props {
   facilityCoordinates: MapCoordinates;
@@ -87,7 +92,14 @@ export const InputContainer = (props: Props) => {
             Forest Resource and Renewable Energy Decision Support System
             (FRREDSS)
           </div>
-          <div className='text-white text-24p'>Select Inputs</div>
+          <div className="flex items-center justify-between gap-x-2 w-full mt-2">
+            <div className='text-white text-24p'>Select Inputs</div>
+          <HomeButton 
+            loading={props.loading}
+            tooltipText='Go To Home' 
+            tooltipTarget='goToHomeButton'
+          />
+          </div>
       </div>
       <div className='cardcontents'>
         <h4 className='font-bold mb-2'>Forestry and Conversion</h4>

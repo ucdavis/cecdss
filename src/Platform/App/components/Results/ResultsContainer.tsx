@@ -1,23 +1,28 @@
 import ReactGA from 'react-ga4';
-import { faCheck, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faDownload, faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { InputModCHP, InputModGP, InputModGPO } from '@ucdavis/tea/input.model';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
+  Button,
   Modal,
   Pagination,
   PaginationItem,
   PaginationLink,
   Progress,
-  Spinner
+  Spinner,
+  Tooltip
 } from 'reactstrap';
 import { AllYearsResults, FrcsInputs, YearlyResult } from '../../models/Types';
 import { AllResultsContainer } from './AllResultsContainer';
 import { YearlyResultsContainer } from './YearlyResultsContainer';
 import UserDetails from '../Form/UserDetails';
 import { useSaveModel } from '../../../Context/saveModel';
+import { URL_LANDING_PAGE } from '../../../../Resources/Constants';
+import TooltipWrapper from '../../../../Shared/TooltipWrapper';
+import { HomeButton } from '../Shared/Button';
 
 interface Props {
   years: number[];
@@ -73,6 +78,7 @@ export const ResultsContainer = (props: Props) => {
     handleCopy();
     toggleModal();
   };
+  
 
   return (
     <>
@@ -83,30 +89,37 @@ export const ResultsContainer = (props: Props) => {
           </div>
           <div className="flex items-center justify-between w-full mt-2">
             <div className='text-white text-36p'>Results</div>
-           {props.saveUrl && (
-             <div className="flex items-center justify-center gap-x-4">
-              {!linkCopied ? (
-                <button 
-                  className="bg-white hover:bg-gray-400 text-gray-800 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p"
-                  onClick={toggleModal}
-                >
-                  <div className="flex items-center justify-center gap-x-2">
-                    <FontAwesomeIcon icon={faDownload} />
-                    <span>Save Model Link</span>
-                  </div>
-                </button>
-              ) : (
-                <button 
-                  className="bg-white hover:bg-gray-400 text-green-100 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p"
-                >
-                  <div className="flex items-center justify-center gap-x-2">
-                    <FontAwesomeIcon icon={faCheck} />
-                    <span>Link Copied to Clipboard</span>
-                  </div>
-                </button>
+            <div className="flex items-center justify-center gap-x-4">
+              {props.saveUrl && (
+                <div className="flex items-center justify-center gap-x-4">
+                  {!linkCopied ? (
+                    <button 
+                      className="bg-white hover:bg-gray-400 text-gray-800 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p"
+                      onClick={toggleModal}
+                    >
+                      <div className="flex items-center justify-center gap-x-2">
+                        <FontAwesomeIcon icon={faDownload} />
+                        <span>Save Model Link</span>
+                      </div>
+                    </button>
+                  ) : (
+                    <button 
+                      className="bg-white hover:bg-gray-400 text-green-100 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p"
+                    >
+                      <div className="flex items-center justify-center gap-x-2">
+                        <FontAwesomeIcon icon={faCheck} />
+                        <span>Link Copied to Clipboard</span>
+                      </div>
+                    </button>
+                  )}
+                </div>
               )}
+              <HomeButton 
+                loading={props.loading}
+                tooltipText='Go To Home' 
+                tooltipTarget='goToHomeButton'
+              />
             </div>
-           )}
           </div>
       </div>
       <div className='cardcontents'>

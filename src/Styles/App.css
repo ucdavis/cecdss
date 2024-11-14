@@ -39,7 +39,7 @@
 }
 .cardheader {
   background-color: var(--primary-color);
-  padding: 16px 24px;
+  padding: 16px 24px 10px 24px;
 }
 .cardheader h4 {
   color: rgba(255, 255, 255, 0.55);
@@ -131,21 +131,17 @@
 
 .layers-container {
   position: fixed;
-  top: 10px;
-  left: 3.5%;
-  width: 20%;
+  top: 5px;
+  left: 50px;
   z-index: 1000;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
+  max-width: 180px;
 }
 
 .layers {
   background-color: #fff;
   border-radius: 8px;
+  margin-top: 7px;
   max-height: 300px;
-  min-width: 180px;
   overflow-y: scroll;
   box-shadow: 0 0 0 1px rgba(49, 49, 93, 0.03),
     0 2px 5px 0 rgba(49, 49, 93, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
