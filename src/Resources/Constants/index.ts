@@ -186,7 +186,7 @@ export const modelFeatures = [
     icon: faDollarSign
   },
   {
-    title: 'Fuel Cost Simulator',
+    title: 'Fuel Reduction Cost Simulator',
     description:
       'Estimate and analyze fuel costs for various biomass feed stocks and supply scenarios.',
     icon: faOilCan
