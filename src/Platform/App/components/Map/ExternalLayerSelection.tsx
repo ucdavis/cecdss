@@ -54,7 +54,7 @@ export const ExternalLayerSelection = (props: Props) => {
   return (
     <div className='layers scrollbar'>
       <div
-        className='cardheader d-flex align-items-center justify-content-between'
+        className='cardheader d-flex align-items-center justify-content-between gap-x-2'
         onClick={() => setIsOpen(!isOpen)}
       >
         <h3>Map Layers</h3>

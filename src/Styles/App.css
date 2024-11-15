@@ -39,7 +39,7 @@
 }
 .cardheader {
   background-color: var(--primary-color);
-  padding: 16px 24px;
+  padding: 16px 24px 10px 24px;
 }
 .cardheader h4 {
   color: rgba(255, 255, 255, 0.55);
@@ -132,10 +132,11 @@
 .layers-container {
   position: fixed;
   top: 5px;
-  left: 3.5%;
-  width: 12%;
+  left: 50px;
   z-index: 1000;
+  max-width: 180px;
 }
+
 .layers {
   background-color: #fff;
   border-radius: 8px;

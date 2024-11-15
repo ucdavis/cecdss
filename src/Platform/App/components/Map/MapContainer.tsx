@@ -47,6 +47,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams } from 'react-router-dom';
 import { ATTRIBUTION, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
+import Loader from '../../../../Shared/Loader';
 import { trackEvent } from '../../../Utils/gaAnalytics';
 import { InputContainer } from '../Inputs/InputContainer';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
@@ -62,7 +63,6 @@ import { ExternalLayerSelection } from './ExternalLayerSelection';
 import { GeoJsonLayers } from './GeoJsonLayers';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
-import Loader from '../../../../Shared/Loader';
 
 
 export interface RequestParamsAllYearsNoTransmission {
@@ -181,18 +181,18 @@ export const MapContainerComponent = () => {
     system: 'Ground-Based Mech WT',
     treatmentid: 3,
     dieselFuelPrice: 2.24,
-    wageFaller: 35.13, // CA FallBuckWage May 2020
+    wageFaller: 42.19, // CA FallBuckWage May 2023
     wageOther: 22.07, // CA AllOthersWage May 2020
-    laborBenefits: 35, // Assume a nationwide average of 35% for benefits and other payroll costs
-    ppiCurrent: 284.7, // Oct 2021
+    laborBenefits: 38.4, // Assume a nationwide average of 38.4% for benefits and other payroll costs
+    ppiCurrent: 145.62, // Nov 2024
     residueRecovFracWT: 80, // FRCS default 80%
     residueRecovFracCTL: 50 // FRCS default 50%
   };
 
   const transportInputsExample: TransportInputs = {
-    wageTruckDriver: 24.71, // Hourly mean wage for tractor-trailer truck drivers May 2020
-    driverBenefits: 67,
-    oilCost: 0.35,
+    wageTruckDriver: 25.23, // Hourly mean wage for tractor-trailer truck drivers Nov 2024
+    driverBenefits: 25,
+    oilCost: 0.641, // June 2022
     fullyLoadedRate: 0,
   };
 
@@ -557,6 +557,21 @@ export const MapContainerComponent = () => {
   useEffect(() => {
     setMapReady(true);
   }, []); 
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string; }) => {
+      if (loading) {
+        event.preventDefault();
+        event.returnValue = "Your model is still running. Are you sure you want to leave?";
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [loading]);
 
   if (isLoading) {
     return (

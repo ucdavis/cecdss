@@ -21,7 +21,7 @@ const Footer = () => {
                         <div className="text-18p font-bold mb-6 text-white">Legal</div>
                         <FooterLink href="https://privacy.ucdavis.edu/web-page-privacy" onClick={() => trackEvent('Footer Links', 'Click', 'Open Privacy Policy')}>Privacy Policy</FooterLink>
                         <div className="text-18p font-bold mb-2 text-white">Last Updated</div>
-                        <div className="text-white text-16p">9 Oct, 2024</div>
+                        <div className="text-white text-16p">14 Nov, 2024</div>
                     </div>
                     <div className="footer-section">
                         <div className="text-18p font-bold mb-6 text-white">Contact Us</div>
@@ -33,7 +33,7 @@ const Footer = () => {
             <div className="divider"></div>
             <div className="w-full flex items-center justify-center p-8">
               <span className="text-sm text-white sm:text-center dark:text-gray-400">
-                © 2024 <a href="https://ucdavis.edu/" className="hover:underline">University of California</a>. All Rights Reserved.
+                © 2019-2024 <a href="https://ucdavis.edu/" className="hover:underline">The Regents of the University of California</a>. All Rights Reserved.
               </span>
             </div>
         </div>

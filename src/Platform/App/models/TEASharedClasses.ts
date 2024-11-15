@@ -10,12 +10,12 @@ import {
 export class IncomeOtherThanEnergyInputModClass
   implements IncomeOtherThanEnergyInputMod {
   CapacityPayment = 166;
-  InterestRateOnDebtReserve = 5;
+  InterestRateOnDebtReserve = 8;
   SalesPriceForChar = 0;
 }
 export class EscalationInflationInputModClass
   implements EscalationInflationInputMod {
-  GeneralInflation = 2.1;
+  GeneralInflation = 2.6;
   EscalationBiomassFuel = 2.1;
   EscalationProductionTaxCredit = 2.1;
   EscalationHeatSales = 2.1;
@@ -25,8 +25,8 @@ export class EscalationInflationInputModClass
 }
 
 export class TaxesInputModClass implements TaxesInputMod {
-  FederalTaxRate = 34;
-  StateTaxRate = 9.6;
+  FederalTaxRate = 37;
+  StateTaxRate = 7.5;
   ProductionTaxCredit = 0;
 }
 export class FinancingInputModClass implements FinancingInputMod {
