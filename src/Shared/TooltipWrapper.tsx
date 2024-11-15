@@ -6,7 +6,6 @@ const args = {
   flip: true,
 };
 
-
 interface TooltipWrapperProps {
     target: string;
     text: string;

@@ -23,6 +23,9 @@ export const HomeButton = ({ loading, tooltipText, tooltipTarget }: HomeButtonPr
 
     window.addEventListener('beforeunload', handleBeforeUnload);
 
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, [loading]);
 
   return (

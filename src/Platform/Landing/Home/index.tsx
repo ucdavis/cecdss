@@ -31,13 +31,13 @@ const TitleOverlay: React.FC<TitleOverlayProps> = ({ fontSize, subtitleFontSize,
         <TypeAnimation
           sequence={[
             'Fuel Reduction Cost Simulator',
-            800,
+            600,
             'Technoeconomic Assessment',
-            800,
+            600,
             'Transportation',
-            800,
+            600,
             'Life Cycle Assessment',
-            800
+            600
           ]}
           wrapper="span"
           speed={50}
