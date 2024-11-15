@@ -42,12 +42,12 @@ import {
   faExpandArrowsAlt,
   faEye,
   faEyeSlash,
-  faHome,
   faMinusSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useParams, useBeforeUnload } from 'react-router-dom';
-import { ATTRIBUTION, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE, URL_LANDING_PAGE } from '../../../../Resources/Constants';
+import { useParams } from 'react-router-dom';
+import { ATTRIBUTION, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
+import Loader from '../../../../Shared/Loader';
 import { trackEvent } from '../../../Utils/gaAnalytics';
 import { InputContainer } from '../Inputs/InputContainer';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
@@ -63,8 +63,6 @@ import { ExternalLayerSelection } from './ExternalLayerSelection';
 import { GeoJsonLayers } from './GeoJsonLayers';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
-import Loader from '../../../../Shared/Loader';
-import { Link } from 'react-router-dom';
 
 
 export interface RequestParamsAllYearsNoTransmission {

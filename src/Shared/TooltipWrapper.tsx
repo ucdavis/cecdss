@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Tooltip } from 'reactstrap'
+import { useState } from 'react';
+import { Tooltip } from 'reactstrap';
 
 const args = {
   autohide: true,
