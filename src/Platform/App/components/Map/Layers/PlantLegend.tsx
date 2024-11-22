@@ -6,15 +6,16 @@ export const PlantLegend = () => (
     className='esriLegendService'
     style={{ display: 'block' }}
   >
-    See{' '}
+    See the {' '}
     <a
       target='_blank'
       rel='noopener noreferrer'
       href='http://www.arcgis.com/home/webmap/viewer.html?url=https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Power_Plant/FeatureServer/0&source=sd'
+      className="font-italic text-decoration-none border-bottom"
     >
-      the ArcGIS map viewer
+      ArcGIS map viewer
     </a>
-    for an interactive map of the plant locations, including custom icons for
+    {' '} for an interactive map of the plant locations, including custom icons for
     each plant type.
   </div>
 );

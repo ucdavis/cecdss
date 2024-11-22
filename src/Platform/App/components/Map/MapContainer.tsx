@@ -178,6 +178,11 @@ export const MapContainerComponent = () => {
   // external layers
   const [externalLayers, setExternalLayers] = useState<string[]>([]);
 
+  const handleExternalLayerChange = (newLayers: string[]) => {
+    setExternalLayers(newLayers);
+    setMapLayerLoading(false);
+  }
+
   const frcsInputsExample: FrcsInputs = {
     system: 'Ground-Based Mech WT',
     treatmentid: 3,
@@ -696,7 +701,7 @@ export const MapContainerComponent = () => {
         </div>
       )}
       <div className='layers-container'>
-        <ExternalLayerSelection onChange={setExternalLayers} />
+        <ExternalLayerSelection onChange={handleExternalLayerChange} />
         <ExternalLayerLegend layers={externalLayers} />
       </div>
       <div
