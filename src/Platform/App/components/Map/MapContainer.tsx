@@ -819,9 +819,9 @@ export const MapContainerComponent = () => {
           />
         )}
         {externalLayers.includes('fire') && (
-          <DynamicMapLayer
+          <FeatureLayer
             url={
-              'https://egis.fire.ca.gov/arcgis/rest/services/FRAP/FHSZ/MapServer'
+              'https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/ArcGIS/rest/services/FHSZ_SRA_LRA_Combined/FeatureServer/0'
             }
             opacity={0.7}
           />
