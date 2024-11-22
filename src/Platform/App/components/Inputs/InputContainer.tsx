@@ -12,14 +12,10 @@ import {
 import { useSaveModel } from '../../../Context/saveModel';
 import { trackEvent } from '../../../Utils/gaAnalytics';
 import { FrcsInputs, MapCoordinates, TransportInputs } from '../../models/Types';
+import { HomeButton } from '../Shared/Button';
 import { FrcsInputsContainer } from './Frcs/FrcsInputsContainer';
 import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 import { TransportInputsContainer } from './Transportation/TransportationInputs';
-import { URL_LANDING_PAGE } from '../../../../Resources/Constants';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import TooltipWrapper from '../../../../Shared/TooltipWrapper';
-import { HomeButton } from '../Shared/Button';
 
 interface Props {
   facilityCoordinates: MapCoordinates;
