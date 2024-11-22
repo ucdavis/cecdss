@@ -22,7 +22,7 @@ import {
   TileLayer,
   useMapEvents,
 } from 'react-leaflet';
-import { Button, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Button, Pagination, PaginationItem, PaginationLink, Progress } from 'reactstrap';
 import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
 import { InputModGPOClass } from '../../models/GPOClasses';
@@ -130,6 +130,7 @@ export const MapContainerComponent = () => {
   const { modelID } = useParams();
   const [isLoading, setIsLoading] = useState(!!modelID);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [mapLayerLoading, setMapLayerLoading] = useState<boolean>(false);
   const [mapReady, setMapReady] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const [saveUrl, setSaveUrl] = useState<string>('');
@@ -573,6 +574,11 @@ export const MapContainerComponent = () => {
     };
   }, [loading]);
 
+  const mapLayerHandler = {
+      loading: () => setMapLayerLoading(true),
+      load: () => setMapLayerLoading(false)
+    }
+
   if (isLoading) {
     return (
       <div className="h-screen w-screen flex items-center justify-center">
@@ -583,6 +589,16 @@ export const MapContainerComponent = () => {
 
   return (
     <div style={style}>
+      {mapLayerLoading && (
+        <Progress
+          animated
+          style={{
+            height: '5px'
+          }}
+          color="success"
+          value="100"
+        />
+      )}
       {(yearlyResults.length > 0 || loading) && (
         <div className='toggle-buttons flex flex-col items-center justify-center gap-y-6'>
           <Button
@@ -771,8 +787,9 @@ export const MapContainerComponent = () => {
         {externalLayers.includes('transmission') && (
           <FeatureLayer
             url={
-              'https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Transmission_Line/FeatureServer/0'
+              'https://services3.arcgis.com/bWPjFyq029ChCGur/arcgis/rest/services/Transmission_Line/FeatureServer/2'
             }
+            eventHandlers={mapLayerHandler}
           />
         )}
         {externalLayers.includes('substation') && (
@@ -780,6 +797,7 @@ export const MapContainerComponent = () => {
             url={
               'https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Substation/FeatureServer/0'
             }
+            eventHandlers={mapLayerHandler}
           />
         )}
         {externalLayers.includes('plant') && (
@@ -787,7 +805,7 @@ export const MapContainerComponent = () => {
             url={
               'https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Power_Plant/FeatureServer/0'
             }
-            ignoreRenderer={true}
+            eventHandlers={mapLayerHandler}
           />
         )}
         {externalLayers.includes('county') && (
@@ -795,6 +813,7 @@ export const MapContainerComponent = () => {
             url={
               'https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/California_County_Boundaries/FeatureServer/0'
             }
+            eventHandlers={mapLayerHandler}
           />
         )}
         {externalLayers.includes('urbanCities') && (
@@ -802,6 +821,7 @@ export const MapContainerComponent = () => {
             url={
               'https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Urban_Areas/FeatureServer/3'
             }
+            eventHandlers={mapLayerHandler}
           />
         )}
         {externalLayers.includes('airDistricts') && (
@@ -809,6 +829,7 @@ export const MapContainerComponent = () => {
             url={
               'https://services.arcgis.com/jDGuO8tYggdCCnUJ/ArcGIS/rest/services/California_Air_Districts/FeatureServer/0'
             }
+            eventHandlers={mapLayerHandler}
           />
         )}
         {externalLayers.includes('ownership') && (
@@ -816,6 +837,7 @@ export const MapContainerComponent = () => {
             url={
               'https://egis.fire.ca.gov/arcgis/rest/services/FRAP/ownership/MapServer'
             }
+            eventHandlers={mapLayerHandler}
           />
         )}
         {externalLayers.includes('fire') && (
@@ -824,6 +846,7 @@ export const MapContainerComponent = () => {
               'https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/ArcGIS/rest/services/FHSZ_SRA_LRA_Combined/FeatureServer/0'
             }
             opacity={0.7}
+            eventHandlers={mapLayerHandler}
           />
         )}
         {externalLayers.includes('dataBoundary') && (
@@ -831,6 +854,7 @@ export const MapContainerComponent = () => {
             url={
               'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/ArcGIS/rest/services/FL_Sierra/FeatureServer/0'
             }
+            eventHandlers={mapLayerHandler}
           />
         )}
         {externalLayers.includes('feedstockBiomassCompetition') && (
@@ -838,6 +862,7 @@ export const MapContainerComponent = () => {
             url={
               'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/arcgis/rest/services/Task_5_Basic_Feedstock_Competition/FeatureServer/1'
             }
+            eventHandlers={mapLayerHandler}
           />
         )}
         {externalLayers.includes('feedstockWoodProcessingCompetition') && (
