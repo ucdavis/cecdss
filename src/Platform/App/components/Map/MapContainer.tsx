@@ -63,6 +63,7 @@ import { ExternalLayerSelection } from './ExternalLayerSelection';
 import { GeoJsonLayers } from './GeoJsonLayers';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
+import { SubstationLayer } from './Layers/SubstationLayer';
 
 
 export interface RequestParamsAllYearsNoTransmission {
@@ -798,12 +799,7 @@ export const MapContainerComponent = () => {
           />
         )}
         {externalLayers.includes('substation') && (
-          <FeatureLayer
-            url={
-              'https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Substation/FeatureServer/0'
-            }
-            eventHandlers={mapLayerHandler}
-          />
+          <SubstationLayer mapLayerHandler={mapLayerHandler} />
         )}
         {externalLayers.includes('plant') && (
           <FeatureLayer
