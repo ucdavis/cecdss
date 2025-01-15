@@ -91,7 +91,7 @@ export const ResultsContainer = (props: Props) => {
                 <div className="flex items-center justify-center gap-x-4">
                   {!linkCopied ? (
                     <button 
-                      className="bg-white hover:bg-gray-400 text-gray-800 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p"
+                      className="text-white hover:bg-gray-400 text-gray-800 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p"
                       onClick={toggleModal}
                     >
                       <div className="flex items-center justify-center gap-x-2">
@@ -101,7 +101,7 @@ export const ResultsContainer = (props: Props) => {
                     </button>
                   ) : (
                     <button 
-                      className="bg-white hover:bg-gray-400 text-green-100 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p"
+                      className="text-white hover:bg-gray-400 text-green-100 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p"
                     >
                       <div className="flex items-center justify-center gap-x-2">
                         <FontAwesomeIcon icon={faCheck} />
