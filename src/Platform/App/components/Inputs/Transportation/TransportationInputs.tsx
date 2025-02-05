@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
 import {
+  Form,
+  FormGroup,
   Input,
   InputGroup,
   InputGroupText,
-  Label,
-  FormGroup,
-  Form,
-  Button
+  Label
 } from 'reactstrap';
-import { TransportInputs, Treatments } from '../../../models/Types';
+import { TransportInputs } from '../../../models/Types';
 
 interface Props {
   inputs: TransportInputs;
