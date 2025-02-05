@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { YearlyResult, ClusterResult } from '../../../models/Types';
-import { Button } from 'reactstrap';
-import { ReactTable } from '../../Shared/ReactTable';
-import { formatNumber, formatCurrency } from '../../Utils/util';
+import React from 'react';
 import { Cell } from 'react-table';
-import { FrcsSkippedClusterResultsContainer } from './FrcsSkippedClusterResultsContainer';
+import { ClusterResult, YearlyResult } from '../../../models/Types';
+import { formatCurrency, formatNumber } from '../../Utils/util';
 
 interface Props {
   results: YearlyResult;

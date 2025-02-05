@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Cell } from 'react-table';
 import {
-  YearlyResult,
-  ClusterResult,
-  ClusterErrorResult
+  ClusterErrorResult,
+  ClusterResult
 } from '../../../models/Types';
-import { Button } from 'reactstrap';
 import { ReactTable } from '../../Shared/ReactTable';
 import { formatNumber } from '../../Utils/util';
-import { Cell } from 'react-table';
 
 interface Props {
   results: ClusterResult[];

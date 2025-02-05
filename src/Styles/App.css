@@ -1427,6 +1427,10 @@ input[type='number'] {
       row-gap: 1.5rem;
     }
 
+    .underline {
+      text-decoration: underline;
+    }
+
     .-space-x-52 > :not([hidden]) ~ :not([hidden]) {
       --tw-space-x-reverse: 0;
       margin-right: calc(-13rem * var(--tw-space-x-reverse));

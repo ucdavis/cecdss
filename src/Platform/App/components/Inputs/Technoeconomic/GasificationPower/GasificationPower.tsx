@@ -1,30 +1,27 @@
-import React from 'react';
-import {
-  Input,
-  Label,
-  InputGroup,
-  InputGroupText,
-  FormText,
-  FormGroup
-} from 'reactstrap';
 import {
   ElectricalFuelBaseYearInputModGP,
-  HeatBaseYearInputMod,
-  ExpensesBaseYearInputModGP,
-  TaxesInputMod,
-  FinancingInputMod,
-  IncomeOtherThanEnergyInputModGP,
   EscalationInflationInputModGP,
-  CarbonCredit
+  ExpensesBaseYearInputModGP,
+  FinancingInputMod,
+  HeatBaseYearInputMod,
+  IncomeOtherThanEnergyInputModGP,
+  TaxesInputMod
 } from '@ucdavis/tea/input.model';
+import {
+  FormGroup,
+  FormText,
+  Input,
+  InputGroup,
+  InputGroupText,
+  Label
+} from 'reactstrap';
+import { FinancingInput } from '../FinancingInput';
 import { HeatBaseYearInput } from '../HeatBaseYearInput';
 import { TaxesInput } from '../TaxesInput';
-import { FinancingInput } from '../FinancingInput';
 import { ElectricalAndFuelBaseYearInputGP } from './ElectricalAndFuelBaseYearInputGP';
-import { ExpensesBaseYearInputGP } from './ExpensesBaseYearInputGP';
-import { CarbonCreditInput } from '../CarbonCreditInput';
-import { IncomeOtherThanEnergyInputGP } from './IncomeOtherThanEnergyInputGP';
 import { EscalationInflationInputGP } from './EscalationInflationInputGP';
+import { ExpensesBaseYearInputGP } from './ExpensesBaseYearInputGP';
+import { IncomeOtherThanEnergyInputGP } from './IncomeOtherThanEnergyInputGP';
 
 interface Props {
   // inputs: InputModGP;

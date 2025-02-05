@@ -7,11 +7,10 @@ import {
   Input,
   InputGroup,
   InputGroupText,
-  Label,
-  UncontrolledTooltip
+  Label
 } from 'reactstrap';
-import { FrcsInputs, Treatments } from '../../../models/Types';
 import styled from 'styled-components';
+import { FrcsInputs, Treatments } from '../../../models/Types';
 
 interface Props {
   inputs: FrcsInputs;
