@@ -1,5 +1,4 @@
-const LOCAL_DEVEOPMENT_MODE = false;
-
-export const serviceUrl = LOCAL_DEVEOPMENT_MODE
-  ? 'http://localhost:3000/'
-  : 'https://cecdss-backend-v2.azurewebsites.net/';
+export const serviceUrl =
+  process.env.REACT_APP_LOCAL_DEVELOPMENT_MODE === 'true'
+    ? 'http://localhost:3000/'
+    : process.env.REACT_APP_BACKEND_BASE_API;

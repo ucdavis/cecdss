@@ -7,8 +7,6 @@ import * as serviceWorker from './serviceWorker';
 
 const rootElement = document.getElementById('root');
 
-console.log(process.env.AUTH0_DOMAIN)
-
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
 
