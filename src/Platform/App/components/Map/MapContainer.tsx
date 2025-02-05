@@ -289,7 +289,6 @@ export const MapContainerComponent = () => {
   const toggleProcessingError = () => {
     setHasProcessingError(true);
     toggleLoading(false);
-    setIsLoading(false);
   };
 
   const years: number[] = [];
