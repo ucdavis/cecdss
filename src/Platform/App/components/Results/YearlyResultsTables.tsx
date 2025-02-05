@@ -1,7 +1,7 @@
 import React from 'react';
 import { YearlyResult } from '../../models/Types';
 import { Alert } from 'reactstrap';
-import { formatNumber, formatCurrency } from '../Shared/util';
+import { formatNumber, formatCurrency } from '../Utils/util';
 
 interface Props {
   biomassTarget: number;

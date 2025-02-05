@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis
 } from 'recharts';
-import { formatNumber } from '../Shared/util';
+import { formatNumber } from '../Utils/util';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 
 interface Props {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatCurrency, formatNumber } from '../../Shared/util';
+import { formatCurrency, formatNumber } from '../../Utils/util';
 import { TechnoeconomicModels, YearlyResult } from '../../../models/Types';
 import { Table } from 'reactstrap';
 import { CashFlow } from '@ucdavis/tea/output.model';

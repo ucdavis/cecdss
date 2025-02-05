@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactTable } from '../../Shared/ReactTable';
 import { Cell } from 'react-table';
-import { formatCurrency } from '../../Shared/util';
+import { formatCurrency } from '../../Utils/util';
 import {
   CashFlow,
   CashFlowCHP,

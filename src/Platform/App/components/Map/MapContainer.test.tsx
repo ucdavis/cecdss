@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MapContainerComponent } from './MapContainer';
-import { fakeallYearResults, fakeYearlyResult } from '../Shared/mockData';
+import { fakeallYearResults, fakeYearlyResult } from '../Utils/mockData';
 import '@testing-library/jest-dom';
 import 'jest-canvas-mock';
 
