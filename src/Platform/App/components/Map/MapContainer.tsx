@@ -1,8 +1,4 @@
-import {
-  InputModCHP,
-  InputModGP,
-  InputModGPO
-} from '@ucdavis/tea/input.model';
+import { InputModCHP, InputModGP, InputModGPO } from '@ucdavis/tea/input.model';
 import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import {
   computeConstantLAC,
@@ -20,9 +16,16 @@ import {
   MapContainer,
   ScaleControl,
   TileLayer,
-  useMapEvents,
+  useMapEvents
 } from 'react-leaflet';
-import { Button, Pagination, PaginationItem, PaginationLink, Progress } from 'reactstrap';
+import {
+  Button,
+  Modal,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Progress
+} from 'reactstrap';
 import { InputModCHPClass } from '../../models/CHPClasses';
 import { InputModGPClass } from '../../models/GPClasses';
 import { InputModGPOClass } from '../../models/GPOClasses';
@@ -42,13 +45,23 @@ import {
   faExpandArrowsAlt,
   faEye,
   faEyeSlash,
-  faMinusSquare
+  faFaceDizzy,
+  faMinusSquare,
+  faRotateRight,
+  faXmark
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams } from 'react-router-dom';
-import { ATTRIBUTION, DEFAULT_TRANSMISSION_VAL, MAP_BOX_TILES, MAP_BOX_TILES_SATELLITE } from '../../../../Resources/Constants';
+import styled from 'styled-components';
+import {
+  ATTRIBUTION,
+  DEFAULT_TRANSMISSION_VAL,
+  MAP_BOX_TILES,
+  MAP_BOX_TILES_SATELLITE
+} from '../../../../Resources/Constants';
 import Loader from '../../../../Shared/Loader';
 import { trackEvent } from '../../../Utils/gaAnalytics';
+import { FormContainer, ModalBackground } from '../Form/UserDetails';
 import { InputContainer } from '../Inputs/InputContainer';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { ResultsContainer } from '../Results/ResultsContainer';
@@ -61,10 +74,9 @@ import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
 import { ExternalLayerLegend } from './ExternalLayerLegend';
 import { ExternalLayerSelection } from './ExternalLayerSelection';
 import { GeoJsonLayers } from './GeoJsonLayers';
+import { SubstationLayer } from './Layers/SubstationLayer';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
-import { SubstationLayer } from './Layers/SubstationLayer';
-
 
 export interface RequestParamsAllYearsNoTransmission {
   facilityLat: number;
@@ -73,9 +85,19 @@ export interface RequestParamsAllYearsNoTransmission {
   teaInputs: InputModGPO | InputModCHP | InputModGP;
 }
 
+interface ProcessingErrorModalProps {
+  close: () => void;
+}
+
 const { BaseLayer } = LayersControl;
 
-const MapClickHandler = ({ setBiomassCoordinates, setFacilityCoordinates, selectBiomassCoordinates, loading, yearlyResults }: any) => {
+const MapClickHandler = ({
+  setBiomassCoordinates,
+  setFacilityCoordinates,
+  selectBiomassCoordinates,
+  loading,
+  yearlyResults
+}: any) => {
   useMapEvents({
     click(e: any) {
       if (!loading && yearlyResults.length === 0) {
@@ -98,13 +120,13 @@ const processDieselFuelPrice = (price: string | number): number => {
       return parsedValue;
     } else {
       console.error('Invalid diesel fuel price');
-      return 0; 
+      return 0;
     }
   }
   return price;
 };
 
-const getShortUrlData = async (modelID:string) => {
+const getShortUrlData = async (modelID: string) => {
   const getUrlData = serviceUrl + `saved-model`;
 
   const originalUrl = await fetch(getUrlData + '/' + modelID, {
@@ -113,13 +135,68 @@ const getShortUrlData = async (modelID:string) => {
     headers: {
       'Content-Type': 'application/json'
     }
-  }).then(res => (res.ok ? res.json() : ('')))
+  }).then(res => (res.ok ? res.json() : ''));
 
   if (!originalUrl) {
     throw new Error('Failed to retrieve original URL');
   }
 
   return originalUrl;
+};
+
+const ProcessingErrorModal = ({
+  close
+}: ProcessingErrorModalProps) => {
+  return (
+    <ModalBackground>
+      <FormContainer>
+        <div className='flex items-center justify-between gap-x-1'>
+          <div className='w-50p' />
+          <div className='text-xl font-bold text-brand leading-7 text-red text-center w-180p flex items-center justify-center gap-x-2'>
+            <FontAwesomeIcon
+              icon={faFaceDizzy}
+              style={{ color: '#fc031c' }}
+              size='lg'
+            />
+            <span>Error</span>
+          </div>
+          <div className='w-50p text-right cursor-pointer' onClick={close}>
+            <FontAwesomeIcon
+              icon={faXmark}
+              style={{ color: 'gray' }}
+              size='lg'
+            />
+          </div>
+        </div>
+        <div className='mt-4 text-sm leading-6 text-gray-600 text-center alert alert-danger'>
+          There was a problem processing your results. This is most likely due
+          to an inability to find enough biomass to satisfy your requirements
+          within a reasonable radius, but could also be due to API performance
+          or availability issues. Please refresh the page and try again. If the
+          problem persists then please click{' '}
+          <a
+            href='mailto:frredss@ucdavis.edu?subject=Error in the FRREDSS App!'
+            className='text-blue-190 underline'
+          >
+            here
+          </a> to get in touch. Thanks!
+        </div>
+        <div className='w-full flex items-center justify-center mt-6'>
+          <div
+            className='flex items-center justify-center gap-x-2 border-2p border-gray-400 border-solid py-1 px-2 rounded-lg cursor-pointer'
+            onClick={() => window.location.reload()}
+          >
+            <FontAwesomeIcon
+              icon={faRotateRight}
+              style={{ color: 'rgb(156, 163, 175)' }}
+              size='sm'
+            />
+            <div className='text-gray-500'>Refresh</div>
+          </div>
+        </div>
+      </FormContainer>
+    </ModalBackground>
+  );
 };
 
 export const MapContainerComponent = () => {
@@ -136,10 +213,8 @@ export const MapContainerComponent = () => {
   const [hasProcessingError, setHasProcessingError] = useState<boolean>(false);
   const [allYearResults, setAllYearResults] = useState<AllYearsResults>();
   const [yearlyResults, setYearlyResults] = useState<YearlyResult[]>([]);
-  const [
-    sensitvityResults,
-    setSensitivityResults
-  ] = useState<OutputModSensitivity>();
+  const [sensitvityResults, setSensitivityResults] =
+    useState<OutputModSensitivity>();
   const [selectedYearIndex, setSelectedYearIndex] = useState<number>(-1);
   const [showResults, toggleShowResults] = useState<boolean>(false);
   const [expandedResults, toggleExpandedResults] = useState<boolean>(false);
@@ -155,10 +230,8 @@ export const MapContainerComponent = () => {
   const [showGeoJson, toggleGeoJson] = useState<boolean>(true);
   const [showErrorGeoJson, toggleErrorGeoJson] = useState<boolean>(false);
   const [showMoveInGeoJson, toggleMoveInGeoJson] = useState<boolean>(false);
-  const [
-    showTransportationGeoJson,
-    toggleTransportationGeoJson
-  ] = useState<boolean>(false);
+  const [showTransportationGeoJson, toggleTransportationGeoJson] =
+    useState<boolean>(false);
 
   const [zoom, setZoom] = useState<number>(9);
   const [center, setCenter] = useState<MapCoordinates>({
@@ -173,11 +246,6 @@ export const MapContainerComponent = () => {
 
   // external layers
   const [externalLayers, setExternalLayers] = useState<string[]>([]);
-
-  const handleExternalLayerChange = (newLayers: string[]) => {
-    setExternalLayers(newLayers);
-    setMapLayerLoading(false);
-  }
 
   const frcsInputsExample: FrcsInputs = {
     system: 'Ground-Based Mech WT',
@@ -195,7 +263,7 @@ export const MapContainerComponent = () => {
     wageTruckDriver: 25.23, // Hourly mean wage for tractor-trailer truck drivers Nov 2024
     driverBenefits: 25,
     oilCost: 0.641, // June 2022
-    fullyLoadedRate: 0,
+    fullyLoadedRate: 0
   };
 
   const [teaInputs, setTeaInputs] = useState<
@@ -210,6 +278,19 @@ export const MapContainerComponent = () => {
   const [transportInputs, setTransportInputs] = useState<TransportInputs>(
     transportInputsExample
   );
+
+  const handleExternalLayerChange = (newLayers: string[]) => {
+    setExternalLayers(newLayers);
+    setMapLayerLoading(false);
+  };
+
+  const processingErrorModalClose = () => setHasProcessingError(false);
+
+  const toggleProcessingError = () => {
+    setHasProcessingError(true);
+    toggleLoading(false);
+    setIsLoading(false);
+  };
 
   const years: number[] = [];
   for (let index = 0; index < teaInputs.Financing.EconomicLife; index++) {
@@ -229,22 +310,18 @@ export const MapContainerComponent = () => {
     }
   }, [teaModel, inputErrors]);
 
-  const [
-    facilityCoordinates,
-    setFacilityCoordinates
-  ] = useState<MapCoordinates>({
-    lat: 37.87439641742907,
-    lng: -120.47592259245009
-  });
+  const [facilityCoordinates, setFacilityCoordinates] =
+    useState<MapCoordinates>({
+      lat: 37.87439641742907,
+      lng: -120.47592259245009
+    });
   const [biomassCoordinates, setBiomassCoordinates] = useState<MapCoordinates>({
     lat: 37.87439641742907,
     lng: -120.47592259245009
   });
 
-  const [
-    selectBiomassCoordinates,
-    setSelectBiomassCoordinates
-  ] = useState<boolean>(false);
+  const [selectBiomassCoordinates, setSelectBiomassCoordinates] =
+    useState<boolean>(false);
 
   const [expansionFactor, setExpansionFactor] = useState<number>(1);
 
@@ -275,13 +352,11 @@ export const MapContainerComponent = () => {
   const submitInputs = async () => {
     toggleLoading(true);
 
-    trackEvent(
-      'Model Run',
-      'Click',
-      'FRREDSS App',
-    );
+    trackEvent('Model Run', 'Click', 'FRREDSS App');
 
-    frcsInputs.dieselFuelPrice = processDieselFuelPrice(frcsInputs.dieselFuelPrice)
+    frcsInputs.dieselFuelPrice = processDieselFuelPrice(
+      frcsInputs.dieselFuelPrice
+    );
 
     let teaInputsClone = { ...teaInputs };
     const cleanedInput = cleanTeaInput(teaInputsClone);
@@ -337,27 +412,24 @@ export const MapContainerComponent = () => {
       transportInputs
     };
 
-    const shortenUrl = await fetch(
-      serviceUrl + `shorten-url`,
-      {
-        mode: 'cors',
-        method: 'POST',
-        body: JSON.stringify({ data }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+    const shortenUrl = await fetch(serviceUrl + `shorten-url`, {
+      mode: 'cors',
+      method: 'POST',
+      body: JSON.stringify({ data }),
+      headers: {
+        'Content-Type': 'application/json'
       }
-    )
-    .then(res => (res.ok ? res.json() : ''))
-    .catch(error => {
-      console.error('Error:', error);
-      return null;
-    });
+    })
+      .then(res => (res.ok ? res.json() : ''))
+      .catch(error => {
+        console.error('Error HELLO:', error);
+        return null;
+      });
 
     if (shortenUrl && shortenUrl.shortUrl) {
-        setSaveUrl(shortenUrl.shortUrl)
+      setSaveUrl(shortenUrl.shortUrl);
     } else {
-        console.error('shortUrl is undefined or request failed');
+      console.error('shortUrl is undefined or request failed');
     }
 
     const allYearResults: AllYearsResults = await fetch(
@@ -370,10 +442,16 @@ export const MapContainerComponent = () => {
           'Content-Type': 'application/json'
         }
       }
-    ).then(res => (res.ok ? res.json() : (continueProcessing = false)));
+    )
+      .then(res => (res.ok ? res.json() : (continueProcessing = false)))
+      .catch(error => {
+        console.error('Error', error);
+        toggleProcessingError();
+        return null;
+      });
 
     if (!continueProcessing) {
-      setHasProcessingError(true);
+      toggleProcessingError();
       return;
     }
 
@@ -451,10 +529,16 @@ export const MapContainerComponent = () => {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then(res => (res.ok ? res.json() : (continueProcessingYear = false)));
+      })
+        .then(res => (res.ok ? res.json() : (continueProcessingYear = false)))
+        .catch(error => {
+          console.error('Error:', error);
+          toggleProcessingError();
+          return null;
+        });
 
       if (!continueProcessingYear) {
-        setHasProcessingError(true);
+        toggleProcessingError();
         return;
       }
 
@@ -517,7 +601,8 @@ export const MapContainerComponent = () => {
     allYearResults.teaResults.AnnualCashFlows = cashFlows;
     allYearResults.teaResults.CurrentLAC.CurrentLACofEnergy = currentLAC;
     allYearResults.teaResults.CurrentLAC.TotalPresentWorth = totalPresentWorth;
-    allYearResults.teaResults.CurrentLAC.PresentWorth = energyRevenueRequiredPresentYears;
+    allYearResults.teaResults.CurrentLAC.PresentWorth =
+      energyRevenueRequiredPresentYears;
     allYearResults.teaResults.ConstantLAC.ConstantLACofEnergy = constantLAC;
     setAllYearResults(allYearResults);
   };
@@ -534,7 +619,7 @@ export const MapContainerComponent = () => {
         try {
           setIsLoading(true);
           const result = await getShortUrlData(modelID);
-          
+
           setTeaModel(result.allYearInputs.teaModel);
           setTeaInputs(result.allYearInputs.teaInputs);
           setFacilityCoordinates({
@@ -558,13 +643,17 @@ export const MapContainerComponent = () => {
 
   useEffect(() => {
     setMapReady(true);
-  }, []); 
+  }, []);
 
   useEffect(() => {
-    const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string; }) => {
+    const handleBeforeUnload = (event: {
+      preventDefault: () => void;
+      returnValue: string;
+    }) => {
       if (loading) {
         event.preventDefault();
-        event.returnValue = "Your model is still running. Are you sure you want to leave?";
+        event.returnValue =
+          'Your model is still running. Are you sure you want to leave?';
       }
     };
 
@@ -576,13 +665,13 @@ export const MapContainerComponent = () => {
   }, [loading]);
 
   const mapLayerHandler = {
-      loading: () => setMapLayerLoading(true),
-      load: () => setMapLayerLoading(false)
-    }
+    loading: () => setMapLayerLoading(true),
+    load: () => setMapLayerLoading(false)
+  };
 
   if (isLoading) {
     return (
-      <div className="h-screen w-screen flex items-center justify-center">
+      <div className='h-screen w-screen flex items-center justify-center'>
         <Loader />
       </div>
     );
@@ -596,8 +685,8 @@ export const MapContainerComponent = () => {
           style={{
             height: '5px'
           }}
-          color="success"
-          value="100"
+          color='success'
+          value='100'
         />
       )}
       {(yearlyResults.length > 0 || loading) && (
@@ -644,7 +733,9 @@ export const MapContainerComponent = () => {
             color='primary'
             className='flex items-center justify-between gap-x-2 w-full px-2'
           >
-            <span>{isErrorZone ? 'Show Unusable Zones' : 'Hide Unusable Zones'}</span>
+            <span>
+              {isErrorZone ? 'Show Unusable Zones' : 'Hide Unusable Zones'}
+            </span>
             <FontAwesomeIcon icon={isErrorZone ? faEye : faEyeSlash} />
           </Button>
           <Button
@@ -704,14 +795,9 @@ export const MapContainerComponent = () => {
         className={expandedResults ? 'expanded-results' : 'sidebar'}
         id='sidebar'
       >
-        {hasProcessingError && (
-          <div className='alert alert-danger'>
-            There was a problem processing your results. This is most likely due
-            to an inability to find enough biomass to satisfy your requirements
-            within a reasonable radius, but could also be due to API performance
-            or availability issues. Please refresh the page and try again.
-          </div>
-        )}
+        <Modal isOpen={hasProcessingError}>
+          <ProcessingErrorModal close={processingErrorModalClose} />
+        </Modal>
         {!showResults && (
           <InputContainer
             facilityCoordinates={facilityCoordinates}
@@ -779,11 +865,16 @@ export const MapContainerComponent = () => {
             <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
           </BaseLayer>
           <BaseLayer name='Satellite'>
-            <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES_SATELLITE} />
+            <TileLayer
+              attribution={ATTRIBUTION}
+              url={MAP_BOX_TILES_SATELLITE}
+            />
           </BaseLayer>
         </LayersControl>
         <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
-        <NominatimSearchControl setFacilityCoordinates={setFacilityCoordinates} />
+        <NominatimSearchControl
+          setFacilityCoordinates={setFacilityCoordinates}
+        />
         <PrintControl />
         {externalLayers.includes('transmission') && (
           <FeatureLayer
@@ -885,7 +976,7 @@ export const MapContainerComponent = () => {
                 selectedYearIndex={selectedYearIndex}
               />
             )}
-            
+
             {showTransportationGeoJson && (
               <ClusterTransportationRoutesLayer
                 facilityCoordinates={facilityCoordinates}
@@ -916,12 +1007,40 @@ export const MapContainerComponent = () => {
 };
 
 export const MapContainerWrapper = () => {
-
   useEffect(() => {
-    ReactGA.send({ hitType: "pageview", page: '/pages/model', title: 'Model Page' });
+    ReactGA.send({
+      hitType: 'pageview',
+      page: '/pages/model',
+      title: 'Model Page'
+    });
   }, []);
 
-  return (
-    <MapContainerComponent />
-  )
-};  
+  return <MapContainerComponent />;
+};
+
+export const StyledButton = styled(Button)`
+  background-color: white;
+  border: 2px solid rgb(165, 165, 165);
+  color: rgb(165, 165, 165);
+  padding: 5px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+    background-color: white;
+  }
+
+  &:active {
+    background-color: #004085;
+  }
+
+  &:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+`;

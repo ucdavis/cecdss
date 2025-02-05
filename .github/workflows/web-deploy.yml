@@ -23,6 +23,11 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Create .env file
+        run: |
+          echo "REACT_APP_BACKEND_BASE_API=${{ secrets.REACT_APP_BACKEND_BASE_API }}" >> .env
+          echo "REACT_APP_LOCAL_DEVELOPMENT_MODE=${{ secrets.REACT_APP_LOCAL_DEVELOPMENT_MODE }}" >> .env
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
