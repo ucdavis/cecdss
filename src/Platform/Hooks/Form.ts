@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { serviceUrl } from '../App/components/Shared/config';
+import { serviceUrl } from '../App/components/Utils/config';
 
 type MethodTypes = 'post' | 'put' | 'patch';
 

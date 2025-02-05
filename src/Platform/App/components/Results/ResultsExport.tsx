@@ -11,7 +11,7 @@ import {
   Treatments,
   YearlyResult
 } from '../../models/Types';
-import { formatCurrency, formatNumber } from '../Shared/util';
+import { formatCurrency, formatNumber } from '../Utils/util';
 import { trackEvent } from '../../../Utils/gaAnalytics';
 
 interface Props {

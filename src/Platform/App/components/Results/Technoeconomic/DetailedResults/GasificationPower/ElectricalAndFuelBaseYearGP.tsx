@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatNumber } from '../../../../Shared/util';
+import { formatNumber } from '../../../../Utils/util';
 import { ElectricalFuelBaseYearModGP } from '@ucdavis/tea/output.model';
 import { ElectricalFuelBaseYearInputModGP } from '@ucdavis/tea/input.model';
 

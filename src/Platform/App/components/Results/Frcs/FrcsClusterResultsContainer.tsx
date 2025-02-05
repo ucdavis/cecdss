@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { YearlyResult, ClusterResult } from '../../../models/Types';
 import { Button } from 'reactstrap';
 import { ReactTable } from '../../Shared/ReactTable';
-import { formatNumber, formatCurrency } from '../../Shared/util';
+import { formatNumber, formatCurrency } from '../../Utils/util';
 import { Cell } from 'react-table';
 import { FrcsSkippedClusterResultsContainer } from './FrcsSkippedClusterResultsContainer';
 

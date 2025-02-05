@@ -2,7 +2,7 @@ import React from 'react';
 import { GeoJSON } from 'react-leaflet';
 import { FeatureCollection, Feature } from 'geojson';
 import { ClusterFeature, ErrorClusterFeature } from '../../models/Types';
-import { formatNumber } from '../Shared/util';
+import { formatNumber } from '../Utils/util';
 
 interface Props {
   years: number[];

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ClusterFeature } from '../../models/Types';
-import { formatNumber } from '../Shared/util';
+import { formatNumber } from '../Utils/util';
 
 interface IProps {
   feature: ClusterFeature;
