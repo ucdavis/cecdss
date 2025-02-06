@@ -15,7 +15,11 @@ To run locally on port 3001 (the [backend app](https://github.com/ucdavis/cecdss
 
 `npm run dev`
 
-Application User Guide is [available on our Wiki](https://github.com/ucdavis/cecdss/wiki/CEC-DSS-Web-Application-User's-Guide)
+## Documentation
+
+Developer Guide is available [here.](https://github.com/ucdavis/cecdss/wiki/Developer-Guide-V2)
+
+Application User Guide is available [here.](https://github.com/ucdavis/cecdss/wiki/CEC-DSS-Web-Application-User's-Guide)
 
 ## Other options for advance users
 
