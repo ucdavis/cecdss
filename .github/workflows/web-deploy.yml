@@ -43,5 +43,5 @@ jobs:
           api_location: ""         # API source code path - optional
           output_location: "build" # Built app content directory - optional
         env:
-          REACT_APP_BACKEND_BASE_API: ${{ secrets.REACT_APP_BACKEND_BASE_API }}
-          REACT_APP_LOCAL_DEVELOPMENT_MODE: ${{ secrets.REACT_APP_LOCAL_DEVELOPMENT_MODE }}
+          REACT_APP_BACKEND_BASE_API: ${{ vars.REACT_APP_BACKEND_BASE_API }}
+          REACT_APP_LOCAL_DEVELOPMENT_MODE: ${{ vars.REACT_APP_LOCAL_DEVELOPMENT_MODE }}
