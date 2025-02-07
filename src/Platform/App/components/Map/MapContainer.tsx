@@ -693,13 +693,13 @@ export const MapContainerComponent = () => {
           <div className='flex items-center justify-center w-full'>
             <Pagination
               aria-label='Page navigation example'
-              size=''
               className='text-14p'
             >
               <PaginationItem active={!showResults}>
                 <PaginationLink
                   key='inputs'
                   onClick={() => toggleShowResults(false)}
+                  className='w-90p h-40p'
                 >
                   Inputs
                 </PaginationLink>
@@ -708,6 +708,7 @@ export const MapContainerComponent = () => {
                 <PaginationLink
                   key='finalResults'
                   onClick={() => toggleShowResults(true)}
+                  className='w-90p h-40p'
                 >
                   Results
                 </PaginationLink>
