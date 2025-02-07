@@ -100,7 +100,7 @@ export const ResultsContainer = (props: Props) => {
                     </div>
                   </Button>
                 ) : (
-                  <Button className='text-white hover:bg-gray-400 text-green-100 text-12p font-bold py-1 px-2 rounded-lg flex items-center justify-center border-white border-1p w-200p bg-none'>
+                  <Button className='text-white hover:bg-gray-400 text-green-100 text-12p font-bold py-1 px-2 rounded-lg flex items-center justify-center border-white border-1p w-200p bg-none bg-green-900'>
                     <div className='flex items-center justify-center gap-x-2'>
                       <FontAwesomeIcon
                         icon={faCheck}
