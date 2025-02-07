@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     env:
-      CI: false # override CI flag so we don't fail on warnings
-
+      CI: false # override CI falg so we don't fail on warnings
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -24,33 +23,17 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Create .env file
-        run: |
-          echo "REACT_APP_BACKEND_BASE_API=${{ secrets.REACT_APP_BACKEND_BASE_API }}" >> .env
-          echo "REACT_APP_LOCAL_DEVELOPMENT_MODE=${{ secrets.REACT_APP_LOCAL_DEVELOPMENT_MODE }}" >> .env
-          cat .env  # Debugging: Ensure the .env file contains expected values
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build React App
-        run: |
-          export $(grep -v '^#' .env | xargs)  # Load .env variables into the shell
-          npm run build
-        env:
-          REACT_APP_BACKEND_BASE_API: ${{ secrets.REACT_APP_BACKEND_BASE_API }}
-          REACT_APP_LOCAL_DEVELOPMENT_MODE: ${{ secrets.REACT_APP_LOCAL_DEVELOPMENT_MODE }}
-
-      - name: Deploy to Azure Static Web Apps
+      - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_KIND_OCEAN_071A97E1E }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} 
+          repo_token: ${{ secrets.GITHUB_TOKEN }}  # Used for GitHub integrations (i.e. PR comments)
           action: "upload"
-          app_location: "build" # Ensure this is the correct output directory
-          api_location: ""      # API source code path - optional
-          output_location: "build" # Path to the built React app
+          # Repository/Build Configurations - adjust these to match your app requirements
+          app_location: "/"        # App source code path
+          api_location: ""         # API source code path - optional
+          output_location: "build" # Built app content directory - optional
         env:
           REACT_APP_BACKEND_BASE_API: ${{ secrets.REACT_APP_BACKEND_BASE_API }}
           REACT_APP_LOCAL_DEVELOPMENT_MODE: ${{ secrets.REACT_APP_LOCAL_DEVELOPMENT_MODE }}
