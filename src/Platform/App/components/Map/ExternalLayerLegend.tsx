@@ -39,11 +39,11 @@ export const ExternalLayerLegend = (props: Props) => {
         className='cardheader d-flex align-items-center justify-content-between'
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h3>Layer Legends</h3>
+        <div className='text-white text-14p'>Layer Legends</div>
         <p>{layerIcon()}</p>
       </div>
       <Collapse isOpen={isOpen}>
-        <div className='cardcontents'>
+        <div className='cardcontents text-14p'>
           {props.layers.includes('fire') && <FireLegend />}
           {props.layers.includes('transmission') && <TransmissionLegend />}
           {props.layers.includes('substation') && <StationLegend />}
@@ -53,8 +53,12 @@ export const ExternalLayerLegend = (props: Props) => {
           {props.layers.includes('urbanCities') && <UrbanCitiesLegend />}
           {props.layers.includes('airDistricts') && <AirDistrictsLegend />}
           {props.layers.includes('dataBoundary') && <BiomassBoundaryLegend />}
-          {props.layers.includes('feedstockBiomassCompetition') && <FeedstockBiomassCompetitionLegend />}
-          {props.layers.includes('feedstockWoodProcessingCompetition') && <FeedstockBiomassCompetitionLegend />}
+          {props.layers.includes('feedstockBiomassCompetition') && (
+            <FeedstockBiomassCompetitionLegend />
+          )}
+          {props.layers.includes('feedstockWoodProcessingCompetition') && (
+            <FeedstockBiomassCompetitionLegend />
+          )}
         </div>
       </Collapse>
     </div>

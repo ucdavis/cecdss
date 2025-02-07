@@ -11,7 +11,7 @@ export const OwnershipLegend = () => (
         <tr>
           <td align='left'>
             <span className='esriLegendServiceLabel'>
-              ownership - Land Ownership
+              Ownership - Land Ownership
             </span>
           </td>
         </tr>

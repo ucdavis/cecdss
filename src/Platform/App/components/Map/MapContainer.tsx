@@ -693,7 +693,7 @@ export const MapContainerComponent = () => {
           <div className='flex items-center justify-center w-full'>
             <Pagination
               aria-label='Page navigation example'
-              size='md'
+              size=''
               className='text-14p'
             >
               <PaginationItem active={!showResults}>

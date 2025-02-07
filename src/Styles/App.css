@@ -39,7 +39,8 @@
 }
 .cardheader {
   background-color: var(--primary-color);
-  padding: 16px 24px 10px 24px;
+  padding: 12px 24px 10px 24px;
+  cursor: pointer;
 }
 .cardheader h4 {
   color: rgba(255, 255, 255, 0.55);
@@ -57,7 +58,7 @@
   margin-bottom: 0px;
 }
 .cardcontents {
-  padding: 16px 16px 0px 16px;
+  padding: 12px 16px 10px 16px;
 }
 .App {
   text-align: left;
@@ -157,14 +158,14 @@
 }
 .toggle-buttons {
   position: fixed;
-  padding: 10px 7px 10px 7px;
+  padding: 12px 7px 12px 7px;
   border-radius: 8px;
   left: 0.5%;
   top: 25%;
   z-index: 1000;
   width: 210px;
   border: 1px solid green;
-  background-color: rgba(242, 243, 242, 0.4);
+  background-color: rgba(229, 229, 229, 0.4);
 }
 .toggle-buttons svg {
   margin-left: 8px;
