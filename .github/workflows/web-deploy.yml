@@ -3,12 +3,14 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - master  
+      - master
 
 jobs:
   build_and_deploy_job:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    env:
+      CI: false # override CI flag so we don't fail on warnings
 
     steps:
       - name: Checkout Repository
@@ -17,23 +19,23 @@ jobs:
           submodules: true
           lfs: false
 
-      - name: Setup Node.js
+      - name: Setup Node.js 18
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Create .env File
+      - name: Create .env file
         run: |
           echo "REACT_APP_BACKEND_BASE_API=${{ secrets.REACT_APP_BACKEND_BASE_API }}" >> .env
           echo "REACT_APP_LOCAL_DEVELOPMENT_MODE=${{ secrets.REACT_APP_LOCAL_DEVELOPMENT_MODE }}" >> .env
-          cat .env  # Debugging: Check if .env is created properly (values will be masked)
+          cat .env  # Debugging: Ensure the .env file contains expected values
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Frontend (React) App
-        run: 
-          export CI=false # Prevent warnings from failing the build
+      - name: Build React App
+        run: |
+          export $(grep -v '^#' .env | xargs)  # Load .env variables into the shell
           npm run build
         env:
           REACT_APP_BACKEND_BASE_API: ${{ secrets.REACT_APP_BACKEND_BASE_API }}
@@ -46,6 +48,6 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}  # Used for GitHub PR comments
           action: "upload"
-          app_location: "/"        # Adjust if your React app is in a subfolder
-          api_location: ""         # API source code path - optional
+          app_location: "build" # Ensure this is the correct output directory
+          api_location: ""      # API source code path - optional
           output_location: "build" # Path to the built React app
