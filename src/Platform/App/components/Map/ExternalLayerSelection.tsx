@@ -57,7 +57,7 @@ export const ExternalLayerSelection = (props: Props) => {
         className='cardheader d-flex align-items-center justify-content-between gap-x-2'
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h3>Map Layers</h3>
+        <div className='text-white text-14p'>Map Layers</div>
         <p>{layerIcon()}</p>
       </div>
       <Collapse isOpen={isOpen}>
@@ -72,7 +72,7 @@ export const ExternalLayerSelection = (props: Props) => {
                 onChange={handleClick}
                 id={layer}
               />
-              <label className='form-check-label' htmlFor={layer}>
+              <label className='form-check-label text-14p' htmlFor={layer}>
                 {AllLayers[layer]}
               </label>
             </div>

@@ -39,7 +39,8 @@
 }
 .cardheader {
   background-color: var(--primary-color);
-  padding: 16px 24px 10px 24px;
+  padding: 12px 24px 10px 24px;
+  cursor: pointer;
 }
 .cardheader h4 {
   color: rgba(255, 255, 255, 0.55);
@@ -57,7 +58,7 @@
   margin-bottom: 0px;
 }
 .cardcontents {
-  padding: 16px 16px 0px 16px;
+  padding: 12px 16px 10px 16px;
 }
 .App {
   text-align: left;
@@ -157,25 +158,19 @@
 }
 .toggle-buttons {
   position: fixed;
-  padding-bottom: 8px;
+  padding: 12px 7px 12px 7px;
   border-radius: 8px;
   left: 0.5%;
-  top: 30%;
+  top: 25%;
   z-index: 1000;
-  width: 220px;
+  width: 210px;
+  border: 1px solid green;
+  background-color: rgba(229, 229, 229, 0.4);
 }
 .toggle-buttons svg {
   margin-left: 8px;
 }
 
-.toggle-input-result {
-  position: fixed;
-  padding-bottom: 24px;
-  border-radius: 8px;
-  left: 6%;
-  bottom: 0.5%;
-  z-index: 2000;
-}
 .input-result-toggle .pagination-lg {
   margin-bottom: 0px;
 }
@@ -1066,6 +1061,10 @@ input[type='number'] {
 
     .max-h-200p {
       max-height: 200px;
+    }
+
+    .w-90p {
+      width: 90px;
     }
 
     .w-100p {

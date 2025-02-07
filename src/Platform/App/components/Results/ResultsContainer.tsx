@@ -5,6 +5,7 @@ import { OutputModSensitivity } from '@ucdavis/tea/output.model';
 import { useState } from 'react';
 import ReactGA from 'react-ga4';
 import {
+  Button,
   Modal,
   Pagination,
   PaginationItem,
@@ -80,49 +81,49 @@ export const ResultsContainer = (props: Props) => {
   return (
     <>
       <div className='cardheader flex flex-col justify-between items-start'>
-          <div className='text-white text-20p'>
-            Forest Resource and Renewable Energy Decision Support System
-            (FRREDSS)
-          </div>
-          <div className="flex items-center justify-between w-full mt-2">
-            <div className='text-white text-36p'>Results</div>
-            <div className="flex items-center justify-center gap-x-4">
-              {props.saveUrl && (
-                <div className="flex items-center justify-center gap-x-4">
-                  {!linkCopied ? (
-                    <button 
-                      className="text-white hover:bg-gray-400 text-gray-800 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p"
-                      onClick={toggleModal}
-                    >
-                      <div className="flex items-center justify-center gap-x-2">
-                        <FontAwesomeIcon icon={faDownload} />
-                        <span>Save Model Link</span>
-                      </div>
-                    </button>
-                  ) : (
-                    <button 
-                      className="text-white hover:bg-gray-400 text-green-100 text-12p font-bold py-2 px-2 rounded-lg flex items-center justify-center border-white border-2p w-200p"
-                    >
-                      <div className="flex items-center justify-center gap-x-2">
-                        <FontAwesomeIcon icon={faCheck} />
-                        <span>Link Copied to Clipboard</span>
-                      </div>
-                    </button>
-                  )}
-                </div>
-              )}
-              {(LOADING_PROGRESS !== 100) && (
-                <Spinner size="sm" color='light' className='mt-1 ml-1'>
+        <div className='text-white text-12p mb-2'>
+          Forest Resource and Renewable Energy Decision Support System (FRREDSS)
+        </div>
+        <div className='flex items-center justify-between w-full mt-2'>
+          <div className='text-white text-24p'>Results</div>
+          <div className='flex items-center justify-center gap-x-4'>
+            {props.saveUrl && (
+              <div className='flex items-center justify-center gap-x-4'>
+                {!linkCopied ? (
+                  <Button
+                    className='text-white hover:bg-gray-400 text-gray-800 text-12p font-bold py-1 px-2 rounded-lg flex items-center justify-center border-white border-1p w-150p'
+                    onClick={toggleModal}
+                  >
+                    <div className='flex items-center justify-center gap-x-2'>
+                      <FontAwesomeIcon icon={faDownload} />
+                      <span>Save Model Link</span>
+                    </div>
+                  </Button>
+                ) : (
+                  <Button className='text-white hover:bg-gray-400 text-green-100 text-12p font-bold py-1 px-2 rounded-lg flex items-center justify-center border-white border-1p w-200p bg-none bg-green-900'>
+                    <div className='flex items-center justify-center gap-x-2'>
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        style={{ color: '#09eb0d' }}
+                      />
+                      <span>Link Copied to Clipboard</span>
+                    </div>
+                  </Button>
+                )}
+              </div>
+            )}
+            {LOADING_PROGRESS !== 100 && (
+              <Spinner size='sm' color='light' className='mt-1 ml-1'>
                 {''}
-                </Spinner>
-              )}
-              <HomeButton 
-                loading={LOADING_PROGRESS !== 100}
-                tooltipText='Go To Home' 
-                tooltipTarget='goToHomeButton'
-              />
-            </div>
+              </Spinner>
+            )}
+            <HomeButton
+              loading={LOADING_PROGRESS !== 100}
+              tooltipText='Go To Home'
+              tooltipTarget='goToHomeButton'
+            />
           </div>
+        </div>
       </div>
       <div className='cardcontents'>
         <div className='years-pagination'>
@@ -141,10 +142,8 @@ export const ResultsContainer = (props: Props) => {
             {pages}
           </Pagination>
         </div>
-        <div className="my-1">
-          <Progress
-            value={LOADING_PROGRESS}
-          />
+        <div className='my-1'>
+          <Progress value={LOADING_PROGRESS} />
         </div>
         {props.selectedYearIndex === props.years.length && (
           <AllResultsContainer {...props} />
@@ -160,7 +159,11 @@ export const ResultsContainer = (props: Props) => {
           )}
       </div>
       <Modal isOpen={modal} toggle={toggleModal}>
-          <UserDetails toggle={toggleModal} onSubmitSuccess={handleFormSubmitSuccess} saveUrl={props.saveUrl} />
+        <UserDetails
+          toggle={toggleModal}
+          onSubmitSuccess={handleFormSubmitSuccess}
+          saveUrl={props.saveUrl}
+        />
       </Modal>
     </>
   );

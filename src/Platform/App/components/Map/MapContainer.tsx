@@ -690,6 +690,31 @@ export const MapContainerComponent = () => {
       )}
       {(yearlyResults.length > 0 || loading) && (
         <div className='toggle-buttons flex flex-col items-center justify-center gap-y-6'>
+          <div className='flex items-center justify-center w-full'>
+            <Pagination
+              aria-label='Page navigation example'
+              className='text-14p'
+            >
+              <PaginationItem active={!showResults}>
+                <PaginationLink
+                  key='inputs'
+                  onClick={() => toggleShowResults(false)}
+                  className='w-90p h-40p'
+                >
+                  Inputs
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem active={showResults}>
+                <PaginationLink
+                  key='finalResults'
+                  onClick={() => toggleShowResults(true)}
+                  className='w-90p h-40p'
+                >
+                  Results
+                </PaginationLink>
+              </PaginationItem>
+            </Pagination>
+          </div>
           <Button
             onClick={() => {
               toggleMoveInGeoJson(h => !h);
@@ -698,7 +723,7 @@ export const MapContainerComponent = () => {
             disabled={allResultsSelected}
             title='Show Move-In Geometry in selected year'
             color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2'
+            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
           >
             <span>{!showMoveInGeoJson ? 'Show Move In' : 'Hide Move In'}</span>
             <FontAwesomeIcon icon={showMoveInGeoJson ? faEye : faEyeSlash} />
@@ -711,7 +736,7 @@ export const MapContainerComponent = () => {
             disabled={allResultsSelected}
             title='Show Transportation Geometry in selected year'
             color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2'
+            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
           >
             <span>
               {!showTransportationGeoJson
@@ -730,7 +755,7 @@ export const MapContainerComponent = () => {
             active={showErrorGeoJson}
             title='Cluster zones which cannot be used for biomass'
             color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2'
+            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
           >
             <span>
               {isErrorZone ? 'Show Unusable Zones' : 'Hide Unusable Zones'}
@@ -744,7 +769,7 @@ export const MapContainerComponent = () => {
             }}
             active={showGeoJson}
             color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2'
+            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
           >
             <span>
               {isClusterZone ? 'Hide Cluster Zones' : 'Show Cluster Zones'}
@@ -752,7 +777,7 @@ export const MapContainerComponent = () => {
             <FontAwesomeIcon icon={isClusterZone ? faEyeSlash : faEye} />
           </Button>
           <Button
-            className='flex items-center justify-between gap-x-2 w-full px-2'
+            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
             color='primary'
             onClick={() => {
               setIsExpanded(!isExpanded);
@@ -764,26 +789,6 @@ export const MapContainerComponent = () => {
               icon={isExpanded ? faExpandArrowsAlt : faMinusSquare}
             />
           </Button>
-          <div className='toggle-input-result'>
-            <Pagination aria-label='Page navigation example' size='lg'>
-              <PaginationItem active={!showResults}>
-                <PaginationLink
-                  key='inputs'
-                  onClick={() => toggleShowResults(false)}
-                >
-                  Inputs
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem active={showResults}>
-                <PaginationLink
-                  key='finalResults'
-                  onClick={() => toggleShowResults(true)}
-                >
-                  Results
-                </PaginationLink>
-              </PaginationItem>
-            </Pagination>
-          </div>
         </div>
       )}
       <div className='layers-container'>
