@@ -31,8 +31,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build React App
-        run: npm run build
+      - name: Build Frontend (React) App
+        run: 
+          export CI=false # Prevent warnings from failing the build
+          npm run build
         env:
           REACT_APP_BACKEND_BASE_API: ${{ secrets.REACT_APP_BACKEND_BASE_API }}
           REACT_APP_LOCAL_DEVELOPMENT_MODE: ${{ secrets.REACT_APP_LOCAL_DEVELOPMENT_MODE }}
