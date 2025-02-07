@@ -7,7 +7,7 @@
 
 ## Choose your backend
 
-This web front-end relies on the backend project [https://github.com/ucdavis/cecdss-backend](https://github.com/ucdavis/cecdss-backend) to be running and accessible.  By default the backend is expected to be running at localhost:3000 but this can be changed in [https://github.com/ucdavis/cecdss/blob/master/src/components/Shared/config.ts](https://github.com/ucdavis/cecdss/blob/master/src/components/Shared/config.ts)
+This web front-end relies on the backend project [https://github.com/ucdavis/cecdss-backend](https://github.com/ucdavis/cecdss-backend) to be running and accessible.  By default the backend is expected to be running at localhost:3000 but this can be changed in [https://github.com/ucdavis/cecdss/blob/master/src/components/Shared/config.ts](https://github.com/ucdavis/cecdss/blob/master/src/components/Shared/config.ts). You can point to the production backend by making `LOCAL_DEVELOPMENT_MODE = false`.
 
 ## Running the app
 
