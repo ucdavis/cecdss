@@ -51,3 +51,6 @@ jobs:
           app_location: "build" # Ensure this is the correct output directory
           api_location: ""      # API source code path - optional
           output_location: "build" # Path to the built React app
+        env:
+          REACT_APP_BACKEND_BASE_API: ${{ secrets.REACT_APP_BACKEND_BASE_API }}
+          REACT_APP_LOCAL_DEVELOPMENT_MODE: ${{ secrets.REACT_APP_LOCAL_DEVELOPMENT_MODE }}
