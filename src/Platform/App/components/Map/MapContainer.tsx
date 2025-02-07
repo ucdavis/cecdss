@@ -690,82 +690,12 @@ export const MapContainerComponent = () => {
       )}
       {(yearlyResults.length > 0 || loading) && (
         <div className='toggle-buttons flex flex-col items-center justify-center gap-y-6'>
-          <Button
-            onClick={() => {
-              toggleMoveInGeoJson(h => !h);
-            }}
-            active={showMoveInGeoJson}
-            disabled={allResultsSelected}
-            title='Show Move-In Geometry in selected year'
-            color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2'
-          >
-            <span>{!showMoveInGeoJson ? 'Show Move In' : 'Hide Move In'}</span>
-            <FontAwesomeIcon icon={showMoveInGeoJson ? faEye : faEyeSlash} />
-          </Button>
-          <Button
-            onClick={() => {
-              toggleTransportationGeoJson(h => !h);
-            }}
-            active={showTransportationGeoJson}
-            disabled={allResultsSelected}
-            title='Show Transportation Geometry in selected year'
-            color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2'
-          >
-            <span>
-              {!showTransportationGeoJson
-                ? 'Show Transportation'
-                : 'Hide Transportation'}
-            </span>
-            <FontAwesomeIcon
-              icon={showTransportationGeoJson ? faEye : faEyeSlash}
-            />
-          </Button>
-          <Button
-            onClick={() => {
-              setIsErrorZone(!isErrorZone);
-              toggleErrorGeoJson(!showErrorGeoJson);
-            }}
-            active={showErrorGeoJson}
-            title='Cluster zones which cannot be used for biomass'
-            color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2'
-          >
-            <span>
-              {isErrorZone ? 'Show Unusable Zones' : 'Hide Unusable Zones'}
-            </span>
-            <FontAwesomeIcon icon={isErrorZone ? faEye : faEyeSlash} />
-          </Button>
-          <Button
-            onClick={() => {
-              setIsClusterZone(!isClusterZone);
-              toggleGeoJson(!showGeoJson);
-            }}
-            active={showGeoJson}
-            color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2'
-          >
-            <span>
-              {isClusterZone ? 'Hide Cluster Zones' : 'Show Cluster Zones'}
-            </span>
-            <FontAwesomeIcon icon={isClusterZone ? faEyeSlash : faEye} />
-          </Button>
-          <Button
-            className='flex items-center justify-between gap-x-2 w-full px-2'
-            color='primary'
-            onClick={() => {
-              setIsExpanded(!isExpanded);
-              toggleExpandedResults(!expandedResults);
-            }}
-          >
-            <span>{isExpanded ? 'Expand Results' : 'Minimize Results'} </span>
-            <FontAwesomeIcon
-              icon={isExpanded ? faExpandArrowsAlt : faMinusSquare}
-            />
-          </Button>
-          <div className='toggle-input-result'>
-            <Pagination aria-label='Page navigation example' size='lg'>
+          <div className='flex items-center justify-center w-full'>
+            <Pagination
+              aria-label='Page navigation example'
+              size='md'
+              className='text-14p'
+            >
               <PaginationItem active={!showResults}>
                 <PaginationLink
                   key='inputs'
@@ -784,6 +714,80 @@ export const MapContainerComponent = () => {
               </PaginationItem>
             </Pagination>
           </div>
+          <Button
+            onClick={() => {
+              toggleMoveInGeoJson(h => !h);
+            }}
+            active={showMoveInGeoJson}
+            disabled={allResultsSelected}
+            title='Show Move-In Geometry in selected year'
+            color='primary'
+            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
+          >
+            <span>{!showMoveInGeoJson ? 'Show Move In' : 'Hide Move In'}</span>
+            <FontAwesomeIcon icon={showMoveInGeoJson ? faEye : faEyeSlash} />
+          </Button>
+          <Button
+            onClick={() => {
+              toggleTransportationGeoJson(h => !h);
+            }}
+            active={showTransportationGeoJson}
+            disabled={allResultsSelected}
+            title='Show Transportation Geometry in selected year'
+            color='primary'
+            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
+          >
+            <span>
+              {!showTransportationGeoJson
+                ? 'Show Transportation'
+                : 'Hide Transportation'}
+            </span>
+            <FontAwesomeIcon
+              icon={showTransportationGeoJson ? faEye : faEyeSlash}
+            />
+          </Button>
+          <Button
+            onClick={() => {
+              setIsErrorZone(!isErrorZone);
+              toggleErrorGeoJson(!showErrorGeoJson);
+            }}
+            active={showErrorGeoJson}
+            title='Cluster zones which cannot be used for biomass'
+            color='primary'
+            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
+          >
+            <span>
+              {isErrorZone ? 'Show Unusable Zones' : 'Hide Unusable Zones'}
+            </span>
+            <FontAwesomeIcon icon={isErrorZone ? faEye : faEyeSlash} />
+          </Button>
+          <Button
+            onClick={() => {
+              setIsClusterZone(!isClusterZone);
+              toggleGeoJson(!showGeoJson);
+            }}
+            active={showGeoJson}
+            color='primary'
+            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
+          >
+            <span>
+              {isClusterZone ? 'Hide Cluster Zones' : 'Show Cluster Zones'}
+            </span>
+            <FontAwesomeIcon icon={isClusterZone ? faEyeSlash : faEye} />
+          </Button>
+          <Button
+            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
+            color='primary'
+            onClick={() => {
+              setIsExpanded(!isExpanded);
+              toggleExpandedResults(!expandedResults);
+            }}
+          >
+            <span>{isExpanded ? 'Expand Results' : 'Minimize Results'} </span>
+            <FontAwesomeIcon
+              icon={isExpanded ? faExpandArrowsAlt : faMinusSquare}
+            />
+          </Button>
         </div>
       )}
       <div className='layers-container'>

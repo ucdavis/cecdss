@@ -84,7 +84,7 @@ export const InputContainer = (props: Props) => {
   return (
     <>
       <div className='cardheader flex flex-col justify-between items-start'>
-        <div className='text-white text-12p'>
+        <div className='text-white text-12p mb-2'>
             Forest Resource and Renewable Energy Decision Support System
             (FRREDSS)
           </div>

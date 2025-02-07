@@ -72,7 +72,7 @@ export const ExternalLayerSelection = (props: Props) => {
                 onChange={handleClick}
                 id={layer}
               />
-              <label className='form-check-label' htmlFor={layer}>
+              <label className='form-check-label text-14p' htmlFor={layer}>
                 {AllLayers[layer]}
               </label>
             </div>
