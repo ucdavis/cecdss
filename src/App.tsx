@@ -20,12 +20,18 @@ const App = () => {
   return (
     <div className='App'>
       <BrowserRouter>
-          <Routes>
+        <Routes>
           <Route path={`${URL_MODEL_PAGE}`} element={<MapContainerWrapper />} />
-          <Route path={`${URL_MODEL_ID_PAGE}`} element={<MapContainerWrapper />} />
-          <Route path={`${URL_LANDING_PAGE}`} element={<Home />} />
+          <Route
+            path={`${URL_MODEL_ID_PAGE}`}
+            element={<MapContainerWrapper />}
+          />
+          <Route
+            path={`${URL_LANDING_PAGE}`}
+            element={<MapContainerWrapper />}
+          />
           <Route path='*' element={<NotFound />} />
-          <Route index element={<Navigate to={`${URL_REROUTE_PAGE}`} />} />
+          <Route index element={<MapContainerWrapper />} />
         </Routes>
       </BrowserRouter>
     </div>

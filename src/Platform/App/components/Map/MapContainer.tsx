@@ -14,6 +14,7 @@ import ReactGA from 'react-ga4';
 import {
   LayersControl,
   MapContainer,
+  Polyline,
   ScaleControl,
   TileLayer,
   useMapEvents
@@ -77,6 +78,12 @@ import { GeoJsonLayers } from './GeoJsonLayers';
 import { SubstationLayer } from './Layers/SubstationLayer';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
+import { AlmondsLayer } from '../Resnick/Layers/AlmondsLayer';
+import { GrapesLayer } from '../Resnick/Layers/GrapesLayer';
+import { PistachiosLayer } from '../Resnick/Layers/PistachiosLayer';
+import { PomegranatesLayer } from '../Resnick/Layers/PomegranatesLayer';
+import { useExternalLayerContext } from '../../../Context/ExternalLayerContext';
+import { WarehouseLayer } from '../Resnick/Layers/WarehouseLayer';
 
 export interface RequestParamsAllYearsNoTransmission {
   facilityLat: number;
@@ -92,20 +99,37 @@ interface ProcessingErrorModalProps {
 const { BaseLayer } = LayersControl;
 
 const MapClickHandler = ({
-  setBiomassCoordinates,
   setFacilityCoordinates,
-  selectBiomassCoordinates,
+  setShippingCoordinates,
   loading,
   yearlyResults
-}: any) => {
+}: {
+  setFacilityCoordinates: (coords: MapCoordinates) => void;
+  setShippingCoordinates: (coords: MapCoordinates) => void;
+  loading: boolean;
+  yearlyResults: YearlyResult[];
+}) => {
+  // Track which coordinate we're selecting (facility or shipping)
+  const [isSelectingFacility, setIsSelectingFacility] = useState(true);
+
   useMapEvents({
     click(e: any) {
       if (!loading && yearlyResults.length === 0) {
-        setBiomassCoordinates(e.latlng);
+        const newCoords = {
+          lat: e.latlng.lat,
+          lng: e.latlng.lng
+        };
 
-        if (selectBiomassCoordinates === false) {
-          setFacilityCoordinates(e.latlng);
+        if (isSelectingFacility) {
+          // First click - set facility coordinates
+          setFacilityCoordinates(newCoords);
+        } else {
+          // Second click - set shipping coordinates
+          setShippingCoordinates(newCoords);
         }
+
+        // Toggle selection mode for next click
+        setIsSelectingFacility(!isSelectingFacility);
       }
     }
   });
@@ -199,11 +223,29 @@ const ProcessingErrorModal = ({
   );
 };
 
+
+export const handleExternalLayerChange = (
+  newLayers: string[], // Array of strings representing the new layers
+  setExternalLayers: (layers: string[]) => void, // Function to update external layers
+  setMapLayerLoading: (isLoading: boolean) => void // Function to update loading state
+) => {
+  setExternalLayers(newLayers); // Update the external layers
+  setMapLayerLoading(false); // Set loading state to false
+};
+
+
 export const MapContainerComponent = () => {
+  const {
+      externalLayers,
+      setExternalLayers,
+      setMapLayerLoading,
+      mapLayerLoading
+  } = useExternalLayerContext();
+
   const { modelID } = useParams();
   const [isLoading, setIsLoading] = useState(!!modelID);
   const [hasLoaded, setHasLoaded] = useState(false);
-  const [mapLayerLoading, setMapLayerLoading] = useState<boolean>(false);
+  // const [mapLayerLoading, setMapLayerLoading] = useState<boolean>(false);
   const [mapReady, setMapReady] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const [saveUrl, setSaveUrl] = useState<string>('');
@@ -233,19 +275,26 @@ export const MapContainerComponent = () => {
   const [showTransportationGeoJson, toggleTransportationGeoJson] =
     useState<boolean>(false);
 
-  const [zoom, setZoom] = useState<number>(9);
+  const [zoom, setZoom] = useState<number>(7);
   const [center, setCenter] = useState<MapCoordinates>({
-    lat: 37.87439641742907,
+    lat: 37.15439641742907,
     lng: -120.47592259245009
   });
+  
   const [bounds, setBounds] = useState<LatLngBoundsExpression>([
     [40.1, -122.5],
     [39.2, -120]
   ]);
   const [inputErrors, setInputError] = useState<string[]>([]);
+  const [shippingCoordinates, setShippingCoordinates] =
+    useState<MapCoordinates>({
+      lat: 38.62625,
+      lng: -122.630083
+    });
+
 
   // external layers
-  const [externalLayers, setExternalLayers] = useState<string[]>([]);
+  // const [externalLayers, setExternalLayers] = useState<string[]>([]);
 
   const frcsInputsExample: FrcsInputs = {
     system: 'Ground-Based Mech WT',
@@ -279,11 +328,6 @@ export const MapContainerComponent = () => {
     transportInputsExample
   );
 
-  const handleExternalLayerChange = (newLayers: string[]) => {
-    setExternalLayers(newLayers);
-    setMapLayerLoading(false);
-  };
-
   const processingErrorModalClose = () => setHasProcessingError(false);
 
   const toggleProcessingError = () => {
@@ -311,8 +355,8 @@ export const MapContainerComponent = () => {
 
   const [facilityCoordinates, setFacilityCoordinates] =
     useState<MapCoordinates>({
-      lat: 37.87439641742907,
-      lng: -120.47592259245009
+      lat: 35.562173,
+      lng: -119.7354
     });
   const [biomassCoordinates, setBiomassCoordinates] = useState<MapCoordinates>({
     lat: 37.87439641742907,
@@ -406,7 +450,7 @@ export const MapContainerComponent = () => {
         teaModel: teaModel,
         teaInputs: teaInputs
       },
-      biomassCoordinates,
+      shippingCoordinates,
       frcsInputs,
       transportInputs
     };
@@ -792,7 +836,7 @@ export const MapContainerComponent = () => {
         </div>
       )}
       <div className='layers-container'>
-        <ExternalLayerSelection onChange={handleExternalLayerChange} />
+        <ExternalLayerSelection />
         <ExternalLayerLegend layers={externalLayers} />
       </div>
       <div
@@ -804,6 +848,9 @@ export const MapContainerComponent = () => {
         </Modal>
         {!showResults && (
           <InputContainer
+            onChangeLayer={handleExternalLayerChange}
+            setExternalLayers={setExternalLayers}
+            setMapLayerLoading={setMapLayerLoading}
             facilityCoordinates={facilityCoordinates}
             setFacilityCoordinates={setFacilityCoordinates}
             biomassCoordinates={biomassCoordinates}
@@ -857,9 +904,8 @@ export const MapContainerComponent = () => {
         style={{ height: '100%', width: '100%' }}
       >
         <MapClickHandler
-          setBiomassCoordinates={setBiomassCoordinates}
           setFacilityCoordinates={setFacilityCoordinates}
-          selectBiomassCoordinates={selectBiomassCoordinates}
+          setShippingCoordinates={setShippingCoordinates}
           loading={loading}
           yearlyResults={yearlyResults}
         />
@@ -963,6 +1009,18 @@ export const MapContainerComponent = () => {
             }
           />
         )}
+        {externalLayers.includes('almondsCA') && (
+          <AlmondsLayer mapLayerHandler={mapLayerHandler} />
+        )}
+        {externalLayers.includes('pomegranatesCA') && (
+          <PomegranatesLayer mapLayerHandler={mapLayerHandler} />
+        )}
+        {externalLayers.includes('pistachiosCA') && (
+          <PistachiosLayer mapLayerHandler={mapLayerHandler} />
+        )}
+        {externalLayers.includes('grapesCA') && (
+          <GrapesLayer mapLayerHandler={mapLayerHandler} />
+        )}
         {yearlyResults.length > 0 && (
           <>
             {showMoveInGeoJson && (
@@ -1000,11 +1058,21 @@ export const MapContainerComponent = () => {
         )}
 
         <CustomMarker icon='facility' position={facilityCoordinates} />
-        {selectBiomassCoordinates &&
-          biomassCoordinates.lat !== facilityCoordinates.lat &&
-          biomassCoordinates.lng !== facilityCoordinates.lng && (
-            <CustomMarker icon='biomass' position={biomassCoordinates} />
-          )}
+        <CustomMarker icon='location' position={shippingCoordinates} />
+
+        <Polyline
+          positions={[
+            [facilityCoordinates.lat, facilityCoordinates.lng],
+            [shippingCoordinates.lat, shippingCoordinates.lng]
+          ]}
+          color='#808080'
+          dashArray='4 8'
+          weight={2}
+          opacity={0.5}
+        />
+        {externalLayers.length > 0 && externalLayers.includes('almondsCA') && (
+          <WarehouseLayer />
+        )}
       </MapContainer>
     </div>
   );

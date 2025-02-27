@@ -1,46 +1,38 @@
+// ExternalLayerSelection.tsx
 import React, { useCallback, useState } from 'react';
 import { Collapse } from 'reactstrap';
-
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-interface Props {
-  onChange: (layers: string[]) => void;
-}
+import { useExternalLayerContext } from '../../../Context/ExternalLayerContext';
 
 const AllLayers: { [key: string]: string } = {
-  fire: 'Fire Hazard Zones',
-  transmission: 'Transmission Lines',
-  substation: 'Substations',
-  plant: 'Power plants',
-  ownership: 'Ownership',
-  county: 'County Lines',
-  urbanCities: 'Urban City Limits',
-  airDistricts: 'Air Districts',
-  dataBoundary: 'Biomass Data Boundary',
-  feedstockBiomassCompetition: 'Wood Biomass Energy Facilities',
-  feedstockWoodProcessingCompetition: 'Current Sawmills',
+  almondsCA: 'Almonds',
+  pistachiosCA: 'Pistachios',
+  pomegranatesCA: 'Pomegranates',
+  // grapesCA: 'Grapes'
 };
 
-export const ExternalLayerSelection = (props: Props) => {
-  const [layers, setLayers] = useState<string[]>([]);
+export const ExternalLayerSelection = () => {
+  const { externalLayers, setExternalLayers, setMapLayerLoading } =
+    useExternalLayerContext();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = useCallback(
+  const handleClickLayerSelection = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      setMapLayerLoading(true); // Set loading state to true when layers change
       const layer = event.target.value;
 
       let newLayers;
       if (event.target.checked) {
-        newLayers = [...layers, layer];
+        newLayers = [...externalLayers, layer];
       } else {
-        newLayers = layers.filter(l => l !== layer);
+        newLayers = externalLayers.filter(l => l !== layer);
       }
 
-      setLayers(newLayers);
-      props.onChange(newLayers);
+      setExternalLayers(newLayers);
+      setMapLayerLoading(false);
     },
-    [props.onChange, layers]
+    [externalLayers, setExternalLayers, setMapLayerLoading]
   );
 
   const layerIcon = () => {
@@ -68,8 +60,8 @@ export const ExternalLayerSelection = (props: Props) => {
                 className='form-check-input'
                 type='checkbox'
                 value={layer}
-                checked={layers.includes(layer)}
-                onChange={handleClick}
+                checked={externalLayers.includes(layer)}
+                onChange={handleClickLayerSelection}
                 id={layer}
               />
               <label className='form-check-label text-14p' htmlFor={layer}>

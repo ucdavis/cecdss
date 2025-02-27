@@ -30,16 +30,16 @@ export const HomeButton = ({ loading, tooltipText, tooltipTarget }: HomeButtonPr
 
   return (
     <>
-        <TooltipWrapper text={tooltipText} target={tooltipTarget} />
-        <Button
-        style={{ background: '#395442', borderColor: '#fff', height: '25px' }}
+      <TooltipWrapper text={tooltipText} target={tooltipTarget} />
+      <Button
+        style={{ background: '#33505d', borderColor: '#fff', height: '25px' }}
         href={URL_LANDING_PAGE}
         className='cursor-pointer flex items-center justify-center gap-x-2'
         id='goToHomeButton'
         disabled={loading}
-        >
+      >
         <FontAwesomeIcon icon={faHome} style={{ fontSize: '14px' }} />
-        </Button>
+      </Button>
     </>
-  )
+  );
 }

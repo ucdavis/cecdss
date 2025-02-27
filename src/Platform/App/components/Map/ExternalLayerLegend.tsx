@@ -13,13 +13,20 @@ import { UrbanCitiesLegend } from './Layers/UrbanCitiesLegend';
 import { AirDistrictsLegend } from './Layers/AirDistrictsLegend';
 import { BiomassBoundaryLegend } from './Layers/BiomassBoundaryLegend';
 import { FeedstockBiomassCompetitionLegend } from './Layers/BasicFeedstockCompetitionLegend';
+import { AlmondsLegend } from '../Resnick/Legend/AlmondsLegend';
+import { GrapesLegend } from '../Resnick/Legend/GrapesLegend';
+import { PistachiosLegend } from '../Resnick/Legend/PistachiosLegend';
+import { PomegranateLegend } from '../Resnick/Legend/PomegranateLegend';
+import { useExternalLayerContext } from '../../../Context/ExternalLayerContext';
 
 interface Props {
   layers: string[];
 }
 
 export const ExternalLayerLegend = (props: Props) => {
-  const [isOpen, setIsOpen] = useState(true);
+    const { externalLayers } =
+      useExternalLayerContext();
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const layerIcon = () => {
     if (isOpen) {
@@ -44,7 +51,7 @@ export const ExternalLayerLegend = (props: Props) => {
       </div>
       <Collapse isOpen={isOpen}>
         <div className='cardcontents text-14p'>
-          {props.layers.includes('fire') && <FireLegend />}
+          {/* {props.layers.includes('fire') && <FireLegend />}
           {props.layers.includes('transmission') && <TransmissionLegend />}
           {props.layers.includes('substation') && <StationLegend />}
           {props.layers.includes('plant') && <PlantLegend />}
@@ -58,7 +65,11 @@ export const ExternalLayerLegend = (props: Props) => {
           )}
           {props.layers.includes('feedstockWoodProcessingCompetition') && (
             <FeedstockBiomassCompetitionLegend />
-          )}
+          )} */}
+          {props.layers.includes('almondsCA') && <AlmondsLegend />}
+          {props.layers.includes('grapesCA') && <GrapesLegend />}
+          {props.layers.includes('pistachiosCA') && <PistachiosLegend />}
+          {props.layers.includes('pomegranatesCA') && <PomegranateLegend />}
         </div>
       </Collapse>
     </div>

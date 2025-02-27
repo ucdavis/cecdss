@@ -1,5 +1,6 @@
 import { ComponentType, ReactNode } from 'react';
 import { SaveModelProvider } from "./saveModel";
+import { ExternalLayerProvider } from './ExternalLayerContext';
 
 type ProviderProps = { children: ReactNode };
 type ProviderWithProps = [ComponentType<ProviderProps>, Record<string, unknown>?];
@@ -19,4 +20,5 @@ const CombineProviders = (providers: ProviderWithProps[]) => {
 
 export const AllProviders: ComponentType<ProviderProps> = CombineProviders([
   [SaveModelProvider],
+  [ExternalLayerProvider]
 ]);

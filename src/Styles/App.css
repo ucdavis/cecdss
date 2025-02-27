@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #385542;
+  --primary-color: #33505d;
 }
 .btn-primary {
   background-color: var(--primary-color) !important;
@@ -100,8 +100,9 @@
 .sidebar {
   position: fixed;
   z-index: 1000;
-  width: 36%;
-  height: 96%;
+  width: 25%;
+  height: auto;
+  max-height: 96%;
   background-color: #fff;
   padding: 0px;
   border-radius: 8px;
@@ -1601,6 +1602,13 @@ input[type='number'] {
     .border-gray-200 {
       --tw-border-opacity: 1;
       border-color: rgb(229 231 235 / var(--tw-border-opacity));
+    }
+
+    .border-gray-300 {
+      --tw-border-opacity: 1;
+      border-color: rgb(206
+        212
+        218 / var(--tw-border-opacity));
     }
 
     .border-gray-400 {

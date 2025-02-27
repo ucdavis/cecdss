@@ -12,8 +12,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 // URLS
-export const URL_REROUTE_PAGE = '/pages/home'
-export const URL_LANDING_PAGE = '/pages/home'
+export const URL_REROUTE_PAGE = '/'
+export const URL_LANDING_PAGE = '/'
 export const URL_MODEL_PAGE = '/pages/model'
 export const URL_MODEL_ID_PAGE = '/pages/model/:modelID'
 
