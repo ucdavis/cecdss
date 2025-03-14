@@ -109,38 +109,40 @@ const MOISTURE_OPTIONS = [
 const MATERIAL_FORMS_CONFIG: MaterialFormsConfig = {
   almonds: {
     hulls: [
-      { value: 'unprocessed', label: 'Unprocessed' },
-      { value: 'milled', label: 'Milled' },
-      { value: 'densified', label: 'Densified' }
+      { value: 'unprocessed', label: 'Unprocessed' }
+      // { value: 'milled', label: 'Milled' },
+      // { value: 'densified', label: 'Densified' }
     ],
     shells: [
       { value: 'unprocessed', label: 'Unprocessed' },
       { value: 'chipped', label: 'Chipped' },
-      { value: 'milled', label: 'Milled' },
-      { value: 'densified', label: 'Densified' }
+      // { value: 'milled', label: 'Milled' },
+      // { value: 'densified', label: 'Densified' }
     ],
     sticks: [
-      { value: 'unprocessed', label: 'Unprocessed' },
-      { value: 'chipped', label: 'Chipped' },
-      { value: 'shredded', label: 'Shredded' }
+      { value: 'unprocessed', label: 'Unprocessed' }
+      // { value: 'chipped', label: 'Chipped' },
+      // { value: 'shredded', label: 'Shredded' }
     ],
     treeRemovals: [
       { value: 'unprocessed', label: 'Unprocessed' },
       { value: 'chipped', label: 'Chipped' },
-      { value: 'shredded', label: 'Shredded' }
+      { value: 'shredded', label: 'Shredded' },
+      { value: 'milled', label: 'Milled' },
+      { value: 'densified', label: 'Densified' }
     ]
   },
   pistachios: {
     hulls: [
       { value: 'unprocessed', label: 'Unprocessed' },
-      { value: 'milled', label: 'Milled' },
-      { value: 'densified', label: 'Densified' }
+      // { value: 'milled', label: 'Milled' },
+      // { value: 'densified', label: 'Densified' }
     ],
     shells: [
       { value: 'unprocessed', label: 'Unprocessed' },
-      { value: 'chipped', label: 'Chipped' },
-      { value: 'milled', label: 'Milled' },
-      { value: 'densified', label: 'Densified' }
+      // { value: 'chipped', label: 'Chipped' },
+      // { value: 'milled', label: 'Milled' },
+      // { value: 'densified', label: 'Densified' }
     ],
     woodyBiomass: [
       { value: 'unprocessed', label: 'Unprocessed' },
