@@ -707,7 +707,7 @@ export const InputContainer = (props: Props) => {
             style={{ borderTop: '1px solid gray' }}
           ></div>
           <h4 className='flex items-center justify-center font-bold mt-4 mb-2'>
-            Byproduct Quantity
+            Bioproduct Quantity
           </h4>
           <FormGroup>
             <InputGroup className='flex gap-x-2'>
