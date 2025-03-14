@@ -103,7 +103,7 @@ export const WarehouseLayer = () => {
           icon={warehouseIcon}
         >
           <Tooltip
-            permanent={index === 0 && true}
+            permanent={false}
             direction='top'
             offset={[0, -20]}
           >
