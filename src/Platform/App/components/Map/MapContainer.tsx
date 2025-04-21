@@ -911,17 +911,17 @@ export const MapContainerComponent = () => {
         />
         <ScaleControl />
         <LayersControl position='bottomleft'>
-          <BaseLayer checked name='Outdoors'>
-            <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
-          </BaseLayer>
           <BaseLayer name='Satellite'>
             <TileLayer
               attribution={ATTRIBUTION}
               url={MAP_BOX_TILES_SATELLITE}
             />
           </BaseLayer>
+          {/* <BaseLayer checked name='Outdoors'>
+            <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
+          </BaseLayer> */}
         </LayersControl>
-        <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
+        <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES_SATELLITE} />
         <NominatimSearchControl
           setFacilityCoordinates={setFacilityCoordinates}
         />
@@ -1065,10 +1065,10 @@ export const MapContainerComponent = () => {
             [facilityCoordinates.lat, facilityCoordinates.lng],
             [shippingCoordinates.lat, shippingCoordinates.lng]
           ]}
-          color='#808080'
+          color='#d7d7d9'
           dashArray='4 8'
           weight={2}
-          opacity={0.5}
+          opacity={0.7}
         />
         {externalLayers.length > 0 && externalLayers.includes('almondsCA') && (
           <WarehouseLayer />

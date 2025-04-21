@@ -22,7 +22,7 @@ export const CustomMarker = (props: Props) => {
       icon={props.icon === 'facility' ? faIndustry : faLocationDot}
       size='3x'
       style={
-        props.icon === 'facility' ? { color: '#474747' } : { color: '#c70216' }
+        props.icon === 'facility' ? { color: '#cde0f7' } : { color: '#fc9090' }
       }
     />
   );

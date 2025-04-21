@@ -39,7 +39,7 @@ export const PistachiosLegend = () => (
                     cx='15'
                     cy='15'
                     r='6'
-                    fill='#605C4E'
+                    fill='#2b86fc'
                     fillOpacity='0.7'
                     stroke='#3388ff'
                     strokeWidth='0'

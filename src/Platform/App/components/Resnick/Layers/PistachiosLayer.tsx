@@ -35,7 +35,7 @@ export const PistachiosLayer = ({ mapLayerHandler }: PistachiosLayerProps) => {
 
   // Style for the GeoJSON layer
   const geoJsonStyle = {
-    color: '#605C4E ',
+    color: '#2b86fc ',
     weight: 2,
     opacity: 1,
     fillOpacity: 0.7
