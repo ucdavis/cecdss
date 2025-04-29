@@ -144,9 +144,7 @@ const getShortUrlData = async (modelID: string) => {
   return originalUrl;
 };
 
-const ProcessingErrorModal = ({
-  close
-}: ProcessingErrorModalProps) => {
+const ProcessingErrorModal = ({ close }: ProcessingErrorModalProps) => {
   return (
     <ModalBackground>
       <FormContainer>
@@ -179,7 +177,8 @@ const ProcessingErrorModal = ({
             className='text-blue-190 underline'
           >
             here
-          </a> to get in touch. Thanks!
+          </a>{' '}
+          to get in touch. Thanks!
         </div>
         <div className='w-full flex items-center justify-center mt-6'>
           <div
@@ -293,7 +292,7 @@ export const MapContainerComponent = () => {
 
   const years: number[] = [];
   for (let index = 0; index < teaInputs.Financing.EconomicLife; index++) {
-    years.push(2016 + index); // Note that the hardcoded 2016 is the first year
+    years.push(2025 + index); // Note that the hardcoded 2025 is the first year
   }
 
   useEffect(() => {

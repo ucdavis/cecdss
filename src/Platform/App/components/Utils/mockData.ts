@@ -151,7 +151,7 @@ export const fakeallYearResults: AllYearsResults = {
 };
 
 export const fakeYearlyResult: YearlyResult = {
-  year: 2016,
+  year: 2025,
   clusterNumbers: [
     '151177',
     '139470',

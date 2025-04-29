@@ -28,7 +28,7 @@ export class InputModGPOClass implements InputModGPO {
   TaxCreditFrac = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   CarbonCredit = new CarbonCreditClass();
   IncludeCarbonCredit = false;
-  FirstYear = 2016;
+  FirstYear = 2025;
 }
 
 export class ElectricalFuelBaseYearInputModGPOClass

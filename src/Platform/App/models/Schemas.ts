@@ -165,7 +165,7 @@ export const teaGPOSchema: Schema<InputModGPO> = yup.object().shape({
   Taxes: taxesSchema,
   CarbonCredit: carbonCreditSchema,
   IncludeCarbonCredit: yup.boolean().required(),
-  FirstYear: yup.number().required().min(2016)
+  FirstYear: yup.number().required().min(2025)
 });
 
 export const teaCHPSchema: Schema<InputModCHP> = yup.object().shape({
@@ -180,7 +180,7 @@ export const teaCHPSchema: Schema<InputModCHP> = yup.object().shape({
   Taxes: taxesSchema,
   CarbonCredit: carbonCreditSchema,
   IncludeCarbonCredit: yup.boolean().required(),
-  FirstYear: yup.number().required().min(2016)
+  FirstYear: yup.number().required().min(2025)
 });
 
 export const teaGPSchema: Schema<InputModGP> = yup.object().shape({
@@ -195,5 +195,5 @@ export const teaGPSchema: Schema<InputModGP> = yup.object().shape({
   Taxes: taxesSchema,
   CarbonCredit: carbonCreditSchema,
   IncludeCarbonCredit: yup.boolean().required(),
-  FirstYear: yup.number().required().min(2016)
+  FirstYear: yup.number().required().min(2025)
 });
