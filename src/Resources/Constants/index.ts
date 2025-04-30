@@ -32,7 +32,8 @@ export const ATTRIBUTION =
     '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
 // USER GUIDE 
-export const USER_GUIDE_LINK = 'https://ucdavis.box.com/s/ptum3pvtfarexagd1nmgy479gej1otmz';
+export const USER_GUIDE_LINK =
+  'https://ucdavis.box.com/s/i0mjr3yzbqrrapcr3u4iuy3sfi7g26wf';
 
 
 // REGISTER 

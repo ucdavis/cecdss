@@ -6,6 +6,7 @@ import {
   ComposedChart,
   Legend,
   Line,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis
@@ -34,55 +35,57 @@ export const ResultsCharts = (props: Props) => {
     return (
       <>
         <h3>Total delivered feedstock cost</h3>
-        <ComposedChart
-          width={1000}
-          height={500}
-          data={data}
-          margin={{
-            top: 20,
-            bottom: 20
-          }}
-        >
-          <CartesianGrid stroke='#f5f5f5' />
-          <XAxis dataKey='name' />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Area
-            type='monotone'
-            dataKey='harvestCosts'
-            name='Harvest Cost'
-            stackId='1'
-            stroke='#8884d8'
-            fill='#8884d8'
-            unit='$/BDMT'
-          />
-          <Area
-            type='monotone'
-            dataKey='transportationCosts'
-            name='Transport Cost'
-            stackId='1'
-            stroke='#82ca9d'
-            fill='#82ca9d'
-            unit='$/BDMT'
-          />
-          <Area
-            type='monotone'
-            dataKey='moveInCosts'
-            name='Move-in Cost'
-            stackId='1'
-            stroke='#ffc658'
-            fill='#ffc658'
-            unit='$/BDMT'
-          />
-          <Line
-            type='monotone'
-            dataKey='total'
-            name='Feedstock Cost'
-            stroke='#ff7300'
-            unit='$/BDMT'
-          />
-        </ComposedChart>
+        <ResponsiveContainer width='100%' height={500}>
+          <ComposedChart
+            data={data}
+            margin={{
+              top: 20,
+              right: 20,
+              bottom: 20,
+              left: 5
+            }}
+          >
+            <CartesianGrid stroke='#f5f5f5' />
+            <XAxis dataKey='name' />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Area
+              type='monotone'
+              dataKey='harvestCosts'
+              name='Harvest Cost'
+              stackId='1'
+              stroke='#8884d8'
+              fill='#8884d8'
+              unit='$/BDMT'
+            />
+            <Area
+              type='monotone'
+              dataKey='transportationCosts'
+              name='Transport Cost'
+              stackId='1'
+              stroke='#82ca9d'
+              fill='#82ca9d'
+              unit='$/BDMT'
+            />
+            <Area
+              type='monotone'
+              dataKey='moveInCosts'
+              name='Move-in Cost'
+              stackId='1'
+              stroke='#ffc658'
+              fill='#ffc658'
+              unit='$/BDMT'
+            />
+            <Line
+              type='monotone'
+              dataKey='total'
+              name='Feedstock Cost'
+              stroke='#ff7300'
+              unit='$/BDMT'
+            />
+          </ComposedChart>
+        </ResponsiveContainer>
         {props.sensitivityResults && <></>}
       </>
     );
@@ -90,3 +93,4 @@ export const ResultsCharts = (props: Props) => {
 
   return <>{renderCostCharts()}</>;
 };
+
