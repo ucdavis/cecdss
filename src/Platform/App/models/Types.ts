@@ -86,66 +86,66 @@ export interface Treatment {
 export const Treatments: Treatment[] = [
   {
     id: 1,
-    name: 'RMI100',
+    name: 'Complete Removal (RMI-100)',
     description: 'Remove all live and dead trees.'
   },
   {
     id: 2,
-    name: 'SDI30',
+    name: 'Low Density Target (SDI-30)',
     description:
       'Stand Density Index (SDI) targeted treatment, aims to reduce the SDI of stands to a targeted portion of the maximum SDI for the stand. SDI30 targets a final SDI of 30% of the maximum SDI.'
   },
   {
     id: 3,
-    name: 'SDI55',
+    name: 'Medium Density Target (SDI-55)',
     description:
       'Stand Density Index (SDI) targeted treatment, aims to reduce the SDI of stands to a targeted portion of the maximum SDI for the stand. SDI55 targets a final SDI of 55% of the maximum SDI.'
   },
   {
     id: 4,
-    name: 'TFA_20',
+    name: 'Crown Thin Light (TFA-20)',
     description:
       '20% reduction in basal area, thinning from above (the largest trees are removed first)'
   },
   {
     id: 5,
-    name: 'TFA_40',
+    name: 'Crown Thin Moderate (TFA-40)',
     description:
       '40% reduction in basal area, thinning from above (the largest trees are removed first)'
   },
   {
     id: 6,
-    name: 'TFA_60',
+    name: 'Crown Thin Heavy (TFA-60)',
     description:
       '60% reduction in basal area, thinning from above (the largest trees are removed first)'
   },
   {
     id: 7,
-    name: 'TFA_80',
+    name: 'Crown Thin Severe (TFA-80)',
     description:
       '80% reduction in basal area, thinning from above (the largest trees are removed first)'
   },
   {
     id: 8,
-    name: 'TFB_20',
+    name: 'Understory Thin Light (TFB-20)',
     description:
       '20% reduction in basal area, thinning from below (the smallest trees are removed first)'
   },
   {
     id: 9,
-    name: 'TFB_40',
+    name: 'Understory Thin Moderate (TFB-40)',
     description:
       '40% reduction in basal area, thinning from below (the smallest trees are removed first)'
   },
   {
     id: 10,
-    name: 'TFB_60',
+    name: 'Understory Thin Heavy (TFB-60)',
     description:
       '60% reduction in basal area, thinning from below (the smallest trees are removed first)'
   },
   {
     id: 11,
-    name: 'TFB_80',
+    name: 'Understory Thin Severe (TFB-80)',
     description:
       '80% reduction in basal area, thinning from below (the smallest trees are removed first)'
   }
@@ -212,15 +212,7 @@ export interface ClusterResult {
   land_use: string;
   site_class: number;
   forest_type: string;
-  haz_class: number;
-  // total live biomass (including saw log)
-  // total dead biomass
-  // tons of biomass
-  // 2, 7, 15, 25, 35, 40
-  // vol of merch timber
-  // land_use
-  // slope, elevation, site_class, forest_type
-  // county
+  haz_class: number; 
 }
 
 export interface ClusterErrorResult {
