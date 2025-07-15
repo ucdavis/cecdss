@@ -2,7 +2,7 @@
   "routes": [
     {
       "route": "/*",
-      "rewrite": "/offline.html"
+      "rewrite": "/index.html"
     }
   ],
   "navigationFallback": {
