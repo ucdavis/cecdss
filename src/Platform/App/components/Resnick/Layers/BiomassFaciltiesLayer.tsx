@@ -201,7 +201,9 @@ export const BiomassFacilitiesLayer = () => {
       // borderRadius: '8px',
       overflow: 'hidden',
       // boxShadow: '0 2px 5px rgba(0,0,0,0.15)',
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      wordWrap: 'break-word' as const,
+      overflowWrap: 'break-word' as const
     },
     imageContainer: {
       width: '100%',
@@ -214,7 +216,8 @@ export const BiomassFacilitiesLayer = () => {
       objectFit: 'cover'
     },
     content: {
-      padding: '12px'
+      padding: '12px',
+      textAlign: 'center' as const
     },
     title: {
       fontSize: '16px',
@@ -318,22 +321,9 @@ export const BiomassFacilitiesLayer = () => {
             opacity={1}
           >
             <div style={cardTooltipStyle.card}>
-              {index === 0 && (
-                <div style={cardTooltipStyle.imageContainer}>
-                  <img
-                    src={minTurnLogo}
-                    alt={location.name}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
-                    }}
-                  />
-                </div>
-              )}
               <div style={cardTooltipStyle.content}>
                 <div style={cardTooltipStyle.title}>{location.name}</div>
-                <div style={cardTooltipStyle.detail}>
+                <div style={{ ...cardTooltipStyle.detail, wordBreak: 'break-word', whiteSpace: 'normal', overflowWrap: 'break-word' }}>
                   <span style={cardTooltipStyle.icon}>📍</span>{' '}
                   {location.location}
                 </div>
@@ -374,9 +364,9 @@ export const BiomassFacilitiesLayer = () => {
                       icon={readyMixIcon}
                     >
                       <Tooltip direction='top' offset={[0, -10]}>
-                        <div style={{ width: '200px' }}>
+                        <div style={{ width: '200px', textAlign: 'center', wordWrap: 'break-word', overflowWrap: 'break-word' }}>
                           <div style={{ fontWeight: 700 }}>{rm.nearbyCementCompanies.name}</div>
-                          <div style={{ fontSize: '13px', color: '#666' }}>{rm.nearbyCementCompanies.location}</div>
+                          <div style={{ fontSize: '13px', color: '#666', wordBreak: 'break-word', whiteSpace: 'normal', overflowWrap: 'break-word' }}>{rm.nearbyCementCompanies.location}</div>
                           <div style={{ fontSize: '12px', color: '#888', marginTop: '4px' }}>Distance: {rm.distance} miles</div>
                         </div>
                       </Tooltip>
