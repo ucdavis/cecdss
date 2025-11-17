@@ -12,6 +12,10 @@ interface ExternalLayerContextType {
   setExternalLayers: (layers: string[]) => void;
   setMapLayerLoading: (isLoading: boolean) => void;
   mapLayerLoading: boolean;
+  selectedFacilityIndex: number | null;
+  setSelectedFacilityIndex: (index: number | null) => void;
+  hoveredFacilityIndex: number | null;
+  setHoveredFacilityIndex: (index: number | null) => void;
 }
 
 const ExternalLayerContext = createContext<ExternalLayerContextType | null>(
@@ -27,15 +31,21 @@ export const ExternalLayerProvider: React.FC<ExternalLayerProviderProps> = ({
 }) => {
   const [externalLayers, setExternalLayers] = useState<string[]>(['almondsCA', 'pistachiosCA', 'pomegranatesCA']);
   const [mapLayerLoading, setMapLayerLoading] = useState<boolean>(false);
+  const [selectedFacilityIndex, setSelectedFacilityIndex] = useState<number | null>(null);
+  const [hoveredFacilityIndex, setHoveredFacilityIndex] = useState<number | null>(null);
 
   const value = useMemo<ExternalLayerContextType>(
     () => ({
       externalLayers,
       setExternalLayers,
       setMapLayerLoading,
-      mapLayerLoading
+      mapLayerLoading,
+      selectedFacilityIndex,
+      setSelectedFacilityIndex,
+      hoveredFacilityIndex,
+      setHoveredFacilityIndex
     }),
-    [externalLayers, setExternalLayers, setMapLayerLoading]
+    [externalLayers, mapLayerLoading, selectedFacilityIndex, hoveredFacilityIndex]
   );
 
   return (

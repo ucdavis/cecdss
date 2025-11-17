@@ -1,6 +1,8 @@
 import { ComponentType, ReactNode } from 'react';
 import { SaveModelProvider } from "./saveModel";
-import { ExternalLayerProvider } from './ExternalLayerContext';
+import { ExternalLayerProvider, useExternalLayerContext } from './ExternalLayerContext';
+
+export { useExternalLayerContext };
 
 type ProviderProps = { children: ReactNode };
 type ProviderWithProps = [ComponentType<ProviderProps>, Record<string, unknown>?];

@@ -18,6 +18,9 @@ import { TechnoeconomicInputs } from './Technoeconomic/TechnoeconomicInputs';
 import { TransportInputsContainer } from './Transportation/TransportationInputs';
 import { useState } from 'react';
 import { useExternalLayerContext } from '../../../Context/ExternalLayerContext';
+import { BIOMASS_FACILITIES, BiomassFaciltiesData, ReadyMixCompanies } from '../Resnick/Layers/BiomassFaciltiesLayer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIndustry, faWarehouse } from '@fortawesome/free-solid-svg-icons';
 
 interface ByproductProps {
   props: Props;
@@ -503,9 +506,11 @@ const PomegranateByproduct = ({ props }: ByproductProps) => {
 
 export const InputContainer = (props: Props) => {
   const { updateLinkCopied } = useSaveModel();
-  const { externalLayers, setExternalLayers, setMapLayerLoading } =
+  const { externalLayers, setExternalLayers, setMapLayerLoading, selectedFacilityIndex, setSelectedFacilityIndex, hoveredFacilityIndex, setHoveredFacilityIndex } =
       useExternalLayerContext();
   const [selectedCrops, setSelectedCrops] = useState<string[]>(externalLayers);
+
+  const selectedFacility = selectedFacilityIndex !== null ? BIOMASS_FACILITIES[selectedFacilityIndex] : null;
 
 
   const handleCropChange = (cropValue: string) => {
@@ -551,7 +556,7 @@ export const InputContainer = (props: Props) => {
           );
         })}
       </ul>
-      <Button
+      {/* <Button
         className='btn-block'
         color='primary'
         onClick={handleClick}
@@ -567,213 +572,102 @@ export const InputContainer = (props: Props) => {
         ) : (
           <>Run Model</>
         )}
-      </Button>
+      </Button> */}
       <br />
     </div>
   );
 
   return (
     <>
-      <div className='cardheader flex flex-col justify-between items-start'>
-        <div className='text-white text-12p mb-1'>Resnick Proposal App</div>
-        <div className='flex items-center justify-between gap-x-2 w-full mt-2'>
-          <div className='text-white text-24p'>Select Inputs</div>
-          <div className='flex items-center justify-center gap-x-2'>
-            {props.loading && (
-              <Spinner size='sm' color='light' className='mr-2'>
-                {''}
-              </Spinner>
-            )}
-            <HomeButton
-              loading={props.loading}
-              tooltipText='Go To Home'
-              tooltipTarget='goToHomeButton'
-            />
-          </div>
-        </div>
+      <div className='cardheader flex flex-col justify-between items-center'>
+        <div className='text-white text-18p mb-1'>Demo</div>
       </div>
-      <div className='cardcontents flex items-center flex-col justify-around w-full'>
-        <h4 className='font-bold mb-2'>Coordinates</h4>
-        <Form className='w-full'>
-          <FormGroup>
-            <InputGroup>
-              <InputGroupText>lat</InputGroupText>
-              <Input
-                type='number'
-                value={props.facilityCoordinates.lat.toString()}
-                onChange={e =>
-                  props.setFacilityCoordinates({
-                    ...props.facilityCoordinates,
-                    lat: parseFloat(e.target.value) || 0
-                  })
-                }
-                disabled={props.disabled}
-              />
-            </InputGroup>
-            <InputGroup>
-              <InputGroupText>lng</InputGroupText>
-              <Input
-                type='number'
-                value={props.facilityCoordinates.lng.toString()}
-                onChange={e =>
-                  props.setFacilityCoordinates({
-                    ...props.facilityCoordinates,
-                    lng: parseFloat(e.target.value) || 0
-                  })
-                }
-                disabled={props.disabled}
-              />
-            </InputGroup>
-          </FormGroup>
-          <div
-            className='font-bold mb-2 w-full text-center'
-            style={{ margin: '1em 0 2em 0' }}
-          >
-            Types of Crop
-          </div>
-          <div className='flex items-center justify-center gap-x-4'>
-            <FormGroup inline check>
-              <Input
-                type='checkbox'
-                value={'almondsCA'}
-                checked={selectedCrops.includes('almondsCA')}
-                onChange={() => handleCropChange('almondsCA')}
-              />
-              <Label check>Almonds</Label>
-            </FormGroup>
-            <FormGroup inline check>
-              <Input
-                type='checkbox'
-                value={'pistachiosCA'}
-                checked={selectedCrops.includes('pistachiosCA')}
-                onChange={() => handleCropChange('pistachiosCA')}
-              />
-              <Label check>Pistachios</Label>
-            </FormGroup>
-          </div>
-          <div className='flex items-center justify-center gap-x-4 mt-2'>
-            <FormGroup inline check>
-              <Input
-                type='checkbox'
-                value={'pomegranatesCA'}
-                checked={selectedCrops.includes('pomegranatesCA')}
-                onChange={() => handleCropChange('pomegranatesCA')}
-              />
-              <Label check>Pomegranates</Label>
-            </FormGroup>
-            {/* <FormGroup inline check>
-              <Input
-                type='checkbox'
-                value={'grapesCA'}
-                checked={selectedCrops.includes('grapesCA')}
-                onChange={() => handleCropChange('grapesCA')}
-              />
-              <Label check>Grapes</Label>
-            </FormGroup> */}
-          </div>
-          {selectedCrops.includes('almondsCA') && (
-            <div className='flex flex-col items-center justify-center w-full mt-4 mb-2'>
-              <div
-                className='font-bold text-16p text-black mb-2 py-2 w-full text-center'
-                style={{ borderTop: '1px solid gray' }}
-              >
-                Almond Byproduct Quantity
-              </div>
-              <AlmondByproduct props={props} />
+      <div className='cardcontents flex items-center flex-col justify-start w-full' style={{ maxHeight: '80vh', overflowY: 'auto' }}>
+        {!selectedFacility ? (
+          <>
+            <h4 className='font-bold mb-3 mt-2 text-gray-700'>
+              <FontAwesomeIcon icon={faWarehouse} className='mr-2 text-green-600' />
+              <span>Biomass Facilities</span>
+            </h4>
+            <div className='flex flex-col w-full gap-y-2'>
+              {BIOMASS_FACILITIES.map((facility, index) => (
+                <div
+                  key={index}
+                  className='p-3 border rounded-xl cursor-pointer bg-white transition-colors'
+                  style={{ 
+                    border: '1px solid #ddd',
+                  }}
+                  onClick={() => setSelectedFacilityIndex(index)}
+                  onMouseEnter={() => setHoveredFacilityIndex(index)}
+                  onMouseLeave={() => setHoveredFacilityIndex(null)}
+                >
+                  <div className='font-bold text-base mb-1 text-gray-700'>{facility.name}</div>
+                  <div className='text-sm text-gray-600'>
+                    📍 {facility.location}
+                  </div>
+                  <div className='text-xs text-gray-500 mt-1'>
+                    {facility.nearbyCementCompanies?.length || 0} ready-mix {facility.nearbyCementCompanies?.length === 1 ? 'company' : 'companies'}
+                  </div>
+                </div>
+              ))}
             </div>
-          )}
-          {selectedCrops.includes('pistachiosCA') && (
-            <div className='flex flex-col items-center justify-center w-full mt-4 mb-2'>
-              <div
-                className='font-bold text-16p text-black mb-2 py-2 w-full text-center'
-                style={{ borderTop: '1px solid gray' }}
+          </>
+        ) : (
+          <>
+            <div className='w-full mb-3'>
+              <Button
+                size='sm'
+                color='secondary'
+                onClick={() => setSelectedFacilityIndex(null)}
+                className='mb-2 text-gray-700'
               >
-                Pistachio Byproduct Quantity
-              </div>
-              <PistachioByproduct props={props} />
+                ← Back to list
+              </Button>
             </div>
-          )}
-          {selectedCrops.includes('pomegranatesCA') && (
-            <div className='flex flex-col items-center justify-center w-full mt-4 mb-2'>
-              <div
-                className='font-bold text-16p text-black mb-2 py-2 w-full text-center'
-                style={{ borderTop: '1px solid gray' }}
-              >
-                Pomegranate Byproduct Quantity
+            
+            <h4 className='font-bold mb-2 text-gray-700'>Selected Facility</h4>
+            <div className='w-full p-3 border rounded mb-4' style={{ border: '1px solid #ddd', backgroundColor: 'white' }}>
+              <div className='font-bold text-lg mb-2 text-gray-700'>{selectedFacility.name}</div>
+              <div className='text-sm text-gray-700 mb-1'>
+                <strong>Location:</strong> {selectedFacility.location}
               </div>
-              <PomegranateByproduct props={props} />
+              <div className='text-sm text-gray-700'>
+                <strong>Coordinates:</strong> {selectedFacility.lat.toFixed(6)}, {selectedFacility.lng.toFixed(6)}
+              </div>
             </div>
-          )}
-          <div
-            className='mb-2 mt-4 w-full'
-            style={{ borderTop: '1px solid gray' }}
-          ></div>
-          <h4 className='flex items-center justify-center font-bold mt-4 mb-2'>
-            Bioproduct Quantity
-          </h4>
-          <FormGroup>
-            <InputGroup className='flex gap-x-2'>
-              <Input
-                type='number'
-                value={12450}
-                min={0}
-                onChange={e => console.log(e.target.value)}
-                disabled={props.disabled}
-                className='rounded'
-              />
-              <Input
-                type='select'
-                // value={inputs[category].unit}
-                // onChange={e =>
-                //   handleInputChange('almonds', 'unit', e.target.value)
-                // }
-                disabled={props.disabled}
-                className='rounded border-1p border-solid border-gray-300'
-              >
-                {UNITS.map(unit => (
-                  <option key={unit.value} value={unit.value}>
-                    {unit.label}
-                  </option>
+
+            <h4 className='font-bold mb-2 text-gray-700'>
+              <FontAwesomeIcon icon={faIndustry} className='mr-2 text-red-600' />
+              <span>Nearby Ready-Mix Companies</span>
+            </h4>
+            {selectedFacility.nearbyCementCompanies && selectedFacility.nearbyCementCompanies.length > 0 ? (
+              <div className='flex flex-col w-full gap-y-2'>
+                {selectedFacility.nearbyCementCompanies.map((company, idx) => (
+                  <div
+                    key={idx}
+                    className='p-3 border rounded'
+                    style={{ 
+                      border: '1px solid #ddd',
+                      backgroundColor: '#f8f9fa'
+                    }}
+                  >
+                    <div className='font-bold text-base mb-1 text-gray-700'>{company.nearbyCementCompanies.name}</div>
+                    <div className='text-sm text-gray-700 mb-1'>
+                      📍 {company.nearbyCementCompanies.location}
+                    </div>
+                    <div className='text-xs text-gray-600'>
+                      Distance: {company.distance} miles
+                    </div>
+                  </div>
                 ))}
-              </Input>
-            </InputGroup>
-          </FormGroup>
-          <h4 className='flex items-center justify-center font-bold mt-4 mb-2'>
-            Shipping Coordinates
-          </h4>
-          <FormGroup>
-            <InputGroup>
-              <InputGroupText>lat</InputGroupText>
-              <Input
-                type='number'
-                value={props.facilityCoordinates.lat.toString()}
-                onChange={e =>
-                  props.setFacilityCoordinates({
-                    ...props.facilityCoordinates,
-                    lat: parseFloat(e.target.value) || 0
-                  })
-                }
-                disabled={props.disabled}
-              />
-            </InputGroup>
-            <InputGroup>
-              <InputGroupText>lng</InputGroupText>
-              <Input
-                type='number'
-                value={props.facilityCoordinates.lng.toString()}
-                onChange={e =>
-                  props.setFacilityCoordinates({
-                    ...props.facilityCoordinates,
-                    lng: parseFloat(e.target.value) || 0
-                  })
-                }
-                disabled={props.disabled}
-              />
-            </InputGroup>
-          </FormGroup>
-        </Form>
+              </div>
+            ) : (
+              <div className='text-sm text-gray-500'>No nearby ready-mix companies</div>
+            )}
+          </>
+        )}
       </div>
-      {button} {/* Uncomment the button */}
+      {button}
     </>
   );
 };

@@ -9,7 +9,6 @@ import 'esri-leaflet-renderers';
 import { Feature, FeatureCollection } from 'geojson';
 import { LatLngBoundsExpression } from 'leaflet';
 import { createRef, useEffect, useState } from 'react';
-import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet';
 import ReactGA from 'react-ga4';
 import {
   LayersControl,
@@ -57,33 +56,21 @@ import styled from 'styled-components';
 import {
   ATTRIBUTION,
   DEFAULT_TRANSMISSION_VAL,
-  MAP_BOX_TILES,
   MAP_BOX_TILES_SATELLITE
 } from '../../../../Resources/Constants';
 import Loader from '../../../../Shared/Loader';
+import { useExternalLayerContext } from '../../../Context/ExternalLayerContext';
 import { trackEvent } from '../../../Utils/gaAnalytics';
 import { FormContainer, ModalBackground } from '../Form/UserDetails';
 import { InputContainer } from '../Inputs/InputContainer';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
+import { BiomassFacilitiesLayer } from '../Resnick/Layers/BiomassFaciltiesLayer';
 import { ResultsContainer } from '../Results/ResultsContainer';
 import { serviceUrl } from '../Utils/config';
 import { convertGeoJSON } from '../Utils/util';
-import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
-import { ClusterTransportationRoutesLayer } from './ClusterTransportationRoutesLayer';
 import { CustomMarker } from './CustomMarker';
-import { ErrorGeoJsonLayers } from './ErrorGeoJsonLayers';
-import { ExternalLayerLegend } from './ExternalLayerLegend';
-import { ExternalLayerSelection } from './ExternalLayerSelection';
-import { GeoJsonLayers } from './GeoJsonLayers';
-import { SubstationLayer } from './Layers/SubstationLayer';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
-import { AlmondsLayer } from '../Resnick/Layers/AlmondsLayer';
-import { GrapesLayer } from '../Resnick/Layers/GrapesLayer';
-import { PistachiosLayer } from '../Resnick/Layers/PistachiosLayer';
-import { PomegranatesLayer } from '../Resnick/Layers/PomegranatesLayer';
-import { useExternalLayerContext } from '../../../Context/ExternalLayerContext';
-import { WarehouseLayer } from '../Resnick/Layers/WarehouseLayer';
 
 export interface RequestParamsAllYearsNoTransmission {
   facilityLat: number;
@@ -275,15 +262,15 @@ export const MapContainerComponent = () => {
   const [showTransportationGeoJson, toggleTransportationGeoJson] =
     useState<boolean>(false);
 
-  const [zoom, setZoom] = useState<number>(7);
+  const [zoom, setZoom] = useState<number>(6);
   const [center, setCenter] = useState<MapCoordinates>({
     lat: 37.15439641742907,
     lng: -120.47592259245009
   });
   
   const [bounds, setBounds] = useState<LatLngBoundsExpression>([
-    [40.1, -122.5],
-    [39.2, -120]
+    [40, -122.5],
+    [35, -118]
   ]);
   const [inputErrors, setInputError] = useState<string[]>([]);
   const [shippingCoordinates, setShippingCoordinates] =
@@ -835,10 +822,10 @@ export const MapContainerComponent = () => {
           </Button>
         </div>
       )}
-      <div className='layers-container'>
+      {/* <div className='layers-container'>
         <ExternalLayerSelection />
         <ExternalLayerLegend layers={externalLayers} />
-      </div>
+      </div> */}
       <div
         className={expandedResults ? 'expanded-results' : 'sidebar'}
         id='sidebar'
@@ -903,12 +890,7 @@ export const MapContainerComponent = () => {
         center={center}
         style={{ height: '100%', width: '100%' }}
       >
-        <MapClickHandler
-          setFacilityCoordinates={setFacilityCoordinates}
-          setShippingCoordinates={setShippingCoordinates}
-          loading={loading}
-          yearlyResults={yearlyResults}
-        />
+        {/* Map clicking disabled: facility/shipping coordinates are not set by map clicks anymore */}
         <ScaleControl />
         <LayersControl position='bottomleft'>
           <BaseLayer name='Satellite'>
@@ -926,138 +908,7 @@ export const MapContainerComponent = () => {
           setFacilityCoordinates={setFacilityCoordinates}
         />
         <PrintControl />
-        {externalLayers.includes('transmission') && (
-          <FeatureLayer
-            url={
-              'https://services3.arcgis.com/bWPjFyq029ChCGur/arcgis/rest/services/Transmission_Line/FeatureServer/2'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('substation') && (
-          <SubstationLayer mapLayerHandler={mapLayerHandler} />
-        )}
-        {externalLayers.includes('plant') && (
-          <FeatureLayer
-            url={
-              'https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Power_Plant/FeatureServer/0'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('county') && (
-          <FeatureLayer
-            url={
-              'https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/California_County_Boundaries/FeatureServer/0'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('urbanCities') && (
-          <FeatureLayer
-            url={
-              'https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Urban_Areas/FeatureServer/3'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('airDistricts') && (
-          <FeatureLayer
-            url={
-              'https://services.arcgis.com/jDGuO8tYggdCCnUJ/ArcGIS/rest/services/California_Air_Districts/FeatureServer/0'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('ownership') && (
-          <DynamicMapLayer
-            url={
-              'https://egis.fire.ca.gov/arcgis/rest/services/FRAP/ownership/MapServer'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('fire') && (
-          <FeatureLayer
-            url={
-              'https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/ArcGIS/rest/services/FHSZ_SRA_LRA_Combined/FeatureServer/0'
-            }
-            opacity={0.7}
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('dataBoundary') && (
-          <FeatureLayer
-            url={
-              'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/ArcGIS/rest/services/FL_Sierra/FeatureServer/0'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('feedstockBiomassCompetition') && (
-          <FeatureLayer
-            url={
-              'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/arcgis/rest/services/Task_5_Basic_Feedstock_Competition/FeatureServer/1'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('feedstockWoodProcessingCompetition') && (
-          <FeatureLayer
-            url={
-              'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/arcgis/rest/services/Task_5_Basic_Feedstock_Competition/FeatureServer/0'
-            }
-          />
-        )}
-        {externalLayers.includes('almondsCA') && (
-          <AlmondsLayer mapLayerHandler={mapLayerHandler} />
-        )}
-        {externalLayers.includes('pomegranatesCA') && (
-          <PomegranatesLayer mapLayerHandler={mapLayerHandler} />
-        )}
-        {externalLayers.includes('pistachiosCA') && (
-          <PistachiosLayer mapLayerHandler={mapLayerHandler} />
-        )}
-        {externalLayers.includes('grapesCA') && (
-          <GrapesLayer mapLayerHandler={mapLayerHandler} />
-        )}
-        {yearlyResults.length > 0 && (
-          <>
-            {showMoveInGeoJson && (
-              <ClusterTransportationMoveInLayer
-                facilityCoordinates={facilityCoordinates}
-                years={years}
-                yearlyResults={yearlyResults}
-                selectedYearIndex={selectedYearIndex}
-              />
-            )}
-            {showGeoJson && (
-              <GeoJsonLayers
-                years={years}
-                yearlyGeoJson={geoJsonShapeResults}
-                selectedYearIndex={selectedYearIndex}
-              />
-            )}
-
-            {showTransportationGeoJson && (
-              <ClusterTransportationRoutesLayer
-                facilityCoordinates={facilityCoordinates}
-                years={years}
-                yearlyResults={yearlyResults}
-                selectedYearIndex={selectedYearIndex}
-              />
-            )}
-            {showErrorGeoJson && (
-              <ErrorGeoJsonLayers
-                years={years}
-                yearlyGeoJson={errorGeoJsonShapeResults}
-                selectedYearIndex={selectedYearIndex}
-              />
-            )}
-          </>
-        )}
-
-        <CustomMarker icon='facility' position={facilityCoordinates} />
+        {/* <CustomMarker icon='facility' position={facilityCoordinates} />
         <CustomMarker icon='location' position={shippingCoordinates} />
 
         <Polyline
@@ -1069,10 +920,8 @@ export const MapContainerComponent = () => {
           dashArray='4 8'
           weight={2}
           opacity={0.7}
-        />
-        {externalLayers.length > 0 && externalLayers.includes('almondsCA') && (
-          <WarehouseLayer />
-        )}
+        /> */}
+        <BiomassFacilitiesLayer />
       </MapContainer>
     </div>
   );

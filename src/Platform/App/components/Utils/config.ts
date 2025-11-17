@@ -1,4 +1,4 @@
-let LOCAL_DEVELOPMENT_MODE = false
+let LOCAL_DEVELOPMENT_MODE = true
 
 export const serviceUrl = LOCAL_DEVELOPMENT_MODE
   ? 'http://localhost:3000/'
