@@ -859,7 +859,6 @@ return (
       </div>
     )}
     
-    {/* External Layers Control */}
     {analysisMode === 'detailed' && (
       <div className='layers-container'>
       <ExternalLayerSelection onChange={handleExternalLayerChange} />
@@ -867,9 +866,8 @@ return (
     </div>
     )}
     
-    {/* LEFT PANEL - Explore Mode Only */}
     {analysisMode === 'explore' && (
-      <div className="absolute left-[4%] top-3 w-80 h-auto z-[1000] bg-white shadow-lg overflow-y-auto rounded-xl">
+      <div className="absolute left-[4%] top-3 w-64 h-auto z-[1000] bg-white shadow-lg overflow-y-auto rounded-xl">
         <ExplorePanel
           facilityCoordinates={facilityCoordinates}
           setFacilityCoordinates={setFacilityCoordinates}

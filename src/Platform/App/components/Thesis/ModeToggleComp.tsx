@@ -13,7 +13,7 @@ export const ModeToggle: React.FC<ModeToggleProps> = ({ mode, setMode }) => {
         className={`
           px-6 py-2 rounded-md font-medium text-sm border-none cursor-pointer transition-all duration-200
           ${mode === 'detailed' 
-            ? 'bg-blue-600 text-white' 
+            ? 'bg-brand text-white' 
             : 'bg-white text-gray-600 hover:bg-gray-50'
           }
         `}
@@ -28,7 +28,7 @@ export const ModeToggle: React.FC<ModeToggleProps> = ({ mode, setMode }) => {
         className={`
           px-6 py-2 rounded-md font-medium text-sm border-none cursor-pointer transition-all duration-200
           ${mode === 'explore' 
-            ? 'bg-blue-600 text-white' 
+            ? 'bg-brand text-white' 
             : 'bg-white text-gray-600 hover:bg-gray-50'
           }
         `}

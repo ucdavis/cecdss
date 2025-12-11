@@ -24,10 +24,11 @@ export const ExplorePanel: React.FC<ExplorePanelProps> = ({
 }) => {
   const [county, setCounty] = useState<string>('');
   const [state, setState] = useState<string>('');
+  const [locationLoading, setLocationLoading] = useState<boolean>(false);
 
-  // Reverse geocode to get county and state
   useEffect(() => {
     if (facilityCoordinates.lat !== 0 && facilityCoordinates.lng !== 0) {
+      setLocationLoading(true)
       fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${facilityCoordinates.lat}&lon=${facilityCoordinates.lng}`)
         .then(res => res.json())
         .then(data => {
@@ -36,10 +37,12 @@ export const ExplorePanel: React.FC<ExplorePanelProps> = ({
             setState(data.address.state || 'California');
           }
         })
-        .catch(err => console.error('Geocoding error:', err));
+        .catch(err => console.error('Geocoding error:', err))
+        .finally(() => setLocationLoading(false));
     } else {
       setCounty('');
       setState('');
+      setLocationLoading(false);
     }
   }, [facilityCoordinates]);
 
@@ -66,9 +69,9 @@ export const ExplorePanel: React.FC<ExplorePanelProps> = ({
 
   return (
     <div className="flex flex-col bg-white">
-      <div className="p-4 border-b bg-white">
-        <h3 className="text-base font-bold text-gray-900 mb-3">Facility Location</h3>
-        <div className="space-y-2">
+      <div className="px-4 py-2 border-b bg-white">
+        <h3 className="text-base font-bold text-gray-900 mb-3">Select Location</h3>
+        <div className="space-y-3 mb-1">
           <div>
             <label className="block text-xs text-gray-700 mb-1">
               Latitude
@@ -95,24 +98,15 @@ export const ExplorePanel: React.FC<ExplorePanelProps> = ({
             />
           </div>
 
-          {/* County and State Display */}
-          {county && (
             <div className="bg-blue-50 rounded p-2 space-y-1">
               <div className="flex items-center gap-2 text-xs">
-                <span>📍</span>
-                <span className="text-gray-700">County: <strong>{county}</strong></span>
-              </div>
-              <div className="flex items-center gap-2 text-xs">
-                <span>🗺️</span>
-                <span className="text-gray-700">State: <strong>{state}</strong></span>
+                <span className="text-gray-700">County: <strong>{locationLoading ? 'Loading...' : county}</strong></span>
               </div>
             </div>
-          )}
         </div>
       </div>
 
-      {/* Search Radius */}
-      <div className="px-4 border-b bg-white">
+      <div className="py-2 px-4 border-b bg-white">
         <h3 className="text-sm font-bold text-gray-900 mb-2">Search Radius: {radius} km</h3>
 
         <input
@@ -131,7 +125,6 @@ export const ExplorePanel: React.FC<ExplorePanelProps> = ({
         </div>
       </div>
 
-      {/* Action Buttons */}
       <div className="p-4 space-y-2 border-b bg-white text-gray-900">
         <button
           onClick={onSearch}
@@ -140,11 +133,11 @@ export const ExplorePanel: React.FC<ExplorePanelProps> = ({
             w-full px-4 py-2 rounded font-medium text-sm transition-all
             ${loading || facilityCoordinates.lat === 0
               ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : 'bg-blue-600 text-white hover:bg-blue-700'
+              : 'bg-brand text-white hover:bg-blue-700'
             }
           `}
         >
-          {loading ? 'Searching...' : 'Search Clusters'}
+          {loading ? 'Analyzing...' : 'Analyze Location'}
         </button>
 
         {facilityCoordinates.lat !== 0 && (
@@ -152,7 +145,7 @@ export const ExplorePanel: React.FC<ExplorePanelProps> = ({
             onClick={handleClearFacility}
             className="w-full px-4 py-2 bg-red-500 text-white rounded font-medium text-sm hover:bg-red-600 transition-colors"
           >
-            Clear Facility Location
+            Clear Location
           </button>
         )}
       </div>
