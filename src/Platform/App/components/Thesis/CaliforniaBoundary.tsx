@@ -24,7 +24,7 @@ export const CaliforniaBoundary: React.FC<CaliforniaBoundaryProps> = ({ setGeome
     <GeoJSON
       data={californiaGeoJson}
       style={{
-        color: '#ef4444',
+        color: '#108508ff',
         weight: 2,
         fillOpacity: 0,
         dashArray: '8, 4'

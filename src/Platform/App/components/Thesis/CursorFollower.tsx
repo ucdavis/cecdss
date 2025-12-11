@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Circle, Marker, useMapEvents } from 'react-leaflet';
+import { Circle, Marker, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import * as turf from '@turf/turf';
 
@@ -39,6 +39,7 @@ export const CursorFollower: React.FC<CursorFollowerProps> = ({
   radius
 }) => {
   const [cursorPos, setCursorPos] = useState<[number, number] | null>(null);
+  const map = useMap();
 
   // Validate if point is in California
   const isInCalifornia = (lat: number, lng: number) => {
@@ -85,15 +86,17 @@ export const CursorFollower: React.FC<CursorFollowerProps> = ({
     },
     
     click(e) {
-      // ONLY handle clicks in explore mode
       if (mode !== 'explore') return;
       
       const { lat, lng } = e.latlng;
       
-      // Validate CA boundary
       if (isInCalifornia(lat, lng)) {
         setFacilityCoordinates({ lat, lng });
         setCursorPos(null);
+        
+        map.flyTo([lat, lng], 10, {
+          duration: 1 
+        });
       } else {
         alert('Please select a location within California boundaries');
       }

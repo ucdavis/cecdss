@@ -80,7 +80,7 @@ import { GeoJsonLayers } from './GeoJsonLayers';
 import { SubstationLayer } from './Layers/SubstationLayer';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
-import { ModeToggle } from '../Thesis/ModeToggle';
+import { ModeToggle } from '../Thesis/ModeToggleComp';
 import { ExplorePanel } from '../Thesis/ExplorePanel';
 import { ChatInterface } from '../Thesis/ChatInterface';
 import { CaliforniaBoundary } from '../Thesis/CaliforniaBoundary';
@@ -241,7 +241,7 @@ export const MapContainerComponent = () => {
   const [showTransportationGeoJson, toggleTransportationGeoJson] =
     useState<boolean>(false);
 
-  const [zoom, setZoom] = useState<number>(9);
+  const [zoom, setZoom] = useState<number>(8);
   const [center, setCenter] = useState<MapCoordinates>({
     lat: 37.87439641742907,
     lng: -120.47592259245009
@@ -387,6 +387,16 @@ export const MapContainerComponent = () => {
     console.error('Error fetching clusters:', error);
   } finally {
     setExploreLoading(false);
+  }
+};
+
+const handleClearFacility = () => {
+  if (mapRef.current) {
+    mapRef.current.flyTo(
+      center, 
+      zoom,               
+      { duration: 1 }  
+    );
   }
 };
 
@@ -868,6 +878,7 @@ return (
           selectedClusters={selectedClusters}
           onSearch={handleExploreSearch}
           loading={exploreLoading}
+          onClearFacility={handleClearFacility}  
         />
       </div>
     )}
@@ -973,11 +984,10 @@ return (
       <CaliforniaBoundary setGeometry={setCaliforniaGeometry} />
     
       
-      {/* Map Controls */}
       <ScaleControl />
       <LayersControl position='bottomleft'>
         <BaseLayer checked name='Outdoors'>
-          <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
+          <TileLayer attribution={analysisMode === 'detailed' ? ATTRIBUTION : MAP_BOX_TILES_QUICK_ATTRIBUTION} url={analysisMode === 'detailed' ? MAP_BOX_TILES : MAP_BOX_TILES_QUICK} />
         </BaseLayer>
         <BaseLayer name='Satellite'>
           <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES_SATELLITE} />

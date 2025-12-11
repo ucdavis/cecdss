@@ -9,6 +9,7 @@ interface ExplorePanelProps {
   selectedClusters: any[];
   onSearch: () => void;
   loading: boolean;
+  onClearFacility?: () => void 
 }
 
 export const ExplorePanel: React.FC<ExplorePanelProps> = ({
@@ -18,7 +19,8 @@ export const ExplorePanel: React.FC<ExplorePanelProps> = ({
   setRadius,
   selectedClusters,
   onSearch,
-  loading
+  loading,
+  onClearFacility
 }) => {
   const [county, setCounty] = useState<string>('');
   const [state, setState] = useState<string>('');
@@ -56,6 +58,7 @@ export const ExplorePanel: React.FC<ExplorePanelProps> = ({
   };
 
   const handleClearFacility = () => {
+    onClearFacility?.()
     setFacilityCoordinates({ lat: 0, lng: 0 });
     setCounty('');
     setState('');
