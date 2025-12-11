@@ -9,7 +9,6 @@ import 'esri-leaflet-renderers';
 import { Feature, FeatureCollection } from 'geojson';
 import { LatLngBoundsExpression } from 'leaflet';
 import { createRef, useEffect, useState } from 'react';
-import { GeoJSON } from 'react-leaflet';
 import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet';
 import ReactGA from 'react-ga4';
 import {
@@ -68,6 +67,11 @@ import { FormContainer, ModalBackground } from '../Form/UserDetails';
 import { InputContainer } from '../Inputs/InputContainer';
 import { checkFrcsValidity, checkTeaValidity } from '../Inputs/validation';
 import { ResultsContainer } from '../Results/ResultsContainer';
+import { CaliforniaBoundary } from '../Thesis/CaliforniaBoundary';
+import { ChatInterface } from '../Thesis/ChatInterface';
+import { CursorFollower } from '../Thesis/CursorFollower';
+import { ExplorePanel } from '../Thesis/ExplorePanel';
+import { ModeToggle } from '../Thesis/ModeToggleComp';
 import { serviceUrl } from '../Utils/config';
 import { convertGeoJSON } from '../Utils/util';
 import { ClusterTransportationMoveInLayer } from './ClusterTransportationMoveInLayer';
@@ -80,12 +84,6 @@ import { GeoJsonLayers } from './GeoJsonLayers';
 import { SubstationLayer } from './Layers/SubstationLayer';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
-import { ModeToggle } from '../Thesis/ModeToggleComp';
-import { ExplorePanel } from '../Thesis/ExplorePanel';
-import { ChatInterface } from '../Thesis/ChatInterface';
-import { CaliforniaBoundary } from '../Thesis/CaliforniaBoundary';
-import { CaliforniaOverlay } from '../Thesis/CaliforniaOverlay';
-import { CursorFollower } from '../Thesis/CursorFollower';
 
 export interface RequestParamsAllYearsNoTransmission {
   facilityLat: number;
