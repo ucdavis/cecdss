@@ -12,7 +12,7 @@ import { CountyLegend } from './Layers/CountyLegend';
 import { UrbanCitiesLegend } from './Layers/UrbanCitiesLegend';
 import { AirDistrictsLegend } from './Layers/AirDistrictsLegend';
 import { BiomassBoundaryLegend } from './Layers/BiomassBoundaryLegend';
-import { FeedstockBiomassCompetitionLegend } from './Layers/BasicFeedstockCompetitionLegend';
+import { FeedstockBiomassCompetitionLegend, RoadsLegend } from './Layers/BasicFeedstockCompetitionLegend';
 
 interface Props {
   layers: string[];
@@ -58,6 +58,9 @@ export const ExternalLayerLegend = (props: Props) => {
           )}
           {props.layers.includes('feedstockWoodProcessingCompetition') && (
             <FeedstockBiomassCompetitionLegend />
+          )}
+          {props.layers.includes('roads') && (
+            <RoadsLegend />
           )}
         </div>
       </Collapse>

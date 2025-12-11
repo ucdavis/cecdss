@@ -20,6 +20,7 @@ const AllLayers: { [key: string]: string } = {
   dataBoundary: 'Biomass Data Boundary',
   feedstockBiomassCompetition: 'Wood Biomass Energy Facilities',
   feedstockWoodProcessingCompetition: 'Current Sawmills',
+  roads: 'Roads',
 };
 
 export const ExternalLayerSelection = (props: Props) => {

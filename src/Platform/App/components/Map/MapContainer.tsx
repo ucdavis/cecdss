@@ -9,6 +9,7 @@ import 'esri-leaflet-renderers';
 import { Feature, FeatureCollection } from 'geojson';
 import { LatLngBoundsExpression } from 'leaflet';
 import { createRef, useEffect, useState } from 'react';
+import { GeoJSON } from 'react-leaflet';
 import { DynamicMapLayer, FeatureLayer } from 'react-esri-leaflet';
 import ReactGA from 'react-ga4';
 import {
@@ -57,6 +58,8 @@ import {
   ATTRIBUTION,
   DEFAULT_TRANSMISSION_VAL,
   MAP_BOX_TILES,
+  MAP_BOX_TILES_QUICK,
+  MAP_BOX_TILES_QUICK_ATTRIBUTION,
   MAP_BOX_TILES_SATELLITE
 } from '../../../../Resources/Constants';
 import Loader from '../../../../Shared/Loader';
@@ -77,6 +80,12 @@ import { GeoJsonLayers } from './GeoJsonLayers';
 import { SubstationLayer } from './Layers/SubstationLayer';
 import NominatimSearchControl from './NominatimSearchControl';
 import { PrintControl } from './PrintControl';
+import { ModeToggle } from '../Thesis/ModeToggle';
+import { ExplorePanel } from '../Thesis/ExplorePanel';
+import { ChatInterface } from '../Thesis/ChatInterface';
+import { CaliforniaBoundary } from '../Thesis/CaliforniaBoundary';
+import { CaliforniaOverlay } from '../Thesis/CaliforniaOverlay';
+import { CursorFollower } from '../Thesis/CursorFollower';
 
 export interface RequestParamsAllYearsNoTransmission {
   facilityLat: number;
@@ -246,6 +255,13 @@ export const MapContainerComponent = () => {
   // external layers
   const [externalLayers, setExternalLayers] = useState<string[]>([]);
 
+  // NEW: Explore mode state
+  const [analysisMode, setAnalysisMode] = useState<'explore' | 'detailed'>('explore');
+  const [radius, setRadius] = useState<number>(10); // km
+  const [californiaGeometry, setCaliforniaGeometry] = useState<any>(null);
+  const [selectedClusters, setSelectedClusters] = useState<any[]>([]);
+  const [exploreLoading, setExploreLoading] = useState<boolean>(false);
+
   const frcsInputsExample: FrcsInputs = {
     system: 'Ground-Based Mech WT',
     treatmentid: 3,
@@ -310,8 +326,8 @@ export const MapContainerComponent = () => {
 
   const [facilityCoordinates, setFacilityCoordinates] =
     useState<MapCoordinates>({
-      lat: 37.87439641742907,
-      lng: -120.47592259245009
+      lat: 0,
+      lng: 0
     });
   const [biomassCoordinates, setBiomassCoordinates] = useState<MapCoordinates>({
     lat: 37.87439641742907,
@@ -346,6 +362,55 @@ export const MapContainerComponent = () => {
 
     return inputs;
   };
+
+  const handleExploreSearch = async () => {
+  if (facilityCoordinates.lat === 0) return;
+  
+  setExploreLoading(true);
+  
+  try {
+    // Call your ML API to get clusters in radius
+    const response = await fetch(`${serviceUrl}clusters/in-radius`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        lat: facilityCoordinates.lat,
+        lng: facilityCoordinates.lng,
+        radius: radius,
+        treatment: frcsInputs.treatmentid
+      })
+    });
+    
+    const clusters = await response.json();
+    setSelectedClusters(clusters);
+  } catch (error) {
+    console.error('Error fetching clusters:', error);
+  } finally {
+    setExploreLoading(false);
+  }
+};
+
+const handleRagQuery = async (query: string): Promise<string> => {
+  try {
+    const response = await fetch(`${serviceUrl}rag/query`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query,
+        facilityLat: facilityCoordinates.lat,
+        facilityLng: facilityCoordinates.lng,
+        radius,
+        clusters: selectedClusters
+      })
+    });
+    
+    const data = await response.json();
+    return data.response;
+  } catch (error) {
+    console.error('RAG query error:', error);
+    return 'Sorry, I encountered an error. Please try again.';
+  }
+};
 
   const submitInputs = async () => {
     toggleLoading(true);
@@ -675,129 +740,153 @@ export const MapContainerComponent = () => {
     );
   }
 
-  return (
-    <div style={style}>
-      {mapLayerLoading && (
-        <Progress
-          animated
-          style={{
-            height: '5px'
-          }}
-          color='success'
-          value='100'
-        />
-      )}
-      {(yearlyResults.length > 0 || loading) && (
-        <div className='toggle-buttons flex flex-col items-center justify-center gap-y-6'>
-          <div className='flex items-center justify-center w-full'>
-            <Pagination
-              aria-label='Page navigation example'
-              className='text-14p'
-            >
-              <PaginationItem active={!showResults}>
-                <PaginationLink
-                  key='inputs'
-                  onClick={() => toggleShowResults(false)}
-                  className='w-90p h-40p'
-                >
-                  Inputs
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem active={showResults}>
-                <PaginationLink
-                  key='finalResults'
-                  onClick={() => toggleShowResults(true)}
-                  className='w-90p h-40p'
-                >
-                  Results
-                </PaginationLink>
-              </PaginationItem>
-            </Pagination>
-          </div>
-          <Button
-            onClick={() => {
-              toggleMoveInGeoJson(h => !h);
-            }}
-            active={showMoveInGeoJson}
-            disabled={allResultsSelected}
-            title='Show Move-In Geometry in selected year'
-            color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
-          >
-            <span>{!showMoveInGeoJson ? 'Show Move In' : 'Hide Move In'}</span>
-            <FontAwesomeIcon icon={showMoveInGeoJson ? faEye : faEyeSlash} />
-          </Button>
-          <Button
-            onClick={() => {
-              toggleTransportationGeoJson(h => !h);
-            }}
-            active={showTransportationGeoJson}
-            disabled={allResultsSelected}
-            title='Show Transportation Geometry in selected year'
-            color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
-          >
-            <span>
-              {!showTransportationGeoJson
-                ? 'Show Transportation'
-                : 'Hide Transportation'}
-            </span>
-            <FontAwesomeIcon
-              icon={showTransportationGeoJson ? faEye : faEyeSlash}
-            />
-          </Button>
-          <Button
-            onClick={() => {
-              setIsErrorZone(!isErrorZone);
-              toggleErrorGeoJson(!showErrorGeoJson);
-            }}
-            active={showErrorGeoJson}
-            title='Cluster zones which cannot be used for biomass'
-            color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
-          >
-            <span>
-              {isErrorZone ? 'Show Unusable Zones' : 'Hide Unusable Zones'}
-            </span>
-            <FontAwesomeIcon icon={isErrorZone ? faEye : faEyeSlash} />
-          </Button>
-          <Button
-            onClick={() => {
-              setIsClusterZone(!isClusterZone);
-              toggleGeoJson(!showGeoJson);
-            }}
-            active={showGeoJson}
-            color='primary'
-            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
-          >
-            <span>
-              {isClusterZone ? 'Hide Cluster Zones' : 'Show Cluster Zones'}
-            </span>
-            <FontAwesomeIcon icon={isClusterZone ? faEyeSlash : faEye} />
-          </Button>
-          <Button
-            className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
-            color='primary'
-            onClick={() => {
-              setIsExpanded(!isExpanded);
-              toggleExpandedResults(!expandedResults);
-            }}
-          >
-            <span>{isExpanded ? 'Expand Results' : 'Minimize Results'} </span>
-            <FontAwesomeIcon
-              icon={isExpanded ? faExpandArrowsAlt : faMinusSquare}
-            />
-          </Button>
+  // Complete return statement for MapContainerComponent
+// Replace everything from "return (" to the final closing ");"
+
+// Complete return statement for MapContainerComponent
+// Replace everything from "return (" to the final closing ");"
+
+return (
+  <div style={style}>
+    {/* Mode Toggle - Absolute positioned at top center */}
+    <ModeToggle mode={analysisMode} setMode={setAnalysisMode} />
+    
+    {/* Loading Progress Bar */}
+    {mapLayerLoading && (
+      <Progress
+        animated
+        style={{ height: '5px' }}
+        color='success'
+        value='100'
+      />
+    )}
+    
+    {/* Toggle Buttons (shown when results exist) */}
+    {(yearlyResults.length > 0 || loading) && (
+      <div className='toggle-buttons flex flex-col items-center justify-center gap-y-6'>
+        <div className='flex items-center justify-center w-full'>
+          <Pagination aria-label='Page navigation example' className='text-14p'>
+            <PaginationItem active={!showResults}>
+              <PaginationLink
+                key='inputs'
+                onClick={() => toggleShowResults(false)}
+                className='w-90p h-40p'
+              >
+                Inputs
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem active={showResults}>
+              <PaginationLink
+                key='finalResults'
+                onClick={() => toggleShowResults(true)}
+                className='w-90p h-40p'
+              >
+                Results
+              </PaginationLink>
+            </PaginationItem>
+          </Pagination>
         </div>
-      )}
-      <div className='layers-container'>
-        <ExternalLayerSelection onChange={handleExternalLayerChange} />
-        <ExternalLayerLegend layers={externalLayers} />
+        <Button
+          onClick={() => toggleMoveInGeoJson(h => !h)}
+          active={showMoveInGeoJson}
+          disabled={allResultsSelected}
+          title='Show Move-In Geometry in selected year'
+          color='primary'
+          className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
+        >
+          <span>{!showMoveInGeoJson ? 'Show Move In' : 'Hide Move In'}</span>
+          <FontAwesomeIcon icon={showMoveInGeoJson ? faEye : faEyeSlash} />
+        </Button>
+        <Button
+          onClick={() => toggleTransportationGeoJson(h => !h)}
+          active={showTransportationGeoJson}
+          disabled={allResultsSelected}
+          title='Show Transportation Geometry in selected year'
+          color='primary'
+          className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
+        >
+          <span>
+            {!showTransportationGeoJson ? 'Show Transportation' : 'Hide Transportation'}
+          </span>
+          <FontAwesomeIcon icon={showTransportationGeoJson ? faEye : faEyeSlash} />
+        </Button>
+        <Button
+          onClick={() => {
+            setIsErrorZone(!isErrorZone);
+            toggleErrorGeoJson(!showErrorGeoJson);
+          }}
+          active={showErrorGeoJson}
+          title='Cluster zones which cannot be used for biomass'
+          color='primary'
+          className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
+        >
+          <span>{isErrorZone ? 'Show Unusable Zones' : 'Hide Unusable Zones'}</span>
+          <FontAwesomeIcon icon={isErrorZone ? faEye : faEyeSlash} />
+        </Button>
+        <Button
+          onClick={() => {
+            setIsClusterZone(!isClusterZone);
+            toggleGeoJson(!showGeoJson);
+          }}
+          active={showGeoJson}
+          color='primary'
+          className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
+        >
+          <span>{isClusterZone ? 'Hide Cluster Zones' : 'Show Cluster Zones'}</span>
+          <FontAwesomeIcon icon={isClusterZone ? faEyeSlash : faEye} />
+        </Button>
+        <Button
+          className='flex items-center justify-between gap-x-2 w-full px-2 text-14p'
+          color='primary'
+          onClick={() => {
+            setIsExpanded(!isExpanded);
+            toggleExpandedResults(!expandedResults);
+          }}
+        >
+          <span>{isExpanded ? 'Expand Results' : 'Minimize Results'} </span>
+          <FontAwesomeIcon icon={isExpanded ? faExpandArrowsAlt : faMinusSquare} />
+        </Button>
       </div>
-      <div
-        className={expandedResults ? 'expanded-results' : 'sidebar'}
-        id='sidebar'
-      >
+    )}
+    
+    {/* External Layers Control */}
+    {analysisMode === 'detailed' && (
+      <div className='layers-container'>
+      <ExternalLayerSelection onChange={handleExternalLayerChange} />
+      <ExternalLayerLegend layers={externalLayers} />
+    </div>
+    )}
+    
+    {/* LEFT PANEL - Explore Mode Only */}
+    {analysisMode === 'explore' && (
+      <div className="absolute left-[4%] top-3 w-80 h-auto z-[1000] bg-white shadow-lg overflow-y-auto rounded-xl">
+        <ExplorePanel
+          facilityCoordinates={facilityCoordinates}
+          setFacilityCoordinates={setFacilityCoordinates}
+          radius={radius}
+          setRadius={setRadius}
+          selectedClusters={selectedClusters}
+          onSearch={handleExploreSearch}
+          loading={exploreLoading}
+        />
+      </div>
+    )}
+    
+    {/* RIGHT PANEL - Explore Mode Only */}
+    {analysisMode === 'explore' && (
+      <div className="absolute right-3 top-3 w-96 h-[calc(100%-28px)] z-[1000] bg-white shadow-lg rounded-xl">
+        <ChatInterface
+          facilityCoordinates={facilityCoordinates}
+          radius={radius}
+          selectedClusters={selectedClusters}
+          onQuery={handleRagQuery}
+        />
+      </div>
+    )}
+    
+    {/* DETAILED MODE SIDEBAR - Only show in detailed mode */}
+    {analysisMode === 'detailed' && (
+      <div className={expandedResults ? 'expanded-results' : 'sidebar'} id='sidebar'>
         <Modal isOpen={hasProcessingError}>
           <ProcessingErrorModal close={processingErrorModalClose} />
         </Modal>
@@ -848,13 +937,29 @@ export const MapContainerComponent = () => {
           />
         )}
       </div>
-      <MapContainer
-        ref={mapRef}
-        bounds={bounds}
-        zoom={zoom}
-        center={center}
-        style={{ height: '100%', width: '100%' }}
-      >
+    )}
+    
+    {/* MAP CONTAINER */}
+    <MapContainer
+      ref={mapRef}
+      bounds={bounds}
+      zoom={zoom}
+      center={center}
+      style={{ height: '100%', width: '100%' }}
+    >
+      {/* Cursor Follower - ONLY in explore mode */}
+      {analysisMode === 'explore' && (
+        <CursorFollower
+          facilityCoordinates={facilityCoordinates}
+          setFacilityCoordinates={setFacilityCoordinates}
+          californiaGeometry={californiaGeometry}
+          mode={analysisMode}
+          radius={radius}
+        />
+      )}
+      
+      {/* MapClickHandler - ONLY in detailed mode (original FRREDSS) */}
+      {analysisMode === 'detailed' && (
         <MapClickHandler
           setBiomassCoordinates={setBiomassCoordinates}
           setFacilityCoordinates={setFacilityCoordinates}
@@ -862,151 +967,152 @@ export const MapContainerComponent = () => {
           loading={loading}
           yearlyResults={yearlyResults}
         />
-        <ScaleControl />
-        <LayersControl position='bottomleft'>
-          <BaseLayer checked name='Outdoors'>
-            <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
-          </BaseLayer>
-          <BaseLayer name='Satellite'>
-            <TileLayer
-              attribution={ATTRIBUTION}
-              url={MAP_BOX_TILES_SATELLITE}
-            />
-          </BaseLayer>
-        </LayersControl>
-        <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
-        <NominatimSearchControl
-          setFacilityCoordinates={setFacilityCoordinates}
+      )}
+      
+      {/* California Boundary - red dashed line */}
+      <CaliforniaBoundary setGeometry={setCaliforniaGeometry} />
+    
+      
+      {/* Map Controls */}
+      <ScaleControl />
+      <LayersControl position='bottomleft'>
+        <BaseLayer checked name='Outdoors'>
+          <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
+        </BaseLayer>
+        <BaseLayer name='Satellite'>
+          <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES_SATELLITE} />
+        </BaseLayer>
+      </LayersControl>
+      
+      {/* Default Tile Layer */}
+      <TileLayer attribution={ATTRIBUTION} url={MAP_BOX_TILES} />
+      
+      {/* Search Control */}
+      <NominatimSearchControl setFacilityCoordinates={setFacilityCoordinates} />
+      
+      {/* Print Control */}
+      <PrintControl />
+      
+      {/* External Feature Layers */}
+      {externalLayers.includes('transmission') && (
+        <FeatureLayer
+          url='https://services3.arcgis.com/bWPjFyq029ChCGur/arcgis/rest/services/Transmission_Line/FeatureServer/2'
+          eventHandlers={mapLayerHandler}
         />
-        <PrintControl />
-        {externalLayers.includes('transmission') && (
-          <FeatureLayer
-            url={
-              'https://services3.arcgis.com/bWPjFyq029ChCGur/arcgis/rest/services/Transmission_Line/FeatureServer/2'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('substation') && (
-          <SubstationLayer mapLayerHandler={mapLayerHandler} />
-        )}
-        {externalLayers.includes('plant') && (
-          <FeatureLayer
-            url={
-              'https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Power_Plant/FeatureServer/0'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('county') && (
-          <FeatureLayer
-            url={
-              'https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/California_County_Boundaries/FeatureServer/0'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('urbanCities') && (
-          <FeatureLayer
-            url={
-              'https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Urban_Areas/FeatureServer/3'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('airDistricts') && (
-          <FeatureLayer
-            url={
-              'https://services.arcgis.com/jDGuO8tYggdCCnUJ/ArcGIS/rest/services/California_Air_Districts/FeatureServer/0'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('ownership') && (
-          <DynamicMapLayer
-            url={
-              'https://egis.fire.ca.gov/arcgis/rest/services/FRAP/ownership/MapServer'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('fire') && (
-          <FeatureLayer
-            url={
-              'https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/ArcGIS/rest/services/FHSZ_SRA_LRA_Combined/FeatureServer/0'
-            }
-            opacity={0.7}
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('dataBoundary') && (
-          <FeatureLayer
-            url={
-              'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/ArcGIS/rest/services/FL_Sierra/FeatureServer/0'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('feedstockBiomassCompetition') && (
-          <FeatureLayer
-            url={
-              'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/arcgis/rest/services/Task_5_Basic_Feedstock_Competition/FeatureServer/1'
-            }
-            eventHandlers={mapLayerHandler}
-          />
-        )}
-        {externalLayers.includes('feedstockWoodProcessingCompetition') && (
-          <FeatureLayer
-            url={
-              'https://services9.arcgis.com/mt4kvYhNXSa5AqLG/arcgis/rest/services/Task_5_Basic_Feedstock_Competition/FeatureServer/0'
-            }
-          />
-        )}
-        {yearlyResults.length > 0 && (
-          <>
-            {showMoveInGeoJson && (
-              <ClusterTransportationMoveInLayer
-                facilityCoordinates={facilityCoordinates}
-                years={years}
-                yearlyResults={yearlyResults}
-                selectedYearIndex={selectedYearIndex}
-              />
-            )}
-            {showGeoJson && (
-              <GeoJsonLayers
-                years={years}
-                yearlyGeoJson={geoJsonShapeResults}
-                selectedYearIndex={selectedYearIndex}
-              />
-            )}
-
-            {showTransportationGeoJson && (
-              <ClusterTransportationRoutesLayer
-                facilityCoordinates={facilityCoordinates}
-                years={years}
-                yearlyResults={yearlyResults}
-                selectedYearIndex={selectedYearIndex}
-              />
-            )}
-            {showErrorGeoJson && (
-              <ErrorGeoJsonLayers
-                years={years}
-                yearlyGeoJson={errorGeoJsonShapeResults}
-                selectedYearIndex={selectedYearIndex}
-              />
-            )}
-          </>
-        )}
-
-        <CustomMarker icon='facility' position={facilityCoordinates} />
-        {selectBiomassCoordinates &&
-          biomassCoordinates.lat !== facilityCoordinates.lat &&
-          biomassCoordinates.lng !== facilityCoordinates.lng && (
-            <CustomMarker icon='biomass' position={biomassCoordinates} />
+      )}
+      {externalLayers.includes('substation') && (
+        <SubstationLayer mapLayerHandler={mapLayerHandler} />
+      )}
+      {externalLayers.includes('plant') && (
+        <FeatureLayer
+          url='https://services3.arcgis.com/bWPjFyq029ChCGur/ArcGIS/rest/services/Power_Plant/FeatureServer/0'
+          eventHandlers={mapLayerHandler}
+        />
+      )}
+      {externalLayers.includes('county') && (
+        <FeatureLayer
+          url='https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/arcgis/rest/services/California_County_Boundaries/FeatureServer/0'
+          eventHandlers={mapLayerHandler}
+        />
+      )}
+      {externalLayers.includes('urbanCities') && (
+        <FeatureLayer
+          url='https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Urban_Areas/FeatureServer/3'
+          eventHandlers={mapLayerHandler}
+        />
+      )}
+      {externalLayers.includes('airDistricts') && (
+        <FeatureLayer
+          url='https://services.arcgis.com/jDGuO8tYggdCCnUJ/ArcGIS/rest/services/California_Air_Districts/FeatureServer/0'
+          eventHandlers={mapLayerHandler}
+        />
+      )}
+      {externalLayers.includes('ownership') && (
+        <DynamicMapLayer
+          url='https://egis.fire.ca.gov/arcgis/rest/services/FRAP/ownership/MapServer'
+          eventHandlers={mapLayerHandler}
+        />
+      )}
+      {externalLayers.includes('fire') && (
+        <FeatureLayer
+          url='https://services1.arcgis.com/jUJYIo9tSA7EHvfZ/ArcGIS/rest/services/FHSZ_SRA_LRA_Combined/FeatureServer/0'
+          opacity={0.7}
+          eventHandlers={mapLayerHandler}
+        />
+      )}
+      {externalLayers.includes('dataBoundary') && (
+        <FeatureLayer
+          url='https://services9.arcgis.com/mt4kvYhNXSa5AqLG/ArcGIS/rest/services/FL_Sierra/FeatureServer/0'
+          eventHandlers={mapLayerHandler}
+        />
+      )}
+      {externalLayers.includes('feedstockBiomassCompetition') && (
+        <FeatureLayer
+          url='https://services9.arcgis.com/mt4kvYhNXSa5AqLG/arcgis/rest/services/Task_5_Basic_Feedstock_Competition/FeatureServer/1'
+          eventHandlers={mapLayerHandler}
+        />
+      )}
+      {externalLayers.includes('feedstockWoodProcessingCompetition') && (
+        <FeatureLayer
+          url='https://services9.arcgis.com/mt4kvYhNXSa5AqLG/arcgis/rest/services/Task_5_Basic_Feedstock_Competition/FeatureServer/0'
+        />
+      )}
+      {externalLayers.includes('roads') && (
+        <FeatureLayer
+          url='https://caltrans-gis.dot.ca.gov/arcgis/rest/services/CHhighway/All_Roads/FeatureServer/0'
+        />
+      )}
+      
+      {/* Yearly Results Layers (FRREDSS) */}
+      {yearlyResults.length > 0 && (
+        <>
+          {showMoveInGeoJson && (
+            <ClusterTransportationMoveInLayer
+              facilityCoordinates={facilityCoordinates}
+              years={years}
+              yearlyResults={yearlyResults}
+              selectedYearIndex={selectedYearIndex}
+            />
           )}
-      </MapContainer>
-    </div>
-  );
+          {showGeoJson && (
+            <GeoJsonLayers
+              years={years}
+              yearlyGeoJson={geoJsonShapeResults}
+              selectedYearIndex={selectedYearIndex}
+            />
+          )}
+          {showTransportationGeoJson && (
+            <ClusterTransportationRoutesLayer
+              facilityCoordinates={facilityCoordinates}
+              years={years}
+              yearlyResults={yearlyResults}
+              selectedYearIndex={selectedYearIndex}
+            />
+          )}
+          {showErrorGeoJson && (
+            <ErrorGeoJsonLayers
+              years={years}
+              yearlyGeoJson={errorGeoJsonShapeResults}
+              selectedYearIndex={selectedYearIndex}
+            />
+          )}
+        </>
+      )}
+      
+      {/* Facility and Biomass Markers - ONLY in detailed mode (original FRREDSS) */}
+      {analysisMode === 'detailed' && (
+        <>
+          <CustomMarker icon='facility' position={facilityCoordinates} />
+          {selectBiomassCoordinates &&
+            biomassCoordinates.lat !== facilityCoordinates.lat &&
+            biomassCoordinates.lng !== facilityCoordinates.lng && (
+              <CustomMarker icon='biomass' position={biomassCoordinates} />
+            )}
+        </>
+      )}
+    </MapContainer>
+  </div>
+);
 };
 
 export const MapContainerWrapper = () => {
@@ -1047,3 +1153,4 @@ export const StyledButton = styled(Button)`
     cursor: not-allowed;
   }
 `;
+

@@ -22,10 +22,15 @@ export const ACCESS_TOKEN =
     'pk.eyJ1IjoibGF1cmFob2xzdGVnZSIsImEiOiJjazZnc3U3c3gybWw5M25xamc2M2RnNTl2In0.Zcg_-cmP110dT_JzIN3QdA';
 
 export const MAP_BOX_TILES =
-    'https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
+    'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
 
+export const MAP_BOX_TILES_QUICK_ATTRIBUTION = 'Map tiles by Stamen Design, CC BY 3.0 — Map data © OpenStreetMap'
+
+export const MAP_BOX_TILES_QUICK = 'https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}.jpg'
+    
+export const MAP_BOX_TILES_HYBRID = ''
 export const MAP_BOX_TILES_SATELLITE =
-    'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token=' +
+    'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v12/tiles/{z}/{x}/{y}?access_token=' +
     ACCESS_TOKEN;
 
 export const ATTRIBUTION =
